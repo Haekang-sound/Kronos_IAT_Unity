@@ -12,9 +12,11 @@ public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.LookAtTarget();
+
         // Down - 플레이어가 공격 페링에 성공 했을 때
         /// TODO: 추후 구현 요망
-        if(false)
+        if (false)
         {
             //_monoBehaviour.TriggerDown();
         }
@@ -24,5 +26,7 @@ public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.EndAttack();
+        _monoBehaviour.ResetAiming();
     }
 }

@@ -116,6 +116,22 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         return CheckDistanceWithTarget(attackDistance);
     }
 
+    public bool IsLookAtTarget()
+    {
+        float angleThreshold = 10.0f; // 바라보는 것으로 간주할 최대 각도
+
+        if (CurrentTarget == null) return false;
+
+        Vector3 forward = transform.forward;
+        Vector3 toTarget = (CurrentTarget.transform.position - transform.position).normalized;
+
+        // 두 벡터 간의 각도 계산
+        float angle = Vector3.Angle(forward, toTarget);
+
+        // 각도가 임계값 이하이면 true 반환
+        return angle <= angleThreshold;
+    }
+
     private bool CheckDistanceWithTarget(float distance)
     {
         Vector3 toTarget = CurrentTarget.transform.position - transform.position;

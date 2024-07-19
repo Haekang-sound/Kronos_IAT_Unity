@@ -76,7 +76,14 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
             {
                 if (_monoBehaviour.IsInAttackRange())
                 {
-                    _monoBehaviour.TriggerAttack();
+                    if (_monoBehaviour.IsLookAtTarget())
+                    {
+                        _monoBehaviour.TriggerAttack();
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {

@@ -185,6 +185,21 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _meleeWeapon.EndAttack();
     }
 
+    public void BeginAiming()
+    {
+        rotationSpeed = 5f;
+    }
+
+    public void StopAiming()
+    {
+        rotationSpeed = 0f;
+    }
+
+    public void ResetAiming()
+    {
+        rotationSpeed = 1f;
+    }
+
     private void SetInPursuit(bool inPursuit)
     {
         _controller.animator.SetBool(hashInPursuit, inPursuit);
