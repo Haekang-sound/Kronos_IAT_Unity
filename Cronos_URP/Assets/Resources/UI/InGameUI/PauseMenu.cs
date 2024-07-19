@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -17,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     GameObject titlePanel;
     bool isPaused;
-    bool isOption;
+    public bool isOption;
     bool isControl;
     bool isLoad;
     bool isTitle;
@@ -95,8 +93,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (isOption)
         {
-            optionPanel.GetComponentInChildren<SoundMixer>().NoButton();
-            optionPanel.GetComponentInChildren<SoundMixer>().ExitPanel();
+            optionPanel.GetComponentInChildren<SoundMixerNCamera>().NoButton();
+            optionPanel.GetComponentInChildren<SoundMixerNCamera>().ExitPanel();
             isOption = false;
         }
         else if (isControl)

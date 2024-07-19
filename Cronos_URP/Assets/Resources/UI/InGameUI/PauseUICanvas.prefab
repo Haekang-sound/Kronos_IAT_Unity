@@ -307,7 +307,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968162436956730427}
+      - m_Target: {fileID: 9193561230784283847}
         m_TargetAssemblyTypeName: SoundMixer, Assembly-CSharp
         m_MethodName: ValueToDefault
         m_Mode: 1
@@ -471,7 +471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5780049223984346412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2045,6 +2045,7 @@ GameObject:
   - component: {fileID: 3292085490053292573}
   - component: {fileID: 7850338774733600090}
   - component: {fileID: 2351374048642232598}
+  - component: {fileID: 9193561230784283847}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -2101,6 +2102,44 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &9193561230784283847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147551720704241100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48daf18a7acb9941ae5d2ff14ec295e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 2b7523f8c0bf7214dac4ff2e6d99f187, type: 2}
+  masterSlider: {fileID: 7179406342265083281}
+  bgmSlider: {fileID: 4269812573818873469}
+  sfxSlider: {fileID: 564774971278080404}
+  masVal: {fileID: 220510145293701393}
+  bgmVal: {fileID: 2203028931912234164}
+  sfxVal: {fileID: 2392714975988146442}
+  camVal: {fileID: 949478903982207494}
+  applyButton: {fileID: 2490156758432030276}
+  confirmPopUp: {fileID: 665506991764403301}
+  optionPanel: {fileID: 2147551720704241100}
+  pausePanel: {fileID: 2482416012629472914}
+  pauseMenu: {fileID: 6937538565047346506}
+  dMas: 70
+  dBgm: 100
+  dSfx: 100
+  cMas: 0
+  cBgm: 0
+  cSfx: 0
+  aMas: 0
+  aBgm: 0
+  aSfx: 0
+  virCam: {fileID: 0}
+  camSlider: {fileID: 2918758295721760984}
+  cSpeed: {x: 0, y: 0}
+  aSpeed: {x: 0, y: 0}
 --- !u!1 &2176951733296575486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,7 +3365,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968162436956730427}
+      - m_Target: {fileID: 9193561230784283847}
         m_TargetAssemblyTypeName: SoundMixer, Assembly-CSharp
         m_MethodName: NoButton
         m_Mode: 1
@@ -3471,7 +3510,6 @@ GameObject:
   - component: {fileID: 2207718153772054723}
   - component: {fileID: 7454530503513455666}
   - component: {fileID: 4648519318154606275}
-  - component: {fileID: 1968162436956730427}
   m_Layer: 5
   m_Name: SoundSliderPanel
   m_TagString: Untagged
@@ -3565,38 +3603,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1968162436956730427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054953582044305912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48daf18a7acb9941ae5d2ff14ec295e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 2b7523f8c0bf7214dac4ff2e6d99f187, type: 2}
-  masterSlider: {fileID: 7179406342265083281}
-  bgmSlider: {fileID: 4269812573818873469}
-  sfxSlider: {fileID: 564774971278080404}
-  masterVal: {fileID: 220510145293701393}
-  bgmVal: {fileID: 2203028931912234164}
-  sfxVal: {fileID: 2392714975988146442}
-  applyButton: {fileID: 2490156758432030276}
-  confirmPopUp: {fileID: 665506991764403301}
-  optionPanel: {fileID: 2147551720704241100}
-  pausePanel: {fileID: 2482416012629472914}
-  dMas: 70
-  dBgm: 100
-  dSfx: 100
-  cMas: 0
-  cBgm: 0
-  cSfx: 0
-  aMas: 0
-  aBgm: 0
-  aSfx: 0
 --- !u!1 &3058157383095829728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,7 +3724,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968162436956730427}
+      - m_Target: {fileID: 9193561230784283847}
         m_TargetAssemblyTypeName: SoundMixer, Assembly-CSharp
         m_MethodName: YesButton
         m_Mode: 1
@@ -5740,7 +5746,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968162436956730427}
+      - m_Target: {fileID: 9193561230784283847}
         m_TargetAssemblyTypeName: SoundMixer, Assembly-CSharp
         m_MethodName: ApplyValue
         m_Mode: 1
@@ -6142,7 +6148,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968162436956730427}
+      - m_Target: {fileID: 9193561230784283847}
         m_TargetAssemblyTypeName: SoundMixer, Assembly-CSharp
         m_MethodName: ConfirmValue
         m_Mode: 1
@@ -7594,6 +7600,7 @@ MonoBehaviour:
   controlPanel: {fileID: 8928727618091253922}
   loadPanel: {fileID: 5173510337674118608}
   titlePanel: {fileID: 3804260604273630183}
+  isOption: 0
 --- !u!1 &5602861321931677139
 GameObject:
   m_ObjectHideFlags: 0
@@ -9945,8 +9952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.008544922, y: -272.82294}
-  m_SizeDelta: {x: -740.79, y: -838.9541}
+  m_AnchoredPosition: {x: 0.008544922, y: -275.9347}
+  m_SizeDelta: {x: -740.79, y: -954.2006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &887509399413758070
 CanvasRenderer:
