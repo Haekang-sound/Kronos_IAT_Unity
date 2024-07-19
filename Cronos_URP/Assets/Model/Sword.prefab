@@ -1,5 +1,77 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &812382494147447971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079789610229053898}
+  - component: {fileID: 8719960461159335241}
+  - component: {fileID: 6874883383856070356}
+  m_Layer: 0
+  m_Name: Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1079789610229053898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812382494147447971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2542878188687278141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8719960461159335241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812382494147447971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &6874883383856070356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812382494147447971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5cd88515cb5d774d830ef4f9a144cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  damageAmount: 1
+  stopCamera: 0
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &9047352775516390619
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,8 +83,7 @@ GameObject:
   - component: {fileID: 2542878188687278141}
   - component: {fileID: 8067651560545330464}
   - component: {fileID: 7973195801001268247}
-  - component: {fileID: 903636804742266742}
-  - component: {fileID: 4431565120504225524}
+  - component: {fileID: 3572667219771660111}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Player
@@ -32,7 +103,8 @@ Transform:
   m_LocalPosition: {x: -222.58415, y: 39.887024, z: 104.09695}
   m_LocalScale: {x: 0.9106624, y: 0.9106623, z: 0.91066235}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1079789610229053898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 1, y: 0, z: 0}
 --- !u!33 &8067651560545330464
@@ -85,28 +157,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &903636804742266742
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9047352775516390619}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.2911797, y: 1.3027447, z: 0.14509305}
-  m_Center: {x: -0.00024033405, y: 0.4403951, z: 0.000015269243}
---- !u!114 &4431565120504225524
+--- !u!114 &3572667219771660111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,11 +166,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9047352775516390619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5cd88515cb5d774d830ef4f9a144cf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0feb28bf5f1e8314eaa8ae9f9c5324fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
-  stopCamera: 0
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 256

@@ -63,9 +63,9 @@ public class EnemyController : MonoBehaviour
         }
 
         _rigidbody.drag = 10f;
-        _rigidbody.angularDrag = 1000f;
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = false;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         _followNavmeshAgent = true;

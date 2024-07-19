@@ -20,6 +20,14 @@ public class CombatZone : MonoBehaviour
         return null;
     }
 
+    private void Awake()
+    {
+        if (target == null)
+        {
+            target = Player.Instance.gameObject;
+        }
+    }
+
     private void Start()
     {
         foreach (var enemy in enemyList)

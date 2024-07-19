@@ -70,12 +70,15 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
     {
         description.text = abilityLevel.descriptionText;
         subdescription.text = $"CP {abilityLevel.pointNeeded} 필요";
+
+        Render();
     }
 
-    private void Update()
+
+    private void OnDisable()
     {
-        // 텍스트 업데이트
-        Render();
+        isFocaus = false;
+        _virtualCam.Priority = 0;
     }
 
     public void FocusIn()
@@ -100,7 +103,7 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
     private IEnumerator SetFocausAfter(bool val, float time)
     {
         // 지정된 시간(2초) 대기
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
 
         isFocaus = val;
     }
@@ -123,6 +126,7 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
 
         // 자식 노드 활성화
         UpdateChilds();
+        Render();
 
         return result;
     }

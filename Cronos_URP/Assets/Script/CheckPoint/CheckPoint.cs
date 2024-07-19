@@ -10,7 +10,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
 
-	bool isOn = false;
+	//bool isOn = false;
 
 	Transform cubeTM;
 
@@ -26,7 +26,7 @@ public class CheckPoint : MonoBehaviour
 		{
 			// 충돌체가 플레이어일 경우에 플레이어 데이터를 저장한다.
 			other.gameObject.GetComponent<Player>().SavePlayerData();
-			isOn = true;
+			//isOn = true;
 		}
 	}
 

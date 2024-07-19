@@ -5,7 +5,7 @@ public class FadeEffector : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
 
-    private void Start()
+    private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -38,31 +38,28 @@ public class FadeEffector : MonoBehaviour
         StartCoroutine(FadeOut(fadeDuration));
     }
 
-    private IEnumerator FadeIn(float fadeDuration)
+    private IEnumerator Fade(float fadeDuration, float targetAlpha)
     {
-        float startTime = Time.time;
+        float startTime = Time.unscaledTime;  // 시작 시간 설정
+        float initialAlpha = canvasGroup.alpha;  // 시작 알파 값 설정
 
-        while (Time.time < startTime + fadeDuration)
+        while (Time.unscaledTime < startTime + fadeDuration)
         {
-            float t = (Time.time - startTime) / fadeDuration;
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 1, t);
-            yield return null;
+            float t = (Time.unscaledTime - startTime) / fadeDuration;  // 현재 시간 계산
+            canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, t);  // 알파 값 보간
+            yield return null;  // 다음 프레임까지 대기
         }
 
-        canvasGroup.alpha = 1;
+        canvasGroup.alpha = targetAlpha;  // 목표 알파 값 설정
+    }
+
+    private IEnumerator FadeIn(float fadeDuration)
+    {
+        return Fade(fadeDuration, 1);
     }
 
     private IEnumerator FadeOut(float fadeDuration)
     {
-        float startTime = Time.time;
-
-        while (Time.time < startTime + fadeDuration)
-        {
-            float t = (Time.time - startTime) / fadeDuration;
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, t);
-            yield return null;
-        }
-
-        canvasGroup.alpha = 0;
+        return Fade(fadeDuration, 0);
     }
 }

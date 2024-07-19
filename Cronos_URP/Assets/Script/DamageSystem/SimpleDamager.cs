@@ -13,7 +13,7 @@ public class SimpleDamager : MonoBehaviour
 
     public LayerMask targetLayers;
 
-    protected GameObject m_owner;
+    //protected GameObject m_owner;
     protected bool m_inAttack = false;
 
     public delegate void TriggerEnterAction(Collider other);
@@ -26,10 +26,10 @@ public class SimpleDamager : MonoBehaviour
         soundManager = SoundManager.Instance;
     }
 
-    public void SetOwner(GameObject owner)
-    {
-        m_owner = owner;
-    }
+    //public void SetOwner(GameObject owner)
+    //{
+    //    m_owner = owner;
+    //}
 
     public void BeginAttack()
     {
@@ -43,7 +43,6 @@ public class SimpleDamager : MonoBehaviour
 
     private void Reset()
     {
-        GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<Collider>().isTrigger = true;
     }
 
@@ -122,10 +121,10 @@ public class SimpleDamager : MonoBehaviour
             return;
         }
 
-        if (damageable.gameObject == m_owner)
-        {
-            return;
-        }
+        //if (damageable.gameObject == m_owner)
+        //{
+        //    return;
+        //}
 
         if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
         {

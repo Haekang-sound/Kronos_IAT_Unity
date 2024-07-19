@@ -1,15 +1,20 @@
+using Cinemachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.FilePathAttribute;
 
 public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButton>
 {
     [SerializeField] public Button rootAbilityNode;
     [SerializeField] public AbilityAmountLimit abilityAmounts;
+
+    public CanvasGroup canvasGroup;
+    public CinemachineVirtualCamera playerVirtualCam;
+
+    private bool isFocaus;
+    private List<Button> _abilityNodes;
 
     private List<IObservable<AbilityIncreaseButton>> _obserables;
     private List<IDisposable> _unsubscribers;
@@ -55,10 +60,8 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
                 {
                     abilityAmounts.UpdateSpent(value.abilityLevel.pointNeeded);
                 }
-
             }
         }
-        
         _lastPressed = value;
     }
 
@@ -77,6 +80,7 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
     {
         // 구독자 구독
         _obserables = GetComponentsInChildren<IObservable<AbilityIncreaseButton>>().ToList();
+        _abilityNodes = GetComponentsInChildren<Button>().ToList();
 
         foreach (var obserable in _obserables)
         {
@@ -89,5 +93,50 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
     public void OnEnable()
     {
         rootAbilityNode.interactable = true;
+        canvasGroup.alpha = 0f;
+    }
+
+    public void Update()
+    {
+        // Test
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (isFocaus == false)
+            {
+                Enter();
+            }
+            else if (isFocaus == true)
+            {
+                Exit();
+            }
+        }
+    }
+
+    public void Enter()
+    {
+        abilityAmounts.UpdatePlayerTimePoint();
+
+        SetEnabledButtons(true);
+        isFocaus = true;
+        canvasGroup.alpha = 1f;
+        playerVirtualCam.Priority = 0;
+        PauseManager.Instance.PauseGame();
+    }
+
+    public void Exit()
+    {
+        PauseManager.Instance.UnPauseGame();
+        playerVirtualCam.Priority = 10;
+        canvasGroup.alpha = 0f;
+        isFocaus = false;
+        SetEnabledButtons(false);
+    }
+
+    private void SetEnabledButtons(bool val)
+    {
+        foreach (var node in _abilityNodes)
+        {
+            node.gameObject.SetActive(val);
+        }
     }
 }

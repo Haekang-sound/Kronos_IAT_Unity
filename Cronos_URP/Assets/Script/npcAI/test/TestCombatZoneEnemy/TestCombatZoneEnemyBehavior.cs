@@ -11,7 +11,7 @@ public class TestCombatZoneEnemyBehavior : MonoBehaviour, IMessageReceiver
     public static readonly int hashNearBase = Animator.StringToHash("nearBase");
     public static readonly int hashDamageBase = Animator.StringToHash("damage");
 
-    public SimpleDamager meleeWeapon;
+    public MeleeWeapon meleeWeapon;
 
     public float timeToStopPursuit;
 
@@ -38,10 +38,8 @@ public class TestCombatZoneEnemyBehavior : MonoBehaviour, IMessageReceiver
 
         if (meleeWeapon == null)
         {
-            meleeWeapon = GetComponentInChildren<SimpleDamager>();
+            meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         }
-
-        meleeWeapon.SetOwner(gameObject);
     }
 
     void OnEnable()

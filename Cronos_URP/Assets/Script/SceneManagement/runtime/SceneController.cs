@@ -167,7 +167,7 @@ public class SceneController : MonoBehaviour
             return;
         }
         Transform entranceLocation = entrance.transform;
-        Transform enteringTransform = entrance.transitioningGameObject.transform;
+        Transform enteringTransform = entrance.transitioningGameObject.transform;	
         enteringTransform.position = entranceLocation.position;
         enteringTransform.rotation = entranceLocation.rotation;
     }
