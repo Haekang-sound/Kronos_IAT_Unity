@@ -1,6 +1,8 @@
 using System.Globalization;
 using System.Resources;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 public abstract class PlayerBaseState : State
@@ -52,6 +54,9 @@ public abstract class PlayerBaseState : State
 		}
 		// 플레이어의 회전은 구면 선형보간의 형태로 이루어진다. 
 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDirection), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
+
+
+
 	}
 
 	/// <summary>
@@ -60,11 +65,18 @@ public abstract class PlayerBaseState : State
 	/// </summary>
 	protected void Move()
 	{
-		stateMachine.Rigidbody.AddForce(stateMachine.Velocity
-									* stateMachine.Animator.speed
-									* stateMachine.Player.moveSpeed
-									* Time.fixedDeltaTime
-									- GetPlayerHorizentalVelocity(), ForceMode.VelocityChange);
+
+		bool isOnSlope = IsOnSlope();
+		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) : stateMachine.Velocity;//.normalized;
+		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+
+		stateMachine.Rigidbody.velocity = velocity * Time.fixedDeltaTime * stateMachine.Player.moveSpeed + gravity;
+
+// 		stateMachine.Rigidbody.AddForce(/*stateMachine.Velocity*/velocity
+// 									* stateMachine.Animator.speed
+// 									* stateMachine.Player.moveSpeed
+// 									* Time.fixedDeltaTime + gravity
+// 									- GetPlayerHorizentalVelocity(), ForceMode.VelocityChange);
 	}
 
 	protected Vector3 GetPlayerHorizentalVelocity()
@@ -89,40 +101,26 @@ public abstract class PlayerBaseState : State
 	}
 
 
-	//public bool IsGrounded()
-// 	{
-// 		RaycastHit hit;
-// 		float distance = 0.1f;
-// 		bool isGrounded = Physics.Raycast(stateMachine.transform.position, Vector3.down, out hit, distance);
-// 		//Debug.Log($"땅에 닿았나? {isGrounded}");
-// 		// Raycast를 사용하여 땅을 체크
-// 		stateMachine.IsGrounded = isGrounded;
-// 		return isGrounded;
-// 	}
-// 	[SerializeField] private LayerMask groundLayer;
-// 	[SerializeField] private float radius = 0.3f;
-// 	[SerializeField] private float offset = 0.1f;
-// 	[SerializeField] private bool drawGizmo;
-// 
-// 
-// 	private void OnDrawGizmos()
-// 	{
-// 		if (!drawGizmo)
-// 		{
-// 			return;
-// 		}
-// 
-// 		Gizmos.color = Color.cyan;
-// 		Gizmos.DrawSphere(stateMachine.transform.position + Vector3.up * offset, radius);
-// 	}
-// 	public bool IsGrounded()
-// 	{
-// 		Vector3 pos = stateMachine.transform.position + Vector3.up * offset;
-// 		bool isGrounded = Physics.CheckSphere(pos, radius, groundLayer);
-// 
-// 		return isGrounded;
-// 	}
+	private const float ray_distance = 2f;
+	private RaycastHit sloperHit;
+	private int groundLayer = 1 << LayerMask.NameToLayer("Ground");
+	private float maxSlopeAngle = 50f;
 
 
+	protected Vector3 AdjustDirectionToSlope(Vector3 direction)
+	{
+		return Vector3.ProjectOnPlane(direction, sloperHit.normal)/*.normalized*/;
+	}
+
+	public bool IsOnSlope()
+	{
+		Ray ray = new Ray(stateMachine.transform.position, Vector3.down);
+		if(Physics.Raycast(ray, out sloperHit, ray_distance, groundLayer))
+		{
+			var angle = Vector3.Angle(Vector3.up, sloperHit.normal);
+			return angle != 0f && angle < maxSlopeAngle;
+		}
+		return false;
+	}
 
 }
