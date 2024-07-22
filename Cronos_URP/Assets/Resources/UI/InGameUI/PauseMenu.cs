@@ -16,9 +16,9 @@ public class PauseMenu : MonoBehaviour
     GameObject titlePanel;
     bool isPaused;
     public bool isOption;
-    bool isControl;
-    bool isLoad;
-    bool isTitle;
+    public bool isControl;
+    public bool isLoad;
+    public bool isTitle;
 
     private void OnEnable()
     {
