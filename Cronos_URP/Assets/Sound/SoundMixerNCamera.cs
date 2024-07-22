@@ -78,6 +78,7 @@ public class SoundMixerNCamera : MonoBehaviour
         aBgm = dBgm;
         aSfx = dSfx;
 
+
         if (camSlider == null)
             Debug.LogWarning("camSlider is not assigned");
         else
