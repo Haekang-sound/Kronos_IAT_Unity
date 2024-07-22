@@ -21,6 +21,11 @@ public class SimpleDamager : MonoBehaviour
 
     SoundManager soundManager;
 
+    private void Start()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
+
     private void OnEnable()
     {
         soundManager = SoundManager.Instance;
