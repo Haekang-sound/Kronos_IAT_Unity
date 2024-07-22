@@ -41,6 +41,13 @@ public class ImpulseCam : MonoBehaviour
 
     public void Shake(float pow)
     {
-        impulse.GenerateImpulse(pow);
+        if (impulse != null)
+        {
+            impulse.GenerateImpulse(pow);
+        }
+        else
+        {
+            Debug.Log("경고: InpulseCam 클래스에서 CinemachineImpulseSource 이 없음");
+        }
     }
 }
