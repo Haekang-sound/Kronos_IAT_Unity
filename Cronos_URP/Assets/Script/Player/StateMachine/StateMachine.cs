@@ -34,6 +34,7 @@ public abstract class StateMachine : MonoBehaviour
 
 	public State GetState()
 	{
+
 		return currentState;
 	}
 
