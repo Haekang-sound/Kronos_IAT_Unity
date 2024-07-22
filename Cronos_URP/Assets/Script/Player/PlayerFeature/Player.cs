@@ -34,24 +34,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 			// 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
 			instance = FindObjectOfType<Player>();
 
-			if (instance != null)
-			{
-				return instance;
-			}
-
-			// 인스턴스가 없다면 직접 생성
-			Create();
-
+			
 			return instance;
 		}
-	}
-
-	public static Player Create()
-	{
-		GameObject sceneControllerGameObject = new GameObject("Player");
-		instance = sceneControllerGameObject.AddComponent<Player>();
-
-		return instance;
 	}
 
 	protected static Player instance;
@@ -84,8 +69,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public int testInt = 0;
 
-
-
+	
 	// Property
 	private float totalspeed;
 	public float moveSpeed { get { return totalspeed; } }
