@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// 어쩌다보니 로드/타이틀을 한 스크립트에서 하게 되었다
+/// 이거맞나
 public class LoadPanel : MonoBehaviour
 {
     [SerializeField]
@@ -13,6 +14,8 @@ public class LoadPanel : MonoBehaviour
     Button load;
     [SerializeField]
     Button title;
+    [SerializeField]
+    PauseMenu pauseMenu;
 
     private void OnEnable()
     {
@@ -39,5 +42,7 @@ public class LoadPanel : MonoBehaviour
         control.gameObject.SetActive(true);
         load.gameObject.SetActive(true);
         title.gameObject.SetActive(true);
+        pauseMenu.isLoad = false;
+        pauseMenu.isTitle = false;
     }
 }

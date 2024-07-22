@@ -16,6 +16,8 @@ public class ControlPanel : MonoBehaviour
     GameObject keyMouTitle;
     [SerializeField]
     GameObject padTitle;
+    [SerializeField]
+    PauseMenu pauseMenu;
 
     private void Start()
     {
@@ -48,5 +50,6 @@ public class ControlPanel : MonoBehaviour
     public void ExitControl()
     {
         gameObject.SetActive(false);
+        pauseMenu.isControl = false;
     }
 }

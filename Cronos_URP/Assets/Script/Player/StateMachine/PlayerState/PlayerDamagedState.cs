@@ -9,8 +9,9 @@ public class PlayerDamagedState : PlayerBaseState
 	public override void Enter()
 	{
 		// TPCPHUD 인스턴스 받아와서 색/크기 변경
+		// 잠시 빼놓음
 		UI_TPCPHUD hud = UI_TPCPHUD.GetInstance();
-		hud.ChangeRed();
+		//hud.ChangeRed();
 
 		stateMachine.Animator.SetTrigger("Damaged");
 	}

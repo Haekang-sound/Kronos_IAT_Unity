@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -17,10 +15,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     GameObject titlePanel;
     bool isPaused;
-    bool isOption;
-    bool isControl;
-    bool isLoad;
-    bool isTitle;
+    public bool isOption;
+    public bool isControl;
+    public bool isLoad;
+    public bool isTitle;
 
     private void OnEnable()
     {
@@ -67,40 +65,56 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
-            {
-                pausePanel.SetActive(true);
-                isPaused = true;
-                pauseManager.PauseGame();
-                Debug.Log("퍼즈메뉴열기");
-            }
-            else if (isOption)
-            {
-                optionPanel.SetActive(false);
-                isOption = false;
-            }
-            else if (isControl)
-            {
-                controlPanel.SetActive(false);
-                isControl = false;
-            }
-            else if (isLoad)
-            {
-                loadPanel.GetComponent<LoadPanel>().ExitLoad();
-                isLoad = false;
-            }
-            else if (isTitle)
-            {
-                titlePanel.GetComponent<LoadPanel>().ExitLoad();
-                isTitle = false;
-            }
+                OpenPauseMenu();
+
             else
-            {
-                pausePanel.SetActive(false);
-                optionPanel.SetActive(false);
-                isPaused = false;
-                pauseManager.UnPauseGame();
-                Debug.Log("퍼즈메뉴닫기");
-            }
+                ClosePanel();
+        }
+    }
+
+    void OpenPauseMenu()
+    {
+        pausePanel.SetActive(true);
+        isPaused = true;
+        pauseManager.PauseGame();
+        Debug.Log("퍼즈메뉴열기");
+    }
+
+    void ClosePauseMenu()
+    {
+        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+        isPaused = false;
+        pauseManager.UnPauseGame();
+        Debug.Log("퍼즈메뉴닫기");
+    }
+
+    void ClosePanel()
+    {
+        if (isOption)
+        {
+            optionPanel.GetComponentInChildren<SoundMixerNCamera>().NoButton();
+            optionPanel.GetComponentInChildren<SoundMixerNCamera>().ExitPanel();
+            isOption = false;
+        }
+        else if (isControl)
+        {
+            controlPanel.SetActive(false);
+            isControl = false;
+        }
+        else if (isLoad)
+        {
+            loadPanel.GetComponent<LoadPanel>().ExitLoad();
+            isLoad = false;
+        }
+        else if (isTitle)
+        {
+            titlePanel.GetComponent<LoadPanel>().ExitLoad();
+            isTitle = false;
+        }
+        else
+        {
+            ClosePauseMenu();
         }
     }
 }
