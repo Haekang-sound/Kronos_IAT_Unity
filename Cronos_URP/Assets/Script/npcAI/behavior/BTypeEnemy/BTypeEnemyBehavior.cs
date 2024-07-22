@@ -95,7 +95,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         var attackTarget = CurrentTarget.transform.position;
 
         // 공격 높이 오프셋
-        attackTarget.y += 1f;
+        attackTarget.y += 1.2f;
 
         _rangeWeapon.Attack(attackTarget);
     }
