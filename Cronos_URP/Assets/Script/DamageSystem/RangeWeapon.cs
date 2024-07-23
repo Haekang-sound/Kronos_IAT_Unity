@@ -6,6 +6,7 @@ public class RangeWeapon : MonoBehaviour
 {
     public Vector3 muzzleOffset;
     public Projectile projectile;
+    public int pooledObejctNum;
 
     public Projectile loadedProjectile
     {
@@ -18,7 +19,7 @@ public class RangeWeapon : MonoBehaviour
     private void Start()
     {
         m_projectilePool = new ObjectPooler<Projectile>();
-        m_projectilePool.Initialize(10, projectile);
+        m_projectilePool.Initialize(pooledObejctNum, projectile);
     }
 
     // TEST

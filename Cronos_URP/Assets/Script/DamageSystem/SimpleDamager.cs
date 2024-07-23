@@ -6,138 +6,144 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class SimpleDamager : MonoBehaviour
 {
-	public bool drawGizmos;
+    public bool drawGizmos;
 
-	public float damageAmount = 1;
-	public bool stopCamera = false;
+    public float damageAmount = 1;
+    public bool stopCamera = false;
 
-	public LayerMask targetLayers;
+    public LayerMask targetLayers;
 
-	//protected GameObject m_owner;
-	protected bool m_inAttack = false;
+    //protected GameObject m_owner;
+    protected bool m_inAttack = false;
 
-	public delegate void TriggerEnterAction(Collider other);
-	public event TriggerEnterAction OnTriggerEnterEvent;
+    public delegate void TriggerEnterAction(Collider other);
+    public event TriggerEnterAction OnTriggerEnterEvent;
 
-	SoundManager soundManager;
+    SoundManager soundManager;
 
-	private void OnEnable()
-	{
-		soundManager = SoundManager.Instance;
-	}
+    private void Start()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
 
-	//public void SetOwner(GameObject owner)
-	//{
-	//    m_owner = owner;
-	//}
+    private void OnEnable()
+    {
+        soundManager = SoundManager.Instance;
+    }
 
-	public void BeginAttack()
-	{
-		m_inAttack = true;
-	}
+    //public void SetOwner(GameObject owner)
+    //{
+    //    m_owner = owner;
+    //}
 
-	public void EndAttack()
-	{
-		m_inAttack = false;
-	}
+    public void BeginAttack()
+    {
+        m_inAttack = true;
+    }
 
-	private void Reset()
-	{
-		GetComponent<Collider>().isTrigger = true;
-	}
+    public void EndAttack()
+    {
+        m_inAttack = false;
+    }
 
-	private void OnDrawGizmos()
-	{
-		if (drawGizmos == false) return;
+    private void Reset()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
 
-		if (m_inAttack)
-		{
-			Gizmos.color = new Color(1, 0, 0, 0.3f);
+    private void OnDrawGizmos()
+    {
+        if (drawGizmos == false) return;
 
-			Gizmos.matrix = transform.localToWorldMatrix;
+        if (m_inAttack)
+        {
+            Gizmos.color = new Color(1, 0, 0, 0.3f);
 
-			var collider = GetComponent<Collider>();
+            Gizmos.matrix = transform.localToWorldMatrix;
 
-			if (collider is BoxCollider boxCollider)
-			{
-				Gizmos.DrawCube(boxCollider.center, boxCollider.size);
-			}
-			else if (collider is SphereCollider sphereCollider)
-			{
-				Gizmos.DrawSphere(sphereCollider.center, sphereCollider.radius);
-			}
-			else if (collider is CapsuleCollider capsuleCollider)
-			{
-				// 캡슐 콜라이더의 위치와 크기를 가져옵니다.
-				Vector3 center = collider.bounds.center;
-				float height = capsuleCollider.height * 0.5f;
-				float radius = capsuleCollider.radius;
+            var collider = GetComponent<Collider>();
 
-				// 캡슐 콜라이더의 방향에 따라 캡슐의 상하 위치를 결정합니다.
-				Vector3 upDirection;
-				if (capsuleCollider.direction == 0) // X-Axis
-				{
-					upDirection = Vector3.right;
-				}
-				else if (capsuleCollider.direction == 1) // Y-Axis
-				{
-					upDirection = Vector3.up;
-				}
-				else // Z-Axis
-				{
-					upDirection = Vector3.forward;
-				}
+            if (collider is BoxCollider boxCollider)
+            {
+                Gizmos.DrawCube(boxCollider.center, boxCollider.size);
+            }
+            else if (collider is SphereCollider sphereCollider)
+            {
+                Gizmos.DrawSphere(sphereCollider.center, sphereCollider.radius);
+            }
+            else if (collider is CapsuleCollider capsuleCollider)
+            {
+                // 캡슐 콜라이더의 위치와 크기를 가져옵니다.
+                Vector3 center = collider.bounds.center;
+                float height = capsuleCollider.height * 0.5f;
+                float radius = capsuleCollider.radius;
 
-				Vector3 bottomSphereCenter = center - upDirection * (height - radius);
-				Vector3 topSphereCenter = center + upDirection * (height - radius);
+                // 캡슐 콜라이더의 방향에 따라 캡슐의 상하 위치를 결정합니다.
+                Vector3 upDirection;
+                if (capsuleCollider.direction == 0) // X-Axis
+                {
+                    upDirection = Vector3.right;
+                }
+                else if (capsuleCollider.direction == 1) // Y-Axis
+                {
+                    upDirection = Vector3.up;
+                }
+                else // Z-Axis
+                {
+                    upDirection = Vector3.forward;
+                }
 
-				// 반구 및 실린더 부분을 그립니다.
-				Gizmos.DrawSphere(bottomSphereCenter, radius);
-				Gizmos.DrawSphere(topSphereCenter, radius);
-				Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.forward, topSphereCenter + radius * Vector3.forward);
-				Gizmos.DrawLine(bottomSphereCenter - radius * Vector3.forward, topSphereCenter - radius * Vector3.forward);
-				Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.right, topSphereCenter + radius * Vector3.right);
-				Gizmos.DrawLine(bottomSphereCenter - radius * Vector3.right, topSphereCenter - radius * Vector3.right);
-			}
-		}
-	}
+                Vector3 bottomSphereCenter = center - upDirection * (height - radius);
+                Vector3 topSphereCenter = center + upDirection * (height - radius);
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (!m_inAttack)
-		{
-			return;
-		}
+                // 반구 및 실린더 부분을 그립니다.
+                Gizmos.DrawSphere(bottomSphereCenter, radius);
+                Gizmos.DrawSphere(topSphereCenter, radius);
+                Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.forward, topSphereCenter + radius * Vector3.forward);
+                Gizmos.DrawLine(bottomSphereCenter - radius * Vector3.forward, topSphereCenter - radius * Vector3.forward);
+                Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.right, topSphereCenter + radius * Vector3.right);
+                Gizmos.DrawLine(bottomSphereCenter - radius * Vector3.right, topSphereCenter - radius * Vector3.right);
+            }
+        }
+    }
 
-		if (this.CompareTag("Player"))
-		{
-			OnTriggerEnterEvent(other);
-		}
-		var damageable = other.GetComponent<Damageable>();
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!m_inAttack)
+        {
+            return;
+        }
 
-		if (damageable == null)
-		{
-			return;
-		}
+        if (this.CompareTag("Player"))
+        {
+            OnTriggerEnterEvent(other);
+        }
 
-		//if (damageable.gameObject == m_owner)
-		//{
-		//    return;
-		//}
+        var damageable = other.GetComponent<Damageable>();
 
-		if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
-		{
-			return;
-		}
+        if (damageable == null)
+        {
+            return;
+        }
 
-		var msg = new Damageable.DamageMessage()
-		{
-			amount = damageAmount,
-			damager = this,
-			direction = Vector3.up,
-			stopCamera = stopCamera
-		};
+        //if (damageable.gameObject == m_owner)
+        //{
+        //    return;
+        //}
 
-		damageable.ApplyDamage(msg);
-	}
+        if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
+        {
+            return;
+        }
+
+        var msg = new Damageable.DamageMessage()
+        {
+            amount = damageAmount,
+            damager = this,
+            direction = Vector3.up,
+            stopCamera = stopCamera
+        };
+
+        damageable.ApplyDamage(msg);
+    }
 }
