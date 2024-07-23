@@ -37,6 +37,10 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		{
 			animator.SetTrigger(dodgeHash);
 		}
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			animator.SetBool(guradHash, true);
+		}
 
 	}
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
