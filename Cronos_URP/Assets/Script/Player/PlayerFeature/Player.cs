@@ -34,7 +34,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			// 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
 			instance = FindObjectOfType<Player>();
 
-			
 			return instance;
 		}
 	}
@@ -157,7 +156,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     }
     private void ChargeCP(Collider other)
 	{
-		if (other.CompareTag("Respawn"))
+		//if (other.CompareTag("Respawn"))
 		{
 			Debug.Log("cp를 회복한다.");
 			if (CP < maxCP && !IsDecreaseCP)
@@ -290,7 +289,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			return;
 		}
-		PlayerFSM.SwitchState(new PlayerDamagedState(PlayerFSM));
+
+		PlayerFSM.Animator.SetTrigger("Damaged");
+		//PlayerFSM.SwitchState(new PlayerDamagedState(PlayerFSM));
 	}
 
 	public void Death(Damageable.DamageMessage msg)
