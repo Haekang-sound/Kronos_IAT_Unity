@@ -147,8 +147,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		GameManager.Instance.PlayerDT = playerData;
 		GameManager.Instance.PlayerDT.saveScene = SceneManager.GetActiveScene().name;
-		
-		currentDamage = meleeWeapon.GetComponentInChildren<SimpleDamager>().damageAmount;
+
+        meleeWeapon.GetComponentInChildren<SimpleDamager>().damageAmount = currentDamage;
 		
 		// 여기에 초기화
         soundManager = SoundManager.Instance;
