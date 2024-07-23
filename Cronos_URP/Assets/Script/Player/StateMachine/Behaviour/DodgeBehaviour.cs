@@ -14,6 +14,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 		stateMachine = PlayerStateMachine.GetInstance();
 		// 상태전환
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerParryState(PlayerStateMachine.GetInstance()));
+		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
 	}
 

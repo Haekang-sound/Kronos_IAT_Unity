@@ -92,15 +92,24 @@ public class AutoTargetting : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			if (FindTarget())
+			if(Target == null)
+			{
+				if (FindTarget())
+				{
+					isTargetting = true;
+					StartCoroutine(AutoTarget());
+				}
+				else
+				{
+					return;
+				}
+			}
+			else
 			{
 				isTargetting = true;
 				StartCoroutine(AutoTarget());
 			}
-			else
-			{
-				return;
-			}
+			
 		}
 
 		if (stateMachine.Player.IsLockOn)

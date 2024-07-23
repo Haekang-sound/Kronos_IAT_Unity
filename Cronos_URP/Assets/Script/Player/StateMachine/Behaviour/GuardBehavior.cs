@@ -12,6 +12,7 @@ public class GuardBehavior : StateMachineBehaviour
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerDefenceState(stateMachine));
+		stateMachine.AutoTargetting.Target = null;
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 	}
 

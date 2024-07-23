@@ -12,6 +12,7 @@ public class FallBehaviour : StateMachineBehaviour
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerFallState(stateMachine));
+		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

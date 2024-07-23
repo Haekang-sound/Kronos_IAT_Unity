@@ -8,7 +8,8 @@ public class DamageBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerDamagedState(PlayerStateMachine.GetInstance()));
-    }
+		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
+	}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

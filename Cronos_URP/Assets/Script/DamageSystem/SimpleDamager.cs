@@ -139,6 +139,7 @@ public class SimpleDamager : MonoBehaviour
         var msg = new Damageable.DamageMessage()
         {
             amount = damageAmount,
+
             damager = this,
             direction = Vector3.up,
             stopCamera = stopCamera
