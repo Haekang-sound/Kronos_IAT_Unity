@@ -36,16 +36,24 @@ public class PlayerMoveState : PlayerBaseState
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 
-		//moveSpeed = 0.5f;
-		if (Input.GetButton("Run"))
+
+		if(stateMachine.Player.IsLockOn)
 		{
-			moveSpeed = 1f;
+			if (Input.GetButton("Run"))
+			{
+				moveSpeed = 1f;
+			}
+			else
+			{
+				stateMachine.StartCoroutine(SmoothChangeSpeed());
+				//moveSpeed = 0.5f; 
+			}
 		}
 		else
 		{
-			stateMachine.StartCoroutine(SmoothChangeSpeed());
-			//moveSpeed = 0.5f; 
+			moveSpeed = 1f;
 		}
+	
 
 		stateMachine.Player.SetSpeed(moveSpeed);
 
