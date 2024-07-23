@@ -17,7 +17,7 @@ public class BuffBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerBuffState(PlayerStateMachine.GetInstance()));
-		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
+		//PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		animator.ResetTrigger(attackHash);
 		animator.ResetTrigger(idleHash);
 		buffTimer = 0f;
