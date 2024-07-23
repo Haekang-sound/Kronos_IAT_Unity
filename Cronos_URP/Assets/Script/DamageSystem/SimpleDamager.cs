@@ -109,8 +109,10 @@ public class SimpleDamager : MonoBehaviour
 			return;
 		}
 
-		OnTriggerEnterEvent(other);
-
+		if (this.CompareTag("Player"))
+		{
+			OnTriggerEnterEvent(other);
+		}
 		var damageable = other.GetComponent<Damageable>();
 
 		if (damageable == null)
