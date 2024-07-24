@@ -141,7 +141,8 @@ public class SimpleDamager : MonoBehaviour
             amount = damageAmount,
 
             damager = this,
-            direction = Vector3.up,
+            direction = (transform.position - other.transform.position).normalized,
+            damageSource = transform.position,
             stopCamera = stopCamera
         };
 

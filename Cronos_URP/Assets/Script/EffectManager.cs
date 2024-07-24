@@ -97,7 +97,6 @@ public class EffectManager : MonoBehaviour
         return null;
     }
 
-
     GameObject FindName(string name)
     {
         foreach (GameObject effect in effects)
@@ -130,9 +129,19 @@ public class EffectManager : MonoBehaviour
         obj.SetActive(false);
     }
 
-    // 이건 씬에서 없애는 것 인스턴싱하고 지울 때
-    void DestroyObject(GameObject obj)
+    // 이펙트매니저가 들고 있는게 나을 것 같은데
+    public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
     {
-        Destroy(obj);
+        // 파편만들기
+        GameObject frag = SpawnEffect("FragFX", targetTrans.position);
+        frag.transform.LookAt(dmgMsg.damageSource);
+        frag.transform.Rotate(-15f, 0, 0);
+        Destroy(frag, 2.0f);
+
+        // 피격이펙트
+        Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
+        GameObject slashed = SpawnEffect("UpSlash", newPos);
+        slashed.transform.forward = Camera.main.transform.forward;
+        Destroy(slashed, 1.0f);
     }
 }
