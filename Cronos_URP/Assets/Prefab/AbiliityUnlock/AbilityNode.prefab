@@ -199,20 +199,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityLevel:
+    id: 0
     maxPoint: 5
     currentPoint: 1
     pointNeeded: 500
     nextNodeUnlockCondition: 5
+    childIdNodes: 
     abilityName: "\uC9F1\uC318 \uACF5\uACA9"
     descriptionText: "\uACF5\uACA9\uB825\uC774 \uC9F1\uC314\uC9D1\uB2C8\uB2E4."
   abilityName: {fileID: 8115271055873236503}
   description: {fileID: 6469240855321178029}
   subdescription: {fileID: 3109208758267289505}
-  childButton:
-  - {fileID: 0}
-  - {fileID: 0}
+  childNodes: []
   fadeUI: {fileID: 8809438620955173426}
   isFocaus: 0
+  button: {fileID: 550256701757941436}
 --- !u!1 &3983997692151261360
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2458321109103105779}
   - component: {fileID: 550256701757941436}
-  - component: {fileID: 4966709860305257197}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -775,33 +775,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4966709860305257197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8722272209754030326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b4d3446fdbc503488faeb181dd67adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityLevel:
-    maxPoint: 5
-    currentPoint: 1
-    pointNeeded: 500
-    nextNodeUnlockCondition: 5
-    abilityName: "\uC9F1\uC318 \uACF5\uACA9"
-    descriptionText: "\uACF5\uACA9\uB825\uC774 \uC9F1\uC314\uC9D1\uB2C8\uB2E4."
-  abilityName: {fileID: 8115271055873236503}
-  description: {fileID: 6469240855321178029}
-  subdescription: {fileID: 3109208758267289505}
-  childButton:
-  - {fileID: 0}
-  - {fileID: 0}
-  fadeUI: {fileID: 8809438620955173426}
-  isFocaus: 0
 --- !u!1 &9046470358629381086
 GameObject:
   m_ObjectHideFlags: 0

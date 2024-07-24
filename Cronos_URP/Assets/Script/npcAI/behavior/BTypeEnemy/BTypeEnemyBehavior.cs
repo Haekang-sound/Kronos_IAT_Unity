@@ -176,12 +176,16 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
     {
+        var dmgMsg = (Damageable.DamageMessage)data;
+
         switch (type)
         {
             case MessageType.DAMAGED:
+                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
                 Damaged();
                 break;
             case MessageType.DEAD:
+                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
                 Dead();
                 break;
             case MessageType.RESPAWN:

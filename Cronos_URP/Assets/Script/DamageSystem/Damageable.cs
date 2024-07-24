@@ -47,7 +47,6 @@ public partial class Damageable : MonoBehaviour
     EffectManager effectManager;
     Player player;
     ImpulseCam impCam;
-    [SerializeField] GameObject playerSword;
 
     void Start()
     {
@@ -60,9 +59,7 @@ public partial class Damageable : MonoBehaviour
     {
         effectManager = EffectManager.Instance;
         soundManager = SoundManager.Instance;
-        // Find의 비용이 크다고 하지만... 인스펙터에서 전부 넣기엔 귀찮다
         player = Player.Instance;
-        playerSword = GameObject.Find("Sword");
     }
 
     void Update()
@@ -125,25 +122,9 @@ public partial class Damageable : MonoBehaviour
             return;
 
         /// 여기에 민동휘가 만들어놓음
-        /// 플레이어 소드를 LookAt 하여 파티클 인스턴싱
         /// 태그가 플레이어가 아니면 적이겠지
         if (gameObject.tag != "Player")
         {
-            // 파편 만들기
-            Vector3 damagedPosition = transform.position;
-            // 일단 맞은 위치에 인스턴스를 만든다.
-            GameObject frag = effectManager.SpawnEffect("FragFX", damagedPosition);
-            frag.transform.LookAt(playerSword.transform);
-            frag.transform.Rotate(-15f, 0, 0);
-            Destroy(frag, 2.0f);
-
-            // 피격 이펙트 만들기
-            Vector3 dir = (transform.position - playerSword.transform.position).normalized;
-            Vector3 newPos = new Vector3(transform.position.x - dir.x, playerSword.transform.position.y, transform.position.z - dir.z);
-            GameObject slashed = effectManager.SpawnEffect("UpSlash", newPos);
-            slashed.transform.forward = Camera.main.transform.forward;
-            Destroy(slashed, 1.0f);
-
             // 히트 스탑 시험중
             if (player != null)
             {
