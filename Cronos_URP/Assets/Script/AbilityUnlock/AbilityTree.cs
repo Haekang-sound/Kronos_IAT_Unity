@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityNode>
+public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
     [SerializeField] public Button rootAbilityNode;
     [SerializeField] public AbilityAmountLimit abilityAmounts;

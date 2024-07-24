@@ -357,7 +357,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8037724239432951902}
-  - component: {fileID: 2359444130887946027}
   m_Layer: 5
   m_Name: AbuilityUnlock
   m_TagString: Untagged
@@ -388,22 +387,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2359444130887946027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064703561269759015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ae67b6301203349a269c65eef32007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootAbilityNode: {fileID: 6973019969215819579}
-  abilityAmounts: {fileID: 1454651652250401060}
-  canvasGroup: {fileID: 8429372351822482684}
-  playerVirtualCam: {fileID: 0}
 --- !u!1 &5386886191756566298
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +476,7 @@ GameObject:
   - component: {fileID: 887528285657398153}
   - component: {fileID: 7334007242761035644}
   - component: {fileID: 7002977254364596522}
+  - component: {fileID: 8933317581357998186}
   m_Layer: 5
   m_Name: AbilityUnlockCanvas
   m_TagString: Untagged
@@ -606,6 +590,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363ae04b0291b9446a00ee0107de8756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8933317581357998186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076314725810633038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ae67b6301203349a269c65eef32007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootAbilityNode: {fileID: 6973019969215819579}
+  abilityAmounts: {fileID: 1454651652250401060}
+  canvasGroup: {fileID: 8429372351822482684}
+  playerVirtualCam: {fileID: 0}
 --- !u!1 &7205392731941171584
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class AbilityAmountLimit : MonoBehaviour
     {
         _player = Player.Instance;
 
-
         UpdatePlayerTimePoint();
 
         Render();
