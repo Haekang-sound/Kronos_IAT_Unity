@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,16 +15,15 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     [SerializeField] public TMP_Text description;
     [SerializeField] public TMP_Text subdescription;
 
-    public Button[] childButton;
-
-    public FadeEffector fadeUI;
+    //public Button[] childButton;
+    public List<AbilityNode> childNodes;
 
     public bool isFocaus;
+    public Button button;
+    public FadeEffector fadeUI;
 
-    private Button _button;
     private CinemachineVirtualCamera _virtualCam;
     private IObserver<AbilityNode> _observer;
-
 
     // IObservable /////////////////////////////////////////////////////////////
 
@@ -56,24 +56,24 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
     }
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(OnClickButton);
+        button.onClick.AddListener(OnClickButton);
         fadeUI.GetComponent<CanvasGroup>().alpha = 0f;
     }
 
     private void Start()
     {
-        description.text = abilityLevel.descriptionText;
-        subdescription.text = $"CP {abilityLevel.pointNeeded} 필요";
-
-        Render();
+        InitRender();
     }
 
+    public void SetInteractable(bool val)
+    {
+        button.interactable = val;
+    }
 
     private void OnDisable()
     {
@@ -93,6 +93,26 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         StartCoroutine(SetFocausAfter(false, 2));
         _virtualCam.Priority = 0;
         fadeUI.StartFadeOut(1.8f);
+    }
+
+    public void InitRender()
+    {
+        description.text = abilityLevel.descriptionText;
+        subdescription.text = $"CP {abilityLevel.pointNeeded} 필요";
+
+        Render();
+    }
+
+    public void UpdateChilds()
+    {
+        if (abilityLevel.currentPoint == abilityLevel.nextNodeUnlockCondition ||
+            abilityLevel.currentPoint >= abilityLevel.maxPoint)
+        {
+            foreach (var child in childNodes)
+            {
+                child.SetInteractable(true);
+            }
+        }
     }
 
     private void OnClickButton()
@@ -129,17 +149,5 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         }
 
         return result;
-    }
-
-    private void UpdateChilds()
-    {
-        if (abilityLevel.currentPoint == abilityLevel.nextNodeUnlockCondition ||
-            abilityLevel.currentPoint == abilityLevel.maxPoint)
-        {
-            foreach (var child in childButton)
-            {
-                child.interactable = true;
-            }
-        }
     }
 }

@@ -3,10 +3,10 @@ using System.Xml;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 
-public class AbilityLevelParser
+public class AbilityDataParser
 {
-    string filepathLevelData = "Assets/Respirces/Text/AbilityLevelData";
-    string filepathUserData = "Assets/Respirces/Text/AbilityUserData";
+    string filepathLevelData = "Assets/Resources/Text/AbilityLevelData";
+    string filepathUserData = "Assets/Resources/Text/AbilityUserData";
 
     // Ability Level Data
     readonly string elementId = "ID";
@@ -67,7 +67,7 @@ public class AbilityLevelParser
         //루트에서 요소 꺼내기
         foreach (XmlElement node in nodes.ChildNodes)
         {
-            int userlevel = System.Convert.ToInt32(node.GetAttribute(elementNextNodeCondition));
+            int userlevel = System.Convert.ToInt32(node.GetAttribute(elementCurrentPoint));
             UsertData.Add(userlevel);
         }
 
@@ -90,7 +90,7 @@ public class AbilityLevelParser
             XmlElement element = doc.CreateElement("Level");
 
             //속성을 만들어 요소에 등록
-            element.SetAttribute("elementCurrentPoint", data.currentPoint.ToString());
+            element.SetAttribute(elementCurrentPoint, data.currentPoint.ToString());
 
             //root의 일부로 요소를 등록
             rootElement.AppendChild(element);
