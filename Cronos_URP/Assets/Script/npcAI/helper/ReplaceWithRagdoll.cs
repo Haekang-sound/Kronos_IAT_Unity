@@ -84,7 +84,8 @@ public class ReplaceWithRagdoll : MonoBehaviour
             {
                 if (child.CompareTag("CinemachineTarget"))
                 {
-                    camera.GetComponent<CinemachineVirtualCamera>().Follow = child;
+                    /// 여기에 문제 있음
+                    //camera.GetComponent<CinemachineVirtualCamera>().Follow = child;
 
                     break;
                 }

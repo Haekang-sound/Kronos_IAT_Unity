@@ -130,12 +130,12 @@ public partial class Damageable : MonoBehaviour
         if (gameObject.tag != "Player")
         {
             // 파편 만들기
-            Vector3 damagedPosition = transform.position;
-            // 일단 맞은 위치에 인스턴스를 만든다.
-            GameObject frag = effectManager.SpawnEffect("FragFX", damagedPosition);
-            frag.transform.LookAt(playerSword.transform);
-            frag.transform.Rotate(-15f, 0, 0);
-            Destroy(frag, 2.0f);
+            //Vector3 damagedPosition = transform.position;
+            //// 일단 맞은 위치에 인스턴스를 만든다.
+            //GameObject frag = effectManager.SpawnEffect("FragFX", damagedPosition);
+            //frag.transform.LookAt(playerSword.transform);
+            //frag.transform.Rotate(-15f, 0, 0);
+            //Destroy(frag, 2.0f);
 
             // 피격 이펙트 만들기
             Vector3 dir = (transform.position - playerSword.transform.position).normalized;
@@ -144,7 +144,7 @@ public partial class Damageable : MonoBehaviour
             slashed.transform.forward = Camera.main.transform.forward;
             Destroy(slashed, 1.0f);
 
-            // 히트 스탑 시험중
+            // 히트 스탑
             if (player != null)
             {
                 player.GetComponent<HitStop>().StartCoroutine(player.GetComponent<HitStop>().HitStopCoroutine());

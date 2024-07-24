@@ -142,6 +142,7 @@ public class SimpleDamager : MonoBehaviour
 
             damager = this,
             direction = Vector3.up,
+            damageSource = gameObject.transform.position,
             stopCamera = stopCamera
         };
 

@@ -135,9 +135,17 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         {
             case MessageType.DAMAGED:
                 Damaged();
+                // 여기서 피격 이펙트 처리
+                Vector3 damagedPos = transform.position;
+                GameObject frag = EffectManager.Instance.SpawnEffect("FragFX", damagedPos);
+                GameObject sendObj = sender as GameObject;
+                frag.transform.LookAt(sendObj.transform);
+                frag.transform.Rotate(-15f, 0, 0);
+                Destroy(frag, 2.0f);
                 break;
             case MessageType.DEAD:
                 Dead();
+                //
                 break;
             case MessageType.RESPAWN:
                 break;
