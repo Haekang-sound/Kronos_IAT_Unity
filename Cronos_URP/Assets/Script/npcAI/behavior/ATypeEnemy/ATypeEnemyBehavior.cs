@@ -19,6 +19,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     private EnemyController _controller;
     private BulletTimeScalable _bulletTimeScalable;
     private MeleeWeapon _meleeWeapon;
+
     // Animator Parameters
     public static readonly int hashDown = Animator.StringToHash("down");
     public static readonly int hashReturn = Animator.StringToHash("return");
