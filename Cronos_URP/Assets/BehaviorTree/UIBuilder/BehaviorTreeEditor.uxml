@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/UIBuilder/BehaviorTreeEditor.uss?fileID=7433441132597879392&amp;guid=8d9502860c813c042989a37398689f0f&amp;type=3#BehaviorTreeEditor" />
+    <uie:Toolbar>
+        <uie:ToolbarMenu tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="Assets" />
+    </uie:Toolbar>
+    <SplitView fixed-pane-initial-dimension="300" orientation="Horizontal" style="width: auto; height: auto; flex-shrink: 1;">
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; flex-shrink: 0; background-color: rgb(56, 56, 56);">
+            <SplitView orientation="Vertical" fixed-pane-initial-dimension="200">
+                <ui:VisualElement name="inspector-container" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(238, 238, 238); -unity-font-style: normal; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; left: auto; background-color: rgb(40, 40, 40); flex-shrink: 1; flex-grow: 0; -unity-text-align: middle-left;" />
+                    <InspectorView style="flex-grow: 1; width: 300px; background-color: rgba(63, 63, 63, 0); flex-wrap: nowrap; flex-direction: column; flex-shrink: 0;">
+                        <ui:TreeView style="flex-shrink: 1; flex-direction: column; flex-basis: auto;" />
+                    </InspectorView>
+                </ui:VisualElement>
+                <ui:VisualElement name="blackboard-container" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Blackboard" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(40, 40, 40); color: rgb(196, 196, 196); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                    <ui:IMGUIContainer style="flex-grow: 1;" />
+                </ui:VisualElement>
+            </SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; flex-shrink: 0; background-color: rgb(32, 32, 32); flex-basis: auto;">
+            <ui:Label tabindex="-1" text="Tree View" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(35, 35, 35, 0); -unity-font-style: normal; color: rgb(238, 238, 238); -unity-slice-scale: 1px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: middle-left; left: auto; flex-shrink: 1;" />
+            <BehaviorTreeView focusable="true" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </SplitView>
+</ui:UXML>
