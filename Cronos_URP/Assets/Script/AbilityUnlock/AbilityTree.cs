@@ -7,19 +7,21 @@ using UnityEngine.UI;
 
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
-    [SerializeField] public Button rootAbilityNode;
+    [SerializeField] public AbilityNode rootAbilityNode;
     [SerializeField] public AbilityAmountLimit abilityAmounts;
 
     public CanvasGroup canvasGroup;
     public CinemachineVirtualCamera playerVirtualCam;
 
     private bool isFocaus;
-    private List<Button> _abilityNodes;
+    private List<AbilityNode> _abilityNodes;
 
     private List<IObservable<AbilityNode>> _obserables;
     private List<IDisposable> _unsubscribers;
 
     private AbilityNode _lastPressed;
+
+    private AbilityDataParser parser = new AbilityDataParser();
 
     // IObserver /////////////////////////////////////////////////////////////
 
@@ -76,24 +78,30 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     // MonoBehaviour /////////////////////////////////////////////////////////////
 
-    void Awake()
+    private void Awake()
     {
         // 구독자 구독
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
-        _abilityNodes = GetComponentsInChildren<Button>().ToList();
+        _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
         foreach (var obserable in _obserables)
         {
             obserable.Subscribe(this);
         }
 
-        rootAbilityNode.interactable = false;
+        rootAbilityNode.SetInteractable(false);
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
-        rootAbilityNode.interactable = true;
+        rootAbilityNode.SetInteractable(true);
         canvasGroup.alpha = 0f;
+    }
+
+    private void Start()
+    {
+        LoadAbilityLevelData();
+        InitChildNodeDatas();
     }
 
     public void Update()
@@ -110,6 +118,50 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 Exit();
             }
         }
+    }
+
+    public void LoadAbilityLevelData()
+    {
+        var LoadedlevelDatas = parser.LoadLevelDataXML();
+        var loadedUserDatas = parser.LoadUserDataXML();
+
+        for (int i = 0; i < _abilityNodes.Count; i++)
+        {
+            _abilityNodes[i].abilityLevel = LoadedlevelDatas[i];
+            _abilityNodes[i].abilityLevel.currentPoint = loadedUserDatas[i];
+            _abilityNodes[i].InitRender();
+
+        }
+    }
+
+    public void InitChildNodeDatas()
+    {
+        foreach (var node in _abilityNodes)
+        {
+            foreach (var childNodeId in node.abilityLevel.childIdNodes)
+            {
+                if (childNodeId != -1)
+                {
+                    var childNode = _abilityNodes[childNodeId];
+                    node.childNodes.Add(childNode);
+                }
+            }
+        }
+
+        foreach (var node in _abilityNodes)
+        {
+            node.UpdateChilds();
+        }
+    }
+
+    public void ResetUserData()
+    {
+        foreach (var node in _abilityNodes)
+        {
+            node.abilityLevel.currentPoint = 0;
+        }
+
+        rootAbilityNode.abilityLevel.currentPoint = 1;
     }
 
     public void Enter()
@@ -130,6 +182,19 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         canvasGroup.alpha = 0f;
         isFocaus = false;
         SetEnabledButtons(false);
+
+        SaveUserData();
+    }
+
+    private void SaveUserData()
+    {
+        List<AbilityLevel> abilityData = new List<AbilityLevel>();
+        foreach (var node in _abilityNodes)
+        {
+            abilityData.Add(node.abilityLevel);
+        }
+
+        parser.SaveUserDataXML(abilityData);
     }
 
     private void SetEnabledButtons(bool val)

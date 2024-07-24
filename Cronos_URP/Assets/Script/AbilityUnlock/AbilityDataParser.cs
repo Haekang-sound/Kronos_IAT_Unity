@@ -3,10 +3,10 @@ using System.Xml;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 
-public class AbilityLevelParser
+public class AbilityDataParser
 {
-    string filepathLevelData = "Assets/Respirces/Text/AbilityLevelData";
-    string filepathUserData = "Assets/Respirces/Text/AbilityUserData";
+    string filepathLevelData = "Assets/Resources/Text/AbilityLevelData";
+    string filepathUserData = "Assets/Resources/Text/AbilityUserData";
 
     // Ability Level Data
     readonly string elementId = "ID";
