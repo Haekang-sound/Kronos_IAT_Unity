@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButton>
+public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityNode>
 {
     [SerializeField] public Button rootAbilityNode;
     [SerializeField] public AbilityAmountLimit abilityAmounts;
@@ -16,14 +16,14 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
     private bool isFocaus;
     private List<Button> _abilityNodes;
 
-    private List<IObservable<AbilityIncreaseButton>> _obserables;
+    private List<IObservable<AbilityNode>> _obserables;
     private List<IDisposable> _unsubscribers;
 
-    private AbilityIncreaseButton _lastPressed;
+    private AbilityNode _lastPressed;
 
     // IObserver /////////////////////////////////////////////////////////////
 
-    public virtual void Subscribe(IObservable<AbilityIncreaseButton> provider)
+    public virtual void Subscribe(IObservable<AbilityNode> provider)
     {
         if (provider != null)
             _unsubscribers.Add(provider.Subscribe(this));
@@ -38,7 +38,7 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
     {
     }
 
-    public virtual void OnNext(AbilityIncreaseButton value)
+    public virtual void OnNext(AbilityNode value)
     {
 
         if (value.isFocaus == false)
@@ -79,7 +79,7 @@ public class AbilityUnlockSystem : MonoBehaviour, IObserver<AbilityIncreaseButto
     void Awake()
     {
         // 구독자 구독
-        _obserables = GetComponentsInChildren<IObservable<AbilityIncreaseButton>>().ToList();
+        _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
         _abilityNodes = GetComponentsInChildren<Button>().ToList();
 
         foreach (var obserable in _obserables)
