@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseButton>
+public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
     public AbilityLevel abilityLevel = new AbilityLevel();
 
@@ -22,12 +22,12 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
 
     private Button _button;
     private CinemachineVirtualCamera _virtualCam;
-    private IObserver<AbilityIncreaseButton> _observer;
+    private IObserver<AbilityNode> _observer;
 
 
     // IObservable /////////////////////////////////////////////////////////////
 
-    public IDisposable Subscribe(IObserver<AbilityIncreaseButton> observer)
+    public IDisposable Subscribe(IObserver<AbilityNode> observer)
     {
         if (_observer != null)
         {
@@ -39,9 +39,9 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
 
     private class Unsubscriber : IDisposable
     {
-        private AbilityIncreaseButton _observable;
+        private AbilityNode _observable;
 
-        public Unsubscriber(AbilityIncreaseButton observable)
+        public Unsubscriber(AbilityNode observable)
         {
             _observable = observable;
         }
@@ -122,11 +122,11 @@ public class AbilityIncreaseButton : MonoBehaviour, IObservable<AbilityIncreaseB
         if (result == true)
         {
             abilityLevel.currentPoint = addedPoint;
-        }
 
-        // 자식 노드 활성화
-        UpdateChilds();
-        Render();
+            // 자식 노드 활성화
+            UpdateChilds();
+            Render();
+        }
 
         return result;
     }

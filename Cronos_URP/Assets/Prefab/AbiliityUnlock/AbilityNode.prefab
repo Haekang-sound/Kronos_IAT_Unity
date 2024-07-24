@@ -156,6 +156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1126464518756265769}
+  - component: {fileID: 1291760833162024962}
   m_Layer: 5
   m_Name: AbilityNode
   m_TagString: Untagged
@@ -177,6 +178,7 @@ RectTransform:
   m_Children:
   - {fileID: 2458321109103105779}
   - {fileID: 578000000389723390}
+  - {fileID: 994533481155285979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -184,6 +186,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1291760833162024962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2498653773582229337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4d3446fdbc503488faeb181dd67adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityLevel:
+    maxPoint: 5
+    currentPoint: 1
+    pointNeeded: 500
+    nextNodeUnlockCondition: 5
+    abilityName: "\uC9F1\uC318 \uACF5\uACA9"
+    descriptionText: "\uACF5\uACA9\uB825\uC774 \uC9F1\uC314\uC9D1\uB2C8\uB2E4."
+  abilityName: {fileID: 8115271055873236503}
+  description: {fileID: 6469240855321178029}
+  subdescription: {fileID: 3109208758267289505}
+  childButton:
+  - {fileID: 0}
+  - {fileID: 0}
+  fadeUI: {fileID: 8809438620955173426}
+  isFocaus: 0
 --- !u!1 &3983997692151261360
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +577,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5962780647341167663}
-  m_Father: {fileID: 2458321109103105779}
+  m_Father: {fileID: 1126464518756265769}
   m_LocalEulerAnglesHint: {x: -3.69, y: 0, z: 0}
 --- !u!114 &8609026769445871424
 MonoBehaviour:
@@ -695,7 +724,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5983385061750802981}
-  - {fileID: 994533481155285979}
   m_Father: {fileID: 1126464518756265769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
