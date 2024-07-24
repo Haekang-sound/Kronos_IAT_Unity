@@ -8,7 +8,7 @@ public class EmptyClick : MonoBehaviour, IPointerClickHandler
 
     public void OnEnable()
     {
-        var abilityButtons = GetComponentsInChildren<AbilityIncreaseButton>();
+        var abilityButtons = GetComponentsInChildren<AbilityNode>();
         foreach (var button in abilityButtons)
         {
             onEmptyClick += button.FocusOut;
