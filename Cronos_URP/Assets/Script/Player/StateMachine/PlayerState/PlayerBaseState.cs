@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Resources;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 public abstract class PlayerBaseState : State
@@ -67,6 +66,14 @@ public abstract class PlayerBaseState : State
 	{
 
 		bool isOnSlope = IsOnSlope();
+		if(isOnSlope)
+		{
+			stateMachine.Rigidbody.useGravity = false;
+		}
+		else
+		{
+			stateMachine.Rigidbody.useGravity = true;
+		}
 		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) : stateMachine.Velocity;//.normalized;
 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
