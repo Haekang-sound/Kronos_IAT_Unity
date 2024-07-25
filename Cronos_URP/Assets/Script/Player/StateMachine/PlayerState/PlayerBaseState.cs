@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Resources;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 public abstract class PlayerBaseState : State
