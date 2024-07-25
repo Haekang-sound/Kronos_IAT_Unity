@@ -450,7 +450,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: Charge
+    m_EventTreshold: 0.3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
   m_Solo: 0
@@ -732,6 +735,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Charge
+    m_EventTreshold: 0.3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
   m_Solo: 0
@@ -2091,6 +2097,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Charge
+    m_EventTreshold: 0.3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
   m_Solo: 0
@@ -3039,6 +3048,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Charge
+    m_EventTreshold: 0.3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
   m_Solo: 0
