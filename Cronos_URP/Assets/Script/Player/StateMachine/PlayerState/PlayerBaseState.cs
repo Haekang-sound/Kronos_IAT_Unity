@@ -67,6 +67,14 @@ public abstract class PlayerBaseState : State
 	{
 
 		bool isOnSlope = IsOnSlope();
+		if(isOnSlope)
+		{
+			stateMachine.Rigidbody.useGravity = false;
+		}
+		else
+		{
+			stateMachine.Rigidbody.useGravity = true;
+		}
 		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) : stateMachine.Velocity;//.normalized;
 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
