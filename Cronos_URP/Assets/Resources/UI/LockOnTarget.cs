@@ -38,7 +38,7 @@ public class LockOnTarget : MonoBehaviour
             targetUI.SetActive(true);
 
             Vector3 dir = (target.transform.position - player.transform.position).normalized;
-
+            transform.position = target.transform.position;
             targetUI.transform.position = target.position - new Vector3(dir.x, 0, dir.z);
             transform.forward = Camera.main.transform.forward;
         }
@@ -47,7 +47,6 @@ public class LockOnTarget : MonoBehaviour
             targetUI.SetActive(false);
         }
 
-        
     }
 
     //ui 오버레이로 설정할 경우
