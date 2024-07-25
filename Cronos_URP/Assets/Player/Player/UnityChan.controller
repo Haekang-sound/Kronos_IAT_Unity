@@ -260,7 +260,7 @@ AnimatorStateMachine:
     m_Position: {x: -400, y: 860, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7910421595478925460}
-    m_Position: {x: -510, y: 110, z: 0}
+    m_Position: {x: -510, y: 100, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -2999757489222086815}
@@ -450,7 +450,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMove
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
   m_Solo: 0
@@ -577,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 40
+  moveForce: 0
   hitStopTime: 0.05
 --- !u!114 &-5474965037399157733
 MonoBehaviour:
@@ -731,6 +734,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
@@ -933,7 +939,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9085366
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1786,7 +1792,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.079709284
   m_TransitionOffset: 0.10000007
   m_ExitTime: 0.5115
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -2090,6 +2096,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
@@ -2585,7 +2594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 20
+  moveForce: 0
   hitStopTime: 0.04
 --- !u!1101 &6718120650951021514
 AnimatorStateTransition:
@@ -2837,7 +2846,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 274ee805c2e3aa94cbc8268438f3da44, type: 3}
+  m_Motion: {fileID: -3329178438744785741, guid: 9b3d1c072065ab04ab2136378f415879, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3038,6 +3047,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: NextCombo
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMove
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3223448887807297641}
