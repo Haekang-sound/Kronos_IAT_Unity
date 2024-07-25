@@ -16,22 +16,16 @@ public class PlayerFallState : PlayerBaseState
 	{
 		if (stateMachine.GroundChecker.IsGrounded())
 		{
-			//stateMachine.Animator.speed = 1f;
 			stateMachine.Animator.SetBool(FallHash, false);
-			//stateMachine.SwitchState(new PlayerIdleState(stateMachine));
 		}
-
+		CalculateMoveDirection();
 	}
 	public override void FixedTick()
 	{
+		FaceMoveDirection();
 		Move();
 	}
-	public override void LateTick()
-	{
-	}
-	public override void Exit()
-	{
-
-	}
+	public override void LateTick(){}
+	public override void Exit(){}
 
 }
