@@ -51,6 +51,8 @@ public class SimpleDamager : MonoBehaviour
         GetComponent<Collider>().isTrigger = true;
     }
 
+#if UNITY_EDITOR
+
     private void OnDrawGizmos()
     {
         if (drawGizmos == false) return;
@@ -107,7 +109,14 @@ public class SimpleDamager : MonoBehaviour
         }
     }
 
+#endif
+
     private void OnTriggerEnter(Collider other)
+    {
+        DamageCheck(other);
+    }
+
+    public void DamageCheck(Collider other)
     {
         if (!m_inAttack)
         {
