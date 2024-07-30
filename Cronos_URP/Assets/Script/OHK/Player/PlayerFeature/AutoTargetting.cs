@@ -41,7 +41,7 @@ public class AutoTargetting : MonoBehaviour
     {
         instance = this;    // 싱글턴으로 쓰겠다.
         MonsterList = new List<GameObject>(); // 몬스터를 담자
-        PlayerCamera = PlayerCamControler.Instance.VirtualCamera;
+		//PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
 
     }
 

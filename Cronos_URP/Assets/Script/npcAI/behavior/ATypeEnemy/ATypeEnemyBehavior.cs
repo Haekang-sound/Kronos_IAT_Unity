@@ -190,6 +190,16 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _meleeWeapon.EndAttack();
     }
 
+    public void BeginCanBeParried()
+    {
+        _meleeWeapon.BeginCanBeParried();
+    }
+
+    public void EndBeCanParried()
+    {
+        _meleeWeapon.EndBeCanParried();
+    }
+
     public void BeginAiming()
     {
         rotationSpeed = 5f;
@@ -231,7 +241,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _bulletTimeScalable.active = false;
     }
 
-    internal void TriggerDown()
+    public void TriggerDown()
     {
         _controller.animator.SetTrigger(hashDown);
     }
