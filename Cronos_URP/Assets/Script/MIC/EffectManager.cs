@@ -25,11 +25,11 @@ public class EffectManager : MonoBehaviour
             return instance;
         }
     }
-
+    
+    // 플레이어 관련
     [SerializeField]
     Player player;
-
-    public GameObject parryFX;
+    GameObject pSword;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -62,14 +62,13 @@ public class EffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        parryFX.transform.position = player.GetComponent<Player>().playerSword.transform.position;
+        
     }
 
     void Initialize()
     {
         player = Player.Instance;
-        parryFX = FindName("ParryGreen");
-        parryFX.SetActive(false);
+        pSword = player.GetComponent<Player>().playerSword;
     }
 
     void LoadEffect()
@@ -150,5 +149,18 @@ public class EffectManager : MonoBehaviour
         GameObject slashed = SpawnEffect("UpSlash", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         Destroy(slashed, 1.0f);
+    }
+
+    public void CreateParryFX()
+    {
+        GameObject parr = SpawnEffect("ParryGreen", pSword.transform.position);
+        Destroy(parr, 1.5f);
+    }
+
+    public void CreateGuardFX()
+    {
+        Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+        GameObject grd = SpawnEffect("GuardFX", grdPos);
+        Destroy(grd, 1.0f);
     }
 }
