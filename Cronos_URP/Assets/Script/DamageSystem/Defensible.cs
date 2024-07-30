@@ -18,7 +18,6 @@ public class Defensible : MonoBehaviour
     [FormerlySerializedAs("hitForwardRoation")] //SHAME!
     public float hitForwardRotation = 360.0f;
 
-
     public void ApplyDamage(ref DamageMessage data)
     {
         if (!isDefending)
@@ -37,6 +36,10 @@ public class Defensible : MonoBehaviour
         {
             return;
         }
+
+        // ∞°µÂ ¿Ã∆Â∆Æ
+        Debug.Log("now Guarding");
+        EffectManager.Instance.CreateGuardFX();
 
         data.amount /= dampRatio;
     }

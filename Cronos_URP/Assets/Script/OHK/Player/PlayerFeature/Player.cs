@@ -95,6 +95,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	AutoTargetting targetting;
 
     MeleeWeapon meleeWeapon;
+	ShieldWeapon shieldWeapon;
 	PlayerStateMachine PlayerFSM;
 
 	public Damageable _damageable;
@@ -132,9 +133,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 		playerTransform = GetComponent<Transform>();
 
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-		meleeWeapon.GetComponentInChildren<SimpleDamager>().OnTriggerEnterEvent += ChargeCP;
+		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
 
-		targetting = GetComponentInChildren<AutoTargetting>();
+        shieldWeapon = GetComponentInChildren<ShieldWeapon>();
+
+        targetting = GetComponentInChildren<AutoTargetting>();
 		totalspeed = Speed;
 
 		if (GameManager.Instance.isRespawn)
@@ -147,7 +150,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		GameManager.Instance.PlayerDT = playerData;
 		GameManager.Instance.PlayerDT.saveScene = SceneManager.GetActiveScene().name;
 
-        meleeWeapon.GetComponentInChildren<SimpleDamager>().damageAmount = currentDamage;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
 		
 		// 여기에 초기화
         soundManager = SoundManager.Instance;
@@ -246,11 +249,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		attackCoefficient = value;
 	}
+
 	public void AdjustMoveCoefficient(float value)
 	{
 		moveCoefficient = value;
 	}
-
 
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
@@ -377,16 +380,36 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void AttackStart()
 	{
-		meleeWeapon.BeginAttack();
+		meleeWeapon?.BeginAttack();
 	}
 	public void AttackEnd()
 	{
-		meleeWeapon.EndAttack();
+		meleeWeapon?.EndAttack();
 	}
 
-	// 칼 사운드를 출력할 때 이펙트를 뿜어보자
-	// 계속 이렇게 할거라면 이름을 바꿔야겠다
-	public void SoundSword()
+    public void BeginGuard()
+    {
+		shieldWeapon?.BeginGuard();
+    }
+
+	public void EndGuard()
+	{
+        shieldWeapon?.EndGuard();
+    }
+
+	public void BeginParry()
+	{
+		shieldWeapon?.BeginParry();
+    }
+
+    public void EndParry()
+    {
+        shieldWeapon?.EndParry();
+    }
+
+    // 칼 사운드를 출력할 때 이펙트를 뿜어보자
+    // 계속 이렇게 할거라면 이름을 바꿔야겠다
+    public void SoundSword()
 	{
 		soundManager.PlaySFX("Attack_SE", transform);
 		// 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.

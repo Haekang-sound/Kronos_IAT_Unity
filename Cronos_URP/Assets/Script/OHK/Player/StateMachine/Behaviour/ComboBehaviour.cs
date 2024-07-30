@@ -24,9 +24,7 @@ public class ComboBehaviour : StateMachineBehaviour
 	[SerializeField] float moveForce;
 
 	public float hitStopTime;
-	public float minFrame;
-
-	public string transitionName = "testTransition ";
+	[Range(0.0f, 1.0f)]	public float minFrame; 
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
