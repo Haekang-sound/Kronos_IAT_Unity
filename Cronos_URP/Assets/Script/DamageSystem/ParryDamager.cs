@@ -58,8 +58,9 @@ public class ParryDamager : SimpleDamager
         var otherParryDamager = other.GetComponent<ParryDamager>();
 
         if (otherParryDamager == null ||
-            otherParryDamager._isParrying == false ||
+            otherParryDamager?._isParrying == false ||
             _canBeParryied == false)
+        // _canBeParryied == true && otherParryDamager._isParrying == true
         {
             return false;
         }
@@ -74,26 +75,27 @@ public class ParryDamager : SimpleDamager
 
         if (_isGuard == true)
         {
+            // Green - 패리 가능한 가드
             if (_isParrying == true)
             {
                 Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
             }
+            // Blue - 가드
             else
             {
-                // Blue
                 Gizmos.color = new Color(0f, 0f, 1f, 0.3f);
             }
         }
         else if (_isGuard == false)
         {
-
+            // yellow - 패리 당할 수 있는 공격 타이밍
             if (_canBeParryied == true)
             {
-                Gizmos.color = new Color(0f, 1f, 1f, 0.3f);
+                Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
             }
+            // Red - 공격
             else
             {
-                // Red
                 Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
             }
         }

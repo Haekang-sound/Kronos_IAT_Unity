@@ -1,37 +1,37 @@
 using UnityEngine;
 public class MeleeWeapon : MonoBehaviour
 {
-    private SimpleDamager _simpleDamager;
-    private ParryDamager _parryDamaer;
+    public SimpleDamager simpleDamager;
+    public ParryDamager parryDamaer;
 
     private void Awake()
     {
-        _simpleDamager = GetComponentInChildren<SimpleDamager>();
-        _parryDamaer = GetComponentInChildren<ParryDamager>();
+        simpleDamager = GetComponentInChildren<SimpleDamager>();
+        parryDamaer = GetComponentInChildren<ParryDamager>();
 
-        _simpleDamager?.gameObject.SetActive(false);
+        simpleDamager?.gameObject.SetActive(false);
     }
 
     public void BeginAttack()
     {
-        _simpleDamager?.gameObject.SetActive(true);
-        _simpleDamager?.BeginAttack();
+        simpleDamager?.gameObject.SetActive(true);
+        simpleDamager?.BeginAttack();
     }
 
     public void EndAttack()
     {
-        _simpleDamager?.EndAttack();
-        _simpleDamager?.gameObject.SetActive(false);
+        simpleDamager?.EndAttack();
+        simpleDamager?.gameObject.SetActive(false);
     }
 
     public void BeginCanBeParried()
     {
-        _parryDamaer?.BeginBeParried();
+        parryDamaer?.BeginBeParried();
     }
 
     public void EndBeCanParried()
     {
-        _parryDamaer?.EndBeParried();
+        parryDamaer?.EndBeParried();
     }
 
 }

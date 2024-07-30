@@ -133,7 +133,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		playerTransform = GetComponent<Transform>();
 
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-		meleeWeapon.GetComponentInChildren<SimpleDamager>().OnTriggerEnterEvent += ChargeCP;
+		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
 
         shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 
@@ -150,7 +150,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		GameManager.Instance.PlayerDT = playerData;
 		GameManager.Instance.PlayerDT.saveScene = SceneManager.GetActiveScene().name;
 
-        meleeWeapon.GetComponentInChildren<SimpleDamager>().damageAmount = currentDamage;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
 		
 		// 여기에 초기화
         soundManager = SoundManager.Instance;
@@ -380,21 +380,21 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void AttackStart()
 	{
-		meleeWeapon.BeginAttack();
+		meleeWeapon?.BeginAttack();
 	}
 	public void AttackEnd()
 	{
-		meleeWeapon.EndAttack();
+		meleeWeapon?.EndAttack();
 	}
 
     public void BeginGuard()
     {
-		shieldWeapon.BeginGuard();
+		shieldWeapon?.BeginGuard();
     }
 
 	public void EndGuard()
 	{
-        shieldWeapon.EndGuard();
+        shieldWeapon?.EndGuard();
     }
 
     // 칼 사운드를 출력할 때 이펙트를 뿜어보자

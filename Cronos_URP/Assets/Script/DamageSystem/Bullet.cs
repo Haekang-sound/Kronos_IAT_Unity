@@ -38,6 +38,16 @@ public class Bullet : Projectile
         m_sinceFired = 0.0f;
     }
 
+    private void Update()
+    {
+        // 8초가 지나면 자동으로 오브젝트가 제거되도록 하드 코딩
+        // 생존 시간 변수를 따로 뒀지만 0으로 초기화 하는 바람에 부득이하게 하드 코딩
+        if (m_sinceFired > 8f)
+        {
+            pool.Free(this);
+        }
+    }
+
     private void FixedUpdate()
     {
         m_sinceFired += Time.deltaTime;
@@ -155,7 +165,6 @@ public class Bullet : Projectile
             default:
                 break;
         }
-
 
         // time-to-hit에서 launch velocity로 변환합니다:
         velocity = toTarget / T - Physics.gravity * T / 2f;
