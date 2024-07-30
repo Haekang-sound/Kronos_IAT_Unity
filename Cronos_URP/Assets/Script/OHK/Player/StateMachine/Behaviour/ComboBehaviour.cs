@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
+using UnityEngine;
+using UnityEditor.Animations;
+using UnityEngine.SocialPlatforms;
+
+
 //using UnityEditorInternal;
 
 //using UnityEditorInternal;
-using UnityEngine;
 
 public class ComboBehaviour : StateMachineBehaviour
 {
@@ -20,6 +24,9 @@ public class ComboBehaviour : StateMachineBehaviour
 	[SerializeField] float moveForce;
 
 	public float hitStopTime;
+	public float minFrame;
+
+	public string transitionName = "testTransition ";
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,9 +40,13 @@ public class ComboBehaviour : StateMachineBehaviour
 		animator.ResetTrigger("Attack");
 	}
 
+
+
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+
+		
 
 		if (stateMachine.Velocity.z != 0f)
 		{
@@ -58,8 +69,13 @@ public class ComboBehaviour : StateMachineBehaviour
 			animator.SetBool(moveHash, false);
 		}
 
-		// 좌클릭시
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		bool attackBool = false;
+		/// 좌클릭시
+		if ((Input.GetKeyDown(KeyCode.Mouse0) && stateInfo.normalizedTime < minFrame))
+		{
+			attackBool = true;
+		}
+		if ((Input.GetKeyDown(KeyCode.Mouse0)||attackBool) && stateInfo.normalizedTime > minFrame)
 		{
 			// NEXTCOMBO 활성화
 			animator.SetBool(nextComboHash, true);
