@@ -10,8 +10,9 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     [SerializeField] public AbilityNode rootAbilityNode;
     [SerializeField] public AbilityAmountLimit abilityAmounts;
 
+    public Canvas abilityTreeCanvas;
     public CanvasGroup canvasGroup;
-    public CinemachineVirtualCamera playerVirtualCam;
+    //public CinemachineVirtualCamera playerVirtualCam;
 
     private bool isFocaus;
     private List<AbilityNode> _abilityNodes;
@@ -90,6 +91,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
 
         rootAbilityNode.SetInteractable(false);
+        abilityTreeCanvas.enabled = false;
+        //playerVirtualCam = PlayerCamControler.Instance.VirtualCamera;
     }
 
     private void OnEnable()
@@ -166,19 +169,21 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public void Enter()
     {
+        abilityTreeCanvas.enabled = true;
         abilityAmounts.UpdatePlayerTimePoint();
 
         SetEnabledButtons(true);
         isFocaus = true;
         canvasGroup.alpha = 1f;
-        playerVirtualCam.Priority = 0;
+        PlayerCamControler.Instance.VirtualCamera.Priority = 0;
         PauseManager.Instance.PauseGame();
     }
 
     public void Exit()
     {
+        abilityTreeCanvas.enabled = false;
         PauseManager.Instance.UnPauseGame();
-        playerVirtualCam.Priority = 10;
+        PlayerCamControler.Instance.VirtualCamera.Priority = 10;
         canvasGroup.alpha = 0f;
         isFocaus = false;
         SetEnabledButtons(false);

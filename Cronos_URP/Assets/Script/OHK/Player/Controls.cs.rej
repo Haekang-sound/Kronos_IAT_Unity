@@ -1,0 +1,130 @@
+diff a/Cronos_URP/Assets/Script/StateMachine/Controls.cs b/Cronos_URP/Assets/Script/StateMachine/Controls.cs	(rejected hunks)
+@@ -866,53 +866,53 @@
+         public void Disable() { Get().Disable(); }
+         public bool enabled => Get().enabled;
+         public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+-		public void AddCallbacks(IPlayerActions instance)
+-		{
+-			if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+-			m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+-			@Look.started += instance.OnLook;
+-			@Look.performed += instance.OnLook;
+-			@Look.canceled += instance.OnLook;
+-			@Move.started += instance.OnMove;
+-			@Move.performed += instance.OnMove;
+-			@Move.canceled += instance.OnMove;
+-			@Jump.started += instance.OnJump;
+-			@Jump.performed += instance.OnJump;
+-			@Jump.canceled += instance.OnJump;
+-			@LAttack.started += instance.OnLAttackDown;
+-			@LAttack.performed += instance.OnLAttack;
+-			@LAttack.canceled += instance.OnLAttack;
+-			@RAttack.started += instance.OnRAttackDown;
+-			@RAttack.performed += instance.OnRAttack;
+-			@RAttack.canceled += instance.OnRAttackUp;
+-			@SwitchingAttribute.started += instance.OnSwitchingAttribute;
+-			@SwitchingAttribute.performed += instance.OnSwitchingAttribute;
+-			@SwitchingAttribute.canceled += instance.OnSwitchingAttribute;
+-		}
++        public void AddCallbacks(IPlayerActions instance)
++        {
++            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
++            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
++            @Look.started += instance.OnLook;
++            @Look.performed += instance.OnLook;
++            @Look.canceled += instance.OnLook;
++            @Move.started += instance.OnMove;
++            @Move.performed += instance.OnMove;
++            @Move.canceled += instance.OnMove;
++            @Jump.started += instance.OnJump;
++            @Jump.performed += instance.OnJump;
++            @Jump.canceled += instance.OnJump;
++            @LAttack.started += instance.OnLAttack;
++            @LAttack.performed += instance.OnLAttack;
++            @LAttack.canceled += instance.OnLAttack;
++            @RAttack.started += instance.OnRAttack;
++            @RAttack.performed += instance.OnRAttack;
++            @RAttack.canceled += instance.OnRAttack;
++            @SwitchingAttribute.started += instance.OnSwitchingAttribute;
++            @SwitchingAttribute.performed += instance.OnSwitchingAttribute;
++            @SwitchingAttribute.canceled += instance.OnSwitchingAttribute;
++        }
+ 
+-		private void UnregisterCallbacks(IPlayerActions instance)
+-		{
+-			@Look.started -= instance.OnLook;
+-			@Look.performed -= instance.OnLook;
+-			@Look.canceled -= instance.OnLook;
+-			@Move.started -= instance.OnMove;
+-			@Move.performed -= instance.OnMove;
+-			@Move.canceled -= instance.OnMove;
+-			@Jump.started -= instance.OnJump;
+-			@Jump.performed -= instance.OnJump;
+-			@Jump.canceled -= instance.OnJump;
+-			@LAttack.started -= instance.OnLAttackDown;
+-			@LAttack.performed -= instance.OnLAttack;
+-			@LAttack.canceled -= instance.OnLAttack;
+-			@RAttack.started -= instance.OnRAttackDown;
+-			@RAttack.performed -= instance.OnRAttack;
+-			@RAttack.canceled -= instance.OnRAttackUp;
+-			@SwitchingAttribute.started -= instance.OnSwitchingAttribute;
+-			@SwitchingAttribute.performed -= instance.OnSwitchingAttribute;
+-			@SwitchingAttribute.canceled -= instance.OnSwitchingAttribute;
+-		}
++        private void UnregisterCallbacks(IPlayerActions instance)
++        {
++            @Look.started -= instance.OnLook;
++            @Look.performed -= instance.OnLook;
++            @Look.canceled -= instance.OnLook;
++            @Move.started -= instance.OnMove;
++            @Move.performed -= instance.OnMove;
++            @Move.canceled -= instance.OnMove;
++            @Jump.started -= instance.OnJump;
++            @Jump.performed -= instance.OnJump;
++            @Jump.canceled -= instance.OnJump;
++            @LAttack.started -= instance.OnLAttack;
++            @LAttack.performed -= instance.OnLAttack;
++            @LAttack.canceled -= instance.OnLAttack;
++            @RAttack.started -= instance.OnRAttack;
++            @RAttack.performed -= instance.OnRAttack;
++            @RAttack.canceled -= instance.OnRAttack;
++            @SwitchingAttribute.started -= instance.OnSwitchingAttribute;
++            @SwitchingAttribute.performed -= instance.OnSwitchingAttribute;
++            @SwitchingAttribute.canceled -= instance.OnSwitchingAttribute;
++        }
+ 
+-		public void RemoveCallbacks(IPlayerActions instance)
++        public void RemoveCallbacks(IPlayerActions instance)
+         {
+             if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+                 UnregisterCallbacks(instance);
+@@ -1063,19 +1063,16 @@
+             return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
+         }
+     }
+-	public interface IPlayerActions
+-	{
+-		void OnLook(InputAction.CallbackContext context);
+-		void OnMove(InputAction.CallbackContext context);
+-		void OnJump(InputAction.CallbackContext context);
+-		void OnLAttack(InputAction.CallbackContext context);
+-		void OnLAttackDown(InputAction.CallbackContext context);
+-		void OnRAttackDown(InputAction.CallbackContext context);
+-		void OnRAttack(InputAction.CallbackContext context);
+-		void OnRAttackUp(InputAction.CallbackContext context);
+-		void OnSwitchingAttribute(InputAction.CallbackContext context);
+-	}
+-	public interface IUIActions
++    public interface IPlayerActions
++    {
++        void OnLook(InputAction.CallbackContext context);
++        void OnMove(InputAction.CallbackContext context);
++        void OnJump(InputAction.CallbackContext context);
++        void OnLAttack(InputAction.CallbackContext context);
++        void OnRAttack(InputAction.CallbackContext context);
++        void OnSwitchingAttribute(InputAction.CallbackContext context);
++    }
++    public interface IUIActions
+     {
+         void OnNavigate(InputAction.CallbackContext context);
+         void OnSubmit(InputAction.CallbackContext context);

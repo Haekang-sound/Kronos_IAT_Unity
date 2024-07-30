@@ -1,0 +1,176 @@
+#node-border {
+    border-left-color: rgb(196, 196, 196);
+    border-right-color: rgb(196, 196, 196);
+    border-top-color: rgb(196, 196, 196);
+    border-bottom-color: rgb(196, 196, 196);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgb(88, 88, 88);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#input {
+    align-items: center;
+    justify-content: flex-start;
+    max-width: none;
+    max-height: none;
+    border-top-width: 4px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#output {
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom-width: 4px;
+}
+
+#selection-border {
+    border-left-color: rgb(0, 165, 255);
+    border-right-color: rgb(0, 165, 255);
+    border-top-color: rgb(0, 165, 255);
+    border-bottom-color: rgb(0, 165, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform-origin: center;
+}
+
+:hover > #selection-border {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(200, 200, 200);
+    border-right-color: rgb(200, 200, 200);
+    border-top-color: rgb(200, 200, 200);
+    border-bottom-color: rgb(200, 200, 200);
+}
+
+:selected > #selection-border {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(68, 192, 255);
+    border-right-color: rgb(68, 192, 255);
+    border-top-color: rgb(68, 192, 255);
+    border-bottom-color: rgb(68, 192, 255);
+}
+
+:hover:selected > #selection-border {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+.node {
+    min-width: 150px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    -unity-font-style: bold;
+}
+
+#title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    min-height: auto;
+    -unity-text-align: middle-left;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    align-self: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#description {
+    font-size: 10px;
+    white-space: normal;
+    max-width: 184px;
+    margin-right: 2px;
+    margin-left: 2px;
+    -unity-text-align: middle-left;
+}
+
+#divider {
+    min-height: 1px;
+    background-color: rgb(200, 200, 200);
+    max-width: initial;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.action #input {
+    background-color: rgb(174, 173, 175);
+}
+
+.composite #input {
+    background-color: rgb(152, 92, 222);
+}
+
+.decorator #input {
+    background-color: rgb(70, 142, 234);
+}
+
+.root #input {
+    background-color: rgb(0, 216, 138);
+    min-height: 20px;
+}
+
+#node-state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.running #node-state {
+    background-color: rgb(255, 213, 0);
+}
+
+.success #node-state {
+    background-color: rgba(60, 212, 0, 0.54);
+}
+
+.failure #node-state {
+    background-color: rgba(250, 25, 25, 0.67);
+}
