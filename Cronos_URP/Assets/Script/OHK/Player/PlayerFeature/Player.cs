@@ -371,8 +371,52 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             playerTransform.position = (Vector3)GameManager.Instance.PlayerDT.RespawnPos;
         }
+
+        //StartCoroutine(RespawnRoutine());
     }
 
+    protected IEnumerator RespawnRoutine()
+    {
+        // Wait for the animator to be transitioning from the EllenDeath state.
+        //while (m_CurrentStateInfo.shortNameHash != m_HashEllenDeath || !m_IsAnimatorTransitioning)
+        //{
+        //    yield return null;
+        //}
+
+        // Wait for the screen to fade out.
+        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        // Enable spawning.
+        //EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
+        //spawn.enabled = true;
+
+        // If there is a checkpoint, move Ellen to it.
+        if (_currentCheckpoint != null)
+        {
+            transform.position = _currentCheckpoint.transform.position;
+            transform.rotation = _currentCheckpoint.transform.rotation;
+        }
+        else
+        {
+            Debug.LogError("There is no Checkpoint set, there should always be a checkpoint set. Did you add a checkpoint at the spawn?");
+        }
+
+        // Set the Respawn parameter of the animator.
+        //m_Animator.SetTrigger(m_HashRespawn);
+
+        // Start the respawn graphic effects.
+        //spawn.StartEffect();
+
+        // Wait for the screen to fade in.
+        // Currently it is not important to yield here but should some changes occur that require waiting until a respawn has finished this will be required.
+        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+
+        _damageable.ResetDamage();
+    }
 
     // 플레이어를 죽이자
     public void PlayerDeath()

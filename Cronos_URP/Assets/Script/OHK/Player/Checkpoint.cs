@@ -5,11 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
-    public readonly int priority;
+    public int priority;
 
     private void Awake()
     {
-        //we make sure the checkpoint is part of the Checkpoint layer, which is set to interact ONLY with the player layer.
         gameObject.layer = LayerMask.NameToLayer("Checkpoint");
     }
 
