@@ -27,9 +27,9 @@ public class EffectManager : MonoBehaviour
     }
 
     [SerializeField]
-    GameObject player;
+    Player player;
 
-    public GameObject fragExample;
+    public GameObject parryFX;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -62,17 +62,19 @@ public class EffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        parryFX.transform.position = player.GetComponent<Player>().playerSword.transform.position;
     }
 
     void Initialize()
     {
-        
+        player = Player.Instance;
+        parryFX = FindName("ParryGreen");
+        parryFX.SetActive(false);
     }
 
     void LoadEffect()
     {
-        effectArray = Resources.LoadAll<GameObject>("FX/InGameFXs");
+        effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
         foreach (GameObject effect in effectArray)
         {
             GameObject effectInstance = Instantiate(effect);
@@ -127,6 +129,11 @@ public class EffectManager : MonoBehaviour
     void TurnOffObject(GameObject obj)
     {
         obj.SetActive(false);
+    }
+
+    void TurnOnObject(GameObject obj)
+    {
+        obj.SetActive(true);
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데

@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayBGM("Demo_SE");
+        //PlayBGM("Demo_SE");
     }
 
     void Update()
@@ -60,7 +60,7 @@ public class SoundManager : MonoBehaviour
     // 리소스 폴더 내부의 SE를 한번에 로드
     void LoadSE()
     {
-        SoundEvent[] bgms = Resources.LoadAll<SoundEvent>("Sound/Bgm");
+        SoundEvent[] bgms = Resources.LoadAll<SoundEvent>("Audio/Bgm");
         foreach (SoundEvent soundEvent in bgms)
         {
             // 리스트나 딕셔너리에 넣자
@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
         }
         Debug.Log("리소스 폴더의 BGM 로드");
 
-        SoundEvent[] sfxs = Resources.LoadAll<SoundEvent>("Sound/Sfx");
+        SoundEvent[] sfxs = Resources.LoadAll<SoundEvent>("Audio/Sfx");
         foreach (SoundEvent soundEvent in sfxs)
         {
             // 리스트나 딕셔너리에 넣자
