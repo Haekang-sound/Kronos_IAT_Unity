@@ -21,4 +21,14 @@ public class ShieldWeapon : MonoBehaviour
         _damager.EndGuard();
         _damager.gameObject.SetActive(false);
     }
+
+    public void BeginParry()
+    {
+        _damager.BeginPerfectGuard();
+    }
+
+    public void EndParry()
+    {
+        _damager.EndPerfectGuard();
+    }
 }
