@@ -38,7 +38,6 @@ public class Defensible : MonoBehaviour
         }
 
         // ∞°µÂ ¿Ã∆Â∆Æ
-        Debug.Log("now Guarding");
         EffectManager.Instance.CreateGuardFX();
 
         data.amount /= dampRatio;

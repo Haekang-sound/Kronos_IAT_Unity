@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,21 +42,22 @@ public class EffectManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            Debug.Log(gameObject.name + " destroyed");
+            return;
         }
         else
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("Effect Manager called on " + gameObject.name);
         }
-
-        Debug.Log("Effect Manager 활성화");
-        LoadEffect();
     }
 
     // 로드한 이펙트에 게임 오브젝트 할당
     void Start()
     {
         Initialize();
+        StartCoroutine(LoadEffectCoroutine());
     }
 
     // Update is called once per frame
@@ -71,7 +72,7 @@ public class EffectManager : MonoBehaviour
         pSword = player.GetComponent<Player>().playerSword;
     }
 
-    void LoadEffect()
+    IEnumerator LoadEffectCoroutine()
     {
         effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
         foreach (GameObject effect in effectArray)
@@ -80,6 +81,8 @@ public class EffectManager : MonoBehaviour
             effectInstance.name = effect.name;
             effects.Add(effectInstance);
             effectInstance.SetActive(false);
+
+            yield return null;
         }
     }
 
@@ -125,15 +128,16 @@ public class EffectManager : MonoBehaviour
     }
 
     // 오브젝트의 SetActive를 false로 하는 것
-    void TurnOffObject(GameObject obj)
-    {
-        obj.SetActive(false);
-    }
+    // 인데 이런게 필요하냐?
+    //void TurnOffObject(GameObject obj)
+    //{
+    //    obj.SetActive(false);
+    //}
 
-    void TurnOnObject(GameObject obj)
-    {
-        obj.SetActive(true);
-    }
+    //void TurnOnObject(GameObject obj)
+    //{
+    //    obj.SetActive(true);
+    //}
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
     public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
