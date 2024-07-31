@@ -15,7 +15,7 @@ public class LastCombo : StateMachineBehaviour
 	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
+	{ 
 		// 이동키입력을 받으면
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{

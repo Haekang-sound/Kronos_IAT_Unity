@@ -24,7 +24,7 @@ public class Respawn : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.P))
 		{
-			GameManager.Instance.isRespawn = true;
+			//GameManager.Instance.isRespawn = true;
             RespawnPlayer();
 		}
 	}
@@ -33,7 +33,7 @@ public class Respawn : MonoBehaviour
 		//1. 플레이어를 inactive 한다.
 		gameObject.SetActive(false);
 		//2. 플레이어의 데이터를 덧씌운다.
-		GameObject.FindObjectsOfType<Player>()[0].PlayerRespawn();
+		//GameObject.FindObjectsOfType<Player>()[0].PlayerRespawn();
         //3. 플레이어를 active 한다.
         gameObject.SetActive(true);
 	}
