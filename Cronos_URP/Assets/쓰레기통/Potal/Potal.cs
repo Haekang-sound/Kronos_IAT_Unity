@@ -28,8 +28,8 @@ public class Potal : MonoBehaviour
 	{
 		if(other.gameObject.CompareTag("Player"))
         {
-			GameManager.Instance.isRespawn = false;
-			GameManager.Instance.SwitchScene(NextScene);
+			//GameManager.Instance.isRespawn = false;
+			//GameManager.Instance.SwitchScene(NextScene);
 			Debug.Log("이젠 되겠지");
 		}
 	}

@@ -1,16 +1,6 @@
-using Cinemachine;
 using Message;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Transactions;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Purchasing;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 
 
 /// <summary>
@@ -101,10 +91,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public Damageable _damageable;
 	public Defensible _defnsible;
 
-	/// 안돼는데 안돼
-	private Vector3 lastPosition;
-	private Quaternion lastRotation;
-
 	SoundManager soundManager;
 	EffectManager effectManager;
 	ImpulseCam impulseCam;
@@ -118,10 +104,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void OnEnable()
 	{
-		/// 안돼는데 안돼
-		lastPosition = transform.position;
-		lastRotation = transform.rotation;
-
 		_damageable = GetComponent<Damageable>();
 		_damageable.onDamageMessageReceivers.Add(this);
 
@@ -140,15 +122,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         targetting = GetComponentInChildren<AutoTargetting>();
 		totalspeed = Speed;
 
-		if (GameManager.Instance.isRespawn)
-		{
-			PlayerRespawn();
-		}
-
 		_damageable.currentHitPoints += maxTP;
-
-		GameManager.Instance.PlayerDT = playerData;
-		GameManager.Instance.PlayerDT.saveScene = SceneManager.GetActiveScene().name;
 
         meleeWeapon.simpleDamager.damageAmount = currentDamage;
 		
@@ -157,9 +131,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		effectManager = EffectManager.Instance;
 		impulseCam = ImpulseCam.Instance;
     }
+
     private void ChargeCP(Collider other)
 	{
-		//if (other.CompareTag("Respawn"))
 		{
 			Debug.Log("cp를 회복한다.");
 			if (CP < maxCP && !IsDecreaseCP)
@@ -174,12 +148,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
-	void Start()
-	{
-	}
-
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			SetCursorInactive();
+		}
+
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 		// 실시간으로 TP 감소
@@ -209,51 +184,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			_damageable.JustDead();
 		}
 	}
-	private void FixedUpdate()
-	{
-
-	}
-
-	private void LateUpdate()
-	{
- 	}
-	private void OnTriggerEnter(Collider other)
-	{
-	}
-
-	/// 증강
-	public void AdjustTP(float value)
-	{
-		maxTP += value;
-		_damageable.currentHitPoints += value;
-	}
-	public void AdjustAttackPower(float value)
-	{
-		currentDamage = value;
-		meleeWeapon.GetComponentInChildren<SimpleDamager>().damageAmount = currentDamage;
-	}
-	public void AdjustSpeed(float vlaue)
-	{
-		Speed += vlaue;
-	}
-	public void AdjustAttackSpeed(float value)
-	{
-		AttackSpeed = value;
-	}
-	public void AdjustChargingCP(float value)
-	{
-		chargingCP = value;
-	}
-
-	public void AdjustAttackCoefficient(float value)
-	{
-		attackCoefficient = value;
-	}
-
-	public void AdjustMoveCoefficient(float value)
-	{
-		moveCoefficient = value;
-	}
 
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
@@ -275,8 +205,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
-
-
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{
 		//  방어상태가 아닐때만 하자
@@ -294,18 +222,21 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		PlayerFSM.Animator.SetTrigger("Damaged");
-		//PlayerFSM.SwitchState(new PlayerDamagedState(PlayerFSM));
 	}
 
-	public void Death(Damageable.DamageMessage msg)
+	// 죽었을 때 호출되는 함수
+	public void Death(Damageable.DamageMessage msg){}
+	void SetCursorInactive()
 	{
-		PlayerDeadRespawn();
-	}
-
-
-	public void StartPlayer()
-	{
-		gameObject.transform.position = new Vector3(0f, 7f, 0f);
+		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
+		if (Cursor.visible)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
 	}
 
 	public void SetSpeed(float value)
@@ -313,71 +244,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 		totalspeed = value * Speed;
 	}
 
-
-	// 리스폰데이터를 GameManager에 저장하자
 	public void SavePlayerData()
 	{
 		playerData.saveScene = SceneManager.GetActiveScene().name; // 현재 씬의 이름을 가져온다
 		playerData.TP = TP;
 		playerData.TP = CP;
 		playerData.RespawnPos = playerTransform.position;
-		// 필요한 데이터를 여기 계속 더하자
-		GameManager.Instance.PlayerDT = playerData;
 	}
-
-	public void PlayerDeadRespawn()
-	{
-// 		if (SceneManager.GetActiveScene().name != GameManager.Instance.PlayerDT.saveScene)
-// 		{
-// 			SceneManager.LoadScene(GameManager.Instance.PlayerDT.saveScene);
-// 		}
-// 		else
-// 		{
-// 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-// 		}
-// 		TP = maxTP;
-// 		CP = GameManager.Instance.PlayerDT.CP;
-// 		if (GameManager.Instance.PlayerDT.RespawnPos.x == 0f
-// 			&& GameManager.Instance.PlayerDT.RespawnPos.y == 0f
-// 			&& GameManager.Instance.PlayerDT.RespawnPos.z == 0f)
-// 		{
-// 			GameManager.Instance.PlayerDT.RespawnPos = new Vector3(0f, 7f, 0f);
-// 		}
-// 		else
-// 		{
-// 
-// 			playerTransform.position = (Vector3)GameManager.Instance.PlayerDT.RespawnPos;
-// 		}
-	}
-
-
-	public void PlayerRespawn()
-	{
-		if (SceneManager.GetActiveScene().name != GameManager.Instance.PlayerDT.saveScene)
-		{
-			SceneManager.LoadScene(GameManager.Instance.PlayerDT.saveScene);
-		}
-		TP = GameManager.Instance.PlayerDT.TP;
-		CP = GameManager.Instance.PlayerDT.CP;
-		if (GameManager.Instance.PlayerDT.RespawnPos.x == 0f
-			&& GameManager.Instance.PlayerDT.RespawnPos.y == 0f
-			&& GameManager.Instance.PlayerDT.RespawnPos.z == 0f)
-		{
-			GameManager.Instance.PlayerDT.RespawnPos = new Vector3(0f, 7f, 0f);
-		}
-		else
-		{
-			playerTransform.position = (Vector3)GameManager.Instance.PlayerDT.RespawnPos;
-		}
-	}
-
-
+	
 	// 플레이어를 죽이자
-	public void PlayerDeath()
-	{
-		TP = 0f;
-	}
-
 	public void AttackStart()
 	{
 		meleeWeapon?.BeginAttack();
