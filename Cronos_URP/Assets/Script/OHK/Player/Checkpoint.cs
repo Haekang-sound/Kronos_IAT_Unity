@@ -9,7 +9,8 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.layer = LayerMask.NameToLayer("Checkpoint");
+		int a =  LayerMask.NameToLayer("Checkpoint");
+		gameObject.layer = LayerMask.NameToLayer("Checkpoint");
     }
 
     private void OnTriggerEnter(Collider other)

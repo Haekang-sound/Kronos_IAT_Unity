@@ -59,10 +59,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private Checkpoint _currentCheckpoint;
 
-    public int testInt = 0;
-
-
-    // Property
+    //public int testInt = 0;
+    
+	// Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
     public float jumpForce { get { return JumpForce; } }
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
     public float CP { get { return currentCP; } set { currentCP = value; } }
-    public float TP { get { return currentTP; } set { currentTP = value; } }
+    public float TP { get { return currentTP; } set { currentTP = value; _damageable.CurrentHitPoints = value; } }
     public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
     public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -371,7 +370,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         
         // TP 초기화 - 적용안됨
         _damageable.ResetDamage();
-        currentTP = maxTP;
+		TP = maxTP;
         // CP 초기화
         currentCP = 0f;
     }
