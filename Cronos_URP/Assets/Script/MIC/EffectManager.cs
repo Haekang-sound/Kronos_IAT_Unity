@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,11 +25,11 @@ public class EffectManager : MonoBehaviour
             return instance;
         }
     }
-
+    
+    // 플레이어 관련
     [SerializeField]
-    GameObject player;
-
-    public GameObject fragExample;
+    Player player;
+    GameObject pSword;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -42,43 +42,47 @@ public class EffectManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            Debug.Log(gameObject.name + " destroyed");
+            return;
         }
         else
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("Effect Manager called on " + gameObject.name);
         }
-
-        Debug.Log("Effect Manager 활성화");
-        LoadEffect();
     }
 
     // 로드한 이펙트에 게임 오브젝트 할당
     void Start()
     {
         Initialize();
+        StartCoroutine(LoadEffectCoroutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void Initialize()
     {
-        
+        player = Player.Instance;
+        pSword = player.GetComponent<Player>().playerSword;
     }
 
-    void LoadEffect()
+    IEnumerator LoadEffectCoroutine()
     {
-        effectArray = Resources.LoadAll<GameObject>("FX/InGameFXs");
+        effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
         foreach (GameObject effect in effectArray)
         {
             GameObject effectInstance = Instantiate(effect);
             effectInstance.name = effect.name;
             effects.Add(effectInstance);
             effectInstance.SetActive(false);
+
+            yield return null;
         }
     }
 
@@ -124,10 +128,16 @@ public class EffectManager : MonoBehaviour
     }
 
     // 오브젝트의 SetActive를 false로 하는 것
-    void TurnOffObject(GameObject obj)
-    {
-        obj.SetActive(false);
-    }
+    // 인데 이런게 필요하냐?
+    //void TurnOffObject(GameObject obj)
+    //{
+    //    obj.SetActive(false);
+    //}
+
+    //void TurnOnObject(GameObject obj)
+    //{
+    //    obj.SetActive(true);
+    //}
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
     public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
@@ -143,5 +153,18 @@ public class EffectManager : MonoBehaviour
         GameObject slashed = SpawnEffect("UpSlash", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         Destroy(slashed, 1.0f);
+    }
+
+    public void CreateParryFX()
+    {
+        GameObject parr = SpawnEffect("ParryGreen", pSword.transform.position);
+        Destroy(parr, 1.5f);
+    }
+
+    public void CreateGuardFX()
+    {
+        Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+        GameObject grd = SpawnEffect("GuardFX", grdPos);
+        Destroy(grd, 1.0f);
     }
 }

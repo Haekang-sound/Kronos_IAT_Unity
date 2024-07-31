@@ -397,6 +397,16 @@ public class Player : MonoBehaviour, IMessageReceiver
         shieldWeapon?.EndGuard();
     }
 
+	public void BeginParry()
+	{
+		shieldWeapon?.BeginParry();
+    }
+
+    public void EndParry()
+    {
+        shieldWeapon?.EndParry();
+    }
+
     // 칼 사운드를 출력할 때 이펙트를 뿜어보자
     // 계속 이렇게 할거라면 이름을 바꿔야겠다
     public void SoundSword()
