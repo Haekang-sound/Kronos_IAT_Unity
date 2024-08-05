@@ -17,12 +17,13 @@ Material:
   - _DOUBLESIDED_ON
   - _NORMALMAP
   - _SMOOTHNESS_MASK
+  - _STATICSPECULARHIGHLIGHT_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3002
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -101,7 +102,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AORemapMax: 1
+    - _AORemapMax: 0.87637365
     - _AORemapMin: 0
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
@@ -132,12 +133,12 @@ Material:
     - _NormalScale: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueOffset: 0
+    - _QueueOffset: 2
     - _ReceiveShadows: 1
     - _SecondarySpecularMultiplier: 1
     - _SecondarySpecularShift: 1
     - _Smoothness: 0.5
-    - _SmoothnessRemapMax: 1
+    - _SmoothnessRemapMax: 0.7344322
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -147,9 +148,9 @@ Material:
     - _SpecularShift: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StaticSpecularHighlight: 0
+    - _StaticSpecularHighlight: 1
     - _Surface: 1
-    - _TransmissionIntensity: 1
+    - _TransmissionIntensity: 0.353
     - _UseShadowThreshold: 0
     - _WorkflowMode: 1
     - _ZTest: 4
@@ -161,9 +162,9 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.9150943, g: 0.34100214, b: 0.34100214, a: 1}
-    - _StaticLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _StaticLightColor: {r: 0.3679245, g: 0.2759434, b: 0.33420748, a: 1}
     - _StaticLightVector: {r: 0, g: 0, b: 0, a: 1}
-    - _TransmissionColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TransmissionColor: {r: 0.12575649, g: 0.12601355, b: 0.16981131, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &98959049806737159
 MonoBehaviour:
