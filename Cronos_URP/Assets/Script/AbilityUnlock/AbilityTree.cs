@@ -1,5 +1,6 @@
 using Cinemachine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public Canvas abilityTreeCanvas;
     public CanvasGroup canvasGroup;
-    //public CinemachineVirtualCamera playerVirtualCam;
+    public CinemachineVirtualCamera mainVirtualCam;
 
     private bool isFocaus;
     private List<AbilityNode> _abilityNodes;
@@ -23,6 +24,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private AbilityNode _lastPressed;
 
     private AbilityDataParser parser = new AbilityDataParser();
+
+    private bool _isTransition;
 
     // IObserver /////////////////////////////////////////////////////////////
 
@@ -93,6 +96,11 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         rootAbilityNode.SetInteractable(false);
         abilityTreeCanvas.enabled = false;
         //playerVirtualCam = PlayerCamControler.Instance.VirtualCamera;
+
+        if (mainVirtualCam == null)
+        {
+            mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
+        }
     }
 
     private void OnEnable()
@@ -112,13 +120,16 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         // Test
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (isFocaus == false)
+            if (_isTransition == false)
             {
-                Enter();
-            }
-            else if (isFocaus == true)
-            {
-                Exit();
+                if (isFocaus == false)
+                {
+                    StartCoroutine(Enter());
+                }
+                else if (isFocaus == true)
+                {
+                    StartCoroutine(Exit());
+                }
             }
         }
     }
@@ -133,7 +144,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             _abilityNodes[i].abilityLevel = LoadedlevelDatas[i];
             _abilityNodes[i].abilityLevel.currentPoint = loadedUserDatas[i];
             _abilityNodes[i].InitRender();
-
         }
     }
 
@@ -167,28 +177,74 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         rootAbilityNode.abilityLevel.currentPoint = 1;
     }
 
-    public void Enter()
+    public IEnumerator Enter()
     {
+        _isTransition = true;
+
+        PauseManager.Instance.PauseGame();
+
+        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
         abilityTreeCanvas.enabled = true;
         abilityAmounts.UpdatePlayerTimePoint();
 
         SetEnabledButtons(true);
-        isFocaus = true;
+        SetPlayerCamPriority(0);
         canvasGroup.alpha = 1f;
-        PlayerCamControler.Instance.VirtualCamera.Priority = 0;
-        PauseManager.Instance.PauseGame();
+
+        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        isFocaus = true;
+        _isTransition = false;
     }
 
-    public void Exit()
+    public IEnumerator Exit()
     {
+        _isTransition = true;
+
+        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
         abilityTreeCanvas.enabled = false;
-        PauseManager.Instance.UnPauseGame();
-        PlayerCamControler.Instance.VirtualCamera.Priority = 10;
+        SetPlayerCamPriority(10);
         canvasGroup.alpha = 0f;
-        isFocaus = false;
         SetEnabledButtons(false);
 
         SaveUserData();
+
+        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        isFocaus = false;
+        PauseManager.Instance.UnPauseGame();
+
+        _isTransition = false;
+    }
+
+    void SetPlayerCamPriority(int val)
+    {
+        if (mainVirtualCam != null)
+        {
+            mainVirtualCam.Priority = val;
+        }
     }
 
     private void SaveUserData()

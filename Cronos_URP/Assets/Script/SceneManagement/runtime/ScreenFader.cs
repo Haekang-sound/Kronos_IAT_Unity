@@ -71,7 +71,7 @@ public class ScreenFader : MonoBehaviour
 
         while (!Mathf.Approximately(canvasGroup.alpha, finalAlpha))
         {
-            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, finalAlpha, fadeSpeed * Time.deltaTime);
+            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, finalAlpha, fadeSpeed * Time.unscaledDeltaTime);
             yield return null;
         }
 

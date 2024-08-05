@@ -59,22 +59,34 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private Checkpoint _currentCheckpoint;
 
-	// Property
+    // Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
     public float jumpForce { get { return JumpForce; } }
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
-    
-	// 스킬 사용정보
-	public AbilityUsageInfo AbilityUsageInfo {  get { return AbilityUsageInfo; } }
 
-	// chronos in game Option
+    // 스킬 사용정보
+    public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+
+    // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
     public float CP { get { return currentCP; } set { currentCP = value; } }
-    public float TP { get { return currentTP; } set { currentTP = value; _damageable.CurrentHitPoints = value; } }
+    public float TP
+    {
+        get { return currentTP; }
+        set
+        {
+            currentTP = value;
+            if (currentTP > maxTP)
+            {
+                currentTP = maxTP;
+            }
+            _damageable.CurrentHitPoints = currentTP;
+        }
+    }
     public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
     public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -368,10 +380,10 @@ public class Player : MonoBehaviour, IMessageReceiver
         yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
         /// TODO - 오해강: 초기화 함수를 따로 만들 것
-        
+
         // TP 초기화 - 적용안됨
         _damageable.ResetDamage();
-		TP = maxTP;
+        TP = maxTP;
         // CP 초기화
         currentCP = 0f;
     }
