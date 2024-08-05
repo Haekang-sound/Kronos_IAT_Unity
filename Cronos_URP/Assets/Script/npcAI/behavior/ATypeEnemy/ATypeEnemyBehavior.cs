@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyController))]
 public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 {
+    public readonly float tp = 20;
     public float attackDistance = 1.8f;
     public float strongAttackDistance = 3f;
     public float strafeDistance = 2f;
@@ -177,6 +178,11 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Dead()
     {
+        if(Player.Instance != null)
+        {
+            Player.Instance.TP += tp;
+        }
+
         GetComponent<ReplaceWithRagdoll>().Replace();
     }
 
