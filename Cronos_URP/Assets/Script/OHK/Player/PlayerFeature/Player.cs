@@ -2,6 +2,7 @@ using Message;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static ScreenFader;
 
 
 /// <summary>
@@ -215,7 +216,7 @@ public class Player : MonoBehaviour, IMessageReceiver
             case MessageType.DEAD:
                 {
                     Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-                    Death(damageData);
+                    Death(/*damageData*/);
                 }
                 break;
             case MessageType.RESPAWN:
@@ -246,9 +247,39 @@ public class Player : MonoBehaviour, IMessageReceiver
     }
 
     // 죽었을 때 호출되는 함수
-    public void Death(Damageable.DamageMessage msg)
+    public void Death(/*Damageable.DamageMessage msg*/)
     {
+        StartCoroutine(DeathScequence());
+    }
 
+    private IEnumerator DeathScequence()
+    {
+        yield return ScreenFader.FadeSceneOut(FadeType.GameOver);
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3);
+
+        yield return ScreenFader.FadeSceneOut(FadeType.Black);
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        Respawn();
+
+        yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        yield return ScreenFader.FadeSceneIn(FadeType.Black);
     }
 
     void SetCursorInactive()
@@ -354,7 +385,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     protected IEnumerator RespawnRoutine()
     {
         // 1초 동안 페이드 아웃.
-        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+        //yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
         while (ScreenFader.IsFading)
         {
@@ -377,7 +408,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         }
 
         // 1초 동안 페이드 아웃
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+        //yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
         /// TODO - 오해강: 초기화 함수를 따로 만들 것
 
