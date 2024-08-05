@@ -59,8 +59,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private Checkpoint _currentCheckpoint;
 
-    //public int testInt = 0;
-    
 	// Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
@@ -68,7 +66,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
-    // chronos in game Option
+    
+	// 스킬 사용정보
+	public AbilityUsageInfo AbilityUsageInfo {  get { return AbilityUsageInfo; } }
+
+	// chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
     public float CP { get { return currentCP; } set { currentCP = value; } }
@@ -97,7 +99,6 @@ public class Player : MonoBehaviour, IMessageReceiver
     EffectManager effectManager;
     ImpulseCam impulseCam;
     public GameObject playerSword;
-
 
     protected void OnDisable()
     {
