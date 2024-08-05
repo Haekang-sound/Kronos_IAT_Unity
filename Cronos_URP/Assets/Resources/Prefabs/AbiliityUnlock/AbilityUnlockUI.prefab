@@ -365,7 +365,7 @@ MonoBehaviour:
   abilityAmounts: {fileID: 1454651652250401060}
   abilityTreeCanvas: {fileID: 8405402085785890810}
   canvasGroup: {fileID: 8429372351822482684}
-  playerVirtualCam: {fileID: 0}
+  mainVirtualCam: {fileID: 0}
 --- !u!1 &5386886191756566298
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +474,7 @@ RectTransform:
   m_LocalScale: {x: 0.07294422, y: 0.07294422, z: 0.07294422}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5697008907021091896}
   - {fileID: 1939029754101415616}
   - {fileID: 7549654460311758510}
   - {fileID: 8249314948566617758}
@@ -694,7 +695,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5697008907021091896}
   - {fileID: 3607932918530726338}
   m_Father: {fileID: 3005464163693967027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -901,12 +901,12 @@ Transform:
   m_GameObject: {fileID: 8651537966443290032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0033469498, y: 0.00083673745, z: -1300}
+  m_LocalPosition: {x: -0.0033469498, y: 0.00083673745, z: -800}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4380952451916788512}
-  m_Father: {fileID: 1939029754101415616}
+  m_Father: {fileID: 3005464163693967027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4768778784431905569
 MonoBehaviour:

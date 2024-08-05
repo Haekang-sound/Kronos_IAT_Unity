@@ -55,11 +55,11 @@ public class FadeEffector : MonoBehaviour
 
     private IEnumerator FadeIn(float fadeDuration)
     {
-        return Fade(fadeDuration, 1);
+        return Fade(fadeDuration, 1f);
     }
 
     private IEnumerator FadeOut(float fadeDuration)
     {
-        return Fade(fadeDuration, 0);
+        return Fade(fadeDuration, 0f);
     }
 }
