@@ -356,7 +356,7 @@ public class AutoTargetting : MonoBehaviour
     public void SortMosterList()
     {
         // 몬스터리스트를 거리 순으로 정렬한다.
-        MonsterList.Sort((x, y) =>
+        MonsterList.Sort((x, y) => 
             (PlayerObject.position - x.transform.position).sqrMagnitude
             .CompareTo((PlayerObject.position - y.transform.position).sqrMagnitude));
     }
