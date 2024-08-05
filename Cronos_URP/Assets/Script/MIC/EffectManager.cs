@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class EffectManager : MonoBehaviour
 {
@@ -30,6 +32,15 @@ public class EffectManager : MonoBehaviour
     [SerializeField]
     Player player;
     GameObject pSword;
+
+    // ±Û·Î¹ú º¼·ý
+    [SerializeField]
+    Volume gVolume;
+    MotionBlur mBlur;
+    ChromaticAberration cAber;
+    public float mBlurVal = 0.7f;
+    public float cAberVal = 0.7f;
+    public float parryTime = 1.0f;
 
     // »ç¿ëÇÒ ÀÌÆåÆ® ¸®½ºÆ®
     static List<GameObject> effects = new List<GameObject>();
@@ -70,6 +81,27 @@ public class EffectManager : MonoBehaviour
     {
         player = Player.Instance;
         pSword = player.GetComponent<Player>().playerSword;
+        gVolume = FindObjectOfType<Volume>();
+        if (gVolume != null)
+            InitializeVol(gVolume);
+    }
+
+    void InitializeVol(Volume vol)
+    {
+        vol.profile.TryGet(out mBlur);
+        vol.profile.TryGet(out cAber);
+
+        if(mBlur != null)
+        {
+            mBlur.active = true;
+            mBlur.intensity.value = 0.0f;
+        }
+
+        if(cAber != null)
+        {
+            cAber.active = true;
+            cAber.intensity.value = 0.0f;
+        }
     }
 
     IEnumerator LoadEffectCoroutine()
@@ -157,8 +189,11 @@ public class EffectManager : MonoBehaviour
 
     public void CreateParryFX()
     {
-        GameObject parr = SpawnEffect("ParryGreen", pSword.transform.position);
+        Vector3 parrPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+        GameObject parr = SpawnEffect("ParryY", parrPos);
         Destroy(parr, 1.5f);
+        StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
+        StartCoroutine(ParryCAberrationCoroutine(cAberVal));
     }
 
     public void CreateGuardFX()
@@ -166,5 +201,35 @@ public class EffectManager : MonoBehaviour
         Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
         GameObject grd = SpawnEffect("GuardFX", grdPos);
         Destroy(grd, 1.0f);
+    }
+
+    IEnumerator ParryMotionBlurCoroutine(float val)
+    {
+        mBlur.intensity.value = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < parryTime)
+        {
+            mBlur.intensity.value = Mathf.Lerp(val, 0f, elapsedTime / parryTime);
+            elapsedTime += Time.deltaTime;
+            Debug.Log("blur intensity : " + mBlur.intensity.value);
+            yield return null;
+        }
+
+        mBlur.intensity.value = 0f;
+    }
+
+    IEnumerator ParryCAberrationCoroutine(float val)
+    {
+        cAber.intensity.value = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < parryTime)
+        {
+            cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
+            elapsedTime += Time.deltaTime;
+            Debug.Log("aberration intensity : " + cAber.intensity.value);
+            yield return null;
+        }
+
+        cAber.intensity.value = 0f;
     }
 }
