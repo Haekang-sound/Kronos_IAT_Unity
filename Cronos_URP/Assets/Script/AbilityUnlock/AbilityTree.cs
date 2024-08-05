@@ -25,6 +25,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     private AbilityDataParser parser = new AbilityDataParser();
 
+    private bool _isTransition;
+
     // IObserver /////////////////////////////////////////////////////////////
 
     public virtual void Subscribe(IObservable<AbilityNode> provider)
@@ -95,7 +97,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         abilityTreeCanvas.enabled = false;
         //playerVirtualCam = PlayerCamControler.Instance.VirtualCamera;
 
-        if(mainVirtualCam == null)
+        if (mainVirtualCam == null)
         {
             mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
         }
@@ -118,13 +120,16 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         // Test
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (isFocaus == false)
+            if (_isTransition == false)
             {
-                StartCoroutine(Enter());
-            }
-            else if (isFocaus == true)
-            {
-                StartCoroutine(Exit());
+                if (isFocaus == false)
+                {
+                    StartCoroutine(Enter());
+                }
+                else if (isFocaus == true)
+                {
+                    StartCoroutine(Exit());
+                }
             }
         }
     }
@@ -139,7 +144,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             _abilityNodes[i].abilityLevel = LoadedlevelDatas[i];
             _abilityNodes[i].abilityLevel.currentPoint = loadedUserDatas[i];
             _abilityNodes[i].InitRender();
-
         }
     }
 
@@ -175,8 +179,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public IEnumerator Enter()
     {
+        _isTransition = true;
+
         PauseManager.Instance.PauseGame();
-        
+
         yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
         while (ScreenFader.IsFading)
@@ -199,10 +205,13 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
 
         isFocaus = true;
+        _isTransition = false;
     }
 
     public IEnumerator Exit()
     {
+        _isTransition = true;
+
         yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
         while (ScreenFader.IsFading)
@@ -226,11 +235,13 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
         isFocaus = false;
         PauseManager.Instance.UnPauseGame();
+
+        _isTransition = false;
     }
 
     void SetPlayerCamPriority(int val)
     {
-        if(mainVirtualCam != null)
+        if (mainVirtualCam != null)
         {
             mainVirtualCam.Priority = val;
         }
