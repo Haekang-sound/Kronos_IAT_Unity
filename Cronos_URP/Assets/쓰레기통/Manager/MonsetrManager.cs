@@ -76,7 +76,7 @@ class MonsterManager : MonoBehaviour
 	{
 		// 플레이어를 생성한다
 		GameObject player = Instantiate(Player, new Vector3(0, 10, 5), Quaternion.identity);
-		player.GetComponent<Player>().PlayerRespawn();
+		//player.GetComponent<Player>().PlayerRespawn();
 
 
 	}

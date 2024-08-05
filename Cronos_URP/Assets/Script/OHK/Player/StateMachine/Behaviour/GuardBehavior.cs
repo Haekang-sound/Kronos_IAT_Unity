@@ -35,7 +35,8 @@ public class GuardBehavior : StateMachineBehaviour
 			// ¿Ãµø¡ﬂ
 			animator.SetBool(moveHash, true);
 		}
-		if (Input.GetKeyUp(KeyCode.Mouse1))
+		//bool test = Input.GetKeyUp(KeyCode.Mouse1);
+		if (!Input.GetKey(KeyCode.Mouse1))
 		{
 			animator.SetBool(guradHash, false);
 		}

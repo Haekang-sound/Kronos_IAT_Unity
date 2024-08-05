@@ -20,20 +20,20 @@ public class UI_Upgrades : MonoBehaviour
     {
         // 데모 : 최대 시간 20% 증가
         float val = player.MaxTP * 0.2f;
-        player.AdjustTP(val);
+        //player.AdjustTP(val);
     }
 
     public void UpgradeS()
     {
         // 데모 : 이동속도 30% 증가
         float val = player.moveSpeed * 0.3f;
-        player.AdjustSpeed(val);
+        //player.AdjustSpeed(val);
     }
 
     public void UpgradeG()
     {
         // 데모 : 공격력 50% 증가
         float val = player.CurrentDamage * 1.5f;
-        player.AdjustAttackPower(val);
+        //player.AdjustAttackPower(val);
     }
 }

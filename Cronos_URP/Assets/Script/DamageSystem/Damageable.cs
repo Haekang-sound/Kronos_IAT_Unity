@@ -26,7 +26,7 @@ public partial class Damageable : MonoBehaviour
     public bool isInvulnerable { get; set; }
     private bool isVulnerable { get; set; } 
 
-    public float currentHitPoints
+    public float CurrentHitPoints
     {
         get { return hitPoints; }
         set { hitPoints = value; }
@@ -78,7 +78,7 @@ public partial class Damageable : MonoBehaviour
 
     public void ResetDamage()
     {
-        currentHitPoints = hitPoints;
+        CurrentHitPoints = hitPoints;
         isInvulnerable = false;
         m_timeSinceLastHit = 0.0f;
         OnResetDamage.Invoke();
@@ -98,7 +98,7 @@ public partial class Damageable : MonoBehaviour
 
     public void ApplyDamage(DamageMessage data)
     {
-        if (currentHitPoints <= 0)
+        if (CurrentHitPoints <= 0)
         {
             // 이미 죽은 상태라면 데미지를 더는 받지 않는다.
             // 만일 이미 죽은 뒤에도 데미지를 받는 것을 감지하고 싶다면 이부분 수정할 것
@@ -144,13 +144,13 @@ public partial class Damageable : MonoBehaviour
         }
 
         isInvulnerable = true;
-        currentHitPoints -= data.amount;
+        CurrentHitPoints -= data.amount;
 
         // 죽든 살든 맞는 소리는 나와야 하니까
         if (gameObject.tag != "Player")
             soundManager.PlaySFX("Enemy_impact_SE", transform);
 
-        if (currentHitPoints <= 0)
+        if (CurrentHitPoints <= 0)
         {
             Debug.Log("데미지를 받아 죽었다");
             schedule += OnDeath.Invoke; //This avoid race condition when objects kill each other.
@@ -161,7 +161,7 @@ public partial class Damageable : MonoBehaviour
             OnReceiveDamage.Invoke();
         }
 
-        var messageType = currentHitPoints <= 0 ? MessageType.DEAD : MessageType.DAMAGED;
+        var messageType = CurrentHitPoints <= 0 ? MessageType.DEAD : MessageType.DAMAGED;
 
         for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
         {
