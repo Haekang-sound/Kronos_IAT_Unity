@@ -11,12 +11,12 @@ public class AttackStack : MonoBehaviour
 
     private float _timer;
 
-    void OnEnable()
+    void Awake()
     {
         damager.OnAttack.AddListener(AddAttackStack);
     }
 
-    private void OnDisable()
+    private void OnDistroy()
     {
         damager.OnAttack.RemoveAllListeners();
     }
