@@ -234,13 +234,16 @@ public class EffectManager : MonoBehaviour
     public void GroundCheckFX()
     {
         // 레이를 쏠 위치 플레이어의 위치 + 정면으로 조금 앞으로 + 조금 위로
-        Vector3 rayTrans = player.transform.position + player.transform.forward * 1.6f + new Vector3(0, 1.5f, 0);
+        Vector3 rayTrans = player.transform.position + 
+            player.transform.forward * 1.6f + 
+            new Vector3(0, 1.5f, 0);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
             // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
-            Quaternion fxRot = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
+            Quaternion fxRot = Quaternion.LookRotation(
+                Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
             
