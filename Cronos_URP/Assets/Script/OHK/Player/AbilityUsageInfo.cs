@@ -7,13 +7,28 @@ public struct AbilityUsageInfo
 		get{ return PlayerStateMachine.GetInstance().Animator.GetBool("EnforcedCombo"); }
 		set { PlayerStateMachine.GetInstance().Animator.SetBool("EnforcedCombo", value); }
 	}
-	//수치 증가 -> 나중에
+	//수치 증가
+	//-> 나중에
 
 	//회피 공격
-
+	public bool DodgeAttack
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("DodgeAttack"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("DodgeAttack", value); }
+	}
 
 	//Com_Attack 사용 불가
+	public bool ComAttackBan
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("ComAttackBan"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackBan", value); }
+	}
 	//Nor_Attack 사용 불가
+	public bool NorAttackBan
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("NorAttackBan"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackBan", value); }
+	}
 	//경직 면역
 
 	/// 민동휘
