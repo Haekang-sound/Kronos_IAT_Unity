@@ -36,6 +36,7 @@ public class PauseManager : MonoBehaviour
 
     private void OnEnable()
     {
+        player = Player.Instance;
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -49,8 +50,12 @@ public class PauseManager : MonoBehaviour
     {
         //playerCam.gameObject.SetActive(false);
         Debug.Log("Pause");
-        playerInput.SwitchCurrentActionMap("UI");
-        player.gameObject.GetComponent<InputReader>().enabled = false;
+
+        playerInput?.SwitchCurrentActionMap("UI");
+        if (player != null)
+        {
+            player.gameObject.GetComponent<InputReader>().enabled = false;
+        }
         Time.timeScale = 0f;
     }
 
@@ -58,8 +63,11 @@ public class PauseManager : MonoBehaviour
     {
         //playerCam.gameObject.SetActive(true);
         Debug.Log("Unpause");
-        playerInput.SwitchCurrentActionMap("Player");
-        player.gameObject.GetComponent<InputReader>().enabled = true;
+        playerInput?.SwitchCurrentActionMap("Player");
+        if (player != null)
+        {
+            player.gameObject.GetComponent<InputReader>().enabled = true;
+        }
         Time.timeScale = 1f;
     }
 }

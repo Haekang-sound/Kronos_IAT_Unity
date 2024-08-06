@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyController))]
 public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 {
+    public readonly float tp = 24;
     public float attackDistance = 1.8f;
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
@@ -205,6 +206,11 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Dead()
     {
+        if (Player.Instance != null)
+        {
+            Player.Instance.TP += tp;
+        }
+
         GetComponent<ReplaceWithRagdoll>().Replace();
     }
 
