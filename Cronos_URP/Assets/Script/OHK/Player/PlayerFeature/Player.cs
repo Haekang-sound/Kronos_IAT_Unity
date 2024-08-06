@@ -295,20 +295,22 @@ public class Player : MonoBehaviour, IMessageReceiver
         shieldWeapon?.EndParry();
     }
 
-    // 칼 사운드를 출력할 때 이펙트를 뿜어보자
-    // 계속 이렇게 할거라면 이름을 바꿔야겠다
+    // 기본 슬래시 FX
+    // 이름이 망해부렀으야
     public void SoundSword()
     {
-        soundManager.PlaySFX("Attack_SE", transform);
-        // 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
-        // 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
-        // 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
-        GameObject slash = effectManager.SpawnEffect("SlashBlue2", transform.position);
-        slash.transform.rotation = playerSword.transform.rotation;
-        slash.transform.Rotate(90f, 180f, 0);
-        float newY = playerSword.transform.position.y;
-        slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
-        Destroy(slash, 0.7f);
+        effectManager.NormalSlashFX("Nor_Attack");
+    }
+
+    public void NormalStrongSlash()
+    {
+        effectManager.NormalStrongFX();
+    }
+
+    public void ComboImpact()
+    {
+        //effectManager.ComboStrongFX();
+        effectManager.GroundCheckFX();
     }
 
     public void SoundVoice()
