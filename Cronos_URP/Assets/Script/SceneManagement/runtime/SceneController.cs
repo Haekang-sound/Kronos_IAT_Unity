@@ -137,7 +137,7 @@ public class SceneController : MonoBehaviour
             entrance.OnReachDestination.Invoke();
         }
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+        yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
 
         //if (m_playerInput)
         //{
