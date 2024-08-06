@@ -194,12 +194,6 @@ public class Player : MonoBehaviour, IMessageReceiver
         }
 
         TP = _damageable.CurrentHitPoints;
-
-
-        if (TP <= 0)
-        {
-            _damageable.JustDead();
-        }
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
@@ -215,7 +209,7 @@ public class Player : MonoBehaviour, IMessageReceiver
                 break;
             case MessageType.DEAD:
                 {
-                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+                    //Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
                     Death(/*damageData*/);
                 }
                 break;
@@ -246,14 +240,21 @@ public class Player : MonoBehaviour, IMessageReceiver
         PlayerFSM.Animator.SetTrigger("Damaged");
     }
 
+    private bool onDeath;
+
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        StartCoroutine(DeathScequence());
+        if (onDeath == false)
+        {
+            StartCoroutine(DeathScequence());
+        }
     }
 
     private IEnumerator DeathScequence()
     {
+        onDeath = true;
+
         yield return ScreenFader.FadeSceneOut(FadeType.GameOver);
 
         while (ScreenFader.IsFading)
@@ -280,6 +281,8 @@ public class Player : MonoBehaviour, IMessageReceiver
         }
 
         yield return ScreenFader.FadeSceneIn(FadeType.Black);
+
+        onDeath = false;
     }
 
     void SetCursorInactive()
