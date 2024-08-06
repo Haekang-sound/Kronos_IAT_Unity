@@ -36,6 +36,8 @@ public class EffectManager : MonoBehaviour
     SoundManager soundManager;
 
     // 레이캐스트 관련
+    float forwardVal = 1.6f;
+    float yUpVal = 1.5f;
     public LayerMask groundLayer;
     public float rayMaxDist = 2.0f;
 
@@ -235,8 +237,8 @@ public class EffectManager : MonoBehaviour
     {
         // 레이를 쏠 위치 플레이어의 위치 + 정면으로 조금 앞으로 + 조금 위로
         Vector3 rayTrans = player.transform.position + 
-            player.transform.forward * 1.6f + 
-            new Vector3(0, 1.5f, 0);
+            player.transform.forward * forwardVal + 
+            new Vector3(0, yUpVal, 0);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
             Vector3 hitPoint = hit.point;
