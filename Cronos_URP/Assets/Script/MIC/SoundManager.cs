@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
     // 캐싱한다면 여기서
     private void Awake()
     {
+        instance = this;
         LoadSE();
     }
 

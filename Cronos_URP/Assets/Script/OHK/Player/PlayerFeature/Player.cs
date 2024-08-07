@@ -108,9 +108,9 @@ public class Player : MonoBehaviour, IMessageReceiver
     public Damageable _damageable;
     public Defensible _defnsible;
 
-    SoundManager soundManager;
-    EffectManager effectManager;
-    ImpulseCam impulseCam;
+    public SoundManager soundManager;
+    public EffectManager effectManager;
+    public ImpulseCam impulseCam;
     public GameObject playerSword;
 
     protected void OnDisable()
@@ -143,10 +143,21 @@ public class Player : MonoBehaviour, IMessageReceiver
 
         meleeWeapon.simpleDamager.damageAmount = currentDamage;
 
+        
+    }
+
+    void Start()
+    {
         // 여기에 초기화
         soundManager = SoundManager.Instance;
         effectManager = EffectManager.Instance;
         impulseCam = ImpulseCam.Instance;
+        if (soundManager != null)
+            Debug.Log("SoundManager found");
+        if (effectManager != null)
+            Debug.Log("EffectManager found");
+        if (impulseCam != null)
+            Debug.Log("ImpulseCam found");
     }
 
     private void ChargeCP(Collider other)
@@ -249,7 +260,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        StartCoroutine(DeathScequence());
+        //StartCoroutine(DeathScequence());
     }
 
     private IEnumerator DeathScequence()
@@ -342,29 +353,35 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 이름이 망해부렀으야
     public void SoundSword()
     {
-        effectManager.NormalSlashFX("Nor_Attack");
+        if (effectManager != null)
+            effectManager.NormalSlashFX("Nor_Attack");
     }
 
     public void NormalStrongSlash()
     {
-        effectManager.NormalStrongFX();
+        if (effectManager != null)
+            effectManager.NormalStrongFX();
     }
 
     public void ComboImpact()
     {
-        //effectManager.ComboStrongFX();
-        effectManager.GroundCheckFX();
-        effectManager.ComboImpactNSlash();
+        if (effectManager != null)
+        {
+            effectManager.GroundCheckFX();
+            effectManager.ComboImpactNSlash();
+        }
     }
 
     public void SoundVoice()
     {
-        soundManager.PlaySFX("Character_voice_SE", transform);
+        if (soundManager != null)
+            soundManager.PlaySFX("Character_voice_SE", transform);
     }
 
     public void Shake()
     {
-        impulseCam.Shake();
+        if (impulseCam != null)
+            impulseCam.Shake();
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)
