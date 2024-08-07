@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
@@ -26,6 +26,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private AbilityDataParser parser = new AbilityDataParser();
 
     private bool _isTransition;
+
+    public UnityEvent OnEnter;
 
     // IObserver /////////////////////////////////////////////////////////////
 
@@ -125,6 +127,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 if (isFocaus == false)
                 {
                     StartCoroutine(Enter());
+                    OnEnter.Invoke();
                 }
                 else if (isFocaus == true)
                 {
