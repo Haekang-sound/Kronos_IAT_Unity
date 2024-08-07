@@ -16,5 +16,4 @@ public struct AbilityUsageInfo
 	/// 김주영
 	//Nor_S_Attack 강 공격 강화
 	//공격 스택
-
 }
