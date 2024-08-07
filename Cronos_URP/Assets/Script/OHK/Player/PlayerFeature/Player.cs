@@ -354,6 +354,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     {
         //effectManager.ComboStrongFX();
         effectManager.GroundCheckFX();
+        effectManager.ComboImpactNSlash();
     }
 
     public void SoundVoice()

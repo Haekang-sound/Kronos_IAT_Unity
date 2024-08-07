@@ -239,6 +239,7 @@ public class EffectManager : MonoBehaviour
         Vector3 rayTrans = player.transform.position + 
             player.transform.forward * forwardVal + 
             new Vector3(0, yUpVal, 0);
+        Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
             Vector3 hitPoint = hit.point;
@@ -255,6 +256,19 @@ public class EffectManager : MonoBehaviour
         {
             Debug.Log("no ground impact");
         }
+    }
+
+    // 능력개방이 되었다면 이거랑 같이
+    public void ComboImpactNSlash()
+    {
+        GameObject cir = SpawnEffect("ImpactCircle", player.transform.position);
+        Destroy(cir, 1.0f);
+        //GameObject slsh = SpawnEffect("ComboSlash", player.transform.position);
+        //slsh.transform.position = new Vector3(
+        //    player.transform.position.x,
+        //    player.transform.position.y + 1.0f,
+        //    player.transform.position.z);
+        //Destroy(slsh, 1.0f);
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
