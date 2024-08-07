@@ -8,17 +8,14 @@ public class DodgeBehaviour : StateMachineBehaviour
 	PlayerStateMachine stateMachine;
 	Vector3 direction;
 	private readonly int moveHash = Animator.StringToHash("isMove");
-	[SerializeField] float moveForce;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
 		stateMachine = PlayerStateMachine.GetInstance();
-		//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 		// 상태전환
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerParryState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
-		PlayerStateMachine.GetInstance().MoveForce = moveForce;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -35,10 +32,10 @@ public class DodgeBehaviour : StateMachineBehaviour
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
-// 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-// 	{
-// 		//PlayerStateMachine.GetInstance().Rigidbody.velocity = Player.Instance.transform.forward * moveForce;
-// 	}
+	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	//{
+	//    // Implement code that processes and affects root motion
+	//}
 
 	// OnStateIK is called right after Animator.OnAnimatorIK()
 	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

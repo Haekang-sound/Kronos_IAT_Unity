@@ -103,11 +103,7 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			if (stateMachine.Velocity.magnitude != 0f)
-			{
-				stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity.normalized);
-				animator.SetTrigger(dodgeHash);
-			}
+			animator.SetTrigger(dodgeHash);
 		}
 
 	}

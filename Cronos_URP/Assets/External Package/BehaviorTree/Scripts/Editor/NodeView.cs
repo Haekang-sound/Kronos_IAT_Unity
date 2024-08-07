@@ -12,7 +12,7 @@ using UnityEditor;
 /// </summary>
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
-    public static string uxmlPath = "Assets/BehaviorTree/UIBuilder/NodeView.uxml";
+    public static string uxmlPath = "Assets/External Package/BehaviorTree/UIBuilder/NodeView.uxml";
 
     // 노드가 선택될 때 호출될 콜백 함수. 'Action<NodeView>' 타입으로, 'NodeView' 인스턴스를 매개변수로 받는다.
     public Action<NodeView> OnNodeSelected;

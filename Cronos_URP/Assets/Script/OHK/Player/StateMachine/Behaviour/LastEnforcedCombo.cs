@@ -1,25 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class LastEnforcedCombo : StateMachineBehaviour
 {
-	PlayerStateMachine stateMachine;
 	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int chargeHash = Animator.StringToHash("Charge");
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	public float hitStopTime;
-	[SerializeField] float moveForce;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		stateMachine = PlayerStateMachine.GetInstance();
-		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
-		stateMachine.MoveForce = moveForce;
-		stateMachine.HitStop.hitStopTime = hitStopTime;
+		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
 	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -58,14 +51,7 @@ public class LastEnforcedCombo : StateMachineBehaviour
 			//¿Œ«≤¡ﬂø° ππ∂Û∞Ì ¡§«ÿ¡‡æﬂ«“µÌ
 			animator.SetBool(chargeAttackHash, false);
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			if (stateMachine.Velocity.magnitude != 0f)
-			{
-				stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity.normalized);
-				animator.SetTrigger(dodgeHash);
-			}
-		}
+
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

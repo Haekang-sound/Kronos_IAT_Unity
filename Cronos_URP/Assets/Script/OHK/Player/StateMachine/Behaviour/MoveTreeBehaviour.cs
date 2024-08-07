@@ -35,10 +35,7 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			if (stateMachine.Velocity.magnitude != 0f)
-			{
-				animator.SetTrigger(dodgeHash);
-			}
+			animator.SetTrigger(dodgeHash);
 		}
 		if (Input.GetKeyDown(KeyCode.Mouse1))
 		{
