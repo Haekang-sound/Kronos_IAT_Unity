@@ -29,6 +29,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public UnityEvent OnEnter;
 
+    private Animator _animator;
+
     // IObserver /////////////////////////////////////////////////////////////
 
     public virtual void Subscribe(IObservable<AbilityNode> provider)
@@ -61,6 +63,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
         else if (value.isFocaus == true)
         {
+            if (value.interactable == false) return;
 
             if (abilityAmounts.CanSpend(value.abilityLevel.pointNeeded) != -1)
             {
@@ -86,6 +89,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
+
         // 구독자 구독
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
         _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
@@ -199,6 +204,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         SetEnabledButtons(true);
         SetPlayerCamPriority(0);
         canvasGroup.alpha = 1f;
+
+        _animator.SetTrigger("enter");
 
         yield return StartCoroutine(ScreenFader.FadeSceneIn());
 

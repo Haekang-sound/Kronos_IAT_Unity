@@ -19,6 +19,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public List<AbilityNode> childNodes;
 
     public bool isFocaus;
+    public bool interactable;
     public Button button;
     public FadeEffector fadeUI;
 
@@ -72,7 +73,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void SetInteractable(bool val)
     {
-        button.interactable = val;
+        //button.interactable = val;
+        interactable = val;
     }
 
     private void OnDisable()
