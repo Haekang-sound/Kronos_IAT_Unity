@@ -131,17 +131,12 @@ public class Player : MonoBehaviour, IMessageReceiver
         playerTransform = GetComponent<Transform>();
 
         meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
 
         shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 
         targetting = GetComponentInChildren<AutoTargetting>();
-        totalspeed = Speed;
+        
 
-        _damageable.hitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
 
         
     }
@@ -158,7 +153,15 @@ public class Player : MonoBehaviour, IMessageReceiver
             Debug.Log("EffectManager found");
         if (impulseCam != null)
             Debug.Log("ImpulseCam found");
-    }
+
+
+		// 문제해결을 위해 옮김 
+		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+		totalspeed = Speed;
+		_damageable.hitPoints = maxTP;
+		_damageable.CurrentHitPoints = maxTP;
+		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+	}
 
     private void ChargeCP(Collider other)
     {
