@@ -18,7 +18,7 @@ public class PlayerAttackState : PlayerBaseState
 	public override void FixedTick()
 	{
 		//stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.MoveForce * stateMachine.Animator.speed * Time.fixedDeltaTime, ForceMode.Impulse);
-		stateMachine.Rigidbody.velocity = stateMachine.transform.forward * stateMachine.MoveForce;
+		//stateMachine.Rigidbody.velocity = stateMachine.transform.forward * stateMachine.MoveForce;
 	}
 	public override void LateTick() { }
 	public override void Exit(){}

@@ -1462,11 +1462,6 @@ PrefabInstance:
       addedObject: {fileID: 239499980}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ee319622ff1152429f9de99628f6bdc, type: 3}
---- !u!4 &569630672 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1971183587510549773, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
-  m_PrefabInstance: {fileID: 834684559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &582163382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1114260476483171701, guid: 5ee319622ff1152429f9de99628f6bdc, type: 3}
@@ -1645,6 +1640,10 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1358003056942352722, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2138169223015833258, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1656,7 +1655,7 @@ PrefabInstance:
     - target: {fileID: 3078419922313236100, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: PlayerObject
       value: 
-      objectReference: {fileID: 569630672}
+      objectReference: {fileID: 915669663}
     - target: {fileID: 3991350262095185854, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 2048
@@ -1760,6 +1759,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3827754c1112894abd22b4d4324aa11, type: 3}
+--- !u!4 &915669663 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6258395230829179170, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+  m_PrefabInstance: {fileID: 834684559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &939896614
 PrefabInstance:
   m_ObjectHideFlags: 0
