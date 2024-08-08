@@ -100,6 +100,7 @@ public class ComboBehaviour : StateMachineBehaviour
 		{
 			if (stateMachine.Velocity.magnitude != 0f)
 			{
+				stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 				animator.SetTrigger(dodgeHash);
 			}
 		}
