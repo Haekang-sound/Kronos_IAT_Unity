@@ -58,6 +58,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool isEnforced = false;
     [SerializeField] private bool isLockOn = false;
     [SerializeField] private bool rigidImmunity = false;
+    [SerializeField] private bool dodgeAttack = false;
 
     private Checkpoint _currentCheckpoint;
 
@@ -97,6 +98,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
     public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
 	public bool RigidImmunity { get { return rigidImmunity; } set {  rigidImmunity = value; } }	
+	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }	
 
 	// 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
 	PlayerData playerData = new PlayerData();

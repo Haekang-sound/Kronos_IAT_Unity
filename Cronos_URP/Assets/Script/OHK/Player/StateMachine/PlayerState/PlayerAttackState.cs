@@ -21,7 +21,6 @@ public class PlayerAttackState : PlayerBaseState
         // 애니메이터에서 루트모션을 받아온다. 
         Vector3 rootMotion = stateMachine.Animator.deltaPosition;
         rootMotion.y = 0;
-        Debug.Log(stateMachine.Animator.deltaPosition);
         if (IsOnSlope())
         {
             stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * 300f;
