@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8771253974558537043}
   - component: {fileID: 3622548740838876216}
+  - component: {fileID: 8224914814066392902}
+  - component: {fileID: 2145108655948178273}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -49,3 +51,38 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: ee832bfac8032bc4c8e10123e4014034, type: 2}
+--- !u!114 &8224914814066392902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328051654789701541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a5c7bdbd86281a41b06e0d32981fb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sssModel: 0
+  _iridescenceModel: 0
+  _sheenModel: 0
+  _enableCoatGeometricAA: 1
+  _screenFadeDistance: 0.1
+  _enableMicroShadows: 1
+  _microShadowsOpacity: 0
+  _enableHighQualityDepthNormals: 1
+--- !u!114 &2145108655948178273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328051654789701541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7aa64b9de4b6a64bbd1ffb09fce965d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wetnessColor: {r: 0, g: 0, b: 0, a: 0}
+  _rainMultiplier: 0
+  _wetness: 0

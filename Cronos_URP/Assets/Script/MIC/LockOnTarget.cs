@@ -7,7 +7,7 @@ public class LockOnTarget : MonoBehaviour
     [SerializeField]
     Transform target;
     [SerializeField]
-    Camera playerCam;
+    Camera mainCam;
     [SerializeField]
     GameObject targetUI;
     [SerializeField]
@@ -22,6 +22,9 @@ public class LockOnTarget : MonoBehaviour
     void Start()
     {
         atTgt = AutoTargetting.GetInstance();
+        mainCam = Camera.main;
+        targetUI = transform.GetChild(0).gameObject;
+        player = Player.Instance;
     }
 
     // Update is called once per frame

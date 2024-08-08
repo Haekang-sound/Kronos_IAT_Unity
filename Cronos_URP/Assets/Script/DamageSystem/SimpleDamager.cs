@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class SimpleDamager : MonoBehaviour
@@ -20,6 +18,8 @@ public class SimpleDamager : MonoBehaviour
     public event TriggerEnterAction OnTriggerEnterEvent;
 
     SoundManager soundManager;
+
+    public UnityEvent OnAttack;
 
     private void Start()
     {
@@ -99,6 +99,7 @@ public class SimpleDamager : MonoBehaviour
         };
 
         damageable.ApplyDamage(msg);
+        OnAttack.Invoke();
     }
 
     public void DrawGizmos()

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEditor.Animations;
 using UnityEngine.SocialPlatforms;
 
 
@@ -43,9 +38,6 @@ public class ComboBehaviour : StateMachineBehaviour
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-
-		
-
 		if (stateMachine.Velocity.z != 0f)
 		{
 			//int a = 3;
