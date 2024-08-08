@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class LastEnforcedCombo : StateMachineBehaviour
 {
+	PlayerStateMachine stateMachine;
 	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int chargeHash = Animator.StringToHash("Charge");
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
+	private readonly int dodgeHash = Animator.StringToHash("Dodge");
+
+	[SerializeField] float moveForce;
 	public float hitStopTime;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
+		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
+
+		stateMachine.MoveForce = moveForce;
+		stateMachine.HitStop.hitStopTime = hitStopTime;
 	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -50,6 +58,14 @@ public class LastEnforcedCombo : StateMachineBehaviour
 		{
 			//¿Œ«≤¡ﬂø° ππ∂Û∞Ì ¡§«ÿ¡‡æﬂ«“µÌ
 			animator.SetBool(chargeAttackHash, false);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			if (stateMachine.Velocity.magnitude != 0f)
+			{
+				animator.SetTrigger(dodgeHash);
+			}
 		}
 
 	}

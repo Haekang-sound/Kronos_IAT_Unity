@@ -28,14 +28,17 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		{
 			animator.SetBool(attackHash, true);
 		}
-		if (stateMachine.InputReader.moveComposite.magnitude == 0f)
-		{
-			animator.SetBool(moveHash, false);
-		}
+// 		if (stateMachine.InputReader.moveComposite.magnitude == 0f)
+// 		{
+// 			animator.SetBool(moveHash, false);
+// 		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			animator.SetTrigger(dodgeHash);
+			if (stateMachine.InputReader.moveComposite.magnitude != 0f)
+			{
+				animator.SetTrigger(dodgeHash);
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.Mouse1))
 		{

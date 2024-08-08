@@ -19,7 +19,7 @@ public class ComboBehaviour : StateMachineBehaviour
 	[SerializeField] float moveForce;
 
 	public float hitStopTime;
-	[Range(0.0f, 1.0f)]	public float minFrame; 
+	[Range(0.0f, 1.0f)] public float minFrame;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -65,19 +65,19 @@ public class ComboBehaviour : StateMachineBehaviour
 		{
 			attackBool = true;
 		}
-		if ((Input.GetKeyDown(KeyCode.Mouse0)||attackBool) && stateInfo.normalizedTime > minFrame)
+		if ((Input.GetKeyDown(KeyCode.Mouse0) || attackBool) && stateInfo.normalizedTime > minFrame)
 		{
 			// NEXTCOMBO 활성화
 			animator.SetBool(nextComboHash, true);
 		}
-		
+
 		// 좌클릭 누르는 중에는 차징
 		if (Input.GetKey(KeyCode.Mouse0))
 		{
 			float current = animator.GetFloat(chargeHash);
 			animator.SetFloat(chargeHash, current + Time.deltaTime);
 		}
-		
+
 		// 누르고있으면 차징중이다
 		if (Input.GetKey(KeyCode.Mouse0))
 		{
@@ -89,7 +89,7 @@ public class ComboBehaviour : StateMachineBehaviour
 			//인풋중에 뭐라고 정해줘야할듯
 			animator.SetBool(chargeAttackHash, false);
 		}
-		
+
 		// 좌클릭땔때 차징 비활성화
 		if (Input.GetKeyUp(KeyCode.Mouse0))
 		{
@@ -98,22 +98,25 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			animator.SetTrigger(dodgeHash);
+			if (stateMachine.Velocity.magnitude != 0f)
+			{
+				animator.SetTrigger(dodgeHash);
+			}
 		}
 
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-// 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-// 	{
-// 
-// 	}
+	// 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	// 	{
+	// 
+	// 	}
 	// OnStateMove is called right after Animator.OnAnimatorMove()
-// 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-// 	{
-// 		// Implement code that processes and affects root motion
-// 
-// 	}
+	// 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	// 	{
+	// 		// Implement code that processes and affects root motion
+	// 
+	// 	}
 
 	// OnStateIK is called right after Animator.OnAnimatorIK()
 	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
