@@ -37,9 +37,6 @@ public class ComboBehaviour : StateMachineBehaviour
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		Vector3 rootMotion = animator.deltaPosition;
-		rootMotion.y = 0;
-
 
 
 		if (stateMachine.Velocity.z != 0f)
@@ -117,11 +114,15 @@ public class ComboBehaviour : StateMachineBehaviour
 	// 
 	// 	}
 	// OnStateMove is called right after Animator.OnAnimatorMove()
-	// 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	// 	{
-	// 		// Implement code that processes and affects root motion
-	// 
-	// 	}
+	 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	 	{
+		// Implement code that processes and affects root motion
+		// 애니메이터에서 루트모션을 받아온다. 
+		Vector3 rootMotion = animator.deltaPosition;
+		rootMotion.y = 0;
+		Debug.Log(animator.deltaPosition);
+		stateMachine.Rigidbody.velocity = rootMotion*300f;
+	 	}
 
 	// OnStateIK is called right after Animator.OnAnimatorIK()
 	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
