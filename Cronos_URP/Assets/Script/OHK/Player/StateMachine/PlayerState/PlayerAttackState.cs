@@ -17,9 +17,22 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void FixedTick()
 	{
-		//stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.MoveForce * stateMachine.Animator.speed * Time.fixedDeltaTime, ForceMode.Impulse);
-		//stateMachine.Rigidbody.velocity = stateMachine.transform.forward * stateMachine.MoveForce;
-	}
+        // Implement code that processes and affects root motion
+        // 애니메이터에서 루트모션을 받아온다. 
+        Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+        rootMotion.y = 0;
+        Debug.Log(stateMachine.Animator.deltaPosition);
+        if (IsOnSlope())
+        {
+            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * 300f;
+            Debug.Log(stateMachine.Rigidbody.velocity);
+        }
+        else
+        {
+            stateMachine.Rigidbody.velocity = rootMotion * stateMachine.MoveForce;
+
+        }
+    }
 	public override void LateTick() { }
 	public override void Exit(){}
 }

@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 300
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &-6130925670275204267
@@ -1137,6 +1137,11 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: 2341847357346862668}
+    second:
+    - {fileID: 1758906489119718432}
+    - {fileID: -1587547279203260226}
+    - {fileID: 238355293268892508}
   - first: {fileID: 4709733735613252092}
     second:
     - {fileID: 3624047856668659846}
@@ -1144,11 +1149,6 @@ AnimatorStateMachine:
     - {fileID: 9093649816371052631}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
-  - first: {fileID: 2341847357346862668}
-    second:
-    - {fileID: 1758906489119718432}
-    - {fileID: -1587547279203260226}
-    - {fileID: 238355293268892508}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -70, y: 250, z: 0}
   m_EntryPosition: {x: -70, y: 100, z: 0}
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 300
   hitStopTime: 0.05
   minFrame: 0
 --- !u!114 &-891119079614451878
@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 300
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1101 &-872182243967851016
@@ -1604,7 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 300
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &-290126547666885164
@@ -3161,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 300
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &7745182279930307600
