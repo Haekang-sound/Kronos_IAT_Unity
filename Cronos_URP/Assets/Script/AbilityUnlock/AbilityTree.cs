@@ -12,6 +12,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     [SerializeField] public AbilityAmountLimit abilityAmounts;
 
     public Canvas abilityTreeCanvas;
+    public PopupController popup;
     public CanvasGroup canvasGroup;
     public CinemachineVirtualCamera mainVirtualCam;
 
@@ -50,7 +51,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public virtual void OnNext(AbilityNode value)
     {
-
         if (value.isFocaus == false)
         {
             value.FocusIn();
@@ -67,10 +67,16 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
             if (abilityAmounts.CanSpend(value.abilityLevel.pointNeeded) != -1)
             {
-                if (value.Increment() == true)
+                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+                popup.OpenPopup("확실합니까?", () =>
                 {
-                    abilityAmounts.UpdateSpent(value.abilityLevel.pointNeeded);
-                }
+                    if (value.Increment() == true)
+                    {
+                        // 확인 버튼을 눌렀을 때 실행할 동작
+                        abilityAmounts.UpdateSpent(value.abilityLevel.pointNeeded);
+                        value.OnUpdated.Invoke();
+                    }
+                });
             }
         }
         _lastPressed = value;
@@ -100,7 +106,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             obserable.Subscribe(this);
         }
 
-        rootAbilityNode.SetInteractable(false);
         abilityTreeCanvas.enabled = false;
         //playerVirtualCam = PlayerCamControler.Instance.VirtualCamera;
 
@@ -275,4 +280,5 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             node.gameObject.SetActive(val);
         }
     }
+
 }

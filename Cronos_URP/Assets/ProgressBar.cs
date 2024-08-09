@@ -15,6 +15,7 @@ public class ProgressBar : MonoBehaviour
 
     protected float percentage;
 
+    public bool isAnimate;
     private bool isFilling;
 
     public virtual void Start()
@@ -43,12 +44,18 @@ public class ProgressBar : MonoBehaviour
 
     private void SetBarFill()
     {
-        if (isFilling == false)
+        if (isAnimate == true)
         {
-            StartCoroutine(FillBarOverTime(percentage, 1.6f)); // 1초 동안 fillAmount를 채움
+            if (isFilling == false)
+            {
+                StartCoroutine(FillBarOverTime(percentage, 1.6f)); // 1초 동안 fillAmount를 채움
+            }
+        }
+        else
+        {
+            barImage.fillAmount = percentage;
         }
     }
-
 
     private IEnumerator FillBarOverTime(float targetPercentage, float duration)
     {

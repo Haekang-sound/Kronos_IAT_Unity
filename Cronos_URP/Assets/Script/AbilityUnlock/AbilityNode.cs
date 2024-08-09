@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
@@ -25,6 +25,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private CinemachineVirtualCamera _virtualCam;
     private IObserver<AbilityNode> _observer;
+
+    public UnityEvent OnUpdated;
 
     // IObservable /////////////////////////////////////////////////////////////
 
@@ -62,13 +64,18 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void OnEnable()
     {
-        button.onClick.AddListener(OnClickButton);
         fadeUI.GetComponent<CanvasGroup>().alpha = 0f;
     }
 
     private void Start()
     {
         InitRender();
+        button.onClick.AddListener(OnClickButton);
+    }
+
+    private void OnDestroy()
+    {
+        button.onClick.RemoveListener(OnClickButton);
     }
 
     public void SetInteractable(bool val)

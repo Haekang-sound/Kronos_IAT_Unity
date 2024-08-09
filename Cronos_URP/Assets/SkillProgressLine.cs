@@ -13,18 +13,21 @@ public class SkillProgressLine : ProgressBar
         base.Start();
         OnSkillAmountChanged();
 
-        Nodes.button.onClick.AddListener(OnSkillAmountChanged);
+        Nodes.OnUpdated.AddListener(OnSkillAmountChanged);
     }
 
     private void OnDestroy()
     {
-        Nodes.button.onClick.RemoveListener(OnSkillAmountChanged);
+        Nodes.OnUpdated.RemoveListener(OnSkillAmountChanged);
     }
 
     public void OnSkillAmountChanged()
     {
         float percentageAmount = GetPercentageFromAmount();
-        UpdatePercentage(percentageAmount);
+        if (percentageAmount > 0f)
+        {
+            UpdatePercentage(percentageAmount);
+        }
     }
 
     private bool IsUnlocked()
