@@ -11,14 +11,20 @@ Material:
   m_Shader: {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _MASKMAP
+  - _NORMALMAP
+  - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+  - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -29,7 +35,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 1edbf5533365e1149868de144696a4ca, type: 3}
+        m_Texture: {fileID: 2800000, guid: e528dfed0fe2b8240902ca0b4cdbd22a, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 2.47, y: 0}
     - _BentNormalMap:
@@ -89,7 +95,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1edbf5533365e1149868de144696a4ca, type: 3}
+        m_Texture: {fileID: 2800000, guid: e528dfed0fe2b8240902ca0b4cdbd22a, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 2.47, y: 0}
     - _MaskMap:
@@ -221,7 +227,7 @@ Material:
     - _HeightTessCenter: 0.5
     - _HorizonFade: 0.5
     - _HorizonOcclusion: 0
-    - _InvTilingScale: 0.39682537
+    - _InvTilingScale: 0.5
     - _Ior: 0
     - _IridescenceMaskScale: 1
     - _IridescenceShift: 0
