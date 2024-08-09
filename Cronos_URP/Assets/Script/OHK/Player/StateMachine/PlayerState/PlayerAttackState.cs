@@ -23,7 +23,7 @@ public class PlayerAttackState : PlayerBaseState
         rootMotion.y = 0;
         if (IsOnSlope())
         {
-            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * 300f;
+            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * stateMachine.MoveForce;
             Debug.Log(stateMachine.Rigidbody.velocity);
         }
         else

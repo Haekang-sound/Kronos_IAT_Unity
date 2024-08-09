@@ -19,8 +19,7 @@ public class PlayerParryState : PlayerBaseState
         rootMotion.y = 0;
         if (IsOnSlope())
         {
-            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * 300f;
-            Debug.Log(stateMachine.Rigidbody.velocity);
+            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * stateMachine.MoveForce;
         }
         else
         {
