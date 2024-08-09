@@ -32,7 +32,11 @@ public struct AbilityUsageInfo
 	//-> 나중에
 
 	//경직 면역
-
+	public bool RigidImmunity
+	{
+		get { return PlayerStateMachine.GetInstance().Player.RigidImmunity; }
+		set { PlayerStateMachine.GetInstance().Player.RigidImmunity = value; }
+	}
 
 	/// 민동휘
 	//Com_S_Attack 강 공격 강화

@@ -15,19 +15,31 @@ public class PlayerParryState : PlayerBaseState
 	public override void Tick() { }
 	public override void FixedTick()
 	{
-		bool isOnSlope = IsOnSlope();
-		if (isOnSlope)
-		{
-			stateMachine.Rigidbody.useGravity = false;
-		}
-		else
-		{
-			stateMachine.Rigidbody.useGravity = true;
-		}
-		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.transform.forward) : stateMachine.transform.forward;
-		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+        Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+        rootMotion.y = 0;
+        if (IsOnSlope())
+        {
+            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * 300f;
+            Debug.Log(stateMachine.Rigidbody.velocity);
+        }
+        else
+        {
+            stateMachine.Rigidbody.velocity = rootMotion * stateMachine.MoveForce;
 
-		stateMachine.Rigidbody.velocity = velocity * stateMachine.MoveForce + gravity;
+        }
+//         bool isOnSlope = IsOnSlope();
+// 		if (isOnSlope)
+// 		{
+// 			stateMachine.Rigidbody.useGravity = false;
+// 		}
+// 		else
+// 		{
+// 			stateMachine.Rigidbody.useGravity = true;
+// 		}
+// 		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.transform.forward) : stateMachine.transform.forward;
+// 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+// 
+// 		stateMachine.Rigidbody.velocity = velocity * stateMachine.MoveForce + gravity;
 
 	}
 	public override void LateTick() { }

@@ -116,7 +116,7 @@ public abstract class PlayerBaseState : State
 
 	protected Vector3 AdjustDirectionToSlope(Vector3 direction)
 	{
-		return Vector3.ProjectOnPlane(direction, sloperHit.normal)/*.normalized*/;
+		return Vector3.ProjectOnPlane(direction, sloperHit.normal);
 	}
 
 	public bool IsOnSlope()
