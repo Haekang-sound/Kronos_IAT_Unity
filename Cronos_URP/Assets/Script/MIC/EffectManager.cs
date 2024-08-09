@@ -39,6 +39,7 @@ public class EffectManager : MonoBehaviour
     float forwardVal = 1.6f;
     float yUpVal = 1.5f;
     public LayerMask groundLayer;
+    public LayerMask wallLayer;
     public float rayMaxDist = 2.0f;
 
     // 글로벌 볼륨
@@ -49,6 +50,8 @@ public class EffectManager : MonoBehaviour
     public float mBlurVal = 0.7f;
     public float cAberVal = 0.7f;
     public float parryTime = 1.0f;
+    [Range(0f, 200f)]
+    public float enforchSlashSpeed = 30.0f;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -94,6 +97,7 @@ public class EffectManager : MonoBehaviour
         if (gVolume != null)
             InitializeVol(gVolume);
         groundLayer = LayerMask.GetMask("Ground");
+        wallLayer = LayerMask.GetMask("Wall");
     }
 
     void InitializeVol(Volume vol)
@@ -261,14 +265,17 @@ public class EffectManager : MonoBehaviour
     // 능력개방이 되었다면 이거랑 같이
     public void ComboImpactNSlash()
     {
-        GameObject cir = SpawnEffect("ImpactCircle", player.transform.position);
+        GameObject cir = SpawnEffect("EnforceGround", player.transform.position);
         Destroy(cir, 1.0f);
-        //GameObject slsh = SpawnEffect("ComboSlash", player.transform.position);
-        //slsh.transform.position = new Vector3(
-        //    player.transform.position.x,
-        //    player.transform.position.y + 1.0f,
-        //    player.transform.position.z);
-        //Destroy(slsh, 1.0f);
+        GameObject slsh = SpawnEffect("EnforceSlash", player.transform.position);
+        slsh.transform.position = new Vector3(
+            player.transform.position.x,
+            player.transform.position.y + 1.0f,
+            player.transform.position.z);
+        slsh.transform.forward = player.transform.forward;
+        var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
+        main.startSpeed = enforchSlashSpeed;
+        Destroy(slsh, 1.0f);
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데

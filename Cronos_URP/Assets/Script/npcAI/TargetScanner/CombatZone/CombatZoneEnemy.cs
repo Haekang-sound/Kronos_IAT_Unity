@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem.XR;
 
 public class CombatZoneEnemy : MonoBehaviour
@@ -15,6 +16,9 @@ public class CombatZoneEnemy : MonoBehaviour
     public CombatZone combatZone { private get; set; }
     // 타깃 발견 시 이동해야할 위치
     public TargetDistributor.TargetFollower FollowerData { get; private set; }
+
+    // 다운 이벤트
+    public UnityEvent OnDown;
 
     private void OnDisable()
     {

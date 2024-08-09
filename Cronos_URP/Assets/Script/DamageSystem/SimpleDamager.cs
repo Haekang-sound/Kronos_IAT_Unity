@@ -12,7 +12,7 @@ public class SimpleDamager : MonoBehaviour
     public LayerMask targetLayers;
 
     //protected GameObject m_owner;
-    protected bool m_inAttack = false;
+    public bool m_inAttack = false;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
