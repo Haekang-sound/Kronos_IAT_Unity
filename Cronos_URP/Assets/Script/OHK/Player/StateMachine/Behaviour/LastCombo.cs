@@ -12,6 +12,9 @@ public class LastCombo : StateMachineBehaviour
 	{
 		animator.ResetTrigger("Attack");
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
+		PlayerStateMachine.GetInstance().Player.IsEnforced = true;
+		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
+
 	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -32,7 +35,8 @@ public class LastCombo : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-
+		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
+		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = false;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()

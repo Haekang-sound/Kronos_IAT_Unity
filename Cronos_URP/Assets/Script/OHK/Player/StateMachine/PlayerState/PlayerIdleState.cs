@@ -17,8 +17,8 @@ public class PlayerIdleState : PlayerBaseState
 
 	public override void Enter()
 	{
-		stateMachine.InputReader.onJumpPerformed += SwitchToParryState; // 스테이트에 돌입할때 input에 맞는 함수를 넣어준다
-		stateMachine.InputReader.onRAttackStart += SwitchToDefanceState;
+		//stateMachine.InputReader.onJumpPerformed += SwitchToParryState; // 스테이트에 돌입할때 input에 맞는 함수를 넣어준다
+		//stateMachine.InputReader.onRAttackStart += SwitchToDefanceState;
 
 		stateMachine.InputReader.onSwitchingStart += Deceleration;
 
@@ -83,10 +83,10 @@ public class PlayerIdleState : PlayerBaseState
 	{
 		stateMachine.InputReader.onMove -= IsMove;
 		//stateMachine.InputReader.onLAttackStart -= SwitchToLAttackState;
-		stateMachine.InputReader.onRAttackStart -= SwitchToDefanceState;
+		//stateMachine.InputReader.onRAttackStart -= SwitchToDefanceState;
 		//stateMachine.InputReader.onLockOnStart -= LockOn;
 
-		stateMachine.InputReader.onSwitchingStart -= Deceleration;
+		//stateMachine.InputReader.onSwitchingStart -= Deceleration;
 	}
 
 	private void SwitchToLAttackState()
