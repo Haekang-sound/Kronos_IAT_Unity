@@ -43,7 +43,10 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
     }
 
-    // void Start()
+    void Start()
+    {
+        OnDown.AddListener(TriggerDown);
+    }
 
     void OnEnable()
     {
@@ -55,6 +58,11 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     private void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
+    }
+
+    void OnDestroy()
+    {
+        OnDown?.RemoveListener(TriggerDown);
     }
 
     // void Update()

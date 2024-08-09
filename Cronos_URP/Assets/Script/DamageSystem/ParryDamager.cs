@@ -7,6 +7,7 @@ public class ParryDamager : SimpleDamager
 {
     [SerializeField]
     private bool _isGuard;
+    [SerializeField]
     private bool _isParrying;
     private bool _canBeParryied;
 

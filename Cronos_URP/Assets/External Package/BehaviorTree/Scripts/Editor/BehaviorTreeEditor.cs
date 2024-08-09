@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 public class BehaviorTreeEditor : EditorWindow
 {
-    public static string uxmlPath = "Assets/External Package/BehaviorTree/UIBuilder/BehaviorTreeEditor.uxml";
-    public static string ussPath = "Assets/External Package/BehaviorTree/UIBuilder/BehaviorTreeEditor.uss";
+    public static string uxmlPath = "Assets/BehaviorTree/UIBuilder/BehaviorTreeEditor.uxml";
+    public static string ussPath = "Assets/BehaviorTree/UIBuilder/BehaviorTreeEditor.uss";
 
     private BehaviorTreeView _treeView;
     private BehaviorTree _tree;

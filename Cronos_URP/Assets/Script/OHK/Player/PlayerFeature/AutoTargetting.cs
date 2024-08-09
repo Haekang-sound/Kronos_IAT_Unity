@@ -96,7 +96,7 @@ public class AutoTargetting : MonoBehaviour
         xDotResult = Mathf.Abs(Vector3.Dot(maincamTransform.right, Vector3.Cross(Vector3.up, direction.normalized).normalized));
         yDotResult = Mathf.Abs(Vector3.Dot(maincamTransform.up, Vector3.Cross(Vector3.right, direction.normalized).normalized));
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) )
         {
             if (Target == null)
             {
@@ -127,7 +127,8 @@ public class AutoTargetting : MonoBehaviour
     private void FixedUpdate()
     {
         // Player가 몬스터 방향으로 몸을 돌린다.
-        if ((isTargetting || stateMachine.Player.IsLockOn || isFacing) && stateMachine.GetState().ToString() != "PlayerParryState")
+        if ((isTargetting || stateMachine.Player.IsLockOn || isFacing )
+            && stateMachine.GetState().ToString() != "PlayerParryState" )
         {
             stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(direction.normalized), 0.1f));
         }

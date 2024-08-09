@@ -57,6 +57,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     [SerializeField] private bool isEnforced = false;
     [SerializeField] private bool isLockOn = false;
+    [SerializeField] private bool rigidImmunity = false;
+    [SerializeField] private bool dodgeAttack = false;
 
     private Checkpoint _currentCheckpoint;
 
@@ -95,9 +97,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     public bool IsDecreaseCP { get; set; }
     public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
     public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
+	public bool RigidImmunity { get { return rigidImmunity; } set {  rigidImmunity = value; } }	
+	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }	
 
-    // 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
-    PlayerData playerData = new PlayerData();
+	// 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
+	PlayerData playerData = new PlayerData();
     Transform playerTransform;
     AutoTargetting targetting;
 
@@ -108,9 +112,9 @@ public class Player : MonoBehaviour, IMessageReceiver
     public Damageable _damageable;
     public Defensible _defnsible;
 
-    SoundManager soundManager;
-    EffectManager effectManager;
-    ImpulseCam impulseCam;
+    public SoundManager soundManager;
+    public EffectManager effectManager;
+    public ImpulseCam impulseCam;
     public GameObject playerSword;
 
     protected void OnDisable()
@@ -131,23 +135,37 @@ public class Player : MonoBehaviour, IMessageReceiver
         playerTransform = GetComponent<Transform>();
 
         meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
 
         shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 
         targetting = GetComponentInChildren<AutoTargetting>();
-        totalspeed = Speed;
+        
 
-        _damageable.hitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
 
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+        
+    }
 
+    void Start()
+    {
         // 여기에 초기화
         soundManager = SoundManager.Instance;
         effectManager = EffectManager.Instance;
         impulseCam = ImpulseCam.Instance;
-    }
+        if (soundManager != null)
+            Debug.Log("SoundManager found");
+        if (effectManager != null)
+            Debug.Log("EffectManager found");
+        if (impulseCam != null)
+            Debug.Log("ImpulseCam found");
+
+
+		// 문제해결을 위해 옮김 
+		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+		totalspeed = Speed;
+		_damageable.hitPoints = maxTP;
+		_damageable.CurrentHitPoints = maxTP;
+		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+	}
 
     private void ChargeCP(Collider other)
     {
@@ -229,27 +247,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     void Damaged(Damageable.DamageMessage damageMessage)
     {
-        //  방어상태가 아닐때만 하자
-        if (PlayerFSM.GetState().ToString() == "PlayerDefenceState")
-        {
-            return;
-        }
-        if (PlayerFSM.GetState().ToString() == "PlayerParryState")
-        {
-            return;
-        }
-        if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
-        {
-            return;
-        }
+        // 여기서 리턴하면 애니메이션만 재생하지 않는다.
+		// 
+        if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
+			PlayerFSM.GetState().ToString() == "PlayerParryState"	||
+			PlayerFSM.GetState().ToString() == "PlayerDamagedState" || 
+			rigidImmunity || isEnforced)
+		{
+			return;
+		}
 
-        PlayerFSM.Animator.SetTrigger("Damaged");
+		PlayerFSM.Animator.SetTrigger("Damaged");
     }
 
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        StartCoroutine(DeathScequence());
+        //StartCoroutine(DeathScequence());
     }
 
     private IEnumerator DeathScequence()
@@ -342,28 +356,35 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 이름이 망해부렀으야
     public void SoundSword()
     {
-        effectManager.NormalSlashFX("Nor_Attack");
+        if (effectManager != null)
+            effectManager.NormalSlashFX("Nor_Attack");
     }
 
     public void NormalStrongSlash()
     {
-        effectManager.NormalStrongFX();
+        if (effectManager != null)
+            effectManager.NormalStrongFX();
     }
 
     public void ComboImpact()
     {
-        //effectManager.ComboStrongFX();
-        effectManager.GroundCheckFX();
+        if (effectManager != null)
+        {
+            effectManager.GroundCheckFX();
+            effectManager.ComboImpactNSlash();
+        }
     }
 
     public void SoundVoice()
     {
-        soundManager.PlaySFX("Character_voice_SE", transform);
+        if (soundManager != null)
+            soundManager.PlaySFX("Character_voice_SE", transform);
     }
 
     public void Shake()
     {
-        impulseCam.Shake();
+        if (impulseCam != null)
+            impulseCam.Shake();
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)

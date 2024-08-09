@@ -78,8 +78,12 @@ MonoBehaviour:
   decayTime: 1
   isEnforced: 0
   isLockOn: 0
+  rigidImmunity: 0
   _damageable: {fileID: 0}
   _defnsible: {fileID: 0}
+  soundManager: {fileID: 0}
+  effectManager: {fileID: 0}
+  impulseCam: {fileID: 0}
   playerSword: {fileID: 4202592198075565264}
 --- !u!114 &7961368793812106336
 MonoBehaviour:
@@ -118,7 +122,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138169223015833258}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 46c45a43799fc0943a163575c03ad96c, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 1425395876f384c49b889efe65a3eab9, type: 3}
   m_Controller: {fileID: 9100000, guid: e98b11be82369ff48b789c31d7e9234b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -283,7 +287,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
-  m_Height: 1.71
+  m_Height: 1.64
   m_Direction: 1
   m_Center: {x: 0, y: 0.81, z: 0}
 --- !u!114 &4187677284004909742
@@ -806,8 +810,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStack: 0
   maxStack: 8
-  damager: {fileID: 6199239959160658659}
   duration: 2.5
+  damager: {fileID: 6199239959160658659}
 --- !u!1 &5519748136424459432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 812382494147447971, guid: 274a3a78a3e481640809fb1bb0518c65, type: 3}
@@ -837,13 +841,25 @@ MonoBehaviour:
   _isGuard: 0
   beParryied:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EffectManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   parrying:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EffectManager, Assembly-CSharp
-        m_MethodName: CreateParryFX
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
