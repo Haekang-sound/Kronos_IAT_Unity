@@ -304,11 +304,13 @@ public class EffectManager : MonoBehaviour
     //    Destroy(cir, 1.0f);
     //}
 
+    // 검기 날리기
     public void SwordWave()
     {
-        GameObject slsh = SpawnEffect("EnforceSlash", player.transform.position);
+        GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
         slsh.transform.position += new Vector3(0, 1f, 0);
         slsh.transform.forward = player.transform.forward;
+        slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
         var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
         main.startSpeed = enforceSlashSpeed;
         Destroy(slsh, 1.0f);
