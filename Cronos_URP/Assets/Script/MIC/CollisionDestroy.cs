@@ -13,10 +13,10 @@ public class CollisionDestroy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered" + other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer(wallLayer))
         {
             Destroy(transform.parent.gameObject);
+            Debug.Log("Invisible Slash triggered Wall");
         }
     }
 }

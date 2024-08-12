@@ -39,7 +39,6 @@ public class EffectManager : MonoBehaviour
     float forwardVal = 1.6f;
     float yUpVal = 1.5f;
     public LayerMask groundLayer;
-    public LayerMask wallLayer;
     public float rayMaxDist = 2.0f;
 
     // 글로벌 볼륨
@@ -56,6 +55,9 @@ public class EffectManager : MonoBehaviour
     public float enforceSlashSpeed = 30.0f;
     public float swordWaveSpeed = 20.0f;
     public float swordWaveDistance = 12.0f;
+    public GameObject invisibleSlash;
+    public bool isGroundEnforced;
+    public bool showInvisibleMesh;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -94,6 +96,14 @@ public class EffectManager : MonoBehaviour
         swordWaveDistance = enforceSlashSpeed * 2f / 5f;
     }
 
+    private void OnValidate()
+    {
+        if (invisibleSlash != null)
+        {
+            ToggleMeshRenderer();
+        }
+    }
+
     void Initialize()
     {
         soundManager = SoundManager.Instance;
@@ -103,7 +113,11 @@ public class EffectManager : MonoBehaviour
         if (gVolume != null)
             InitializeVol(gVolume);
         groundLayer = LayerMask.GetMask("Ground");
-        wallLayer = LayerMask.GetMask("Wall");
+
+        if (invisibleSlash != null)
+        {
+            ToggleMeshRenderer();
+        }
     }
 
     void InitializeVol(Volume vol)
@@ -195,17 +209,22 @@ public class EffectManager : MonoBehaviour
         return null;
     }
 
-    // 오브젝트의 SetActive를 false로 하는 것
-    // 인데 이런게 필요하냐?
-    //void TurnOffObject(GameObject obj)
-    //{
-    //    obj.SetActive(false);
-    //}
-
-    //void TurnOnObject(GameObject obj)
-    //{
-    //    obj.SetActive(true);
-    //}
+    void ToggleMeshRenderer()
+    {
+        if (invisibleSlash != null)
+        {
+            // 프리팹 인스턴스에서 MeshRenderer를 찾고 활성화/비활성화
+            MeshRenderer meshRenderer = invisibleSlash.GetComponentInChildren<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                meshRenderer.enabled = showInvisibleMesh;
+            }
+            else
+            {
+                Debug.LogWarning("MeshRenderer not found on prefab instance.");
+            }
+        }
+    }
 
     // 플레이어 관련 이펙트
     public void NormalSlashFX(string fxName)
@@ -246,8 +265,10 @@ public class EffectManager : MonoBehaviour
     public void GroundCheckFX()
     {
         // 레이를 쏠 위치 플레이어의 위치 + 정면으로 조금 앞으로 + 조금 위로
+        // 기준을 플레이어 포워드에서 칼 로컬 중심으로 조금 바꿈
         Vector3 rayTrans = player.transform.position + 
-            player.transform.forward * forwardVal + 
+            //player.transform.forward * forwardVal + 
+            pSword.transform.up * -1 * forwardVal + 
             new Vector3(0, yUpVal, 0);
         Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
@@ -256,11 +277,18 @@ public class EffectManager : MonoBehaviour
             Vector3 hitNormal = hit.normal;
             // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
             Quaternion fxRot = Quaternion.LookRotation(
-                Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
+                //Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
+                Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
             
             Destroy(impact, 2.0f);
+            // 능력개방되었다면 이것도 나옴
+            if (isGroundEnforced)
+            {
+                GameObject cir = SpawnEffect("EnforceGround", hitPoint, fxRot);
+                Destroy(cir, 1.0f);
+            }
         }
         else
         {
@@ -269,11 +297,12 @@ public class EffectManager : MonoBehaviour
     }
 
     // 능력개방이 되었다면 이거랑 같이
-    public void GroundImpact()
-    {
-        GameObject cir = SpawnEffect("EnforceGround", player.transform.position);
-        Destroy(cir, 1.0f);
-    }
+    //public void GroundImpact()
+    //{
+    //    Vector3 impPos = player.transform.position + player.transform.forward * forwardVal;
+    //    GameObject cir = SpawnEffect("EnforceGround", impPos);
+    //    Destroy(cir, 1.0f);
+    //}
 
     public void SwordWave()
     {
@@ -303,8 +332,6 @@ public class EffectManager : MonoBehaviour
 
             yield return null;
         }
-
-        Debug.Log("Destroy SwordWave Instance");
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
