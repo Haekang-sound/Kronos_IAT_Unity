@@ -92,7 +92,10 @@ public class EffectManager : MonoBehaviour
     {
         soundManager = SoundManager.Instance;
         player = Player.Instance;
-        pSword = player.GetComponent<Player>().playerSword;
+        if(player != null)
+        {
+            pSword = player.GetComponent<Player>().playerSword;
+        }
         gVolume = FindObjectOfType<Volume>();
         if (gVolume != null)
             InitializeVol(gVolume);
