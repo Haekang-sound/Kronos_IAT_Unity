@@ -50,8 +50,12 @@ public class EffectManager : MonoBehaviour
     public float mBlurVal = 0.7f;
     public float cAberVal = 0.7f;
     public float parryTime = 1.0f;
+
+    // 강화 검기 관련
     [Range(0f, 200f)]
-    public float enforchSlashSpeed = 30.0f;
+    public float enforceSlashSpeed = 30.0f;
+    public float swordWaveSpeed = 20.0f;
+    public float swordWaveDistance = 12.0f;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -82,10 +86,12 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(LoadEffectCoroutine());
     }
 
-    // Update is called once per frame
+    // 디버그를 위해서 일단 업데이트에 넣어놓았다
+    // 기획 쪽에서 조정이 끝나면 별도로 구현한다
     void Update()
     {
-        
+        swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
+        swordWaveDistance = enforceSlashSpeed * 2f / 5f;
     }
 
     void Initialize()
@@ -263,19 +269,42 @@ public class EffectManager : MonoBehaviour
     }
 
     // 능력개방이 되었다면 이거랑 같이
-    public void ComboImpactNSlash()
+    public void GroundImpact()
     {
         GameObject cir = SpawnEffect("EnforceGround", player.transform.position);
         Destroy(cir, 1.0f);
+    }
+
+    public void SwordWave()
+    {
         GameObject slsh = SpawnEffect("EnforceSlash", player.transform.position);
-        slsh.transform.position = new Vector3(
-            player.transform.position.x,
-            player.transform.position.y + 1.0f,
-            player.transform.position.z);
+        slsh.transform.position += new Vector3(0, 1f, 0);
         slsh.transform.forward = player.transform.forward;
         var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
-        main.startSpeed = enforchSlashSpeed;
+        main.startSpeed = enforceSlashSpeed;
         Destroy(slsh, 1.0f);
+
+        GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
+        invislash.transform.position += new Vector3(0, 1f, 0);
+        invislash.transform.forward = player.transform.forward;
+        invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
+        StartCoroutine(MoveWave(invislash));
+    }
+
+    IEnumerator MoveWave(GameObject proj)
+    {
+        Vector3 startPos = proj.transform.position;
+        Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
+        Destroy(proj, 0.7f);
+
+        while (Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
+        {
+            proj.transform.position = Vector3.MoveTowards(proj.transform.position, DestPos, swordWaveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        Debug.Log("Destroy SwordWave Instance");
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
@@ -296,6 +325,10 @@ public class EffectManager : MonoBehaviour
 
     public void CreateParryFX()
     {
+        // 글로벌볼륨이 없다면 나가
+        if (gVolume == null)
+            return;
+
         Vector3 parrPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
         GameObject parr = SpawnEffect("ParryY", parrPos);
         Destroy(parr, 1.5f);
