@@ -37,7 +37,7 @@ public class ComboBehaviour : StateMachineBehaviour
 		animator.SetBool(nextComboHash, false);
 		animator.ResetTrigger("Attack");
 
-		stateMachine.InputReader.onLAttackStart += Attack;
+		//stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 	}
@@ -71,27 +71,27 @@ public class ComboBehaviour : StateMachineBehaviour
 		}
 
 		
-// 		/// 좌클릭시
-// 		if ((Input.GetKeyDown(KeyCode.Mouse0) && stateInfo.normalizedTime < minFrame))
-// 		{
-// 			attackBool = true;
-// 		}
-		//if ((Input.GetKeyDown(KeyCode.Mouse0) || attackBool) && stateInfo.normalizedTime > minFrame)
-		if (attackBool && stateInfo.normalizedTime > minFrame)
+ 		/// 좌클릭시
+ 		if ((Input.GetKeyDown(KeyCode.Mouse0) && stateInfo.normalizedTime < minFrame))
+ 		{
+ 			attackBool = true;
+ 		}
+		//if (attackBool && stateInfo.normalizedTime > minFrame)
+		if ((Input.GetKeyDown(KeyCode.Mouse0) || attackBool) && stateInfo.normalizedTime > minFrame)
 		{
 			// NEXTCOMBO 활성화
 			animator.SetBool(nextComboHash, true);
 		}
 
 		// 좌클릭 누르는 중에는 차징
-		if (/*Input.GetKey(KeyCode.Mouse0)*/stateMachine.InputReader.IsLAttackPressed)
+		if (stateMachine.InputReader.IsLAttackPressed)
 		{
 			float current = animator.GetFloat(chargeHash);
 			animator.SetFloat(chargeHash, current + Time.deltaTime);
 		}
 
 		// 누르고있으면 차징중이다
-		if (/*Input.GetKey(KeyCode.Mouse0)*/stateMachine.InputReader.IsLAttackPressed)
+		if (stateMachine.InputReader.IsLAttackPressed)
 		{
 			//인풋중에 뭐라고 정해줘야할듯
 			animator.SetBool(chargeAttackHash, true);
@@ -124,7 +124,7 @@ public class ComboBehaviour : StateMachineBehaviour
 	{
 		animator.SetFloat(chargeHash, 0);
 		animator.SetBool(chargeAttackHash, false);
-		stateMachine.InputReader.onLAttackStart -= Attack;
+		//stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
 
