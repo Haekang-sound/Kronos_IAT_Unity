@@ -25,6 +25,8 @@ public class PlayerStateMachine : StateMachine
 	public float MoveForce {  get; set; }
 	public bool IsGrounded {  get;  set; }
 
+	public AnimatorStateInfo currentStateInformable { get; set; }
+
 	public void Awake()
 	{
 		instance = this;

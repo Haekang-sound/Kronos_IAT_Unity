@@ -29,15 +29,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	public Action onRAttackPerformed;
 	public Action onRAttackCanceled;
 
-	public Action onSwitchingStart;
-	public Action onSwitchingPerformed;
-	public Action onSwitchingCanceled;
+	public Action onDecelerationStart;
+	public Action onDecelerationPerformed;
+	public Action onDecelerationCanceled;
 
 	public Action onZoom;
 
 	public Action onLockOnStart;
 	public Action onLockOnPerformed;
 	public Action onLockOnCanceled;
+
+	public Action onUnlockAbilityStart;
+	public Action onUnlockAbilityPerformed;
+	public Action onUnlockAbilityCanceled;
+
+	public Action onRunStart;
+	public Action onRunPerformed;
+	public Action onRunCanceled;
 
 	public bool IsLAttackPressed { get; set; } = false;
 	public bool IsRAttackPressed { get; private set; } = false;
@@ -72,7 +80,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		onMove?.Invoke(); // 이동 발생여부를 검증한다.
 	}
 
-	public void OnJumpDown(InputAction.CallbackContext context) { onJumpStart?.Invoke(); }
+	public void OnJumpDown(InputAction.CallbackContext context) { if (context.started) onJumpStart?.Invoke(); }
 	public void OnJump(InputAction.CallbackContext context)
 	{
 		if (!context.performed)
@@ -82,21 +90,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
 		onJumpPerformed?.Invoke();// onJump가 null 이 아니라면 실행한다.
 	}
-	public void OnJumpUp(InputAction.CallbackContext context) { onJumpCanceled?.Invoke(); } // onJump가 null 이 아니라면 실행한다.
+	public void OnJumpUp(InputAction.CallbackContext context) { if (context.canceled) onJumpCanceled?.Invoke(); } // onJump가 null 이 아니라면 실행한다.
 																							// 좌클릭
 	public void OnLAttackDown(InputAction.CallbackContext context)
 	{
 		if (context.started)
 		{
+			Debug.Log("작동down");
 			onLAttackStart?.Invoke();
 			// L.Attack 시작 처리
+			IsLAttackPressed = true;
 		}
 	}
 	public void OnLAttack(InputAction.CallbackContext context)
 	{
 		if (context.performed)
 		{
-			IsLAttackPressed = true;
+			Debug.Log("작동");
 			onLAttackPerformed?.Invoke();
 			// L.Attack 처리
 		}
@@ -105,43 +115,91 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	{
 		if (context.canceled)
 		{
+			Debug.Log("작동up");
 			IsLAttackPressed = false;
 			onLAttackCanceled?.Invoke();
 			// L.Attack 종료 처리
 		}
 	}
 	// 우클릭
-	public void OnRAttackDown(InputAction.CallbackContext context) { onRAttackStart?.Invoke(); }
-	public void OnRAttack(InputAction.CallbackContext context)
+	public void OnRAttackDown(InputAction.CallbackContext context)
 	{
-		IsRAttackPressed = true;
-		onRAttackPerformed?.Invoke();
+		if (context.started)
+		{
+			IsRAttackPressed = true;
+			onRAttackStart?.Invoke();
+
+		}
+	}
+		public void OnRAttack(InputAction.CallbackContext context)
+	{
+		if (context.performed)
+		{
+			onRAttackPerformed?.Invoke();
+		}
 	}
 	public void OnRAttackUp(InputAction.CallbackContext context)
 	{
-		IsRAttackPressed = false;
-		onRAttackCanceled?.Invoke();
+		if (context.canceled)
+		{
+			IsRAttackPressed = false;
+			onRAttackCanceled?.Invoke();
+		}
 	}
+
 	// Q
-	public void OnSwitchingDown(InputAction.CallbackContext context) { onSwitchingStart?.Invoke(); }
-	public void OnSwitching(InputAction.CallbackContext context) { onSwitchingPerformed?.Invoke(); }
-	public void OnSwitchingUp(InputAction.CallbackContext context) { onSwitchingCanceled?.Invoke(); }
+	public void OnDecelerationDown(InputAction.CallbackContext context) { if (context.started) onDecelerationStart?.Invoke(); }
+	public void OnDeceleration(InputAction.CallbackContext context) { if (context.performed) onDecelerationPerformed.Invoke(); }
+	public void OnDecelerationUp(InputAction.CallbackContext context) { if (context.canceled) onDecelerationCanceled?.Invoke(); }
 
 	// 휠
 	public void OnZoom(InputAction.CallbackContext context) { onZoom?.Invoke(); }
 
 
-	public void OnLockOnDown(InputAction.CallbackContext context)
+	public void OnLockOnDown(InputAction.CallbackContext context) { if (context.started) onLockOnStart?.Invoke(); }
+	public void OnLockOn(InputAction.CallbackContext context) { if (context.performed) onLockOnPerformed?.Invoke(); Debug.Log("누르는중"); }
+	public void OnLockOnUp(InputAction.CallbackContext context) { if (context.canceled) onLockOnCanceled?.Invoke(); }
+
+	public void OnUnlockAbilityDown(InputAction.CallbackContext context)
 	{
-		onLockOnStart?.Invoke();
-	}
-	public void OnLockOn(InputAction.CallbackContext context)
-	{
-		//onLockOnPerformed?.Invoke(); 
+		if (context.started) onUnlockAbilityStart?.Invoke();
 	}
 
-	public void OnLockOnUp(InputAction.CallbackContext context)
+	public void OnUnlockAbility(InputAction.CallbackContext context)
 	{
-		//onLockOnCanceled?.Invoke();
+		if (context.performed) onUnlockAbilityPerformed?.Invoke();
+
 	}
+	public void OnUnlockAbilityUp(InputAction.CallbackContext context)
+	{
+		if (context.canceled) onUnlockAbilityCanceled?.Invoke();
+	}
+
+
+	public void OnRunDown(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			onRunPerformed?.Invoke();
+		}
+	}
+	public void OnRun(InputAction.CallbackContext context)
+	{
+		if (context.performed)
+		{
+			onRunStart?.Invoke();
+		}
+	}
+
+
+	public void OnRunUp(InputAction.CallbackContext context)
+	{
+		if (context.canceled)
+		{
+			onRunCanceled?.Invoke();
+		}
+	}
+
+
+
 }

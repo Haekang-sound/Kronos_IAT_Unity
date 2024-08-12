@@ -10,10 +10,6 @@ public class PlayerAttackState : PlayerBaseState
 	public override void Tick()
 	{
 		CalculateMoveDirection();   // 방향을 계산하고
-		if (stateMachine.Velocity.magnitude != 0f)
-		{
-			//ismove = true;
-		}
 	}
 	public override void FixedTick()
 	{
@@ -24,7 +20,7 @@ public class PlayerAttackState : PlayerBaseState
         if (IsOnSlope())
         {
             stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * stateMachine.MoveForce;
-            Debug.Log(stateMachine.Rigidbody.velocity);
+            //Debug.Log(stateMachine.Rigidbody.velocity);
         }
         else
         {
