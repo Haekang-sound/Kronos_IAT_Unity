@@ -1116,6 +1116,10 @@ MonoBehaviour:
   targetLayers:
     serializedVersion: 2
     m_Bits: 512
+  m_inAttack: 0
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &982843127
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2202,6 +2206,10 @@ MonoBehaviour:
   targetLayers:
     serializedVersion: 2
     m_Bits: 0
+  m_inAttack: 0
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5540252807663207587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4297,7 +4305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 0
+  maxHitPoints: 100
+  currentHitPoints: 0
   invulnerabiltyTime: 0
   hitAngle: 360
   hitForwardRotation: 360
@@ -4362,6 +4371,9 @@ MonoBehaviour:
   drawGizmos: 1
   target: {fileID: 251128035}
   targetDistance: 30
+  phaseOne: {fileID: 11400000, guid: 4a9da4dd37eda9640b15a0b526bbceb3, type: 2}
+  phaseTwo: {fileID: 11400000, guid: 33936d5e286d9d2478a99a717fbad06d, type: 2}
+  phaseTree: {fileID: 11400000, guid: d98d9000ac6c36041aeab9b58b4addff, type: 2}
 --- !u!114 &9021636629479409206
 MonoBehaviour:
   m_ObjectHideFlags: 0

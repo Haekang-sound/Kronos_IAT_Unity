@@ -11,11 +11,11 @@ class CheckTargetDistance : DecoratorNode
     public float distance;
     public Comparison comparison;
 
-    private GameObject _target;
+    //private GameObject _target;
 
     protected override void OnStart()
     {
-        _target = blackboard.target;
+        //_target = blackboard.target;
     }
 
     protected override void OnStop()
@@ -24,7 +24,7 @@ class CheckTargetDistance : DecoratorNode
 
     protected override State OnUpdate()
     {
-        Vector3 toTarget = _target.transform.position - blackboard.monobehaviour.transform.position;
+        Vector3 toTarget = blackboard.target.transform.position - blackboard.monobehaviour.transform.position;
         bool checkDistance = toTarget.sqrMagnitude < distance * distance;
 
         if (comparison == Comparison.Greater && checkDistance == true)

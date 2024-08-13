@@ -1,6 +1,7 @@
-﻿using UnityEngine;
 
-public class Timeout : DecoratorNode
+using UnityEngine;
+
+public class Cooldown : DecoratorNode
 {
     public float duration = 1.0f;
     float _startTime;
@@ -18,9 +19,9 @@ public class Timeout : DecoratorNode
     {
         float elapsed = Time.time - _startTime;
 
-        if (elapsed > duration)
+        if (elapsed < duration)
         {
-            return State.Failure;
+            return State.Running;
         }
 
         return child.Update();

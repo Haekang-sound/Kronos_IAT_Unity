@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Message;
-using Sonity.Internal;
-using Sonity;
 
 public partial class Damageable : MonoBehaviour
 {
+    public float maxHitPoints;
+    public float currentHitPoints;
     [Tooltip("피해를 받은 후 무적 상태가 되는 시간입니다.")]
-    public float hitPoints;
     public float invulnerabiltyTime;
 
 
@@ -28,8 +27,8 @@ public partial class Damageable : MonoBehaviour
 
     public float CurrentHitPoints
     {
-        get { return hitPoints; }
-        set { hitPoints = value; }
+        get { return currentHitPoints; }
+        set { currentHitPoints = value; }
     }
 
     public UnityEvent OnDeath, OnReceiveDamage, OnHitWhileInvulnerable, OnBecomeVulnerable, OnResetDamage;
@@ -78,7 +77,7 @@ public partial class Damageable : MonoBehaviour
 
     public void ResetDamage()
     {
-        CurrentHitPoints = hitPoints;
+        CurrentHitPoints = maxHitPoints;
         isInvulnerable = false;
         m_timeSinceLastHit = 0.0f;
         OnResetDamage.Invoke();
@@ -93,8 +92,6 @@ public partial class Damageable : MonoBehaviour
     {
         m_Collider.enabled = enabled;
     }
-
-
 
     public void ApplyDamage(DamageMessage data)
     {
@@ -168,6 +165,18 @@ public partial class Damageable : MonoBehaviour
             var receiver = onDamageMessageReceivers[i] as IMessageReceiver;
             receiver.OnReceiveMessage(messageType, this, data);
         }
+    }
+
+    public float GetHealthPercentage()
+    {
+        if (maxHitPoints == 0)
+        {
+            return 0; // maxHitPoints가 0일 경우 0%로 처리
+        }
+
+        float hitpoints = Mathf.Max(0, CurrentHitPoints);
+
+        return (hitpoints / maxHitPoints) * 100f;
     }
 
     public void JustDead()

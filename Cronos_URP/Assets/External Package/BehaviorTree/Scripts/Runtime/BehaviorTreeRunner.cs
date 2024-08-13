@@ -11,7 +11,8 @@ public class BehaviorTreeRunner : MonoBehaviour
     {
         _context = CreateBehaviourTreeContext();
         tree = tree.Clone();
-        tree.Bind(_context);
+        //tree.Bind(_context);
+        Bind();
     }
 
     void Update()
@@ -20,6 +21,11 @@ public class BehaviorTreeRunner : MonoBehaviour
         {
             tree.Update();
         }
+    }
+
+    public void Bind()
+    {
+        tree.Bind(_context);
     }
 
     Context CreateBehaviourTreeContext()
