@@ -16,7 +16,7 @@ public class AttackStack : MonoBehaviour
         damager.OnAttack.AddListener(AddAttackStack);
     }
 
-    void OnDistory()
+    private void OnDistroy()
     {
         damager.OnAttack.RemoveAllListeners();
     }
@@ -27,7 +27,7 @@ public class AttackStack : MonoBehaviour
         {
             _timer += Time.unscaledDeltaTime;
 
-            if (_timer > duration)
+            if (_timer < duration)
             {
                 _timer = 0f;
                 RemoveAttackStack();

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 public class CombatZone : MonoBehaviour
 {
     public bool drawGizmos;
@@ -24,7 +23,11 @@ public class CombatZone : MonoBehaviour
     {
         if (target == null)
         {
-            target = Player.Instance.gameObject;
+
+            if (Player.Instance != null)
+            {
+                target = Player.Instance.gameObject;
+            }
         }
     }
 
@@ -48,7 +51,7 @@ public class CombatZone : MonoBehaviour
 
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         CheckClear();
     }
@@ -86,7 +89,6 @@ public class CombatZone : MonoBehaviour
 
         isClear = true;
     }
-
     private void OnDrawGizmos()
     {
         if (drawGizmos == false) return;
