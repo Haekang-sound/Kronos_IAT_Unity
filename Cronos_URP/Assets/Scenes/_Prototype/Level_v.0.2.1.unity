@@ -942,11 +942,15 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rayMaxDist: 2
   gVolume: {fileID: 1327295861}
   mBlurVal: 0.7
   cAberVal: 0.7
   parryTime: 1
+  enforchSlashSpeed: 30
 --- !u!4 &302820034
 Transform:
   m_ObjectHideFlags: 0
@@ -3720,6 +3724,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5697008907021091896, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: 7076314725810633038, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3740,7 +3748,9 @@ PrefabInstance:
       propertyPath: playerVirtualCam
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3705231158458661925, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
+    - {fileID: 4887539918643333016, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

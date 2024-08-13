@@ -371,8 +371,14 @@ public class Player : MonoBehaviour, IMessageReceiver
         if (effectManager != null)
         {
             effectManager.GroundCheckFX();
-            effectManager.ComboImpactNSlash();
+            effectManager.SwordWave();
         }
+    }
+
+    public void GroundImpact()
+    {
+        if (effectManager != null)
+            effectManager.GroundCheckFX();
     }
 
     public void SoundVoice()

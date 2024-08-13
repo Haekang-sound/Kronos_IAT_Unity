@@ -13,4 +13,14 @@ public class AbilityLevel
 
     [SerializeField] public string abilityName;
     [SerializeField] public string descriptionText;
+
+    public bool IsNextNodeUnlock()
+    {
+        return currentPoint >= nextNodeUnlockCondition;
+    }
+
+    public float GetPercentageOFNextNodeUnlock()
+    {
+        return Mathf.Min(currentPoint / nextNodeUnlockCondition, 1f);
+    }
 }
