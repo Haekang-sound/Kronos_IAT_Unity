@@ -381,6 +381,12 @@ public class Player : MonoBehaviour, IMessageReceiver
             effectManager.GroundCheckFX();
     }
 
+    public void GroundScar()
+    {
+        if (effectManager != null)
+            effectManager.GroundScar();
+    }
+
     public void SoundVoice()
     {
         if (soundManager != null)

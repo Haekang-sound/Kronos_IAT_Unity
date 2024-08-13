@@ -299,13 +299,30 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // 능력개방이 되었다면 이거랑 같이
-    //public void GroundImpact()
-    //{
-    //    Vector3 impPos = player.transform.position + player.transform.forward * forwardVal;
-    //    GameObject cir = SpawnEffect("EnforceGround", impPos);
-    //    Destroy(cir, 1.0f);
-    //}
+    // 바닥에 상처만 남기는 Nor_Attack_4 전용
+    public void GroundScar()
+    {
+        Vector3 rayTrans = player.transform.position +
+            pSword.transform.up * -1 * forwardVal +
+            new Vector3(0, yUpVal, 0);
+        Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
+        if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
+        {
+            Vector3 hitPoint = hit.point;
+            Vector3 hitNormal = hit.normal;
+            // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
+            Quaternion fxRot = Quaternion.LookRotation(
+                Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
+            fxRot *= Quaternion.Euler(0, -90f, 0);
+            GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
+
+            Destroy(impact, 2.0f);
+        }
+        else
+        {
+            Debug.Log("no ground impact");
+        }
+    }
 
     // 검기 날리기
     public void SwordWave()
