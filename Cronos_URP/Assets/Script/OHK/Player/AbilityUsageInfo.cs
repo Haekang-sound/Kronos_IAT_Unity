@@ -7,8 +7,6 @@ public struct AbilityUsageInfo
 		get{ return PlayerStateMachine.GetInstance().Animator.GetBool("EnforcedCombo"); }
 		set { PlayerStateMachine.GetInstance().Animator.SetBool("EnforcedCombo", value); }
 	}
-	//수치 증가
-	//-> 나중에
 
 	//회피 공격
 	public bool DodgeAttack
@@ -29,7 +27,16 @@ public struct AbilityUsageInfo
 		get { return PlayerStateMachine.GetInstance().Animator.GetBool("NorAttackBan"); }
 		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackBan", value); }
 	}
+
+	//수치 증가
+	//-> 나중에
+
 	//경직 면역
+	public bool RigidImmunity
+	{
+		get { return PlayerStateMachine.GetInstance().Player.RigidImmunity; }
+		set { PlayerStateMachine.GetInstance().Player.RigidImmunity = value; }
+	}
 
 	/// 민동휘
 	//Com_S_Attack 강 공격 강화

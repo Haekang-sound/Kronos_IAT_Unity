@@ -17,10 +17,8 @@ public class PlayerIdleState : PlayerBaseState
 
 	public override void Enter()
 	{
-		stateMachine.InputReader.onJumpPerformed += SwitchToParryState; // 스테이트에 돌입할때 input에 맞는 함수를 넣어준다
-		stateMachine.InputReader.onRAttackStart += SwitchToDefanceState;
 
-		stateMachine.InputReader.onSwitchingStart += Deceleration;
+		stateMachine.InputReader.onDecelerationStart += Deceleration;
 
 		stateMachine.InputReader.onMove += IsMove;
 		stateMachine.Rigidbody.velocity = Vector3.zero;
@@ -30,14 +28,9 @@ public class PlayerIdleState : PlayerBaseState
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			stateMachine.Animator.SetTrigger("Attack");
-			//stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 		}
 
-		// playerComponent기준으로 땅에 닿아있지 않다면
-// 		if (!IsGrounded())
-// 		{
-// 			//stateMachine.SwitchState(new PlayerFallState(stateMachine)); // 상태를 생성해서 접근한다.
-// 		}
+
 		// 움직이면 == 이동키입력을 받으면
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
@@ -82,11 +75,8 @@ public class PlayerIdleState : PlayerBaseState
 	public override void Exit()
 	{
 		stateMachine.InputReader.onMove -= IsMove;
-		//stateMachine.InputReader.onLAttackStart -= SwitchToLAttackState;
-		stateMachine.InputReader.onRAttackStart -= SwitchToDefanceState;
-		//stateMachine.InputReader.onLockOnStart -= LockOn;
+		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 
-		stateMachine.InputReader.onSwitchingStart -= Deceleration;
 	}
 
 	private void SwitchToLAttackState()

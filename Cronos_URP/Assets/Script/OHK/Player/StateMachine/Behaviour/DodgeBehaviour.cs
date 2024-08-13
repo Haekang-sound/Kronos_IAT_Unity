@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 //using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class DodgeBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
 	Vector3 direction;
-	private readonly int moveHash = Animator.StringToHash("isMove");
+	private readonly int attackHash = Animator.StringToHash("Attack");
+	[SerializeField] float moveForce;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
 		stateMachine = PlayerStateMachine.GetInstance();
 		// 상태전환
+		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+		animator.ResetTrigger(attackHash);
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerParryState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
+		PlayerStateMachine.GetInstance().MoveForce = moveForce;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
