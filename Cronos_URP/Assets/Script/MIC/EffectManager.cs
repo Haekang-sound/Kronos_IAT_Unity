@@ -329,14 +329,25 @@ public class EffectManager : MonoBehaviour
     {
         Vector3 startPos = proj.transform.position;
         Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
-        Destroy(proj, 0.7f);
+        //Destroy(proj, 0.7f);
+        StartCoroutine(DestroyWave(proj));
 
-        while (Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
+        while (proj != null && Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
         {
+            if (proj == null)
+                yield break;
+
             proj.transform.position = Vector3.MoveTowards(proj.transform.position, DestPos, swordWaveSpeed * Time.deltaTime);
 
             yield return null;
         }
+    }
+
+    IEnumerator DestroyWave(GameObject wav)
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (wav != null)
+            Destroy(wav);
     }
 
     // 이펙트매니저가 들고 있는게 나을 것 같은데
