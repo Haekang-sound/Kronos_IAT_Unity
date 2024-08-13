@@ -23,22 +23,9 @@ public class PlayerParryState : PlayerBaseState
         }
         else
         {
-            stateMachine.Rigidbody.velocity = rootMotion * stateMachine.MoveForce;
+            stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * stateMachine.MoveForce;
 
         }
-//         bool isOnSlope = IsOnSlope();
-// 		if (isOnSlope)
-// 		{
-// 			stateMachine.Rigidbody.useGravity = false;
-// 		}
-// 		else
-// 		{
-// 			stateMachine.Rigidbody.useGravity = true;
-// 		}
-// 		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.transform.forward) : stateMachine.transform.forward;
-// 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-// 
-// 		stateMachine.Rigidbody.velocity = velocity * stateMachine.MoveForce + gravity;
 
 	}
 	public override void LateTick() { }

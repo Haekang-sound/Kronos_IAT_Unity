@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -11,6 +12,14 @@ public class PlayerMoveState : PlayerBaseState
 	private readonly int SideWalkHash = Animator.StringToHash("SideWalk");
 	private readonly int moveXHash = Animator.StringToHash("moveX");
 	private readonly int moveYHash = Animator.StringToHash("moveY");
+
+
+	private readonly int attackHash = Animator.StringToHash("Attack");
+	private readonly int moveHash = Animator.StringToHash("isMove");
+	private readonly int dodgeHash = Animator.StringToHash("Dodge");
+	private readonly int guradHash = Animator.StringToHash("isGuard");
+
+
 	private const float AnimationDampTime = 0.1f;
 
 	float moveSpeed = 0.5f;
@@ -32,7 +41,12 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRunStart += Run;
 		stateMachine.InputReader.onRunCanceled += StopRun;
 
-		
+		stateMachine.InputReader.onLAttackStart += Attack;
+		stateMachine.InputReader.onRAttackStart += Gurad;
+		stateMachine.InputReader.onJumpStart += Dodge;
+
+
+
 	}
 
 	// state의 update라 볼 수 있지
@@ -133,6 +147,10 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
 		stateMachine.InputReader.onRunStart -= Run;
 		stateMachine.InputReader.onRunCanceled -= StopRun;
+
+		stateMachine.InputReader.onLAttackStart -= Attack;
+		stateMachine.InputReader.onRAttackStart -= Gurad;
+		stateMachine.InputReader.onJumpStart -= Dodge;
 	}
 
 
@@ -206,7 +224,15 @@ public class PlayerMoveState : PlayerBaseState
 		moveSpeed = targetSpeed; // Ensure it reaches the target value at the end
 	}
 
-
+	private void Attack() { PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수"); }
+	private void Dodge()
+	{
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
+		{
+			stateMachine.Animator.SetTrigger(dodgeHash);
+		}
+	}
+	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
 }
 
 

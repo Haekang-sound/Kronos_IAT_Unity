@@ -94,13 +94,26 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 																							// 좌클릭
 	public void OnLAttackDown(InputAction.CallbackContext context)
 	{
+
 		if (context.started)
 		{
-			Debug.Log("작동down");
+			// 키가 눌렸을 때 반응 (LAttack 시작)
+			Debug.Log("LAttack 시작");
 			onLAttackStart?.Invoke();
 			// L.Attack 시작 처리
 			IsLAttackPressed = true;
 		}
+		else if (context.canceled)
+		{
+			// 키가 떨어졌을 때 반응 (LAttack 종료)
+			Debug.Log("LAttack 종료 dw");
+		}
+
+// 		if (context.started)
+// 		{
+// 			Debug.Log("작동down");
+// 
+// 		}
 	}
 	public void OnLAttack(InputAction.CallbackContext context)
 	{
@@ -115,9 +128,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	{
 		if (context.canceled)
 		{
-			Debug.Log("작동up");
+			Debug.Log("LAttack 종료");
 			IsLAttackPressed = false;
-			onLAttackCanceled?.Invoke();
+			onLAttackCanceled?.Invoke(); 
 			// L.Attack 종료 처리
 		}
 	}

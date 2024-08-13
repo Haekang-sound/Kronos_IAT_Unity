@@ -20,9 +20,9 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
 
-		//stateMachine.InputReader.onLAttackStart += Attack;
-		stateMachine.InputReader.onRAttackStart += Gurad;
-		stateMachine.InputReader.onJumpStart += Dodge;
+// 		stateMachine.InputReader.onLAttackStart += Attack;
+// 		stateMachine.InputReader.onRAttackStart += Gurad;
+// 		stateMachine.InputReader.onJumpStart += Dodge;
 
 
 	}
@@ -32,10 +32,10 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	//cks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-				if (Input.GetKeyDown(KeyCode.Mouse0))
-				{
-					animator.SetBool(attackHash, true);
-				}
+// 				if (Input.GetKeyDown(KeyCode.Mouse0))
+// 				{
+// 					animator.SetBool(attackHash, true);
+// 				}
 
 		// 		if (Input.GetKeyDown(KeyCode.Space))
 		// 		{
@@ -54,12 +54,12 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	//OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		//stateMachine.InputReader.onLAttackStart -= Attack;
-		stateMachine.InputReader.onRAttackStart -= Gurad;
-		stateMachine.InputReader.onJumpStart -= Dodge;
+// 		stateMachine.InputReader.onLAttackStart -= Attack;
+// 		stateMachine.InputReader.onRAttackStart -= Gurad;
+// 		stateMachine.InputReader.onJumpStart -= Dodge;
 	}
 
-	private void Attack() { PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); }
+	private void Attack() { PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수"); }
 	private void Dodge()
 	{
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)

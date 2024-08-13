@@ -26,6 +26,7 @@ public class PlayerStateMachine : StateMachine
 	public bool IsGrounded {  get;  set; }
 
 	public AnimatorStateInfo currentStateInformable { get; set; }
+	public float minf {  get; set; }
 
 	public void Awake()
 	{
