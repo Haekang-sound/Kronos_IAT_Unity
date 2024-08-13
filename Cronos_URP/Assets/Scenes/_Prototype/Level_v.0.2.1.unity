@@ -655,7 +655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &175009629
 Transform:
   m_ObjectHideFlags: 0
@@ -942,15 +942,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
   rayMaxDist: 2
   gVolume: {fileID: 1327295861}
   mBlurVal: 0.7
   cAberVal: 0.7
   parryTime: 1
-  enforchSlashSpeed: 30
+  enforceSlashSpeed: 30
+  swordWaveSpeed: 20
+  swordWaveDistance: 12
+  invisibleSlash: {fileID: 0}
+  isGroundEnforced: 0
+  showInvisibleMesh: 0
 --- !u!4 &302820034
 Transform:
   m_ObjectHideFlags: 0
@@ -993,11 +995,11 @@ PrefabInstance:
     - target: {fileID: 6110385969868070002, guid: e5bab1fbef07ff44684dab56e1a4845d, type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 2053119893}
+      objectReference: {fileID: 0}
     - target: {fileID: 6724260207127709406, guid: e5bab1fbef07ff44684dab56e1a4845d, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2053119893}
+      objectReference: {fileID: 0}
     - target: {fileID: 8819375131294005905, guid: e5bab1fbef07ff44684dab56e1a4845d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1148,17 +1150,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3863ce963ba4d714481e2c5a7a0ba746, type: 3}
---- !u!114 &406954046 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5627632538650919245, guid: 99e3851a68612c54795d68cd96d1edd5, type: 3}
-  m_PrefabInstance: {fileID: 1964078986}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10912b1ee49b5a84eb7940c89e15940b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &417983476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3722,7 +3713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3193052065479357164, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697008907021091896, guid: 2472ac94a5778e643bb731389ac7d8a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29356,7 +29347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &4503035790640924453
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -49962,8 +49953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1854546f486021d44bb2231787102ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _combatZone: {fileID: 406954046}
-  isLeft: 0
+  timeline: {fileID: 0}
+  combatZone: {fileID: 0}
 --- !u!23 &7953749936033429978
 MeshRenderer:
   m_ObjectHideFlags: 0

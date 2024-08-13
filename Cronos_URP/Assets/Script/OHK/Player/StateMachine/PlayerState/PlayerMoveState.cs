@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -11,18 +12,41 @@ public class PlayerMoveState : PlayerBaseState
 	private readonly int SideWalkHash = Animator.StringToHash("SideWalk");
 	private readonly int moveXHash = Animator.StringToHash("moveX");
 	private readonly int moveYHash = Animator.StringToHash("moveY");
+
+
+	private readonly int attackHash = Animator.StringToHash("Attack");
+	private readonly int moveHash = Animator.StringToHash("isMove");
+	private readonly int dodgeHash = Animator.StringToHash("Dodge");
+	private readonly int guradHash = Animator.StringToHash("isGuard");
+
+
 	private const float AnimationDampTime = 0.1f;
 
 	float moveSpeed = 0.5f;
 	public float targetSpeed = 0.5f;
 
 	float releaseLockOn = 0f;
+	bool isRelease = false;
+	bool isRun = false;
+
 
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 	public override void Enter()
 	{
-		stateMachine.InputReader.onSwitchingStart += Deceleration;
+		stateMachine.InputReader.onDecelerationStart += Deceleration;
+		stateMachine.InputReader.onLockOnStart += LockOn;
+		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
+		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
+		stateMachine.InputReader.onRunStart += Run;
+		stateMachine.InputReader.onRunCanceled += StopRun;
+
+		stateMachine.InputReader.onLAttackStart += Attack;
+		stateMachine.InputReader.onRAttackStart += Gurad;
+		stateMachine.InputReader.onJumpStart += Dodge;
+
+
+
 	}
 
 	// state의 update라 볼 수 있지
@@ -39,14 +63,13 @@ public class PlayerMoveState : PlayerBaseState
 
 		if(stateMachine.Player.IsLockOn)
 		{
-			if (Input.GetButton("Run"))
+			if (isRun)
 			{
 				moveSpeed = 1f;
 			}
 			else
 			{
 				stateMachine.StartCoroutine(SmoothChangeSpeed());
-				//moveSpeed = 0.5f; 
 			}
 		}
 		else
@@ -57,23 +80,8 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.Player.SetSpeed(moveSpeed);
 
-		if (Input.GetMouseButtonDown(2))
-		{
-			// 락온 상태가 아니라면
-			if (!stateMachine.Player.IsLockOn)
-			{
-				// 대상을 찾고
-				stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
-			}
-			// 락온상태라면 락온을 해제한다.
-			else
-			{
-				//stateMachine.AutoTargetting.LockOff();
-				stateMachine.AutoTargetting.SwitchTarget();
-			}
-		}
-
-		if (Input.GetMouseButton(2))
+		// 휠꾹
+		if (isRelease)
 		{
 			releaseLockOn += Time.deltaTime;
 
@@ -81,10 +89,6 @@ public class PlayerMoveState : PlayerBaseState
 			{
 				stateMachine.AutoTargetting.LockOff();
 			}
-		}
-		else
-		{
-			releaseLockOn = 0f;
 		}
 
 		// 애니메이터 movespeed의 파라메터의 값을 정한다.
@@ -137,7 +141,61 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Exit()
 	{
-		stateMachine.InputReader.onSwitchingStart -= Deceleration;
+		stateMachine.InputReader.onDecelerationStart -= Deceleration;
+		stateMachine.InputReader.onLockOnStart -= LockOn;
+		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
+		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
+		stateMachine.InputReader.onRunStart -= Run;
+		stateMachine.InputReader.onRunCanceled -= StopRun;
+
+		stateMachine.InputReader.onLAttackStart -= Attack;
+		stateMachine.InputReader.onRAttackStart -= Gurad;
+		stateMachine.InputReader.onJumpStart -= Dodge;
+	}
+
+
+	private void LockOn()
+	{
+		Debug.Log("누름");
+		// 락온 상태가 아니라면
+		if (!stateMachine.Player.IsLockOn)
+		{
+			// 대상을 찾고
+			stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
+		}
+		// 락온상태라면 타겟을 변경한다.
+		else
+		{
+			stateMachine.AutoTargetting.SwitchTarget();
+		}
+	}
+
+	private void ReleaseLockOn()
+	{
+		isRelease = true;
+
+		//Debug.Log("누르는중");
+		releaseLockOn += Time.deltaTime;
+
+		if (releaseLockOn > 1f)
+		{
+			stateMachine.AutoTargetting.LockOff();
+		}
+	}
+
+	private void ReleaseReset()
+	{
+		isRelease = false;
+		releaseLockOn = 0f;
+	}
+
+	private void Run()
+	{
+		isRun = true;
+	}
+	private void StopRun()
+	{
+		isRun = false;
 	}
 
 	private void Deceleration()
@@ -166,7 +224,15 @@ public class PlayerMoveState : PlayerBaseState
 		moveSpeed = targetSpeed; // Ensure it reaches the target value at the end
 	}
 
-
+	private void Attack() { PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수"); }
+	private void Dodge()
+	{
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
+		{
+			stateMachine.Animator.SetTrigger(dodgeHash);
+		}
+	}
+	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
 }
 
 
