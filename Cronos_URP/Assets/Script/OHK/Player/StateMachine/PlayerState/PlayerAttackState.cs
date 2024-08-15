@@ -23,8 +23,8 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 // 
-// 		stateMachine.Animator.SetBool(nextComboHash, false);
-// 		stateMachine.Animator.ResetTrigger("Attack");
+		stateMachine.Animator.SetBool(nextComboHash, false);
+		stateMachine.Animator.ResetTrigger("Attack");
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
@@ -93,8 +93,8 @@ public class PlayerAttackState : PlayerBaseState
 	public override void LateTick() { }
 	public override void Exit() 
 	{
-// 		stateMachine.Animator.SetFloat(chargeHash, 0);
-// 		stateMachine.Animator.SetBool(chargeAttackHash, false);
+		stateMachine.Animator.SetFloat(chargeHash, 0);
+		stateMachine.Animator.SetBool(chargeAttackHash, false);
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
@@ -102,12 +102,11 @@ public class PlayerAttackState : PlayerBaseState
 
 	private void Attack()
 	{
-		int handlerCount = stateMachine.InputReader.onLAttackStart?.GetInvocationList().Length ?? 0;
-		Debug.Log($"몇개냐 {handlerCount}, 이름은 {currentStateInfo.shortNameHash} ");
-		/// 좌클릭시
-		//if (currentStateInfo.normalizedTime < minFrame)
-		//{
-			attackBool = true;
+        /// 좌클릭시
+        //if (currentStateInfo.normalizedTime < minFrame)
+        //{
+        stateMachine.AutoTargetting.AutoTargeting();
+        attackBool = true;
 		//}
 		if (attackBool && currentStateInfo.normalizedTime > minFrame)
 		{

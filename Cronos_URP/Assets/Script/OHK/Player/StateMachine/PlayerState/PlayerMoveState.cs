@@ -42,12 +42,15 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRunCanceled += StopRun;
 
 		stateMachine.InputReader.onLAttackStart += Attack;
+		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 
+        stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 
-	}
+
+    }
 
 	// state의 update라 볼 수 있지
 	public override void Tick()
@@ -61,7 +64,7 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 
 
-		if(stateMachine.Player.IsLockOn)
+		if (stateMachine.Player.IsLockOn)
 		{
 			if (isRun)
 			{
@@ -76,7 +79,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			moveSpeed = 1f;
 		}
-	
+
 
 		stateMachine.Player.SetSpeed(moveSpeed);
 
@@ -97,7 +100,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			// moveSpeed에 y값을곱해서 전방이동인지 후방이동인지 확인한다.
 			stateMachine.Animator.SetFloat(MoveSpeedHash,
-											/*Mathf.Abs(stateMachine.InputReader.moveComposite.y) > 0f ? moveSpeed :*/ 
+											/*Mathf.Abs(stateMachine.InputReader.moveComposite.y) > 0f ? moveSpeed :*/
 											(moveSpeed * stateMachine.InputReader.moveComposite.y), AnimationDampTime, Time.deltaTime);
 		}
 		else
@@ -149,9 +152,12 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRunCanceled -= StopRun;
 
 		stateMachine.InputReader.onLAttackStart -= Attack;
+		stateMachine.InputReader.onLAttackCanceled -= ReleaseAttack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
-	}
+
+        stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
+    }
 
 
 	private void LockOn()
@@ -224,7 +230,17 @@ public class PlayerMoveState : PlayerBaseState
 		moveSpeed = targetSpeed; // Ensure it reaches the target value at the end
 	}
 
-	private void Attack() { PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수"); }
+	private void Attack()
+	{
+		stateMachine.AutoTargetting.AutoTargeting();
+		stateMachine.InputReader.clickCondition = true;
+		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수");
+	}
+	private void ReleaseAttack()
+	{
+        stateMachine.InputReader.clickCondition = false;
+    }
+
 	private void Dodge()
 	{
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
@@ -233,6 +249,10 @@ public class PlayerMoveState : PlayerBaseState
 		}
 	}
 	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
+    public void ReleaseGuard()
+    {
+        stateMachine.Animator.SetBool(guradHash, false);
+    }
 }
 
 

@@ -38,10 +38,10 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		animator.SetBool(nextComboHash, false);
 		animator.ResetTrigger("Attack");
-
-// 		stateMachine.InputReader.onLAttackStart += Attack;
-// 		stateMachine.InputReader.onRAttackStart += Gurad;
-// 		stateMachine.InputReader.onJumpStart += Dodge;
+// 
+//         InputReader.GetInstance().onLAttackStart += Attack;
+//         InputReader.GetInstance().onRAttackStart += Gurad;
+//         InputReader.GetInstance().onJumpStart += Dodge;
 	}
 
 
@@ -126,8 +126,8 @@ public class ComboBehaviour : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.SetFloat(chargeHash, 0);
-		animator.SetBool(chargeAttackHash, false);
+// 		animator.SetFloat(chargeHash, 0);
+// 		animator.SetBool(chargeAttackHash, false);
 // 		stateMachine.InputReader.onLAttackStart -= Attack;
 // 		stateMachine.InputReader.onRAttackStart -= Gurad;
 // 		stateMachine.InputReader.onJumpStart -= Dodge;

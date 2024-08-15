@@ -1,6 +1,7 @@
 using Message;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static ScreenFader;
 
@@ -73,6 +74,9 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 스킬 사용정보
     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
 
+    public bool on = false;
+    public bool perform = false;
+    public bool off = false;
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
