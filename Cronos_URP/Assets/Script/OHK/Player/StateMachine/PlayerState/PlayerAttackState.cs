@@ -3,7 +3,6 @@ public class PlayerAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
 	public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
 	private readonly int chargeHash = Animator.StringToHash("Charge");
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
@@ -32,13 +31,6 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-
-		/// 좌클릭시
-// 		if ((Input.GetKeyDown(KeyCode.Mouse0) && stateMachine.currentStateInformable.normalizedTime < stateMachine.minf))
-// 		{
-// 			attackBool = true;
-// 		}
-		//if ((Input.GetKeyDown(KeyCode.Mouse0) || attackBool) && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		{
 			// NEXTCOMBO 활성화

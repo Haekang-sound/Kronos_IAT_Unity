@@ -12,19 +12,14 @@ public class PlayerMoveState : PlayerBaseState
 	private readonly int SideWalkHash = Animator.StringToHash("SideWalk");
 	private readonly int moveXHash = Animator.StringToHash("moveX");
 	private readonly int moveYHash = Animator.StringToHash("moveY");
-
-
 	private readonly int attackHash = Animator.StringToHash("Attack");
-	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
-
 
 	private const float AnimationDampTime = 0.1f;
 
 	float moveSpeed = 0.5f;
 	public float targetSpeed = 0.5f;
-
 	float releaseLockOn = 0f;
 	bool isRelease = false;
 	bool isRun = false;
@@ -160,6 +155,11 @@ public class PlayerMoveState : PlayerBaseState
     }
 
 
+	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
+	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
+	public void ReleaseGuard() { stateMachine.Animator.SetBool(guradHash, false); }
+	private void Run() { isRun = true; }
+	private void StopRun() { isRun = false; }
 	private void LockOn()
 	{
 		Debug.Log("누름");
@@ -188,20 +188,10 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.AutoTargetting.LockOff();
 		}
 	}
-
 	private void ReleaseReset()
 	{
 		isRelease = false;
 		releaseLockOn = 0f;
-	}
-
-	private void Run()
-	{
-		isRun = true;
-	}
-	private void StopRun()
-	{
-		isRun = false;
 	}
 
 	private void Deceleration()
@@ -213,7 +203,6 @@ public class PlayerMoveState : PlayerBaseState
 		}
 
 	}
-
 	// 값 변화를 부드럽게 주자
 	IEnumerator SmoothChangeSpeed()
 	{
@@ -229,18 +218,12 @@ public class PlayerMoveState : PlayerBaseState
 
 		moveSpeed = targetSpeed; // Ensure it reaches the target value at the end
 	}
-
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
 		stateMachine.InputReader.clickCondition = true;
-		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); Debug.Log("MoveTree어택함수");
+		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); 
 	}
-	private void ReleaseAttack()
-	{
-        stateMachine.InputReader.clickCondition = false;
-    }
-
 	private void Dodge()
 	{
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
@@ -248,11 +231,6 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
-	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
-    public void ReleaseGuard()
-    {
-        stateMachine.Animator.SetBool(guradHash, false);
-    }
 }
 
 

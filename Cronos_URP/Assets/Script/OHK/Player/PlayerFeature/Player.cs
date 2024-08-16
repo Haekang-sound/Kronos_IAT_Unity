@@ -71,12 +71,12 @@ public class Player : MonoBehaviour, IMessageReceiver
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
 
-    // 스킬 사용정보
-    public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-
-    public bool on = false;
-    public bool perform = false;
-    public bool off = false;
+//     // 스킬 사용정보
+//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+// 
+//     public bool on = false;
+//     public bool perform = false;
+//     public bool off = false;
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
@@ -130,23 +130,15 @@ public class Player : MonoBehaviour, IMessageReceiver
     {
         _damageable = GetComponent<Damageable>();
         _damageable.onDamageMessageReceivers.Add(this);
-
         _defnsible = GetComponent<Defensible>();
 
         // 감속/가속 변경함수를 임시로 사용해보자
         // 반드시 지워져야할 부분이지만 임시로 넣는다
         PlayerFSM = GetComponent<PlayerStateMachine>();
         playerTransform = GetComponent<Transform>();
-
         meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-
         shieldWeapon = GetComponentInChildren<ShieldWeapon>();
-
         targetting = GetComponentInChildren<AutoTargetting>();
-        
-
-
-        
     }
 
     void Start()

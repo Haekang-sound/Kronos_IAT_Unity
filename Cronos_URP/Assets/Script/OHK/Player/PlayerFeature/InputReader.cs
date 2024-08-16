@@ -103,9 +103,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnLAttack(InputAction.CallbackContext context)
     {
-        Player.Instance.on = context.started;
-        Player.Instance.perform = context.performed;
-        Player.Instance.off = context.canceled;
+//         Player.Instance.on = context.started;
+//         Player.Instance.perform = context.performed;
+//         Player.Instance.off = context.canceled;
         if (context.started && Input.GetKeyDown(KeyCode.Mouse0))
         {
             IsLAttackPressed = true;
