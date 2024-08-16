@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 
 public class MoveToTarget : ActionNode
@@ -21,10 +22,13 @@ public class MoveToTarget : ActionNode
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
+
+        SetFollowNavmeshAgent(true);
     }
 
     protected override void OnStop()
     {
+        SetFollowNavmeshAgent(false);
     }
 
     protected override State OnUpdate()
@@ -65,5 +69,20 @@ public class MoveToTarget : ActionNode
         {
             blackboard.moveToPosition = blackboard.target.transform.position;
         }
+    }
+
+    public void SetFollowNavmeshAgent(bool follow)
+    {
+        if (!follow && context.agent.enabled)
+        {
+            context.agent.ResetPath();
+        }
+        else if (follow && !context.agent.enabled)
+        {
+            context.agent.Warp(context.gameObject.transform.position);
+        }
+
+        //_followNavmeshAgent = follow;
+        context.agent.enabled = follow;
     }
 }

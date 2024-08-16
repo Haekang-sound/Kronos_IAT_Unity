@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
 
 [CreateAssetMenu()]
 public class BehaviorTree : ScriptableObject
@@ -13,6 +11,8 @@ public class BehaviorTree : ScriptableObject
     public Blackboard blackboard = new Blackboard();
     public Node.State Update()
     {
+        blackboard.Update();
+
         if (rootNode.state == Node.State.Running)
         {
             treeState = rootNode.Update();

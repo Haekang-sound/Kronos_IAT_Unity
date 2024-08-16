@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -10,4 +9,10 @@ public class Blackboard
 
     public GameObject target;
     public Vector3 moveToPosition;
+    public float timer;
+
+    public void Update()
+    {
+        timer -= Time.deltaTime;
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class CheckTargetDistance : DecoratorNode
+class CheckTargetDistance : ActionNode
 {
     public enum Comparison
     {
@@ -36,8 +36,6 @@ class CheckTargetDistance : DecoratorNode
             return State.Failure;
         }
 
-        var state = child.Update();
-
-        return state;
+        return State.Success;
     }
 }

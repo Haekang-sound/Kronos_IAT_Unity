@@ -26,7 +26,7 @@ class AnimatorSetUntrigger : ActionNode
             return State.Failure;
         }
 
-        animator.SetTrigger(parameterName);
+        animator.ResetTrigger(parameterName);
 
         return State.Success;
     }
