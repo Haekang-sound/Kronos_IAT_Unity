@@ -6,6 +6,7 @@ public class MoveToTarget : ActionNode
     public float speed = 3.5f;
     public float stoppingDistance = 0.1f;
     public bool updateRotation = true;
+    public bool useAnimationSpeed;
     public float acceleration = 100f;
 
     protected override void OnStart()
@@ -13,7 +14,10 @@ public class MoveToTarget : ActionNode
         UpdateMoveToPosition();
 
         context.agent.stoppingDistance = stoppingDistance;
-        context.agent.speed = speed;
+        if (useAnimationSpeed == true)
+        {
+            context.agent.speed = speed;
+        }
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;

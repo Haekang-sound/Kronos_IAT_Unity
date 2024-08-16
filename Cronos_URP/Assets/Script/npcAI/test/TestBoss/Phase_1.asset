@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70f8a5209fa6b84e8031b220c12a6eb, type: 3}
   m_Name: Inverter
   m_EditorClassIdentifier: 
-  state: 1
+  state: 2
   started: 0
   guid: 869233bc60226c54695811d4c6b24cbd
   position: {x: -1142.6501, y: -300.35004}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c802f3af2236b4f94bc3fea6b1db4c, type: 3}
   m_Name: CheckTargetDistance
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
   started: 0
   guid: 1a0e79fb82c9cfd40af3a8a9216ccb63
   position: {x: -1253.8969, y: 251.63792}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03242357c585b3442ba5c329b98bba11, type: 3}
   m_Name: RandomSelector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 40ace937162c2c940a2cdf6334297aa9
   position: {x: -525.64526, y: 424.15024}
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7dd9a0ff374fd48a4e24479671a931, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 72ecd2b27554b81459ca1f3badec40ed
   position: {x: -384.2106, y: 90.25095}
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7dd9a0ff374fd48a4e24479671a931, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 76742a90547578d42990a4ed7026b9cd
   position: {x: -1000.8796, y: 609.6897}
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03242357c585b3442ba5c329b98bba11, type: 3}
   m_Name: RandomSelector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: cbb8ab09fe88d1a4a9f1770a4da7532a
   position: {x: -916.87946, y: 428.68967}
@@ -394,8 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
+  state: 1
+  started: 1
   guid: 1650352b14f47c643aaf5b17f0fd3995
   position: {x: -147, y: 110}
   blackboard:
@@ -432,6 +432,7 @@ MonoBehaviour:
   speed: 3.5
   stoppingDistance: 3
   updateRotation: 1
+  useAnimationSpeed: 1
   acceleration: 100
 --- !u!114 &1915081089929740848
 MonoBehaviour:
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_Name: Parallel
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 83af42603ab22f143892419bf42efc26
   position: {x: -624.4065, y: -319.17728}
   blackboard:
@@ -470,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: acfba05d12b4b6041b30913267817779
   position: {x: -627.6208, y: 623.30347}
@@ -562,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ed72674b1a1ab43bcd2a25954862cb, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 3ae4ad3e7623e6945bca262ad29c5e67
   position: {x: -825.08624, y: 45.12323}
@@ -587,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590f4325285b1b645be55bc7cb011a60, type: 3}
   m_Name: Cooldown
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: e1cfc060d1d78d4489649806c6fa275f
   position: {x: -827.4852, y: -117.743774}
@@ -634,8 +635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c802f3af2236b4f94bc3fea6b1db4c, type: 3}
   m_Name: CheckTargetDistance
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
+  state: 1
+  started: 1
   guid: 302069e3f807a0d42a9ba5ace946b6b5
   position: {x: -202, y: 253}
   blackboard:
@@ -659,8 +660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 1
-  started: 0
+  state: 0
+  started: 1
   guid: 0c944d9bd47dc6647a7be7dd4dc7e977
   position: {x: -802.56647, y: -514.65515}
   blackboard:
@@ -684,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f830463ffd5dfd4dbc150f784db6fa0, type: 3}
   m_Name: IsTargetNull
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 24186586c7887914ca3980403f940eff
   position: {x: -1142.6501, y: -151.35007}
@@ -756,7 +757,7 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: dc95653f06d33424dacda8e160fadff7
   position: {x: -306.24234, y: -97.75301}
   blackboard:
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: e40d2c60aace6db41aa9c29a2d1e776c
   position: {x: -671.9803, y: 230.06158}

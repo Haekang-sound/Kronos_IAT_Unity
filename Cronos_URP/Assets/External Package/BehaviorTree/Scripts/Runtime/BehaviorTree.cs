@@ -73,6 +73,7 @@ public class BehaviorTree : ScriptableObject
         Traverse(rootNode, node => {
             node.context = context;
             node.blackboard = blackboard;
+            node.started = false;
         });
     }
 
