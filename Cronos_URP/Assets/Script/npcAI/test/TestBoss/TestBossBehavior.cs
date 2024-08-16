@@ -110,7 +110,7 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
     {
         _btRunner.tree = bt;
         _btRunner.tree.blackboard = _blackboard;
-        _btRunner.Bind();
+        _btRunner.BindTree();
     }
 
     private void Damaged()

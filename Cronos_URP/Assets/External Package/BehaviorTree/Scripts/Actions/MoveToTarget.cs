@@ -12,6 +12,9 @@ public class MoveToTarget : ActionNode
 
     protected override void OnStart()
     {
+        SetFollowNavmeshAgent(true);
+        UseNavemeshAgentRotation(true);
+
         UpdateMoveToPosition();
 
         context.agent.stoppingDistance = stoppingDistance;
@@ -22,13 +25,12 @@ public class MoveToTarget : ActionNode
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
-
-        SetFollowNavmeshAgent(true);
     }
 
     protected override void OnStop()
     {
         SetFollowNavmeshAgent(false);
+        UseNavemeshAgentRotation(false);
     }
 
     protected override State OnUpdate()
@@ -84,5 +86,10 @@ public class MoveToTarget : ActionNode
 
         //_followNavmeshAgent = follow;
         context.agent.enabled = follow;
+    }
+
+    public void UseNavemeshAgentRotation(bool use)
+    {
+        context.agent.updateRotation = use;
     }
 }

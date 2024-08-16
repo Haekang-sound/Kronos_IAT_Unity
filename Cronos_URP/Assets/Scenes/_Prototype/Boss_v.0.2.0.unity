@@ -1939,7 +1939,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.03
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!4 &1633123585
@@ -1986,9 +1986,11 @@ MonoBehaviour:
   drawGizmos: 1
   target: {fileID: 251128035}
   targetDistance: 5
+  rotationSpeed: 5
   phaseOne: {fileID: 11400000, guid: 29e0a0ed502601a499ec1aa3f21df14e, type: 2}
   phaseTwo: {fileID: 11400000, guid: 33936d5e286d9d2478a99a717fbad06d, type: 2}
   phaseTree: {fileID: 11400000, guid: d98d9000ac6c36041aeab9b58b4addff, type: 2}
+  controller: {fileID: 0}
 --- !u!114 &1633123588
 MonoBehaviour:
   m_ObjectHideFlags: 0

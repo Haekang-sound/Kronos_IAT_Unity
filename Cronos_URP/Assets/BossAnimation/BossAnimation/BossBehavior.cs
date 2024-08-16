@@ -1,22 +1,28 @@
 using Message;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.Playables;
 
 public class BossBehavior : MonoBehaviour, IMessageReceiver
 {
     public bool drawGizmos;
     public GameObject target;
+
     public float targetDistance;
+    public float rotationSpeed = 1.0f;
 
     public BehaviorTree phaseOne;
     public BehaviorTree phaseTwo;
     public BehaviorTree phaseTree;
     private Blackboard _blackboard;
 
+    [SerializeField]
+    public EnemyController controller;
+
+    private Animator _animator;
     private Damageable _damageable;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
-
     private bool _onPhaseOne;
     private bool _onPhaseTwo;
     private bool _onPhaseTree;
@@ -26,6 +32,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         _blackboard = new Blackboard();
 
+        controller = GetComponent<EnemyController>();
+
+        _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
@@ -37,6 +46,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void OnEnable()
     {
+        SceneLinkedSMB<BossBehavior>.Initialise(_animator, this);
+
         _blackboard.target = target;
         _blackboard.monobehaviour = gameObject;
     }
@@ -125,5 +136,33 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _behaviortreeRunner.tree = bt;
         _behaviortreeRunner.tree.blackboard = _blackboard;
         _behaviortreeRunner.Bind();
+    }
+
+    public void LookAtTarget()
+    {
+        if (target == null) return;
+
+        // 바라보는 방향 설정
+        var lookPosition = target.transform.position - transform.position;
+        lookPosition.y = 0;
+        var rotation = Quaternion.LookRotation(lookPosition);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+    }
+
+    public void Strafe(bool isRingth = true)
+    {
+        if (target == null) return;
+
+        Vector3 offsetPlayer = target.transform.position - transform.position;
+
+        if(isRingth == false)
+        {
+            offsetPlayer = transform.position - target.transform.position;
+        }
+
+        Vector3 direction = Vector3.Cross(offsetPlayer, Vector3.up);
+        controller.SetTarget(transform.position + direction);
+
+        LookAtTarget();
     }
 }
