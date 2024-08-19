@@ -10,12 +10,14 @@ public class MoveToTarget : ActionNode
     public bool useAnimationSpeed;
     public float acceleration = 100f;
 
+    private EnemyController enemyController;
+
     protected override void OnStart()
     {
-        SetFollowNavmeshAgent(true);
-        UseNavemeshAgentRotation(true);
+        enemyController = context.gameObject.GetComponent<EnemyController>();
 
-        UpdateMoveToPosition();
+        enemyController.SetFollowNavmeshAgent(true);
+        enemyController.UseNavemeshAgentRotation(true);
 
         context.agent.stoppingDistance = stoppingDistance;
         if (useAnimationSpeed == true)
@@ -29,12 +31,13 @@ public class MoveToTarget : ActionNode
 
     protected override void OnStop()
     {
-        SetFollowNavmeshAgent(false);
-        UseNavemeshAgentRotation(false);
+        enemyController.SetFollowNavmeshAgent(false);
+        enemyController.UseNavemeshAgentRotation(false);
     }
 
     protected override State OnUpdate()
     {
+
         UpdateMoveToPosition();
         UpdateDestination();
 
@@ -54,6 +57,12 @@ public class MoveToTarget : ActionNode
         }
 
         return State.Running;
+    }
+
+    public override void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(context.transform.position, stoppingDistance);
     }
 
     private void UpdateDestination()

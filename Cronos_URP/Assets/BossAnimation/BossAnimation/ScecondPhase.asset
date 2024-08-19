@@ -17,7 +17,6 @@ MonoBehaviour:
   guid: d9726b716438ba849ad87aa4f5f7c66f
   position: {x: 764.99994, y: 608.33997}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -43,7 +42,6 @@ MonoBehaviour:
   guid: c61bff66845283245bfb8583ff65794c
   position: {x: 1125, y: 610.3399}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -69,7 +67,6 @@ MonoBehaviour:
   guid: 5bfd067cca7ddf74fa8f67f577e680c1
   position: {x: 226.91974, y: 324.74496}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -93,7 +90,6 @@ MonoBehaviour:
   guid: 4b3f9b59d5121ab488f4fb6216f5ecda
   position: {x: 1563, y: 749.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -115,43 +111,16 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: c4d7e4592ece7e0409429f4060891979
-  position: {x: -1118.6954, y: 177.9999}
+  position: {x: -1560, y: 174}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
   description: "\uBAA9\uD45C\uC5D0\uAC8C \uC774\uB3D9"
   drawGizmos: 0
   children:
-  - {fileID: -5062695968724777568}
-  - {fileID: 4560567974806474877}
-  - {fileID: -1635878077648113236}
   - {fileID: -4293714808286170816}
---- !u!114 &-5062695968724777568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d14b029d406374f8a733b6a1a4cee1, type: 3}
-  m_Name: AnimatorSetUntrigger
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: 3c38042a53c3ef74495c30ab24507ca2
-  position: {x: -1642.6954, y: 317.99994}
-  blackboard:
-    monobehaviour: {fileID: 0}
-    target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
-    timer: 17.598787
-  description: idle
-  drawGizmos: 0
-  parameterName: idle
+  - {fileID: -1635878077648113236}
 --- !u!114 &-5060230608995652665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +138,6 @@ MonoBehaviour:
   guid: 1202fccf3a467344e973b632784718a4
   position: {x: -27, y: -353}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -191,15 +159,14 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 0ae80b5f3b7ab6b4c99132e7d9a81adf
-  position: {x: -1119.5505, y: 320.15002}
+  position: {x: -1653, y: 325}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
-  description: idle
+  description: run
   drawGizmos: 0
-  parameterName: idle
+  parameterName: run
 --- !u!114 &-3750220971956419643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +184,6 @@ MonoBehaviour:
   guid: 8437356d45e7e4a4aa649a91a4d19563
   position: {x: 526.82904, y: 23.497982}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -226,6 +192,31 @@ MonoBehaviour:
   children:
   - {fileID: 8324164926774043032}
   - {fileID: -1909194757403660656}
+--- !u!114 &-3566785034783731032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318454c716c393840b3947bf643160f0, type: 3}
+  m_Name: LookatTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 22b5a104c5adaf64da420dc8b70facfd
+  position: {x: -1627.6002, y: 481.7501}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: "\uD0C0\uAC9F\uC744 \uBC14\uB77C\uBCF4\uB294 \uAC01\uB3C4\uAC00 1\uB3C4\uBA74
+    \uC131\uACF5!"
+  drawGizmos: 0
+  rotationSpeed: 1
+  angleThreshold: 10
 --- !u!114 &-3036208202840220657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +234,6 @@ MonoBehaviour:
   guid: 6711c60e83010d047901b055cb65774c
   position: {x: 1032, y: 757.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -267,7 +257,6 @@ MonoBehaviour:
   guid: bfd367e8ad5331e468ebbc0479be9e68
   position: {x: 44.919876, y: 328.74503}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -291,7 +280,6 @@ MonoBehaviour:
   guid: f44af1423f90f2343a48f123d324f6a1
   position: {x: -1116.6956, y: 19.999924}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -301,6 +289,7 @@ MonoBehaviour:
   - {fileID: 6549365569887696249}
   - {fileID: -5518931682976507313}
   - {fileID: 2519050506275657651}
+  - {fileID: -147581496799616033}
   - {fileID: -286072179190653099}
 --- !u!114 &-2324192559126248337
 MonoBehaviour:
@@ -319,7 +308,6 @@ MonoBehaviour:
   guid: f63bc8ffd139ef347b2a6a4444c33514
   position: {x: 821.99994, y: 299.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -345,7 +333,6 @@ MonoBehaviour:
   guid: 5619f92a378c7c24581f340336c4cbf0
   position: {x: 505.00006, y: 464.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -370,7 +357,6 @@ MonoBehaviour:
   guid: 0b29e539fc08adb4bbd39710e1a905c6
   position: {x: 823.00006, y: 167.67749}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -393,13 +379,12 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b68686cea14c82946b2d69584a7ba815
-  position: {x: -207.69556, y: 318.99988}
+  position: {x: -206, y: 336}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
-  description: avoid_back
+  description: "\uC784\uC2DC avoid_back\n\uCD94\uD6C4 \uBCC0\uACBD \uC694\uB9DD"
   drawGizmos: 0
   message: avoid_back
 --- !u!114 &-1635878077648113236
@@ -417,9 +402,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 8cc40e1246f30634d9dea2a526e980e5
-  position: {x: -1292.6954, y: 320.00003}
+  position: {x: -1479, y: 326}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -445,9 +429,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: e4d5dd53684c0ed4d8e05209eaf598e0
-  position: {x: -759.69556, y: 324.99985}
+  position: {x: -1015, y: 336}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -473,7 +456,6 @@ MonoBehaviour:
   guid: fff1c7d2ff1a80b41a044e7f939a12d3
   position: {x: -27, y: -126}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -497,9 +479,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 4a0540f9f6b5a8344ac3f80bb2d3a561
-  position: {x: -290.69543, y: 169.99986}
+  position: {x: -289, y: 187}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -508,6 +489,29 @@ MonoBehaviour:
   children:
   - {fileID: 5066872480121816932}
   - {fileID: -1741616817104038360}
+--- !u!114 &-147581496799616033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa4999e27a695e448b9a567da13e7fc, type: 3}
+  m_Name: ResetTimer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6cfe55404a29f854b851dc83db28bd5e
+  position: {x: -583, y: 175}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: 30
+  drawGizmos: 0
+  resetTime: 30
 --- !u!114 &-40481977123866167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,9 +527,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 88cda523dbcd0f64aa43af1e941531e7
-  position: {x: -1094.6956, y: 473.99988}
+  position: {x: -1260.6002, y: 479.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -550,10 +553,8 @@ MonoBehaviour:
   - {fileID: -5060230608995652665}
   - {fileID: -1635878077648113236}
   - {fileID: 6204243995199459134}
-  - {fileID: 4560567974806474877}
   - {fileID: -2387099211600743991}
   - {fileID: -417473577056501548}
-  - {fileID: -5062695968724777568}
   - {fileID: 6549365569887696249}
   - {fileID: -5518931682976507313}
   - {fileID: 7855827214345865335}
@@ -566,7 +567,6 @@ MonoBehaviour:
   - {fileID: 2519050506275657651}
   - {fileID: -2464679647266343616}
   - {fileID: -6341619257823578959}
-  - {fileID: 4655654754084972045}
   - {fileID: 6335614425611529627}
   - {fileID: 8324164926774043032}
   - {fileID: -3750220971956419643}
@@ -589,8 +589,9 @@ MonoBehaviour:
   - {fileID: 5650890772891655263}
   - {fileID: -8738746801495339192}
   - {fileID: -1909194757403660656}
+  - {fileID: -147581496799616033}
+  - {fileID: -3566785034783731032}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -611,7 +612,6 @@ MonoBehaviour:
   guid: 9cc36de1fb6192943a83044205c4d608
   position: {x: 1475, y: 607.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -635,9 +635,8 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: c10cf3ba5df305c49a7554b2291a2fbb
-  position: {x: -921.69543, y: 177.9999}
+  position: {x: -1010, y: 173}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -662,9 +661,8 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: c2a5b7b6e8377b8468794399e6ef78d8
-  position: {x: -409.69562, y: 473.99988}
+  position: {x: -575.6002, y: 479.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -686,39 +684,14 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: d0254d3f42945c9409e0a91cfa3b2fd2
-  position: {x: -752.69543, y: 472.99994}
+  position: {x: -918.60016, y: 478.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
   description: "\uC560\uB2C8\uBA54\uC774\uC158(5.1\uCD08)"
   drawGizmos: 0
   duration: 5.1
---- !u!114 &4560567974806474877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
-  m_Name: AnimatorSetTrigger
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: 71886b40ab8e9db439a601582426f4d9
-  position: {x: -1463.6956, y: 317.00003}
-  blackboard:
-    monobehaviour: {fileID: 0}
-    target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
-    timer: 17.598787
-  description: run
-  drawGizmos: 0
-  parameterName: run
 --- !u!114 &4627564302948652422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,39 +707,14 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: ad070e6357eae4a459761eb7c33383ef
-  position: {x: -580.69543, y: 472.99994}
+  position: {x: -746.60016, y: 478.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
   description: attack_charge_combo
   drawGizmos: 0
   parameterName: attack_charge_combo
---- !u!114 &4655654754084972045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: be0134bdf92e5e44292e6f732366f3a8
-  position: {x: -1416.6954, y: 475.99994}
-  blackboard:
-    monobehaviour: {fileID: 0}
-    target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
-    timer: 17.598787
-  description: 
-  drawGizmos: 0
-  duration: 1
 --- !u!114 &5031011493360723076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,7 +732,6 @@ MonoBehaviour:
   guid: 0f17a1f0d31db1b498d15e0413847dc6
   position: {x: 1216, y: 754.3401}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -806,13 +753,12 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: d294bb86ca3c5954fbe0347a55cf0e2f
-  position: {x: -382.69553, y: 317.00003}
+  position: {x: -381, y: 334}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
-  description: 
+  description: 1
   drawGizmos: 0
   duration: 1
 --- !u!114 &5650890772891655263
@@ -832,7 +778,6 @@ MonoBehaviour:
   guid: b6bc0c8ef478a284fbd065b68ae3176b
   position: {x: 857.00006, y: 758.33997}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -856,7 +801,6 @@ MonoBehaviour:
   guid: 04b75e2b80693114a98c90412077d188
   position: {x: -26.999971, y: -244.95818}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -880,7 +824,6 @@ MonoBehaviour:
   guid: 51cce59fdcadc76408d9c2877e063100
   position: {x: 404.91986, y: 326.74506}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -902,9 +845,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 5c75232d464611b478871568a6d03aa7
-  position: {x: -1257.6956, y: 475}
+  position: {x: -1423.6002, y: 480.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -926,15 +868,13 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 3b5e8c293dc36694da1dadb4e3a011b4
-  position: {x: -1457.6953, y: 174.99991}
+  position: {x: -1821, y: 177}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
-  description: "\uACF5\uACA9 \uCFE8\uD0C0\uC784 \uCCB4\uD06C"
+  description: 
   drawGizmos: 0
-  resetTime: 30
 --- !u!114 &6791711771361072228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,9 +890,8 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: 66b2d903f759b4141ac0042d19a9ec64
-  position: {x: -583.69543, y: 323.99994}
+  position: {x: -749.6001, y: 329.75003}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -976,9 +915,8 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b1ef343433eaf0442a83b2003e1a1d3e
-  position: {x: -925.69556, y: 472.99994}
+  position: {x: -1091.6002, y: 478.7501}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -1002,7 +940,6 @@ MonoBehaviour:
   guid: 9a052a09df421854aa8336bbc71c5ee5
   position: {x: 672.00006, y: 755.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -1024,16 +961,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: fa3e55bf042b11948883188886ebf6a1
-  position: {x: -922.69556, y: 323.99994}
+  position: {x: -1261, y: 330}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
   description: "Swing Attack \uC2DC\uD000\uC2A4"
   drawGizmos: 0
   children:
-  - {fileID: 4655654754084972045}
+  - {fileID: -3566785034783731032}
   - {fileID: 6445252902910302475}
   - {fileID: -40481977123866167}
 --- !u!114 &8324164926774043032
@@ -1053,7 +989,6 @@ MonoBehaviour:
   guid: 71d528fd07bd8d643a04fd505013fa96
   position: {x: 226.91974, y: 175.745}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -1080,7 +1015,6 @@ MonoBehaviour:
   guid: 50f43293566e9ad469cd2edd8457e40f
   position: {x: 1126, y: 464.34}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
@@ -1107,10 +1041,9 @@ MonoBehaviour:
   guid: 32715b4890a757b40ad1e4920a510626
   position: {x: 1392, y: 750.33997}
   blackboard:
-    monobehaviour: {fileID: 0}
     target: {fileID: 0}
     moveToPosition: {x: -8.74163e-12, y: 0.01000002, z: 5.2000087e-21}
     timer: 17.598787
-  description: "\uB545 \uB0B4\uB824\uCC0D\uAE30!"
+  description: "\uC784\uC2DC \uB545 \uB0B4\uB824\uCC0D\uAE30\n\uCD94\uD6C4 \uBCC0\uACBD"
   drawGizmos: 0
   message: "\uB545 \uB0B4\uB824\uCC0D\uAE30!"

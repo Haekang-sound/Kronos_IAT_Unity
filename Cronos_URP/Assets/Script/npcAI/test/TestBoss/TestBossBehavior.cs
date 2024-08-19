@@ -37,9 +37,7 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
 
     void OnEnable()
     {
-        //_btRunner.tree.blackboard.monobehaviour = gameObject;
         _blackboard.target = target;
-        _blackboard.monobehaviour = gameObject;
 
         _btRunner.tree = phaseOne;
     }
@@ -51,7 +49,6 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
     void OnDisable()
     {
         _btRunner.tree.blackboard.target = null;
-        _btRunner.tree.blackboard.monobehaviour = null;
     }
 
     void Update()

@@ -14,12 +14,12 @@ class AnimatorSetUntrigger : ActionNode
 
     protected override State OnUpdate()
     {
-        if (blackboard.monobehaviour == null)
+        if (context.gameObject == null)
         {
             return State.Failure;
         }
 
-        var animator = blackboard.monobehaviour.GetComponent<Animator>();
+        var animator = context.animator;
 
         if (animator == null)
         {

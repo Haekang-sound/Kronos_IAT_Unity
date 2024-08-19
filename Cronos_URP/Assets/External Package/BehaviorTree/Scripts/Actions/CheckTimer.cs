@@ -1,9 +1,5 @@
-using UnityEngine;
-
 public class CheckTimer : ActionNode
 {
-    public float resetTime;
-
     protected override void OnStart()
     {
     }
@@ -16,7 +12,6 @@ public class CheckTimer : ActionNode
     {
         if (blackboard.timer < 0f)
         {
-            blackboard.timer = resetTime;
             return State.Success;
         }
         else

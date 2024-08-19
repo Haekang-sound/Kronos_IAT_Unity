@@ -51,7 +51,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         SceneLinkedSMB<BossBehavior>.Initialise(_animator, this);
 
         _blackboard.target = target;
-        _blackboard.monobehaviour = gameObject;
+        //_blackboard.monobehaviour = gameObject;
     }
 
     //private void OnDisable()

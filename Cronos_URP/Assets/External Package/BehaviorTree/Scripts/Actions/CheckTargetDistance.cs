@@ -24,7 +24,7 @@ class CheckTargetDistance : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector3 toTarget = blackboard.target.transform.position - blackboard.monobehaviour.transform.position;
+        Vector3 toTarget = blackboard.target.transform.position - context.transform.position;
         bool checkDistance = toTarget.sqrMagnitude < distance * distance;
 
         if (comparison == Comparison.Greater && checkDistance == true)
@@ -37,5 +37,10 @@ class CheckTargetDistance : ActionNode
         }
 
         return State.Success;
+    }
+    public override void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(context.transform.position, distance);
     }
 }
