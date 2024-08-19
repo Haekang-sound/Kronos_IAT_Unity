@@ -12,136 +12,165 @@ using UnityEngine.UI;
 /// </summary>
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
-	public Vector2 mouseDelta; // 마우스 이동정보를 받아온다
-	public Vector2 moveComposite;
 
-	public Action onMove;
+    static InputReader instance;
+    public static InputReader GetInstance() { return instance; }
+    public void Awake()
+    {
+        instance = this;
+    }
+    public bool clickCondition = true;
 
-	public Action onJumpStart;      // 점프의 대한 액션을 담기 위한 변수
-	public Action onJumpPerformed;      // 점프의 대한 액션을 담기 위한 변수
-	public Action onJumpCanceled;      // 점프의 대한 액션을 담기 위한 변수
+    public Vector2 mouseDelta; // 마우스 이동정보를 받아온다
+    public Vector2 moveComposite;
 
-	public Action onLAttackStart;   // 공격의 대한 액션을 담기 위한 변수
-	public Action onLAttackPerformed;   // 공격의 대한 액션을 담기 위한 변수
-	public Action onLAttackCanceled;   // 공격의 대한 액션을 담기 위한 변수
+    public Action onMove;
 
-	public Action onRAttackStart;
-	public Action onRAttackPerformed;
-	public Action onRAttackCanceled;
+    public Action onJumpStart;      // 점프의 대한 액션을 담기 위한 변수
+    public Action onJumpPerformed;      // 점프의 대한 액션을 담기 위한 변수
+    public Action onJumpCanceled;      // 점프의 대한 액션을 담기 위한 변수
 
-	public Action onSwitchingStart;
-	public Action onSwitchingPerformed;
-	public Action onSwitchingCanceled;
+    public Action onLAttackStart;   // 공격의 대한 액션을 담기 위한 변수
+    public Action onLAttackPerformed;   // 공격의 대한 액션을 담기 위한 변수
+    public Action onLAttackCanceled;   // 공격의 대한 액션을 담기 위한 변수
 
-	public Action onZoom;
+    public Action onRAttackStart;
+    public Action onRAttackPerformed;
+    public Action onRAttackCanceled;
 
-	public Action onLockOnStart;
-	public Action onLockOnPerformed;
-	public Action onLockOnCanceled;
+    public Action onDecelerationStart;
+    public Action onDecelerationPerformed;
+    public Action onDecelerationCanceled;
 
-	public bool IsLAttackPressed { get; set; } = false;
-	public bool IsRAttackPressed { get; private set; } = false;
+    public Action onZoom;
 
-	private Controls controls;
+    public Action onLockOnStart;
+    public Action onLockOnPerformed;
+    public Action onLockOnCanceled;
 
-	private void OnEnable()
-	{
-		if (controls != null)
-		{
-			controls.Player.Enable();
-			return;
-		}
-		controls = new Controls();
-		controls.Player.SetCallbacks(this); // InputReader는 IPlayerActions를 상속받았다.
-											// Actions을 세팅한다.
-		controls.Player.Enable();       // 사용가능한 형태로 만든다.
-	}
+    public Action onUnlockAbilityStart;
+    public Action onUnlockAbilityPerformed;
+    public Action onUnlockAbilityCanceled;
 
-	public void OnDisable()
-	{
-		// 플레이어의 disable 함수를 호출한다.
-		controls.Player.Disable();
+    public Action onRunStart;
+    public Action onRunPerformed;
+    public Action onRunCanceled;
 
-	}
+    public bool IsLAttackPressed { get; set; } = false;
+    public bool IsRAttackPressed { get; private set; } = false;
 
-	// 카메라 이동을 담당하는! 
-	public void OnLook(InputAction.CallbackContext context) { mouseDelta = context.ReadValue<Vector2>(); }
-	public void OnMove(InputAction.CallbackContext context)
-	{
-		moveComposite = context.ReadValue<Vector2>();
-		onMove?.Invoke(); // 이동 발생여부를 검증한다.
-	}
+    private Controls controls;
 
-	public void OnJumpDown(InputAction.CallbackContext context) { onJumpStart?.Invoke(); }
-	public void OnJump(InputAction.CallbackContext context)
-	{
-		if (!context.performed)
-		{
-			return;
-		}
+    // 이 메서드는 다음 클릭을 위해 상태를 초기화하는 역할을 합니다.
 
-		onJumpPerformed?.Invoke();// onJump가 null 이 아니라면 실행한다.
-	}
-	public void OnJumpUp(InputAction.CallbackContext context) { onJumpCanceled?.Invoke(); } // onJump가 null 이 아니라면 실행한다.
-																							// 좌클릭
-	public void OnLAttackDown(InputAction.CallbackContext context)
-	{
-		if (context.started)
-		{
-			onLAttackStart?.Invoke();
-			// L.Attack 시작 처리
-		}
-	}
-	public void OnLAttack(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			IsLAttackPressed = true;
-			onLAttackPerformed?.Invoke();
-			// L.Attack 처리
-		}
-	}
-	public void OnLAttackUp(InputAction.CallbackContext context)
-	{
-		if (context.canceled)
-		{
-			IsLAttackPressed = false;
-			onLAttackCanceled?.Invoke();
-			// L.Attack 종료 처리
-		}
-	}
-	// 우클릭
-	public void OnRAttackDown(InputAction.CallbackContext context) { onRAttackStart?.Invoke(); }
-	public void OnRAttack(InputAction.CallbackContext context)
-	{
-		IsRAttackPressed = true;
-		onRAttackPerformed?.Invoke();
-	}
-	public void OnRAttackUp(InputAction.CallbackContext context)
-	{
-		IsRAttackPressed = false;
-		onRAttackCanceled?.Invoke();
-	}
-	// Q
-	public void OnSwitchingDown(InputAction.CallbackContext context) { onSwitchingStart?.Invoke(); }
-	public void OnSwitching(InputAction.CallbackContext context) { onSwitchingPerformed?.Invoke(); }
-	public void OnSwitchingUp(InputAction.CallbackContext context) { onSwitchingCanceled?.Invoke(); }
+    private void OnEnable()
+    {
+        if (controls != null)
+        {
+            controls.Player.Enable();
+            return;
+        }
+        controls = new Controls();
+        controls.Player.SetCallbacks(this); // InputReader는 IPlayerActions를 상속받았다.
+                                            // Actions을 세팅한다.
+        controls.Player.Enable();       // 사용가능한 형태로 만든다.
+    }
 
-	// 휠
-	public void OnZoom(InputAction.CallbackContext context) { onZoom?.Invoke(); }
+    public void OnDisable()
+    {
+        // 플레이어의 disable 함수를 호출한다.
+        controls.Player.Disable();
 
+    }
 
-	public void OnLockOnDown(InputAction.CallbackContext context)
-	{
-		onLockOnStart?.Invoke();
-	}
-	public void OnLockOn(InputAction.CallbackContext context)
-	{
-		//onLockOnPerformed?.Invoke(); 
-	}
+    // 카메라 이동을 담당하는! 
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveComposite = context.ReadValue<Vector2>();
+        onMove?.Invoke(); // 이동 발생여부를 검증한다.
+    }
 
-	public void OnLockOnUp(InputAction.CallbackContext context)
-	{
-		//onLockOnCanceled?.Invoke();
-	}
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started){onJumpStart?.Invoke();}
+        else if (context.performed){onJumpPerformed?.Invoke();}
+        else if (context.canceled){onJumpCanceled?.Invoke();}
+    }
+
+    public void OnLAttack(InputAction.CallbackContext context)
+    {
+//         Player.Instance.on = context.started;
+//         Player.Instance.perform = context.performed;
+//         Player.Instance.off = context.canceled;
+        if (context.started && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            IsLAttackPressed = true;
+            onLAttackStart?.Invoke();
+        }
+        else if (context.performed && Input.GetKey(KeyCode.Mouse0))
+        {
+            onLAttackPerformed?.Invoke();
+        }
+        else if (context.canceled && Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            IsLAttackPressed = false;
+            onLAttackCanceled?.Invoke();
+        }
+    }
+    // 우클릭
+
+    public void OnRAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            IsRAttackPressed = true;
+            onRAttackStart?.Invoke();
+        }
+        else if (context.performed)
+        {
+            onRAttackPerformed?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            IsRAttackPressed = false;
+            onRAttackCanceled?.Invoke();
+        }
+    }
+
+    // Q
+    public void OnDeceleration(InputAction.CallbackContext context)
+    {
+        if (context.started) onDecelerationStart?.Invoke();
+        else if (context.performed) onDecelerationPerformed.Invoke();
+        else if (context.canceled) onDecelerationCanceled?.Invoke();
+    }
+
+    // 휠
+    public void OnZoom(InputAction.CallbackContext context) { onZoom?.Invoke(); }
+
+    public void OnLockOn(InputAction.CallbackContext context)
+    {
+        if (context.started) onLockOnStart?.Invoke();
+        else if (context.performed) onLockOnPerformed?.Invoke();
+        else if (context.canceled) onLockOnCanceled?.Invoke();
+    }
+
+    public void OnUnlockAbility(InputAction.CallbackContext context)
+    {
+        if (context.started) onUnlockAbilityStart?.Invoke();
+        else if (context.performed) onUnlockAbilityPerformed?.Invoke();
+        else if (context.canceled) onUnlockAbilityCanceled?.Invoke();
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.started) { onRunPerformed?.Invoke(); }
+        else if (context.performed) { onRunStart?.Invoke(); }
+        else if (context.canceled) { onRunCanceled?.Invoke(); }
+    }
+
 }

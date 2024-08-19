@@ -25,12 +25,13 @@ public class LastEnforcedCombo : StateMachineBehaviour
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		if (Input.GetKeyDown(KeyCode.Mouse1))
-		{
-			animator.SetBool(guradHash, true);
-		}
-		// 이동키입력을 받으면
-		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
+        stateMachine.currentStateInformable = stateInfo;
+        // 		if (Input.GetKeyDown(KeyCode.Mouse1))
+        // 		{
+        // 			animator.SetBool(guradHash, true);
+        // 		}
+        // 이동키입력을 받으면
+        if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
 			// 이동중
 			animator.SetBool(moveHash, true);
@@ -41,32 +42,32 @@ public class LastEnforcedCombo : StateMachineBehaviour
 			animator.SetBool(moveHash, false);
 		}
 
-		// 좌클릭 누르는 중에는 차징
-		if (Input.GetKey(KeyCode.Mouse0))
-		{
-			float current = animator.GetFloat(chargeHash);
-			animator.SetFloat(chargeHash, current + Time.deltaTime);
-		}
-
-		// 누르고있으면 차징중이다
-		if (Input.GetKey(KeyCode.Mouse0))
-		{
-			//인풋중에 뭐라고 정해줘야할듯
-			animator.SetBool(chargeAttackHash, true);
-		}
-		else
-		{
-			//인풋중에 뭐라고 정해줘야할듯
-			animator.SetBool(chargeAttackHash, false);
-		}
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			if (stateMachine.Velocity.magnitude != 0f)
-			{
-				animator.SetTrigger(dodgeHash);
-			}
-		}
+// 		// 좌클릭 누르는 중에는 차징
+// 		if (Input.GetKey(KeyCode.Mouse0))
+// 		{
+// 			float current = animator.GetFloat(chargeHash);
+// 			animator.SetFloat(chargeHash, current + Time.deltaTime);
+// 		}
+// 
+// 		// 누르고있으면 차징중이다
+// 		if (Input.GetKey(KeyCode.Mouse0))
+// 		{
+// 			//인풋중에 뭐라고 정해줘야할듯
+// 			animator.SetBool(chargeAttackHash, true);
+// 		}
+// 		else
+// 		{
+// 			//인풋중에 뭐라고 정해줘야할듯
+// 			animator.SetBool(chargeAttackHash, false);
+// 		}
+// 
+// 		if (Input.GetKeyDown(KeyCode.Space))
+// 		{
+// 			if (stateMachine.Velocity.magnitude != 0f)
+// 			{
+// 				animator.SetTrigger(dodgeHash);
+// 			}
+// 		}
 
 	}
 
