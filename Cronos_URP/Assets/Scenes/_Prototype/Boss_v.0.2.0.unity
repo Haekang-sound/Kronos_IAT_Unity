@@ -1852,6 +1852,7 @@ GameObject:
   - component: {fileID: 1633123587}
   - component: {fileID: 1633123586}
   - component: {fileID: 1633123589}
+  - component: {fileID: 1633123590}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
@@ -1985,11 +1986,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   target: {fileID: 251128035}
-  targetDistance: 5
-  rotationSpeed: 5
+  targetDistance: 10
+  rotationSpeed: 1080
   phaseOne: {fileID: 11400000, guid: 29e0a0ed502601a499ec1aa3f21df14e, type: 2}
-  phaseTwo: {fileID: 11400000, guid: 33936d5e286d9d2478a99a717fbad06d, type: 2}
-  phaseTree: {fileID: 11400000, guid: d98d9000ac6c36041aeab9b58b4addff, type: 2}
+  phaseTwo: {fileID: 11400000, guid: e5e15c2a1074fec49b0e31538ed52e62, type: 2}
+  phaseTree: {fileID: 11400000, guid: 4948dc325b01acc4e868771b46dbea10, type: 2}
   controller: {fileID: 0}
 --- !u!114 &1633123588
 MonoBehaviour:
@@ -2044,6 +2045,33 @@ PlayableDirector:
     value: {fileID: 1633123581}
   m_ExposedReferences:
     m_References: []
+--- !u!54 &1633123590
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633123580}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1667680596
 GameObject:
   m_ObjectHideFlags: 0

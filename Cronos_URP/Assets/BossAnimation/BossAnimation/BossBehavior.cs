@@ -23,6 +23,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private Damageable _damageable;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
+    private Rigidbody _rigidbody;
+
     private bool _onPhaseOne;
     private bool _onPhaseTwo;
     private bool _onPhaseTree;
