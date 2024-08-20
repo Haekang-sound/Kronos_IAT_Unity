@@ -18,7 +18,7 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.Rigidbody.velocity = Vector3.zero;
         stateMachine.Animator.ResetTrigger(attackHash);
         stateMachine.Animator.ResetTrigger(idleHash);
-        stateMachine.Animator.SetBool(BuffHash, true);
+        //stateMachine.Animator.SetBool(BuffHash, true);
         buffTimer = 0f;
 
         stateMachine.InputReader.onLAttackStart += Attack;
