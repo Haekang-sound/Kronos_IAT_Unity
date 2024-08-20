@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class CapsuleColliderData
 {
-	public CapsuleCollider collider { get; private set; }
-	public Vector3 colliderCenterInLocalSpace { get; private set; }
+	public CapsuleCollider Collider { get; private set; }
+	public Vector3 ColliderCenterInLocalSpace { get; private set; }
 
 	public void Initialize(GameObject gameObject)
 	{
-		if (collider != null)
+		if (Collider != null)
 		{
 			return;
 		}
 
-		collider = gameObject.AddComponent<CapsuleCollider>();
+		Collider = gameObject.AddComponent<CapsuleCollider>();
 		UpdateColliderData();
 
 	}
 
-	private void UpdateColliderData()
+	public void UpdateColliderData()
 	{
-		colliderCenterInLocalSpace = collider.center;
+		ColliderCenterInLocalSpace = Collider.center;
 	}
 }

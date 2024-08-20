@@ -61,6 +61,12 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool rigidImmunity = false;
     [SerializeField] private bool dodgeAttack = false;
 
+	/// <summary>
+	/// floating capsule만드는중 
+	/// </summary>
+	[field: Header("Collisions")]
+	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
+
     private Checkpoint _currentCheckpoint;
 
     // Property
@@ -121,7 +127,19 @@ public class Player : MonoBehaviour, IMessageReceiver
     public ImpulseCam impulseCam;
     public GameObject playerSword;
 
-    protected void OnDisable()
+
+	private void Awake()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+	}
+	private void OnValidate()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+
+	}
+	protected void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
     }
