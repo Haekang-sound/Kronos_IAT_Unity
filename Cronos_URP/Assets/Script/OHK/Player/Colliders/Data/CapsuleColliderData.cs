@@ -14,7 +14,7 @@ public class CapsuleColliderData
 			return;
 		}
 
-		Collider = gameObject.AddComponent<CapsuleCollider>();
+		Collider = gameObject.GetComponent<CapsuleCollider>();
 		UpdateColliderData();
 
 	}

@@ -9,10 +9,12 @@ public abstract class PlayerBaseState : State
 	// 변수를 읽기전용으로 선언
 	protected readonly PlayerStateMachine stateMachine;
 	Vector3 moveDirection;
+	private SlopeData slopeData;
 
 	protected PlayerBaseState(PlayerStateMachine stateMachine)
 	{
 		this.stateMachine = stateMachine;
+		slopeData = stateMachine.Player.CapsuleColldierUtility.SlopeData;
 	}
 
 	/// <summary>
@@ -129,5 +131,18 @@ public abstract class PlayerBaseState : State
 		}
 		return false;
 	}
+
+	public void Float()
+	{
+		Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.CapsuleColldierUtility.CapsuleColliderData.Collider.bounds.center;
+
+		Ray  downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
+
+		if(Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, slopeData.FloatRayDistance))
+		{
+
+		}
+	}
+
 
 }

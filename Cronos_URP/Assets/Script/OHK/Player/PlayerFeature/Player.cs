@@ -61,11 +61,12 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool rigidImmunity = false;
     [SerializeField] private bool dodgeAttack = false;
 
-// 	/// <summary>
-// 	/// floating capsule만드는중 
-// 	/// </summary>
-// 	[field: Header("Collisions")]
-// 	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
+	/// <summary>
+	/// floating capsule만드는중 
+	/// </summary>
+	[field: Header("Collisions")]
+	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
+	[field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
     private Checkpoint _currentCheckpoint;
 
@@ -79,10 +80,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 //     // 스킬 사용정보
 //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-// 
-//     public bool on = false;
-//     public bool perform = false;
-//     public bool off = false;
+
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
@@ -128,17 +126,17 @@ public class Player : MonoBehaviour, IMessageReceiver
     public GameObject playerSword;
 
 
-// 	private void Awake()
-// 	{
-// 		CapsuleColldierUtility.Initialize(gameObject);
-// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-// 	}
-// 	private void OnValidate()
-// 	{
-// 		CapsuleColldierUtility.Initialize(gameObject);
-// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-// 
-// 	}
+	private void Awake()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+	}
+	private void OnValidate()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+
+	}
 	protected void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);

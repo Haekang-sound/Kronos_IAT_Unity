@@ -80,6 +80,12 @@ MonoBehaviour:
   isLockOn: 0
   rigidImmunity: 0
   dodgeAttack: 0
+  <CapsuleColldierUtility>k__BackingField:
+    <DefaultColliderData>k__BackingField:
+      <Height>k__BackingField: 1.8
+      <CeneterY>k__BackingField: 0.9
+      <Radius>k__BackingField: 0.2
+    <SlopeData>k__BackingField: {fileID: 0}
   _damageable: {fileID: 0}
   _defnsible: {fileID: 0}
   soundManager: {fileID: 0}
@@ -112,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f887149bd7220b04b9a3507bacfb5900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickCondition: 1
   mouseDelta: {x: 0, y: 0}
   moveComposite: {x: 0, y: 0}
 --- !u!95 &1358003056942352722
@@ -288,9 +295,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
-  m_Height: 1.64
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.81, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &4187677284004909742
 MonoBehaviour:
   m_ObjectHideFlags: 0
