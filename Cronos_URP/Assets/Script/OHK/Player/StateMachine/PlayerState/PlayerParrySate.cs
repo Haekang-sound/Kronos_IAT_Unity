@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerParryState : PlayerBaseState
 {
 	public PlayerParryState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+	private readonly int attackHash = Animator.StringToHash("Attack");
 	public override void Enter()
 	{
+		stateMachine.InputReader.onLAttackStart += Attack;
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
 			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
@@ -30,5 +32,13 @@ public class PlayerParryState : PlayerBaseState
 	}
 	public override void LateTick() { }
 
-	public override void Exit() { }
+	public override void Exit() 
+	{
+		stateMachine.InputReader.onLAttackStart += Attack;
+	}
+	private void Attack()
+	{
+		stateMachine.AutoTargetting.AutoTargeting();
+		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true);
+	}
 }

@@ -43,6 +43,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
         _meleeWeapon = GetComponentInChildren<SimpleDamager>();
+		_rigidbody = GetComponent<Rigidbody>();
     }
 
     // void Start()

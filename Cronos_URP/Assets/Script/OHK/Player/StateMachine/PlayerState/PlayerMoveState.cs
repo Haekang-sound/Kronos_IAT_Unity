@@ -221,7 +221,6 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		stateMachine.InputReader.clickCondition = true;
 		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); 
 	}
 	private void Dodge()
