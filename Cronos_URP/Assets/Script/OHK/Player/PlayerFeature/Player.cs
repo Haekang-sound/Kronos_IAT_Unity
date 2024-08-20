@@ -77,12 +77,12 @@ public class Player : MonoBehaviour, IMessageReceiver
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
 
-//     // 스킬 사용정보
-//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-// 
-//     public bool on = false;
-//     public bool perform = false;
-//     public bool off = false;
+    //     // 스킬 사용정보
+    //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+    // 
+    //     public bool on = false;
+    //     public bool perform = false;
+    //     public bool off = false;
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
@@ -107,11 +107,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     public bool IsDecreaseCP { get; set; }
     public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
     public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
-	public bool RigidImmunity { get { return rigidImmunity; } set {  rigidImmunity = value; } }	
-	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }	
+    public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
+    public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
 
-	// 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
-	PlayerData playerData = new PlayerData();
+    // 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
+    PlayerData playerData = new PlayerData();
     Transform playerTransform;
     AutoTargetting targetting;
 
@@ -126,6 +126,10 @@ public class Player : MonoBehaviour, IMessageReceiver
     public EffectManager effectManager;
     public ImpulseCam impulseCam;
     public GameObject playerSword;
+    public GameObject spcCubeL;
+    public GameObject spcCubeR;
+    public PlayerStateMachine psm;
+    //public float spcActivateTime;
 
 
 // 	private void Awake()
@@ -171,15 +175,15 @@ public class Player : MonoBehaviour, IMessageReceiver
             Debug.Log("EffectManager found");
         if (impulseCam != null)
             Debug.Log("ImpulseCam found");
+        psm = gameObject.GetComponent<PlayerStateMachine>();
 
-
-		// 문제해결을 위해 옮김 
-		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-		totalspeed = Speed;
-		_damageable.currentHitPoints = maxTP;
-		_damageable.CurrentHitPoints = maxTP;
-		meleeWeapon.simpleDamager.damageAmount = currentDamage;
-	}
+        // 문제해결을 위해 옮김 
+        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        totalspeed = Speed;
+        _damageable.currentHitPoints = maxTP;
+        _damageable.CurrentHitPoints = maxTP;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+    }
 
     private void ChargeCP(Collider other)
     {
@@ -231,6 +235,17 @@ public class Player : MonoBehaviour, IMessageReceiver
         if (TP <= 0)
         {
             _damageable.JustDead();
+        }
+
+        // 움직일 때마다 spc큐브를 활성화.
+        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+        {
+            StartCoroutine(ActivateSpcCubes(0.0f));
+        }
+        else
+        {
+            spcCubeL.SetActive(false);
+            spcCubeR.SetActive(false);
         }
     }
 
@@ -411,6 +426,13 @@ public class Player : MonoBehaviour, IMessageReceiver
     {
         if (impulseCam != null)
             impulseCam.Shake();
+    }
+
+    IEnumerator ActivateSpcCubes(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        spcCubeL.SetActive(true);
+        spcCubeR.SetActive(true);
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)
