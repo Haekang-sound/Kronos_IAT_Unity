@@ -212,8 +212,8 @@ public class SoundMixerNCamera : MonoBehaviour
         // 최대값은 1, 최소값은 0.0001 -> 0이면 계산이 고장나고 볼륨이 올라감 
         float clampVal = Mathf.Clamp(value, 0.0001f, 1f);
         // 선형 보간값을 감쇠 보간값으로 변환
-        float logVal = Mathf.Log10(clampVal);
-        return logVal * 20f;
+        float logVal = Mathf.Log10(clampVal) * 20f;
+        return logVal;
     }
 
     // 슬라이더 값을 pov 에임 스피드에 적합한 값으로 바꾼다

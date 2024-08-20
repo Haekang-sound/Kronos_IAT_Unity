@@ -14,12 +14,7 @@ class AnimatorSetBool : ActionNode
 
     protected override State OnUpdate()
     {
-        if(blackboard.monobehaviour == null)
-        {
-            return State.Failure;
-        }
-
-        var animator = blackboard.monobehaviour.GetComponent<Animator>();
+        var animator = context.animator;
 
         if(animator == null)
         {

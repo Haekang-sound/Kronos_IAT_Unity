@@ -176,7 +176,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 문제해결을 위해 옮김 
 		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
 		totalspeed = Speed;
-		_damageable.hitPoints = maxTP;
+		_damageable.currentHitPoints = maxTP;
 		_damageable.CurrentHitPoints = maxTP;
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
 	}

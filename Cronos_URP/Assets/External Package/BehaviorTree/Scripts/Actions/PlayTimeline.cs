@@ -11,7 +11,7 @@ class PlayTimeline : ActionNode
 
     protected override void OnStart()
     {
-        _director = blackboard.monobehaviour.GetComponent<PlayableDirector>();
+        _director = context.gameObject.GetComponent<PlayableDirector>();
 
         _director.playableAsset = timeline;
 
@@ -20,11 +20,11 @@ class PlayTimeline : ActionNode
         {
             if (kvp is AnimationTrack)
             {
-                _director.SetGenericBinding(kvp, blackboard.monobehaviour.GetComponent<Animator>());
+                _director.SetGenericBinding(kvp, context.gameObject.GetComponent<Animator>());
             }
             else if (kvp is SpawnHitColliderTrack)
             {
-                _director.SetGenericBinding(kvp, blackboard.monobehaviour.transform);
+                _director.SetGenericBinding(kvp, context.gameObject.transform);
             }
         }
 
@@ -37,7 +37,7 @@ class PlayTimeline : ActionNode
 
     protected override State OnUpdate()
     {
-        if (blackboard.monobehaviour == null || _director == null)
+        if ( _director == null)
         {
             return State.Failure;
         }
