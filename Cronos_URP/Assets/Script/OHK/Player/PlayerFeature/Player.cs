@@ -61,11 +61,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool rigidImmunity = false;
     [SerializeField] private bool dodgeAttack = false;
 
-	/// <summary>
-	/// floating capsule만드는중 
-	/// </summary>
-	[field: Header("Collisions")]
-	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
+// 	/// <summary>
+// 	/// floating capsule만드는중 
+// 	/// </summary>
+// 	[field: Header("Collisions")]
+// 	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
 
     private Checkpoint _currentCheckpoint;
 
@@ -128,17 +128,17 @@ public class Player : MonoBehaviour, IMessageReceiver
     public GameObject playerSword;
 
 
-	private void Awake()
-	{
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-	}
-	private void OnValidate()
-	{
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-
-	}
+// 	private void Awake()
+// 	{
+// 		CapsuleColldierUtility.Initialize(gameObject);
+// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+// 	}
+// 	private void OnValidate()
+// 	{
+// 		CapsuleColldierUtility.Initialize(gameObject);
+// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+// 
+// 	}
 	protected void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
