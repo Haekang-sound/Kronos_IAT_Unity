@@ -65,7 +65,7 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onLAttackStart -= Attack;
         stateMachine.InputReader.onRAttackStart -= Gurad;
         stateMachine.InputReader.onJumpStart -= Dodge;
-        stateMachine.Animator.SetBool(BuffHash, false);
+        //stateMachine.Animator.SetBool(BuffHash, false);
 	}
     private void Attack()
     {
