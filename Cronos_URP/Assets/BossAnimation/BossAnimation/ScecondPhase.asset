@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8811031856439707658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
+  m_Name: AnimatorSetTrigger
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b4832dd611aca7c4d9d6f161abdbc8cd
+  position: {x: -376, y: 477}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: attack_swing
+  drawGizmos: 0
+  parameterName: attack_swing
 --- !u!114 &-8738746801495339192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +168,7 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 5066872480121816932}
-  - {fileID: -1741616817104038360}
+  - {fileID: 5171507767125052497}
   weights:
   - 8
   - 2
@@ -422,29 +445,6 @@ MonoBehaviour:
   drawGizmos: 0
   child: {fileID: -2324192559126248337}
   time: 2
---- !u!114 &-1741616817104038360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7dd9a0ff374fd48a4e24479671a931, type: 3}
-  m_Name: Log
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: b68686cea14c82946b2d69584a7ba815
-  position: {x: -273.85016, y: 310.70004}
-  blackboard:
-    target: {fileID: 0}
-    moveToPosition: {x: -0.2983482, y: 0.00999983, z: 5.65751}
-    timer: 8.372766
-  description: avoid_back
-  drawGizmos: 0
-  message: avoid_back
 --- !u!114 &-1635878077648113236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +615,6 @@ MonoBehaviour:
   - {fileID: 4627564302948652422}
   - {fileID: 2611521707517861493}
   - {fileID: 5066872480121816932}
-  - {fileID: -1741616817104038360}
   - {fileID: 7616932276648223597}
   - {fileID: 5650890772891655263}
   - {fileID: -8738746801495339192}
@@ -627,6 +626,9 @@ MonoBehaviour:
   - {fileID: 5577187310641704144}
   - {fileID: -5288480278566032436}
   - {fileID: -3443682860253111966}
+  - {fileID: 5171507767125052497}
+  - {fileID: -8811031856439707658}
+  - {fileID: 6052968813967376728}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: -0.2983482, y: 0.00999983, z: 5.65751}
@@ -763,7 +765,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: d294bb86ca3c5954fbe0347a55cf0e2f
-  position: {x: -448.85013, y: 308.70007}
+  position: {x: -475, y: 314}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: -0.2983482, y: 0.00999983, z: 5.65751}
@@ -771,6 +773,31 @@ MonoBehaviour:
   description: 1
   drawGizmos: 0
   duration: 1
+--- !u!114 &5171507767125052497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: dd693f3eb44c74b44970003b770bfe09
+  position: {x: -277, y: 309}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -8811031856439707658}
+  - {fileID: 6052968813967376728}
 --- !u!114 &5297520280219282270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,6 +874,29 @@ MonoBehaviour:
   description: "\uC560\uB2C8\uBA54\uC774\uC158(17.1\uCD08)"
   drawGizmos: 0
   duration: 17.1
+--- !u!114 &6052968813967376728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4616225a11f5bbf40a85f1957a1a391a
+  position: {x: -178, y: 478}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: 1
+  drawGizmos: 0
+  duration: 1
 --- !u!114 &6204243995199459134
 MonoBehaviour:
   m_ObjectHideFlags: 0
