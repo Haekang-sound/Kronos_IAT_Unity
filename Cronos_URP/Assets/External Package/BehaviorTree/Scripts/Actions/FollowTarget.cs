@@ -1,6 +1,6 @@
-Ôªøusing UnityEngine;
+using UnityEngine;
 
-public class MoveToTarget : ActionNode
+public class FollowTarget : ActionNode
 {
     public float speed = 3.5f;
     public float stoppingDistance = 0.1f;
@@ -25,9 +25,6 @@ public class MoveToTarget : ActionNode
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
-
-        UpdateMoveToPosition();
-        UpdateDestination();
     }
 
     protected override void OnStop()
@@ -38,6 +35,10 @@ public class MoveToTarget : ActionNode
 
     protected override State OnUpdate()
     {
+
+        UpdateMoveToPosition();
+        UpdateDestination();
+
         if (!useAnimationSpeed)
         {
             context.agent.acceleration = acceleration;
@@ -62,6 +63,12 @@ public class MoveToTarget : ActionNode
         return State.Running;
     }
 
+    public override void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(context.transform.position, stoppingDistance);
+    }
+
     private void UpdateDestination()
     {
         context.agent.SetDestination(blackboard.moveToPosition);
@@ -71,11 +78,31 @@ public class MoveToTarget : ActionNode
     {
         if (blackboard.target == null)
         {
-            Debug.Log("ÌÉÄÍπÉÏùÑ Ï∞æÏùÑ Ïàò ÏóÜÏùå");
+            Debug.Log("≈∏±Í¿ª √£¿ª ºˆ æ¯¿Ω");
         }
         else
         {
             blackboard.moveToPosition = blackboard.target.transform.position;
         }
+    }
+
+    public void SetFollowNavmeshAgent(bool follow)
+    {
+        if (!follow && context.agent.enabled)
+        {
+            context.agent.ResetPath();
+        }
+        else if (follow && !context.agent.enabled)
+        {
+            context.agent.Warp(context.gameObject.transform.position);
+        }
+
+        //_followNavmeshAgent = follow;
+        context.agent.enabled = follow;
+    }
+
+    public void UseNavemeshAgentRotation(bool use)
+    {
+        context.agent.updateRotation = use;
     }
 }
