@@ -20,10 +20,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public EnemyController controller;
 
     private Animator _animator;
+
     private Damageable _damageable;
+    private MeleeWeapon _meleeWeapon;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
-    private Rigidbody _rigidbody;
 
     private bool _onPhaseOne;
     private bool _onPhaseTwo;
@@ -38,6 +39,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
+        _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
     }
@@ -166,5 +168,29 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         controller.SetTarget(transform.position + direction);
 
         LookAtTarget();
+    }
+    public void BeginAttack()
+    {
+        _meleeWeapon.BeginAttack();
+    }
+
+    public void EndAttack()
+    {
+        _meleeWeapon.EndAttack();
+    }
+
+    public void BeginAiming()
+    {
+        rotationSpeed = 5f;
+    }
+
+    public void StopAiming()
+    {
+        rotationSpeed = 0f;
+    }
+
+    public void ResetAiming()
+    {
+        rotationSpeed = 1f;
     }
 }

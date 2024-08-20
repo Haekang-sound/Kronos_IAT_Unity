@@ -10,7 +10,7 @@ public class CheckTimer : ActionNode
 
     protected override State OnUpdate()
     {
-        if (blackboard.timer < 0f)
+        if (blackboard.timer <= 0f)
         {
             return State.Success;
         }
