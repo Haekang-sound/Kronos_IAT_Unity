@@ -1,6 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
-
+﻿
 public class Selector : CompositeNode
 {
     protected int current;

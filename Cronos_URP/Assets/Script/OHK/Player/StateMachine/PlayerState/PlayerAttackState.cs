@@ -3,7 +3,6 @@ public class PlayerAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
 	public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
 	private readonly int chargeHash = Animator.StringToHash("Charge");
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
@@ -23,8 +22,8 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 // 
-// 		stateMachine.Animator.SetBool(nextComboHash, false);
-// 		stateMachine.Animator.ResetTrigger("Attack");
+		stateMachine.Animator.SetBool(nextComboHash, false);
+		stateMachine.Animator.ResetTrigger("Attack");
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
@@ -32,13 +31,6 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-
-		/// 좌클릭시
-// 		if ((Input.GetKeyDown(KeyCode.Mouse0) && stateMachine.currentStateInformable.normalizedTime < stateMachine.minf))
-// 		{
-// 			attackBool = true;
-// 		}
-		//if ((Input.GetKeyDown(KeyCode.Mouse0) || attackBool) && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		{
 			// NEXTCOMBO 활성화
@@ -93,8 +85,8 @@ public class PlayerAttackState : PlayerBaseState
 	public override void LateTick() { }
 	public override void Exit() 
 	{
-// 		stateMachine.Animator.SetFloat(chargeHash, 0);
-// 		stateMachine.Animator.SetBool(chargeAttackHash, false);
+		stateMachine.Animator.SetFloat(chargeHash, 0);
+		stateMachine.Animator.SetBool(chargeAttackHash, false);
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
@@ -102,12 +94,11 @@ public class PlayerAttackState : PlayerBaseState
 
 	private void Attack()
 	{
-		int handlerCount = stateMachine.InputReader.onLAttackStart?.GetInvocationList().Length ?? 0;
-		Debug.Log($"몇개냐 {handlerCount}, 이름은 {currentStateInfo.shortNameHash} ");
-		/// 좌클릭시
-		//if (currentStateInfo.normalizedTime < minFrame)
-		//{
-			attackBool = true;
+        /// 좌클릭시
+        //if (currentStateInfo.normalizedTime < minFrame)
+        //{
+        stateMachine.AutoTargetting.AutoTargeting();
+        attackBool = true;
 		//}
 		if (attackBool && currentStateInfo.normalizedTime > minFrame)
 		{

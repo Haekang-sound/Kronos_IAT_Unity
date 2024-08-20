@@ -96,28 +96,6 @@ public class AutoTargetting : MonoBehaviour
 		xDotResult = Mathf.Abs(Vector3.Dot(maincamTransform.right, Vector3.Cross(Vector3.up, direction.normalized).normalized));
 		yDotResult = Mathf.Abs(Vector3.Dot(maincamTransform.up, Vector3.Cross(Vector3.right, direction.normalized).normalized));
 
-		if (Input.GetKeyDown(KeyCode.Mouse0))
-		{
-			if (Target == null)
-			{
-				if (FindTarget())
-				{
-					isTargetting = true;
-					StartCoroutine(AutoTarget());
-				}
-				else
-				{
-					return;
-				}
-			}
-			else
-			{
-				isTargetting = true;
-				StartCoroutine(AutoTarget());
-			}
-
-		}
-
 		if (stateMachine.Player.IsLockOn)
 		{
 			LockOn();
@@ -179,7 +157,26 @@ public class AutoTargetting : MonoBehaviour
 	{
 		isTargetting = false;
 	}
-
+	public void AutoTargeting()
+	{
+        if (Target == null)
+        {
+            if (FindTarget())
+            {
+                isTargetting = true;
+                StartCoroutine(AutoTarget());
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            isTargetting = true;
+            StartCoroutine(AutoTarget());
+        }
+    }
 	private IEnumerator AutoTarget()
 	{
 		isTargetting = true;

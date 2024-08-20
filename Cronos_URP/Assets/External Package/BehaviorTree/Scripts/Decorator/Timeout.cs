@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Timeout : DecoratorNode
 {
@@ -17,7 +16,9 @@ public class Timeout : DecoratorNode
 
     protected override State OnUpdate()
     {
-        if (Time.time - _startTime > duration)
+        float elapsed = Time.time - _startTime;
+
+        if (elapsed > duration)
         {
             return State.Failure;
         }

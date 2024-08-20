@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 
 public class MoveToTarget : ActionNode
@@ -6,14 +7,23 @@ public class MoveToTarget : ActionNode
     public float speed = 3.5f;
     public float stoppingDistance = 0.1f;
     public bool updateRotation = true;
+    public bool useAnimationSpeed;
     public float acceleration = 100f;
+
+    private EnemyController enemyController;
 
     protected override void OnStart()
     {
-        UpdateMoveToPosition();
+        enemyController = context.gameObject.GetComponent<EnemyController>();
+
+        enemyController.SetFollowNavmeshAgent(true);
+        enemyController.UseNavemeshAgentRotation(true);
 
         context.agent.stoppingDistance = stoppingDistance;
-        context.agent.speed = speed;
+        if (useAnimationSpeed == true)
+        {
+            context.agent.speed = speed;
+        }
         context.agent.destination = blackboard.moveToPosition;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
@@ -21,10 +31,13 @@ public class MoveToTarget : ActionNode
 
     protected override void OnStop()
     {
+        enemyController.SetFollowNavmeshAgent(false);
+        enemyController.UseNavemeshAgentRotation(false);
     }
 
     protected override State OnUpdate()
     {
+
         UpdateMoveToPosition();
         UpdateDestination();
 
@@ -46,6 +59,12 @@ public class MoveToTarget : ActionNode
         return State.Running;
     }
 
+    public override void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(context.transform.position, stoppingDistance);
+    }
+
     private void UpdateDestination()
     {
         context.agent.SetDestination(blackboard.moveToPosition);
@@ -61,5 +80,25 @@ public class MoveToTarget : ActionNode
         {
             blackboard.moveToPosition = blackboard.target.transform.position;
         }
+    }
+
+    public void SetFollowNavmeshAgent(bool follow)
+    {
+        if (!follow && context.agent.enabled)
+        {
+            context.agent.ResetPath();
+        }
+        else if (follow && !context.agent.enabled)
+        {
+            context.agent.Warp(context.gameObject.transform.position);
+        }
+
+        //_followNavmeshAgent = follow;
+        context.agent.enabled = follow;
+    }
+
+    public void UseNavemeshAgentRotation(bool use)
+    {
+        context.agent.updateRotation = use;
     }
 }

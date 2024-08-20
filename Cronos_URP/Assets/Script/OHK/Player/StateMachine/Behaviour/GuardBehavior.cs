@@ -7,18 +7,14 @@ public class GuardBehavior : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
 	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
+    private readonly int guradHash = Animator.StringToHash("isGuard");
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerDefenceState(stateMachine));
-		stateMachine.AutoTargetting.Target = null;
-		stateMachine.Rigidbody.velocity = Vector3.zero;
-
-		stateMachine.Player.BeginGuard();
-		stateMachine.Player.BeginParry();
+	
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,22 +28,18 @@ public class GuardBehavior : StateMachineBehaviour
         // 이동키입력을 받으면
         if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
-			// 이동중
-			animator.SetBool(moveHash, true);
+            // 이동중
+            animator.SetBool(moveHash, true);
 		}
-		//bool test = Input.GetKeyUp(KeyCode.Mouse1);
-		if (!Input.GetKey(KeyCode.Mouse1))
-		{
-			animator.SetBool(guradHash, false);
-		}
+
 
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-        stateMachine.Player.EndGuard();
-    }
+// 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+// 	{
+//         
+//     }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
