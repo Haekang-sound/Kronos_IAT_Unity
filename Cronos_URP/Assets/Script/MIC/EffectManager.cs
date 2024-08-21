@@ -1,3 +1,4 @@
+using Sonity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -406,6 +407,7 @@ public class EffectManager : MonoBehaviour
 
     public void CreateParryFX()
     {
+        soundManager.PlaySFX("Parry_SE", player.transform);
         Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
         GameObject parr = SpawnEffect("GuardFlare", parrPos);
         StartCoroutine(FadeOutLights(parr));
