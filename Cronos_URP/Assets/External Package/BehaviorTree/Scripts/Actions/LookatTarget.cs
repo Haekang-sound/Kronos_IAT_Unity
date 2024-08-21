@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LookatTarget : ActionNode
 {
@@ -37,7 +38,9 @@ public class LookatTarget : ActionNode
         var c = Color.blue;
         c.a = 0.3f;
         UnityEditor.Handles.color = c;
-        UnityEditor.Handles.DrawSolidArc(context.agent.transform.position, Vector3.up, context.agent.transform.forward, angleThreshold, 20);
+
+        Vector3 rotatedForward = Quaternion.Euler(0, -angleThreshold * 0.5f, 0) * context.agent.transform.forward;
+        UnityEditor.Handles.DrawSolidArc(context.agent.transform.position, Vector3.up, rotatedForward, angleThreshold, 20);
 #endif
     }
 
