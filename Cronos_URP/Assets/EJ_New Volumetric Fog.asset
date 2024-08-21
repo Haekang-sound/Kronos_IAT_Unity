@@ -12,33 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612e70f49e5124da0a95111a57250300, type: 3}
   m_Name: EJ_New Volumetric Fog
   m_EditorClassIdentifier: 
-  raymarchQuality: 3
-  raymarchMinStep: 13.23
+  raymarchQuality: 6
+  raymarchMinStep: 0.1
   jittering: 0.3
-  dithering: 0.426
+  dithering: 1
   renderQueue: 3100
   sortingLayerID: 0
   sortingOrder: 0
   constantDensity: 0
   noiseTexture: {fileID: 2800000, guid: 9c79340e1a1054275ba04070a27de306, type: 3}
   noiseTextureOptimizedSize: 256
-  noiseStrength: 0.41
-  noiseScale: 15
-  noiseFinalMultiplier: 0.5
+  noiseStrength: 0.84
+  noiseScale: 30
+  noiseFinalMultiplier: 0.4
   useDetailNoise: 0
   detailTexture: {fileID: 11700000, guid: 950add8d241c6479bbab1f10e1035d60, type: 2}
   detailScale: 0.35
   detailStrength: 0.5
   detailOffset: -0.5
-  density: 0.6
+  density: 0.05
   shape: 0
   scaleNoiseWithHeight: 0.01
   border: 0.05
   customHeight: 0
   height: 75
-  verticalOffset: -10
-  distance: 313.8
-  distanceFallOff: 0.93
+  verticalOffset: 0.64
+  distance: 30
+  distanceFallOff: 0.7
   maxDistance: 2000
   maxDistanceFallOff: 0
   terrainFit: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   terrainFogHeight: 25
   terrainFogMinAltitude: 0
   terrainFogMaxAltitude: 150
-  albedo: {r: 0.6509434, g: 0.62338376, b: 0.5987451, a: 1}
+  albedo: {r: 0.6183695, g: 0.6701139, b: 0.6792453, a: 1}
   enableDepthGradient: 0
   depthGradient:
     serializedVersion: 2
@@ -114,7 +114,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   brightness: 1
-  deepObscurance: 1
+  deepObscurance: 1.32
   specularColor: {r: 1, g: 1, b: 0.8, a: 1}
   specularThreshold: 0.637
   specularIntensity: 0.428
