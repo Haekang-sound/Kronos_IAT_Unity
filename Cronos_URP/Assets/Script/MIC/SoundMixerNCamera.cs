@@ -78,6 +78,8 @@ public class SoundMixerNCamera : MonoBehaviour
         aBgm = dBgm;
         aSfx = dSfx;
 
+        GameObject playerCam = GameObject.Find("PlayerCam");
+        virCam = playerCam.GetComponent<CinemachineVirtualCamera>();
 
         if (camSlider == null)
             Debug.LogWarning("camSlider is not assigned");
