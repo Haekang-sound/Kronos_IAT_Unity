@@ -165,7 +165,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         }
 
         Vector3 direction = Vector3.Cross(offsetPlayer, Vector3.up);
-        controller.SetTarget(transform.position + direction);
+        controller.SetTarget(transform.position + direction.normalized) ;
 
         LookAtTarget();
     }

@@ -292,7 +292,9 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        //StartCoroutine(DeathScequence());
+        if(ScreenFader.Instance == null) return;
+
+        StartCoroutine(DeathScequence());
     }
 
     private IEnumerator DeathScequence()

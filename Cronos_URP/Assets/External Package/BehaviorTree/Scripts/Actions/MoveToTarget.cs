@@ -54,7 +54,8 @@ public class MoveToTarget : ActionNode
             return State.Success;
         }
 
-        if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+        if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathPartial ||
+            context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
             return State.Failure;
         }
