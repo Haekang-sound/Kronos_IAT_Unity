@@ -1,4 +1,3 @@
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerBuffState : PlayerBaseState
@@ -18,7 +17,7 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.Rigidbody.velocity = Vector3.zero;
         stateMachine.Animator.ResetTrigger(attackHash);
         stateMachine.Animator.ResetTrigger(idleHash);
-        stateMachine.Animator.SetBool(BuffHash, true);
+        //stateMachine.Animator.SetBool(BuffHash, true);
         buffTimer = 0f;
 
         stateMachine.InputReader.onLAttackStart += Attack;
@@ -66,7 +65,7 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onLAttackStart -= Attack;
         stateMachine.InputReader.onRAttackStart -= Gurad;
         stateMachine.InputReader.onJumpStart -= Dodge;
-        stateMachine.Animator.SetBool(BuffHash, false);
+        //stateMachine.Animator.SetBool(BuffHash, false);
 	}
     private void Attack()
     {

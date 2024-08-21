@@ -11,14 +11,22 @@ Material:
   m_Shader: {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _DOUBLESIDED_ON
+  - _EMISSION
+  - _MASKMAP
+  - _NORMALMAP
+  - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+  - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -97,7 +105,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e85171e2bfce5b6409cef8a923d9bdb3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -363,7 +371,6 @@ Material:
     - _PuddlesAnimationSpeed: 1
     - _PuddlesNormalScale: 1
     - _PuddlesSize: 1
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _RainAnimationSpeed: 0.1
     - _RainDistortionScale: 0.5
@@ -375,7 +382,6 @@ Material:
     - _ReceiveShadows: 1
     - _RefractionEnable: 0
     - _RefractionShadowAttenuation: 1
-    - _SensorId: 1
     - _Smoothness: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
@@ -420,7 +426,7 @@ Material:
     - _BaseColor3: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _PuddlesFramesSize: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
