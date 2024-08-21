@@ -49,6 +49,7 @@ public class EffectManager : MonoBehaviour
     public float mBlurVal = 0.7f;
     public float cAberVal = 0.7f;
     public float parryTime = 1.0f;
+    public float fadeTime = 0.3f;
 
     // 강화 검기 관련
     [Range(0f, 200f)]
@@ -383,24 +384,38 @@ public class EffectManager : MonoBehaviour
         Destroy(slashed, 1.0f);
     }
 
-    public void CreateParryFX()
-    {
-        // 글로벌볼륨이 없다면 나가
-        if (gVolume == null)
-            return;
+    //public void CreateParryFX()
+    //{
+    //    // 글로벌볼륨이 없다면 나가
+    //    if (gVolume == null)
+    //        return;
 
-        Vector3 parrPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
-        GameObject parr = SpawnEffect("ParryY", parrPos);
-        Destroy(parr, 1.5f);
-        StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
-        StartCoroutine(ParryCAberrationCoroutine(cAberVal));
-    }
+    //    Vector3 parrPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+    //    GameObject parr = SpawnEffect("ParryY", parrPos);
+    //    Destroy(parr, 1.5f);
+    //    StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
+    //    StartCoroutine(ParryCAberrationCoroutine(cAberVal));
+    //}
 
     public void CreateGuardFX()
     {
         Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
         GameObject grd = SpawnEffect("GuardFX", grdPos);
         Destroy(grd, 1.0f);
+    }
+
+    public void CreateParryFX()
+    {
+        Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
+        GameObject parr = SpawnEffect("GuardFlare", parrPos);
+        StartCoroutine(FadeOutLights(parr));
+        Destroy(parr, 1.0f);
+        CreateGuardFX();
+        // 글로벌볼륨이 없다면 나가
+        if (gVolume == null)
+            return;
+        StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
+        StartCoroutine(ParryCAberrationCoroutine(cAberVal));
     }
 
     IEnumerator ParryMotionBlurCoroutine(float val)
@@ -431,5 +446,22 @@ public class EffectManager : MonoBehaviour
         }
 
         cAber.intensity.value = 0f;
+    }
+
+    IEnumerator FadeOutLights(GameObject flare)
+    {
+        float elapsedTime = 0.0f;
+        Light light = flare.GetComponent<Light>();
+        LensFlareComponentSRP lens = flare.GetComponent<LensFlareComponentSRP>();
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            light.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
+            lens.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
+            yield return null;
+        }
+
+        light.intensity = 0f;
+        lens.intensity = 0f;
     }
 }
