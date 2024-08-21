@@ -10,6 +10,15 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
     public GameObject target;
     public float targetDistance;
 
+    public BehaviorTree phaseOne;
+    public BehaviorTree phaseTwo;
+    public BehaviorTree phaseTree;
+
+    private bool _phaseTwo;
+    private bool _phaseTree;
+    private Blackboard _blackboard;
+
+    private Damageable _damageable;
     private BehaviorTreeRunner _btRunner;
     private PlayableDirector _playableDirector;
 
@@ -20,18 +29,26 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
             target = GameObject.FindGameObjectWithTag("Player");
         }
 
+        _damageable = GetComponent<Damageable>();
         _btRunner = GetComponent<BehaviorTreeRunner>();
+
+        _blackboard = new Blackboard();
     }
 
     void OnEnable()
     {
-        _btRunner.tree.blackboard.monobehaviour = gameObject;
+        _blackboard.target = target;
+
+        _btRunner.tree = phaseOne;
     }
+
+    void Start()
+    {
+    }    
 
     void OnDisable()
     {
         _btRunner.tree.blackboard.target = null;
-        _btRunner.tree.blackboard.monobehaviour = null;
     }
 
     void Update()
@@ -41,7 +58,22 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
 
         if (target && checkDistance)
         {
-            _btRunner.tree.blackboard.target = target;
+            _btRunner.tree.blackboard = _blackboard;
+            //_btRunner.tree.blackboard.target = target;
+            _btRunner.Bind();
+        }
+
+
+        if(_phaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        {
+            ChangePhase(phaseTwo);
+            _phaseTwo = true;
+        }
+        
+        if(_phaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        {
+            ChangePhase(phaseTree);
+            _phaseTree = true;
         }
     }
 
@@ -70,6 +102,12 @@ public class TestBossBehavior : MonoBehaviour, IMessageReceiver
                 return;
 
         }
+    }
+    public void ChangePhase(BehaviorTree bt)
+    {
+        _btRunner.tree = bt;
+        _btRunner.tree.blackboard = _blackboard;
+        _btRunner.BindTree();
     }
 
     private void Damaged()

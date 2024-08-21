@@ -48,7 +48,6 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
             _previusSpeed = _monoBehaviour.Controller.GetNavemeshAgentSpeed();
             _monoBehaviour.Controller.SetNavemeshAgentSpeed(_monoBehaviour.strafeSpeed);
         }
-
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -101,7 +100,6 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
         {
             _monoBehaviour.Controller.SetNavemeshAgentSpeed(_previusSpeed);
         }
-
     }
 
     private void ResetTimer()

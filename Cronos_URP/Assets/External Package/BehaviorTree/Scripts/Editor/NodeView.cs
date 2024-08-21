@@ -12,8 +12,6 @@ using UnityEditor;
 /// </summary>
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
-    public static string uxmlPath = "Assets/BehaviorTree/UIBuilder/NodeView.uxml";
-
     // 노드가 선택될 때 호출될 콜백 함수. 'Action<NodeView>' 타입으로, 'NodeView' 인스턴스를 매개변수로 받는다.
     public Action<NodeView> OnNodeSelected;
     // 이 뷰가 표현하는 'Node' 객체. 행동 트리의 구성 요소 중 하나이다.
@@ -25,7 +23,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     // 생성자는 'Node' 객체를 매개변수로 받아, 노드의 시각적 표현을 초기화한다.
     // 이 과정에서 노드의 이름, 위치, 입력/출력 포트 생성, CSS 클래스 설정, 데이터 바인딩 설정 등을 수행한다.
-    public NodeView(Node node): base(uxmlPath)
+    public NodeView(Node node): base(AssetDatabase.GetAssetPath(BehaviorTreeSettings.GetOrCreateSettings().nodeXml))
     {
         if (node == null)
         {

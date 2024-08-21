@@ -20,6 +20,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     private EnemyController _controller;
     private BulletTimeScalable _bulletTimeScalable;
     private MeleeWeapon _meleeWeapon;
+    private Rigidbody _rigidbody;
 
     // Animator Parameters
     public static readonly int hashDown = Animator.StringToHash("down");
@@ -41,6 +42,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+		_rigidbody = GetComponentInChildren<Rigidbody>();
     }
 
     void Start()
@@ -48,11 +50,20 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         OnDown.AddListener(TriggerDown);
     }
 
+
     void OnEnable()
     {
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 
         _damageable.onDamageMessageReceivers.Add(this);
+
+        _rigidbody.GetComponent<Rigidbody>();
+
+        _rigidbody.drag = 10f;
+        _rigidbody.isKinematic = false;
+        _rigidbody.useGravity = false;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     private void OnDisable()
