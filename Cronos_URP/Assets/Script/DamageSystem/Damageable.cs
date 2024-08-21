@@ -43,7 +43,7 @@ public partial class Damageable : MonoBehaviour
     System.Action schedule;
 
     SoundManager soundManager;
-    EffectManager effectManager;
+    //EffectManager effectManager;
     Player player;
     ImpulseCam impCam;
 
@@ -56,7 +56,7 @@ public partial class Damageable : MonoBehaviour
 
     private void OnEnable()
     {
-        effectManager = EffectManager.Instance;
+        //effectManager = EffectManager.Instance;
         soundManager = SoundManager.Instance;
         player = Player.Instance;
     }
@@ -145,7 +145,7 @@ public partial class Damageable : MonoBehaviour
 
         // 죽든 살든 맞는 소리는 나와야 하니까
         if (gameObject.tag != "Player")
-            soundManager.PlaySFX("Enemy_impact_SE", transform);
+            soundManager.PlaySFX("Hit_Metal_SE", transform);
 
         if (CurrentHitPoints <= 0)
         {
