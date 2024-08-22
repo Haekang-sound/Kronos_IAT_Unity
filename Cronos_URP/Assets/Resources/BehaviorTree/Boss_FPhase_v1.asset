@@ -18,8 +18,8 @@ MonoBehaviour:
   position: {x: -1561.055, y: 865.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: idle
   drawGizmos: 0
   parameterName: idle
@@ -41,8 +41,8 @@ MonoBehaviour:
   position: {x: 1149.3225, y: 871.355}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack_smash_ground
   drawGizmos: 0
   parameterName: attack_smash_ground
@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: f2fb0074a11443f40aaa2f4d18cfea18
   position: {x: -624.055, y: 866.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 5.1
   drawGizmos: 0
   duration: 5.1
@@ -87,8 +87,8 @@ MonoBehaviour:
   position: {x: -557.055, y: 543.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 10
   drawGizmos: 0
   resetTime: 10
@@ -110,8 +110,8 @@ MonoBehaviour:
   position: {x: -1188.055, y: 865.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack_swing
   drawGizmos: 0
   parameterName: attack_swing
@@ -133,8 +133,8 @@ MonoBehaviour:
   position: {x: -806.05505, y: 866.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack_running_simple
   drawGizmos: 0
   parameterName: attack_running_simple
@@ -156,8 +156,8 @@ MonoBehaviour:
   position: {x: -1509.055, y: 668.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: run
   drawGizmos: 0
   parameterName: run
@@ -179,8 +179,8 @@ MonoBehaviour:
   position: {x: -1320.055, y: 526.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uBAA9\uD45C\uB97C \uD5A5\uD574 \uC774\uB3D9"
   drawGizmos: 0
   children:
@@ -198,22 +198,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e7e38bc1d2db74d9684dc7994da2fb, type: 3}
   m_Name: WeightedRandomSelector
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 0bf85793b8141634dae678fe4dc4767d
   position: {x: -928.055, y: 536.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uAE30\uBCF8 \uACF5\uACA9 \n(75 / 25)"
   drawGizmos: 0
   children:
   - {fileID: 353109355764100358}
   - {fileID: 4047045108605966870}
   weights:
-  - 25
   - 75
+  - 25
 --- !u!114 &-4432289722217986344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,14 +226,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 1
+  started: 0
   guid: bb46cb843214eda4981422350193d917
   position: {x: -905.055, y: 347.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uAE30\uBCF8 \uC774\uB3D9, \uAE30\uBCF8 \uACF5\uACA9"
   drawGizmos: 0
   children:
@@ -260,8 +260,8 @@ MonoBehaviour:
   position: {x: -1365.055, y: 865.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uD0C0\uAE43 \uACE0\uC815"
   drawGizmos: 1
   rotationSpeed: 16
@@ -284,8 +284,8 @@ MonoBehaviour:
   position: {x: 1244.3225, y: 721.35504}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack_smash_ground
   drawGizmos: 0
   children:
@@ -303,14 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2f980eb88f1de4f8d1890e6ec9dc5b, type: 3}
   m_Name: CheckTimer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 5a75f34f69b584e4896e910284393f60
   position: {x: -1555.055, y: 532.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 
   drawGizmos: 0
 --- !u!114 &-2508828038790848612
@@ -331,8 +331,8 @@ MonoBehaviour:
   position: {x: -176.05507, y: 844.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 1
   drawGizmos: 0
   duration: 1
@@ -354,8 +354,8 @@ MonoBehaviour:
   position: {x: -367.05493, y: 844.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: avoid_back
   drawGizmos: 0
   parameterName: avoid_back
@@ -377,8 +377,8 @@ MonoBehaviour:
   position: {x: 0, y: 95.40001}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 
   drawGizmos: 0
   child: {fileID: 5386971415522838825}
@@ -400,8 +400,8 @@ MonoBehaviour:
   position: {x: 953.32245, y: 869.35504}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 6.4
   drawGizmos: 0
   duration: 6.4
@@ -423,8 +423,8 @@ MonoBehaviour:
   position: {x: 183.48215, y: 703.2509}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: strafe
   drawGizmos: 0
   parameterName: strafe
@@ -480,8 +480,8 @@ MonoBehaviour:
   - {fileID: 6486354961986618037}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
 --- !u!114 &142795689192190451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,13 +495,13 @@ MonoBehaviour:
   m_Name: RandomWait
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 3d062f6f78a1d134c9f0d513182a94d2
   position: {x: 378.48224, y: 698.2509}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 1~4
   drawGizmos: 0
   minDuration: 1
@@ -521,11 +521,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 03b3b303c70e3924398910a7b4c39325
-  position: {x: -999.05505, y: 700.6775}
+  position: {x: -1000.3226, y: 701}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: swing attack
   drawGizmos: 0
   children:
@@ -546,13 +546,13 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 23d766b7bf2a57d4bbfde868594b5b56
   position: {x: 377.4822, y: 548.251}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uACBD\uACC4 \uC774\uB3D9"
   drawGizmos: 0
   children:
@@ -577,8 +577,8 @@ MonoBehaviour:
   position: {x: 854.3225, y: 724.35504}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack uppercut
   drawGizmos: 0
   children:
@@ -602,8 +602,8 @@ MonoBehaviour:
   position: {x: -307.05505, y: 536.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uACF5\uACA9 \uD6C4 \uB3D9\uC791 \n(8 / 2)"
   drawGizmos: 0
   children:
@@ -630,8 +630,8 @@ MonoBehaviour:
   position: {x: -374.05505, y: 703.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 1
   drawGizmos: 0
   duration: 1
@@ -653,8 +653,8 @@ MonoBehaviour:
   position: {x: 1022.3225, y: 527.355}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uD2B9\uC218 \uACF5\uACA9\n(50 / 25)"
   drawGizmos: 0
   children:
@@ -675,14 +675,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 4b883603b4ca6584ba6305e476bbeb17
   position: {x: -805.055, y: 704.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: runnsing simple attack
   drawGizmos: 0
   children:
@@ -706,8 +706,8 @@ MonoBehaviour:
   position: {x: -1, y: 200.40001}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 
   drawGizmos: 0
   children:
@@ -731,8 +731,8 @@ MonoBehaviour:
   position: {x: 0, y: -1.5999908}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 
   drawGizmos: 0
   child: {fileID: -582922611479388487}
@@ -754,8 +754,8 @@ MonoBehaviour:
   position: {x: 1348.3225, y: 869.35504}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 3
   drawGizmos: 0
   duration: 3
@@ -777,8 +777,8 @@ MonoBehaviour:
   position: {x: -1319.055, y: 667.6775}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uAC70\uB9AC 3 \uAE4C\uC9C0"
   drawGizmos: 1
   speed: 3.5
@@ -799,13 +799,13 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 58a74fa9212a85349ae09a70e0fd6108
   position: {x: 674.20746, y: 352.645}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: "\uACBD\uACC4 \uC774\uB3D9, \uD2B9\uC218 \uACF5\uACA9"
   drawGizmos: 0
   children:
@@ -829,8 +829,8 @@ MonoBehaviour:
   position: {x: 761.32245, y: 872.35504}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: attack_uppercut
   drawGizmos: 0
   parameterName: attack_uppercut
@@ -852,8 +852,8 @@ MonoBehaviour:
   position: {x: -999.05505, y: 865.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: 6
   drawGizmos: 0
   duration: 6
@@ -875,8 +875,8 @@ MonoBehaviour:
   position: {x: 572.48206, y: 699.251}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: idle
   drawGizmos: 0
   parameterName: idle
@@ -898,8 +898,8 @@ MonoBehaviour:
   position: {x: -176.05507, y: 701.67755}
   blackboard:
     target: {fileID: 0}
-    moveToPosition: {x: -8.74163e-12, y: 0.009999993, z: 5.3340754e-21}
-    timer: -4.6344013
+    moveToPosition: {x: 7.6897106, y: 0.0099999895, z: 3.2466438}
+    timer: 8.124387
   description: avoid back
   drawGizmos: 0
   children:
