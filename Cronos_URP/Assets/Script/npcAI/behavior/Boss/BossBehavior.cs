@@ -21,6 +21,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private Animator _animator;
 
+    private HitShake _hitShake;
     private Damageable _damageable;
     private MeleeWeapon _meleeWeapon;
     private PlayableDirector _playableDirector;
@@ -37,6 +38,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         controller = GetComponent<EnemyController>();
 
+        _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
@@ -93,10 +95,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
-                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
                 break;
             case MessageType.DEAD:
-                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
                 break;
             case MessageType.RESPAWN:
                 break;
