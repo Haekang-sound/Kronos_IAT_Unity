@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HN_New Volumetric Fog Profile
   m_EditorClassIdentifier: 
   raymarchQuality: 16
-  raymarchMinStep: 0.1
+  raymarchMinStep: 0.2
   jittering: 0
   dithering: 1
   renderQueue: 3100
@@ -30,13 +30,13 @@ MonoBehaviour:
   detailScale: 0.35
   detailStrength: 0.5
   detailOffset: -0.5
-  density: 0.25
+  density: 0.03
   shape: 0
   scaleNoiseWithHeight: 0
   border: 0.05
   customHeight: 0
   height: 0
-  verticalOffset: -46
+  verticalOffset: 3.58
   distance: 1
   distanceFallOff: 0.93
   maxDistance: 100
@@ -49,7 +49,7 @@ MonoBehaviour:
   terrainFogHeight: 25
   terrainFogMinAltitude: 0
   terrainFogMaxAltitude: 150
-  albedo: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 0.835}
+  albedo: {r: 1, g: 1, b: 1, a: 0.7}
   enableDepthGradient: 0
   depthGradient:
     serializedVersion: 2
@@ -82,7 +82,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   depthGradientMaxDistance: 1000
-  enableHeightGradient: 1
+  enableHeightGradient: 0
   heightGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  brightness: 0.25
+  brightness: 0.05
   deepObscurance: 0.58
   specularColor: {r: 0, g: 0, b: 0, a: 1}
   specularThreshold: 0.637
