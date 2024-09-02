@@ -61,12 +61,14 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool rigidImmunity = false;
     [SerializeField] private bool dodgeAttack = false;
 
-	/// <summary>
-	/// floating capsule만드는중 
-	/// </summary>
-	[field: Header("Collisions")]
-	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
-	[field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+    /// <summary>
+    /// floating capsule만드는중 
+    /// </summary>
+    [field: Header("Collisions")]
+    [field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
+    [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+    [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
+
 
     private Checkpoint _currentCheckpoint;
 
@@ -78,8 +80,8 @@ public class Player : MonoBehaviour, IMessageReceiver
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
 
-//     // 스킬 사용정보
-//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+    //     // 스킬 사용정보
+    //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
 
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
@@ -105,11 +107,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     public bool IsDecreaseCP { get; set; }
     public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
     public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
-	public bool RigidImmunity { get { return rigidImmunity; } set {  rigidImmunity = value; } }	
-	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }	
+    public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
+    public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
 
-	// 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
-	PlayerData playerData = new PlayerData();
+    // 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
+    PlayerData playerData = new PlayerData();
     Transform playerTransform;
     AutoTargetting targetting;
 
@@ -126,18 +128,18 @@ public class Player : MonoBehaviour, IMessageReceiver
     public GameObject playerSword;
 
 
-	private void Awake()
-	{
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-	}
-	private void OnValidate()
-	{
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+    private void Awake()
+    {
+        CapsuleColldierUtility.Initialize(gameObject);
+        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+    }
+    private void OnValidate()
+    {
+        CapsuleColldierUtility.Initialize(gameObject);
+        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
-	}
-	protected void OnDisable()
+    }
+    protected void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
     }
@@ -171,13 +173,13 @@ public class Player : MonoBehaviour, IMessageReceiver
             Debug.Log("ImpulseCam found");
 
 
-		// 문제해결을 위해 옮김 
-		meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-		totalspeed = Speed;
-		_damageable.hitPoints = maxTP;
-		_damageable.CurrentHitPoints = maxTP;
-		meleeWeapon.simpleDamager.damageAmount = currentDamage;
-	}
+        // 문제해결을 위해 옮김 
+        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        totalspeed = Speed;
+        _damageable.hitPoints = maxTP;
+        _damageable.CurrentHitPoints = maxTP;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+    }
 
     private void ChargeCP(Collider other)
     {
@@ -260,16 +262,16 @@ public class Player : MonoBehaviour, IMessageReceiver
     void Damaged(Damageable.DamageMessage damageMessage)
     {
         // 여기서 리턴하면 애니메이션만 재생하지 않는다.
-		// 
+        // 
         if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-			PlayerFSM.GetState().ToString() == "PlayerParryState"	||
-			PlayerFSM.GetState().ToString() == "PlayerDamagedState" || 
-			rigidImmunity || isEnforced)
-		{
-			return;
-		}
+            PlayerFSM.GetState().ToString() == "PlayerParryState" ||
+            PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
+            rigidImmunity || isEnforced)
+        {
+            return;
+        }
 
-		PlayerFSM.Animator.SetTrigger("Damaged");
+        PlayerFSM.Animator.SetTrigger("Damaged");
     }
 
     // 죽었을 때 호출되는 함수

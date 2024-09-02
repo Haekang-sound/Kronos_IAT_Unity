@@ -22,7 +22,7 @@ public class CapsuleColldierUtility
 	public void CalculateCapsuleColliderDimensions()
 	{
 		SetCapsuleColliderRadius(DefaultColliderData.Radius);
-		SetCapsulecolliderHeight(DefaultColliderData.Height);// * (1f - SlopeData.StepHeightPercentage));
+		SetCapsulecolliderHeight((DefaultColliderData.Height) * (1f - SlopeData.StepHeightPercentage));
 		RecalculateCapsuleColliderCenter();
 		float halfColiderHeight = CapsuleColliderData.Collider.height / 2f;
 		if(halfColiderHeight < CapsuleColliderData.Collider.radius)
