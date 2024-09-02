@@ -6,6 +6,7 @@ public class Log : ActionNode
 
     protected override void OnStart()
     {
+        description = message;
     }
 
     protected override void OnStop()

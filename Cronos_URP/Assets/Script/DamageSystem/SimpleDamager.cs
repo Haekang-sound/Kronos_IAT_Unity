@@ -119,7 +119,7 @@ public class SimpleDamager : MonoBehaviour
         else if (collider is CapsuleCollider capsuleCollider)
         {
             // 캡슐 콜라이더의 위치와 크기를 가져옵니다.
-            Vector3 center = collider.bounds.center;
+            Vector3 center = capsuleCollider.center;
             float height = capsuleCollider.height * 0.5f;
             float radius = capsuleCollider.radius;
 

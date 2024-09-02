@@ -12,6 +12,8 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public float rotationSpeed = 1.0f;
 
     public Vector3 BasePosition { get; private set; }
+    private float _baseTolerance = 0.6f;
+
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
@@ -20,6 +22,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     private EnemyController _controller;
     private BulletTimeScalable _bulletTimeScalable;
     private SimpleDamager _meleeWeapon;
+    private Rigidbody _rigidbody;
 
     // Animator Parameters
     public static readonly int hashAim = Animator.StringToHash("aim");
@@ -42,15 +45,25 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
         _meleeWeapon = GetComponentInChildren<SimpleDamager>();
+		_rigidbody = GetComponent<Rigidbody>();
     }
 
     // void Start()
+
 
     void OnEnable()
     {
         SceneLinkedSMB<BTypeEnemyBehavior>.Initialise(_controller.animator, this);
 
         _damageable.onDamageMessageReceivers.Add(this);
+
+        _rigidbody.GetComponent<Rigidbody>();
+
+        _rigidbody.drag = 10f;
+        _rigidbody.isKinematic = false;
+        _rigidbody.useGravity = false;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     private void OnDisable()
@@ -85,6 +98,10 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
         //Gizmos.color = Color.blue;
         //Gizmos.DrawWireSphere(transform.position, strafeDistance);
+
+        // 기본 위치 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +126,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public bool IsNearBase()
     {
         Vector3 toBase = BasePosition - transform.position;
-        return toBase.sqrMagnitude < 0.01f;  // 0.01 은 오차 범위
+        return toBase.sqrMagnitude < _baseTolerance;
     }
 
     public bool IsInAttackRange()

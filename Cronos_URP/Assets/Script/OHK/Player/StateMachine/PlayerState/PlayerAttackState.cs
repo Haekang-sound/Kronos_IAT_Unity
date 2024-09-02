@@ -8,7 +8,7 @@ public class PlayerAttackState : PlayerBaseState
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
-
+	Vector3 totalMove;
 	[SerializeField] float moveForce;
 	bool attackBool = false;
 
@@ -21,7 +21,7 @@ public class PlayerAttackState : PlayerBaseState
 		attackBool = false;
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
-// 
+		// 
 		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 
@@ -62,28 +62,29 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.Animator.SetFloat(chargeHash, 0);
 		}
 
+		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+		rootMotion.y = 0;
+		totalMove += rootMotion;
+
 
 		CalculateMoveDirection();   // 방향을 계산하고
 	}
 	public override void FixedTick()
 	{
-		// Implement code that processes and affects root motion
-		// 애니메이터에서 루트모션을 받아온다. 
-		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
-		rootMotion.y = 0;
 		if (IsOnSlope())
 		{
-			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(rootMotion) * stateMachine.MoveForce;
-			//Debug.Log(stateMachine.Rigidbody.velocity);
+			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
 		}
 		else
 		{
-			stateMachine.Rigidbody.velocity = rootMotion * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
 
 		}
+
+		totalMove = Vector3.zero;
 	}
 	public override void LateTick() { }
-	public override void Exit() 
+	public override void Exit()
 	{
 		stateMachine.Animator.SetFloat(chargeHash, 0);
 		stateMachine.Animator.SetBool(chargeAttackHash, false);
@@ -94,11 +95,11 @@ public class PlayerAttackState : PlayerBaseState
 
 	private void Attack()
 	{
-        /// 좌클릭시
-        //if (currentStateInfo.normalizedTime < minFrame)
-        //{
-        stateMachine.AutoTargetting.AutoTargeting();
-        attackBool = true;
+		/// 좌클릭시
+		//if (currentStateInfo.normalizedTime < minFrame)
+		//{
+		stateMachine.AutoTargetting.AutoTargeting();
+		attackBool = true;
 		//}
 		if (attackBool && currentStateInfo.normalizedTime > minFrame)
 		{

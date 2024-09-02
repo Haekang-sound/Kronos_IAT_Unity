@@ -7,14 +7,12 @@ using System.Collections.Generic;
 
 public class BehaviorTreeEditor : EditorWindow
 {
-    public static string uxmlPath = "Assets/BehaviorTree/UIBuilder/BehaviorTreeEditor.uxml";
-    public static string ussPath = "Assets/BehaviorTree/UIBuilder/BehaviorTreeEditor.uss";
-
     private BehaviorTreeView _treeView;
     private BehaviorTree _tree;
     private InspectorView _inspectorView;
     private IMGUIContainer _blackboardView;
     private ToolbarMenu _toolbarMenu; // 행동 트리 에디터의 도구 모음 메뉴이다.
+    private BehaviorTreeSettings _treeSettings;
 
     // 편집 중인 행동 트리와 그 블랙보드를 직렬화하는 객체이다.
     SerializedObject _treeObject;
@@ -68,16 +66,18 @@ public class BehaviorTreeEditor : EditorWindow
 
     public void CreateGUI()
     {
+        _treeSettings = BehaviorTreeSettings.GetOrCreateSettings();
+
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
         // 에디터 윈도우의 'rootVisualElement' 객체에 접근하여 UI의 기본 컨테이너로 사용한다.
 
         // UXML 가져오기
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlPath);
+        var visualTree = _treeSettings.behaviourTreeXml;
         visualTree.CloneTree(root);
 
         // 스타일 시트
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(ussPath);
+        var styleSheet = _treeSettings.behaviourTreeStyle;
         root.styleSheets.Add(styleSheet);
 
         // 매인 트리 뷰

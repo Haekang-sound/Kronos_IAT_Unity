@@ -10,10 +10,12 @@ using System.Linq;
 public class BehaviorTreeView : GraphView
 {
     public Action<NodeView> OnNodeSelected;
-    // 현재 에디터에서 작업중인 'BehaviorTree' 객체, 이 트리는 노드의 집합과 그들 사이의 연결 관계를 포함한다.
-    private BehaviorTree _tree;
     // UxmlFactory : 'GraphView'의 'UxmlFactory' 를 상속받는 내부 클래스로, UXML을 통해 'BehaviorTreeView'를 인스턴스화 할 때 사용된다.
     public new class UxmlFactory : UxmlFactory<BehaviorTreeView, GraphView.UxmlTraits> { }
+
+    // 현재 에디터에서 작업중인 'BehaviorTree' 객체, 이 트리는 노드의 집합과 그들 사이의 연결 관계를 포함한다.
+    private BehaviorTree _tree;
+    private BehaviorTreeSettings _treeSettings;
 
     /// <summary>
     /// 생성자에서 설정을 로드하고, 'GraphView'에 필요한 조작기(mainiplators)와 UI 요소를 추가한다.
@@ -24,6 +26,8 @@ public class BehaviorTreeView : GraphView
     /// </summary>
     public BehaviorTreeView()
     {
+        _treeSettings = BehaviorTreeSettings.GetOrCreateSettings();
+
         Insert(0, new GridBackground()); // 백그라운드 드로우
 
         this.AddManipulator(new ContentZoomer());
@@ -32,8 +36,7 @@ public class BehaviorTreeView : GraphView
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
 
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviorTreeEditor.ussPath);
-        //var styleSheet = _settings.behaviourTreeStyle;
+        var styleSheet = _treeSettings.behaviourTreeStyle;
         styleSheets.Add(styleSheet); // 스타일 시트 직접참조
 
         Undo.undoRedoPerformed += OnUndoRedo;

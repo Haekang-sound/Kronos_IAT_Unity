@@ -127,8 +127,10 @@ Shader "ASE/ASE_StandartPlantsT"
 		}
 
 
+		#include "Assets/External Package/VertExmotion/Shaders/VertExmotion.cginc"
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
+			VertExmotion( v );
 			UNITY_INITIALIZE_OUTPUT( Input, o );
 			float4 ase_screenPos = ComputeScreenPos( UnityObjectToClipPos( v.vertex ) );
 			o.screenPosition = ase_screenPos;
@@ -210,7 +212,9 @@ Shader "ASE/ASE_StandartPlantsT"
 		ENDCG
 		CGPROGRAM
 		#pragma surface surf StandardCustom keepalpha fullforwardshadows exclude_path:deferred vertex:vertexDataFunc 
-
+		#pragma surface surf Lambert alpha vertex:vert addshadow
+		#include "Assets/External Package/VertExmotion/Shaders/VertExmotion.cginc"
+		void vert (inout appdata_full v) {VertExmotion( v );}
 		ENDCG
 		Pass
 		{

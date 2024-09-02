@@ -126,6 +126,10 @@ public class Player : MonoBehaviour, IMessageReceiver
     public EffectManager effectManager;
     public ImpulseCam impulseCam;
     public GameObject playerSword;
+    public GameObject spcCubeL;
+    public GameObject spcCubeR;
+    public PlayerStateMachine psm;
+    //public float spcActivateTime;
 
 
     private void Awake()
@@ -171,12 +175,19 @@ public class Player : MonoBehaviour, IMessageReceiver
             Debug.Log("EffectManager found");
         if (impulseCam != null)
             Debug.Log("ImpulseCam found");
-
+        psm = gameObject.GetComponent<PlayerStateMachine>();
 
         // 문제해결을 위해 옮김 
         meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
-        _damageable.hitPoints = maxTP;
+        _damageable.currentHitPoints = maxTP;
+        _damageable.CurrentHitPoints = maxTP;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+
+        // 문제해결을 위해 옮김 
+        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        totalspeed = Speed;
+        _damageable.maxHitPoints = maxTP;
         _damageable.CurrentHitPoints = maxTP;
         meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
@@ -232,6 +243,17 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             _damageable.JustDead();
         }
+
+        // 움직일 때마다 spc큐브를 활성화.
+        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+        {
+            StartCoroutine(ActivateSpcCubes(0.0f));
+        }
+        else
+        {
+            spcCubeL.SetActive(false);
+            spcCubeR.SetActive(false);
+        }
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
@@ -277,7 +299,9 @@ public class Player : MonoBehaviour, IMessageReceiver
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        //StartCoroutine(DeathScequence());
+        if(ScreenFader.Instance == null) return;
+
+        StartCoroutine(DeathScequence());
     }
 
     private IEnumerator DeathScequence()
@@ -411,6 +435,13 @@ public class Player : MonoBehaviour, IMessageReceiver
     {
         if (impulseCam != null)
             impulseCam.Shake();
+    }
+
+    IEnumerator ActivateSpcCubes(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        spcCubeL.SetActive(true);
+        spcCubeR.SetActive(true);
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)
