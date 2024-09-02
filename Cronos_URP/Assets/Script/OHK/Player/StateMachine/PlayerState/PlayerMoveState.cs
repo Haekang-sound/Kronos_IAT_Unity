@@ -132,7 +132,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
 		}
-		Float();/// floatingcapsule실험중
+//		Float();/// floatingcapsule실험중
 		Move();                     // 이동한다.	
 
 	}

@@ -162,7 +162,6 @@ public abstract class PlayerBaseState : State
 
     private void SetSlopeSpeedModifierOnAngle(float groundAngle)
     {
-        throw new NotImplementedException();
     }
     protected Vector3 GetPlayerVerticalVelocity()
     {
