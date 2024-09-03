@@ -113,7 +113,7 @@ public abstract class PlayerBaseState : State
     private const float ray_distance = 2f;
     private RaycastHit sloperHit;
     private int groundLayer = 1 << LayerMask.NameToLayer("Ground");
-    private float maxSlopeAngle = 90f;
+    private float maxSlopeAngle = 30f;
 
 
     protected Vector3 AdjustDirectionToSlope(Vector3 direction)
