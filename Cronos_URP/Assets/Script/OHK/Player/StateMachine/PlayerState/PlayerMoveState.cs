@@ -24,7 +24,7 @@ public class PlayerMoveState : PlayerBaseState
 	bool isRelease = false;
 	bool isRun = false;
 
-
+	Vector3 totalMove;
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 	public override void Enter()
@@ -50,6 +50,10 @@ public class PlayerMoveState : PlayerBaseState
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
+		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+		rootMotion.y = 0;
+		totalMove += rootMotion;
+
 		if (Input.GetKeyDown(KeyCode.V))
 		{
 			stateMachine.Player.CP += 1f;
@@ -116,11 +120,12 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
+		//Move(rootMotion);                     // 이동한다.	
 
 	}
 	public override void FixedTick()
 	{
-
+		Float();
 		if (stateMachine.Player.IsLockOn)
 		{
 			if (moveSpeed > 0.5f)
@@ -132,9 +137,11 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
 		}
-//		Float();/// floatingcapsule실험중
-		Move();                     // 이동한다.	
+		//		Float();/// floatingcapsule실험중
+		//Move(totalMove);                     // 이동한다.	
+		//stateMachine.Rigidbody.velocity = totalMove;
 
+		totalMove = Vector3.zero;
 	}
 
 	public override void LateTick() { }

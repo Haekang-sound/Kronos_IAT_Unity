@@ -10,6 +10,7 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	private readonly int moveHash = Animator.StringToHash("isMove");
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
+	[SerializeField] float moveForce;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,6 +19,7 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
+		stateMachine.MoveForce = moveForce;
 
 	}
 

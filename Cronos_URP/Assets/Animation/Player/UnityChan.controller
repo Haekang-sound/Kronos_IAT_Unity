@@ -381,7 +381,7 @@ BlendTree:
     m_Motion: {fileID: 6798249207383254174, guid: 7016da273b515074f8856ec6415db446, type: 3}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 0.1
     m_CycleOffset: 0.5
     m_DirectBlendParameter: MoveSpeed
     m_Mirror: 1
@@ -1807,7 +1807,7 @@ AnimatorController:
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_DefaultWeight: 0
-    m_IKPass: 0
+    m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
 --- !u!1109 &238355293268892508
@@ -1957,6 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf17a5ed0654e184b993fbe53bdd4df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveForce: 100000000
 --- !u!1101 &937470777637431945
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
