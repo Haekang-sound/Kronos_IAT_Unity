@@ -37,8 +37,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private string CurrentState;
 
     [Header("Move Option")]
-    [SerializeField] private float Speed = 5f;
-    private float JumpForce = 10f; // 점프 만들면 쓰지뭐
+    [SerializeField] private float Speed = 1f;
     [SerializeField] private float LookRotationDampFactor = 10f;
     [SerializeField] private float attackCoefficient = 0.1f;
     [SerializeField] private float moveCoefficient = 0.1f;
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour, IMessageReceiver
     // Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
-    public float jumpForce { get { return JumpForce; } }
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
@@ -134,7 +132,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private void Awake()
     {
-        CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.Initialize(gameObject);
         CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
     }
     private void OnValidate()

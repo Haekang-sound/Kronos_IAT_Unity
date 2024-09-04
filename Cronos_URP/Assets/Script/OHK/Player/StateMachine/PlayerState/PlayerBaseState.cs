@@ -104,11 +104,11 @@ public abstract class PlayerBaseState : State
 		{
 			stateMachine.Rigidbody.useGravity = true;
 		}
-		Vector3 velocity = AdjustKeyDirectionToSlope( moveVector);
+		Vector3 velocity = moveVector;// AdjustKeyDirectionToSlope( moveVector);
 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
 		//stateMachine.Rigidbody.velocity = new Vector3(10, 0, 0);
- 		stateMachine.Rigidbody.velocity = velocity * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
+		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition;//velocity;// * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
 // 		Debug.Log(stateMachine.Rigidbody.velocity);
 		/** stateMachine.Animator.speed + gravity;*/
 
@@ -187,8 +187,11 @@ public abstract class PlayerBaseState : State
 			{
 				return;
 			}
+			// Ä¸½¶À» ¶ç¿ö¾ß ÇÏ´Â velocity¸¦ °è»êÇÕ´Ï´Ù.
 			float amountToLift = distanceToFloatingPoint * slopeData.StepReachForce - GetPlayerVerticalVelocity().y;
+			// yº¤ÅÍ¸¦ »ý¼ºÇÕ´Ï´Ù.
 			Vector3 liftForce = new Vector3(0f, amountToLift, 0f);
+			// Ä¸½¶À» ¶ç¿ó´Ï´Ù.
 			stateMachine.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
 		}
 	}

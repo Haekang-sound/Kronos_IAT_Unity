@@ -381,7 +381,7 @@ BlendTree:
     m_Motion: {fileID: 6798249207383254174, guid: 7016da273b515074f8856ec6415db446, type: 3}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 0.1
+    m_TimeScale: 1
     m_CycleOffset: 0.5
     m_DirectBlendParameter: MoveSpeed
     m_Mirror: 1
@@ -1688,115 +1688,121 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: goIdle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: MoveSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: SideWalk
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Charge
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: NextCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isGuard
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Dodge
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isFalling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Damaged
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isLockOn
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: chargeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: moveX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: moveY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: EnforcedCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: DodgeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: ComAttackBan
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: NorAttackBan
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
+  - m_Name: animSpeed
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1957,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf17a5ed0654e184b993fbe53bdd4df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 100000000
+  animSpeed: 10
 --- !u!1101 &937470777637431945
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2453,7 +2459,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: MoveBlendTree
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 1
   m_Transitions:
   - {fileID: -4322261204003801519}
   - {fileID: -6652447622358280224}
@@ -2466,16 +2472,16 @@ AnimatorState:
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 1
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8902206517571878540}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: animSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: animSpeed
 --- !u!1101 &3263143427552425416
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
