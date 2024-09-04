@@ -163,6 +163,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7279922765870762327
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f58d540f5c8df4b872cae2ed3ee75f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &-7013851165997797299
 AnimatorState:
   serializedVersion: 6
@@ -600,6 +612,37 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1107 &-5620342027781842395
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ComboAttack
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: -1623663299153418549}
+    m_Position: {x: 410, y: -220, z: 0}
+  m_ChildStateMachines:
+  - serializedVersion: 1
+    m_StateMachine: {fileID: 2341847357346862668}
+    m_Position: {x: 410, y: 90, z: 0}
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions:
+  - first: {fileID: 2341847357346862668}
+    second:
+    - {fileID: 1758906489119718432}
+    - {fileID: -1587547279203260226}
+    - {fileID: 238355293268892508}
+  m_StateMachineBehaviours:
+  - {fileID: -7279922765870762327}
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: -1623663299153418549}
 --- !u!114 &-5487672899089347578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1124,9 +1167,6 @@ AnimatorStateMachine:
   m_Name: Attack
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -1623663299153418549}
-    m_Position: {x: 430, y: 200, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -3455181346278278870}
     m_Position: {x: 430, y: -180, z: 0}
   m_ChildStateMachines:
@@ -1134,8 +1174,8 @@ AnimatorStateMachine:
     m_StateMachine: {fileID: 4709733735613252092}
     m_Position: {x: 150, y: 200, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 2341847357346862668}
-    m_Position: {x: 740, y: 200, z: 0}
+    m_StateMachine: {fileID: -5620342027781842395}
+    m_Position: {x: 620, y: 200, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
@@ -1146,11 +1186,6 @@ AnimatorStateMachine:
     - {fileID: 9093649816371052631}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
-  - first: {fileID: 2341847357346862668}
-    second:
-    - {fileID: 1758906489119718432}
-    - {fileID: -1587547279203260226}
-    - {fileID: 238355293268892508}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -70, y: 250, z: 0}
   m_EntryPosition: {x: -70, y: 100, z: 0}
