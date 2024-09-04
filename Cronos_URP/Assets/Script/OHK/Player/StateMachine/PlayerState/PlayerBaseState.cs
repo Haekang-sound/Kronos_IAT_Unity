@@ -107,8 +107,8 @@ public abstract class PlayerBaseState : State
 		Vector3 velocity = AdjustKeyDirectionToSlope( moveVector);
 		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
-		stateMachine.Rigidbody.velocity = new Vector3(10, 0, 0);
-// 		stateMachine.Rigidbody.velocity = velocity * stateMachine.MoveForce;// * Time.fixedDeltaTime
+		//stateMachine.Rigidbody.velocity = new Vector3(10, 0, 0);
+ 		stateMachine.Rigidbody.velocity = velocity * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
 // 		Debug.Log(stateMachine.Rigidbody.velocity);
 		/** stateMachine.Animator.speed + gravity;*/
 

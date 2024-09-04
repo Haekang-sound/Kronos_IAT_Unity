@@ -120,10 +120,12 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
-		//Move(rootMotion);                     // 이동한다.	
+		Move(totalMove);                     // 이동한다.	
+        totalMove = Vector3.zero;
 
-	}
-	public override void FixedTick()
+
+    }
+    public override void FixedTick()
 	{
 		Float();
 		if (stateMachine.Player.IsLockOn)
@@ -141,7 +143,6 @@ public class PlayerMoveState : PlayerBaseState
 		//Move(totalMove);                     // 이동한다.	
 		//stateMachine.Rigidbody.velocity = totalMove;
 
-		totalMove = Vector3.zero;
 	}
 
 	public override void LateTick() { }
