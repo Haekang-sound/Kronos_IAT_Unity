@@ -123,6 +123,76 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &32958757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181398020903437399, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480241934705244062, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_Name
+      value: Player_PactoralBoneTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480241934705244062, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5032348888184748323, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 765297646}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6704309426229964216, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1913021224}
+    - targetCorrespondingSourceObject: {fileID: 8341403797011356000, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1768667035}
+  m_SourcePrefab: {fileID: 100100000, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
 --- !u!1 &173338155
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +326,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &198655336 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5032348888184748323, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+  m_PrefabInstance: {fileID: 32958757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3614,6 +3689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2138169223015833258, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3078419922313236100, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: PlayerCamera
       value: 
@@ -3907,6 +3986,171 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+--- !u!1 &457134608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457134612}
+  - component: {fileID: 457134611}
+  - component: {fileID: 457134610}
+  - component: {fileID: 457134609}
+  - component: {fileID: 457134613}
+  - component: {fileID: 457134614}
+  m_Layer: 8
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &457134609
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &457134610
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &457134611
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &457134612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.0800548, y: -0.55643713, z: 2.254037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507945250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &457134613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49bbd6d58be6d734491cfcc5a9ffef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &457134614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457134608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 5
+  currentHitPoints: 0
+  invulnerabiltyTime: 0
+  hitAngle: 360
+  hitForwardRotation: 360
+  defensible: {fileID: 0}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 457134613}
+        m_TargetAssemblyTypeName: DestroyablePlazeObject, Assembly-CSharp
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWhileInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBecomeVulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageMessageReceivers: []
 --- !u!1001 &478054446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3971,6 +4215,206 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 348413972}
   m_SourcePrefab: {fileID: 100100000, guid: 3cb42426ef3812d48abc2e7f3f311cb4, type: 3}
+--- !u!1 &481974008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481974009}
+  - component: {fileID: 481974010}
+  m_Layer: 0
+  m_Name: PlazaSoundTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &481974009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481974008}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.2629395, y: 2.3486032, z: 1.8736382}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507945250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481974010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481974008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65c3a80a1a35884b9a0bf632cd09354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  internals:
+    soundEventsExpand: 1
+    soundTriggerPart:
+    - expandSoundEvent: 1
+      soundEvent: {fileID: 11400000, guid: 3b4bda9a0a89b1d41bdc24720c4eaa43, type: 2}
+      soundEventModifier:
+        volumeDecibel: 0
+        volumeRatio: 1
+        pitchSemitone: 0
+        pitchRatio: 1
+        delay: 0
+        increase2D: 0
+        intensity: 1
+        reverbZoneMixDecibel: 0
+        reverbZoneMixRatio: 1
+        startPosition: 0
+        reverse: 0
+        stereoPan: 0
+        polyphony: 1
+        distanceScale: 1
+        distortionIncrease: 0
+        fadeInLength: 0
+        fadeInShape: 2
+        fadeOutLength: 0
+        fadeOutShape: -2
+        followPosition: 1
+        bypassReverbZones: 0
+        bypassVoiceEffects: 0
+        bypassListenerEffects: 0
+        volumeUse: 0
+        pitchUse: 0
+        delayUse: 0
+        increase2DUse: 0
+        intensityUse: 0
+        reverbZoneMixUse: 0
+        startPositionUse: 0
+        reverseUse: 0
+        stereoPanUse: 0
+        polyphonyUse: 0
+        distanceScaleUse: 0
+        distortionIncreaseUse: 0
+        fadeInLengthUse: 0
+        fadeInShapeUse: 0
+        fadeOutLengthUse: 0
+        fadeOutShapeUse: 0
+        followPositionUse: 0
+        bypassReverbZonesUse: 0
+        bypassVoiceEffectsUse: 0
+        bypassListenerEffectsUse: 0
+      expandModifier: 1
+      soundTriggerTodo:
+        onEnableUse: 1
+        onDisableUse: 1
+        onStartUse: 0
+        onDestroyUse: 0
+        onTriggerEnterUse: 0
+        onTriggerExitUse: 0
+        onTriggerEnter2DUse: 0
+        onTriggerExit2DUse: 0
+        onCollisionEnterUse: 0
+        onCollisionExitUse: 0
+        onCollisionEnter2DUse: 0
+        onCollisionExit2DUse: 0
+        onMouseEnterUse: 0
+        onMouseExitUse: 0
+        onMouseDownUse: 0
+        onMouseUpUse: 0
+        onEnableAction: 0
+        onDisableAction: 1
+        onStartAction: 0
+        onDestroyAction: 1
+        onTriggerEnterAction: 0
+        onTriggerExitAction: 1
+        onTriggerEnter2DAction: 0
+        onTriggerExit2DAction: 1
+        onCollisionEnterAction: 0
+        onCollisionExitAction: 1
+        onCollisionEnter2DAction: 0
+        onCollisionExit2DAction: 1
+        onMouseEnterAction: 0
+        onMouseExitAction: 1
+        onMouseDownAction: 0
+        onMouseUpAction: 1
+      expandTrigger: 1
+      triggerTagUse: 0
+      triggerTags:
+      - Untagged
+      collisionVelocityToIntensity: 0
+      collisionTagUse: 0
+      collisionTags:
+      - Untagged
+    soundParameterDistanceScale:
+      internals:
+        type: 10
+        updateMode: 1
+        valueFloat: 1
+        valueInt: 0
+        valueBool: 0
+--- !u!1 &507945248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 507945250}
+  - component: {fileID: 507945249}
+  m_Layer: 0
+  m_Name: PlazeObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &507945249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507945248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de16c47fc3d662c449c965d12db9ff76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statue: {fileID: 1820846368}
+  lock1: {fileID: 457134608}
+  lock2: {fileID: 1842079412}
+  lock3: {fileID: 1079259394}
+  rotateAmount: 0.02
+  rotateDegree: 45
+  totalDegree: 0
+  elapsedDegree: 0
+  soundTrigger: {fileID: 481974008}
+--- !u!4 &507945250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507945248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.069945, y: 1.1664371, z: 8.945963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1820846369}
+  - {fileID: 457134612}
+  - {fileID: 1842079416}
+  - {fileID: 1079259398}
+  - {fileID: 481974009}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &616901079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4796163816734636, guid: 1305720c8c0a1794eb921f1a69df2ec0, type: 3}
@@ -4096,11 +4540,1040 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000b62482df0b064da5f449c29977db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_version: 1.10.7
+  className: VertExmotion
+  m_executeOnLateUpdate: 1
+  m_dontCheckShaderCompatibility: 0
+  m_useVertexBufferMode: 1
+  m_params:
+    usePaintDataFromMeshColors: 0
+  m_editorParams:
+    lastSensorSelected: 0
+    m_showMaterialIDWireFrame: 0
+    m_hideUnselectedMaterialID: 0
+    m_gradientFactor: 0.6
+    m_mode: 0
+  m_VertExmotionSensors: []
+  m_sensorsLinks: []
+  m_vertexColors:
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 1431655765
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4244438268
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4160223223
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 168430090
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4143380214
+  - rgba: 4076008178
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 589505315
+  - rgba: 235802126
+  - rgba: 1768515945
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 16843009
+  - rgba: 3318072773
+  - rgba: 4177066232
+  - rgba: 3537031890
+  - rgba: 4193909241
+  - rgba: 4244438268
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 3873892070
+  - rgba: 4126537205
+  - rgba: 4210752250
+  - rgba: 1532713819
+  - rgba: 3503345872
+  - rgba: 4244438268
+  - rgba: 4042322160
+  - rgba: 4210752250
+  - rgba: 4177066232
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 3570717908
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4126537205
+  - rgba: 4210752250
+  - rgba: 4244438268
+  - rgba: 0
+  - rgba: 3958107115
+  - rgba: 4261281277
+  - rgba: 0
+  - rgba: 0
+  - rgba: 3334915782
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 134744072
+  - rgba: 134744072
+  - rgba: 84215045
+  - rgba: 3048584629
+  - rgba: 3503345872
+  - rgba: 3419130827
+  - rgba: 4092851187
+  - rgba: 4244438268
+  - rgba: 4244438268
+  - rgba: 3722304989
+  - rgba: 4244438268
+  - rgba: 4244438268
+  - rgba: 4177066232
+  - rgba: 4261281277
+  - rgba: 4244438268
+  - rgba: 4143380214
+  - rgba: 4244438268
+  - rgba: 4261281277
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 1616928864
+  - rgba: 3419130827
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4210752250
+  - rgba: 4210752250
+  - rgba: 4193909241
+  - rgba: 4261281277
+  - rgba: 4261281277
+  - rgba: 4261281277
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 336860180
+  - rgba: 0
+  - rgba: 909522486
+  - rgba: 4143380214
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 168430090
+  - rgba: 589505315
+  - rgba: 1431655765
+  - rgba: 235802126
+  - rgba: 1768515945
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 16843009
+  - rgba: 0
+  - rgba: 3318072773
+  - rgba: 4177066232
+  - rgba: 4143380214
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 1431655765
+  - rgba: 3537031890
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 4193909241
+  - rgba: 4244438268
+  - rgba: 4076008178
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  m_initialShaders:
+  - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_shareMesh: 0
+  m_meshCopy: 0
+  m_showEditorPanel: 0
+  m_editMode: 1
+  m_shaderSensorPos:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionDirection:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderRCT:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSquashStrech:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSpeed:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionAxis:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderAxisScaleX:
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  m_shaderAxisScaleY:
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  m_shaderAxisScaleZ:
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  m_shaderLink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  m_normalCorrection: 0
+  m_normalSmooth: 0.2
+  m_smr: {fileID: 0}
+  m_mf: {fileID: 0}
+  m_renderer: {fileID: 620527401}
+  m_tmpVcols: []
+  m_floatArrayPID: 0
+  m_linkVB: []
+  m_csGB: {fileID: 0}
+  m_GBInitialized: 0
+  m_vbInitialized: 0
+  lastFrameCount: 0
+  m_OnbeginFrameRegistered: 0
+  m_csBake: {fileID: 0}
+  m_originalVertice: []
+  m_originalNormals: []
+  m_bakeMeshInitialized: 0
+  m_bakeKernel: 0
 --- !u!1 &689781667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
   m_PrefabInstance: {fileID: 1826983624}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &765297645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765297646}
+  - component: {fileID: 765297647}
+  m_Layer: 0
+  m_Name: VertExmotion Sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &765297646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765297645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0021972656, y: 0.8237561, z: -0.14484842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 198655336}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765297647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765297645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698fbf4fce2fab744bfa4e75c8ef9346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  className: VertExmotionSensor
+  m_parent: {fileID: 198655336}
+  m_parentSensor: {fileID: 0}
+  m_envelopRadius: 0.19429964
+  m_center: {x: 0, y: 0, z: 0}
+  m_motionDirection: {x: 0, y: 0, z: 0}
+  m_motionTorqueForce: 0
+  m_torqueAxis: {x: 0, y: 0, z: 0}
+  m_centripetalForce: 0
+  m_collision: {x: 0, y: 0, z: 0}
+  m_params:
+    translation:
+      amplitudeMultiplier: 1
+      outerMaxDistance: 0.03
+      innerMaxDistance: 0.03
+      axisLimits: 0
+      axisOuterMaxDistance: {x: 1, y: 1, z: 1}
+      axisInnerMaxDistance: {x: 1, y: 1, z: 1}
+      worldOffset: {x: 0, y: 0, z: 0}
+      localOffset: {x: 0, y: 0, z: 0}
+      gravityInOut: {x: 0, y: 0}
+    rotation:
+      angle: 0
+      axis: {x: 0, y: 0, z: 1}
+    torque:
+      amplitude: 0
+      smooth: 0
+      max: 0
+      damping: 0
+      bouncing: 0
+    fx:
+      stretch: 0
+      stretchMax: 1
+      stretchMinSpeed: 0
+      squash: 0
+    power: 1
+    inflate: 0
+    scale: {x: 1, y: 1, z: 1}
+    damping: 1
+    bouncing: 1
+    globalSmooth: 0
+  m_pidTime: 2
+  m_pid:
+    m_target: {x: 0, y: 0, z: 0}
+    m_params:
+      kp: 1
+      ki: 1
+      kd: 0
+      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+    m_pidX:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_pidY:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_pidZ:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_useGlobalParameters: 1
+  m_layerID: 0
+  m_executeOnLateUpdate: 1
+  m_sensorDirection: {x: 0, y: 0, z: 0}
+  m_lastPosition: {x: 0, y: 0, z: 0}
+  m_lastMotionDirection: {x: 0, y: 0, z: 0}
+  m_torqueForcePID:
+    lastTime: 0
+    errSum: 0
+    error: 0
+    m_target: 0
+    m_timeScale: 1
+    m_unscaledTime: 0
+    m_params:
+      kp: 1
+      ki: 0.5
+      kd: 0
+      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+    dtMax: 1
+    dtStepNext: 0
+    delta: 0
+    m_lastInput: 0
+  m_torqueAxisPID:
+    m_target: {x: 0, y: 0, z: 0}
+    m_params:
+      kp: 1
+      ki: 0.5
+      kd: 0
+      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+    m_pidX:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_pidY:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_pidZ:
+      lastTime: 0
+      errSum: 0
+      error: 0
+      m_target: 0
+      m_timeScale: 1
+      m_unscaledTime: 0
+      m_params:
+        kp: 1
+        ki: 0.5
+        kd: 0
+        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
+      dtMax: 1
+      dtStepNext: 0
+      delta: 0
+      m_lastInput: 0
+    m_useGlobalParameters: 1
+  m_lastForward: {x: 0, y: 0, z: 0}
+  m_lastRight: {x: 0, y: 0, z: 0}
+  m_speed: {x: 0, y: 0, z: 0}
+  m_lastSpeed: {x: 0, y: 0, z: 0}
+  m_speedStrech: {x: 0, y: 0, z: 0}
+  m_accStretch: {x: 0, y: 0, z: 0}
+  m_stretch: 0
+  m_motionReference: {fileID: 0}
+  m_oldScaleFactorFixed: 0
+  m_unscaledTime: 0
 --- !u!20 &944050837 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6396934668716429246, guid: e8b492326625f364ba6607b5ffa2aabc, type: 3}
@@ -4220,6 +5693,171 @@ PrefabInstance:
       addedObject: {fileID: 616901079}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec7d22e7f5d830347bbfd5d6dfbbdff8, type: 3}
+--- !u!1 &1079259394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079259398}
+  - component: {fileID: 1079259397}
+  - component: {fileID: 1079259396}
+  - component: {fileID: 1079259395}
+  - component: {fileID: 1079259399}
+  - component: {fileID: 1079259400}
+  m_Layer: 8
+  m_Name: Cube (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1079259395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1079259396
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1079259397
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1079259398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.079945, y: -0.55643713, z: -4.8559623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507945250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079259399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49bbd6d58be6d734491cfcc5a9ffef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1079259400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079259394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 5
+  currentHitPoints: 0
+  invulnerabiltyTime: 0
+  hitAngle: 360
+  hitForwardRotation: 360
+  defensible: {fileID: 0}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1079259399}
+        m_TargetAssemblyTypeName: DestroyablePlazeObject, Assembly-CSharp
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWhileInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBecomeVulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageMessageReceivers: []
 --- !u!1001 &1083757086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4341,6 +5979,84 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5bab1fbef07ff44684dab56e1a4845d, type: 3}
+--- !u!1001 &1089922864
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1820846369}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.014927376
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.72710073
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.014927376
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.11643365
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+      propertyPath: m_Name
+      value: SM_Statue_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+--- !u!4 &1089922865 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51f223b41f6949445938cd514a904dd1, type: 3}
+  m_PrefabInstance: {fileID: 1089922864}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1114735538
 GameObject:
   m_ObjectHideFlags: 0
@@ -4379,7 +6095,7 @@ MonoBehaviour:
   mBlurVal: 0.7
   cAberVal: 0.7
   parryTime: 1
-  exponent: 2
+  fadeTime: 0.3
   enforceSlashSpeed: 30
   swordWaveSpeed: 20
   swordWaveDistance: 12
@@ -4605,6 +6321,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1597283150725843469, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597283150725843469, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2063251937281630316, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -4642,6 +6366,18 @@ PrefabInstance:
       value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.009259259
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.009259259
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.009259259
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -4675,7 +6411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -5.039978
+      value: -5.04
       objectReference: {fileID: 0}
     - target: {fileID: 4988199565673915496, guid: 34c767fe479683748a66aa7fe0151f3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4903,6 +6639,838 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1768667032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8341403797011356000, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+  m_PrefabInstance: {fileID: 32958757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1768667034 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3757271439659166164, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+  m_PrefabInstance: {fileID: 32958757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1768667035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768667032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000b62482df0b064da5f449c29977db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.10.7
+  className: VertExmotion
+  m_executeOnLateUpdate: 1
+  m_dontCheckShaderCompatibility: 0
+  m_useVertexBufferMode: 1
+  m_params:
+    usePaintDataFromMeshColors: 0
+  m_editorParams:
+    lastSensorSelected: 0
+    m_showMaterialIDWireFrame: 0
+    m_hideUnselectedMaterialID: 0
+    m_gradientFactor: 0.6
+    m_mode: 0
+  m_VertExmotionSensors: []
+  m_sensorsLinks: []
+  m_vertexColors:
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  - rgba: 0
+  m_initialShaders:
+  - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_shareMesh: 0
+  m_meshCopy: 0
+  m_showEditorPanel: 0
+  m_editMode: 1
+  m_shaderSensorPos: []
+  m_shaderMotionDirection: []
+  m_shaderRCT: []
+  m_shaderSquashStrech: []
+  m_shaderSpeed: []
+  m_shaderMotionAxis: []
+  m_shaderAxisScaleX: []
+  m_shaderAxisScaleY: []
+  m_shaderAxisScaleZ: []
+  m_shaderLink: []
+  m_normalCorrection: 0
+  m_normalSmooth: 0.2
+  m_smr: {fileID: 0}
+  m_mf: {fileID: 0}
+  m_renderer: {fileID: 1768667034}
+  m_tmpVcols: []
+  m_floatArrayPID: 0
+  m_linkVB: []
+  m_csGB: {fileID: 0}
+  m_GBInitialized: 0
+  m_vbInitialized: 0
+  lastFrameCount: 0
+  m_OnbeginFrameRegistered: 0
+  m_csBake: {fileID: 0}
+  m_originalVertice: []
+  m_originalNormals: []
+  m_bakeMeshInitialized: 0
+  m_bakeKernel: 0
+--- !u!1 &1820846368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820846369}
+  - component: {fileID: 1820846372}
+  - component: {fileID: 1820846371}
+  - component: {fileID: 1820846370}
+  m_Layer: 0
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820846369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820846368}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.069945, y: -1.0964371, z: -0.9959631}
+  m_LocalScale: {x: 3.3495498, y: 0.06876626, z: 3.3495498}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1089922865}
+  m_Father: {fileID: 507945250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1820846370
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820846368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!23 &1820846371
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820846368}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1820846372
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820846368}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1826983624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4989,6 +7557,171 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1923415732}
   m_SourcePrefab: {fileID: 100100000, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
+--- !u!1 &1842079412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1842079416}
+  - component: {fileID: 1842079415}
+  - component: {fileID: 1842079414}
+  - component: {fileID: 1842079413}
+  - component: {fileID: 1842079417}
+  - component: {fileID: 1842079418}
+  m_Layer: 8
+  m_Name: Cube (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1842079413
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1842079414
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1842079415
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1842079416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.3199449, y: -0.55643713, z: 2.4340372}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507945250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1842079417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49bbd6d58be6d734491cfcc5a9ffef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1842079418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842079412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 5
+  currentHitPoints: 0
+  invulnerabiltyTime: 0
+  hitAngle: 360
+  hitForwardRotation: 360
+  defensible: {fileID: 0}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1842079417}
+        m_TargetAssemblyTypeName: DestroyablePlazeObject, Assembly-CSharp
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWhileInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBecomeVulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageMessageReceivers: []
 --- !u!1 &1895409674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5020,6 +7753,3482 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1913021222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6704309426229964216, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+  m_PrefabInstance: {fileID: 32958757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1913021224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913021222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000b62482df0b064da5f449c29977db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.10.7
+  className: VertExmotion
+  m_executeOnLateUpdate: 1
+  m_dontCheckShaderCompatibility: 0
+  m_useVertexBufferMode: 1
+  m_params:
+    usePaintDataFromMeshColors: 0
+  m_editorParams:
+    lastSensorSelected: 0
+    m_showMaterialIDWireFrame: 0
+    m_hideUnselectedMaterialID: 0
+    m_gradientFactor: 0.6
+    m_mode: 0
+  m_VertExmotionSensors: []
+  m_sensorsLinks: []
+  m_vertexColors:
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  - rgba: 4278190080
+  m_initialShaders:
+  - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_shareMesh: 0
+  m_meshCopy: 0
+  m_showEditorPanel: 0
+  m_editMode: 1
+  m_shaderSensorPos:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionDirection:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderRCT:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSquashStrech:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSpeed:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionAxis:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderAxisScaleX:
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  m_shaderAxisScaleY:
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  m_shaderAxisScaleZ:
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  m_shaderLink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  m_normalCorrection: 0
+  m_normalSmooth: 0.2
+  m_smr: {fileID: 0}
+  m_mf: {fileID: 0}
+  m_renderer: {fileID: 1913021225}
+  m_tmpVcols: []
+  m_floatArrayPID: 0
+  m_linkVB: []
+  m_csGB: {fileID: 0}
+  m_GBInitialized: 0
+  m_vbInitialized: 0
+  lastFrameCount: 0
+  m_OnbeginFrameRegistered: 0
+  m_csBake: {fileID: 0}
+  m_originalVertice: []
+  m_originalNormals: []
+  m_bakeMeshInitialized: 0
+  m_bakeKernel: 0
+--- !u!137 &1913021225 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6908946745160823169, guid: 0abf829f42cf3e744bfff3711aab52c8, type: 3}
+  m_PrefabInstance: {fileID: 32958757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1923415726 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4173196648517120406, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
@@ -5062,13 +11271,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2186553825789631108, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsGlobal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482416012629472914, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3804260604273630183, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4060823536265168559, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060823536265168559, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375033466358440916, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5296475231803690184, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
       propertyPath: m_Name
       value: PauseUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296475231803690184, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359563548169226285, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6517679093015136714, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -5154,10 +11391,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6844857116688649095, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042255561506280667, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9193561230784283847, guid: 76496583da6f2c64d8714dbffb0af3a7, type: 3}
       propertyPath: virCam
       value: 
-      objectReference: {fileID: 1923415726}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5351,6 +11596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Overlay Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 762521528851722228, guid: e8b492326625f364ba6607b5ffa2aabc, type: 3}
+      propertyPath: m_VolumeLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8873422508059270031, guid: e8b492326625f364ba6607b5ffa2aabc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.75
@@ -5421,3 +11670,5 @@ SceneRoots:
   - {fileID: 173338159}
   - {fileID: 620527403}
   - {fileID: 404457123}
+  - {fileID: 507945250}
+  - {fileID: 32958757}

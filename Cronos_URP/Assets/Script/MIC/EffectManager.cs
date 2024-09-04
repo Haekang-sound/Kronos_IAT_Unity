@@ -385,19 +385,6 @@ public class EffectManager : MonoBehaviour
         Destroy(slashed, 1.0f);
     }
 
-    //public void CreateParryFX()
-    //{
-    //    // 글로벌볼륨이 없다면 나가
-    //    if (gVolume == null)
-    //        return;
-
-    //    Vector3 parrPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
-    //    GameObject parr = SpawnEffect("ParryY", parrPos);
-    //    Destroy(parr, 1.5f);
-    //    StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
-    //    StartCoroutine(ParryCAberrationCoroutine(cAberVal));
-    //}
-
     public void CreateGuardFX()
     {
         Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
