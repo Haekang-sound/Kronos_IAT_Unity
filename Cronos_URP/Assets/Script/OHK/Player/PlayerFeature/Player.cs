@@ -37,8 +37,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private string CurrentState;
 
     [Header("Move Option")]
-    [SerializeField] private float Speed = 5f;
-    private float JumpForce = 10f; // 점프 만들면 쓰지뭐
+    [SerializeField] private float Speed = 1f;
     [SerializeField] private float LookRotationDampFactor = 10f;
     [SerializeField] private float attackCoefficient = 0.1f;
     [SerializeField] private float moveCoefficient = 0.1f;
@@ -61,28 +60,27 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private bool rigidImmunity = false;
     [SerializeField] private bool dodgeAttack = false;
 
-// 	/// <summary>
-// 	/// floating capsule만드는중 
-// 	/// </summary>
-// 	[field: Header("Collisions")]
-// 	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility {  get; private set; }
+    /// <summary>
+    /// floating capsule만드는중 
+    /// </summary>
+    [field: Header("Collisions")]
+    [field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
+    [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+    [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
+
 
     private Checkpoint _currentCheckpoint;
 
     // Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
-    public float jumpForce { get { return JumpForce; } }
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
 
     //     // 스킬 사용정보
     //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-    // 
-    //     public bool on = false;
-    //     public bool perform = false;
-    //     public bool off = false;
+
     // chronos in game Option
     public float MaxCP { get { return maxCP; } set { maxCP = value; } }
     public float MaxTP { get { return maxTP; } set { maxTP = value; } }
@@ -132,18 +130,18 @@ public class Player : MonoBehaviour, IMessageReceiver
     //public float spcActivateTime;
 
 
-// 	private void Awake()
-// 	{
-// 		CapsuleColldierUtility.Initialize(gameObject);
-// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-// 	}
-// 	private void OnValidate()
-// 	{
-// 		CapsuleColldierUtility.Initialize(gameObject);
-// 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-// 
-// 	}
-	protected void OnDisable()
+    private void Awake()
+    {
+		CapsuleColldierUtility.Initialize(gameObject);
+        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+    }
+    private void OnValidate()
+    {
+        CapsuleColldierUtility.Initialize(gameObject);
+        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+
+    }
+    protected void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
     }
@@ -181,6 +179,13 @@ public class Player : MonoBehaviour, IMessageReceiver
         meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
         _damageable.currentHitPoints = maxTP;
+        _damageable.CurrentHitPoints = maxTP;
+        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+
+        // 문제해결을 위해 옮김 
+        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        totalspeed = Speed;
+        _damageable.maxHitPoints = maxTP;
         _damageable.CurrentHitPoints = maxTP;
         meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
@@ -277,22 +282,24 @@ public class Player : MonoBehaviour, IMessageReceiver
     void Damaged(Damageable.DamageMessage damageMessage)
     {
         // 여기서 리턴하면 애니메이션만 재생하지 않는다.
-		// 
+        // 
         if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-			PlayerFSM.GetState().ToString() == "PlayerParryState"	||
-			PlayerFSM.GetState().ToString() == "PlayerDamagedState" || 
-			rigidImmunity || isEnforced)
-		{
-			return;
-		}
+            PlayerFSM.GetState().ToString() == "PlayerParryState" ||
+            PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
+            rigidImmunity || isEnforced)
+        {
+            return;
+        }
 
-		PlayerFSM.Animator.SetTrigger("Damaged");
+        PlayerFSM.Animator.SetTrigger("Damaged");
     }
 
     // 죽었을 때 호출되는 함수
     public void Death(/*Damageable.DamageMessage msg*/)
     {
-        //StartCoroutine(DeathScequence());
+        if(ScreenFader.Instance == null) return;
+
+        StartCoroutine(DeathScequence());
     }
 
     private IEnumerator DeathScequence()

@@ -16,7 +16,7 @@ public class WeightedRandomSelector : CompositeNode
         }
 
         // 랜덤 값을 생성
-        randomValue = Random.Range(0, totalWeight);
+        randomValue = Random.Range(0, totalWeight + 1);
     }
 
     protected override void OnStop()

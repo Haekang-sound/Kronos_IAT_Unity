@@ -12,6 +12,8 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public float rotationSpeed = 1.0f;
 
     public Vector3 BasePosition { get; private set; }
+    private float _baseTolerance = 0.6f;
+
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
@@ -96,6 +98,10 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
         //Gizmos.color = Color.blue;
         //Gizmos.DrawWireSphere(transform.position, strafeDistance);
+
+        // 기본 위치 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +126,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public bool IsNearBase()
     {
         Vector3 toBase = BasePosition - transform.position;
-        return toBase.sqrMagnitude < 0.01f;  // 0.01 은 오차 범위
+        return toBase.sqrMagnitude < _baseTolerance;
     }
 
     public bool IsInAttackRange()
