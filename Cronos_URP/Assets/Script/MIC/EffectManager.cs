@@ -61,6 +61,9 @@ public class EffectManager : MonoBehaviour
     public bool isGroundEnforced;
     public bool showInvisibleMesh;
 
+    // 강화 상태 오우라
+    public GameObject swordAura;
+
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
     GameObject[] effectArray;
@@ -123,6 +126,9 @@ public class EffectManager : MonoBehaviour
         {
             ToggleMeshRenderer();
         }
+        swordAura = GameObject.Find("Com_Ready");
+        if (swordAura != null)
+            swordAura.SetActive(false);
     }
 
     void InitializeVol(Volume vol)
@@ -256,15 +262,26 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // 일단 맨땅에 이펙트 만들기
-    public void ComboStrongFX()
+    // 강화 오라 활성화
+    public void SwordAuraOn()
     {
-        Vector3 impTrans = player.transform.position + player.transform.forward * 1.6f;
-        GameObject impact = SpawnEffect("Nor04_Attack_Ground", impTrans);
-        impact.transform.rotation = player.transform.rotation;
-        impact.transform.Rotate(0, -90f, 0);
-        Destroy(impact, 2.0f);
+        swordAura.SetActive(true);
     }
+
+    public void SwordAuraOff()
+    {
+        swordAura.SetActive(false);
+    }
+
+    // 일단 맨땅에 이펙트 만들기
+    //public void ComboStrongFX()
+    //{
+    //    Vector3 impTrans = player.transform.position + player.transform.forward * 1.6f;
+    //    GameObject impact = SpawnEffect("Nor04_Attack_Ground", impTrans);
+    //    impact.transform.rotation = player.transform.rotation;
+    //    impact.transform.Rotate(0, -90f, 0);
+    //    Destroy(impact, 2.0f);
+    //}
 
     // 지면의 각도에 맞게 이펙트를 남기려면 어떻게 해야할까
     public void GroundCheckFX()

@@ -402,6 +402,12 @@ public class Player : MonoBehaviour, IMessageReceiver
             effectManager.NormalSlashFX("Com_Attack");
     }
 
+    public void SwordAura()
+    {
+        if (effectManager != null)
+            effectManager.SwordAuraOn();
+    }
+
     public void NormalStrongSlash()
     {
         if (effectManager != null)
