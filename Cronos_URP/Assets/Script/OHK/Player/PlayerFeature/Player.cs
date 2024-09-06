@@ -390,10 +390,16 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     // 기본 슬래시 FX
     // 이름이 망해부렀으야
-    public void SoundSword()
+    public void NormalSlash()
     {
         if (effectManager != null)
             effectManager.NormalSlashFX("Nor_Attack");
+    }
+
+    public void EnforcedSlash()
+    {
+        if (effectManager != null)
+            effectManager.NormalSlashFX("Com_Attack");
     }
 
     public void NormalStrongSlash()
