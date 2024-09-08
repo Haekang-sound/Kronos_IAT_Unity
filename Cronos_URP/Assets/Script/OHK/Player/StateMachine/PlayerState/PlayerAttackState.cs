@@ -19,7 +19,7 @@ public class PlayerAttackState : PlayerBaseState
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 		attackBool = false;
-		stateMachine.MoveForce = moveForce;
+        stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 		// 
 		stateMachine.Animator.SetBool(nextComboHash, false);

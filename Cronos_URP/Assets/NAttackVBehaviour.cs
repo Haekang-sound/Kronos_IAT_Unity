@@ -22,7 +22,7 @@ public class NAttackVBehaviour : StateMachineBehaviour
 	public void RAttack()
 	{
 		Debug.Log("다른공격을 하겠어요");
-		PlayerStateMachine.GetInstance().Animator.SetTrigger("Rattck");
+		PlayerStateMachine.GetInstance().Animator.SetTrigger("Rattack");
 
 	}
 

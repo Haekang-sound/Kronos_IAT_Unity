@@ -24,6 +24,7 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		animator.SetBool(nextComboHash, false);
 		animator.ResetTrigger("Attack");
+		animator.ResetTrigger("Rattack");
 	}
 
 
