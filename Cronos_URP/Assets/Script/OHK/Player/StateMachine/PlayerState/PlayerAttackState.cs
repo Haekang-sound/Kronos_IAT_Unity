@@ -109,6 +109,11 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
+		if (stateMachine.Player.CP < 10f)
+		{
+			return;
+		}
+		stateMachine.Player.CP -= 10f;
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
 			stateMachine.Animator.SetBool(nextComboHash, false);
@@ -116,6 +121,14 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
-	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
+	private void Gurad()
+	{
+		if (stateMachine.IsRattack)
+		{
+			stateMachine.IsRattack = false;
+			return;
+		}
+		stateMachine.Animator.SetBool(guradHash, true); 
+	}
 
 }

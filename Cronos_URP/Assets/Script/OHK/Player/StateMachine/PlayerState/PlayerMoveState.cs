@@ -233,12 +233,17 @@ public class PlayerMoveState : PlayerBaseState
 	}
 	private void Dodge()
 	{
+		if(stateMachine.Player.CP < 10f)
+		{
+			return;
+		} 
+		stateMachine.Player.CP -= 10f;
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
-}
+} 
 
 
 
