@@ -11,14 +11,20 @@ Material:
   m_Shader: {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _MASKMAP
+  - _NORMALMAP
+  - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+  - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -191,7 +197,7 @@ Material:
     - _InvTilingScale: 1
     - _Ior: 0
     - _Metallic: 0
-    - _MetallicRemapMax: 1
+    - _MetallicRemapMax: 0.6888121
     - _MetallicRemapMin: 0
     - _NormalScale: 1
     - _OcclusionStrength: 1

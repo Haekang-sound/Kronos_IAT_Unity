@@ -24,7 +24,7 @@ public class PlayerMoveState : PlayerBaseState
 	bool isRelease = false;
 	bool isRun = false;
 
-
+	Vector3 totalMove;
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 	public override void Enter()
@@ -50,27 +50,28 @@ public class PlayerMoveState : PlayerBaseState
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			stateMachine.Player.CP += 1f;
-		}
+ 		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+ 		rootMotion.y = 0;
+		//totalMove += rootMotion;
 
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 
+		//stateMachine.Animator.SetFloat("animSpeed", stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f);
 
-		if (stateMachine.Player.IsLockOn)
-		{
-			if (isRun)
-			{
-				moveSpeed = 1f;
-			}
-			else
-			{
-				stateMachine.StartCoroutine(SmoothChangeSpeed());
-			}
-		}
-		else
+		/// 걷기 삭제로 인한 주석처리 
+// 		if (stateMachine.Player.IsLockOn)
+// 		{
+// 			if (isRun)
+// 			{
+// 				moveSpeed = 1f;
+// 			}
+// 			else
+// 			{
+// 				stateMachine.StartCoroutine(SmoothChangeSpeed());
+// 			}
+// 		}
+		//else
 		{
 			moveSpeed = 1f;
 		}
@@ -116,11 +117,15 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
+ 		//Move(totalMove);                     // 이동한다.	
+ 		//Move();                     // 이동한다.	
+//         totalMove = Vector3.zero;
 
-	}
-	public override void FixedTick()
+
+    }
+    public override void FixedTick()
 	{
-
+		Float();
 		if (stateMachine.Player.IsLockOn)
 		{
 			if (moveSpeed > 0.5f)
@@ -132,8 +137,10 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
 		}
-//		Float();/// floatingcapsule실험중
-		Move();                     // 이동한다.	
+		//		Float();/// floatingcapsule실험중
+		//Move();                     // 이동한다.	
+		//Move(totalMove);                     // 이동한다.	
+		//stateMachine.Rigidbody.velocity = totalMove;
 
 	}
 
@@ -154,7 +161,8 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onJumpStart -= Dodge;
 
         stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
-    }
+		stateMachine.Animator.speed = 1f;
+	}
 
 
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
@@ -227,12 +235,17 @@ public class PlayerMoveState : PlayerBaseState
 	}
 	private void Dodge()
 	{
+		if(stateMachine.Player.CP < 10f)
+		{
+			return;
+		} 
+		stateMachine.Player.CP -= 10f;
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
-}
+} 
 
 
 

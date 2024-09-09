@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             if (instance != null)
             {
-                return instance;
+                return instance; 
             }
 
             // 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
@@ -37,8 +37,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private string CurrentState;
 
     [Header("Move Option")]
-    [SerializeField] private float Speed = 5f;
-    private float JumpForce = 10f; // 점프 만들면 쓰지뭐
+    [SerializeField] private float Speed = 1f;
     [SerializeField] private float LookRotationDampFactor = 10f;
     [SerializeField] private float attackCoefficient = 0.1f;
     [SerializeField] private float moveCoefficient = 0.1f;
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour, IMessageReceiver
     // Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
-    public float jumpForce { get { return JumpForce; } }
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
@@ -134,7 +132,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private void Awake()
     {
-        CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.Initialize(gameObject);
         CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
     }
     private void OnValidate()
@@ -180,16 +178,9 @@ public class Player : MonoBehaviour, IMessageReceiver
         // 문제해결을 위해 옮김 
         meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
-        _damageable.currentHitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
-
-        // 문제해결을 위해 옮김 
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-        totalspeed = Speed;
-        _damageable.maxHitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+		_damageable.currentHitPoints = maxTP;
+		_damageable.CurrentHitPoints = maxTP;
+		meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
 
     private void ChargeCP(Collider other)
@@ -392,10 +383,22 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     // 기본 슬래시 FX
     // 이름이 망해부렀으야
-    public void SoundSword()
+    public void NormalSlash()
     {
         if (effectManager != null)
             effectManager.NormalSlashFX("Nor_Attack");
+    }
+
+    public void EnforcedSlash()
+    {
+        if (effectManager != null)
+            effectManager.NormalSlashFX("Com_Attack");
+    }
+
+    public void SwordAura()
+    {
+        if (effectManager != null)
+            effectManager.SwordAuraOn();
     }
 
     public void NormalStrongSlash()

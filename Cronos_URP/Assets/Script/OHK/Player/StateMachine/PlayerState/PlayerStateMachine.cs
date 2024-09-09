@@ -10,7 +10,10 @@ public class PlayerStateMachine : StateMachine
 {
 	static PlayerStateMachine instance;
 	public static PlayerStateMachine GetInstance() { return instance; }
-
+	/// <summary>
+	///  이건 우클릭 콤보용
+	/// </summary>
+	public bool IsRattack {  get; set; }
 	public Vector3 Velocity;
     public Player Player { get; private set; }
     public InputReader InputReader { get; private set; }

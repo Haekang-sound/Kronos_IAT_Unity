@@ -115,4 +115,16 @@ public class SoundManager : MonoBehaviour
                 se.StopMusic();
         }
     }
+
+    public void StopSFX(string name)
+    {
+        foreach (SoundEvent se in SfxList)
+        {
+            if (se.name == name)
+            {
+                Debug.Log($"Found {se.name} in SfxList");
+                se.StopMusic(false);
+            }
+        }
+    }
 }
