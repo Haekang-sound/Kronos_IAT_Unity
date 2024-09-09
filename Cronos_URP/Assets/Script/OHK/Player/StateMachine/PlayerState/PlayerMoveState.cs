@@ -50,8 +50,8 @@ public class PlayerMoveState : PlayerBaseState
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
-// 		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
-// 		rootMotion.y = 0;
+ 		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
+ 		rootMotion.y = 0;
 		//totalMove += rootMotion;
 
 		// 플레이어의 cp 를 이동속도에 반영한다.
@@ -117,8 +117,8 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
-// 		//Move(totalMove);                     // 이동한다.	
-// 		Move(rootMotion);                     // 이동한다.	
+ 		//Move(totalMove);                     // 이동한다.	
+ 		//Move();                     // 이동한다.	
 //         totalMove = Vector3.zero;
 
 
@@ -138,6 +138,7 @@ public class PlayerMoveState : PlayerBaseState
 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
 		}
 		//		Float();/// floatingcapsule실험중
+		//Move();                     // 이동한다.	
 		//Move(totalMove);                     // 이동한다.	
 		//stateMachine.Rigidbody.velocity = totalMove;
 
