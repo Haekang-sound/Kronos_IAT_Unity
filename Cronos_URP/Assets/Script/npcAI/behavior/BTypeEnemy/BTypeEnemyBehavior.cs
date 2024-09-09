@@ -229,6 +229,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         }
 
         GetComponent<ReplaceWithRagdoll>().Replace();
+        _controller.Release();
     }
 
     internal void UseBulletTimeScale()

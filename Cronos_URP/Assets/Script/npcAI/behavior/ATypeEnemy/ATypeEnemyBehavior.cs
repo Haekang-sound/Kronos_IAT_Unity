@@ -45,7 +45,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-		_rigidbody = GetComponentInChildren<Rigidbody>();
+        _rigidbody = GetComponentInChildren<Rigidbody>();
     }
 
     void Start()
@@ -97,7 +97,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void OnDrawGizmos()
     {
-        if(drawGizmos == false) return;
+        if (drawGizmos == false) return;
 
         // 공격 범위
         Gizmos.color = Color.red;
@@ -134,7 +134,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         LookAtTarget();
     }
 
-    public void StrafeRight() 
+    public void StrafeRight()
     {
         if (CurrentTarget == null) return;
 
@@ -204,12 +204,13 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Dead()
     {
-        if(Player.Instance != null)
+        if (Player.Instance != null)
         {
             Player.Instance.TP += tp;
         }
 
         GetComponent<ReplaceWithRagdoll>().Replace();
+        _controller.Release();
     }
 
     public void BeginAttack()
