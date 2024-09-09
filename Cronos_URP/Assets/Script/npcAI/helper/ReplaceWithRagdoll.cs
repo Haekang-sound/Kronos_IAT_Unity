@@ -92,6 +92,5 @@ public class ReplaceWithRagdoll : MonoBehaviour
 
         }
 
-        Destroy(gameObject);
     }
 }

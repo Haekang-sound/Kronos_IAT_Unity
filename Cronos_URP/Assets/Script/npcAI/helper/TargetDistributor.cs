@@ -29,6 +29,7 @@ public class TargetDistributor : MonoBehaviour
         }
     }
 
+    // 0이하면 안된다.
     public int arcsCount;
 
     protected Vector3[] _worldDirection;
