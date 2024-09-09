@@ -21,7 +21,9 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
         _monoBehaviour.Controller.SetFollowNavmeshAgent(true);
         _monoBehaviour.Controller.UseNavemeshAgentRotation(false);
 
-        // Damaged - 상태에서 피격 당했을 때
+        _monoBehaviour.aimRing.SetActive(true);
+        _monoBehaviour.StartCoroutine(_monoBehaviour.ShrinkScale());
+
         _monoBehaviour.ResetTriggerDamaged();
 
         _strafeTime = Random.Range(minStrafeTime, maxStrafeTime);
@@ -102,10 +104,15 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
     {
         _monoBehaviour.Controller.UseNavemeshAgentRotation(true);
         _monoBehaviour.Controller.SetFollowNavmeshAgent(false);
+
+        if (_monoBehaviour.aimRing.activeSelf)
+        _monoBehaviour.aimRing.SetActive(false);
     }
 
     private void ResetTimer()
     {
         _timer = 0.0f;
     }
+
+    
 }
