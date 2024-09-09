@@ -920,7 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 200
+  maxHitPoints: 0
+  currentHitPoints: 0
   invulnerabiltyTime: 0
   hitAngle: 360
   hitForwardRotation: 360
@@ -955,6 +956,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   timeToStopPursuit: 0
+  useCombatZone: 1
+  OnDown:
+    m_PersistentCalls:
+      m_Calls: []
   attackDistance: 6
   strafeSpeed: 1
   rotationSpeed: 8
