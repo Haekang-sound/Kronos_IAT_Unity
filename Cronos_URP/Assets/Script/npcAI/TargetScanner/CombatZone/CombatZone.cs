@@ -5,6 +5,7 @@ public class CombatZone : MonoBehaviour
     public bool drawGizmos;
 
     public bool isClear;
+    public UnityEvent onClear;
     public GameObject target;
     public CombatZoneEnemy[] enemyList;
 
@@ -88,6 +89,7 @@ public class CombatZone : MonoBehaviour
         }
 
         isClear = true;
+        onClear.Invoke();
     }
     private void OnDrawGizmos()
     {

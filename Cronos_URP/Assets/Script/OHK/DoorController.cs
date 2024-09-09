@@ -6,26 +6,25 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
 	public GameObject timeline;
-    public CombatZone combatZone;
 
-    private bool _actived;
+    public bool isActived;
 
     private void Start()
     {
         timeline.SetActive(false);
     }
 
-    public void ActiveTimeline(bool val)
-	{
-        timeline.SetActive(val);
-	}
-
-    public void Update()
+    public void PlayTimeline()
     {
-        if (_actived == false && combatZone.isClear == true) 
+        if (isActived == false)
         {
             ActiveTimeline(true);
-            _actived = true;
+            isActived = true;
         }
+    }
+
+    private void ActiveTimeline(bool val)
+    {
+        timeline.SetActive(val);
     }
 }
