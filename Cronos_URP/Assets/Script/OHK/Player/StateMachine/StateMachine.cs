@@ -7,9 +7,10 @@ using UnityEngine.EventSystems;
 public abstract class StateMachine : MonoBehaviour
 {
 	private State currentState; // 상태
-    
-	// 상태를 변경하는 함수
-	public void SwitchState(State state)
+    [Range(0.0f, 1.0f)] public float minFrame;
+
+    // 상태를 변경하는 함수
+    public void SwitchState(State state)
 	{
         currentState?.Exit();   // 현재 상태를 탈출합니다.
         currentState = state;   // 새로운 상태로 변경합니다.

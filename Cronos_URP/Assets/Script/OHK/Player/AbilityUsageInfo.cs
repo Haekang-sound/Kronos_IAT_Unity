@@ -28,8 +28,6 @@ public struct AbilityUsageInfo
 		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackBan", value); }
 	}
 
-	//수치 증가
-	//-> 나중에
 
 	//경직 면역
 	public bool RigidImmunity

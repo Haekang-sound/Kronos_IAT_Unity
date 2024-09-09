@@ -23,6 +23,7 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onLAttackStart += Attack;
         stateMachine.InputReader.onRAttackStart += Gurad;
         stateMachine.InputReader.onJumpStart += Dodge;
+
     }
 	public override void Tick()
 	{
@@ -56,8 +57,9 @@ public class PlayerBuffState : PlayerBaseState
     }
 	public override void FixedTick()
 	{
-	}
-	public override void LateTick()
+        Float();
+    }
+    public override void LateTick()
 	{
     }
 	public override void Exit()

@@ -10,7 +10,6 @@ public class PlayerJumpState : PlayerBaseState
 	public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	public override void Enter()
 	{
-		stateMachine.Velocity = new Vector3(stateMachine.Velocity.x, stateMachine.Player.jumpForce, stateMachine.Velocity.z);
 		stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossFadeDuration);
 
 		CinemachineBrain cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();

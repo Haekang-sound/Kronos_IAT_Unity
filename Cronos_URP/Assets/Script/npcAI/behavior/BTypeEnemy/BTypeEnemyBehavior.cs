@@ -1,4 +1,6 @@
 using Message;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +12,11 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public float attackDistance = 1.8f;
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
+
+    public GameObject aimRing;
+    public GameObject aimEnd;
+    private Vector3 ringOriginScale = new Vector3(1f, 1f, 1f);
+    private Vector3 ringShrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
@@ -64,6 +71,9 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _rigidbody.useGravity = false;
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+
+        aimRing.SetActive(false);
+        aimEnd.SetActive(false);
     }
 
     private void OnDisable()
@@ -293,5 +303,18 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     internal void TriggerIdle()
     {
         _controller.animator.SetTrigger(hashIdle);
+    }
+
+    // 에임 이펙트 관련한거
+    public IEnumerator ShrinkScale()
+    {
+        aimRing.transform.localScale = ringOriginScale;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < 2.0f)
+        {
+            aimRing.transform.localScale = Vector3.Lerp(ringOriginScale, ringShrinkScale, elapsedTime / 2.0f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }

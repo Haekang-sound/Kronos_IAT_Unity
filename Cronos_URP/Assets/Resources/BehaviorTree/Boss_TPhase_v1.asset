@@ -93,7 +93,7 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 9142599340816291293}
-  - {fileID: 7213231818821040500}
+  - {fileID: 0}
   - {fileID: 2552580236432083769}
 --- !u!114 &-6645201128046602107
 MonoBehaviour:
@@ -164,6 +164,33 @@ MonoBehaviour:
   description: attack_running_simple
   drawGizmos: 0
   parameterName: attack_running_simple
+--- !u!114 &-6077504023752581261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da78b7bb9c26ad341ab1f5442637f83c, type: 3}
+  m_Name: MoveToTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 5db20f6314a1e7942b34d76abdc80e62
+  position: {x: 3757.7607, y: 644.88007}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: 0
+  description: 
+  drawGizmos: 0
+  speed: 3.5
+  stoppingDistance: 0.1
+  updateRotation: 1
+  useAnimationSpeed: 0
+  acceleration: 100
 --- !u!114 &-5518793505069011606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,8 +643,9 @@ MonoBehaviour:
   - {fileID: -8078142554132241222}
   - {fileID: -7890811068446414719}
   - {fileID: 9142599340816291293}
-  - {fileID: 7213231818821040500}
+  - {fileID: 0}
   - {fileID: 2552580236432083769}
+  - {fileID: -6077504023752581261}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 10.167499, y: 0.010000013, z: -13.64098}

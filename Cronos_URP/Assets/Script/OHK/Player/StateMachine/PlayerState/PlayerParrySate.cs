@@ -32,7 +32,7 @@ public class PlayerParryState : PlayerBaseState
 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
 
 		}
-
+		Float();
 		totalMove = Vector3.zero;
 	}
 	public override void LateTick() { }

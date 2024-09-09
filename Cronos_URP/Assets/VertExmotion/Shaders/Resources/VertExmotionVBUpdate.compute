@@ -1,0 +1,176 @@
+﻿#pragma kernel CSMain
+
+
+//#define SHADER_TARGET 40
+#define VERTEXMOTION_VB
+#include "../VertExmotion.cginc"
+
+
+RWByteAddressBuffer _VertexBuffer;
+uint _VertexBufferStride;
+int _VertexCount;
+bool _skinnedMesh;
+
+float4x4 _ObjectToWorld;
+float4x4 _WorldToObject;
+float3 _Scale;
+
+RWStructuredBuffer<float3> _vertexBuf;
+RWStructuredBuffer<float3> _normalBuf;
+RWStructuredBuffer<float4> _tangentBuf;
+RWStructuredBuffer<float4> _colorBuf;
+
+//------------------------------------------------------------
+//GRAPHIC BUFFER
+//------------------------------------------------------------
+
+int POSITION = 0;
+
+float3 GB_GetData(int vid, int dataId)
+{
+	//0 ->  position
+	//1 ->  normal
+	int offset = 4 * 3 * dataId;
+	return asfloat(_VertexBuffer.Load3(vid * _VertexBufferStride + offset));
+}
+
+
+void GB_SetData(int vid, int dataId, float3 value)
+{
+	//0 ->  position
+	//1 ->  normal	
+	int offset = 4 * 3 * dataId;
+	_VertexBuffer.Store3(vid * _VertexBufferStride + offset, asuint(value));
+
+}
+
+
+float3 GB_GetLocalPosition(int vid)
+{
+	return GB_GetData(vid, 0);
+}
+
+
+void GB_SetLocalPosition(int vid, float3 position)
+{
+	GB_SetData(vid, 0, position);
+}
+
+
+float3 GB_GetLocalNormal(int vid)
+{
+	return normalize(GB_GetData(vid, 1));
+}
+
+void GB_SetLocalNormal(int vid, float3 normal)
+{
+	GB_SetData(vid, 1, normal);
+}
+
+
+
+
+//------------------------------------------------------------
+//VERTEXMOTION
+//------------------------------------------------------------
+
+
+float4 VertExmotion(float4 vpos, float4 col)
+{	
+    vpos.xyz /= _Scale;
+    float4 wrldPos = mul(_ObjectToWorld, vpos);
+    float w = 0;
+    wrldPos = VertExmotionBase(wrldPos, col, w);
+    vpos.xyz = mul(_WorldToObject, wrldPos).xyz * _Scale;
+    return vpos;
+}
+float4 VertExmotionW(float4 vpos, float4 col)
+{
+	
+	float w = 0;
+	vpos = VertExmotionBase(vpos, col, w);
+	
+	return vpos;
+}
+
+
+float4 VertExmotion(float4 vpos, float4 col, inout float weight)
+{
+    vpos.xyz /= _Scale;
+	float4 wrldPos = mul(_ObjectToWorld, vpos);
+    wrldPos = VertExmotionBase(wrldPos, col, weight);
+    vpos.xyz = mul(_WorldToObject, wrldPos).xyz * _Scale;
+    return vpos;
+}
+
+
+float4 VertExmotion(float4 vpos, float4 col, inout float3 n, float4 t)
+{
+	//_NormalCorrection = .8;
+    float w = 0;
+    float4 newpos = VertExmotion(vpos, col, w);
+
+	if (length(t.xyz) > 0 && KVM_NormalCorrection>0)
+	{
+		float4 biTan = float4(cross(n, t.xyz), 0);
+		float4 Tan = float4(cross( biTan.xyz, n.xyz), 0);
+		float4 posTan = VertExmotion(vpos + normalize(Tan) * .001, col);
+		float4 posBiTan = VertExmotion(vpos + normalize(biTan) * .001, col);
+		float3 newNormal = normalize(cross(normalize(posTan - newpos).xyz, normalize(posBiTan - newpos).xyz));
+		if(length(newNormal)>0)
+			n = lerp(n, newNormal, KVM_NormalCorrection*(w < KVM_NormalSmooth ? w * (1.0 / KVM_NormalSmooth) : 1));
+	}
+
+    return newpos;
+}
+
+
+
+
+
+//------------------------------------------------------------
+// KERNEL
+//------------------------------------------------------------
+
+
+[numthreads(32,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+
+	if (id.x >= (uint)_VertexCount)
+		return;
+
+	float4 vpos;
+	float3 n;
+	float4 t;	
+	float4 col = _colorBuf[id.x];
+	t = _tangentBuf[id.x];
+
+	if (_skinnedMesh)
+	{
+		vpos = float4(GB_GetLocalPosition(id.x), 1);
+		n = GB_GetLocalNormal(id.x);		
+
+	} 	
+	else
+	{
+		vpos = float4(_vertexBuf[id.x],1);		
+		n = _normalBuf[id.x];		
+	}
+	
+	//vpos.xyz += float3(0, .1, 0);
+	//vpos = VertExmotion(vpos, col);
+	if (_skinnedMesh)
+	{
+		vpos = VertExmotion(vpos, col, n, t);
+	}
+	else
+	{
+		vpos = VertExmotion(vpos, col, n, t);
+	}
+
+
+	GB_SetLocalPosition(id.x, vpos.xyz);
+	//GB_SetLocalPosition(id.x, float3(0,0,0));
+	GB_SetLocalNormal(id.x, n.xyz);
+}
