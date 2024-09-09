@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             if (instance != null)
             {
-                return instance;
+                return instance; 
             }
 
             // 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
@@ -179,13 +179,6 @@ public class Player : MonoBehaviour, IMessageReceiver
         meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
         _damageable.currentHitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
-
-        // 문제해결을 위해 옮김 
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-        totalspeed = Speed;
-        _damageable.maxHitPoints = maxTP;
         _damageable.CurrentHitPoints = maxTP;
         meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }

@@ -16,8 +16,6 @@ public class ComboBehaviour : StateMachineBehaviour
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		//currentStateInfo = stateInfo;
-
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 
@@ -26,6 +24,7 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		animator.SetBool(nextComboHash, false);
 		animator.ResetTrigger("Attack");
+		animator.ResetTrigger("Rattack");
 	}
 
 
