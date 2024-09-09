@@ -59,18 +59,19 @@ public class PlayerMoveState : PlayerBaseState
 
 		//stateMachine.Animator.SetFloat("animSpeed", stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f);
 
-		if (stateMachine.Player.IsLockOn)
-		{
-			if (isRun)
-			{
-				moveSpeed = 1f;
-			}
-			else
-			{
-				stateMachine.StartCoroutine(SmoothChangeSpeed());
-			}
-		}
-		else
+		/// 걷기 삭제로 인한 주석처리 
+// 		if (stateMachine.Player.IsLockOn)
+// 		{
+// 			if (isRun)
+// 			{
+// 				moveSpeed = 1f;
+// 			}
+// 			else
+// 			{
+// 				stateMachine.StartCoroutine(SmoothChangeSpeed());
+// 			}
+// 		}
+		//else
 		{
 			moveSpeed = 1f;
 		}

@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             if (instance != null)
             {
-                return instance;
+                return instance; 
             }
 
             // 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
