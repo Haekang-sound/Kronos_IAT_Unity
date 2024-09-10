@@ -13,11 +13,11 @@ public class CombatZoneEnemy : MonoBehaviour
     // finder의 타깃
     public GameObject CurrentTarget { get; private set; }
     // Scan 영역
+    public bool useCombatZone;
     public CombatZone combatZone { private get; set; }
     // 타깃 발견 시 이동해야할 위치
     public TargetDistributor.TargetFollower FollowerData { get; private set; }
 
-    // 다운 이벤트
     public UnityEvent OnDown;
 
     private void OnDisable()
@@ -28,6 +28,9 @@ public class CombatZoneEnemy : MonoBehaviour
     // 타겟 객체의 위치에서 특정 방향으로 90%의 거리에 있는 지점을 FollowerData.requiredPoint로 설정
     public void RequestTargetPosition(float distance)
     {
+        if (FollowerData == null)
+            return;
+
         Vector3 fromTarget = transform.position - CurrentTarget.transform.position;
         fromTarget.y = 0;
 
@@ -36,13 +39,21 @@ public class CombatZoneEnemy : MonoBehaviour
 
     public void FindTarget()
     {
-        // scanner의 타깃
-        var target = combatZone.Detect(transform, CurrentTarget == null);
-        
+        GameObject target = null;
+        if (useCombatZone == true)
+        {
+            // scanner의 타깃
+            target = combatZone.Detect(transform, CurrentTarget == null);
+        }
+        else
+        {
+            target = GetComponent<EnemyController>().target;
+        }
+
         if (CurrentTarget == null)
         {
             // 현재 타깃이 없고, Scanner가 타깃을 발견한 경우.
-            if (target != null) 
+            if (target != null)
             {
                 CurrentTarget = target;
                 TargetDistributor distributor = target.GetComponentInChildren<TargetDistributor>();
@@ -89,8 +100,8 @@ public class CombatZoneEnemy : MonoBehaviour
 
                     // 이동위치 업데이트 2: 타깃의 Distributer 재구독.
                     TargetDistributor distributor = target.GetComponentInChildren<TargetDistributor>();
-                    
-                    if (distributor != null) 
+
+                    if (distributor != null)
                     {
                         FollowerData = distributor.RegisterNewFollower();
                     }

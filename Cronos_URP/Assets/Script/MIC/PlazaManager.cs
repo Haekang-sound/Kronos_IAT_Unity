@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlazaManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlazaManager : MonoBehaviour
     public float totalDegree = 0.0f;
     public float elapsedDegree = 0.0f;
 
+	public int destroyedCount = 0;
+	public UnityEvent OnOpen;
     public GameObject soundTrigger;
 
     void Start()
@@ -33,7 +36,13 @@ public class PlazaManager : MonoBehaviour
 
     void ObjectDestroyed()
     {
+		destroyedCount++;
         StartCoroutine(Spin45Degree());
+		if(destroyedCount == 3)
+		{
+			// 여기서 문여는 함수를 호출? 
+			OnOpen.Invoke();
+		}
     }
 
     IEnumerator Spin45Degree()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
 {
@@ -84,10 +85,21 @@ public class EffectManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Debug.Log("Effect Manager called on " + gameObject.name);
         }
+		SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // 로드한 이펙트에 게임 오브젝트 할당
-    void Start()
+	/// <summary>
+	/// 씬전환 초기화를 위한 함수
+	/// 민동휘는 고치던가 
+	/// By OHK
+	/// </summary>
+	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		Initialize();
+	}
+
+	// 로드한 이펙트에 게임 오브젝트 할당
+	void Start()
     {
         Initialize();
         StartCoroutine(LoadEffectCoroutine());

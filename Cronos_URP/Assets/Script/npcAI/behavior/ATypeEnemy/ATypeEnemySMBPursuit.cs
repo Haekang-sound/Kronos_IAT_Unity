@@ -11,7 +11,6 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
     }
     public PursuitFor purpose;
 
-
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _monoBehaviour.ChangeDebugText("PURSUIT");

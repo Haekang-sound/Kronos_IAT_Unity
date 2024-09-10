@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 /// <summary>
 /// 모든 Enmy 객체들이 공동적으로 가지는 컴포넌트 및 변수를 정의한 클래스
@@ -41,6 +42,10 @@ public class EnemyController : MonoBehaviour
     protected Rigidbody _rigidbody;
 
     const float _groundedRayDistance = .8f;
+
+    public bool useObjectPool;
+    private IObjectPool<EnemyController> objectPool;
+    public IObjectPool<EnemyController> ObjectPool { set { objectPool = value; useObjectPool = true; } }
 
     void OnEnable()
     {
@@ -239,5 +244,17 @@ public class EnemyController : MonoBehaviour
         }
 
         return _navMeshAgent.SetDestination(position);
+    }
+
+    public void Release()
+    {
+        if(useObjectPool)
+        {
+            objectPool.Release(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
