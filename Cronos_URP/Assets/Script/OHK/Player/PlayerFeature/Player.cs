@@ -126,6 +126,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     public GameObject playerSword;
     public GameObject spcCubeL;
     public GameObject spcCubeR;
+    public float spcDelay;
     public PlayerStateMachine psm;
     //public float spcActivateTime;
 
@@ -238,7 +239,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         // 움직일 때마다 spc큐브를 활성화.
         if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
         {
-            StartCoroutine(ActivateSpcCubes(0.0f));
+            StartCoroutine(ActivateSpcCubes(spcDelay));
         }
         else
         {
@@ -443,8 +444,11 @@ public class Player : MonoBehaviour, IMessageReceiver
     IEnumerator ActivateSpcCubes(float delay)
     {
         yield return new WaitForSeconds(delay);
-        spcCubeL.SetActive(true);
-        spcCubeR.SetActive(true);
+        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+        {
+            spcCubeL.SetActive(true);
+            spcCubeR.SetActive(true);
+        }
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)
