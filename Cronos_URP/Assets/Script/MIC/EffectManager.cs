@@ -1,6 +1,7 @@
 using Sonity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -95,14 +96,17 @@ public class EffectManager : MonoBehaviour
 	/// </summary>
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		Initialize();
+// 		Initialize();
+// 		StartCoroutine(LoadEffectCoroutine());
 	}
 
 	// 로드한 이펙트에 게임 오브젝트 할당
 	void Start()
     {
-        StartCoroutine(LoadEffectCoroutine());
-    }
+		int a = 3;
+		Initialize();
+		StartCoroutine(LoadEffectCoroutine());
+	}
 
     // 디버그를 위해서 일단 업데이트에 넣어놓았다
     // 기획 쪽에서 조정이 끝나면 별도로 구현한다
