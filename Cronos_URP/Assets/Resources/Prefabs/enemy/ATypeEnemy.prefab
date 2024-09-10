@@ -168,8 +168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4427584833974447933}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -5, y: 0, z: 5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -177,7 +177,7 @@ Transform:
   - {fileID: 6099788310743127534}
   - {fileID: 844715325392617934}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5236233930874830728
 Animator:
   serializedVersion: 5
@@ -238,6 +238,7 @@ MonoBehaviour:
   interpolateTurning: 0
   applyAnimationRotation: 0
   rotationLerpSpeed: 0
+  useObjectPool: 0
 --- !u!136 &74958551394690362
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 0
   timeToStopPursuit: 0
+  useCombatZone: 1
   OnDown:
     m_PersistentCalls:
       m_Calls: []
