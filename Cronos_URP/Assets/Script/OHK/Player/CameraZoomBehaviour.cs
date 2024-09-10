@@ -5,6 +5,7 @@ public class CameraZoomBehaviour : StateMachineBehaviour
 {
 	public float value =3f;
 	public float time;
+	[SerializeField] AnimationCurve curve;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){}
 
@@ -15,10 +16,10 @@ public class CameraZoomBehaviour : StateMachineBehaviour
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-		CamerZoom.GetInstance().SetDefault();
-	}
+	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	//{
+	//	CamerZoom.GetInstance().SetDefault();
+	//}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
