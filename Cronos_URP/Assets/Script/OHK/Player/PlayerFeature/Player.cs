@@ -451,6 +451,18 @@ public class Player : MonoBehaviour, IMessageReceiver
         }
     }
 
+    // 플레이어 spcCube를 활성화 - 키프레임에서 이벤트로 호출
+    public void ActivateSCube()
+    {
+        spcCubeL.SetActive(true);
+        spcCubeR.SetActive(true);
+    }
+
+    public void DeactivateSCube()
+    {
+
+    }
+
     public void SetCheckpoint(Checkpoint checkpoint)
     {
         if (_currentCheckpoint != null)
