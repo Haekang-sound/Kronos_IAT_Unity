@@ -145,7 +145,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnDeceleration(InputAction.CallbackContext context)
     {
         if (context.started) onDecelerationStart?.Invoke();
-        else if (context.performed) onDecelerationPerformed.Invoke();
+        else if (context.performed) onDecelerationPerformed?.Invoke();
         else if (context.canceled) onDecelerationCanceled?.Invoke();
     }
 
