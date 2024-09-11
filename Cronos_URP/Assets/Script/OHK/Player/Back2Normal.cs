@@ -6,7 +6,6 @@ public class Back2Normal : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		EffectManager.Instance.SwordAuraOff();
-		Debug.Log("END ENFORCED");
 	}
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
@@ -16,10 +15,7 @@ public class Back2Normal : StateMachineBehaviour
     //}
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){}
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

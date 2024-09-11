@@ -103,7 +103,6 @@ public class EffectManager : MonoBehaviour
 	// 로드한 이펙트에 게임 오브젝트 할당
 	void Start()
     {
-		int a = 3;
 		Initialize();
 		StartCoroutine(LoadEffectCoroutine());
 	}
