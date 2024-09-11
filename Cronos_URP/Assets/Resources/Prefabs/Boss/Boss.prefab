@@ -5841,7 +5841,6 @@ GameObject:
   - component: {fileID: 8109977669758520242}
   - component: {fileID: 7062134607530597408}
   - component: {fileID: 3326145331922590434}
-  - component: {fileID: 7750578258040405777}
   - component: {fileID: 7683453723291258127}
   m_Layer: 8
   m_Name: Boss
@@ -5909,7 +5908,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.03
+  m_BaseOffset: -0.05
   m_WalkableMask: 3
   m_ObstacleAvoidanceType: 4
 --- !u!114 &433410041497287839
@@ -5929,6 +5928,7 @@ MonoBehaviour:
   interpolateTurning: 0
   applyAnimationRotation: 0
   rotationLerpSpeed: 0
+  useObjectPool: 0
 --- !u!95 &8041877679954655832
 Animator:
   serializedVersion: 5
@@ -6017,25 +6017,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 0}
---- !u!320 &7750578258040405777
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8751960732937434445}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 6563096722005948930, guid: fb074853495523d4687025e8c103f860, type: 2}
-    value: {fileID: 8041877679954655832}
-  m_ExposedReferences:
-    m_References: []
 --- !u!54 &7683453723291258127
 Rigidbody:
   m_ObjectHideFlags: 0
