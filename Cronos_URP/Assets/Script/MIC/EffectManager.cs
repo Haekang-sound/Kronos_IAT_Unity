@@ -65,6 +65,11 @@ public class EffectManager : MonoBehaviour
     // 강화 상태 오우라
     public GameObject swordAura;
 
+    // 보스 이펙트 관련
+    public float bossBeamDistance = 4.0f;
+    public float bossBeamTerm = 0.2f;
+    public float bossBeamDupeTime = 8.0f;
+
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
     GameObject[] effectArray;
@@ -95,12 +100,13 @@ public class EffectManager : MonoBehaviour
 	/// </summary>
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		Initialize();
+		//Initialize();
 	}
 
 	// 로드한 이펙트에 게임 오브젝트 할당
 	void Start()
     {
+        Initialize();
         StartCoroutine(LoadEffectCoroutine());
     }
 
@@ -124,11 +130,14 @@ public class EffectManager : MonoBehaviour
     {
         soundManager = SoundManager.Instance;
         player = Player.Instance;
+
         if(player != null)
         {
             pSword = player.GetComponent<Player>().playerSword;
         }
-        gVolume = FindObjectOfType<Volume>();
+        if (gVolume == null)
+            gVolume = FindObjectOfType<Volume>();
+
         if (gVolume != null)
             InitializeVol(gVolume);
         groundLayer = LayerMask.GetMask("Ground");
@@ -137,7 +146,9 @@ public class EffectManager : MonoBehaviour
         {
             ToggleMeshRenderer();
         }
-        swordAura = GameObject.Find("Com_Ready");
+        if (swordAura == null)
+            swordAura = GameObject.Find("Com_Ready");
+
         if (swordAura != null)
             swordAura.SetActive(false);
     }
@@ -277,6 +288,7 @@ public class EffectManager : MonoBehaviour
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
+        StartCoroutine(BossEightBeamCoroutine(player.transform));
     }
 
     public void SwordAuraOff()
@@ -369,15 +381,15 @@ public class EffectManager : MonoBehaviour
         invislash.transform.position += new Vector3(0, 1f, 0);
         invislash.transform.forward = player.transform.forward;
         invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
-        StartCoroutine(MoveWave(invislash));
+        StartCoroutine(MoveWaveCoroutine(invislash));
     }
 
-    IEnumerator MoveWave(GameObject proj)
+    IEnumerator MoveWaveCoroutine(GameObject proj)
     {
         Vector3 startPos = proj.transform.position;
         Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
         //Destroy(proj, 0.7f);
-        StartCoroutine(DestroyWave(proj));
+        StartCoroutine(DestroyWaveCoroutine(proj));
 
         while (proj != null && Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
         {
@@ -390,7 +402,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    IEnumerator DestroyWave(GameObject wav)
+    IEnumerator DestroyWaveCoroutine(GameObject wav)
     {
         yield return new WaitForSeconds(0.7f);
         if (wav != null)
@@ -425,7 +437,7 @@ public class EffectManager : MonoBehaviour
         soundManager.PlaySFX("Parry_SE", player.transform);
         Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
         GameObject parr = SpawnEffect("GuardFlare", parrPos);
-        StartCoroutine(FadeOutLights(parr));
+        StartCoroutine(FadeOutLightsCoroutine(parr));
         Destroy(parr, 1.0f);
         CreateGuardFX();
         // 글로벌볼륨이 없다면 나가
@@ -435,6 +447,29 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ParryCAberrationCoroutine(cAberVal));
     }
 
+    // 보스 8방향 빔
+    public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
+    {
+        for (int i = 0; i < bossBeamDupeTime; i++)
+        {
+            soundManager.PlaySFX("Beam_SE", player.transform);
+
+            for (int j = 0; j < 8; j++)
+            {
+                GameObject beam = SpawnEffect("BossFX_1Beam", bossTrans.position);
+                beam.transform.Rotate(0, 45.0f * j, 0);
+
+                GameObject beamBase = beam.transform.GetChild(0).gameObject;
+                beamBase.transform.position += beamBase.transform.right * (bossBeamDistance * i);
+
+                Destroy(beam, 0.6f);
+            }
+            // TODO
+            yield return new WaitForSeconds(bossBeamTerm);
+        }
+    }
+
+    // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
     {
         mBlur.intensity.value = val;
@@ -450,6 +485,7 @@ public class EffectManager : MonoBehaviour
         mBlur.intensity.value = 0f;
     }
 
+    // 패리했을 때 크로마틱 애버레이션
     IEnumerator ParryCAberrationCoroutine(float val)
     {
         cAber.intensity.value = val;
@@ -465,7 +501,7 @@ public class EffectManager : MonoBehaviour
         cAber.intensity.value = 0f;
     }
 
-    IEnumerator FadeOutLights(GameObject flare)
+    IEnumerator FadeOutLightsCoroutine(GameObject flare)
     {
         float elapsedTime = 0.0f;
         Light light = flare.GetComponent<Light>();
@@ -481,4 +517,6 @@ public class EffectManager : MonoBehaviour
         light.intensity = 0f;
         lens.intensity = 0f;
     }
+
+
 }
