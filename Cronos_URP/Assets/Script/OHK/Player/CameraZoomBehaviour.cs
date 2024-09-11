@@ -12,7 +12,11 @@ public class CameraZoomBehaviour : StateMachineBehaviour
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		CamerZoom.GetInstance().Zoomer(value, time);
+		float value = curve.Evaluate(stateInfo.normalizedTime);
+		Debug.Log(value);
+
+		//CamerZoom.GetInstance().Zoomer(value, time);
+		CamerZoom.GetInstance().ZoomerCurve(value);
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

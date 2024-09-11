@@ -19,6 +19,8 @@ public class SpawnEnemyWave : MonoBehaviour
 
     private void Awake()
     {
+        spawnTimer = spawnCycleTime;
+
         enemyPrefab.gameObject.SetActive(false);
 
         pool = new ObjectPool<EnemyController>(CreateEnemy,
@@ -28,6 +30,8 @@ public class SpawnEnemyWave : MonoBehaviour
 
     void Start()
     {
+    
+
         if (Target == null)
         {
             Target = Player.Instance.gameObject;
