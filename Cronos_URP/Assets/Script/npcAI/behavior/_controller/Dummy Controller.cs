@@ -10,6 +10,7 @@ public class DummyController : MonoBehaviour, IMessageReceiver
     private Animator _animator;
     private Rigidbody _rigidbody;
     private HitShake _hitShake;
+    private KnockBack _knockBack;
     private Damageable _damageable;
     private BulletTimeScalable _bulletTimeScalable;
 
@@ -20,14 +21,17 @@ public class DummyController : MonoBehaviour, IMessageReceiver
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _hitShake = GetComponent<HitShake>();
+        _knockBack = GetComponent<KnockBack>();
         _damageable = GetComponent<Damageable>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
     }
 
     void OnEnable()
     {
-        _rigidbody.isKinematic = true;
+        _rigidbody.drag = 10f;
+        _rigidbody.isKinematic = false;
         _rigidbody.useGravity = false;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         _damageable.onDamageMessageReceivers.Add(this);
@@ -40,10 +44,12 @@ public class DummyController : MonoBehaviour, IMessageReceiver
 
     public void OnReceiveMessage(MessageType type, object sender, object msg)
     {
+        var dmgMsg = (Damageable.DamageMessage)msg;
+
         switch (type)
         {
             case MessageType.DAMAGED:
-                Damaged();
+                Damaged(dmgMsg);
                 break;
             case MessageType.DEAD:
                 break;
@@ -54,11 +60,14 @@ public class DummyController : MonoBehaviour, IMessageReceiver
         }
     }
 
-    private void Damaged()
+    private void Damaged(Damageable.DamageMessage msg)
     {
         UnuseBulletTimeScale();
         _animator.SetTrigger(hashDamage);
-        _hitShake.Begin();
+
+        _hitShake?.Begin();
+
+        _knockBack?.Begin(msg.damageSource);
     }
 
     internal void UseBulletTimeScale()

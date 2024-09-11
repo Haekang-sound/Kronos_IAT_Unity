@@ -19,6 +19,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
+    private KnockBack _knockBack;
     private Damageable _damageable;
     private EnemyController _controller;
     private BulletTimeScalable _bulletTimeScalable;
@@ -41,6 +42,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         BasePosition = transform.position;
 
         _hitShake = GetComponent<HitShake>();
+        _knockBack = GetComponent<KnockBack>();
         _damageable = GetComponent<Damageable>();
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
@@ -59,6 +61,8 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 
         _damageable.onDamageMessageReceivers.Add(this);
+
+        _meleeWeapon.SetOwner(gameObject);
 
         _rigidbody.GetComponent<Rigidbody>();
 
@@ -165,7 +169,7 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         {
             case MessageType.DAMAGED:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
-                Damaged();
+                Damaged(dmgMsg);
                 break;
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
@@ -195,11 +199,12 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         return toTarget.sqrMagnitude < distance * distance;
     }
 
-    private void Damaged()
+    private void Damaged(Damageable.DamageMessage msg)
     {
         UnuseBulletTimeScale();
         TriggerDamage();
         _hitShake.Begin();
+        _knockBack?.Begin(msg.damageSource);
     }
 
     private void Dead()

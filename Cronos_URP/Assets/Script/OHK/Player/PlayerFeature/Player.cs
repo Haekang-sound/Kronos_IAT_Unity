@@ -177,6 +177,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         psm = gameObject.GetComponent<PlayerStateMachine>();
 
         // 문제해결을 위해 옮김 
+        meleeWeapon.SetOwner(gameObject);
         meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
 		_damageable.currentHitPoints = maxTP;

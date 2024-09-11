@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 2166233687412480796}
   - component: {fileID: 4231333519554678771}
   - component: {fileID: -2601519489802444424}
+  - component: {fileID: 2766467903001530211}
   m_Layer: 8
   m_Name: ATypeEnemy
   m_TagString: Respawn
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 0
+  maxHitPoints: 100
   currentHitPoints: 0
   invulnerabiltyTime: 0
   hitAngle: 360
@@ -387,6 +388,19 @@ MonoBehaviour:
   time: 0.2
   distance: 0.1
   delayBetweenShakes: 0
+--- !u!114 &2766467903001530211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427584833974447933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6449ae620abac4b84bdb49e03d9b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForcePower: 100
 --- !u!1 &7134127758879641834
 GameObject:
   m_ObjectHideFlags: 0
