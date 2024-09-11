@@ -31,7 +31,7 @@ public class CamerZoom : MonoBehaviour
 
 	private void Update()
 	{
-		//Zoom();
+		Zoom();
 	}
 
 	private void Zoom()
@@ -57,6 +57,13 @@ public class CamerZoom : MonoBehaviour
 		float currentDistance = framingTransposer.m_CameraDistance;
 		float lerpedZoomValue = Mathf.Lerp(currentDistance, zValue, time * Time.deltaTime);
 		framingTransposer.m_CameraDistance = lerpedZoomValue; 
+	}
+	public void ZoomerCurve(float zValue)
+	{
+		//원하는 시간만큼간다
+		//float currentDistance = framingTransposer.m_CameraDistance;
+		//float lerpedZoomValue = Mathf.Lerp(currentDistance, zValue, Time.deltaTime);
+		framingTransposer.m_CameraDistance = zValue;
 	}
 	public void SetDefault()
 	{

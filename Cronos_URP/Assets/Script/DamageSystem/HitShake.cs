@@ -33,6 +33,7 @@ public class HitShake : MonoBehaviour
             _timer += Time.deltaTime;
 
             _randomPos = _originalPos + (Random.insideUnitSphere * distance);
+            _randomPos.y = _originalPos.y;
 
             transform.position = _randomPos;
 
