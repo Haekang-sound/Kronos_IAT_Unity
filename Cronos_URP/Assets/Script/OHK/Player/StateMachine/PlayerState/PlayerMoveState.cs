@@ -50,34 +50,23 @@ public class PlayerMoveState : PlayerBaseState
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
- 		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
- 		rootMotion.y = 0;
-		//totalMove += rootMotion;
-
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
-
-		//stateMachine.Animator.SetFloat("animSpeed", stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f);
-
-		/// 걷기 삭제로 인한 주석처리 
-// 		if (stateMachine.Player.IsLockOn)
-// 		{
-// 			if (isRun)
-// 			{
-// 				moveSpeed = 1f;
-// 			}
-// 			else
-// 			{
-// 				stateMachine.StartCoroutine(SmoothChangeSpeed());
-// 			}
-// 		}
-		//else
-		{
-			moveSpeed = 1f;
-		}
-
+		moveSpeed = 1f;
 
 		stateMachine.Player.SetSpeed(moveSpeed);
+		/// 이동휴 죽어라
+		/// 죽어라 이동휴
+		/// 이어라 죽동휴
+		/// 죽동휴 이어라
+		/// 폭발 테스트용만들어야 겠지?
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			Debug.Log("이거 맞으면 당근을 흔드세요");
+			
+			if(stateMachine.Player.IsDecreaseCP)
+				stateMachine.Player.CPBomb();
+		}
 
 		// 휠꾹
 		if (isRelease)
@@ -96,7 +85,6 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			// moveSpeed에 y값을곱해서 전방이동인지 후방이동인지 확인한다.
 			stateMachine.Animator.SetFloat(MoveSpeedHash,
-											/*Mathf.Abs(stateMachine.InputReader.moveComposite.y) > 0f ? moveSpeed :*/
 											(moveSpeed * stateMachine.InputReader.moveComposite.y), AnimationDampTime, Time.deltaTime);
 		}
 		else
@@ -117,15 +105,9 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
- 		//Move(totalMove);                     // 이동한다.	
- 		//Move();                     // 이동한다.	
-//         totalMove = Vector3.zero;
-
-
     }
     public override void FixedTick()
 	{
-		//Float();
 		if (stateMachine.Player.IsLockOn)
 		{
 			if (moveSpeed > 0.5f)

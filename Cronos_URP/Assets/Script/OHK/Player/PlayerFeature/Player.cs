@@ -382,9 +382,30 @@ public class Player : MonoBehaviour, IMessageReceiver
         shieldWeapon?.EndParry();
     }
 
-    // 기본 슬래시 FX
-    // 이름이 망해부렀으야
-    public void NormalSlash()
+
+	public void CPBomb()
+	{
+		if (effectManager != null)
+		{ 
+			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
+			Destroy(bomb, 3.0f);
+
+
+			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+			Destroy(bombDamager, 3.0f);
+		}
+	}
+
+	public void TimeSlash(string name, Vector3 pos)
+	{
+		if (effectManager != null)
+			effectManager.SpawnEffect(name, pos);
+	}
+
+
+	// 기본 슬래시 FX
+	// 이름이 망해부렀으야
+	public void NormalSlash()
     {
         if (effectManager != null)
             effectManager.NormalSlashFX("Nor_Attack");
