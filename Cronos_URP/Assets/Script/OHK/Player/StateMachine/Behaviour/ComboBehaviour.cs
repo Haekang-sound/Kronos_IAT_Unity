@@ -45,6 +45,8 @@ public class ComboBehaviour : StateMachineBehaviour
 			// ÀÌµ¿¾Æ´Ô
 			animator.SetBool(moveHash, false);
 		}
+		if (stateMachine.MoveForce < 1f)
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime); ;
 
 	}
 

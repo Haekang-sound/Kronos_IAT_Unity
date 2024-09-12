@@ -68,18 +68,28 @@ public class PlayerAttackState : PlayerBaseState
 
 
 		CalculateMoveDirection();   // 방향을 계산하고
-	}
-	public override void FixedTick()
-	{
-		if (IsOnSlope())
+		if (stateMachine.MoveForce > 1f)
 		{
 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
 		}
 		else
 		{
-			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
-
+			Debug.Log(stateMachine.Animator.deltaPosition);
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}
+	}
+	public override void FixedTick()
+	{
+// 		if (IsOnSlope())
+// 		{
+// 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
+// 		}
+// 		else
+// 		{
+	
+
+
+		//}
 		Float();
 		totalMove = Vector3.zero;
 	}

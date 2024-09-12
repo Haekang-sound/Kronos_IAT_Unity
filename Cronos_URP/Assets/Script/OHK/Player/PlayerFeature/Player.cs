@@ -184,7 +184,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
 
-    private void ChargeCP(Collider other)
+    public void ChargeCP(Collider other)
     {
         {
             Debug.Log("cp를 회복한다.");
