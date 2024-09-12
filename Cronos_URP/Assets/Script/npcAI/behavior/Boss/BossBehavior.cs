@@ -24,6 +24,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private HitShake _hitShake;
     private Damageable _damageable;
     private MeleeWeapon _meleeWeapon;
+    private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
 
@@ -42,6 +43,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+        _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
     }
@@ -104,6 +106,12 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
                 return;
 
         }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    public void BossEightBeamCoroutine()
+    {
+        StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
