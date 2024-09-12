@@ -62,10 +62,17 @@ public class PlayerMoveState : PlayerBaseState
 		/// 폭발 테스트용만들어야 겠지?
 		if(Input.GetKeyDown(KeyCode.E))
 		{
-			Debug.Log("이거 맞으면 당근을 흔드세요");
 			
 			if(stateMachine.Player.IsDecreaseCP)
 				stateMachine.Player.CPBomb();
+		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+
+			Debug.Log("이거 맞으면 당근을 흔드세요");
+			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * 100f, ForceMode.Impulse);
+
 		}
 
 		// 휠꾹

@@ -68,7 +68,7 @@ public class PlayerAttackState : PlayerBaseState
 
 		if (stateMachine.MoveForce > 1f)
 		{
-			stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}
 		else
 		{

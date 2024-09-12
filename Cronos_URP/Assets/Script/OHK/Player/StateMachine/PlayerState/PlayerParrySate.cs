@@ -6,7 +6,6 @@ public class PlayerParryState : PlayerBaseState
 {
 	public PlayerParryState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	private readonly int attackHash = Animator.StringToHash("Attack");
-	Vector3 totalMove;
 	public override void Enter()
 	{
 		stateMachine.InputReader.onLAttackStart += Attack;
@@ -17,23 +16,18 @@ public class PlayerParryState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
-		rootMotion.y = 0;
-		totalMove += rootMotion;
-	}
-	public override void FixedTick()
-	{
-		if (IsOnSlope())
+		if (stateMachine.MoveForce > 1f)
 		{
-			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}
 		else
 		{
-			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
-
+			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}
+	}
+	public override void FixedTick()
+	{
 		Float();
-		totalMove = Vector3.zero;
 	}
 	public override void LateTick() { }
 
