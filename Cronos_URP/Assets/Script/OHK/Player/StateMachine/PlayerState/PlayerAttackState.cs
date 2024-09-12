@@ -24,6 +24,7 @@ public class PlayerAttackState : PlayerBaseState
 		// 
 		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
+		stateMachine.Animator.ResetTrigger("Rattack");
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
@@ -62,36 +63,23 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.Animator.SetFloat(chargeHash, 0);
 		}
 
-		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
-		rootMotion.y = 0;
-		totalMove += rootMotion;
-
 
 		CalculateMoveDirection();   // 방향을 계산하고
+
 		if (stateMachine.MoveForce > 1f)
 		{
-			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition * stateMachine.MoveForce;
 		}
 		else
 		{
-			Debug.Log(stateMachine.Animator.deltaPosition);
 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}
 	}
 	public override void FixedTick()
 	{
-// 		if (IsOnSlope())
-// 		{
-// 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(totalMove) * stateMachine.MoveForce;
-// 		}
-// 		else
-// 		{
-	
 
 
-		//}
 		Float();
-		totalMove = Vector3.zero;
 	}
 	public override void LateTick() { }
 	public override void Exit()

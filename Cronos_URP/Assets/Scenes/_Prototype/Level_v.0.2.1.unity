@@ -947,12 +947,14 @@ MonoBehaviour:
   mBlurVal: 0.7
   cAberVal: 0.7
   parryTime: 1
+  fadeTime: 0.3
   enforceSlashSpeed: 30
   swordWaveSpeed: 20
   swordWaveDistance: 12
   invisibleSlash: {fileID: 0}
   isGroundEnforced: 0
   showInvisibleMesh: 0
+  swordAura: {fileID: 0}
 --- !u!4 &302820034
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,6 +1348,10 @@ PrefabInstance:
         'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
         'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
         'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473154190031297308, guid: 99e3851a68612c54795d68cd96d1edd5, type: 3}
+      propertyPath: ForcePower
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4448433654554216702, guid: 99e3851a68612c54795d68cd96d1edd5, type: 3}
       propertyPath: m_WarningMessage
@@ -3335,7 +3341,7 @@ PrefabInstance:
       objectReference: {fileID: 960814855}
     - target: {fileID: 7187067325126008650, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -92.71
+      value: -92.501
       objectReference: {fileID: 0}
     - target: {fileID: 7187067325126008650, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4635,7 +4641,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -4662,7 +4668,7 @@ Transform:
   m_GameObject: {fileID: 2053119889}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -92.71, y: 12.28, z: -87.2}
+  m_LocalPosition: {x: -92.501, y: 12.28, z: -87.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50203,7 +50209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 0}
-  combatZone: {fileID: 0}
+  isActived: 0
 --- !u!23 &7953749936033429978
 MeshRenderer:
   m_ObjectHideFlags: 0

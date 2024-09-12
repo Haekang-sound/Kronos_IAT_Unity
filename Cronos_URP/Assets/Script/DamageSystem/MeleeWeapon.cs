@@ -12,6 +12,8 @@ public class MeleeWeapon : MonoBehaviour
         simpleDamager?.gameObject.SetActive(false);
     }
 
+    public void SetOwner(GameObject owner) => simpleDamager?.SetOwner(owner);
+
     public void BeginAttack()
     {
         simpleDamager?.gameObject.SetActive(true);

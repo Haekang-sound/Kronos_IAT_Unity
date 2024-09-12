@@ -24,6 +24,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
+    private KnockBack _knockBack;
     private Damageable _damageable;
     private RangeWeapon _rangeWeapon;
     private EnemyController _controller;
@@ -47,6 +48,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         BasePosition = transform.position;
 
         _hitShake = GetComponent<HitShake>();
+        _knockBack = GetComponent<KnockBack>();
         _damageable = GetComponent<Damageable>();
         _rangeWeapon = GetComponent<RangeWeapon>();
         _controller = GetComponent<EnemyController>();
@@ -210,7 +212,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         {
             case MessageType.DAMAGED:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
-                Damaged();
+                Damaged(dmgMsg);
                 break;
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
@@ -224,11 +226,13 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         }
     }
 
-    private void Damaged()
+    private void Damaged(Damageable.DamageMessage msg)
     {
+		Player.Instance.ChargeCP();
         UnuseBulletTimeScale();
         TriggerDamage();
         _hitShake.Begin();
+        _knockBack?.Begin(msg.damageSource);
     }
 
     private void Dead()

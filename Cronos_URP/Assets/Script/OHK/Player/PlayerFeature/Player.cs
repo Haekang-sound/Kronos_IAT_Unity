@@ -177,7 +177,8 @@ public class Player : MonoBehaviour, IMessageReceiver
         psm = gameObject.GetComponent<PlayerStateMachine>();
 
         // 문제해결을 위해 옮김 
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        meleeWeapon.SetOwner(gameObject);
+        //meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
 		_damageable.currentHitPoints = maxTP;
 		_damageable.CurrentHitPoints = maxTP;
@@ -187,7 +188,6 @@ public class Player : MonoBehaviour, IMessageReceiver
     public void ChargeCP(Collider other)
     {
         {
-            Debug.Log("cp를 회복한다.");
             if (CP < maxCP && !IsDecreaseCP)
             {
                 CP += chargingCP;
@@ -199,8 +199,22 @@ public class Player : MonoBehaviour, IMessageReceiver
             }
         }
     }
+	public void ChargeCP()
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
 
-    private void Update()
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+
+	private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {

@@ -11,7 +11,7 @@ public class SimpleDamager : MonoBehaviour
 
     public LayerMask targetLayers;
 
-    //protected GameObject m_owner;
+    protected GameObject m_owner;
     public bool m_inAttack = false;
 
     public delegate void TriggerEnterAction(Collider other);
@@ -31,10 +31,7 @@ public class SimpleDamager : MonoBehaviour
         soundManager = SoundManager.Instance;
     }
 
-    //public void SetOwner(GameObject owner)
-    //{
-    //    m_owner = owner;
-    //}
+    public void SetOwner(GameObject owner) => m_owner = owner;
 
     public void BeginAttack()
     {
@@ -71,11 +68,6 @@ public class SimpleDamager : MonoBehaviour
             return;
         }
 
-        if (this.CompareTag("Player"))
-        {
-            OnTriggerEnterEvent(other);
-        }
-
         var damageable = other.GetComponent<Damageable>();
 
         if (damageable == null)
@@ -97,6 +89,11 @@ public class SimpleDamager : MonoBehaviour
             damageSource = transform.position,
             stopCamera = stopCamera
         };
+
+        if (m_owner != null)
+        {
+            msg.damageSource = m_owner.transform.position;
+        }
 
         damageable.ApplyDamage(msg);
         OnAttack.Invoke();
