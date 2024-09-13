@@ -21,7 +21,7 @@ public class PlayerAttackState : PlayerBaseState
 		attackBool = false;
         stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
-		// 
+		
 		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
@@ -68,7 +68,7 @@ public class PlayerAttackState : PlayerBaseState
 
 		if (stateMachine.MoveForce > 1f)
 		{
-			stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}
 		else
 		{
@@ -77,8 +77,6 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void FixedTick()
 	{
-
-
 		Float();
 	}
 	public override void LateTick() { }

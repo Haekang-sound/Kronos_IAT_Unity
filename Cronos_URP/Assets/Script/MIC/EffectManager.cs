@@ -288,7 +288,6 @@ public class EffectManager : MonoBehaviour
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
-        StartCoroutine(BossEightBeamCoroutine(player.transform));
     }
 
     public void SwordAuraOff()
@@ -467,6 +466,14 @@ public class EffectManager : MonoBehaviour
             // TODO
             yield return new WaitForSeconds(bossBeamTerm);
         }
+    }
+
+    // 보스 불 장판 만들기
+    public void BossFireShoot(Transform bosstrans)
+    {
+        GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
+        fire.transform.forward = bosstrans.transform.forward;
+        fire.transform.position += new Vector3(0, 1.0f, 0);
     }
 
     // 패리했을 때 모션 블러

@@ -75,7 +75,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619655756060650}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -4975,7 +4975,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619655777220871}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -9850,7 +9850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7607619655914472718
 Transform:
   m_ObjectHideFlags: 0
@@ -9875,7 +9875,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619655914472713}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14778,8 +14778,9 @@ GameObject:
   - component: {fileID: 7607619655946925668}
   - component: {fileID: 2014488088487250570}
   - component: {fileID: 8304764346536111483}
+  - component: {fileID: 412324650032587329}
   m_Layer: 0
-  m_Name: Effect_02_OneHandSmash
+  m_Name: BossFX_FireProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14816,7 +14817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 2
-  MoveSpeed: 10
+  MoveSpeed: 20
   AbleHit: 1
   HitDelay: 0.5
   m_hitObject: {fileID: 6782056314920602498, guid: b4a8e7ec07b06db44a09b8a9fb7dc3ed, type: 3}
@@ -14837,7 +14838,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19619,6 +19620,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &412324650032587329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7607619655946925671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09933192979451444a2503c9835608b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayMaxDist: 10
+  floorDestroyTime: 5
+  fireTerm: 0.2
 --- !u!1 &7607619656162255316
 GameObject:
   m_ObjectHideFlags: 0
@@ -19661,7 +19677,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619656162255316}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -24561,7 +24577,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619656699740977}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -29494,7 +29510,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7607619657062083106}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
