@@ -288,7 +288,6 @@ public class EffectManager : MonoBehaviour
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
-        StartCoroutine(BossEightBeamCoroutine(player.transform));
     }
 
     public void SwordAuraOff()
