@@ -23,6 +23,8 @@ public class PlayerMoveState : PlayerBaseState
 	float releaseLockOn = 0f;
 	bool isRelease = false;
 	bool isRun = false;
+	float timeLine;
+	bool timeslash = false;
 
 	Vector3 totalMove;
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
@@ -62,17 +64,27 @@ public class PlayerMoveState : PlayerBaseState
 		/// 폭발 테스트용만들어야 겠지?
 		if(Input.GetKeyDown(KeyCode.E))
 		{
-			
 			if(stateMachine.Player.IsDecreaseCP)
 				stateMachine.Player.CPBomb();
 		}
 
+
+		
+		// 시간베기 테스트용
 		if (Input.GetKeyDown(KeyCode.R))
 		{
-
-			Debug.Log("이거 맞으면 당근을 흔드세요");
-			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * 100f, ForceMode.Impulse);
-
+			timeslash = true;
+		}
+		// 시간베기 테스트용
+		if (timeslash)
+		{
+			timeLine += Time.deltaTime;
+			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.Player.TimeSlashCurve.Evaluate(timeLine / 0.5f), ForceMode.Impulse);
+			if(timeLine > 0.5f)
+			{
+				timeslash = false;
+				timeLine = 0f;
+			}
 		}
 
 		// 휠꾹

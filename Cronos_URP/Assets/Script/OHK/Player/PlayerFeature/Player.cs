@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     [Header("State")]
     [SerializeField] private string CurrentState;
+    [SerializeField] public AnimationCurve TimeSlashCurve;
 
     [Header("Move Option")]
     [SerializeField] private float Speed = 1f;
