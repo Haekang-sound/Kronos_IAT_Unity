@@ -1,6 +1,7 @@
 using Message;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static ScreenFader;
@@ -14,192 +15,197 @@ using static ScreenFader;
 /// </summary>
 public class Player : MonoBehaviour, IMessageReceiver
 {
-    // 싱글턴 객체 입니다. 
-    public static Player Instance
-    {
-        get
-        {
-            if (instance != null)
-            {
-                return instance; 
-            }
+	// 싱글턴 객체 입니다. 
+	public static Player Instance
+	{
+		get
+		{
+			if (instance != null)
+			{
+				return instance;
+			}
 
-            // 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
-            instance = FindObjectOfType<Player>();
+			// 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
+			instance = FindObjectOfType<Player>();
 
-            return instance;
-        }
-    }
+			return instance;
+		}
+	}
 
-    protected static Player instance;
+	public RenderObjects SkillRenderObj;
+	public GameObject sphere;
+	public float biggerSpeed;
+	public float valuebig = 0f;
 
-    [Header("State")]
-    [SerializeField] private string CurrentState;
-    [SerializeField] public AnimationCurve TimeSlashCurve;
+	protected static Player instance;
 
-    [Header("Move Option")]
-    [SerializeField] private float Speed = 1f;
-    [SerializeField] private float LookRotationDampFactor = 10f;
-    [SerializeField] private float attackCoefficient = 0.1f;
-    [SerializeField] private float moveCoefficient = 0.1f;
+	[Header("State")]
+	[SerializeField] private string CurrentState;
+	[SerializeField] public AnimationCurve TimeSlashCurve;
 
-    [SerializeField] private float maxTP;
-    [SerializeField] private float maxCP;
+	[Header("Move Option")]
+	[SerializeField] private float Speed = 1f;
+	[SerializeField] private float LookRotationDampFactor = 10f;
+	[SerializeField] private float attackCoefficient = 0.1f;
+	[SerializeField] private float moveCoefficient = 0.1f;
 
-    [SerializeField] private float currentDamage;
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private float chargeAttack = 0f;
+	[SerializeField] private float maxTP;
+	[SerializeField] private float maxCP;
 
-    [SerializeField] private float currentTP;
-    [SerializeField] private float currentCP;
-    [SerializeField] private float chargingCP = 10f;
-    [SerializeField] private float decayTime = 1f;
+	[SerializeField] private float currentDamage;
+	[SerializeField] private float attackSpeed;
+	[SerializeField] private float chargeAttack = 0f;
 
-
-    [SerializeField] private bool isEnforced = false;
-    [SerializeField] private bool isLockOn = false;
-    [SerializeField] private bool rigidImmunity = false;
-    [SerializeField] private bool dodgeAttack = false;
-
-    /// <summary>
-    /// floating capsule만드는중 
-    /// </summary>
-    [field: Header("Collisions")]
-    [field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
-    [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
-    [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
+	[SerializeField] private float currentTP;
+	[SerializeField] private float currentCP;
+	[SerializeField] private float chargingCP = 10f;
+	[SerializeField] private float decayTime = 1f;
 
 
-    private Checkpoint _currentCheckpoint;
+	[SerializeField] private bool isEnforced = false;
+	[SerializeField] private bool isLockOn = false;
+	[SerializeField] private bool rigidImmunity = false;
+	[SerializeField] private bool dodgeAttack = false;
 
-    // Property
-    private float totalspeed;
-    public float moveSpeed { get { return totalspeed; } }
-    public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
-    public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
-    public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
-
-    //     // 스킬 사용정보
-    //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-
-    // chronos in game Option
-    public float MaxCP { get { return maxCP; } set { maxCP = value; } }
-    public float MaxTP { get { return maxTP; } set { maxTP = value; } }
-    public float CP { get { return currentCP; } set { currentCP = value; } }
-    public float TP
-    {
-        get { return currentTP; }
-        set
-        {
-            currentTP = value;
-            if (currentTP > maxTP)
-            {
-                currentTP = maxTP;
-            }
-            _damageable.CurrentHitPoints = currentTP;
-        }
-    }
-    public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
-    public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
-    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-    public float ChargeAttack { get { return chargeAttack; } set { chargeAttack = value; } }
-    public bool IsDecreaseCP { get; set; }
-    public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
-    public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
-    public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
-    public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
-
-    // 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
-    PlayerData playerData = new PlayerData();
-    Transform playerTransform;
-    AutoTargetting targetting;
-
-    MeleeWeapon meleeWeapon;
-    ShieldWeapon shieldWeapon;
-    PlayerStateMachine PlayerFSM;
-
-    public Damageable _damageable;
-    public Defensible _defnsible;
-
-    public SoundManager soundManager;
-    public EffectManager effectManager;
-    public ImpulseCam impulseCam;
-    public GameObject playerSword;
-    public GameObject spcCubeL;
-    public GameObject spcCubeR;
-    public float spcDelay;
-    public PlayerStateMachine psm;
-    //public float spcActivateTime;
+	/// <summary>
+	/// floating capsule만드는중 
+	/// </summary>
+	[field: Header("Collisions")]
+	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
+	[field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+	[field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
 
 
-    private void Awake()
-    {
+	private Checkpoint _currentCheckpoint;
+
+	// Property
+	private float totalspeed;
+	public float moveSpeed { get { return totalspeed; } }
+	public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
+	public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
+	public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
+
+	//     // 스킬 사용정보
+	//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+
+	// chronos in game Option
+	public float MaxCP { get { return maxCP; } set { maxCP = value; } }
+	public float MaxTP { get { return maxTP; } set { maxTP = value; } }
+	public float CP { get { return currentCP; } set { currentCP = value; } }
+	public float TP
+	{
+		get { return currentTP; }
+		set
+		{
+			currentTP = value;
+			if (currentTP > maxTP)
+			{
+				currentTP = maxTP;
+			}
+			_damageable.CurrentHitPoints = currentTP;
+		}
+	}
+	public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
+	public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
+	public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+	public float ChargeAttack { get { return chargeAttack; } set { chargeAttack = value; } }
+	public bool IsDecreaseCP { get; set; }
+	public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // 강화상태를 위한 프로퍼티
+	public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
+	public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
+	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
+
+	// 플레이어 데이터를 저장하고 respawn시 반영하는 데이터
+	PlayerData playerData = new PlayerData();
+	Transform playerTransform;
+	AutoTargetting targetting;
+
+	MeleeWeapon meleeWeapon;
+	ShieldWeapon shieldWeapon;
+	PlayerStateMachine PlayerFSM;
+
+	public Damageable _damageable;
+	public Defensible _defnsible;
+
+	public SoundManager soundManager;
+	public EffectManager effectManager;
+	public ImpulseCam impulseCam;
+	public GameObject playerSword;
+	public GameObject spcCubeL;
+	public GameObject spcCubeR;
+	public float spcDelay;
+	public PlayerStateMachine psm;
+	//public float spcActivateTime;
+
+
+	private void Awake()
+	{
 		CapsuleColldierUtility.Initialize(gameObject);
-        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
-    }
-    private void OnValidate()
-    {
-        CapsuleColldierUtility.Initialize(gameObject);
-        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+	}
+	private void OnValidate()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
-    }
-    protected void OnDisable()
-    {
-        _damageable.onDamageMessageReceivers.Remove(this);
-    }
+	}
+	protected void OnDisable()
+	{
+		_damageable.onDamageMessageReceivers.Remove(this);
+	}
 
-    private void OnEnable()
-    {
-        _damageable = GetComponent<Damageable>();
-        _damageable.onDamageMessageReceivers.Add(this);
-        _defnsible = GetComponent<Defensible>();
+	private void OnEnable()
+	{
+		_damageable = GetComponent<Damageable>();
+		_damageable.onDamageMessageReceivers.Add(this);
+		_defnsible = GetComponent<Defensible>();
 
-        // 감속/가속 변경함수를 임시로 사용해보자
-        // 반드시 지워져야할 부분이지만 임시로 넣는다
-        PlayerFSM = GetComponent<PlayerStateMachine>();
-        playerTransform = GetComponent<Transform>();
-        meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-        shieldWeapon = GetComponentInChildren<ShieldWeapon>();
-        targetting = GetComponentInChildren<AutoTargetting>();
-    }
+		// 감속/가속 변경함수를 임시로 사용해보자
+		// 반드시 지워져야할 부분이지만 임시로 넣는다
+		PlayerFSM = GetComponent<PlayerStateMachine>();
+		playerTransform = GetComponent<Transform>();
+		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
+		targetting = GetComponentInChildren<AutoTargetting>();
+	}
 
-    void Start()
-    {
-        // 여기에 초기화
-        soundManager = SoundManager.Instance;
-        effectManager = EffectManager.Instance;
-        impulseCam = ImpulseCam.Instance;
-        if (soundManager != null)
-            Debug.Log("SoundManager found");
-        if (effectManager != null)
-            Debug.Log("EffectManager found");
-        if (impulseCam != null)
-            Debug.Log("ImpulseCam found");
-        psm = gameObject.GetComponent<PlayerStateMachine>();
+	void Start()
+	{
+		// 여기에 초기화
+		soundManager = SoundManager.Instance;
+		effectManager = EffectManager.Instance;
+		impulseCam = ImpulseCam.Instance;
+		if (soundManager != null)
+			Debug.Log("SoundManager found");
+		if (effectManager != null)
+			Debug.Log("EffectManager found");
+		if (impulseCam != null)
+			Debug.Log("ImpulseCam found");
+		psm = gameObject.GetComponent<PlayerStateMachine>();
 
-        // 문제해결을 위해 옮김 
-        meleeWeapon.SetOwner(gameObject);
-        //meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-        totalspeed = Speed;
+		// 문제해결을 위해 옮김 
+		meleeWeapon.SetOwner(gameObject);
+		//meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+		totalspeed = Speed;
 		_damageable.currentHitPoints = maxTP;
 		_damageable.CurrentHitPoints = maxTP;
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
-    }
+	}
 
-    public void ChargeCP(Collider other)
-    {
-        {
-            if (CP < maxCP && !IsDecreaseCP)
-            {
-                CP += chargingCP;
+	public void ChargeCP(Collider other)
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
 
-                if (CP > maxCP)
-                {
-                    CP = maxCP;
-                }
-            }
-        }
-    }
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
 	public void ChargeCP()
 	{
 		{
@@ -215,193 +221,232 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
+	float totaltime = 0f;
+	
+	bool bigger = false;
+
 	private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SetCursorInactive();
-        }
-
-        CurrentState = PlayerFSM.GetState().GetType().Name;
-
-        // 실시간으로 TP 감소
-        if (_damageable.CurrentHitPoints > 0f)
-        {
-            _damageable.CurrentHitPoints -= Time.deltaTime;
-        }
-
-        // 실시간으로 CP감소
-        if (IsDecreaseCP && CP > 0)
-        {
-            CP -= Time.deltaTime * decayTime;
-            if (CP <= 0)
-            {
-                IsDecreaseCP = false;
-                CP = 0;
-                Debug.Log("몬스터들의 속도가 원래대로 돌아온다.");
-                BulletTime.Instance.SetNormalSpeed();
-            }
-        }
-
-        TP = _damageable.CurrentHitPoints;
+	{
 
 
-        if (TP <= 0)
-        {
-            _damageable.JustDead();
-        }
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			SetCursorInactive();
+		}
 
-        // 움직일 때마다 spc큐브를 활성화.
-        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-        {
-            StartCoroutine(ActivateSpcCubes(spcDelay));
-        }
-        else
-        {
-            spcCubeL.SetActive(false);
-            spcCubeR.SetActive(false);
-        }
-    }
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			sphere.transform.localScale = Vector3.zero;
+			bigger = true;
+		}
+		if (bigger)
+		{
+			totaltime += Time.deltaTime;
 
-    public void OnReceiveMessage(MessageType type, object sender, object data)
-    {
-        switch (type)
-        {
-            case MessageType.DAMAGED:
-                {
-                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+			if (sphere.transform.localScale.x > valuebig)
+			{
+				SkillRenderObj.SetActive(true);
+				sphere.transform.localScale = Vector3.one * valuebig;
+				bigger = false;
+				//sphere.transform.localScale = Vector3.zero;
+				totaltime = 0f;
+			}
+			else
+			{
+				sphere.transform.localScale = Vector3.one * totaltime * biggerSpeed;
 
-                    Damaged(damageData);
-                }
-                break;
-            case MessageType.DEAD:
-                {
-                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-                    Death(/*damageData*/);
-                }
-                break;
-            case MessageType.RESPAWN:
-                {
+			}
+			if (SkillRenderObj.isActive)
+			{
 
-                }
-                break;
-        }
-    }
+				sphere.transform.localScale = Vector3.zero;
+			}
+		}
 
-    void Damaged(Damageable.DamageMessage damageMessage)
-    {
-        // 여기서 리턴하면 애니메이션만 재생하지 않는다.
-        // 
-        if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-            PlayerFSM.GetState().ToString() == "PlayerParryState" ||
-            PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
-            rigidImmunity || isEnforced)
-        {
-            return;
-        }
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			SkillRenderObj.SetActive(false);
+		}
+		CurrentState = PlayerFSM.GetState().GetType().Name;
 
-        PlayerFSM.Animator.SetTrigger("Damaged");
-    }
+		// 실시간으로 TP 감소
+		if (_damageable.CurrentHitPoints > 0f)
+		{
+			_damageable.CurrentHitPoints -= Time.deltaTime;
+		}
 
-    // 죽었을 때 호출되는 함수
-    public void Death(/*Damageable.DamageMessage msg*/)
-    {
-        if(ScreenFader.Instance == null) return;
+		// 실시간으로 CP감소
+		if (IsDecreaseCP && CP > 0)
+		{
+			CP -= Time.deltaTime * decayTime;
+			if (CP <= 0)
+			{
+				IsDecreaseCP = false;
+				CP = 0;
+				Debug.Log("몬스터들의 속도가 원래대로 돌아온다.");
+				BulletTime.Instance.SetNormalSpeed();
+			}
+		}
 
-        StartCoroutine(DeathScequence());
-    }
+		TP = _damageable.CurrentHitPoints;
 
-    private IEnumerator DeathScequence()
-    {
-        yield return ScreenFader.FadeSceneOut(FadeType.GameOver);
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		if (TP <= 0)
+		{
+			_damageable.JustDead();
+		}
 
-        yield return new WaitForSeconds(3);
+		// 움직일 때마다 spc큐브를 활성화.
+		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+		{
+			StartCoroutine(ActivateSpcCubes(spcDelay));
+		}
+		else
+		{
+			spcCubeL.SetActive(false);
+			spcCubeR.SetActive(false);
+		}
+	}
 
-        yield return ScreenFader.FadeSceneOut(FadeType.Black);
+	public void OnReceiveMessage(MessageType type, object sender, object data)
+	{
+		switch (type)
+		{
+			case MessageType.DAMAGED:
+				{
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+					Damaged(damageData);
+				}
+				break;
+			case MessageType.DEAD:
+				{
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					Death(/*damageData*/);
+				}
+				break;
+			case MessageType.RESPAWN:
+				{
 
-        Respawn();
+				}
+				break;
+		}
+	}
 
-        yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+	void Damaged(Damageable.DamageMessage damageMessage)
+	{
+		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
+		// 
+		if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
+			PlayerFSM.GetState().ToString() == "PlayerParryState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
+			rigidImmunity || isEnforced)
+		{
+			return;
+		}
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		PlayerFSM.Animator.SetTrigger("Damaged");
+	}
 
-        yield return ScreenFader.FadeSceneIn(FadeType.Black);
-    }
+	// 죽었을 때 호출되는 함수
+	public void Death(/*Damageable.DamageMessage msg*/)
+	{
+		if (ScreenFader.Instance == null) return;
 
-    void SetCursorInactive()
-    {
-        Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
-        if (Cursor.visible)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
+		StartCoroutine(DeathScequence());
+	}
 
-    public void SetSpeed(float value)
-    {
-        totalspeed = value * Speed;
-    }
+	private IEnumerator DeathScequence()
+	{
+		yield return ScreenFader.FadeSceneOut(FadeType.GameOver);
 
-    public void SavePlayerData()
-    {
-        playerData.saveScene = SceneManager.GetActiveScene().name; // 현재 씬의 이름을 가져온다
-        playerData.TP = TP;
-        playerData.TP = CP;
-        playerData.RespawnPos = playerTransform.position;
-    }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-    // 플레이어를 죽이자
-    public void AttackStart()
-    {
-        meleeWeapon?.BeginAttack();
-    }
-    public void AttackEnd()
-    {
-        meleeWeapon?.EndAttack();
-    }
+		yield return new WaitForSeconds(3);
 
-    public void BeginGuard()
-    {
-        shieldWeapon?.BeginGuard();
-    }
+		yield return ScreenFader.FadeSceneOut(FadeType.Black);
 
-    public void EndGuard()
-    {
-        shieldWeapon?.EndGuard();
-    }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-    public void BeginParry()
-    {
-        shieldWeapon?.BeginParry();
-    }
+		Respawn();
 
-    public void EndParry()
-    {
-        shieldWeapon?.EndParry();
-    }
+		yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
+
+		yield return ScreenFader.FadeSceneIn(FadeType.Black);
+	}
+
+	void SetCursorInactive()
+	{
+		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
+		if (Cursor.visible)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+	}
+
+	public void SetSpeed(float value)
+	{
+		totalspeed = value * Speed;
+	}
+
+	public void SavePlayerData()
+	{
+		playerData.saveScene = SceneManager.GetActiveScene().name; // 현재 씬의 이름을 가져온다
+		playerData.TP = TP;
+		playerData.TP = CP;
+		playerData.RespawnPos = playerTransform.position;
+	}
+
+	// 플레이어를 죽이자
+	public void AttackStart()
+	{
+		meleeWeapon?.BeginAttack();
+	}
+	public void AttackEnd()
+	{
+		meleeWeapon?.EndAttack();
+	}
+
+	public void BeginGuard()
+	{
+		shieldWeapon?.BeginGuard();
+	}
+
+	public void EndGuard()
+	{
+		shieldWeapon?.EndGuard();
+	}
+
+	public void BeginParry()
+	{
+		shieldWeapon?.BeginParry();
+	}
+
+	public void EndParry()
+	{
+		shieldWeapon?.EndParry();
+	}
 
 
 	public void CPBomb()
 	{
 		if (effectManager != null)
-		{ 
+		{
 			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
 			Destroy(bomb, 3.0f);
 
@@ -421,136 +466,136 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// 기본 슬래시 FX
 	// 이름이 망해부렀으야
 	public void NormalSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalSlashFX("Nor_Attack");
-    }
+	{
+		if (effectManager != null)
+			effectManager.NormalSlashFX("Nor_Attack");
+	}
 
-    public void EnforcedSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalSlashFX("Com_Attack");
-    }
+	public void EnforcedSlash()
+	{
+		if (effectManager != null)
+			effectManager.NormalSlashFX("Com_Attack");
+	}
 
-    public void SwordAura()
-    {
-        if (effectManager != null)
-            effectManager.SwordAuraOn();
-    }
+	public void SwordAura()
+	{
+		if (effectManager != null)
+			effectManager.SwordAuraOn();
+	}
 
-    public void NormalStrongSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalStrongFX();
-    }
+	public void NormalStrongSlash()
+	{
+		if (effectManager != null)
+			effectManager.NormalStrongFX();
+	}
 
-    public void ComboImpact()
-    {
-        if (effectManager != null)
-        {
-            effectManager.GroundCheckFX();
-            effectManager.SwordWave();
-        }
-    }
+	public void ComboImpact()
+	{
+		if (effectManager != null)
+		{
+			effectManager.GroundCheckFX();
+			effectManager.SwordWave();
+		}
+	}
 
-    public void GroundImpact()
-    {
-        if (effectManager != null)
-            effectManager.GroundCheckFX();
-    }
+	public void GroundImpact()
+	{
+		if (effectManager != null)
+			effectManager.GroundCheckFX();
+	}
 
-    public void GroundScar()
-    {
-        if (effectManager != null)
-            effectManager.GroundScar();
-    }
+	public void GroundScar()
+	{
+		if (effectManager != null)
+			effectManager.GroundScar();
+	}
 
-    public void SoundVoice()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Character_voice_SE", transform);
-    }
+	public void SoundVoice()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Character_voice_SE", transform);
+	}
 
-    public void Shake()
-    {
-        if (impulseCam != null)
-            impulseCam.Shake();
-    }
+	public void Shake()
+	{
+		if (impulseCam != null)
+			impulseCam.Shake();
+	}
 
-    IEnumerator ActivateSpcCubes(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-        {
-            spcCubeL.SetActive(true);
-            spcCubeR.SetActive(true);
-        }
-    }
+	IEnumerator ActivateSpcCubes(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+		{
+			spcCubeL.SetActive(true);
+			spcCubeR.SetActive(true);
+		}
+	}
 
-    // 플레이어 spcCube를 활성화 - 키프레임에서 이벤트로 호출
-    public void ActivateSCube()
-    {
-        spcCubeL.SetActive(true);
-        spcCubeR.SetActive(true);
-    }
+	// 플레이어 spcCube를 활성화 - 키프레임에서 이벤트로 호출
+	public void ActivateSCube()
+	{
+		spcCubeL.SetActive(true);
+		spcCubeR.SetActive(true);
+	}
 
-    public void DeactivateSCube()
-    {
+	public void DeactivateSCube()
+	{
 
-    }
+	}
 
-    public void SetCheckpoint(Checkpoint checkpoint)
-    {
-        if (_currentCheckpoint != null)
-        {
-            if (_currentCheckpoint.priority > checkpoint.priority)
-            {
-                return;
-            }
-        }
+	public void SetCheckpoint(Checkpoint checkpoint)
+	{
+		if (_currentCheckpoint != null)
+		{
+			if (_currentCheckpoint.priority > checkpoint.priority)
+			{
+				return;
+			}
+		}
 
-        _currentCheckpoint = checkpoint;
-    }
+		_currentCheckpoint = checkpoint;
+	}
 
-    public void Respawn()
-    {
-        StartCoroutine(RespawnRoutine());
-    }
+	public void Respawn()
+	{
+		StartCoroutine(RespawnRoutine());
+	}
 
-    protected IEnumerator RespawnRoutine()
-    {
-        // 1초 동안 페이드 아웃.
-        //yield return StartCoroutine(ScreenFader.FadeSceneOut());
+	protected IEnumerator RespawnRoutine()
+	{
+		// 1초 동안 페이드 아웃.
+		//yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        // Enable spawning.
-        //EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
-        //spawn.enabled = true;
+		// Enable spawning.
+		//EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
+		//spawn.enabled = true;
 
-        // If there is a checkpoint, move Ellen to it.
-        if (_currentCheckpoint != null)
-        {
-            transform.position = _currentCheckpoint.transform.position;
-            transform.rotation = _currentCheckpoint.transform.rotation;
-        }
-        else
-        {
-            Debug.LogError("체크포인트가 없는 데스");
-        }
+		// If there is a checkpoint, move Ellen to it.
+		if (_currentCheckpoint != null)
+		{
+			transform.position = _currentCheckpoint.transform.position;
+			transform.rotation = _currentCheckpoint.transform.rotation;
+		}
+		else
+		{
+			Debug.LogError("체크포인트가 없는 데스");
+		}
 
-        // 1초 동안 페이드 아웃
-        //yield return StartCoroutine(ScreenFader.FadeSceneIn());
+		// 1초 동안 페이드 아웃
+		//yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
-        /// TODO - 오해강: 초기화 함수를 따로 만들 것
+		/// TODO - 오해강: 초기화 함수를 따로 만들 것
 
-        // TP 초기화 - 적용안됨
-        _damageable.ResetDamage();
-        TP = maxTP;
-        // CP 초기화
-        currentCP = 0f;
-    }
+		// TP 초기화 - 적용안됨
+		_damageable.ResetDamage();
+		TP = maxTP;
+		// CP 초기화
+		currentCP = 0f;
+	}
 }
