@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     [Header("State")]
     [SerializeField] private string CurrentState;
+    [SerializeField] public AnimationCurve TimeSlashCurve;
 
     [Header("Move Option")]
     [SerializeField] private float Speed = 1f;
@@ -178,17 +179,16 @@ public class Player : MonoBehaviour, IMessageReceiver
 
         // 문제해결을 위해 옮김 
         meleeWeapon.SetOwner(gameObject);
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        //meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
 		_damageable.currentHitPoints = maxTP;
 		_damageable.CurrentHitPoints = maxTP;
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
 
-    private void ChargeCP(Collider other)
+    public void ChargeCP(Collider other)
     {
         {
-            Debug.Log("cp를 회복한다.");
             if (CP < maxCP && !IsDecreaseCP)
             {
                 CP += chargingCP;
@@ -200,8 +200,22 @@ public class Player : MonoBehaviour, IMessageReceiver
             }
         }
     }
+	public void ChargeCP()
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
 
-    private void Update()
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+
+	private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
@@ -383,9 +397,30 @@ public class Player : MonoBehaviour, IMessageReceiver
         shieldWeapon?.EndParry();
     }
 
-    // 기본 슬래시 FX
-    // 이름이 망해부렀으야
-    public void NormalSlash()
+
+	public void CPBomb()
+	{
+		if (effectManager != null)
+		{ 
+			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
+			Destroy(bomb, 3.0f);
+
+
+			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+			Destroy(bombDamager, 3.0f);
+		}
+	}
+
+	public void TimeSlash(string name, Vector3 pos)
+	{
+		if (effectManager != null)
+			effectManager.SpawnEffect(name, pos);
+	}
+
+
+	// 기본 슬래시 FX
+	// 이름이 망해부렀으야
+	public void NormalSlash()
     {
         if (effectManager != null)
             effectManager.NormalSlashFX("Nor_Attack");

@@ -228,6 +228,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Damaged(Damageable.DamageMessage msg)
     {
+		Player.Instance.ChargeCP();
         UnuseBulletTimeScale();
         TriggerDamage();
         _hitShake.Begin();

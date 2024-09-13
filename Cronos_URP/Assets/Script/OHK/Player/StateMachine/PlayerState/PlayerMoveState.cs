@@ -23,6 +23,8 @@ public class PlayerMoveState : PlayerBaseState
 	float releaseLockOn = 0f;
 	bool isRelease = false;
 	bool isRun = false;
+	float timeLine;
+	bool timeslash = false;
 
 	Vector3 totalMove;
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
@@ -50,34 +52,40 @@ public class PlayerMoveState : PlayerBaseState
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
- 		Vector3 rootMotion = stateMachine.Animator.deltaPosition;
- 		rootMotion.y = 0;
-		//totalMove += rootMotion;
-
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
+		moveSpeed = 1f;
 
-		//stateMachine.Animator.SetFloat("animSpeed", stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f);
-
-		/// 걷기 삭제로 인한 주석처리 
-// 		if (stateMachine.Player.IsLockOn)
-// 		{
-// 			if (isRun)
-// 			{
-// 				moveSpeed = 1f;
-// 			}
-// 			else
-// 			{
-// 				stateMachine.StartCoroutine(SmoothChangeSpeed());
-// 			}
-// 		}
-		//else
+		stateMachine.Player.SetSpeed(moveSpeed);
+		/// 이동휴 죽어라
+		/// 죽어라 이동휴
+		/// 이어라 죽동휴
+		/// 죽동휴 이어라
+		/// 폭발 테스트용만들어야 겠지?
+		if(Input.GetKeyDown(KeyCode.E))
 		{
-			moveSpeed = 1f;
+			if(stateMachine.Player.IsDecreaseCP)
+				stateMachine.Player.CPBomb();
 		}
 
 
-		stateMachine.Player.SetSpeed(moveSpeed);
+		
+		// 시간베기 테스트용
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			timeslash = true;
+		}
+		// 시간베기 테스트용
+		if (timeslash)
+		{
+			timeLine += Time.deltaTime;
+			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.Player.TimeSlashCurve.Evaluate(timeLine / 0.5f), ForceMode.Impulse);
+			if(timeLine > 0.5f)
+			{
+				timeslash = false;
+				timeLine = 0f;
+			}
+		}
 
 		// 휠꾹
 		if (isRelease)
@@ -96,7 +104,6 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			// moveSpeed에 y값을곱해서 전방이동인지 후방이동인지 확인한다.
 			stateMachine.Animator.SetFloat(MoveSpeedHash,
-											/*Mathf.Abs(stateMachine.InputReader.moveComposite.y) > 0f ? moveSpeed :*/
 											(moveSpeed * stateMachine.InputReader.moveComposite.y), AnimationDampTime, Time.deltaTime);
 		}
 		else
@@ -117,15 +124,9 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
- 		//Move(totalMove);                     // 이동한다.	
- 		//Move();                     // 이동한다.	
-//         totalMove = Vector3.zero;
-
-
     }
     public override void FixedTick()
 	{
-		//Float();
 		if (stateMachine.Player.IsLockOn)
 		{
 			if (moveSpeed > 0.5f)
@@ -137,10 +138,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
 		}
-		//		Float();/// floatingcapsule실험중
 		Move();                     // 이동한다.	
-		//Move(totalMove);                     // 이동한다.	
-		//stateMachine.Rigidbody.velocity = totalMove;
 
 	}
 

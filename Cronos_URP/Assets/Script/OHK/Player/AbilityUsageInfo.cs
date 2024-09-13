@@ -36,6 +36,20 @@ public struct AbilityUsageInfo
 		set { PlayerStateMachine.GetInstance().Player.RigidImmunity = value; }
 	}
 
+	// Nor_Attack 변환
+	public bool NorAttackVariation
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("NorAttackVariation"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", value); }
+	}
+
+	// Com_Attack 변환
+	public bool ComAttackVariation
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("ComAttackVariation"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", value); }
+	}
+
 	/// 민동휘
 	//Com_S_Attack 강 공격 강화
 
