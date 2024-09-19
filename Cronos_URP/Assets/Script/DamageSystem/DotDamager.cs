@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DotDamager : SimpleDamager
 {
-    [SerializeField] 
+    [SerializeField]
     private float _elapse;
     public float period = 1f;
 
@@ -13,13 +13,20 @@ public class DotDamager : SimpleDamager
 
     private void OnTriggerStay(Collider other)
     {
-        _elapse += Time.deltaTime;
-
         if (_elapse > period)
         {
-            _elapse = 0f;
-            DamageCheck(other);
+            bool damaged = DamageCheck(other);
+            if (damaged)
+            {
+                _elapse = 0f;
+                Debug.Log("µµÆ®´ï");
+            }
         }
+    }
+
+    private void Update()
+    {
+        _elapse += Time.deltaTime;
     }
 
     private void OnDrawGizmos()

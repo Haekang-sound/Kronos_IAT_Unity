@@ -50,18 +50,18 @@ public class SimpleDamager : MonoBehaviour
         DamageCheck(other);
     }
 
-    public void DamageCheck(Collider other)
+    public bool DamageCheck(Collider other)
     {
         var damageable = other.GetComponent<Damageable>();
 
         if (damageable == null)
         {
-            return;
+            return false;
         }
 
         if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
         {
-            return;
+            return false;
         }
 
         var msg = new Damageable.DamageMessage()
@@ -81,6 +81,8 @@ public class SimpleDamager : MonoBehaviour
 
         damageable.ApplyDamage(msg);
         OnAttack.Invoke();
+
+        return true;
     }
 
     public void DrawGizmos()

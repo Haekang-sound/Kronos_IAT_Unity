@@ -109,9 +109,15 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
+    ///
     public void BossEightBeamCoroutine()
     {
         StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
+    }
+
+    public void BossFireShoot()
+    {
+        _effectManager.BossFireShoot(transform);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +195,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        rotationSpeed = 5f;
+        rotationSpeed = 1080f;
     }
 
     public void StopAiming()
