@@ -63,8 +63,8 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.Animator.SetFloat(chargeHash, 0);
 		}
 
-
 		CalculateMoveDirection();   // 방향을 계산하고
+
 
 		if (stateMachine.MoveForce > 1f)
 		{
@@ -77,11 +77,12 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void FixedTick()
 	{
-		Vector3 dir = Camera.main.transform.forward;
-		dir.y = 0f;
-		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation,
-		Quaternion.LookRotation(dir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
+// 		Vector3 dir = Camera.main.transform.forward;
+// 		dir.y = 0f;
+// 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation,
+// 		Quaternion.LookRotation(dir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
 
+		FaceMoveDirection();
 		Float();
 	}
 	public override void LateTick() { }
