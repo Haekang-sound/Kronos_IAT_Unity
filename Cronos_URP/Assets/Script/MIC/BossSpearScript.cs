@@ -53,7 +53,17 @@ public class BossSpearScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        Debug.Log("창 파괴됨");
+        int collisionLayer = collision.gameObject.layer;
+        if (collisionLayer == LayerMask.NameToLayer("Player"))
+        {
+            // 플레이어한테 대미지박기
+        }
+
+        if (collisionLayer == LayerMask.NameToLayer("Ground"))
+        {
+            sat = false;
+            Debug.Log("창 부딪침");
+            EffectManager.Instance.SpearImpact(targetPos);
+        }
     }
 }

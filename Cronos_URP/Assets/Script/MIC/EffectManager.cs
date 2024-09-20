@@ -479,20 +479,6 @@ public class EffectManager : MonoBehaviour
     }
 
     // 보스 창 5개 쏘기
-    //public IEnumerator BossSpearCoroutine(Transform bosstrans)
-    //{
-    //    Vector3 forward = bosstrans.transform.forward;
-    //    for (int i = 0; i < 5; i++)
-    //    {
-    //        Vector3 newOffset = new Vector3((i - 2), (3.5f - (Mathf.Abs(i - 2) * 0.5f)), 0);
-    //        Vector3 newPos = bosstrans.TransformPoint(newOffset);
-    //        GameObject proj = SpawnEffect("BossFX_ShootProj", newPos);
-    //        proj.transform.forward = forward;
-    //        Destroy(proj, 8.0f);
-
-    //        yield return new WaitForSeconds(0.1f);
-    //    }
-    //}
 
     // 보스 창 5개 쏘기
     public void BossFiveSpear(Transform bossTrans)
@@ -503,6 +489,12 @@ public class EffectManager : MonoBehaviour
         GameObject spears = SpawnEffect("BossFX_Spears", newPos);
         spears.transform.forward = forward;
         Destroy(spears, 15.0f);
+    }
+
+    public void SpearImpact(Vector3 pos)
+    {
+        GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
+        Destroy(imp, 3.0f);
     }
 
     // 패리했을 때 모션 블러
@@ -553,6 +545,4 @@ public class EffectManager : MonoBehaviour
         light.intensity = 0f;
         lens.intensity = 0f;
     }
-
-
 }
