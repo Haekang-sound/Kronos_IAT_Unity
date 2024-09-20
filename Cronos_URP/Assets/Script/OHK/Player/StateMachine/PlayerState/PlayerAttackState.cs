@@ -19,9 +19,9 @@ public class PlayerAttackState : PlayerBaseState
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 		attackBool = false;
-        stateMachine.MoveForce = moveForce;
+		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
-		
+
 		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
@@ -77,6 +77,11 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void FixedTick()
 	{
+		Vector3 dir = Camera.main.transform.forward;
+		dir.y = 0f;
+		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation,
+		Quaternion.LookRotation(dir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
+
 		Float();
 	}
 	public override void LateTick() { }
@@ -124,7 +129,7 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.IsRattack = false;
 			return;
 		}
-		stateMachine.Animator.SetBool(guradHash, true); 
+		stateMachine.Animator.SetBool(guradHash, true);
 	}
 
 }
