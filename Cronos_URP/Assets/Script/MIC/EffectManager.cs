@@ -468,6 +468,14 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+    // 보스 불 장판 만들기
+    public void BossFireShoot(Transform bosstrans)
+    {
+        GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
+        fire.transform.forward = bosstrans.transform.forward;
+        fire.transform.position += new Vector3(0, 1.0f, 0);
+    }
+
     // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
     {
