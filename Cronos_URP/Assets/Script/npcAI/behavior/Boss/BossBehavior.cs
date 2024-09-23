@@ -1,4 +1,5 @@
 using Message;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Playables;
@@ -206,5 +207,32 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void ResetAiming()
     {
         rotationSpeed = 1f;
+    }
+
+    public void LightSpeedRushUpgrade()
+    {
+        //GameObject obj = Resources.Load<GameObject>("Models/Boss/LightSpeedRush_Clon");
+        GameObject obj = Resources.Load<GameObject>("Prefabs/Boss/LightSpeedRush_Clon");
+
+        var clone1 = Instantiate(obj, transform.position, transform.rotation);
+        var clone2 = Instantiate(obj, transform.position, transform.rotation);
+
+        float offset = 3f;
+        var right = transform.position + transform.right * offset;
+        var left = transform.position - transform.right * offset;
+
+        clone1.GetComponent<MoveObject>().targetPosition = right;
+        clone2.GetComponent<MoveObject>().targetPosition = left;
+
+        clone1.GetComponent<BossLightRushCloneBehavior>().activeTime = 2f;
+        clone2.GetComponent<BossLightRushCloneBehavior>().activeTime = 2.4f;
+
+        StartCoroutine(RushAfterSeconds(gameObject, 3f));
+    }
+
+    private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        _animator.SetTrigger("rush");
     }
 }
