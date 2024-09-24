@@ -17,12 +17,10 @@ public class MeleeWeapon : MonoBehaviour
     public void BeginAttack()
     {
         simpleDamager?.gameObject.SetActive(true);
-        simpleDamager?.BeginAttack();
     }
 
     public void EndAttack()
     {
-        simpleDamager?.EndAttack();
         simpleDamager?.gameObject.SetActive(false);
     }
 

@@ -7,13 +7,13 @@ public class RandomWait : ActionNode
     public float minDuration = 0;
     public float maxDuration = 1;
 
-    private float _duration = 1;
-    private float _startTime;
+    [SerializeField] private float _duration = 1;
+    [SerializeField] private float _elapse;
 
     protected override void OnStart()
     {
-        _startTime = Time.time;
         _duration = Random.Range(minDuration, maxDuration + 1);
+        _elapse = 0f;
     }
 
     protected override void OnStop()
@@ -22,7 +22,16 @@ public class RandomWait : ActionNode
 
     protected override State OnUpdate()
     {
-        if (Time.time - _startTime > _duration)
+        float speed = 1;
+
+        if (BulletTime.Instance)
+        {
+            speed = BulletTime.Instance.GetCurrentSpeed();
+        }
+
+        _elapse += Time.deltaTime * speed;
+
+        if (_elapse > _duration)
         {
             return State.Success;
         }
