@@ -139,7 +139,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void Render()
     {
-        abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
+        //abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
+        abilityName.text = $"{abilityLevel.abilityName}";
     }
 
     public bool Increment()
