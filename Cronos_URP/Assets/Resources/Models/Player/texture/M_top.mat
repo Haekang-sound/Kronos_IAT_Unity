@@ -14,6 +14,7 @@ Material:
   m_ValidKeywords:
   - _DISPLACEMENT_LOCK_TILING_SCALE
   - _EMISSION
+  - _EMISSION_FRESNEL
   - _MASKMAP
   - _NORMALMAP
   - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
@@ -104,7 +105,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: da8ed1b9adc27aa46bade2d706204a87, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -276,9 +277,9 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionFresnelPower: 1
-    - _EmissionScale: 1
-    - _EnableEmissionFresnel: 0
+    - _EmissionFresnelPower: 3
+    - _EmissionScale: 0.5
+    - _EnableEmissionFresnel: 1
     - _EnableGeometricSpecularAA: 0
     - _EnvironmentReflections: 1
     - _GIOcclusionBias: 0
@@ -343,7 +344,7 @@ Material:
     - _Metallic1: 0
     - _Metallic2: 0
     - _Metallic3: 0
-    - _MetallicRemapMax: 1
+    - _MetallicRemapMax: 0.8623482
     - _MetallicRemapMax1: 1
     - _MetallicRemapMax2: 1
     - _MetallicRemapMax3: 1
@@ -385,7 +386,7 @@ Material:
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
-    - _SmoothnessRemapMax: 1
+    - _SmoothnessRemapMax: 0.84615386
     - _SmoothnessRemapMax1: 1
     - _SmoothnessRemapMax2: 1
     - _SmoothnessRemapMax3: 1
@@ -425,7 +426,7 @@ Material:
     - _BaseColor3: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
-    - _EmissionColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+    - _EmissionColor: {r: 1, g: 0.66041553, b: 0.495283, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _PuddlesFramesSize: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
