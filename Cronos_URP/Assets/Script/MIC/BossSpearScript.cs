@@ -64,6 +64,7 @@ public class BossSpearScript : MonoBehaviour
             sat = false;
             Debug.Log("Ã¢ ºÎµúÄ§");
             EffectManager.Instance.SpearImpact(targetPos);
+            Destroy(gameObject, 3.0f);
         }
     }
 }

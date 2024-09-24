@@ -70,6 +70,9 @@ public class EffectManager : MonoBehaviour
     public float bossBeamTerm = 0.2f;
     public float bossBeamDupeTime = 8.0f;
 
+    public float bossMoonHeight = 4.0f;
+    public float bossMoonDistance = 5.0f;
+
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
     GameObject[] effectArray;
@@ -285,11 +288,11 @@ public class EffectManager : MonoBehaviour
     }
 
     // 강화 오라 활성화
-    // 보스 창만들기 테스트중
+    // 보스 위성 테스트중
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
-        BossFiveSpear(player.transform);
+        BossMoon(player.transform);
     }
 
     public void SwordAuraOff()
@@ -465,7 +468,6 @@ public class EffectManager : MonoBehaviour
 
                 Destroy(beam, 0.6f);
             }
-            // TODO
             yield return new WaitForSeconds(bossBeamTerm);
         }
     }
@@ -479,8 +481,6 @@ public class EffectManager : MonoBehaviour
     }
 
     // 보스 창 5개 쏘기
-
-    // 보스 창 5개 쏘기
     public void BossFiveSpear(Transform bossTrans)
     {
         Vector3 forward = bossTrans.forward;
@@ -491,10 +491,28 @@ public class EffectManager : MonoBehaviour
         Destroy(spears, 15.0f);
     }
 
+    // 창 지면 이펙트
     public void SpearImpact(Vector3 pos)
     {
         GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
         Destroy(imp, 3.0f);
+    }
+
+    // 보스 위성 만들기
+    public void BossMoon(Transform bossTrans)
+    {
+        List<int> moonNums = new List<int>();
+        moonNums = FisherYatesShuffles(8, 5);
+        Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
+        Vector3 newPos = bossTrans.TransformPoint(newOffset);
+
+        for (int i = 0; i <  moonNums.Count; i++)
+        {
+            GameObject moon = SpawnEffect("BossFX_Moon", newPos);
+            moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
+            moon.transform.position += moon.transform.forward * bossMoonDistance;
+            
+        }
     }
 
     // 패리했을 때 모션 블러
@@ -544,5 +562,44 @@ public class EffectManager : MonoBehaviour
 
         light.intensity = 0f;
         lens.intensity = 0f;
+    }
+
+
+    // elements 개의 원소를 넣으면 result 개의 랜덤 값을 앞에서 뽑는
+    // 피셔-예이츠 알고리즘
+    public List<int> FisherYatesShuffles(int elements, int result)
+    {
+        // 0부터 elements개의 숫자를 리스트로 생성
+        List<int> numbers = new List<int>();
+        for (int i = 0; i < elements; i++)
+        {
+            numbers.Add(i);
+        }
+
+        // 랜덤 객체 생성
+        System.Random rand = new System.Random();
+
+        // 피셔-예이츠 알고리즘으로 리스트 셔플
+        for (int i = numbers.Count - 1; i > 0; i--)
+        {
+            int j = rand.Next(0, i + 1); // 0부터 i까지의 인덱스 중 하나를 선택
+            // numbers[i]와 numbers[j]를 swap
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+
+        // 결과 출력
+        Debug.Log("랜덤 배열: " + string.Join(", ", numbers));
+
+        List<int> numbers2 = new List<int>();
+        for (int i = 0; i < result; i++)
+        {
+            numbers2.Add(numbers[i]);
+        }
+
+        Debug.Log("number2 배열: " + string.Join(", ", numbers2));
+
+        return numbers2;
     }
 }
