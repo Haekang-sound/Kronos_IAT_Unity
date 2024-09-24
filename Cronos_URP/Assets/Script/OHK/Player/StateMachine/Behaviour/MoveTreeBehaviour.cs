@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class MoveTreeBehaviour : StateMachineBehaviour
 {
@@ -17,6 +18,7 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
+		//animator.ResetTrigger("TimeStop");
 		animator.SetFloat(animSpeedHash, animSpeed);
 
 	}
@@ -25,6 +27,12 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.SetFloat(animSpeedHash, animSpeed);
+
+		if(Input.GetKeyDown(KeyCode.G))
+		{
+			animator.SetTrigger("TimeStop");
+
+		}
 	}
 	//OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
