@@ -218,7 +218,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	}
 
 	float totaltime = 0f;
-	
+
 	bool bigger = false;
 
 	private void Update()
@@ -416,7 +416,31 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		shieldWeapon?.EndParry();
 	}
+	//GameObject bomb;
+	public void CPBombGround()
+	{
+		if (effectManager != null)
+		{
+			GameObject bomb = effectManager.SpawnEffect("CPGround", transform.position);
+			Destroy(bomb, 5.0f);
 
+		}
+	}
+	public void CPBombSlash()
+	{
+		if (effectManager != null)
+		{
+			GameObject slash = effectManager.SpawnEffect("CPSlash", transform.position);
+
+			Destroy(slash, 3.0f);
+			Invoke("test", 1.5f);
+		}
+	}
+
+	public void test()
+	{
+		SkillRenderObj.SetActive(false);
+	}
 
 	public void CPBomb()
 	{
