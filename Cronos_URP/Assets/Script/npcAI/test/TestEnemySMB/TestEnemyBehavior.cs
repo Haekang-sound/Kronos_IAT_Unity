@@ -240,16 +240,6 @@ public class TestEnemyBehavior : MonoBehaviour, IMessageReceiver
         _controller.animator.SetTrigger(hashAttack);
     }
 
-    public void AttackBegin()
-    {
-        meleeWeapon.BeginAttack();
-    }
-
-    public void AttackEnd()
-    {
-        meleeWeapon.EndAttack();
-    }
-
     public void SetNearBase(bool nearBase)
     {
         _controller.animator.SetBool(hashNearBase, nearBase);
