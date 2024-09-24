@@ -31,13 +31,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 			return instance;
 		}
 	}
+	protected static Player instance;
 
 	public RenderObjects SkillRenderObj;
-	public GameObject sphere;
-	public float biggerSpeed;
-	public float valuebig = 0f;
-
-	protected static Player instance;
 
 	[Header("State")]
 	[SerializeField] private string CurrentState;
@@ -236,32 +232,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			sphere.transform.localScale = Vector3.zero;
-			bigger = true;
+			Vector3 temp = transform.position;
+			effectManager.SpawnEffect("TeraainScanner", temp);
+			SkillRenderObj.SetActive(true);
 		}
-		if (bigger)
-		{
-			totaltime += Time.deltaTime;
 
-			if (sphere.transform.localScale.x > valuebig)
-			{
-				SkillRenderObj.SetActive(true);
-				sphere.transform.localScale = Vector3.one * valuebig;
-				bigger = false;
-				//sphere.transform.localScale = Vector3.zero;
-				totaltime = 0f;
-			}
-			else
-			{
-				sphere.transform.localScale = Vector3.one * totaltime * biggerSpeed;
-
-			}
-			if (SkillRenderObj.isActive)
-			{
-
-				sphere.transform.localScale = Vector3.zero;
-			}
-		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
