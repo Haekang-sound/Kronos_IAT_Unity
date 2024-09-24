@@ -28,14 +28,26 @@ public struct AbilityUsageInfo
 		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackBan", value); }
 	}
 
-	//수치 증가
-	//-> 나중에
 
 	//경직 면역
 	public bool RigidImmunity
 	{
 		get { return PlayerStateMachine.GetInstance().Player.RigidImmunity; }
 		set { PlayerStateMachine.GetInstance().Player.RigidImmunity = value; }
+	}
+
+	// Nor_Attack 변환
+	public bool NorAttackVariation
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("NorAttackVariation"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", value); }
+	}
+
+	// Com_Attack 변환
+	public bool ComAttackVariation
+	{
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool("ComAttackVariation"); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", value); }
 	}
 
 	/// 민동휘

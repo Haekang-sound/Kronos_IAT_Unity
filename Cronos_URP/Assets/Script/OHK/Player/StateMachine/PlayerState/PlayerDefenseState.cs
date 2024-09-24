@@ -11,14 +11,14 @@ public class PlayerDefenceState : PlayerBaseState
 
         stateMachine.Player.BeginGuard();
         stateMachine.Player.BeginParry();
-        stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
+        //stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
     }
 	public override void Tick()
     {
-//         if (!Input.GetKey(KeyCode.Mouse1))
-//         {
-//             
-//         }
+       if (!stateMachine.InputReader.IsRAttackPressed)
+       {
+			stateMachine.Animator.SetBool(guradHash, false);
+		}
     }
 	public override void FixedTick()
     {
@@ -28,7 +28,7 @@ public class PlayerDefenceState : PlayerBaseState
 	public override void Exit()
     {
         stateMachine.Player.EndGuard();
-        stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
+        //stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
     }
     public void ReleaseGuard()
     {

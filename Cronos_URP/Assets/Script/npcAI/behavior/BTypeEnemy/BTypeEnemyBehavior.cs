@@ -1,4 +1,6 @@
 using Message;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,12 +13,18 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
 
+    public GameObject aimRing;
+    public GameObject aimEnd;
+    private Vector3 ringOriginScale = new Vector3(1f, 1f, 1f);
+    private Vector3 ringShrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
+
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
 
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
+    private KnockBack _knockBack;
     private Damageable _damageable;
     private RangeWeapon _rangeWeapon;
     private EnemyController _controller;
@@ -40,6 +48,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         BasePosition = transform.position;
 
         _hitShake = GetComponent<HitShake>();
+        _knockBack = GetComponent<KnockBack>();
         _damageable = GetComponent<Damageable>();
         _rangeWeapon = GetComponent<RangeWeapon>();
         _controller = GetComponent<EnemyController>();
@@ -64,6 +73,9 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         _rigidbody.useGravity = false;
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+
+        aimRing.SetActive(false);
+        aimEnd.SetActive(false);
     }
 
     private void OnDisable()
@@ -200,7 +212,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         {
             case MessageType.DAMAGED:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
-                Damaged();
+                Damaged(dmgMsg);
                 break;
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
@@ -214,11 +226,13 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         }
     }
 
-    private void Damaged()
+    private void Damaged(Damageable.DamageMessage msg)
     {
+		Player.Instance.ChargeCP();
         UnuseBulletTimeScale();
         TriggerDamage();
         _hitShake.Begin();
+        _knockBack?.Begin(msg.damageSource);
     }
 
     private void Dead()
@@ -229,6 +243,7 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         }
 
         GetComponent<ReplaceWithRagdoll>().Replace();
+        _controller.Release();
     }
 
     internal void UseBulletTimeScale()
@@ -293,5 +308,18 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
     internal void TriggerIdle()
     {
         _controller.animator.SetTrigger(hashIdle);
+    }
+
+    // 에임 이펙트 관련한거
+    public IEnumerator ShrinkScale()
+    {
+        aimRing.transform.localScale = ringOriginScale;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < 2.0f)
+        {
+            aimRing.transform.localScale = Vector3.Lerp(ringOriginScale, ringShrinkScale, elapsedTime / 2.0f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }

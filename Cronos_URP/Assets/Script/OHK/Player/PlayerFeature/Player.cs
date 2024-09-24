@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         {
             if (instance != null)
             {
-                return instance;
+                return instance; 
             }
 
             // 인스턴스가 없다면 계층 구조창에서 검색해서 가져옴.
@@ -35,10 +35,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     [Header("State")]
     [SerializeField] private string CurrentState;
+    [SerializeField] public AnimationCurve TimeSlashCurve;
 
     [Header("Move Option")]
-    [SerializeField] private float Speed = 5f;
-    private float JumpForce = 10f; // 점프 만들면 쓰지뭐
+    [SerializeField] private float Speed = 1f;
     [SerializeField] private float LookRotationDampFactor = 10f;
     [SerializeField] private float attackCoefficient = 0.1f;
     [SerializeField] private float moveCoefficient = 0.1f;
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour, IMessageReceiver
     // Property
     private float totalspeed;
     public float moveSpeed { get { return totalspeed; } }
-    public float jumpForce { get { return JumpForce; } }
     public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
     public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
     public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
@@ -128,13 +127,14 @@ public class Player : MonoBehaviour, IMessageReceiver
     public GameObject playerSword;
     public GameObject spcCubeL;
     public GameObject spcCubeR;
+    public float spcDelay;
     public PlayerStateMachine psm;
     //public float spcActivateTime;
 
 
     private void Awake()
     {
-        CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.Initialize(gameObject);
         CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
     }
     private void OnValidate()
@@ -178,24 +178,17 @@ public class Player : MonoBehaviour, IMessageReceiver
         psm = gameObject.GetComponent<PlayerStateMachine>();
 
         // 문제해결을 위해 옮김 
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
+        meleeWeapon.SetOwner(gameObject);
+        //meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
         totalspeed = Speed;
-        _damageable.currentHitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
-
-        // 문제해결을 위해 옮김 
-        meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-        totalspeed = Speed;
-        _damageable.maxHitPoints = maxTP;
-        _damageable.CurrentHitPoints = maxTP;
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
+		_damageable.currentHitPoints = maxTP;
+		_damageable.CurrentHitPoints = maxTP;
+		meleeWeapon.simpleDamager.damageAmount = currentDamage;
     }
 
-    private void ChargeCP(Collider other)
+    public void ChargeCP(Collider other)
     {
         {
-            Debug.Log("cp를 회복한다.");
             if (CP < maxCP && !IsDecreaseCP)
             {
                 CP += chargingCP;
@@ -207,8 +200,22 @@ public class Player : MonoBehaviour, IMessageReceiver
             }
         }
     }
+	public void ChargeCP()
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
 
-    private void Update()
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+
+	private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
@@ -247,7 +254,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         // 움직일 때마다 spc큐브를 활성화.
         if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
         {
-            StartCoroutine(ActivateSpcCubes(0.0f));
+            StartCoroutine(ActivateSpcCubes(spcDelay));
         }
         else
         {
@@ -390,12 +397,45 @@ public class Player : MonoBehaviour, IMessageReceiver
         shieldWeapon?.EndParry();
     }
 
-    // 기본 슬래시 FX
-    // 이름이 망해부렀으야
-    public void SoundSword()
+
+	public void CPBomb()
+	{
+		if (effectManager != null)
+		{ 
+			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
+			Destroy(bomb, 3.0f);
+
+
+			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+			Destroy(bombDamager, 3.0f);
+		}
+	}
+
+	public void TimeSlash(string name, Vector3 pos)
+	{
+		if (effectManager != null)
+			effectManager.SpawnEffect(name, pos);
+	}
+
+
+	// 기본 슬래시 FX
+	// 이름이 망해부렀으야
+	public void NormalSlash()
     {
         if (effectManager != null)
             effectManager.NormalSlashFX("Nor_Attack");
+    }
+
+    public void EnforcedSlash()
+    {
+        if (effectManager != null)
+            effectManager.NormalSlashFX("Com_Attack");
+    }
+
+    public void SwordAura()
+    {
+        if (effectManager != null)
+            effectManager.SwordAuraOn();
     }
 
     public void NormalStrongSlash()
@@ -440,8 +480,23 @@ public class Player : MonoBehaviour, IMessageReceiver
     IEnumerator ActivateSpcCubes(float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+        {
+            spcCubeL.SetActive(true);
+            spcCubeR.SetActive(true);
+        }
+    }
+
+    // 플레이어 spcCube를 활성화 - 키프레임에서 이벤트로 호출
+    public void ActivateSCube()
+    {
         spcCubeL.SetActive(true);
         spcCubeR.SetActive(true);
+    }
+
+    public void DeactivateSCube()
+    {
+
     }
 
     public void SetCheckpoint(Checkpoint checkpoint)

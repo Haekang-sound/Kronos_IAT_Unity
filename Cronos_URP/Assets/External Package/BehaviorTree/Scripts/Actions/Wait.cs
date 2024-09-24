@@ -3,11 +3,11 @@ using UnityEngine;
 public class Wait : ActionNode
 {
     public float duration = 1;
-    float startTime;
+    [SerializeField] float _elapse;
 
     protected override void OnStart()
     {
-        startTime = Time.time;
+        _elapse = 0f;
     }
 
     protected override void OnStop()
@@ -16,7 +16,16 @@ public class Wait : ActionNode
 
     protected override State OnUpdate()
     {
-        if (Time.time - startTime > duration)
+        float speed = 1;
+
+        if (BulletTime.Instance)
+        {
+            speed = BulletTime.Instance.GetCurrentSpeed();
+        }
+
+        _elapse += Time.deltaTime * speed;
+
+        if (_elapse > duration)
         {
             return State.Success;
         }

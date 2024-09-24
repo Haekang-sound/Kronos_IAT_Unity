@@ -118,7 +118,6 @@ public class SpawnHitColliderMixerBehaviour : PlayableBehaviour
         damager.drawGizmos = true;
         damager.damageAmount = input.damageAmount;
         damager.targetLayers = input.targetLayers;
-        damager.BeginAttack();
     }
 
     private void CreateHitBoxCollider(int i, SpawnHitColliderBehaviour input)

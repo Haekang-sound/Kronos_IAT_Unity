@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _DOUBLESIDED_ON
   - _EMISSION
   - _MASKMAP
   - _NORMALMAP
@@ -20,9 +21,9 @@ Material:
   - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
-  m_LightmapFlags: 6
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
@@ -161,7 +162,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _CoatNormalEnable: 0
     - _CoatNormalScale: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoMapScale: 1
@@ -176,7 +177,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EmissionFresnelPower: 1
-    - _EmissionScale: 0
+    - _EmissionScale: 15.77
     - _EnableEmissionFresnel: 0
     - _EnableGeometricSpecularAA: 0
     - _EnvironmentReflections: 1
@@ -198,7 +199,7 @@ Material:
     - _InvTilingScale: 1
     - _Ior: 0
     - _Metallic: 0
-    - _MetallicRemapMax: 1
+    - _MetallicRemapMax: 0.7579649
     - _MetallicRemapMin: 0
     - _NormalScale: 1
     - _OcclusionStrength: 1
@@ -223,7 +224,7 @@ Material:
     - _RefractionEnable: 0
     - _RefractionShadowAttenuation: 1
     - _Smoothness: 0.5
-    - _SmoothnessRemapMax: 1
+    - _SmoothnessRemapMax: 0.7727834
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -243,8 +244,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
-    - _EmissionColor: {r: 1, g: 0.44855002, b: 0, a: 1}
+    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
+    - _EmissionColor: {r: 1, g: 0.86527425, b: 0.2216981, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _PuddlesFramesSize: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
