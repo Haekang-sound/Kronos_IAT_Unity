@@ -59,6 +59,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _blackboard.target = target;
         //_blackboard.monobehaviour = gameObject;
+
+        controller.SetFollowNavmeshAgent(false);
+        controller.UseNavemeshAgentRotation(true);
     }
 
     //private void OnDisable()
@@ -160,6 +163,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void LookAtTarget()
     {
         if (target == null) return;
+        if (rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
@@ -196,7 +200,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        rotationSpeed = 1080f;
+        rotationSpeed = 100f;
     }
 
     public void StopAiming()
@@ -206,7 +210,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void ResetAiming()
     {
-        rotationSpeed = 1f;
+        rotationSpeed = 16f;
     }
 
     public void LightSpeedRushUpgrade()

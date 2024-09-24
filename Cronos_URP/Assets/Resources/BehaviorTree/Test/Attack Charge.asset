@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4974449407297934217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833c7771e017bc34998e5892330b8f46, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: a7936ff8c3c27c2419bdb56715674f64
+  position: {x: 3, y: -202}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+  description: 
+  drawGizmos: 0
+  child: {fileID: 292150610921233547}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4503a5e3594608e43ac9c8a3ee2c5023, type: 3}
+  m_Name: Attack Charge
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -4974449407297934217}
+  treeState: 0
+  nodes:
+  - {fileID: -4974449407297934217}
+  - {fileID: 292150610921233547}
+  - {fileID: 6900544263626174739}
+  - {fileID: 5088986085483959884}
+  - {fileID: 2409232043502019547}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+--- !u!114 &292150610921233547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8bd8b70a1d4f2d48b8fbd108af2d61b, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 2d27d52103591b049851f2d21f78afca
+  position: {x: 3, y: -105}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+  description: 
+  drawGizmos: 0
+  child: {fileID: 6900544263626174739}
+--- !u!114 &2409232043502019547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
+  m_Name: AnimatorSetTrigger
+  m_EditorClassIdentifier: 
+  state: 2
+  started: 0
+  guid: 6fd6090815eb6064c9acc3c8ea42e75b
+  position: {x: -231, y: 225}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+  description: _upgraded
+  drawGizmos: 0
+  parameterName: attack_charge
+--- !u!114 &5088986085483959884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 5ca67559fa1b1f04c8b862240013408c
+  position: {x: 3, y: 225}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+  description: 5
+  drawGizmos: 0
+  duration: 5
+  _elapse: 2.7099006
+--- !u!114 &6900544263626174739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 388ff49c4ab95094cac51e6d0500024c
+  position: {x: 3, y: 46}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    timer: -72.86242
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: 2409232043502019547}
+  - {fileID: 5088986085483959884}
