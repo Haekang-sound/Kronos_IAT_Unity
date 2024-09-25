@@ -12,9 +12,12 @@ public class JasonSaveLoader : MonoBehaviour
 	void Start()
 	{
 		// StreamReader를 사용하여 BOM을 무시하고 파일을 UTF-8로 읽기
-		string filePath = Application.dataPath + "/output/data.json";
+		string filePath = Application.dataPath + "/output/LoadingText.json";
+		/// 이거 쓸 수 있게 만들자~
+// 		string LoadingfilePath = Application.dataPath + "/output/LoadingText.json";
+// 		string ScenefilePath = Application.dataPath + "/output/SceneName.json";
+// 		string QuestfilePath = Application.dataPath + "/output/Quest.json";
 		string jsonData;
-		Debug.Log(filePath);
 		// UTF-8 인코딩을 사용하여 StreamReader 초기화
 		using (StreamReader reader = new StreamReader(filePath, new UTF8Encoding(false)))
 		{
