@@ -506,14 +506,15 @@ public class EffectManager : MonoBehaviour
         Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
         Vector3 newPos = bossTrans.TransformPoint(newOffset);
 
-        for (int i = 0; i <  moonNums.Count; i++)
+        for (int i = 0; i < moonNums.Count; i++)
         {
-            GameObject moon = SpawnEffect("BossFX_Moon", newPos);
+            GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
             moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
             moon.transform.position += moon.transform.forward * bossMoonDistance;
             
         }
     }
+
 
     // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
