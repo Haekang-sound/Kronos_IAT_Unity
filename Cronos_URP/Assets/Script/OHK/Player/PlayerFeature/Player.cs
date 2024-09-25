@@ -1,5 +1,6 @@
 using Message;
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
@@ -216,32 +217,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 			}
 		}
 	}
-
-	float totaltime = 0f;
-
-	bool bigger = false;
-
 	private void Update()
 	{
-
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
 			SetCursorInactive();
 		}
 
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			Vector3 temp = transform.position;
-			effectManager.SpawnEffect("TeraainScanner", temp);
-			SkillRenderObj.SetActive(true);
-		}
-
-
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			SkillRenderObj.SetActive(false);
-		}
+		//if (Input.GetKeyDown(KeyCode.Alpha2))
+// 		if (currentCP <= 0f && IsDecreaseCP)
+// 		{
+// 			SkillRenderObj.SetActive(false);
+// 		}
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 		// 실시간으로 TP 감소
@@ -259,6 +247,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				IsDecreaseCP = false;
 				CP = 0;
 				Debug.Log("몬스터들의 속도가 원래대로 돌아온다.");
+				SkillRenderObj.SetActive(false);
 				BulletTime.Instance.SetNormalSpeed();
 			}
 		}
@@ -416,7 +405,18 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		shieldWeapon?.EndParry();
 	}
-	//GameObject bomb;
+
+	/// <summary>
+	/// 시간정지 관련함수
+	/// </summary>
+
+	public void TimeStop()
+	{
+		Vector3 temp = transform.position;
+		effectManager.SpawnEffect("TeraainScanner", temp);
+		SkillRenderObj.SetActive(true);
+	}
+
 	public void CPBombGround()
 	{
 		if (effectManager != null)
@@ -437,6 +437,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
+	/// <summary>
+	///  시간정지 효과를 멈추는 함수 수정할것
+	/// </summary>
 	public void test()
 	{
 		SkillRenderObj.SetActive(false);

@@ -40,7 +40,7 @@ public class JasonSaveLoader : MonoBehaviour
 
 	public class NameValue
 	{
-		[JsonProperty("이름")]
+		[JsonProperty("지역이름")]
 		public string name;
 
 		[JsonProperty("값")]

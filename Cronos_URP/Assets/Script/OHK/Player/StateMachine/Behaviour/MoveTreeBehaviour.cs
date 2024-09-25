@@ -18,7 +18,6 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
-		//animator.ResetTrigger("TimeStop");
 		animator.SetFloat(animSpeedHash, animSpeed);
 
 	}
@@ -28,17 +27,12 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	{
 		animator.SetFloat(animSpeedHash, animSpeed);
 
-		if(Input.GetKeyDown(KeyCode.G))
-		{
-			animator.SetTrigger("TimeStop");
-
-		}
 	}
 	//OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-		//animator.speed = 1f;
-	}
+// 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+// 	{
+// 		//animator.speed = 1f;
+// 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
