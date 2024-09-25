@@ -434,6 +434,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 			Destroy(slash, 3.0f);
 			Invoke("test", 1.5f);
+			Invoke("CPBoombDamager", 1.5f);
+			currentCP= 0;
 		}
 	}
 
@@ -443,6 +445,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void test()
 	{
 		SkillRenderObj.SetActive(false);
+	}
+	public void CPBoombDamager()
+	{
+		GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+		Destroy(bombDamager, .5f);
 	}
 
 	public void CPBomb()
