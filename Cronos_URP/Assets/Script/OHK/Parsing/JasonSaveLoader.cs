@@ -14,7 +14,7 @@ public class JasonSaveLoader : MonoBehaviour
 		// StreamReader를 사용하여 BOM을 무시하고 파일을 UTF-8로 읽기
 		string filePath = Application.dataPath + "/output/data.json";
 		string jsonData;
-
+		Debug.Log(filePath);
 		// UTF-8 인코딩을 사용하여 StreamReader 초기화
 		using (StreamReader reader = new StreamReader(filePath, new UTF8Encoding(false)))
 		{
@@ -40,7 +40,7 @@ public class JasonSaveLoader : MonoBehaviour
 
 	public class NameValue
 	{
-		[JsonProperty("지역이름")]
+		[JsonProperty("이름")]
 		public string name;
 
 		[JsonProperty("값")]
