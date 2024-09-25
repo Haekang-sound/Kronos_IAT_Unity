@@ -225,11 +225,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			SetCursorInactive();
 		}
 
-		//if (Input.GetKeyDown(KeyCode.Alpha2))
-// 		if (currentCP <= 0f && IsDecreaseCP)
-// 		{
-// 			SkillRenderObj.SetActive(false);
-// 		}
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 		// 실시간으로 TP 감소
@@ -244,11 +239,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			CP -= Time.deltaTime * decayTime;
 			if (CP <= 0)
 			{
-				IsDecreaseCP = false;
-				CP = 0;
-				Debug.Log("몬스터들의 속도가 원래대로 돌아온다.");
-				SkillRenderObj.SetActive(false);
-				BulletTime.Instance.SetNormalSpeed();
+				TimeNormalization();
 			}
 		}
 
@@ -350,6 +341,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 		yield return ScreenFader.FadeSceneIn(FadeType.Black);
 	}
 
+	/// <summary>
+	/// 감속상태 정상화
+	/// </summary>
+	public void TimeNormalization()
+	{
+		IsDecreaseCP = false;
+		CP = 0;
+		SkillRenderObj.SetActive(false);
+		BulletTime.Instance.SetNormalSpeed();
+	}
+
 	void SetCursorInactive()
 	{
 		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
@@ -435,7 +437,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			Destroy(slash, 3.0f);
 			Invoke("test", 1.5f);
 			Invoke("CPBoombDamager", 1.5f);
-			currentCP= 0;
+			Invoke("TimeNormalization", 1.5f);
 		}
 	}
 
