@@ -48,8 +48,13 @@ public class EffectManager : MonoBehaviour
     Volume gVolume;
     MotionBlur mBlur;
     ChromaticAberration cAber;
+    DepthOfField dOF;
     public float mBlurVal = 0.7f;
     public float cAberVal = 0.7f;
+    public float dofFDistance = 2.0f;
+    public float dofFLength = 100.0f;
+    public float dofAperture = 6.0f;
+
     public float parryTime = 1.0f;
     public float fadeTime = 0.3f;
 
@@ -160,6 +165,7 @@ public class EffectManager : MonoBehaviour
     {
         vol.profile.TryGet(out mBlur);
         vol.profile.TryGet(out cAber);
+        vol.profile.TryGet(out dOF);
 
         if(mBlur != null)
         {
@@ -171,6 +177,14 @@ public class EffectManager : MonoBehaviour
         {
             cAber.active = true;
             cAber.intensity.value = 0.0f;
+        }
+
+        if (dOF != null)
+        {
+            dOF.active = true;
+            dOF.focusDistance.value = 0.0f;
+            dOF.focalLength.value = 0.0f;
+            dOF.aperture.value = 0.0f;
         }
     }
 
@@ -288,11 +302,12 @@ public class EffectManager : MonoBehaviour
     }
 
     // 강화 오라 활성화
-    // 보스 위성 테스트중
+    // 보스 칼 테스트중
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
-        BossMoon(player.transform);
+        //BossFiveSpear(player.transform);
+        //BossMoon(player.transform);
     }
 
     public void SwordAuraOff()
@@ -438,7 +453,7 @@ public class EffectManager : MonoBehaviour
 
     public void CreateParryFX()
     {
-        soundManager.PlaySFX("Parry_SE", player.transform);
+        soundManager.PlaySFX("Parry_Sound_SE", player.transform);
         Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
         GameObject parr = SpawnEffect("GuardFlare", parrPos);
         StartCoroutine(FadeOutLightsCoroutine(parr));
@@ -449,6 +464,9 @@ public class EffectManager : MonoBehaviour
             return;
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
         StartCoroutine(ParryCAberrationCoroutine(cAberVal));
+        StartCoroutine(ParryDepthOfFieldCoroutine());
+        StartCoroutine(ParryTime(0.3f));
+        
     }
 
     // 보스 8방향 빔
@@ -511,7 +529,6 @@ public class EffectManager : MonoBehaviour
             GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
             moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
             moon.transform.position += moon.transform.forward * bossMoonDistance;
-            
         }
     }
 
@@ -546,6 +563,42 @@ public class EffectManager : MonoBehaviour
         }
 
         cAber.intensity.value = 0f;
+    }
+
+    // 패리했을 때 뎁스 오브 필드 시간은 다른 효과보다 조금 빨리 끝나게
+    IEnumerator ParryDepthOfFieldCoroutine()
+    {
+        dOF.focusDistance.value = dofFDistance;
+        dOF.focalLength.value = dofFLength;
+        dOF.aperture.value = dofAperture;
+        float elapsedTime = 0.0f;
+        float dofTime = 0.3f;
+        while (elapsedTime < parryTime)
+        {
+            elapsedTime += Time.deltaTime;
+            dOF.focusDistance.value = Mathf.Lerp(dofFDistance, 0.1f, elapsedTime / dofTime);
+            dOF.focalLength.value = Mathf.Lerp(dofFLength, 1f, elapsedTime / dofTime);
+            dOF.aperture.value = Mathf.Lerp(dofAperture, 1f, elapsedTime / dofTime);
+            yield return null;
+        }
+
+        dOF.focusDistance.value = 0.1f;
+        dOF.focalLength.value = 1f;
+        dOF.aperture.value = 1f;
+    }
+
+    // 패리했을 때 시간 줄이기
+    IEnumerator ParryTime(float val)
+    {
+        // val 만큼 타임스케일 줄였다 원래대로 돌리기
+        Time.timeScale = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < 0.5f)
+        {
+            elapsedTime += Time.deltaTime;
+            Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / 0.5f);
+            yield return null;
+        }
     }
 
     IEnumerator FadeOutLightsCoroutine(GameObject flare)

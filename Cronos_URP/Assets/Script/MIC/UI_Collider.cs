@@ -22,9 +22,17 @@ public class UI_Collider : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            UIManager.Instance.StartCoroutine(UIManager.Instance.FadeAlpha(count));
+            UIManager.Instance.StartCoroutine(UIManager.Instance.FadeRegionAlpha(count));
             //Destroy(gameObject);
             count++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            UIManager.Instance.StartCoroutine(UIManager.Instance.ShowObjectiveUI());
         }
     }
 }

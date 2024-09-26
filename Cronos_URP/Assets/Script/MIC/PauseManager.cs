@@ -10,6 +10,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField]
     GameObject playerCam;
 
+    bool isPause = false;
+
     // ±×·± ½Ì±ÛÅÏÀ¸·Î ±¦ÂúÀº°¡
     private static PauseManager instance;
     public static PauseManager Instance
@@ -43,7 +45,8 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-
+        if (isPause)
+            Time.timeScale = 0f;
     }
 
     public void PauseGame()
@@ -56,7 +59,7 @@ public class PauseManager : MonoBehaviour
         {
             player.gameObject.GetComponent<InputReader>().enabled = false;
         }
-        Time.timeScale = 0f;
+        isPause = true;
     }
 
     public void UnPauseGame()
@@ -68,6 +71,7 @@ public class PauseManager : MonoBehaviour
         {
             player.gameObject.GetComponent<InputReader>().enabled = true;
         }
+        isPause = false;
         Time.timeScale = 1f;
     }
 }
