@@ -24,6 +24,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private HitShake _hitShake;
     private Damageable _damageable;
+    private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
     private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
@@ -43,6 +44,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
+        _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
@@ -113,7 +115,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
-    ///
+
     public void BossEightBeamCoroutine()
     {
         StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
@@ -233,6 +235,43 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         StartCoroutine(RushAfterSeconds(gameObject, 3f));
     }
+
+    public void AnimatorSetTrigger(string triggername)
+    {
+        _animator.SetTrigger(triggername);
+    }
+
+    public void BeginGroggy()
+    {
+        AnimatorSetTrigger("groggy");
+        _behaviortreeRunner.play = false;
+    }
+
+    public void EndGroggy()
+    {
+        AnimatorSetTrigger("idle");
+        
+        _groggyStack.ResetStack();
+        _behaviortreeRunner.play = true;
+
+        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        {
+            ChangePhase(phaseTree);
+            _onPhaseTree = true;
+        }
+        else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        {
+            ChangePhase(phaseTwo);
+            _onPhaseTwo = true;
+        }
+        else
+        {
+            ChangePhase(phaseOne);
+            _onPhaseOne = true;
+        }
+    }
+
+    // -----
 
     private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
     {
