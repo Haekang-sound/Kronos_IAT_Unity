@@ -73,6 +73,23 @@ public class CombatZone : MonoBehaviour
         }
     }
 
+    // -----
+
+    public void DebugKIllAll()
+    {
+        foreach(var enemy in enemyList)
+        {
+            if(enemy != null)
+            {
+                enemy.GetComponent<Damageable>().OnDeath.Invoke();
+                enemy.GetComponent<ReplaceWithRagdoll>().Replace();
+                enemy.GetComponent<EnemyController>().Release();
+            }
+        }
+    }
+
+    // -----
+
     private void CheckClear()
     {
         if (isClear)
