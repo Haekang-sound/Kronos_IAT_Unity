@@ -201,9 +201,9 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         return toTarget.sqrMagnitude < distance * distance;
     }
 
-    public void SetUseKnockback(bool val) => useKnockback = val;
+	public void SetUseKnockback(bool val) => useKnockback = val;
 
-    private void Damaged(Damageable.DamageMessage msg)
+	private void Damaged(Damageable.DamageMessage msg)
     {
         Player.Instance.ChargeCP();
         UnuseBulletTimeScale();

@@ -123,6 +123,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public Damageable _damageable;
 	public Defensible _defnsible;
+	private KnockBack _knockBack;
 
 	public SoundManager soundManager;
 	public EffectManager effectManager;
@@ -137,6 +138,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Awake()
 	{
+		_knockBack = GetComponent<KnockBack>();
 		CapsuleColldierUtility.Initialize(gameObject);
 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 	}
@@ -287,7 +289,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 		}
 	}
-
+	public bool useKnockback;
+	public void SetUseKnockback(bool val) => useKnockback = val;
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{
 		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
@@ -298,6 +301,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 			rigidImmunity || isEnforced)
 		{
 			return;
+		}
+
+		if (useKnockback)
+		{
+			_knockBack?.Begin(damageMessage.damageSource);
 		}
 
 		PlayerFSM.Animator.SetTrigger("Damaged");
