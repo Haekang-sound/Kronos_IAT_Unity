@@ -64,7 +64,7 @@ public class PlayerAttackState : PlayerBaseState
 		}
 
 		CalculateMoveDirection();   // 방향을 계산하고
-
+		
 
 		if (stateMachine.MoveForce > 1f)
 		{

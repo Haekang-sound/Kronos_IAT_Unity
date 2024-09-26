@@ -7,52 +7,67 @@ using Newtonsoft.Json;
 
 public class JasonSaveLoader : MonoBehaviour
 {
-	public static List<NameValue> nameValues;
+	public static List<InGameText> LoadingTexts;
+	public static List<InGameText> SceneTexts;
+	public static List<InGameText> QuestTexts;
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		// StreamReader를 사용하여 BOM을 무시하고 파일을 UTF-8로 읽기
-		string filePath = Application.dataPath + "/output/LoadingText.json";
-		/// 이거 쓸 수 있게 만들자~
-// 		string LoadingfilePath = Application.dataPath + "/output/LoadingText.json";
-// 		string ScenefilePath = Application.dataPath + "/output/SceneName.json";
-// 		string QuestfilePath = Application.dataPath + "/output/Quest.json";
-		string jsonData;
+		string ScenefilePath = Application.dataPath + "/output/SceneName.json";
+		string LoadingfilePath = Application.dataPath + "/output/LoadingText.json";
+		string QuestfilePath = Application.dataPath + "/output/Quest.json";
+
+		string LoadingData;
+		string SceneData;
+		string QuestData;
+
 		// UTF-8 인코딩을 사용하여 StreamReader 초기화
-		using (StreamReader reader = new StreamReader(filePath, new UTF8Encoding(false)))
+		using (StreamReader reader = new StreamReader(LoadingfilePath, new UTF8Encoding(false)))
 		{
-			jsonData = reader.ReadToEnd();
+			LoadingData = reader.ReadToEnd();
+		}
+		using (StreamReader reader = new StreamReader(ScenefilePath, new UTF8Encoding(false)))
+		{
+			SceneData = reader.ReadToEnd();
+		}
+		using (StreamReader reader = new StreamReader(QuestfilePath, new UTF8Encoding(false)))
+		{
+			QuestData = reader.ReadToEnd();
 		}
 
 		// JSON 데이터를 객체 리스트로 디시리얼라이즈
-		nameValues = JsonConvert.DeserializeObject<List<NameValue>>(jsonData);
-
-		// 리스트의 모든 객체 출력
-		foreach (var nameValue in nameValues)
-		{
-			nameValue.Print();
-		}
+		QuestTexts = JsonConvert.DeserializeObject<List<InGameText>>(QuestData);
+		LoadingTexts = JsonConvert.DeserializeObject<List<InGameText>>(LoadingData);
+		SceneTexts = JsonConvert.DeserializeObject<List<InGameText>>(SceneData);
 	}
-	
+
 
 	// Update is called once per frame
 	void Update()
 	{
-
+		Debug.Log(JasonSaveLoader.LoadingTexts[0].text);
+		Debug.Log(JasonSaveLoader.SceneTexts[0].text);
+		Debug.Log(JasonSaveLoader.QuestTexts[0].text);
 	}
 
-	public class NameValue
+	public class InGameText
 	{
-		[JsonProperty("이름")]
-		public string name;
+		[JsonProperty("ID")]
+		public int ID;
 
-		[JsonProperty("값")]
-		public int value;
+		[JsonProperty("Index")]
+		public int Index;
+
+		[JsonProperty("Text")]
+		public string text;
 
 		public void Print()
 		{
-			Debug.Log(name);
-			Debug.Log(value);
+			Debug.Log(ID);
+			Debug.Log(Index);
+			Debug.Log(text);
 		}
 	}
 }
