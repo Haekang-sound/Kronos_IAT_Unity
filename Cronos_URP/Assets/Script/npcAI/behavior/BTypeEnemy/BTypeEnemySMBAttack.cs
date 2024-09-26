@@ -8,6 +8,7 @@ public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
     {
         _monoBehaviour.ChangeDebugText("ATTACK");
         _monoBehaviour.aimEnd.SetActive(true);
+
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,10 +30,14 @@ public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
         }
 
         // RELOAD - 애니메이션이 종료 됐을 때
+
     }
 
     public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _monoBehaviour.aimEnd.SetActive(false);
+
+        // 공격 중 데미지를 입어도 피격 애니메이션이 재생되지 않도록
+        _monoBehaviour.ResetTriggerDamaged();
     }
 }

@@ -30,8 +30,6 @@ public class SpawnEnemyWave : MonoBehaviour
 
     void Start()
     {
-    
-
         if (Target == null)
         {
             Target = Player.Instance.gameObject;

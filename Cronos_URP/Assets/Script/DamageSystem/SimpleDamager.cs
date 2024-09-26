@@ -12,7 +12,6 @@ public class SimpleDamager : MonoBehaviour
     public LayerMask targetLayers;
 
     protected GameObject m_owner;
-    public bool m_inAttack = false;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
@@ -33,16 +32,6 @@ public class SimpleDamager : MonoBehaviour
 
     public void SetOwner(GameObject owner) => m_owner = owner;
 
-    public void BeginAttack()
-    {
-        m_inAttack = true;
-    }
-
-    public void EndAttack()
-    {
-        m_inAttack = false;
-    }
-
     private void Reset()
     {
         GetComponent<Collider>().isTrigger = true;
@@ -61,23 +50,18 @@ public class SimpleDamager : MonoBehaviour
         DamageCheck(other);
     }
 
-    public void DamageCheck(Collider other)
+    public bool DamageCheck(Collider other)
     {
-        if (!m_inAttack)
-        {
-            return;
-        }
-
         var damageable = other.GetComponent<Damageable>();
 
         if (damageable == null)
         {
-            return;
+            return false;
         }
 
         if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
         {
-            return;
+            return false;
         }
 
         var msg = new Damageable.DamageMessage()
@@ -97,6 +81,8 @@ public class SimpleDamager : MonoBehaviour
 
         damageable.ApplyDamage(msg);
         OnAttack.Invoke();
+
+        return true;
     }
 
     public void DrawGizmos()

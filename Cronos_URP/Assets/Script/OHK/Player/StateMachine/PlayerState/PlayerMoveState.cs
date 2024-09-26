@@ -15,6 +15,8 @@ public class PlayerMoveState : PlayerBaseState
 	private readonly int attackHash = Animator.StringToHash("Attack");
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
+	private readonly int timeStopHash = Animator.StringToHash("TimeStop");
+	private readonly int CPBoombHash = Animator.StringToHash("CPBoomb");
 
 	private const float AnimationDampTime = 0.1f;
 
@@ -43,11 +45,11 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 
-        stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
+		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 
 
-    }
+	}
 
 	// state의 update라 볼 수 있지
 	public override void Tick()
@@ -57,19 +59,7 @@ public class PlayerMoveState : PlayerBaseState
 		moveSpeed = 1f;
 
 		stateMachine.Player.SetSpeed(moveSpeed);
-		/// 이동휴 죽어라
-		/// 죽어라 이동휴
-		/// 이어라 죽동휴
-		/// 죽동휴 이어라
-		/// 폭발 테스트용만들어야 겠지?
-		if(Input.GetKeyDown(KeyCode.E))
-		{
-			if(stateMachine.Player.IsDecreaseCP)
-				stateMachine.Player.CPBomb();
-		}
 
-
-		
 		// 시간베기 테스트용
 		if (Input.GetKeyDown(KeyCode.R))
 		{
@@ -80,7 +70,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			timeLine += Time.deltaTime;
 			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.Player.TimeSlashCurve.Evaluate(timeLine / 0.5f), ForceMode.Impulse);
-			if(timeLine > 0.5f)
+			if (timeLine > 0.5f)
 			{
 				timeslash = false;
 				timeLine = 0f;
@@ -124,8 +114,8 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
-    }
-    public override void FixedTick()
+	}
+	public override void FixedTick()
 	{
 		if (stateMachine.Player.IsLockOn)
 		{
@@ -158,7 +148,7 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
 
-        stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
+		stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
 		stateMachine.Animator.speed = 1f;
 	}
 
@@ -206,8 +196,13 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		if (stateMachine.Player.CP >= 100)
 		{
+			stateMachine.Animator.SetTrigger(timeStopHash);
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
+		}
+		else if(stateMachine.Player.IsDecreaseCP)
+		{
+			stateMachine.Animator.SetTrigger(CPBoombHash);
 		}
 
 	}
@@ -229,21 +224,21 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true); 
+		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true);
 	}
 	private void Dodge()
 	{
-		if(stateMachine.Player.CP < 10f)
+		if (stateMachine.Player.CP < 10f)
 		{
 			return;
-		} 
+		}
 		stateMachine.Player.CP -= 10f;
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
-} 
+}
 
 
 

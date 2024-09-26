@@ -59,8 +59,6 @@ public abstract class PlayerBaseState : State
 		// 플레이어의 회전은 구면 선형보간의 형태로 이루어진다. 
 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDirection), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
 
-
-
 	}
 
 	/// <summary>

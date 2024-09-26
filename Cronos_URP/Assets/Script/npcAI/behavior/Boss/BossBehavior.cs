@@ -1,4 +1,5 @@
 using Message;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Playables;
@@ -24,6 +25,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private HitShake _hitShake;
     private Damageable _damageable;
     private MeleeWeapon _meleeWeapon;
+    private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
 
@@ -42,6 +44,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+        _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
     }
@@ -104,6 +107,18 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
                 return;
 
         }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    ///
+    public void BossEightBeamCoroutine()
+    {
+        StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
+    }
+
+    public void BossFireShoot()
+    {
+        _effectManager.BossFireShoot(transform);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -181,7 +196,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        rotationSpeed = 5f;
+        rotationSpeed = 1080f;
     }
 
     public void StopAiming()
@@ -192,5 +207,32 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void ResetAiming()
     {
         rotationSpeed = 1f;
+    }
+
+    public void LightSpeedRushUpgrade()
+    {
+        //GameObject obj = Resources.Load<GameObject>("Models/Boss/LightSpeedRush_Clon");
+        GameObject obj = Resources.Load<GameObject>("Prefabs/Boss/LightSpeedRush_Clon");
+
+        var clone1 = Instantiate(obj, transform.position, transform.rotation);
+        var clone2 = Instantiate(obj, transform.position, transform.rotation);
+
+        float offset = 3f;
+        var right = transform.position + transform.right * offset;
+        var left = transform.position - transform.right * offset;
+
+        clone1.GetComponent<MoveObject>().targetPosition = right;
+        clone2.GetComponent<MoveObject>().targetPosition = left;
+
+        clone1.GetComponent<BossLightRushCloneBehavior>().activeTime = 2f;
+        clone2.GetComponent<BossLightRushCloneBehavior>().activeTime = 2.4f;
+
+        StartCoroutine(RushAfterSeconds(gameObject, 3f));
+    }
+
+    private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        _animator.SetTrigger("rush");
     }
 }

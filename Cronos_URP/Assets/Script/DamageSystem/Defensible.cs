@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ using static Damageable;
 
 public class Defensible : MonoBehaviour
 {
-    public bool isDefending;
+	public Action onDefensFalse;
+	public bool isDefending;
     [Range(1.0f, 100.0f)]
     public float dampRatio = 10.0f;
 
@@ -34,13 +36,19 @@ public class Defensible : MonoBehaviour
 
         if (Vector3.Angle(forward, positionToDamager) > hitAngle * 0.5f)
         {
-            return;
+			Debug.Log("가드를 실패한");
+			onDefensFalse?.Invoke();
+			return;
         }
 
         // 가드 이펙트
         EffectManager.Instance.CreateGuardFX();
+		Vector3 temp = data.direction;
+		temp.y = 0f;
 
-        data.amount /= dampRatio;
+		PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
+
+		data.amount /= dampRatio;
     }
 
 #if UNITY_EDITOR
