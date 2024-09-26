@@ -47,9 +47,6 @@ public class JasonSaveLoader : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log(JasonSaveLoader.LoadingTexts[0].text);
-		Debug.Log(JasonSaveLoader.SceneTexts[0].text);
-		Debug.Log(JasonSaveLoader.QuestTexts[0].text);
 	}
 
 	public class InGameText
