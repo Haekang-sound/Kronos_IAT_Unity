@@ -3,6 +3,8 @@ using UnityEngine;
 public class BehaviorTreeRunner : MonoBehaviour
 {
     public BehaviorTree tree;
+    public bool play = true;
+
     private Context _context;
 
     void Start()
@@ -13,7 +15,7 @@ public class BehaviorTreeRunner : MonoBehaviour
 
     void Update()
     {
-        if(tree != null)
+        if(tree != null && play == true)
         {
             tree.Update();
         }
