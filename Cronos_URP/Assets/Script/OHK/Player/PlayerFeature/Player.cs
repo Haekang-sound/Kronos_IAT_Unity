@@ -292,7 +292,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
 		// 
-		if (PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
+		if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
 			PlayerFSM.GetState().ToString() == "PlayerParryState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
 			rigidImmunity || isEnforced)
