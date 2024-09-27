@@ -243,6 +243,16 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginGroggy()
     {
+        // 애니메이터의 모든 파라미터를 가져옴
+        foreach (AnimatorControllerParameter parameter in _animator.parameters)
+        {
+            // 파라미터가 트리거일 경우 리셋
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _animator.ResetTrigger(parameter.name);
+            }
+        }
+
         AnimatorSetTrigger("groggy");
         _behaviortreeRunner.play = false;
     }
