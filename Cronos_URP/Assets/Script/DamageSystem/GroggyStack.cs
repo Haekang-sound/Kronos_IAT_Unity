@@ -9,6 +9,8 @@ public class GroggyStack : MonoBehaviour
 
     [SerializeField]
     private int _currentStack;
+    [SerializeField]
+    private bool _isGroggy;
 
     // =====
 
@@ -21,16 +23,17 @@ public class GroggyStack : MonoBehaviour
     public void ResetStack()
     {
         _currentStack = 0;
+        _isGroggy = false;
     }
 
     // -----
 
     private void Check()
     {
-        if (_currentStack >= maxStack)
+        if (_isGroggy == false && _currentStack >= maxStack)
         {
-            ResetStack();
             OnMaxStack.Invoke();
+            _isGroggy = true;
         }
     }
 

@@ -155,13 +155,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         }
     }
 
-    public void ChangePhase(BehaviorTree bt)
-    {
-        _behaviortreeRunner.tree = bt;
-        _behaviortreeRunner.tree.blackboard = _blackboard;
-        _behaviortreeRunner.Bind();
-    }
-
     public void LookAtTarget()
     {
         if (target == null) return;
@@ -243,15 +236,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginGroggy()
     {
-        // 애니메이터의 모든 파라미터를 가져옴
-        foreach (AnimatorControllerParameter parameter in _animator.parameters)
-        {
-            // 파라미터가 트리거일 경우 리셋
-            if (parameter.type == AnimatorControllerParameterType.Trigger)
-            {
-                _animator.ResetTrigger(parameter.name);
-            }
-        }
+        ResetAllTriggers();
 
         AnimatorSetTrigger("groggy");
         _behaviortreeRunner.play = false;
@@ -266,22 +251,66 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
-            ChangePhase(phaseTree);
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
             _onPhaseTree = true;
         }
         else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
         {
-            ChangePhase(phaseTwo);
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
             _onPhaseTwo = true;
         }
         else
         {
-            ChangePhase(phaseOne);
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
     }
 
     // -----
+
+    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float  delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        ChangePhase(bt);
+    }
+
+    private void ChangePhase(BehaviorTree bt)
+    {
+        _behaviortreeRunner.tree = bt;
+        _behaviortreeRunner.tree.blackboard = _blackboard;
+        _behaviortreeRunner.Bind();
+    }
+
+    private void StartResetAllTriggers()
+    {
+        StartCoroutine(ResetAllTriggersAfterDelay());
+    }
+
+    private IEnumerator ResetAllTriggersAfterDelay()
+    {
+        _animator.SetTrigger("idle");
+
+        yield return new WaitForSeconds(1f);
+
+        ResetAllTriggers();
+    }
+
+    private void ResetAllTriggers()
+    {
+        // 애니메이터의 모든 파라미터를 가져옴
+        foreach (AnimatorControllerParameter parameter in _animator.parameters)
+        {
+            // 파라미터가 트리거일 경우 리셋
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _animator.ResetTrigger(parameter.name);
+            }
+        }
+    }
 
     private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
     {
