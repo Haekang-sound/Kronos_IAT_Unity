@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -76,7 +74,20 @@ public class ParryDamager : SimpleDamager
     {
         if (drawGizmos == false) return;
 
-        if (_isGuard == true)
+        if (_isGuard == false)
+        {
+            // yellow - 패리 당할 수 있는 공격 타이밍
+            if (_canBeParryied == true)
+            {
+                Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
+            }
+            // Red - 공격
+            else if (_inAttack == true)
+            {
+                Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
+            }
+        }
+        else if (_isGuard == true)
         {
             // Green - 패리 가능한 가드
             if (_isParrying == true)
@@ -87,19 +98,6 @@ public class ParryDamager : SimpleDamager
             else
             {
                 Gizmos.color = new Color(0f, 0f, 1f, 0.3f);
-            }
-        }
-        else if (_isGuard == false)
-        {
-            // yellow - 패리 당할 수 있는 공격 타이밍
-            if (_canBeParryied == true)
-            {
-                Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
-            }
-            // Red - 공격
-            else
-            {
-                Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
             }
         }
 
