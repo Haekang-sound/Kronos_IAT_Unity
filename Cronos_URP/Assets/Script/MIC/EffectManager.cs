@@ -48,12 +48,18 @@ public class EffectManager : MonoBehaviour
     Volume gVolume;
     MotionBlur mBlur;
     ChromaticAberration cAber;
+    DepthOfField dOF;
     public float mBlurVal = 0.7f;
     public float cAberVal = 0.7f;
+    public float dofFDistance = 2.0f;
+    public float dofFLength = 100.0f;
+    public float dofAperture = 6.0f;
+
     public float parryTime = 1.0f;
     public float fadeTime = 0.3f;
 
     // 강화 검기 관련
+    public bool isSwordWave;
     [Range(0f, 200f)]
     public float enforceSlashSpeed = 30.0f;
     public float swordWaveSpeed = 20.0f;
@@ -69,6 +75,9 @@ public class EffectManager : MonoBehaviour
     public float bossBeamDistance = 4.0f;
     public float bossBeamTerm = 0.2f;
     public float bossBeamDupeTime = 8.0f;
+
+    public float bossMoonHeight = 4.0f;
+    public float bossMoonDistance = 5.0f;
 
     // 사용할 이펙트 리스트
     static List<GameObject> effects = new List<GameObject>();
@@ -157,6 +166,7 @@ public class EffectManager : MonoBehaviour
     {
         vol.profile.TryGet(out mBlur);
         vol.profile.TryGet(out cAber);
+        vol.profile.TryGet(out dOF);
 
         if(mBlur != null)
         {
@@ -168,6 +178,14 @@ public class EffectManager : MonoBehaviour
         {
             cAber.active = true;
             cAber.intensity.value = 0.0f;
+        }
+
+        if (dOF != null)
+        {
+            dOF.active = true;
+            dOF.focusDistance.value = 0.0f;
+            dOF.focalLength.value = 0.0f;
+            dOF.aperture.value = 0.0f;
         }
     }
 
@@ -285,9 +303,12 @@ public class EffectManager : MonoBehaviour
     }
 
     // 강화 오라 활성화
+    // 보스 칼 테스트중
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
+        //BossFiveSpear(player.transform);
+        //BossMoon(player.transform);
     }
 
     public void SwordAuraOff()
@@ -368,19 +389,22 @@ public class EffectManager : MonoBehaviour
     // 검기 날리기
     public void SwordWave()
     {
-        GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
-        slsh.transform.position += new Vector3(0, 1f, 0);
-        slsh.transform.forward = player.transform.forward;
-        slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
-        var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
-        main.startSpeed = enforceSlashSpeed;
-        Destroy(slsh, 1.0f);
+        if (isSwordWave)
+        {
+            GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
+            slsh.transform.position += new Vector3(0, 1f, 0);
+            slsh.transform.forward = player.transform.forward;
+            slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
+            var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
+            main.startSpeed = enforceSlashSpeed;
+            Destroy(slsh, 1.0f);
 
-        GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
-        invislash.transform.position += new Vector3(0, 1f, 0);
-        invislash.transform.forward = player.transform.forward;
-        invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
-        StartCoroutine(MoveWaveCoroutine(invislash));
+            GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
+            invislash.transform.position += new Vector3(0, 1f, 0);
+            invislash.transform.forward = player.transform.forward;
+            invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
+            StartCoroutine(MoveWaveCoroutine(invislash));
+        }
     }
 
     IEnumerator MoveWaveCoroutine(GameObject proj)
@@ -433,7 +457,7 @@ public class EffectManager : MonoBehaviour
 
     public void CreateParryFX()
     {
-        soundManager.PlaySFX("Parry_SE", player.transform);
+        soundManager.PlaySFX("Parry_Sound_SE", player.transform);
         Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
         GameObject parr = SpawnEffect("GuardFlare", parrPos);
         StartCoroutine(FadeOutLightsCoroutine(parr));
@@ -444,6 +468,9 @@ public class EffectManager : MonoBehaviour
             return;
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
         StartCoroutine(ParryCAberrationCoroutine(cAberVal));
+        StartCoroutine(ParryDepthOfFieldCoroutine());
+        StartCoroutine(ParryTime(0.3f));
+        
     }
 
     // 보스 8방향 빔
@@ -463,7 +490,6 @@ public class EffectManager : MonoBehaviour
 
                 Destroy(beam, 0.6f);
             }
-            // TODO
             yield return new WaitForSeconds(bossBeamTerm);
         }
     }
@@ -475,6 +501,41 @@ public class EffectManager : MonoBehaviour
         fire.transform.forward = bosstrans.transform.forward;
         fire.transform.position += new Vector3(0, 1.0f, 0);
     }
+
+    // 보스 창 5개 쏘기
+    public void BossFiveSpear(Transform bossTrans)
+    {
+        Vector3 forward = bossTrans.forward;
+        Vector3 newOffset = new Vector3(0, 3.5f, 0);
+        Vector3 newPos = bossTrans.TransformPoint(newOffset);
+        GameObject spears = SpawnEffect("BossFX_Spears", newPos);
+        spears.transform.forward = forward;
+        Destroy(spears, 15.0f);
+    }
+
+    // 창 지면 이펙트
+    public void SpearImpact(Vector3 pos)
+    {
+        GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
+        Destroy(imp, 3.0f);
+    }
+
+    // 보스 위성 만들기
+    public void BossMoon(Transform bossTrans)
+    {
+        List<int> moonNums = new List<int>();
+        moonNums = FisherYatesShuffles(8, 5);
+        Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
+        Vector3 newPos = bossTrans.TransformPoint(newOffset);
+
+        for (int i = 0; i < moonNums.Count; i++)
+        {
+            GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
+            moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
+            moon.transform.position += moon.transform.forward * bossMoonDistance;
+        }
+    }
+
 
     // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
@@ -508,6 +569,42 @@ public class EffectManager : MonoBehaviour
         cAber.intensity.value = 0f;
     }
 
+    // 패리했을 때 뎁스 오브 필드 시간은 다른 효과보다 조금 빨리 끝나게
+    IEnumerator ParryDepthOfFieldCoroutine()
+    {
+        dOF.focusDistance.value = dofFDistance;
+        dOF.focalLength.value = dofFLength;
+        dOF.aperture.value = dofAperture;
+        float elapsedTime = 0.0f;
+        float dofTime = 0.3f;
+        while (elapsedTime < parryTime)
+        {
+            elapsedTime += Time.deltaTime;
+            dOF.focusDistance.value = Mathf.Lerp(dofFDistance, 0.1f, elapsedTime / dofTime);
+            dOF.focalLength.value = Mathf.Lerp(dofFLength, 1f, elapsedTime / dofTime);
+            dOF.aperture.value = Mathf.Lerp(dofAperture, 1f, elapsedTime / dofTime);
+            yield return null;
+        }
+
+        dOF.focusDistance.value = 0.1f;
+        dOF.focalLength.value = 1f;
+        dOF.aperture.value = 1f;
+    }
+
+    // 패리했을 때 시간 줄이기
+    IEnumerator ParryTime(float val)
+    {
+        // val 만큼 타임스케일 줄였다 원래대로 돌리기
+        Time.timeScale = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < 0.5f)
+        {
+            elapsedTime += Time.deltaTime;
+            Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / 0.5f);
+            yield return null;
+        }
+    }
+
     IEnumerator FadeOutLightsCoroutine(GameObject flare)
     {
         float elapsedTime = 0.0f;
@@ -526,4 +623,41 @@ public class EffectManager : MonoBehaviour
     }
 
 
+    // elements 개의 원소를 넣으면 result 개의 랜덤 값을 앞에서 뽑는
+    // 피셔-예이츠 알고리즘
+    public List<int> FisherYatesShuffles(int elements, int result)
+    {
+        // 0부터 elements개의 숫자를 리스트로 생성
+        List<int> numbers = new List<int>();
+        for (int i = 0; i < elements; i++)
+        {
+            numbers.Add(i);
+        }
+
+        // 랜덤 객체 생성
+        System.Random rand = new System.Random();
+
+        // 피셔-예이츠 알고리즘으로 리스트 셔플
+        for (int i = numbers.Count - 1; i > 0; i--)
+        {
+            int j = rand.Next(0, i + 1); // 0부터 i까지의 인덱스 중 하나를 선택
+            // numbers[i]와 numbers[j]를 swap
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+
+        // 결과 출력
+        Debug.Log("랜덤 배열: " + string.Join(", ", numbers));
+
+        List<int> numbers2 = new List<int>();
+        for (int i = 0; i < result; i++)
+        {
+            numbers2.Add(numbers[i]);
+        }
+
+        Debug.Log("number2 배열: " + string.Join(", ", numbers2));
+
+        return numbers2;
+    }
 }

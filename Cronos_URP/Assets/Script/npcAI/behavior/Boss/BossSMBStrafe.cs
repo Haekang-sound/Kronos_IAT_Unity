@@ -23,6 +23,8 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
             _previusSpeed = _monoBehaviour.controller.GetNavemeshAgentSpeed();
             _monoBehaviour.controller.SetNavemeshAgentSpeed(1);
         }
+
+        _monoBehaviour.ResetAiming();
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

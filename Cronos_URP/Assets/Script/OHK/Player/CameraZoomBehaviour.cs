@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class CameraZoomBehaviour : StateMachineBehaviour
 {
-	public float value =3f;
-	public float time;
+	public float time = 0f;
 	[SerializeField] AnimationCurve curve;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){}
@@ -13,10 +12,15 @@ public class CameraZoomBehaviour : StateMachineBehaviour
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		float value = curve.Evaluate(stateInfo.normalizedTime);
-		Debug.Log(value);
 
-		//CamerZoom.GetInstance().Zoomer(value, time);
-		CamerZoom.GetInstance().ZoomerCurve(value);
+		if (time > 0f)
+		{
+			CamerZoom.GetInstance().Zoomer(value, time);
+		}
+		else
+		{
+			CamerZoom.GetInstance().ZoomerCurve(value);
+		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

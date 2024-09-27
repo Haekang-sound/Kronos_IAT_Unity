@@ -12,6 +12,7 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
+		
 		stateMachine.MoveForce = moveForce;
 		//stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 

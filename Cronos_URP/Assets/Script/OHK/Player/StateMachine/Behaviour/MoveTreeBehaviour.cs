@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class MoveTreeBehaviour : StateMachineBehaviour
 {
@@ -25,12 +26,13 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.SetFloat(animSpeedHash, animSpeed);
+
 	}
 	//OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-		//animator.speed = 1f;
-	}
+// 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+// 	{
+// 		//animator.speed = 1f;
+// 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -10,6 +10,7 @@ public class PlayerDamagedState : PlayerBaseState
 		// TPCPHUD 인스턴스 받아와서 색/크기 변경
 		// 잠시 빼놓음
 		UI_TPCPHUD hud = UI_TPCPHUD.GetInstance();
+		//Player.Instance.SetUseKnockback(true);
 		//hud.ChangeRed();
 	}
 	public override void Tick(){}
@@ -18,6 +19,9 @@ public class PlayerDamagedState : PlayerBaseState
 		Float();
 	}
 	public override void LateTick(){}
-	public override void Exit(){}
+	public override void Exit()
+	{
+		//Player.Instance.SetUseKnockback(false);
+	}
 
 }

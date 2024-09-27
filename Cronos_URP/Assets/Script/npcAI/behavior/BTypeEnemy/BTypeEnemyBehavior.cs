@@ -226,13 +226,21 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         }
     }
 
+    private bool useKnockback;
+    public void SetUseKnockback(bool val) => useKnockback = val;
+
+
     private void Damaged(Damageable.DamageMessage msg)
     {
-		Player.Instance.ChargeCP();
-        UnuseBulletTimeScale();
+		Player.Instance.ChargeCP(msg.isActiveSkill);
+		UnuseBulletTimeScale();
         TriggerDamage();
         _hitShake.Begin();
-        _knockBack?.Begin(msg.damageSource);
+
+        if (useKnockback)
+        {
+            _knockBack?.Begin(msg.damageSource);
+        }
     }
 
     private void Dead()
