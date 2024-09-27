@@ -54,10 +54,39 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0b44ec46de1d346498e46d51509e91bf, type: 2}
     - target: {fileID: 919132149155446097, guid: cb47773c8391c5c4b9aa355a81e698a5, type: 3}
       propertyPath: m_Name
-      value: SM_clock
+      value: SM_clock_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb47773c8391c5c4b9aa355a81e698a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8032816276602443668}
   m_SourcePrefab: {fileID: 100100000, guid: cb47773c8391c5c4b9aa355a81e698a5, type: 3}
+--- !u!1 &4333803444974180708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cb47773c8391c5c4b9aa355a81e698a5, type: 3}
+  m_PrefabInstance: {fileID: 3523409838065443893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8032816276602443668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333803444974180708}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6800005, y: 1.68, z: 0.12000004}
+  m_Center: {x: 0, y: 0, z: -0.06000002}
