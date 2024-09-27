@@ -859,7 +859,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.6632777
+  m_ExitTime: 0.5137689
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1986,7 +1986,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo_02_2
+  m_Name: Nor_AbilityAttack01
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3444,7 +3444,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill_I
+  m_Name: Com_AbilityAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3454,6 +3454,7 @@ AnimatorState:
   - {fileID: 4214278041240460997}
   m_StateMachineBehaviours:
   - {fileID: 7304474947817863767}
+  - {fileID: 7380673278053056779}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4806,7 +4807,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 5
-  hitStopTime: 0
+  hitStopTime: 0.05
+--- !u!114 &7380673278053056779
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aceab151563e21340a4496539a90bcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 4
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 4
+      inSlope: 16.666668
+      outSlope: 16.666668
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06
+      value: 5
+      inSlope: 11.123452
+      outSlope: 11.123452
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.23920389
+      value: 6
+      inSlope: 0.7118962
+      outSlope: 0.7118962
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6722664
+      value: 4.2
+      inSlope: -1.8826742
+      outSlope: -1.8826742
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1987534
+    - serializedVersion: 3
+      time: 1
+      value: 4
+      inSlope: -0.6102512
+      outSlope: -0.6102512
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!206 &7486225451022554944
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4944,7 +5009,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo_01_4
+  m_Name: Nor_AbilityAttack02
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -5098,7 +5163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aceab151563e21340a4496539a90bcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 9.6
+  time: 5
   curve:
     serializedVersion: 2
     m_Curve:
