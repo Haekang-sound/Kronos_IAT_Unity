@@ -14,6 +14,8 @@ public class SimpleDamager : MonoBehaviour
     protected GameObject m_owner;
     public bool inAttack;
 
+	public bool isAcitveSkill = false;
+
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
 
@@ -95,6 +97,7 @@ public class SimpleDamager : MonoBehaviour
             msg.damageSource = m_owner.transform.position;
         }
 
+		msg.isActiveSkill = isAcitveSkill;
         damageable.ApplyDamage(msg);
         OnAttack.Invoke();
 

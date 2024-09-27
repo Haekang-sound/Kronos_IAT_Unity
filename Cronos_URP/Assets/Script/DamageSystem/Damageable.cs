@@ -189,6 +189,7 @@ public partial class Damageable : MonoBehaviour
         data.damageSource = new Vector3(0, 0, 0);
         data.throwing = false;
         data.stopCamera = false;
+		data.isActiveSkill = false;
 
         for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
         {

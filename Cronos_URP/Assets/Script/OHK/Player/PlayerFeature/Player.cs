@@ -205,6 +205,25 @@ public class Player : MonoBehaviour, IMessageReceiver
 			}
 		}
 	}
+	public void ChargeCP(bool isActiveSkill)
+	{
+		// 액티브스킬이라면 cp를 채우지 않는다.
+		if(isActiveSkill)
+		{
+			return;
+		}
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
+
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
 	public void ChargeCP()
 	{
 		{
