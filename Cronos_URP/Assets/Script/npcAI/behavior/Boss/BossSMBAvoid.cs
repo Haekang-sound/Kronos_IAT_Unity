@@ -5,6 +5,7 @@ public class BossSMBAvoid : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.StopAiming();
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -15,5 +16,6 @@ public class BossSMBAvoid : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.ResetAiming();
     }
 }

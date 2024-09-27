@@ -24,6 +24,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private HitShake _hitShake;
     private Damageable _damageable;
+    private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
     private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
@@ -43,6 +44,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
+        _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
@@ -59,6 +61,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _blackboard.target = target;
         //_blackboard.monobehaviour = gameObject;
+
+        controller.SetFollowNavmeshAgent(false);
+        controller.UseNavemeshAgentRotation(true);
     }
 
     //private void OnDisable()
@@ -110,7 +115,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
-    ///
+
     public void BossEightBeamCoroutine()
     {
         StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
@@ -150,16 +155,10 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         }
     }
 
-    public void ChangePhase(BehaviorTree bt)
-    {
-        _behaviortreeRunner.tree = bt;
-        _behaviortreeRunner.tree.blackboard = _blackboard;
-        _behaviortreeRunner.Bind();
-    }
-
     public void LookAtTarget()
     {
         if (target == null) return;
+        if (rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
@@ -196,7 +195,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        rotationSpeed = 1080f;
+        rotationSpeed = 100f;
     }
 
     public void StopAiming()
@@ -206,7 +205,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void ResetAiming()
     {
-        rotationSpeed = 1f;
+        rotationSpeed = 16f;
     }
 
     public void LightSpeedRushUpgrade()
@@ -228,6 +227,89 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         clone2.GetComponent<BossLightRushCloneBehavior>().activeTime = 2.4f;
 
         StartCoroutine(RushAfterSeconds(gameObject, 3f));
+    }
+
+    public void AnimatorSetTrigger(string triggername)
+    {
+        _animator.SetTrigger(triggername);
+    }
+
+    public void BeginGroggy()
+    {
+        ResetAllTriggers();
+
+        AnimatorSetTrigger("groggy");
+        _behaviortreeRunner.play = false;
+    }
+
+    public void EndGroggy()
+    {
+        AnimatorSetTrigger("idle");
+        
+        _groggyStack.ResetStack();
+        _behaviortreeRunner.play = true;
+
+        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        {
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
+            _onPhaseTree = true;
+        }
+        else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        {
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
+            _onPhaseTwo = true;
+        }
+        else
+        {
+            StartResetAllTriggers();
+            StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
+            _onPhaseOne = true;
+        }
+    }
+
+    // -----
+
+    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float  delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        ChangePhase(bt);
+    }
+
+    private void ChangePhase(BehaviorTree bt)
+    {
+        _behaviortreeRunner.tree = bt;
+        _behaviortreeRunner.tree.blackboard = _blackboard;
+        _behaviortreeRunner.Bind();
+    }
+
+    private void StartResetAllTriggers()
+    {
+        StartCoroutine(ResetAllTriggersAfterDelay());
+    }
+
+    private IEnumerator ResetAllTriggersAfterDelay()
+    {
+        _animator.SetTrigger("idle");
+
+        yield return new WaitForSeconds(1f);
+
+        ResetAllTriggers();
+    }
+
+    private void ResetAllTriggers()
+    {
+        // 애니메이터의 모든 파라미터를 가져옴
+        foreach (AnimatorControllerParameter parameter in _animator.parameters)
+        {
+            // 파라미터가 트리거일 경우 리셋
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _animator.ResetTrigger(parameter.name);
+            }
+        }
     }
 
     private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
