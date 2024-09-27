@@ -59,6 +59,7 @@ public class EffectManager : MonoBehaviour
     public float fadeTime = 0.3f;
 
     // 강화 검기 관련
+    public bool isSwordWave;
     [Range(0f, 200f)]
     public float enforceSlashSpeed = 30.0f;
     public float swordWaveSpeed = 20.0f;
@@ -388,19 +389,22 @@ public class EffectManager : MonoBehaviour
     // 검기 날리기
     public void SwordWave()
     {
-        GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
-        slsh.transform.position += new Vector3(0, 1f, 0);
-        slsh.transform.forward = player.transform.forward;
-        slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
-        var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
-        main.startSpeed = enforceSlashSpeed;
-        Destroy(slsh, 1.0f);
+        if (isSwordWave)
+        {
+            GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
+            slsh.transform.position += new Vector3(0, 1f, 0);
+            slsh.transform.forward = player.transform.forward;
+            slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
+            var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
+            main.startSpeed = enforceSlashSpeed;
+            Destroy(slsh, 1.0f);
 
-        GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
-        invislash.transform.position += new Vector3(0, 1f, 0);
-        invislash.transform.forward = player.transform.forward;
-        invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
-        StartCoroutine(MoveWaveCoroutine(invislash));
+            GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
+            invislash.transform.position += new Vector3(0, 1f, 0);
+            invislash.transform.forward = player.transform.forward;
+            invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
+            StartCoroutine(MoveWaveCoroutine(invislash));
+        }
     }
 
     IEnumerator MoveWaveCoroutine(GameObject proj)
