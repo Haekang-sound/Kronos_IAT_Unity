@@ -23,4 +23,9 @@ public class AbilityLevel
     {
         return Mathf.Min(currentPoint / nextNodeUnlockCondition, 1f);
     }
+
+    public bool IscCmpleted()
+    {
+        return currentPoint >= maxPoint;
+    }
 }
