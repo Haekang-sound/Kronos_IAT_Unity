@@ -515,6 +515,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 			effectManager.NormalSlashFX("Com_Attack");
 	}
 
+	public void DodgeSlash()
+	{
+		if (effectManager != null)
+			effectManager.DodgeAttack();
+	}
+
 	public void SwordAura()
 	{
 		if (effectManager != null)
@@ -545,7 +551,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void GroundScar()
 	{
 		if (effectManager != null)
-			effectManager.GroundScar();
+			effectManager.GroundScar("Nor04_Ground");
+	}
+
+	public void AbilitySlash()
+	{
+		if (effectManager != null)
+			effectManager.AbilitySlash();
+	}
+
+	public void AbilityScar()
+	{
+		if (effectManager != null)
+			effectManager.GroundScar("AbilityGroundScar");
 	}
 
 	public void SoundVoice()
