@@ -11,6 +11,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
     public AbilityLevel abilityLevel = new AbilityLevel();
 
+    public ImageGrayscale background;
+    public ImageGrayscale skillIcon;
+
     [SerializeField] public TMP_Text abilityName;
     [SerializeField] public TMP_Text description;
     [SerializeField] public TMP_Text subdescription;
@@ -60,6 +63,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Awake()
     {
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
+
+        //background.SetGrayscale(1f);
+        //skillIcon.SetGrayscale(1f);
     }
 
     private void OnEnable()
@@ -73,6 +79,10 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         button.onClick.AddListener(OnClickButton);
     }
 
+    //private void Update()
+    //{
+    //}
+
     private void OnDestroy()
     {
         button.onClick.RemoveListener(OnClickButton);
@@ -82,6 +92,11 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         //button.interactable = val;
         interactable = val;
+
+        if (interactable)
+        {
+            background.SetGrayscale(0f);
+        }
     }
 
     private void OnDisable()
@@ -89,6 +104,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         isFocaus = false;
         _virtualCam.Priority = 0;
     }
+
+    // =====
 
     public void FocusIn()
     {
@@ -141,6 +158,13 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         //abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
         abilityName.text = $"{abilityLevel.abilityName}";
+
+        // TEST
+        if (abilityLevel.currentPoint == 1)
+        {
+            skillIcon.SetGrayscale(0f);
+            background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
+        }
     }
 
     public bool Increment()
