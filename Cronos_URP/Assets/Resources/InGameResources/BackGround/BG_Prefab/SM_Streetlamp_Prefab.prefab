@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6d0980433a4d51648ac7f8ce959987f4, type: 2}
     - target: {fileID: 919132149155446097, guid: 3a1ad424c745ccb4f9c8b63ede6ad6b2, type: 3}
       propertyPath: m_Name
-      value: SM_Streetlamp
+      value: SM_Streetlamp_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 9146558330047081556, guid: 3a1ad424c745ccb4f9c8b63ede6ad6b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -63,5 +63,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6072391574331347817, guid: 3a1ad424c745ccb4f9c8b63ede6ad6b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 871921639446925617}
   m_SourcePrefab: {fileID: 100100000, guid: 3a1ad424c745ccb4f9c8b63ede6ad6b2, type: 3}
+--- !u!1 &7034863731768515137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6072391574331347817, guid: 3a1ad424c745ccb4f9c8b63ede6ad6b2, type: 3}
+  m_PrefabInstance: {fileID: 5339671857940461270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &871921639446925617
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034863731768515137}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.62, y: 4.267608, z: 0.60789526}
+  m_Center: {x: 0, y: 2.1350625, z: 0}
