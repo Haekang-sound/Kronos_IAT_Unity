@@ -24,6 +24,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private HitShake _hitShake;
     private Damageable _damageable;
+    private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
     private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
@@ -43,6 +44,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
         _damageable = GetComponent<Damageable>();
+        _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
@@ -59,6 +61,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _blackboard.target = target;
         //_blackboard.monobehaviour = gameObject;
+
+        controller.SetFollowNavmeshAgent(false);
+        controller.UseNavemeshAgentRotation(true);
     }
 
     //private void OnDisable()
@@ -110,7 +115,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
-    ///
+
     public void BossEightBeamCoroutine()
     {
         StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
@@ -160,6 +165,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void LookAtTarget()
     {
         if (target == null) return;
+        if (rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
@@ -196,7 +202,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        rotationSpeed = 1080f;
+        rotationSpeed = 100f;
     }
 
     public void StopAiming()
@@ -206,7 +212,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void ResetAiming()
     {
-        rotationSpeed = 1f;
+        rotationSpeed = 16f;
     }
 
     public void LightSpeedRushUpgrade()
@@ -229,6 +235,53 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         StartCoroutine(RushAfterSeconds(gameObject, 3f));
     }
+
+    public void AnimatorSetTrigger(string triggername)
+    {
+        _animator.SetTrigger(triggername);
+    }
+
+    public void BeginGroggy()
+    {
+        // 애니메이터의 모든 파라미터를 가져옴
+        foreach (AnimatorControllerParameter parameter in _animator.parameters)
+        {
+            // 파라미터가 트리거일 경우 리셋
+            if (parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _animator.ResetTrigger(parameter.name);
+            }
+        }
+
+        AnimatorSetTrigger("groggy");
+        _behaviortreeRunner.play = false;
+    }
+
+    public void EndGroggy()
+    {
+        AnimatorSetTrigger("idle");
+        
+        _groggyStack.ResetStack();
+        _behaviortreeRunner.play = true;
+
+        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        {
+            ChangePhase(phaseTree);
+            _onPhaseTree = true;
+        }
+        else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        {
+            ChangePhase(phaseTwo);
+            _onPhaseTwo = true;
+        }
+        else
+        {
+            ChangePhase(phaseOne);
+            _onPhaseOne = true;
+        }
+    }
+
+    // -----
 
     private IEnumerator RushAfterSeconds(GameObject gameObject, float seconds)
     {
