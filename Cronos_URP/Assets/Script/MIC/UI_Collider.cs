@@ -32,7 +32,7 @@ public class UI_Collider : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            UIManager.Instance.StartCoroutine(UIManager.Instance.ShowObjectiveUI());
+            UIManager.Instance.StartCoroutine(UIManager.Instance.AchieveSubObjective());
         }
     }
 }
