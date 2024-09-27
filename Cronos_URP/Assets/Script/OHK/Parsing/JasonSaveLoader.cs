@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -12,7 +11,7 @@ public class JasonSaveLoader : MonoBehaviour
 	public static List<InGameText> QuestTexts;
 
 	// Start is called before the first frame update
-	void Start()
+	public void Initialize()
 	{
 		// StreamReader를 사용하여 BOM을 무시하고 파일을 UTF-8로 읽기
 		string ScenefilePath = Application.dataPath + "/output/SceneName.json";

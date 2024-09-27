@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UI_Collider : MonoBehaviour
 {
-    int count = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +20,16 @@ public class UI_Collider : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            UIManager.Instance.StartCoroutine(UIManager.Instance.FadeRegionAlpha(count));
-            //Destroy(gameObject);
-            count++;
+            UIManager.Instance.StartCoroutine(UIManager.Instance.FadeRegionAlpha());
+            Destroy(gameObject);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "Player")
-        {
-            UIManager.Instance.StartCoroutine(UIManager.Instance.ShowObjectiveUI());
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.name == "Player")
+    //    {
+    //        UIManager.Instance.StartCoroutine(UIManager.Instance.AchieveSubObjective());
+    //    }
+    //}
 }

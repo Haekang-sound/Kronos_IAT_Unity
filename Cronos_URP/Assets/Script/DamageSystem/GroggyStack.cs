@@ -16,6 +16,9 @@ public class GroggyStack : MonoBehaviour
 
     public void AddStack()
     {
+        if (_isGroggy)
+            return;
+
         _currentStack++;
         Check();
     }
