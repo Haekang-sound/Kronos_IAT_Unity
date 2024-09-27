@@ -61,7 +61,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 _lastPressed.FocusOut();
             }
         }
-        else if (value.isFocaus == true)
+        else if (value.isFocaus == true && value.abilityLevel.IscCmpleted() == false)
         {
             if (value.interactable == false) return;
 

@@ -159,10 +159,10 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         //abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
         abilityName.text = $"{abilityLevel.abilityName}";
 
-        // TEST
         if (abilityLevel.currentPoint == 1)
         {
-            skillIcon.SetGrayscale(0f);
+            //skillIcon.SetGrayscale(0f);
+            skillIcon.StartGrayScaleRoutine();
             background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
         }
     }
