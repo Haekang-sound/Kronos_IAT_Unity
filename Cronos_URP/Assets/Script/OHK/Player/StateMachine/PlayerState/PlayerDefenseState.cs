@@ -8,10 +8,10 @@ public class PlayerDefenceState : PlayerBaseState
 	{
         stateMachine.AutoTargetting.Target = null;
         stateMachine.Rigidbody.velocity = Vector3.zero;
-
-        stateMachine.Player.BeginGuard();
+		Player.Instance._defnsible.isDefending = true;
+		Player.Instance._defnsible.onDefensFalse += DefenceFalse;
+		stateMachine.Player.BeginGuard();
         stateMachine.Player.BeginParry();
-        //stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
     }
 	public override void Tick()
     {
@@ -28,10 +28,19 @@ public class PlayerDefenceState : PlayerBaseState
 	public override void Exit()
     {
         stateMachine.Player.EndGuard();
-        //stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
-    }
+		Player.Instance._defnsible.isDefending = false;
+		Player.Instance._defnsible.onDefensFalse -= DefenceFalse;
+	}
     public void ReleaseGuard()
     {
         stateMachine.Animator.SetBool(guradHash, false);
-    }
+	}
+
+	public void DefenceFalse()
+	{
+		Debug.Log("데미지를 받아야하는");
+		stateMachine.Animator.SetBool(guradHash, false);
+		stateMachine.Animator.SetTrigger("Damaged");
+	}
+
 }

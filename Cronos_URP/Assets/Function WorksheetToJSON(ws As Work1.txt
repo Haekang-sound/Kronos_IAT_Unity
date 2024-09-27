@@ -1,0 +1,68 @@
+Function WorksheetToJSON(ws As Worksheet) As String
+    Dim json As String
+    Dim i As Integer, j As Integer
+    Dim cellValue As String
+    
+    json = "["
+    
+    For i = 2 To ws.UsedRange.Rows.Count ' 2번째 행부터 시작 (헤더 제외)
+        json = json & "{"
+        For j = 1 To ws.UsedRange.Columns.Count
+            cellValue = ws.Cells(i, j).Value
+            
+            ' 숫자인지 문자열인지 확인
+            If IsNumeric(cellValue) Then
+                json = json & """" & ws.Cells(1, j).Value & """: " & cellValue
+            Else
+                json = json & """" & ws.Cells(1, j).Value & """: """ & cellValue & """"
+            End If
+            
+            If j < ws.UsedRange.Columns.Count Then
+                json = json & ", "
+            End If
+        Next j
+        json = json & "}"
+        If i < ws.UsedRange.Rows.Count Then
+            json = json & ", "
+        End If
+    Next i
+    
+    json = json & "]"
+    
+    WorksheetToJSON = json
+End Function
+
+Sub ExportToJSON()
+    Dim json As String
+    Dim ws As Worksheet
+    Dim filePath As String
+    Dim stream As Object
+    
+    Set ws = ThisWorkbook.Sheets("LoadingText") ' 변환하고자 하는 시트 이름
+    
+    json = WorksheetToJSON(ws)
+    
+    ' 엑셀 파일이 있는 경로를 기준으로 상대 경로 설정
+    filePath = ThisWorkbook.Path & "\output\LoadingText.json"
+    
+    ' 폴더가 없는 경우 폴더 생성
+    If Dir(ThisWorkbook.Path & "\output", vbDirectory) = "" Then
+        MkDir ThisWorkbook.Path & "\output"
+    End If
+    
+    ' ADODB.Stream 객체를 사용하여 UTF-8 인코딩으로 파일 저장
+    Set stream = CreateObject("ADODB.Stream")
+    stream.Type = 2 ' 텍스트 스트림
+    stream.Charset = "utf-8" ' UTF-8 인코딩 설정
+    stream.Open
+    stream.WriteText json
+    stream.SaveToFile filePath, 2 ' 2는 파일 덮어쓰기
+    stream.Close
+    
+    MsgBox "JSON 파일이 성공적으로 UTF-8 인코딩으로 저장되었습니다.", vbInformation
+    
+End Sub
+
+Sub ExportToJSON_LoadingText()
+
+End Sub

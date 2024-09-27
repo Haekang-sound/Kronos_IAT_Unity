@@ -17,11 +17,21 @@ public class MeleeWeapon : MonoBehaviour
     public void BeginAttack()
     {
         simpleDamager?.gameObject.SetActive(true);
+
+        if (parryDamaer)
+        {
+            parryDamaer.inAttack = true;
+        }
     }
 
     public void EndAttack()
     {
         simpleDamager?.gameObject.SetActive(false);
+
+        if (parryDamaer)
+        {
+            parryDamaer.inAttack = false;
+        }
     }
 
     public void BeginCanBeParried()
