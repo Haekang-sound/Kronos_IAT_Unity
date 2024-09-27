@@ -7,11 +7,14 @@ public class SimpleDamager : MonoBehaviour
     public bool drawGizmos;
 
     public float damageAmount = 1;
-    public bool stopCamera = false;
+    public bool stopCamera;
 
     public LayerMask targetLayers;
 
     protected GameObject m_owner;
+    public bool inAttack;
+
+	public bool isAcitveSkill = false;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
@@ -31,6 +34,16 @@ public class SimpleDamager : MonoBehaviour
     }
 
     public void SetOwner(GameObject owner) => m_owner = owner;
+
+    public void BeginAttack()
+    {
+        inAttack = true;
+    }
+
+    public void EndAttack()
+    {
+        inAttack = false;
+    }
 
     private void Reset()
     {
@@ -53,6 +66,11 @@ public class SimpleDamager : MonoBehaviour
     public bool DamageCheck(Collider other)
     {
         var damageable = other.GetComponent<Damageable>();
+
+        if(!inAttack)
+        {
+            return false;
+        }
 
         if (damageable == null)
         {
@@ -79,6 +97,7 @@ public class SimpleDamager : MonoBehaviour
             msg.damageSource = m_owner.transform.position;
         }
 
+		msg.isActiveSkill = isAcitveSkill;
         damageable.ApplyDamage(msg);
         OnAttack.Invoke();
 
