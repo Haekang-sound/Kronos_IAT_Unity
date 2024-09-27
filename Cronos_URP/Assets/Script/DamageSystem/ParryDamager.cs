@@ -82,7 +82,7 @@ public class ParryDamager : SimpleDamager
                 Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
             }
             // Red - АјАн
-            else if (_inAttack == true)
+            else if (inAttack == true)
             {
                 Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
             }

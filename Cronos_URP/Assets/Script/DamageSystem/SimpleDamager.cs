@@ -12,7 +12,7 @@ public class SimpleDamager : MonoBehaviour
     public LayerMask targetLayers;
 
     protected GameObject m_owner;
-    public bool _inAttack;
+    public bool inAttack;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
@@ -35,12 +35,12 @@ public class SimpleDamager : MonoBehaviour
 
     public void BeginAttack()
     {
-        _inAttack = true;
+        inAttack = true;
     }
 
     public void EndAttack()
     {
-        _inAttack = false;
+        inAttack = false;
     }
 
     private void Reset()
@@ -65,7 +65,7 @@ public class SimpleDamager : MonoBehaviour
     {
         var damageable = other.GetComponent<Damageable>();
 
-        if(!_inAttack)
+        if(!inAttack)
         {
             return false;
         }
