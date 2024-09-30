@@ -84,6 +84,21 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void StartRegion()
+    {
+        StartCoroutine(FadeRegionAlpha());
+    }
+
+    public void StartMain()
+    {
+        StartCoroutine(AppearMainObjective());
+    }
+
+    public void ClearSub()
+    {
+        StartCoroutine(AchieveSubObjective());
+    }
+
     /// 지역이름 UI 애니메이션
     /// 새 지역으로 들어왔다면 이 코루틴을 호출
     public IEnumerator FadeRegionAlpha()
@@ -135,7 +150,7 @@ public class UIManager : MonoBehaviour
 
         // 첫 번째 목표는 여기서 띄우기
         yield return new WaitForSeconds(1.0f);
-        StartCoroutine(ShowObjectiveUI());
+        StartCoroutine(AppearMainObjective());
 
         // 다음 지역이름으로 인덱스 올리기
         sceneIdx++;
@@ -144,7 +159,7 @@ public class UIManager : MonoBehaviour
     /// 메인 목표 박스 UI 애니메이션
     /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
     /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
-    public IEnumerator ShowObjectiveUI()
+    public IEnumerator AppearMainObjective()
     {
         Debug.Log("Show Main objective UI");
 
@@ -267,6 +282,8 @@ public class UIManager : MonoBehaviour
         objectiveIdx++;
 
         // TODO: 다음 메인 목표 띄우기. 필요하다면
+        if (objectiveIdx == 1)
+            StartCoroutine(AppearMainObjective());
     }
 
 }
