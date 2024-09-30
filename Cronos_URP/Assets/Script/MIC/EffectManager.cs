@@ -33,7 +33,7 @@ public class EffectManager : MonoBehaviour
     // 플레이어 관련
     [SerializeField]
     Player player;
-    GameObject pSword;
+    public GameObject pSword;
 
     SoundManager soundManager;
 
@@ -303,17 +303,36 @@ public class EffectManager : MonoBehaviour
     }
 
     // 강화 오라 활성화
-    // 보스 칼 테스트중
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
-        //BossFiveSpear(player.transform);
-        //BossMoon(player.transform);
     }
 
     public void SwordAuraOff()
     {
         swordAura.SetActive(false);
+    }
+
+    // 구르기 공격
+    public void DodgeAttack()
+    {
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject dttack = SpawnEffect("DodgeAttack", player.transform.position);
+        float newY = player.playerSword.transform.position.y;
+        dttack.transform.position = new Vector3(dttack.transform.position.x, newY, dttack.transform.position.z);
+        dttack.transform.forward = player.transform.forward;
+        Destroy(dttack, 4.0f);
+    }
+
+    // 어빌리티 공격 1
+    public void AbilitySlash()
+    {
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject aSlash = SpawnEffect("AbilitySlash", player.transform.position);
+        aSlash.transform.rotation = player.playerSword.transform.rotation;
+        float newY = player.playerSword.transform.position.y;
+        aSlash.transform.position = new Vector3(aSlash.transform.position.x, newY, aSlash.transform.position.z);
+        Destroy(aSlash, 2.0f);
     }
 
     // 일단 맨땅에 이펙트 만들기
@@ -362,21 +381,24 @@ public class EffectManager : MonoBehaviour
     }
 
     // 바닥에 상처만 남기는 Nor_Attack_4 전용
-    public void GroundScar()
+    // 이었는데 이제 능력개방에서도 써서 변수 받아야됨
+    public void GroundScar(string name)
     {
+        Debug.Log("땅 체크 시작");
         Vector3 rayTrans = player.transform.position +
             pSword.transform.up * -1 * forwardVal +
             new Vector3(0, yUpVal, 0);
         Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
+            Debug.Log("땅이랑 찾았다");
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
             // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
             Quaternion fxRot = Quaternion.LookRotation(
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
-            GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
+            GameObject impact = SpawnEffect(name, hitPoint, fxRot);
 
             Destroy(impact, 2.0f);
         }

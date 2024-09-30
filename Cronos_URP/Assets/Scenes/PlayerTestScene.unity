@@ -3204,6 +3204,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: maxHitPoints
+      value: 352.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8751960732937434445, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -3892,17 +3896,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5432976119440392353, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 3810427998169931925}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
---- !u!1 &1106288472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2872080032776972083, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
-  m_PrefabInstance: {fileID: 1076232116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1128336881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4470,11 +4466,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &1504677218 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5432976119440392353, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
-  m_PrefabInstance: {fileID: 1076232116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1605627867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8828972337593751634, guid: b36d2b9da18d9b74cb349685c6f5c3ea, type: 3}
@@ -5294,31 +5285,22 @@ PrefabInstance:
       addedObject: {fileID: 2031164420}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ee319622ff1152429f9de99628f6bdc, type: 3}
---- !u!224 &3810427998169931925 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8735469401117567972, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
-  m_PrefabInstance: {fileID: 6005087903172128695}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6005087903172128695
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1504677218}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 519902407162873035, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
       propertyPath: m_Name
       value: BossStatus
       objectReference: {fileID: 0}
-    - target: {fileID: 7200030521887851489, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c280ddaab90cde6489f84752808be017, type: 3}
     - target: {fileID: 8474292484803768489, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
-      propertyPath: CpHolder
-      value: 
-      objectReference: {fileID: 1106288472}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8710919995566035550, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5450,4 +5432,5 @@ SceneRoots:
   - {fileID: 1253779407}
   - {fileID: 282348799}
   - {fileID: 1076232116}
+  - {fileID: 6005087903172128695}
   - {fileID: 860154135}
