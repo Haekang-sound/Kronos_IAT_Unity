@@ -52,8 +52,11 @@ public struct AbilityUsageInfo
 
 	/// 민동휘
 	//Com_S_Attack 강 공격 강화
+	public bool comSAttackUpgrade;
 
-	/// 김주영
-	//Nor_S_Attack 강 공격 강화
-	//공격 스택
+    /// 김주영
+    //Nor_S_Attack 강 공격 강화
+    public bool norSAttackUpgrade;
+    //공격 스택
+    public bool attackStack;
 }
