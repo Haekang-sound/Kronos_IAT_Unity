@@ -45,7 +45,7 @@ public class EffectManager : MonoBehaviour
 
     // 글로벌 볼륨
     [SerializeField]
-    Volume gVolume;
+    Volume eVolume;
     MotionBlur mBlur;
     ChromaticAberration cAber;
     DepthOfField dOF;
@@ -144,11 +144,15 @@ public class EffectManager : MonoBehaviour
         {
             pSword = player.GetComponent<Player>().playerSword;
         }
-        if (gVolume == null)
-            gVolume = FindObjectOfType<Volume>();
+        if (eVolume == null)
+        {
+            // 비용이 크다지만 알빠냐
+            GameObject eVol = GameObject.Find("Effect Volume");
+            eVolume = eVol.GetComponent<Volume>();
+        }
 
-        if (gVolume != null)
-            InitializeVol(gVolume);
+        if (eVolume != null)
+            InitializeVol(eVolume);
         groundLayer = LayerMask.GetMask("Ground");
 
         if (invisibleSlash != null)
@@ -486,7 +490,7 @@ public class EffectManager : MonoBehaviour
         Destroy(parr, 1.0f);
         CreateGuardFX();
         // 글로벌볼륨이 없다면 나가
-        if (gVolume == null)
+        if (eVolume == null)
             return;
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
         StartCoroutine(ParryCAberrationCoroutine(cAberVal));

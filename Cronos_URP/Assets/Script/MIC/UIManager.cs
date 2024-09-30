@@ -78,6 +78,7 @@ public class UIManager : MonoBehaviour
 
     void InitialzeJSON()
     {
+        Debug.Log("Initializing Json Loader");
         JasonSaveLoader loader = new JasonSaveLoader();
         loader.Initialize();
     }

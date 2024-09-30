@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UI_Collider : MonoBehaviour
 {
+    public GameObject LoaderUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class UI_Collider : MonoBehaviour
             UIManager.Instance.StartCoroutine(UIManager.Instance.FadeRegionAlpha());
             Destroy(gameObject);
         }
+
     }
 
     //private void OnTriggerExit(Collider other)
