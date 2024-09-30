@@ -33,10 +33,23 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	//	CP 폭발 - Mov_TimeBomb
 	public void Mov_TimeBomb()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("CPBoomb", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool("isCPBoomb", true);
 	}
 	//	시간 정지 - Mov_TimeStop
+	public void Mov_TimeStop()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("TimeStop", true);
+	}
+	// 격렬한 강타 - Com_AbilityAttack
+	public void Com_AbilityAttack()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", true);
+	}
 	// 격렬한 일격 - Nor_AbilityAttack
+	public void Nor_AbilityAttack()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", true);
+	}
 
 
 
