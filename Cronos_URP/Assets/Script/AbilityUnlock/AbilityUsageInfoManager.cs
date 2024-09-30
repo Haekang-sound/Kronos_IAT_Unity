@@ -38,7 +38,7 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	//	시간 정지 - Mov_TimeStop
 	public void Mov_TimeStop()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("TimeStop", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool("isTimeStop", true);
 	}
 	// 격렬한 강타 - Com_AbilityAttack
 	public void Com_AbilityAttack()

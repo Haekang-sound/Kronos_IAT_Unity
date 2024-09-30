@@ -60,8 +60,8 @@ public class UIManager : MonoBehaviour
     public int sceneIdx = 0;
     public int objectiveIdx = 0;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         regionNameObj.SetActive(false);
         objectiveMainObj.SetActive(false);
@@ -74,8 +74,8 @@ public class UIManager : MonoBehaviour
     void InitialzeJSON()
     {
         Debug.Log("Initializing Json Loader");
-        JasonSaveLoader loader = new JasonSaveLoader();
-        loader.Initialize();
+         JasonSaveLoader loader = new JasonSaveLoader();
+         loader.Initialize();
     }
 
     // Update is called once per frame

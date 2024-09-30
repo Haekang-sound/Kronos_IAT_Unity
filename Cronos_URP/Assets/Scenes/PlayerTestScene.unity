@@ -607,25 +607,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 380184042161885060, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: defaultDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2742764849260958128, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
       propertyPath: m_Name
       value: PlayerCam
-      objectReference: {fileID: 0}
-    - target: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4173196648517120406, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
       propertyPath: m_Follow
@@ -635,10 +619,6 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1891516020}
-    - target: {fileID: 5420370260629162410, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7187067325126008650, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -232.551
@@ -679,41 +659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7937186651005419037, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_XDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7937186651005419037, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_YDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7937186651005419037, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_ZDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613087760079446216, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_IgnoreTag
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613087760079446216, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_CollideAgainst.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613087760079446216, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_TransparentLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613087760079446216, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      propertyPath: m_MinimumDistanceFromTarget
-      value: 0.01
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 457380340}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
 --- !u!4 &244900980 stripped
 Transform:
@@ -1568,45 +1517,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &457380337 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3254932898238186301, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
-  m_PrefabInstance: {fileID: 165154572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &457380338 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4173196648517120406, guid: 8ab477a64edd8d449a48aed261f3cfcd, type: 3}
   m_PrefabInstance: {fileID: 165154572}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457380337}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &457380340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457380337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ApplyAfter: 2
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseCameraSpace: 1
-  m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_Duration: 1
-    m_NoiseOffsets: {x: -471.56467, y: -937.1918, z: -55.887573}
 --- !u!1 &459053187
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,29 +4312,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4142318409313593855, guid: d1601210491435547abb8c577b3e9203, type: 3}
-      propertyPath: m_Cameras.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4142318409313593855, guid: d1601210491435547abb8c577b3e9203, type: 3}
       propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 801736225}
-    - target: {fileID: 5087062709508721841, guid: d1601210491435547abb8c577b3e9203, type: 3}
-      propertyPath: field of view
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087062709508721841, guid: d1601210491435547abb8c577b3e9203, type: 3}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087062709508721841, guid: d1601210491435547abb8c577b3e9203, type: 3}
-      propertyPath: near clip plane
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087062709508721841, guid: d1601210491435547abb8c577b3e9203, type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6796443819418518301, guid: d1601210491435547abb8c577b3e9203, type: 3}
       propertyPath: m_Name
       value: Main Camera
