@@ -395,7 +395,7 @@ public class EffectManager : MonoBehaviour
         Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
-            Debug.Log("범위에 땅이 았다");
+            Debug.Log("범위에 땅이 있다");
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
             // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
