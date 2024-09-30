@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class UI_Collider : MonoBehaviour
 {
-    public GameObject LoaderUI;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // 가장 간단한 콜라이더로 목표UI를 띄우는 방법
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player")
@@ -27,12 +14,4 @@ public class UI_Collider : MonoBehaviour
         }
 
     }
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.name == "Player")
-    //    {
-    //        UIManager.Instance.StartCoroutine(UIManager.Instance.AchieveSubObjective());
-    //    }
-    //}
 }

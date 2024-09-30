@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -70,10 +69,6 @@ public class UIManager : MonoBehaviour
 
         InitialzeJSON();
 
-        
-        //regionNames.Add("시간의 그늘 빈민가");
-        //regionNames.Add("질서의 거리");
-        //regionNames.Add("멈추지 않는 시간의 광장");
     }
 
     void InitialzeJSON()
@@ -89,7 +84,8 @@ public class UIManager : MonoBehaviour
         
     }
 
-    // 지역이름 UI 애니메이션
+    /// 지역이름 UI 애니메이션
+    /// 새 지역으로 들어왔다면 이 코루틴을 호출
     public IEnumerator FadeRegionAlpha()
     {
         Debug.Log("Begin Coroutine");
@@ -145,7 +141,9 @@ public class UIManager : MonoBehaviour
         sceneIdx++;
     }
 
-    // 메인 목표 박스 UI 애니메이션
+    /// 메인 목표 박스 UI 애니메이션
+    /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
+    /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
     public IEnumerator ShowObjectiveUI()
     {
         Debug.Log("Show Main objective UI");
@@ -207,7 +205,9 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // 서브 목표 UI 띄우기
+    /// 서브 목표 UI 띄우기
+    /// 얘는 메인 목표가 나오면 무조건 호출된다.
+    /// 단독으로 쓰일 일은 거의 없을 것 같다.
     public IEnumerator AppearSubObjective()
     {
         Debug.Log("Show sub objective UI");
@@ -228,7 +228,8 @@ public class UIManager : MonoBehaviour
         subText.GetComponent <CanvasGroup>().alpha = 1.0f;
     }
 
-    // 목표 달성하면 서브 UI 띠용하고 지우기
+    /// 목표 달성하면 서브 UI 띠용하고 지우기
+    /// 끝나고 자동으로 다음 메인 목표를 띄워야 할 수도 있다.
     public IEnumerator AchieveSubObjective()
     {
         Debug.Log("Achieve sub objective UI");
