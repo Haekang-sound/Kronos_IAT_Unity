@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
@@ -28,6 +29,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private CinemachineVirtualCamera _virtualCam;
     private IObserver<AbilityNode> _observer;
+    private VideoPlayer _videoPlayer;
 
     public UnityEvent OnUpdated;
 
@@ -63,6 +65,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Awake()
     {
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
+        _videoPlayer = GetComponentInChildren<VideoPlayer>();
+        _videoPlayer?.Pause();
+
 
         //background.SetGrayscale(1f);
         //skillIcon.SetGrayscale(1f);
@@ -112,6 +117,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         StartCoroutine(SetFocausAfter(true, 2));
         _virtualCam.Priority = 10;
         fadeUI.StartFadeIn(1.4f);
+        _videoPlayer.time = 0;
+        _videoPlayer?.Play();
     }
 
     public void FocusOut()
@@ -119,6 +126,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         StartCoroutine(SetFocausAfter(false, 2));
         _virtualCam.Priority = 0;
         fadeUI.StartFadeOut(1.0f);
+        _videoPlayer?.Pause();
     }
 
     public void InitRender()
@@ -164,6 +172,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
             //skillIcon.SetGrayscale(0f);
             skillIcon.StartGrayScaleRoutine();
             background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
+            background.GetComponent<RotateUI>().active = true;
         }
     }
 
