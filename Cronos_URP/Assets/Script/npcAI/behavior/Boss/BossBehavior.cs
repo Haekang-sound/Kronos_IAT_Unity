@@ -49,6 +49,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
+
+		if (target == null)
+			target = Player.Instance.gameObject;
     }
 
     //void Start()

@@ -8,7 +8,7 @@ public class GroggyStack : MonoBehaviour
     public UnityEvent OnMaxStack;
 
     [SerializeField]
-    private int _currentStack;
+	public int _currentStack;
     [SerializeField]
     private bool _isGroggy;
 
