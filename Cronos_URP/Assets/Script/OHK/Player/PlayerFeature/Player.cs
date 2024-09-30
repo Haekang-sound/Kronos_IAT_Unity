@@ -165,6 +165,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 		targetting = GetComponentInChildren<AutoTargetting>();
+
+		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
 	}
 
 	void Start()

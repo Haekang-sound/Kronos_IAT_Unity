@@ -9,7 +9,7 @@ public class ParryDamager : SimpleDamager
     private bool _isParrying;
     private bool _canBeParryied;
 
-    public UnityEvent beParryied, parrying;
+	public UnityEvent beParryied, parrying;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -65,7 +65,7 @@ public class ParryDamager : SimpleDamager
         }
 
         beParryied.Invoke();
-        otherParryDamager.parrying.Invoke();
+        otherParryDamager.parrying?.Invoke();
 
         return true;
     }

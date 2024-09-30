@@ -116,7 +116,9 @@ public class SceneController : MonoBehaviour
 
         //PersistentDataManager.ClearPersisters();
 
-        yield return SceneManager.LoadSceneAsync(newSceneName);
+        /// 새 로딩 씬 테스트중
+        //yield return SceneManager.LoadSceneAsync(newSceneName);
+        yield return SceneLoader.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(newSceneName));
 
         //m_playerInput = FindObjectOfType<PlayerInput>();
 
