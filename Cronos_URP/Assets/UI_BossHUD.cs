@@ -15,9 +15,10 @@ public class UI_BossHUD : MonoBehaviour
 	[SerializeField]
 	[Range(0, 1)] float GroggyProgress = 0f;
 	[SerializeField]
-	Image circleImageCP;
+	Image circleImageCPL;
 	[SerializeField]
-	GameObject CpHolder;
+	Image circleImageCPR;
+
 
 
 	// ui 움직이는 시간
@@ -51,8 +52,8 @@ public class UI_BossHUD : MonoBehaviour
 		MaxGroggyPoint = BossGroggyStack.maxStack;
 		groggyPoint = BossGroggyStack._currentStack;
 		GroggyProgress = groggyPoint / MaxGroggyPoint;
-		circleImageCP.fillAmount = GroggyProgress;
-		CpHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 0, GroggyProgress * -360));
+		circleImageCPL.fillAmount = GroggyProgress;
+		circleImageCPR.fillAmount = GroggyProgress;
 	}
 
 
