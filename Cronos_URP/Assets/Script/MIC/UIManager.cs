@@ -1,10 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+	private List<string> sceneName;
+	
+	private List<string> Quest;
+
     private static UIManager instance;
     // Get하는 프로퍼티
     public static UIManager Instance
@@ -63,19 +68,24 @@ public class UIManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        regionNameObj.SetActive(false);
+		//sceneName.Add("시간의 그림자 빈민가");
+		
+		//Quest.Add("전방의 경계 중인 경비병들을 처치");
+		//Quest.Add("TAB 키를 눌러 운명의 톱니로 진입해 능력을 개방하기");
+
+		regionNameObj.SetActive(false);
         objectiveMainObj.SetActive(false);
         objectiveSubObj.SetActive(false);
 
-        InitialzeJSON();
+        //InitialzeJSON();
 
     }
 
     void InitialzeJSON()
     {
-        Debug.Log("Initializing Json Loader");
-         JasonSaveLoader loader = new JasonSaveLoader();
-         loader.Initialize();
+//         Debug.Log("Initializing Json Loader");
+//          JasonSaveLoader loader = new JasonSaveLoader();
+//          loader.Initialize();
     }
 
     // Update is called once per frame
@@ -108,8 +118,9 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(true);
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        /// 제이슨 로드하고 텍스트 뽑기
-        regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		/// 제이슨 로드하고 텍스트 뽑기
+		//regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		//regionText.text = sceneName[sceneIdx];
 
         float elapsedTime = 0.0f;
         // 배경 페이드
@@ -165,7 +176,8 @@ public class UIManager : MonoBehaviour
 
         objectiveMainObj.SetActive(true);
         mainText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//mainText.text = Quest[objectiveIdx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -228,7 +240,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("Show sub objective UI");
         objectiveSubObj.SetActive(true);
         subText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//subText.text = Quest[objectiveIdx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -282,8 +295,8 @@ public class UIManager : MonoBehaviour
         objectiveIdx++;
 
         // TODO: 다음 메인 목표 띄우기. 필요하다면
-        if (objectiveIdx == 1)
-            StartCoroutine(AppearMainObjective());
+//         if (objectiveIdx == 1)
+//             StartCoroutine(AppearMainObjective());
     }
 
 }
