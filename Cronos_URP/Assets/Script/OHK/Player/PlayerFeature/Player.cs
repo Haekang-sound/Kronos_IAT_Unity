@@ -247,6 +247,26 @@ public class Player : MonoBehaviour, IMessageReceiver
 			SetCursorInactive();
 		}
 
+		// 능력개방치트
+		if (Input.GetKeyDown(KeyCode.Alpha0))
+		{
+			PlayerFSM.Animator.SetBool("isCPBoomb", true);
+			PlayerFSM.Animator.SetBool("isTimeStop", true);
+			PlayerFSM.Animator.SetBool("ComAttackVariation", true);
+			PlayerFSM.Animator.SetBool("NorAttackVariation", true);
+			PlayerFSM.Animator.SetBool("DodgeAttack", true);
+			PlayerFSM.Animator.SetBool("EnforcedCombo", true);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha9))
+		{
+			PlayerFSM.Animator.SetBool("isCPBoomb", false);
+			PlayerFSM.Animator.SetBool("isTimeStop", false);
+			PlayerFSM.Animator.SetBool("ComAttackVariation", false);
+			PlayerFSM.Animator.SetBool("NorAttackVariation", false);
+			PlayerFSM.Animator.SetBool("DodgeAttack", false);
+			PlayerFSM.Animator.SetBool("EnforcedCombo", false);
+		}
+
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 		// 실시간으로 TP 감소
