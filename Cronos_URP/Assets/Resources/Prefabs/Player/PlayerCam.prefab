@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 380184042161885060}
   - component: {fileID: 8590422002447952834}
   - component: {fileID: 4368324374380347894}
+  - component: {fileID: 5930203081851054669}
   m_Layer: 0
   m_Name: PlayerCam
   m_TagString: Untagged
@@ -263,7 +264,7 @@ MonoBehaviour:
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
+  m_MinimumDistanceFromTarget: 0.01
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
@@ -286,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ef9154606f88b4386053f0aeaff472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDistance: 2.5
+  defaultDistance: 3
   minimumDistance: 2.5
   maximumDistance: 2.5
   smoothing: 6
@@ -327,3 +328,26 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: -951.0796, y: 875.0734, z: -53.1279}
+--- !u!114 &5930203081851054669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254932898238186301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: -471.56467, y: -937.1918, z: -55.887573}

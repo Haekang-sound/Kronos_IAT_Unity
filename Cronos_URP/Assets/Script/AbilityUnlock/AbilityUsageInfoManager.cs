@@ -6,54 +6,81 @@ public class AbilityUsageInfoManager : MonoBehaviour
 {
     private AbilityUsageInfo abilityUsageInfo;
 
-    public void UseEnforcedCombo()
+	//콤보 강화
+	public void UseEnforcedCombo()
     {
         abilityUsageInfo.EnforcedCombo = true;
     }
 
-    public void UseDodgeAttack()
+	//회피 공격 == 돌진 공격
+	public void UseDodgeAttack()
     {
         abilityUsageInfo.DodgeAttack = true;
     }
 
-    public void UseAttackBan()
-    {
-        abilityUsageInfo.ComAttackBan = true;
-    }
+	//심판의 일섬 - Com_S_Attack_Aura
+	public void Com_S_Attack_Aura()
+	{
+		EffectManager.Instance.isSwordWave = true;
+	}
 
-    public void UseNorAttackBan()
-    {
-        abilityUsageInfo.NorAttackBan = true;
-    }
+	//심판의 일격 - Com_S_Attack_Ground
+	public void Com_S_Attack_Ground()
+	{
+		EffectManager.Instance.isGroundEnforced = true;
+	}
 
-    public void UseRigidImmunity()
+	//	CP 폭발 - Mov_TimeBomb
+	public void Mov_TimeBomb()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("isCPBoomb", true);
+	}
+	//	시간 정지 - Mov_TimeStop
+	public void Mov_TimeStop()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("isTimeStop", true);
+	}
+	// 격렬한 강타 - Com_AbilityAttack
+	public void Com_AbilityAttack()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", true);
+	}
+	// 격렬한 일격 - Nor_AbilityAttack
+	public void Nor_AbilityAttack()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", true);
+	}
+
+
+
+	//경직 면역
+	public void UseRigidImmunity()
     {
         abilityUsageInfo.RigidImmunity = true;
     }
 
-    public void UseNorAttackVariation()
+	// Nor_Attack 변환
+	public void UseNorAttackVariation()
     {
         abilityUsageInfo.NorAttackVariation = true;
     }
 
-    public void UseComAttackVariation()
+	// Com_Attack 변환
+	public void UseComAttackVariation()
     {
         abilityUsageInfo.ComAttackVariation = true;
     }
 
-    public void UseComSAttackUpgrade()
+	//Com_S_Attack 강 공격 강화
+	public void UseComSAttackUpgrade()
     {
         abilityUsageInfo.comSAttackUpgrade = true;
     }
 
-    public void UseNorSAttackUpgrade()
+	//Nor_S_Attack 강 공격 강화
+	public void UseNorSAttackUpgrade()
     {
         abilityUsageInfo.norSAttackUpgrade = true;
-    }
-
-    public void UseAttackStack()
-    {
-        abilityUsageInfo.attackStack = true;
     }
 
 }
