@@ -16,6 +16,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     public CanvasGroup canvasGroup;
     public CinemachineVirtualCamera mainVirtualCam;
 
+    public bool useParser;
+
     private bool isFocaus;
     private List<AbilityNode> _abilityNodes;
 
@@ -29,8 +31,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private bool _isTransition;
 
     public UnityEvent OnEnter;
-
-    private Animator _animator;
 
     // IObserver /////////////////////////////////////////////////////////////
 
@@ -61,7 +61,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 _lastPressed.FocusOut();
             }
         }
-        else if (value.isFocaus == true)
+        else if (value.isFocaus == true && value.abilityLevel.IscCmpleted() == false)
         {
             if (value.interactable == false) return;
 
@@ -95,8 +95,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-
         // 구독자 구독
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
         _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
@@ -117,14 +115,18 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     private void OnEnable()
     {
-        rootAbilityNode.SetInteractable(true);
         canvasGroup.alpha = 0f;
     }
 
     private void Start()
     {
-        LoadAbilityLevelData();
-        InitChildNodeDatas();
+        rootAbilityNode.SetInteractable(true);
+
+        if (useParser)
+        {
+            LoadAbilityLevelData();
+            InitChildNodeDatas();
+        }
     }
 
     public void Update()
@@ -210,8 +212,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         SetPlayerCamPriority(0);
         canvasGroup.alpha = 1f;
 
-        _animator.SetTrigger("enter");
-
         yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
         while (ScreenFader.IsFading)
@@ -239,7 +239,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         canvasGroup.alpha = 0f;
         SetEnabledButtons(false);
 
-        SaveUserData();
+        if (useParser)
+        {
+            SaveUserData();
+        }
 
         yield return StartCoroutine(ScreenFader.FadeSceneIn());
 

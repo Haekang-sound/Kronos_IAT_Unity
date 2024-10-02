@@ -43,20 +43,20 @@ class MonsterManager : MonoBehaviour
 
     private void Update()
     {
-        /// 임시함수
-        if (Input.GetKeyUp(KeyCode.Equals))
-        {
-            CreateMonster();
-        }
-        if (Input.GetKeyUp(KeyCode.Backspace))
-        {
-            DeleteMonster();
-        }
-
-		if (Input.GetKeyUp(KeyCode.Alpha0))
-		{
-			CreatePlayer();
-		}
+//         /// 임시함수
+//         if (Input.GetKeyUp(KeyCode.Equals))
+//         {
+//             CreateMonster();
+//         }
+//         if (Input.GetKeyUp(KeyCode.Backspace))
+//         {
+//             DeleteMonster();
+//         }
+// 
+// 		if (Input.GetKeyUp(KeyCode.Alpha0))
+// 		{
+// 			CreatePlayer();
+// 		}
 	}
 
 

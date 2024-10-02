@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+	private List<string> sceneName;
+	
+	private List<string> Quest;
+
     private static UIManager instance;
     // Get하는 프로퍼티
     public static UIManager Instance
@@ -61,25 +65,27 @@ public class UIManager : MonoBehaviour
     public int sceneIdx = 0;
     public int objectiveIdx = 0;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
-        regionNameObj.SetActive(false);
+		//sceneName.Add("시간의 그림자 빈민가");
+		
+		//Quest.Add("전방의 경계 중인 경비병들을 처치");
+		//Quest.Add("TAB 키를 눌러 운명의 톱니로 진입해 능력을 개방하기");
+
+		regionNameObj.SetActive(false);
         objectiveMainObj.SetActive(false);
         objectiveSubObj.SetActive(false);
 
-        InitialzeJSON();
+        //InitialzeJSON();
 
-        
-        //regionNames.Add("시간의 그늘 빈민가");
-        //regionNames.Add("질서의 거리");
-        //regionNames.Add("멈추지 않는 시간의 광장");
     }
 
     void InitialzeJSON()
     {
-        JasonSaveLoader loader = new JasonSaveLoader();
-        loader.Initialize();
+//         Debug.Log("Initializing Json Loader");
+//          JasonSaveLoader loader = new JasonSaveLoader();
+//          loader.Initialize();
     }
 
     // Update is called once per frame
@@ -88,7 +94,23 @@ public class UIManager : MonoBehaviour
         
     }
 
-    // 지역이름 UI 애니메이션
+    public void StartRegion()
+    {
+        StartCoroutine(FadeRegionAlpha());
+    }
+
+    public void StartMain()
+    {
+        StartCoroutine(AppearMainObjective());
+    }
+
+    public void ClearSub()
+    {
+        StartCoroutine(AchieveSubObjective());
+    }
+
+    /// 지역이름 UI 애니메이션
+    /// 새 지역으로 들어왔다면 이 코루틴을 호출
     public IEnumerator FadeRegionAlpha()
     {
         Debug.Log("Begin Coroutine");
@@ -96,8 +118,9 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(true);
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        /// 제이슨 로드하고 텍스트 뽑기
-        regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		/// 제이슨 로드하고 텍스트 뽑기
+		//regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		//regionText.text = sceneName[sceneIdx];
 
         float elapsedTime = 0.0f;
         // 배경 페이드
@@ -138,20 +161,23 @@ public class UIManager : MonoBehaviour
 
         // 첫 번째 목표는 여기서 띄우기
         yield return new WaitForSeconds(1.0f);
-        StartCoroutine(ShowObjectiveUI());
+        StartCoroutine(AppearMainObjective());
 
         // 다음 지역이름으로 인덱스 올리기
         sceneIdx++;
     }
 
-    // 메인 목표 박스 UI 애니메이션
-    public IEnumerator ShowObjectiveUI()
+    /// 메인 목표 박스 UI 애니메이션
+    /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
+    /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
+    public IEnumerator AppearMainObjective()
     {
         Debug.Log("Show Main objective UI");
 
         objectiveMainObj.SetActive(true);
         mainText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//mainText.text = Quest[objectiveIdx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -206,13 +232,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // 서브 목표 UI 띄우기
+    /// 서브 목표 UI 띄우기
+    /// 얘는 메인 목표가 나오면 무조건 호출된다.
+    /// 단독으로 쓰일 일은 거의 없을 것 같다.
     public IEnumerator AppearSubObjective()
     {
         Debug.Log("Show sub objective UI");
         objectiveSubObj.SetActive(true);
         subText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//subText.text = Quest[objectiveIdx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -227,7 +256,8 @@ public class UIManager : MonoBehaviour
         subText.GetComponent <CanvasGroup>().alpha = 1.0f;
     }
 
-    // 목표 달성하면 서브 UI 띠용하고 지우기
+    /// 목표 달성하면 서브 UI 띠용하고 지우기
+    /// 끝나고 자동으로 다음 메인 목표를 띄워야 할 수도 있다.
     public IEnumerator AchieveSubObjective()
     {
         Debug.Log("Achieve sub objective UI");
@@ -265,6 +295,8 @@ public class UIManager : MonoBehaviour
         objectiveIdx++;
 
         // TODO: 다음 메인 목표 띄우기. 필요하다면
+//         if (objectiveIdx == 1)
+//             StartCoroutine(AppearMainObjective());
     }
 
 }
