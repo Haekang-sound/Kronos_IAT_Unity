@@ -236,6 +236,7 @@ public class AutoTargetting : MonoBehaviour
 		// 몬스터리스트가 없거나 사이즈가 0이라면 false
 		if (MonsterList == null || MonsterList.Count == 0)
 		{
+			Debug.Log("몬스터리스트업ㄴㅅ음");
 			Target = null;
 			return false;
 		}
