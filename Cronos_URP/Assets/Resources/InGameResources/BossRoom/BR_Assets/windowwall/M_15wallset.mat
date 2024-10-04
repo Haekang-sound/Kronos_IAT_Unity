@@ -11,21 +11,27 @@ Material:
   m_Shader: {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _MASKMAP
+  - _NORMALMAP
+  - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+  - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 12d0b8cece15a6145aeb97b4fae3c709, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6a04bc3b58e6b634db26da8dbf6253e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -69,11 +75,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 12d0b8cece15a6145aeb97b4fae3c709, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6a04bc3b58e6b634db26da8dbf6253e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 5363371ef0f4ee94eaa822f55946c287, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0b37667525437d4498df368b6c2e27fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -81,7 +87,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: a68fa085ce85bf544a072d2f98f05149, type: 3}
+        m_Texture: {fileID: 2800000, guid: b4f2b788254b4ae4fa4bbdf78c21ad6d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -191,7 +197,7 @@ Material:
     - _InvTilingScale: 1
     - _Ior: 0
     - _Metallic: 0
-    - _MetallicRemapMax: 1
+    - _MetallicRemapMax: 0.71842647
     - _MetallicRemapMin: 0
     - _NormalScale: 1
     - _OcclusionStrength: 1
@@ -216,7 +222,7 @@ Material:
     - _RefractionEnable: 0
     - _RefractionShadowAttenuation: 1
     - _Smoothness: 0.5
-    - _SmoothnessRemapMax: 1
+    - _SmoothnessRemapMax: 0.7515528
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
