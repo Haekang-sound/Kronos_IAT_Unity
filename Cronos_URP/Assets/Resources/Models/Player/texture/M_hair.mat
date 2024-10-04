@@ -8,26 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_hair
-  m_Shader: {fileID: 4800000, guid: 0f9feef2b9c4b1e46965a69de0f18176, type: 3}
+  m_Shader: {fileID: 4800000, guid: 73658638743c1bf49aa03b002fac2cbf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
-  - _ALPHATEST_ON
-  - _AO_MAP
-  - _DOUBLESIDED_ON
-  - _NORMALMAP
-  - _SHADOW_CUTOFF
-  - _SMOOTHNESS_MASK
-  - _STATICSPECULARHIGHLIGHT_ON
-  - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _USEHASHING_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3002
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_LockedProperties: 
@@ -90,6 +81,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TanNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -113,6 +108,9 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaToMask: 0
+    - _AnisoRot: 0.25
+    - _AnisotropicFrequency: 1
+    - _AnisotropicRoughness: 0.25
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -135,8 +133,10 @@ Material:
     - _NormalScale: 1.28
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _PrimaryShift: 0.5
     - _QueueOffset: 2
     - _ReceiveShadows: 1
+    - _SecondaryShift: -0.5
     - _SecondarySpecularMultiplier: 1
     - _SecondarySpecularShift: 1
     - _Smoothness: 0.5
@@ -151,8 +151,10 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _StaticSpecularHighlight: 1
+    - _Subsurface: 0.2
     - _Surface: 1
     - _TransmissionIntensity: 0.054
+    - _UseHashing: 0
     - _UseShadowThreshold: 1
     - _WorkflowMode: 1
     - _ZTest: 4
