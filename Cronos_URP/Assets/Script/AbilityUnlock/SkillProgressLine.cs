@@ -32,13 +32,13 @@ public class SkillProgressLine : ProgressBar
 
     private bool IsUnlocked()
     {
-        return Nodes.abilityLevel.IsNextNodeUnlock();
+        return Nodes.levelData.IsNextNodeUnlock();
     }
 
     private float GetPercentageFromAmount()
     {
         if (!IsUnlocked()) return 0f;
 
-        return Nodes.abilityLevel.GetPercentageOFNextNodeUnlock();
+        return Nodes.levelData.GetPercentageOFNextNodeUnlock();
     }
 }

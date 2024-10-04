@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class SaveLoadManager : MonoBehaviour
 {
-    public static DataManager Instance
+    public static SaveLoadManager Instance
     {
         get
         {
             if (instance != null)
                 return instance;
-            instance = FindObjectOfType<DataManager>();
+            instance = FindObjectOfType<SaveLoadManager>();
             if (instance != null)
                 return instance;
 
@@ -19,14 +17,13 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    protected static DataManager instance;
+    protected static SaveLoadManager instance;
 
-
-    public static DataManager Create()
+    public static SaveLoadManager Create()
     {
         GameObject dataManagerGameObject = new GameObject("PersistentDataManager");
         DontDestroyOnLoad(dataManagerGameObject);
-        instance = dataManagerGameObject.AddComponent<DataManager>();
+        instance = dataManagerGameObject.AddComponent<SaveLoadManager>();
         return instance;
     }
 
@@ -37,6 +34,12 @@ public class DataManager : MonoBehaviour
     public static void SaveAllData()
     {
         Player.Instance.Save();
+
+        var at = GameObject.Find("AbilityUnlock").GetComponent<AbilityTree>();
+        if (at != null)
+        {
+            at.SaveData();
+        }
     }
 
     public static void LoadAllData()

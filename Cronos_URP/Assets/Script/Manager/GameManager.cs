@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
         if (_isInitialized == false)
         {
-            DataManager.DeleteAllData();
+            SaveLoadManager.DeleteAllData();
             _isInitialized = true;
         }
 

@@ -689,8 +689,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     internal void Load()
     {
-        Debug.Log("Try Player Load");
-
         if (PlayerPrefs.HasKey("maxTP"))
         {
             maxTP = PlayerPrefs.GetFloat("maxTP");
