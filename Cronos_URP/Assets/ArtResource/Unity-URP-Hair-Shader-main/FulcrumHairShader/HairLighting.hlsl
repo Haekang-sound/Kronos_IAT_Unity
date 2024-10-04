@@ -212,7 +212,7 @@ half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData, float b
     
     half4 shadowMask = CalculateShadowMask(inputData);
     AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(inputData, surfaceData);
-    uint meshRenderingLayers = GetMeshRenderingLightLayer();
+    uint meshRenderingLayers = GetMeshRenderingLayer();
     Light mainLight = GetMainLight(inputData, shadowMask, aoFactor);
     LightingData lightingData = CreateLightingData(inputData, surfaceData);
     lightingData.giColor = GlobalIllumination(brdfData,inputData.bakedGI, aoFactor.indirectAmbientOcclusion, inputData.positionWS,inputData.normalWS, inputData.viewDirectionWS);
