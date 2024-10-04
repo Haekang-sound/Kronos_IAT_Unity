@@ -165,7 +165,8 @@ public class PlayerMoveState : PlayerBaseState
 		if (!stateMachine.Player.IsLockOn)
 		{
 			// 대상을 찾고
-			stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
+			bool temp = stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
+			Debug.Log(temp);
 		}
 		// 락온상태라면 타겟을 변경한다.
 		else
