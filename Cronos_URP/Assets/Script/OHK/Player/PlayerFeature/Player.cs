@@ -56,6 +56,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     [SerializeField] private float currentTP;
     [SerializeField] private float currentCP;
     [SerializeField] private float chargingCP = 10f;
+    [SerializeField] private float chargingTP = 10f;
     [SerializeField] private float decayTime = 1f;
 
 
@@ -241,7 +242,11 @@ public class Player : MonoBehaviour, IMessageReceiver
             }
         }
     }
-    private void Update()
+	public float TPGain()
+	{
+		return chargingTP;
+	}
+	private void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Alpha4))

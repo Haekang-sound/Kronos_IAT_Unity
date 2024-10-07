@@ -237,7 +237,12 @@ public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         TriggerDamage();
         _hitShake.Begin();
 
-        if (useKnockback)
+		if (Player.Instance != null)
+		{
+			Player.Instance.TP += Player.Instance.TPGain();
+		}
+
+		if (useKnockback)
         {
             _knockBack?.Begin(msg.damageSource);
         }
