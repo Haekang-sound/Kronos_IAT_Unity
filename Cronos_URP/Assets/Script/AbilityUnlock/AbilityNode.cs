@@ -24,7 +24,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public List<AbilityNode> childNodes;
 
     public bool isFocaus;
-    public bool interactable;
+    public bool  interactable;
     public Button button;
     public FadeEffector fadeUI;
 
@@ -212,7 +212,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         if (PlayerPrefs.HasKey("node_" + levelData.id))
         {
             var num = PlayerPrefs.GetInt(key);
-            if (num == 1)
+            if (num >= 1)
             {
                 SetInteractable(true);
                 background.SetGrayscale(0f);

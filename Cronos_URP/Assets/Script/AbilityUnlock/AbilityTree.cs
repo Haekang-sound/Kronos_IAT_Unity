@@ -115,10 +115,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private void OnEnable()
     {
         canvasGroup.alpha = 0f;
-    }
 
-    private void Start()
-    {
         rootAbilityNode.SetInteractable(true);
 
         if (useParser)
@@ -133,10 +130,11 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             {
                 _abilityNodes[i].levelData.id = i;
             }
+
+            // 로드 및 초기화
+            LoadData();
         }
 
-        /// 로드 및 초기화
-        LoadData();
 
     }
 
@@ -146,8 +144,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             node.Save();
         }
-
-        Debug.Log("Ability Tree Save");
     }
 
     public void LoadData()
@@ -156,8 +152,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             node.Load();
         }
-
-        Debug.Log("Ability Tree Load");
     }
 
     public void Update()
