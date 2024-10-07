@@ -5,20 +5,24 @@ using UnityEngine;
 public class SkillProgressLine : ProgressBar
 {
     //[SerializeField, CanBeNull] public SkillProgressLine parent;
-    [SerializeField] public AbilityNode Nodes;
+    [SerializeField] public AbilityNode node;
     [SerializeField] public int requiredLevelsAmount;
+
+    private void Awake()
+    {
+        node.OnUpdated.AddListener(OnSkillAmountChanged);
+    }
 
     public override void Start()
     {
         base.Start();
-        OnSkillAmountChanged();
 
-        Nodes.OnUpdated.AddListener(OnSkillAmountChanged);
+        OnSkillAmountChanged();
     }
 
     private void OnDestroy()
     {
-        Nodes.OnUpdated.RemoveListener(OnSkillAmountChanged);
+        node.OnUpdated.RemoveListener(OnSkillAmountChanged);
     }
 
     public void OnSkillAmountChanged()
@@ -32,13 +36,13 @@ public class SkillProgressLine : ProgressBar
 
     private bool IsUnlocked()
     {
-        return Nodes.levelData.IsNextNodeUnlock();
+        return node.levelData.IsNextNodeUnlock();
     }
 
     private float GetPercentageFromAmount()
     {
         if (!IsUnlocked()) return 0f;
 
-        return Nodes.levelData.GetPercentageOFNextNodeUnlock();
+        return node.levelData.GetPercentageOFNextNodeUnlock();
     }
 }

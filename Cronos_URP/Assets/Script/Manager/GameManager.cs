@@ -27,10 +27,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    bool _isInitialized = false;
-
-
     void Awake()
     {
         if (Instance != this)
@@ -39,15 +35,16 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (_isInitialized == false)
-        {
-            SaveLoadManager.DeleteAllData();
-            _isInitialized = true;
-        }
+        SaveLoadManager.DeleteAllData();
 
         DontDestroyOnLoad(gameObject);
     }
 
+
+    private void Reset()
+    {
+        SaveLoadManager.DeleteAllData();
+    }
 
     // 
     //     public PlayerData PlayerDT { get; set; }
