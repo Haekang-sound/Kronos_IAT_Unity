@@ -4,8 +4,11 @@ using UnityEngine;
 
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
-public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
+[RequireComponent(typeof(FanShapeScanner))]
+public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 {
+    public bool drawGizmos = true;
+
     public readonly float tp = 20;
     public float attackDistance = 1.8f;
     public float strongAttackDistance = 3f;
