@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
-    public AbilityLevel abilityLevel = new AbilityLevel();
+    public AbilityLevel levelData = new AbilityLevel();
 
     public ImageGrayscale background;
     public ImageGrayscale skillIcon;
@@ -23,7 +24,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public List<AbilityNode> childNodes;
 
     public bool isFocaus;
-    public bool interactable;
+    public bool  interactable;
     public Button button;
     public FadeEffector fadeUI;
 
@@ -131,16 +132,16 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void InitRender()
     {
-        description.text = abilityLevel.descriptionText;
-        subdescription.text = $"CP {abilityLevel.pointNeeded} 필요";
+        description.text = levelData.descriptionText;
+        subdescription.text = $"CP {levelData.pointNeeded} 필요";
 
         Render();
     }
 
     public void UpdateChilds()
     {
-        if (abilityLevel.currentPoint == abilityLevel.nextNodeUnlockCondition ||
-            abilityLevel.currentPoint >= abilityLevel.maxPoint)
+        if (levelData.currentPoint == levelData.nextNodeUnlockCondition ||
+            levelData.currentPoint >= levelData.maxPoint)
         {
             foreach (var child in childNodes)
             {
@@ -165,9 +166,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Render()
     {
         //abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
-        abilityName.text = $"{abilityLevel.abilityName}";
+        abilityName.text = $"{levelData.abilityName}";
 
-        if (abilityLevel.currentPoint == 1)
+        if (levelData.currentPoint == 1)
         {
             //skillIcon.SetGrayscale(0f);
             skillIcon.StartGrayScaleRoutine();
@@ -178,13 +179,13 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public bool Increment()
     {
-        int addedPoint = abilityLevel.currentPoint + 1;
+        int addedPoint = levelData.currentPoint + 1;
 
-        bool result = addedPoint <= abilityLevel.maxPoint;
+        bool result = addedPoint <= levelData.maxPoint;
 
         if (result == true)
         {
-            abilityLevel.currentPoint = addedPoint;
+            levelData.currentPoint = addedPoint;
 
             // 자식 노드 활성화
             UpdateChilds();
@@ -192,5 +193,39 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         }
 
         return result;
+    }
+
+    public void Save()
+    {
+        var key = "node_" + levelData.id;
+        var interactableInt = interactable ? 1 : 0;
+        PlayerPrefs.SetInt(key, interactableInt);
+        PlayerPrefs.SetInt("currentPoint_" + levelData.id, levelData.currentPoint);
+
+        Debug.Log("TreeNode( " + key + ": " + interactableInt + ") has Saved");
+    }
+
+    internal void Load()
+    {
+        var key = "node_" + levelData.id;
+
+        if (PlayerPrefs.HasKey("node_" + levelData.id))
+        {
+            var num = PlayerPrefs.GetInt(key);
+            if (num >= 1)
+            {
+                SetInteractable(true);
+                background.SetGrayscale(0f);
+            }
+
+            var point = PlayerPrefs.GetInt("currentPoint_" + levelData.id);
+            for (int i = 0; i < point; i++)
+            {
+                if(true == Increment());
+                    OnUpdated.Invoke();
+            }
+
+            Debug.Log("TreeNode( " + key + ": " + num + "  ) has Loaded");
+        }
     }
 }

@@ -101,6 +101,7 @@ public class SceneController : MonoBehaviour
     {
         m_transitioning = true;
         //PersistentDataManager.SaveAllData();
+        SaveLoadManager.SaveAllData();
 
         //if (m_playerInput == null)
         //{
@@ -127,6 +128,7 @@ public class SceneController : MonoBehaviour
         //    m_playerInput.ReleaseControl();
         //}
         //PersistentDataManager.LoadAllData();
+        SaveLoadManager.LoadAllData();
 
         SceneTransitionDestination entrance = GetDestination();
 
