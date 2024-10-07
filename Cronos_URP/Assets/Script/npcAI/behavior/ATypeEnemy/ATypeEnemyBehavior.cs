@@ -210,7 +210,12 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         TriggerDamage();
         _hitShake.Begin();
 
-        if (useKnockback)
+		if (Player.Instance != null)
+		{
+			Player.Instance.TP += Player.Instance.TPGain();
+		}
+
+		if (useKnockback)
         {
             _knockBack?.Begin(msg.damageSource);
         }
@@ -218,11 +223,6 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Dead()
     {
-        if (Player.Instance != null)
-        {
-            Player.Instance.TP += tp;
-        }
-
         GetComponent<ReplaceWithRagdoll>().Replace();
         _controller.Release();
     }

@@ -12,6 +12,7 @@ public class LastEnforcedCombo : StateMachineBehaviour
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 
 	[SerializeField] float moveForce;
+	[SerializeField] float Damage;
 	public float hitStopTime;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,6 +22,9 @@ public class LastEnforcedCombo : StateMachineBehaviour
 
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
+
+		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
+		Player.Instance.CurrentDamage = Damage;
 	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
