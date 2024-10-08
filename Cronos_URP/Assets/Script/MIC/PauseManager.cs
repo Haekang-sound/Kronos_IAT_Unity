@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +52,8 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+		PlayerStateMachine.GetInstance().isPaused = true;
+		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
         //playerCam.gameObject.SetActive(false);
         Debug.Log("Pause");
 
@@ -73,5 +76,7 @@ public class PauseManager : MonoBehaviour
         }
         isPause = false;
         Time.timeScale = 1f;
-    }
+		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
+		PlayerStateMachine.GetInstance().isPaused = false;
+	}
 }

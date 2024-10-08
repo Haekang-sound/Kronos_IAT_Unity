@@ -66,11 +66,11 @@ public class PlayerAttackState : PlayerBaseState
 		CalculateMoveDirection();   // 방향을 계산하고
 		
 
-		if (stateMachine.MoveForce > 1f)
+		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 		{
 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}
-		else
+		else if(stateMachine.Animator.deltaPosition != null)
 		{
 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}

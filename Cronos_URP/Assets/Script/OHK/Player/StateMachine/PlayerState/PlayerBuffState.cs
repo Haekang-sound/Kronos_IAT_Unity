@@ -21,8 +21,8 @@ public class PlayerBuffState : PlayerBaseState
 	private readonly int moveYHash = Animator.StringToHash("moveY");
 	private readonly int timeStopHash = Animator.StringToHash("TimeStop");
 	private readonly int CPBoombHash = Animator.StringToHash("CPBoomb");
-	[SerializeField] private float buffTimer = 3f;
-	public float buffTime = 3f;
+// 	[SerializeField] private float buffTimer = 3f;
+// 	public float buffTime = 3f;
 
 
 	private const float AnimationDampTime = 0.1f;
@@ -41,7 +41,6 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.Animator.ResetTrigger(attackHash);
         stateMachine.Animator.ResetTrigger(idleHash);
         //stateMachine.Animator.SetBool(BuffHash, true);
-        buffTimer = 0f;
 
         stateMachine.InputReader.onLAttackStart += Attack;
         stateMachine.InputReader.onRAttackStart += Gurad;
@@ -62,19 +61,10 @@ public class PlayerBuffState : PlayerBaseState
 	public override void Tick()
 	{
 
-        buffTimer += Time.deltaTime;
-
-
-        // 특정 조건을 만족할 때 애니메이션을 종료하고 targetStateName으로 전환
-         if (buffTimer > buffTime)
-         {
-             stateMachine.Animator.SetTrigger(moveHash);
-         }
-
-		//         if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
-		//         {
-		//             stateMachine.Animator.SetBool(moveHash, true);
-		//         }
+		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
+		{
+		    stateMachine.Animator.SetBool("combMove", true);
+		}
 
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
@@ -118,23 +108,24 @@ public class PlayerBuffState : PlayerBaseState
 			stateMachine.Animator.SetFloat(moveYHash, stateMachine.InputReader.moveComposite.y, AnimationDampTime, Time.deltaTime);
 			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
-		CalculateMoveDirection();   // 방향을 계산하고
+		//CalculateMoveDirection();   // 방향을 계산하고
 
 	}
 	public override void FixedTick()
 	{
-		if (stateMachine.Player.IsLockOn)
-		{
-			if (moveSpeed > 0.5f)
-			{
-				FaceMoveDirection();        // 캐릭터 방향을 바꾸고
-			}
-		}
-		else
-		{
-			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
-		}
-		Move();                     // 이동한다.	
+		Float();
+// 		if (stateMachine.Player.IsLockOn)
+// 		{
+// 			if (moveSpeed > 0.5f)
+// 			{
+// 				FaceMoveDirection();        // 캐릭터 방향을 바꾸고
+// 			}
+// 		}
+// 		else
+// 		{
+// 			FaceMoveDirection();        // 캐릭터 방향을 바꾸고
+// 		}
+// 		Move();                     // 이동한다.	
 	}
     public override void LateTick()
 	{
@@ -156,7 +147,6 @@ public class PlayerBuffState : PlayerBaseState
 
 		stateMachine.InputReader.onRAttackCanceled -= ReleaseGuard;
 		stateMachine.Animator.speed = 1f;
-
 	}
     private void Attack()
     {
@@ -248,5 +238,10 @@ public class PlayerBuffState : PlayerBaseState
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
+	}
+
+	private void BuffOff()
+	{
+		stateMachine.Animator.SetTrigger(moveHash);
 	}
 }
