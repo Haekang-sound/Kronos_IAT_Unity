@@ -1,13 +1,14 @@
 using Message;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
-public class BTypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
+public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 {
+    public bool drawGizmos = true;
+
     public readonly float tp = 24;
     public float attackDistance = 1.8f;
     public float strafeSpeed = 1f;
