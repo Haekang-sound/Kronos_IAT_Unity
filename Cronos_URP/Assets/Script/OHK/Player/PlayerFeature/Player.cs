@@ -116,7 +116,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	Transform playerTransform;
 	AutoTargetting targetting;
 
-	MeleeWeapon meleeWeapon;
+	public MeleeWeapon meleeWeapon;
 	ShieldWeapon shieldWeapon;
 	PlayerStateMachine PlayerFSM;
 
