@@ -71,6 +71,9 @@ public class EffectManager : MonoBehaviour
     // 강화 상태 오우라
     public GameObject swordAura;
 
+    // 파티클을 빨아들이는 박스
+    public GameObject absorbBox;
+
     // 보스 이펙트 관련
     public float bossBeamDistance = 4.0f;
     public float bossBeamTerm = 0.2f;
@@ -135,6 +138,8 @@ public class EffectManager : MonoBehaviour
         //    BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CreateAbsorbFX(player.transform);
     }
 
     private void OnValidate()
@@ -174,6 +179,9 @@ public class EffectManager : MonoBehaviour
 
         if (swordAura != null)
             swordAura.SetActive(false);
+
+        if (absorbBox == null)
+            absorbBox = GameObject.Find("AbsorbBox");
     }
 
     void InitializeVol(Volume vol)
@@ -482,6 +490,13 @@ public class EffectManager : MonoBehaviour
         GameObject slashed = SpawnEffect("UpSlash", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         Destroy(slashed, 1.0f);
+    }
+
+    public void CreateAbsorbFX(Transform trans)
+    {
+        // 1초 뒤에 hud로 돌진하는 파티클 만들기
+        GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0));
+        Destroy(ab, 3.0f);
     }
 
     public void CreateGuardFX()

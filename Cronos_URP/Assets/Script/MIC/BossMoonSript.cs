@@ -15,6 +15,7 @@ public class BossMoonSript : MonoBehaviour
     ParticleSystem.MainModule rMainMod;
     ParticleSystem.MainModule rMainMod2;
     public GameObject blackHoleParticle;
+    public GameObject blackHoleSphere;
     Color blackColor = Color.black;
     Color blueColor = Color.blue;
     Color yellowColor = Color.yellow;
@@ -23,6 +24,8 @@ public class BossMoonSript : MonoBehaviour
     public float changeDuration = 1.0f;
     public float colorDuration = 3.0f;
     float count = 0;
+    Material mat;
+    
 
     void Start()
     {
@@ -31,6 +34,7 @@ public class BossMoonSript : MonoBehaviour
         ring.SetActive(false);
         ring2.SetActive(false);
         blackHoleParticle.SetActive(false);
+        mat = blackHoleSphere.gameObject.GetComponent<Renderer>().material;
 
         Invoke("MoonFall", 1.0f);
         //Destroy(gameObject, 28.0f);
@@ -83,6 +87,7 @@ public class BossMoonSript : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             Color curColor = Color.Lerp(startColor, endColor, elapsedTime/changeDuration);
+            Color rimColor = Color.Lerp(whiteColor, endColor, elapsedTime / changeDuration);
 
             // gradient 업데이트
             gradient.SetKeys(
@@ -92,7 +97,13 @@ public class BossMoonSript : MonoBehaviour
 
             col1.color = new ParticleSystem.MinMaxGradient(gradient);
             col2.color = new ParticleSystem.MinMaxGradient(gradient);
-
+            if (startColor == Color.black)
+                mat.SetColor("_RimLightColor", rimColor);
+            else if (endColor == Color.black)
+                mat.SetColor("_RimLightColor", redColor);
+            else
+                mat.SetColor("_RimLightColor", curColor);
+            Debug.Log("Current rim Light : " + mat.GetColor("_RimLightColor"));
 
             yield return null;
         }
