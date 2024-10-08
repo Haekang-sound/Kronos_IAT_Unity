@@ -25,12 +25,6 @@ public partial class Damageable : MonoBehaviour
     public bool isInvulnerable { get; set; }
     private bool isVulnerable { get; set; } 
 
-    public float CurrentHitPoints
-    {
-        get { return currentHitPoints; }
-        set { currentHitPoints = value; }
-    }
-
     public UnityEvent OnDeath, OnReceiveDamage, OnHitWhileInvulnerable, OnBecomeVulnerable, OnResetDamage;
 
     [Tooltip("데미지를 입으면, 다른 게임 오브젝트에게 메시지를 전달합니다.")]
@@ -47,18 +41,22 @@ public partial class Damageable : MonoBehaviour
     Player player;
     ImpulseCam impCam;
 
-    void Start()
+    private void Awake()
     {
-        ResetDamage();
         m_Collider = GetComponent<Collider>();
-        impCam = ImpulseCam.Instance;
     }
 
     private void OnEnable()
     {
-        //effectManager = EffectManager.Instance;
-        soundManager = SoundManager.Instance;
+        ResetDamage();
+    }
+
+    void Start()
+    {
         player = Player.Instance;
+        impCam = ImpulseCam.Instance;
+        soundManager = SoundManager.Instance;
+        //effectManager = EffectManager.Instance;
     }
 
     void Update()
@@ -77,7 +75,7 @@ public partial class Damageable : MonoBehaviour
 
     public void ResetDamage()
     {
-        CurrentHitPoints = maxHitPoints;
+        currentHitPoints = maxHitPoints;
         isInvulnerable = false;
         m_timeSinceLastHit = 0.0f;
         OnResetDamage.Invoke();
@@ -95,7 +93,7 @@ public partial class Damageable : MonoBehaviour
 
     public void ApplyDamage(DamageMessage data)
     {
-        if (CurrentHitPoints <= 0)
+        if (currentHitPoints <= 0)
         {
             // 이미 죽은 상태라면 데미지를 더는 받지 않는다.
             // 만일 이미 죽은 뒤에도 데미지를 받는 것을 감지하고 싶다면 이부분 수정할 것
@@ -141,13 +139,13 @@ public partial class Damageable : MonoBehaviour
         }
 
         isInvulnerable = true;
-        CurrentHitPoints -= data.amount;
+        currentHitPoints -= data.amount;
 
         // 죽든 살든 맞는 소리는 나와야 하니까
         if (gameObject.tag != "Player")
             soundManager.PlaySFX("Hit_Metal_SE", transform);
 
-        if (CurrentHitPoints <= 0)
+        if (currentHitPoints <= 0)
         {
             Debug.Log("데미지를 받아 죽었다");
             schedule += OnDeath.Invoke; //This avoid race condition when objects kill each other.
@@ -158,7 +156,7 @@ public partial class Damageable : MonoBehaviour
             OnReceiveDamage.Invoke();
         }
 
-        var messageType = CurrentHitPoints <= 0 ? MessageType.DEAD : MessageType.DAMAGED;
+        var messageType = currentHitPoints <= 0 ? MessageType.DEAD : MessageType.DAMAGED;
 
         for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
         {
@@ -174,7 +172,7 @@ public partial class Damageable : MonoBehaviour
             return 0; // maxHitPoints가 0일 경우 0%로 처리
         }
 
-        float hitpoints = Mathf.Max(0, CurrentHitPoints);
+        float hitpoints = Mathf.Max(0, currentHitPoints);
 
         return (hitpoints / maxHitPoints) * 100f;
     }

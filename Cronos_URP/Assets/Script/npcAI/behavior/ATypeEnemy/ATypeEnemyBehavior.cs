@@ -4,8 +4,11 @@ using UnityEngine;
 
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
-public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
+[RequireComponent(typeof(FanShapeScanner))]
+public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 {
+    public bool drawGizmos = true;
+
     public readonly float tp = 20;
     public float attackDistance = 1.8f;
     public float strongAttackDistance = 3f;
@@ -210,7 +213,12 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
         TriggerDamage();
         _hitShake.Begin();
 
-        if (useKnockback)
+		if (Player.Instance != null)
+		{
+			Player.Instance.TP += Player.Instance.TPGain();
+		}
+
+		if (useKnockback)
         {
             _knockBack?.Begin(msg.damageSource);
         }
@@ -218,11 +226,6 @@ public class ATypeEnemyBehavior : CombatZoneEnemy, IMessageReceiver
 
     private void Dead()
     {
-        if (Player.Instance != null)
-        {
-            Player.Instance.TP += tp;
-        }
-
         GetComponent<ReplaceWithRagdoll>().Replace();
         _controller.Release();
     }

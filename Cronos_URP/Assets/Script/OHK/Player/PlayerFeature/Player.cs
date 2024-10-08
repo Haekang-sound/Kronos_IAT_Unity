@@ -1,4 +1,5 @@
 using Message;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -55,13 +56,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[SerializeField] private float currentTP;
 	[SerializeField] private float currentCP;
 	[SerializeField] private float chargingCP = 10f;
+	[SerializeField] private float chargingTP = 10f;
 	[SerializeField] private float decayTime = 1f;
-
 
 	[SerializeField] private bool isEnforced = false;
 	[SerializeField] private bool isLockOn = false;
 	[SerializeField] private bool rigidImmunity = false;
 	[SerializeField] private bool dodgeAttack = false;
+
+	public bool isBuff = false;
+	public float buffTimer = 3f;
+	public float buffTime = 3f;
 
 	/// <summary>
 	/// floating capsule만드는중 
@@ -98,7 +103,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			{
 				currentTP = maxTP;
 			}
-			_damageable.CurrentHitPoints = currentTP;
+			_damageable.currentHitPoints = currentTP;
 		}
 	}
 	public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
@@ -116,7 +121,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	Transform playerTransform;
 	AutoTargetting targetting;
 
-	MeleeWeapon meleeWeapon;
+	public MeleeWeapon meleeWeapon;
 	ShieldWeapon shieldWeapon;
 	PlayerStateMachine PlayerFSM;
 
@@ -138,8 +143,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	private void Awake()
 	{
 		_knockBack = GetComponent<KnockBack>();
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+		_defnsible = GetComponent<Defensible>();
+		_damageable = GetComponent<Damageable>();
+		playerTransform = GetComponent<Transform>();
+		PlayerFSM = GetComponent<PlayerStateMachine>();
+		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
+		targetting = GetComponentInChildren<AutoTargetting>();
 	}
 	private void OnValidate()
 	{
@@ -154,23 +164,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void OnEnable()
 	{
-		_damageable = GetComponent<Damageable>();
 		_damageable.onDamageMessageReceivers.Add(this);
-		_defnsible = GetComponent<Defensible>();
 
-		// 감속/가속 변경함수를 임시로 사용해보자
-		// 반드시 지워져야할 부분이지만 임시로 넣는다
-		PlayerFSM = GetComponent<PlayerStateMachine>();
-		playerTransform = GetComponent<Transform>();
-		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
-		targetting = GetComponentInChildren<AutoTargetting>();
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
 		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
 	}
 
 	void Start()
 	{
+		// TEST: 데이터 로드 
+		Load();
+
 		// 여기에 초기화
 		soundManager = SoundManager.Instance;
 		effectManager = EffectManager.Instance;
@@ -185,11 +191,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		// 문제해결을 위해 옮김 
 		meleeWeapon.SetOwner(gameObject);
-		//meleeWeapon.simpleDamager.OnTriggerEnterEvent += ChargeCP;
-		totalspeed = Speed;
-		_damageable.currentHitPoints = maxTP;
-		_damageable.CurrentHitPoints = maxTP;
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+
+		totalspeed = Speed;
+		_damageable.maxHitPoints = maxTP;
+		_damageable.currentHitPoints = currentTP;
 	}
 
 	public void ChargeCP(Collider other)
@@ -209,7 +215,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void ChargeCP(bool isActiveSkill)
 	{
 		// 액티브스킬이라면 cp를 채우지 않는다.
-		if(isActiveSkill)
+		if (isActiveSkill)
 		{
 			return;
 		}
@@ -239,8 +245,28 @@ public class Player : MonoBehaviour, IMessageReceiver
 			}
 		}
 	}
+	public float TPGain()
+	{
+		return chargingTP;
+	}
 	private void Update()
 	{
+		// 버프중이라면
+		if (isBuff)
+		{
+			buffTimer += Time.deltaTime;
+		}
+		else // 아니라면
+		{
+			buffTimer = 0f;
+		}
+
+		// 특정 조건을 만족할 때 애니메이션을 종료하고 targetStateName으로 전환
+		if (buffTimer > buffTime)
+		{
+			PlayerFSM.Animator.SetBool("isMove",true);
+			effectManager.SwordAuraOff(); 
+		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
@@ -270,9 +296,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 		// 실시간으로 TP 감소
-		if (_damageable.CurrentHitPoints > 0f)
+		if (_damageable.currentHitPoints > 0f)
 		{
-			_damageable.CurrentHitPoints -= Time.deltaTime;
+			_damageable.currentHitPoints -= Time.deltaTime;
 		}
 
 		// 실시간으로 CP감소
@@ -285,7 +311,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			}
 		}
 
-		TP = _damageable.CurrentHitPoints;
+		TP = _damageable.currentHitPoints;
 
 
 		if (TP <= 0)
@@ -674,5 +700,30 @@ public class Player : MonoBehaviour, IMessageReceiver
 		TP = maxTP;
 		// CP 초기화
 		currentCP = 0f;
+	}
+
+	internal void Save()
+	{
+		PlayerPrefs.SetFloat("maxTP", maxTP);
+		PlayerPrefs.SetFloat("maxCP", maxCP);
+
+		PlayerPrefs.SetFloat("currentTP", currentTP);
+		PlayerPrefs.SetFloat("currentCP", currentCP);
+	}
+
+	internal void Load()
+	{
+		if (PlayerPrefs.HasKey("maxTP"))
+		{
+			maxTP = PlayerPrefs.GetFloat("maxTP");
+			maxCP = PlayerPrefs.GetFloat("maxCP");
+			currentTP = PlayerPrefs.GetFloat("currentTP");
+			currentCP = PlayerPrefs.GetFloat("currentCP");
+
+		}
+		//else
+		//{
+		//   Debug.Log("Player Load faile");
+		//}
 	}
 }

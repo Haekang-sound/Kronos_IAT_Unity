@@ -42,7 +42,7 @@ public class ImageGrayscale : MonoBehaviour
         float time = 0f;
         while (duration > time)
         {
-            float durationFrame = Time.deltaTime;
+            float durationFrame = Time.unscaledDeltaTime;
             float ratio = time / duration;
             float grayAmount = isGrayscale ? ratio : 1 - ratio;
             

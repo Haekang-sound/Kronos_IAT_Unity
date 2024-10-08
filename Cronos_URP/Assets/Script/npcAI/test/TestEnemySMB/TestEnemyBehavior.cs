@@ -15,7 +15,7 @@ public class TestEnemyBehavior : MonoBehaviour, IMessageReceiver
 
 
 	public SimpleDamager meleeWeapon;
-    public FanShape playerScanner = new FanShape();
+    public FanShapeScanner playerScanner = new FanShapeScanner();
     public float timeToStopPursuit;
 
     [System.NonSerialized]

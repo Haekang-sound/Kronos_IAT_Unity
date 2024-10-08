@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
     [SerializeField] public AbilityNode rootAbilityNode;
@@ -61,11 +60,11 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 _lastPressed.FocusOut();
             }
         }
-        else if (value.isFocaus == true && value.abilityLevel.IscCmpleted() == false)
+        else if (value.isFocaus == true && value.levelData.IscCmpleted() == false)
         {
             if (value.interactable == false) return;
 
-            if (abilityAmounts.CanSpend(value.abilityLevel.pointNeeded) != -1)
+            if (abilityAmounts.CanSpend(value.levelData.pointNeeded) != -1)
             {
                 // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
                 popup.OpenPopup("확실합니까?", () =>
@@ -73,7 +72,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                     if (value.Increment() == true)
                     {
                         // 확인 버튼을 눌렀을 때 실행할 동작
-                        abilityAmounts.UpdateSpent(value.abilityLevel.pointNeeded);
+                        abilityAmounts.UpdateSpent(value.levelData.pointNeeded);
                         value.OnUpdated.Invoke();
                     }
                 });
@@ -116,16 +115,42 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private void OnEnable()
     {
         canvasGroup.alpha = 0f;
-    }
 
-    private void Start()
-    {
         rootAbilityNode.SetInteractable(true);
 
         if (useParser)
         {
             LoadAbilityLevelData();
             InitChildNodeDatas();
+        }
+        else
+        {
+            // 인덱스 부여
+            for (int i = 0; i < _abilityNodes.Count; i++)
+            {
+                _abilityNodes[i].levelData.id = i;
+            }
+
+            // 로드 및 초기화
+            LoadData();
+        }
+
+
+    }
+
+    public void SaveData()
+    {
+        foreach (var node in _abilityNodes)
+        {
+            node.Save();
+        }
+    }
+
+    public void LoadData()
+    {
+        foreach (var node in _abilityNodes)
+        {
+            node.Load();
         }
     }
 
@@ -156,8 +181,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
         for (int i = 0; i < _abilityNodes.Count; i++)
         {
-            _abilityNodes[i].abilityLevel = LoadedlevelDatas[i];
-            _abilityNodes[i].abilityLevel.currentPoint = loadedUserDatas[i];
+            _abilityNodes[i].levelData = LoadedlevelDatas[i];
+            _abilityNodes[i].levelData.currentPoint = loadedUserDatas[i];
             _abilityNodes[i].InitRender();
         }
     }
@@ -166,7 +191,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     {
         foreach (var node in _abilityNodes)
         {
-            foreach (var childNodeId in node.abilityLevel.childIdNodes)
+            foreach (var childNodeId in node.levelData.childIdNodes)
             {
                 if (childNodeId != -1)
                 {
@@ -186,10 +211,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     {
         foreach (var node in _abilityNodes)
         {
-            node.abilityLevel.currentPoint = 0;
+            node.levelData.currentPoint = 0;
         }
 
-        rootAbilityNode.abilityLevel.currentPoint = 1;
+        rootAbilityNode.levelData.currentPoint = 1;
     }
 
     public IEnumerator Enter()
@@ -270,7 +295,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         List<AbilityLevel> abilityData = new List<AbilityLevel>();
         foreach (var node in _abilityNodes)
         {
-            abilityData.Add(node.abilityLevel);
+            abilityData.Add(node.levelData);
         }
 
         parser.SaveUserDataXML(abilityData);
@@ -283,5 +308,4 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             node.gameObject.SetActive(val);
         }
     }
-
 }
