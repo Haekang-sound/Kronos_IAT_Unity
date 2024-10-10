@@ -3,13 +3,15 @@ public class MeleeWeapon : MonoBehaviour
 {
     public SimpleDamager simpleDamager;
     public ParryDamager parryDamaer;
+	public BoxColliderAdjuster bAdjuster;
 
     private void Awake()
     {
         simpleDamager = GetComponentInChildren<SimpleDamager>();
         parryDamaer = GetComponentInChildren<ParryDamager>();
+		bAdjuster = GetComponentInChildren<BoxColliderAdjuster>();
 
-        simpleDamager?.gameObject.SetActive(false);
+		simpleDamager?.gameObject.SetActive(false);
     }
 
     public void SetOwner(GameObject owner) => simpleDamager?.SetOwner(owner);
