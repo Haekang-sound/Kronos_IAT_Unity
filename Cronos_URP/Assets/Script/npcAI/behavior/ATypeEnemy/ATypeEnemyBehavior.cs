@@ -330,7 +330,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
                 key = Animator.StringToHash("on_fall_damaged");
                 break;
             case Damageable.DamageType.Down: 
-                key = Animator.StringToHash("down");
+                key = Animator.StringToHash("fall_down");
                 break;
         }
 
