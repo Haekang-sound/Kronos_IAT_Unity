@@ -56,8 +56,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[SerializeField] private float currentTP;
 	[SerializeField] private float currentCP;
 	[SerializeField] private float chargingCP = 10f;
-	[SerializeField] private float chargingTP = 10f;
-	[SerializeField] private float decayTime = 1f;
+	[SerializeField] private float TPAbsorptionRatio = 1f;
+	[SerializeField] private float CPDecayRatio = 1f;
 
 	[SerializeField] private bool isEnforced = false;
 	[SerializeField] private bool isLockOn = false;
@@ -245,9 +245,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 			}
 		}
 	}
+	// 타격시 tp흡수량
 	public float TPGain()
 	{
-		return chargingTP;
+		return TPAbsorptionRatio * currentDamage;
 	}
 	private void Update()
 	{
@@ -304,7 +305,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 실시간으로 CP감소
 		if (IsDecreaseCP && CP > 0)
 		{
-			CP -= Time.deltaTime * decayTime;
+			CP -= Time.deltaTime * CPDecayRatio;
 			if (CP <= 0)
 			{
 				TimeNormalization();
@@ -710,7 +711,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		PlayerPrefs.SetFloat("currentTP", currentTP);
 		PlayerPrefs.SetFloat("currentCP", currentCP);
 	}
-
+	
 	internal void Load()
 	{
 		if (PlayerPrefs.HasKey("maxTP"))

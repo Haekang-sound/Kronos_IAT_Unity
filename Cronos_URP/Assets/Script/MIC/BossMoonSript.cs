@@ -69,7 +69,7 @@ public class BossMoonSript : MonoBehaviour
 
     public IEnumerator ChangeColorCoroutine(Color startColor, Color endColor)
     {
-
+		// 서서히 바뀔때 이때 호출 하면됨
         float elapsedTime = 0.0f;
 
         ring.SetActive(true);
@@ -103,11 +103,12 @@ public class BossMoonSript : MonoBehaviour
                 mat.SetColor("_RimLightColor", redColor);
             else
                 mat.SetColor("_RimLightColor", curColor);
-            Debug.Log("Current rim Light : " + mat.GetColor("_RimLightColor"));
+            //Debug.Log("Current rim Light : " + mat.GetColor("_RimLightColor"));
 
             yield return null;
         }
 
+		// 색이 다바뀐다음에 넣고 싶으면
         gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(endColor, 0.0f), new GradientColorKey(endColor, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
@@ -117,7 +118,8 @@ public class BossMoonSript : MonoBehaviour
         col2.color = new ParticleSystem.MinMaxGradient(gradient);
 
         count++;
-
+		
+		// 유지시간
         yield return new WaitForSeconds(colorDuration);
 
         if (count < 5 && endColor == blueColor)
@@ -135,7 +137,7 @@ public class BossMoonSript : MonoBehaviour
         }
         else
         {
-            Debug.Log("enough counts");
+            //Debug.Log("enough counts");
             yield return new WaitForSeconds(5.0f);
             StartCoroutine(ChangeColorCoroutine(redColor, blackColor));
             yield return new WaitForSeconds(1.0f);
