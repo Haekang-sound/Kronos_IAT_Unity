@@ -77,9 +77,13 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
 
             /// TODO: Player 가 패링 가능 여부를 어떻게 받아올 것인지 구현할 것
             // Attack - 범위보다 플레이어가 멀어 졌을 때
-            if (_monoBehaviour.IsInMeleeAttackRange())
+            if (_monoBehaviour.IsInAttackRange())
             {
                 _monoBehaviour.TriggerAttack();
+            }
+            else if(_monoBehaviour.IsInNormalAttackRange())
+            {
+                _monoBehaviour.TriggerAttackNormal();
             }
             else if (_monoBehaviour.IsInStrongAttackRange() == false)
             {

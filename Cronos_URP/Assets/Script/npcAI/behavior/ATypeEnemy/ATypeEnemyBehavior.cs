@@ -21,8 +21,6 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
 
-    private bool useKnockback;
-
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
 
@@ -42,6 +40,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public static readonly int hashStrafe = Animator.StringToHash("strafe");
     public static readonly int hashDamage = Animator.StringToHash("damage");
     public static readonly int hashAttack = Animator.StringToHash("attack");
+    public static readonly int hashAttackNormal = Animator.StringToHash("attack_normal");
     public static readonly int hashNearBase = Animator.StringToHash("nearBase");
     public static readonly int hashInPursuit = Animator.StringToHash("inPursuit");
     public static readonly int hashIdle = Animator.StringToHash("idle");
@@ -198,7 +197,12 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         return CheckDistanceWithTarget(strongAttackDistance);
     }
 
-    public bool IsInMeleeAttackRange()
+    public bool IsInNormalAttackRange()
+    {
+        return CheckDistanceWithTarget(normalAttackDistance);
+    }
+
+    public bool IsInAttackRange()
     {
         return CheckDistanceWithTarget(meleeAttackDistance);
     }
@@ -209,24 +213,19 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         return toTarget.sqrMagnitude < distance * distance;
     }
 
-	public void SetUseKnockback(bool val) => useKnockback = val;
-
-	private void Damaged(Damageable.DamageMessage msg)
+    private void Damaged(Damageable.DamageMessage msg)
     {
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
         _hitShake.Begin();
 
-		if (Player.Instance != null)
-		{
-			Player.Instance.TP += Player.Instance.TPGain();
-		}
-
-		if (useKnockback)
+        if (Player.Instance != null)
         {
-            _knockBack?.Begin(msg.damageSource);
+            Player.Instance.TP += Player.Instance.TPGain();
         }
+
+        _knockBack?.Begin(msg.damageSource);
     }
 
     private void Dead()
@@ -317,7 +316,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
         switch (type)
         {
-            case Damageable.DamageType.None: 
+            case Damageable.DamageType.None:
                 break;
             case Damageable.DamageType.ATypeHit:
                 key = Animator.StringToHash("hit_a");
@@ -328,13 +327,13 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
             case Damageable.DamageType.KockBack:
                 key = Animator.StringToHash("knock_back");
                 break;
-            case Damageable.DamageType.Fall: 
+            case Damageable.DamageType.Fall:
                 key = Animator.StringToHash("fall");
                 break;
-            case Damageable.DamageType.OnFallDamaged: 
+            case Damageable.DamageType.OnFallDamaged:
                 key = Animator.StringToHash("on_fall_damaged");
                 break;
-            case Damageable.DamageType.Down: 
+            case Damageable.DamageType.Down:
                 key = Animator.StringToHash("fall_down");
                 break;
         }
@@ -350,6 +349,11 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     internal void TriggerAttack()
     {
         _controller.animator.SetTrigger(hashAttack);
+    }
+
+    internal void TriggerAttackNormal()
+    {
+        _controller.animator.SetTrigger(hashAttackNormal);
     }
 
     internal void TriggerStrongAttack()
