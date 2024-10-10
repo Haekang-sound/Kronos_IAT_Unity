@@ -7,12 +7,17 @@ using UnityEngine;
 [RequireComponent(typeof(FanShapeScanner))]
 public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 {
-    public bool drawGizmos = true;
+    [SerializeField]
+    private bool drawGizmos = true;
 
     public readonly float tp = 20;
-    public float attackDistance = 1.8f;
+
+    [Header("Attack Ragne")]
+    public float meleeAttackDistance = 1.8f;
+    public float normalAttackDistance = 2.4f;
     public float strongAttackDistance = 3f;
-    public float strafeDistance = 2f;
+
+
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
 
@@ -110,12 +115,12 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
         // 공격 범위
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
+        Gizmos.DrawWireSphere(transform.position, meleeAttackDistance);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, normalAttackDistance);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, strafeDistance);
-
-        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, strongAttackDistance);
 
         // 기본 위치 
@@ -193,9 +198,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         return CheckDistanceWithTarget(strongAttackDistance);
     }
 
-    public bool IsInAttackRange()
+    public bool IsInMeleeAttackRange()
     {
-        return CheckDistanceWithTarget(attackDistance);
+        return CheckDistanceWithTarget(meleeAttackDistance);
     }
 
     public bool CheckDistanceWithTarget(float distance)
@@ -364,7 +369,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     internal void RequestTargetPosition()
     {
-        RequestTargetPosition(attackDistance);
+        RequestTargetPosition(meleeAttackDistance);
     }
 
     internal void TriggerStrafe()

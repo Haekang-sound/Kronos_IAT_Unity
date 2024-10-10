@@ -5,6 +5,9 @@ using static UnityEngine.Advertisements.Advertisement;
 [System.Serializable]
 public class FanShapeScanner: MonoBehaviour
 {
+    [SerializeField]
+    private bool drawGizmos = true;
+
     public float heightOffset;
     public float detectionRadius;
     [Range(0.0f, 360.0f)]
@@ -72,6 +75,8 @@ public class FanShapeScanner: MonoBehaviour
 
     public void OnDrawGizmos()
     {
+        if (!drawGizmos) return;
+
         EditorGizmo(gameObject.transform);
     }
 

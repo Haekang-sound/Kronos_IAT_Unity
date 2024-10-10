@@ -41,7 +41,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
             if (purpose == PursuitFor.Normal)
             {
                 // ATTACK - 공격 사거리 안에 있을 때
-                if (_monoBehaviour.IsInAttackRange())
+                if (_monoBehaviour.IsInMeleeAttackRange())
                 {
                     _monoBehaviour.TriggerAttack();
                 }

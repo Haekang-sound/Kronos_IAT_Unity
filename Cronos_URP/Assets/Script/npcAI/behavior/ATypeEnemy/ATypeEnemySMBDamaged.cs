@@ -20,7 +20,7 @@ public class ATypeEnemySMBDamaged : SceneLinkedSMB<ATypeEnemyBehavior>
         {
             // STRAFE - 범위 안에 있을 때
             Vector3 toTarget = currentTarget.transform.position - _monoBehaviour.transform.position;
-            float strafeDistance = _monoBehaviour.strafeDistance;
+            float strafeDistance = _monoBehaviour.normalAttackDistance;
             if (toTarget.sqrMagnitude < strafeDistance * strafeDistance)
             {
                 _monoBehaviour.TriggerStrafe();
