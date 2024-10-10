@@ -55,7 +55,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _controller = GetComponent<EnemyController>();
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
         _meleeWeapon = GetComponentInChildren<SimpleDamager>();
-		_rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     // void Start()
@@ -103,7 +103,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void OnDrawGizmos()
     {
-        if(drawGizmos == false) return;
+        if (drawGizmos == false) return;
 
         // 공격 범위
         Gizmos.color = Color.red;
@@ -182,7 +182,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         LookAtTarget();
     }
 
-    public void StrafeRight() 
+    public void StrafeRight()
     {
         if (CurrentTarget == null) return;
 
@@ -227,26 +227,19 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         }
     }
 
-    private bool useKnockback;
-    public void SetUseKnockback(bool val) => useKnockback = val;
-
-
     private void Damaged(Damageable.DamageMessage msg)
     {
-		Player.Instance.ChargeCP(msg.isActiveSkill);
-		UnuseBulletTimeScale();
+        Player.Instance.ChargeCP(msg.isActiveSkill);
+        UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
         _hitShake.Begin();
 
-		if (Player.Instance != null)
-		{
-			Player.Instance.TP += Player.Instance.TPGain();
-		}
-
-		if (useKnockback)
+        if (Player.Instance != null)
         {
-            _knockBack?.Begin(msg.damageSource);
+            Player.Instance.TP += Player.Instance.TPGain();
         }
+
+        _knockBack?.Begin(msg.damageSource);
     }
 
     private void Dead()
