@@ -2,6 +2,17 @@ using UnityEngine;
 
 public partial class Damageable : MonoBehaviour
 {
+    public enum DamageType
+    {
+        None = 0,
+        ATypeHit,
+        BTypeHit,
+        KockBack,
+        Fall,
+        OnFallDamaged,
+        Down
+    }
+
     public struct DamageMessage
     {
         public MonoBehaviour damager;
@@ -9,8 +20,8 @@ public partial class Damageable : MonoBehaviour
         public Vector3 direction;
         public Vector3 damageSource;
         public bool throwing;
-		public bool isActiveSkill;
+        public bool isActiveSkill;
 
-        public bool stopCamera;
+        public DamageType damageType;
     }
 }

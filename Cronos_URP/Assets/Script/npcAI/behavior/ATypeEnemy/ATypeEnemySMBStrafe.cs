@@ -48,6 +48,8 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
             _previusSpeed = _monoBehaviour.Controller.GetNavemeshAgentSpeed();
             _monoBehaviour.Controller.SetNavemeshAgentSpeed(_monoBehaviour.strafeSpeed);
         }
+
+        _monoBehaviour.rotationSpeed = 8f;
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -93,6 +95,7 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.rotationSpeed = 1f;
         _monoBehaviour.Controller.SetFollowNavmeshAgent(false);
         _monoBehaviour.Controller.UseNavemeshAgentRotation(true);
 

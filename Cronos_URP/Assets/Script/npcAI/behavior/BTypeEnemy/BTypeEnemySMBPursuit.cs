@@ -10,9 +10,6 @@ public class BTypeEnemySMBPursuit : SceneLinkedSMB<BTypeEnemyBehavior>
         
         _monoBehaviour.Controller.SetFollowNavmeshAgent(true);
 
-        // Damaged - 상태에서 피격 당했을 때
-        _monoBehaviour.ResetTriggerDamaged();
-
         _monoBehaviour.SetFollowerDataRequire(true);
     }
 

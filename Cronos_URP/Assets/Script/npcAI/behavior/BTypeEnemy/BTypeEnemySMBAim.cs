@@ -24,8 +24,6 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
         _monoBehaviour.aimRing.SetActive(true);
         _monoBehaviour.StartCoroutine(_monoBehaviour.ShrinkScale());
 
-        _monoBehaviour.ResetTriggerDamaged();
-
         _strafeTime = Random.Range(minStrafeTime, maxStrafeTime);
         _strafeSpeed = Random.Range(-1f, 1f);
         _onRinght = _strafeSpeed > 0;
