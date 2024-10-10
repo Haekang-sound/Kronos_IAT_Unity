@@ -101,7 +101,6 @@ public class BossBullet : Projectile
             amount = damageAmount,
             damageSource = transform.position,
             damager = this,
-            stopCamera = false,
             throwing = true
         };
 

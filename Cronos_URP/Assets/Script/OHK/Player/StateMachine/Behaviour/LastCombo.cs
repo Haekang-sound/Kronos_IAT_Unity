@@ -9,6 +9,8 @@ public class LastCombo : StateMachineBehaviour
 	private readonly int moveHash = Animator.StringToHash("isMove");
     [SerializeField] float moveForce;
     [SerializeField] float Damage;
+    public Damageable.DamageType damageType;
+
     public float hitStopTime;
     [Range(0.0f, 1.0f)] public float minFrame;
     AnimatorStateInfo currentStateInfo;
@@ -23,8 +25,8 @@ public class LastCombo : StateMachineBehaviour
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
-
-	}
+        Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
+    }
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{ 

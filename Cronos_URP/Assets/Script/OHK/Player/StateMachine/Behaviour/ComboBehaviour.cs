@@ -11,6 +11,8 @@ public class ComboBehaviour : StateMachineBehaviour
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
 
+	public Damageable.DamageType damageType;
+
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 
@@ -25,6 +27,7 @@ public class ComboBehaviour : StateMachineBehaviour
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
+		Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
 
 		animator.SetBool(nextComboHash, false);
 		animator.ResetTrigger("Attack");

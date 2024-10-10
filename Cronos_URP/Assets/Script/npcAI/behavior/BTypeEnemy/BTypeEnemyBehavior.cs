@@ -235,7 +235,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
 		Player.Instance.ChargeCP(msg.isActiveSkill);
 		UnuseBulletTimeScale();
-        TriggerDamage();
+        TriggerDamage(msg.damageType);
         _hitShake.Begin();
 
 		if (Player.Instance != null)
@@ -290,13 +290,35 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _controller.animator.SetTrigger(hashReturn);
     }
 
-    internal void TriggerDamage()
+    internal void TriggerDamage(Damageable.DamageType type)
     {
-        _controller.animator.SetTrigger(hashDamage);
-    }
-    internal void ResetTriggerDamaged()
-    {
-        _controller.animator.ResetTrigger(hashDamage);
+        var key = hashDamage;
+
+        switch (type)
+        {
+            case Damageable.DamageType.None:
+                break;
+            case Damageable.DamageType.ATypeHit:
+                key = Animator.StringToHash("hit_a");
+                break;
+            case Damageable.DamageType.BTypeHit:
+                key = Animator.StringToHash("hit_b");
+                break;
+            case Damageable.DamageType.KockBack:
+                key = Animator.StringToHash("knock_back");
+                break;
+            case Damageable.DamageType.Fall:
+                key = Animator.StringToHash("fall");
+                break;
+            case Damageable.DamageType.OnFallDamaged:
+                key = Animator.StringToHash("on_fall_damaged");
+                break;
+            case Damageable.DamageType.Down:
+                key = Animator.StringToHash("fall_down");
+                break;
+        }
+
+        _controller.animator.SetTrigger(key);
     }
 
     internal void TriggerAttack()
