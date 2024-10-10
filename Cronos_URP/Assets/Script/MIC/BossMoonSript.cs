@@ -25,7 +25,10 @@ public class BossMoonSript : MonoBehaviour
     public float colorDuration = 3.0f;
     float count = 0;
     Material mat;
-    
+
+	// 여기 넣어주면 좋지 않아? ㅎ
+	public GameObject gField;
+	public GravityField gravityField;
 
     void Start()
     {
@@ -50,6 +53,7 @@ public class BossMoonSript : MonoBehaviour
         else if (fall && transform.position.y <= 0.5f)
         {
             fall = false;
+			gField.SetActive(true);
             StartCoroutine(ChangeColorCoroutine(blackColor, blueColor));
         }
     }
@@ -108,16 +112,31 @@ public class BossMoonSript : MonoBehaviour
             yield return null;
         }
 
-		// 색이 다바뀐다음에 넣고 싶으면
-        gradient.SetKeys(
+		gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(endColor, 0.0f), new GradientColorKey(endColor, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
         );
-
         col1.color = new ParticleSystem.MinMaxGradient(gradient);
         col2.color = new ParticleSystem.MinMaxGradient(gradient);
 
-        count++;
+		// 색이 다바뀐다음에 넣고 싶으면
+		if (endColor == blueColor)
+		{
+			gravityField.AnimSpeed = 0.1f;
+		}
+		else if (endColor == yellowColor)
+		{
+			gravityField.AnimSpeed = 10f;
+		}
+		else if (endColor == redColor)
+		{
+			//안쪽으로 몰려~
+			gravityField.AnimSpeed = 1f;
+			gravityField.isGravitation = true;
+			
+		}
+
+		count++;
 		
 		// 유지시간
         yield return new WaitForSeconds(colorDuration);

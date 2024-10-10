@@ -6,7 +6,10 @@ using UnityEngine;
 public class GravityField : MonoBehaviour
 {
 	bool isSlow;
-	public float AnimSpeed= 0.1f;
+	public bool isGravitation;
+	public float AnimSpeed = 0.1f;
+	public float Gravity = 3f;
+
 	Animator m_Animator;
 	private void OnTriggerEnter(Collider other)
 	{
@@ -16,7 +19,6 @@ public class GravityField : MonoBehaviour
 		{
 			isSlow = true;
 			Debug.Log("저는 플레이어에용! 애니메이터도 있어용!");
-			Player.Instance.SetSpeed(0f);
 
 		}
 	}
@@ -25,7 +27,7 @@ public class GravityField : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			isSlow = false;
-			PlayerStateMachine.GetInstance().Animator.speed = AnimSpeed;
+			PlayerStateMachine.GetInstance().Animator.speed = 1f;
 			Debug.Log("잘놀다 갑니다");
 
 		}
@@ -34,22 +36,36 @@ public class GravityField : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(isSlow)
+		if (isSlow)
 		{
 			Debug.Log("느려진다는려진다");
 			PlayerStateMachine.GetInstance().Animator.speed = AnimSpeed;
 
 			Debug.Log(PlayerStateMachine.GetInstance().Animator.speed);
-			Player.Instance.SetSpeed(0f);
+		}
+
+
+
+	}
+	private void FixedUpdate()
+	{
+		if (isGravitation&& isSlow)
+		{
+			Vector3 temp = transform.position - Player.Instance.transform.position;
+			temp.y = 0f;
+
+			// 거리에 비례해서 어쩌구저쩌구하게 만들어야 할듯
+			// 폴리싱때 할까? 
+			PlayerStateMachine.GetInstance().Rigidbody.velocity += temp.normalized * Gravity;
 		}
 	}
 
 	private void OnDestroy()
 	{
-			PlayerStateMachine.GetInstance().Animator.speed = 1f;
+		PlayerStateMachine.GetInstance().Animator.speed = 1f;
 	}
 
-	public void SetAnimSpeed()
+	public void SetAnimSpeed(float value)
 	{
 
 	}
