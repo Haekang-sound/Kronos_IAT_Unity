@@ -8,8 +8,8 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 	PlayerStateMachine stateMachine;
 
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-	private readonly int animSpeedHash = Animator.StringToHash("animSpeed");
-	[SerializeField] float animSpeed = 1f;
+	//private readonly int animSpeedHash = Animator.StringToHash("animSpeed");
+	//[SerializeField] float animSpeed = 1f;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,14 +18,14 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
-		animator.SetFloat(animSpeedHash, animSpeed);
+		//animator.SetFloat(animSpeedHash, animSpeed);
 
 	}
 
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.SetFloat(animSpeedHash, animSpeed);
+		//animator.SetFloat(animSpeedHash, animSpeed);
 
 	}
 	//OnStateExit is called when a transition ends and the state machine finishes evaluating this state
