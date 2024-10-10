@@ -49,7 +49,7 @@ public class GravityField : MonoBehaviour
 	}
 	private void FixedUpdate()
 	{
-		if (isGravitation&& isSlow)
+		if (isGravitation && isSlow)
 		{
 			Vector3 temp = transform.position - Player.Instance.transform.position;
 			temp.y = 0f;
@@ -62,7 +62,8 @@ public class GravityField : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		PlayerStateMachine.GetInstance().Animator.speed = 1f;
+		if (PlayerStateMachine.GetInstance() != null)
+			PlayerStateMachine.GetInstance().Animator.speed = 1f;
 	}
 
 	public void SetAnimSpeed(float value)
