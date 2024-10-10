@@ -213,10 +213,10 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         TriggerDamage();
         _hitShake.Begin();
 
-		if (Player.Instance != null)
-		{
-			Player.Instance.TP += Player.Instance.TPGain();
-		}
+		//if (Player.Instance != null)
+		//{
+		//	Player.Instance.TP += Player.Instance.TPGain();
+		//}
 
 		if (useKnockback)
         {

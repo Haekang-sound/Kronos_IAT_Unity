@@ -248,7 +248,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// 타격시 tp흡수량
 	public float TPGain()
 	{
-		return TPAbsorptionRatio * currentDamage;
+		return TPAbsorptionRatio /** currentDamage*/;
 	}
 	private void Update()
 	{

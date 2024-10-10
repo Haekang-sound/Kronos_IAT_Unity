@@ -56,6 +56,9 @@ public class AheadToHUD : MonoBehaviour
 
         isTrigger = true;
         Debug.Log("Trigger particle!");
+        Debug.Log("Gained TP : " + Player.Instance.TPGain() * burstNumber);
+        Player.Instance.TP += Player.Instance.TPGain() * burstNumber;
+        Debug.Log("Player current TP : " + Player.Instance.TP);
 
 
         // 파티클 배열 생성 및 가져오기

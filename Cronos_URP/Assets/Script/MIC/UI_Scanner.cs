@@ -4,6 +4,7 @@ public class UI_Scanner : MonoBehaviour
 {
     public GameObject player;
     public GameObject interText;
+    public GameObject abilityUnlock;
     bool isPopup;
     bool isInteracting;
 
@@ -12,6 +13,7 @@ public class UI_Scanner : MonoBehaviour
     {
         player = Player.Instance.gameObject;
         interText = GameObject.Find("UI_Interact");
+        abilityUnlock = GameObject.Find("AbilityUnlock");
         interText.SetActive(false);
         isPopup = false;
         isInteracting = false;
@@ -47,7 +49,17 @@ public class UI_Scanner : MonoBehaviour
     {
         if (isPopup && Input.GetKeyDown(KeyCode.E) && !isInteracting)
         {
-            
+            isInteracting = true;
+            interText.SetActive(false);
+            abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
+        }
+
+        if (isInteracting && Input.GetKeyDown(KeyCode.Tab))
+        {
+            isInteracting = false;
+            abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
+            interText.SetActive(true);
+            isPopup = true;
         }
     }
 

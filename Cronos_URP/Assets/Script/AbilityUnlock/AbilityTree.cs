@@ -154,22 +154,26 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
     }
 
-    public void Update()
+
+    public void EnterAbility()
     {
-        // Test
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (_isTransition == false)
         {
-            if (_isTransition == false)
+            if (isFocaus == false)
             {
-                if (isFocaus == false)
-                {
-                    StartCoroutine(Enter());
-                    OnEnter.Invoke();
-                }
-                else if (isFocaus == true)
-                {
-                    StartCoroutine(Exit());
-                }
+                StartCoroutine(Enter());
+                OnEnter.Invoke();
+            }
+        }
+    }
+
+    public void ExitAbility()
+    {
+        if (_isTransition == false)
+        {
+            if (isFocaus == true)
+            {
+                StartCoroutine(Exit());
             }
         }
     }
