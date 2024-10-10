@@ -18,6 +18,11 @@ public class ProgressBar : MonoBehaviour
     public bool isAnimate;
     private bool isFilling;
 
+    private void Awake()
+    {
+        //barImage.fillAmount = 0f;
+    }
+
     public virtual void Start()
     {
         percentage = DefaultPercentage;

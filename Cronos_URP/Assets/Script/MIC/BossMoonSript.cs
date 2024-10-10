@@ -15,6 +15,7 @@ public class BossMoonSript : MonoBehaviour
     ParticleSystem.MainModule rMainMod;
     ParticleSystem.MainModule rMainMod2;
     public GameObject blackHoleParticle;
+    public GameObject blackHoleSphere;
     Color blackColor = Color.black;
     Color blueColor = Color.blue;
     Color yellowColor = Color.yellow;
@@ -23,6 +24,8 @@ public class BossMoonSript : MonoBehaviour
     public float changeDuration = 1.0f;
     public float colorDuration = 3.0f;
     float count = 0;
+    Material mat;
+    
 
     void Start()
     {
@@ -31,6 +34,7 @@ public class BossMoonSript : MonoBehaviour
         ring.SetActive(false);
         ring2.SetActive(false);
         blackHoleParticle.SetActive(false);
+        mat = blackHoleSphere.gameObject.GetComponent<Renderer>().material;
 
         Invoke("MoonFall", 1.0f);
         //Destroy(gameObject, 28.0f);
@@ -65,7 +69,7 @@ public class BossMoonSript : MonoBehaviour
 
     public IEnumerator ChangeColorCoroutine(Color startColor, Color endColor)
     {
-
+		// 서서히 바뀔때 이때 호출 하면됨
         float elapsedTime = 0.0f;
 
         ring.SetActive(true);
@@ -83,6 +87,7 @@ public class BossMoonSript : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             Color curColor = Color.Lerp(startColor, endColor, elapsedTime/changeDuration);
+            Color rimColor = Color.Lerp(whiteColor, endColor, elapsedTime / changeDuration);
 
             // gradient 업데이트
             gradient.SetKeys(
@@ -92,11 +97,18 @@ public class BossMoonSript : MonoBehaviour
 
             col1.color = new ParticleSystem.MinMaxGradient(gradient);
             col2.color = new ParticleSystem.MinMaxGradient(gradient);
-
+            if (startColor == Color.black)
+                mat.SetColor("_RimLightColor", rimColor);
+            else if (endColor == Color.black)
+                mat.SetColor("_RimLightColor", redColor);
+            else
+                mat.SetColor("_RimLightColor", curColor);
+            //Debug.Log("Current rim Light : " + mat.GetColor("_RimLightColor"));
 
             yield return null;
         }
 
+		// 색이 다바뀐다음에 넣고 싶으면
         gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(endColor, 0.0f), new GradientColorKey(endColor, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
@@ -106,7 +118,8 @@ public class BossMoonSript : MonoBehaviour
         col2.color = new ParticleSystem.MinMaxGradient(gradient);
 
         count++;
-
+		
+		// 유지시간
         yield return new WaitForSeconds(colorDuration);
 
         if (count < 5 && endColor == blueColor)
@@ -124,7 +137,7 @@ public class BossMoonSript : MonoBehaviour
         }
         else
         {
-            Debug.Log("enough counts");
+            //Debug.Log("enough counts");
             yield return new WaitForSeconds(5.0f);
             StartCoroutine(ChangeColorCoroutine(redColor, blackColor));
             yield return new WaitForSeconds(1.0f);

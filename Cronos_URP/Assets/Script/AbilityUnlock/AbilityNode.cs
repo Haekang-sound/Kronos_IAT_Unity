@@ -171,7 +171,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         if (levelData.currentPoint == 1)
         {
             //skillIcon.SetGrayscale(0f);
-            skillIcon.StartGrayScaleRoutine();
+            skillIcon.Reset();
             background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
             background.GetComponent<RotateUI>().active = true;
         }

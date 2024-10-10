@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 4231333519554678771}
   - component: {fileID: 6621852547052331384}
   - component: {fileID: 2766467903001530211}
+  - component: {fileID: 1394358186394038310}
   m_Layer: 8
   m_Name: ATypeEnemy
   m_TagString: Respawn
@@ -434,12 +435,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b737b3124f05ab4fbe605d6b9ee6a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmos: 0
-  timeToStopPursuit: 0
-  useCombatZone: 1
+  timeToStopPursuit: 100
+  scanner: {fileID: 1394358186394038310}
   OnDown:
     m_PersistentCalls:
       m_Calls: []
+  drawGizmos: 1
   attackDistance: 1.5
   strongAttackDistance: 3
   strafeDistance: 3
@@ -457,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc465430e9abb34f90e12b1f516476b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollPrefab: {fileID: 8902862480717848591, guid: 65198d2d24e85d2409ed728a5bfe57f6, type: 3}
+  ragdollPrefab: {fileID: 8471465133789767035, guid: 909473ecfa010c54db3a8ec61121b0b9, type: 3}
 --- !u!114 &4231333519554678771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +500,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForcePower: 3
+--- !u!114 &1394358186394038310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427584833974447933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6d87099de79c04f9925b25c613e5dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightOffset: 1.8
+  detectionRadius: 13
+  detectionAngle: 280
+  maxHeightDifference: 2
+  viewBlockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7134127758879641834
 GameObject:
   m_ObjectHideFlags: 0

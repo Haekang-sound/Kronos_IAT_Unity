@@ -1221,6 +1221,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b988f7af5ad49748b788f107f9bdf47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 770713323397539876}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b988f7af5ad49748b788f107f9bdf47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4843559490409304501}
   m_SourcePrefab: {fileID: 100100000, guid: 3b988f7af5ad49748b788f107f9bdf47, type: 3}
 --- !u!4 &7083932612220552871 stripped
 Transform:
@@ -1389,12 +1392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611d45435c2762742a0400a711b0280a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmos: 0
-  timeToStopPursuit: 0
-  useCombatZone: 1
+  timeToStopPursuit: 100
+  scanner: {fileID: 4843559490409304501}
   OnDown:
     m_PersistentCalls:
       m_Calls: []
+  drawGizmos: 0
   attackDistance: 6
   strafeSpeed: 1
   rotationSpeed: 8
@@ -1427,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc465430e9abb34f90e12b1f516476b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollPrefab: {fileID: 8902862480717848591, guid: 65198d2d24e85d2409ed728a5bfe57f6, type: 3}
+  ragdollPrefab: {fileID: 5325312043543699516, guid: d2bc12fc0fc16da4dbdb70318f0c1ddc, type: 3}
 --- !u!114 &3685617736305639920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,3 +1472,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForcePower: 3
+--- !u!114 &4843559490409304501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567454204185697309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6d87099de79c04f9925b25c613e5dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightOffset: 1.8
+  detectionRadius: 13
+  detectionAngle: 280
+  maxHeightDifference: 2
+  viewBlockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 6144
