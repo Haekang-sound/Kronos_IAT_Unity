@@ -55,7 +55,7 @@ public class PlayerMoveState : PlayerBaseState
 	public override void Tick()
 	{
 		// 플레이어의 cp 를 이동속도에 반영한다.
-		stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
+		//stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 		moveSpeed = 1f;
 
 		stateMachine.Player.SetSpeed(moveSpeed);

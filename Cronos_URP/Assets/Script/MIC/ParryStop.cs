@@ -44,10 +44,10 @@ public class ParryStop : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            animator.Play("Parry");
-        }
+//         if (Input.GetKeyDown(KeyCode.R))
+//         {
+//             animator.Play("Parry");
+//         }
     }
 
     public void StopTime(/*float changeTime,*/ int restoreSpeed, float delay)
