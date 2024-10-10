@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Damageable;
 
 public class LastEnforcedCombo : StateMachineBehaviour
 {
@@ -13,7 +14,8 @@ public class LastEnforcedCombo : StateMachineBehaviour
 
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
-	public float hitStopTime;
+    public Damageable.DamageType damageType;
+    public float hitStopTime;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -25,7 +27,8 @@ public class LastEnforcedCombo : StateMachineBehaviour
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
-	}
+        Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
+    }
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{

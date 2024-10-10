@@ -7,7 +7,6 @@ public class SimpleDamager : MonoBehaviour
     public bool drawGizmos;
 
     public float damageAmount = 1;
-    public bool stopCamera;
 
     public LayerMask targetLayers;
 
@@ -15,6 +14,8 @@ public class SimpleDamager : MonoBehaviour
     public bool inAttack;
 
 	public bool isAcitveSkill = false;
+
+    public Damageable.DamageType currentDamageType = Damageable.DamageType.None;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
@@ -89,7 +90,8 @@ public class SimpleDamager : MonoBehaviour
             damager = this,
             direction = (transform.position - other.transform.position).normalized,
             damageSource = transform.position,
-            stopCamera = stopCamera
+            damageType = currentDamageType,
+           
         };
 
         if (m_owner != null)

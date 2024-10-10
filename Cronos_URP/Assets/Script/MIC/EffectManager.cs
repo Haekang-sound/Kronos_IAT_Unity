@@ -136,8 +136,8 @@ public class EffectManager : MonoBehaviour
         //    BossFireShoot(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha3))
         //    BossFiveSpear(player.transform);
-//         if (Input.GetKeyDown(KeyCode.Alpha4))
-//             BossMoon(player.transform);
+         if (Input.GetKeyDown(KeyCode.Alpha3))
+             BossMoon(player.transform);
         if (Input.GetKeyDown(KeyCode.Alpha5))
             CreateAbsorbFX(player.transform, 12);
     }

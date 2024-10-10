@@ -699,6 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1.8
   Damage: 0
+  damageType: 3
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &-6130925670275204267
@@ -960,7 +961,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 850, y: -30, z: 0}
+  m_ParentStateMachinePosition: {x: 850, y: -50, z: 0}
   m_DefaultState: {fileID: -1623663299153418549}
 --- !u!114 &-5500852380666101792
 MonoBehaviour:
@@ -995,6 +996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2
   Damage: 0
+  damageType: 4
   hitStopTime: 0.05
   minFrame: 0.4
 --- !u!114 &-5474965037399157733
@@ -1011,6 +1013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2
   Damage: 0
+  damageType: 4
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1101 &-5449367887995219412
@@ -1102,6 +1105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2.3
   hitStopTime: 0.04
+  Damage: 0
+  damageType: 3
   minFrame: 0.5
 --- !u!1101 &-5073566405331926085
 AnimatorStateTransition:
@@ -1671,6 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2
   Damage: 0
+  damageType: 5
   hitStopTime: 0.06
 --- !u!1101 &-3161619818504497173
 AnimatorStateTransition:
@@ -1775,6 +1781,11 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: 2341847357346862668}
+    second:
+    - {fileID: 1758906489119718432}
+    - {fileID: -1587547279203260226}
+    - {fileID: 238355293268892508}
   - first: {fileID: 4709733735613252092}
     second:
     - {fileID: 3624047856668659846}
@@ -1782,11 +1793,6 @@ AnimatorStateMachine:
     - {fileID: 9093649816371052631}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
-  - first: {fileID: 2341847357346862668}
-    second:
-    - {fileID: 1758906489119718432}
-    - {fileID: -1587547279203260226}
-    - {fileID: 238355293268892508}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -70, y: 250, z: 0}
   m_EntryPosition: {x: -70, y: 100, z: 0}
@@ -2337,6 +2343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: -50
   Damage: 0
+  damageType: 1
   hitStopTime: 0.05
   minFrame: 0.328
 --- !u!1101 &-872182243967851016
@@ -2424,6 +2431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2.8
   Damage: 0
+  damageType: 1
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &-290126547666885164
@@ -2440,6 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1.5
   Damage: 0
+  damageType: 5
   hitStopTime: 0.04
   minFrame: 0
 --- !u!1101 &-119523204972760793
@@ -2778,6 +2787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1
   Damage: 0
+  damageType: 5
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &550255494032006098
@@ -3439,6 +3449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1.3
   Damage: 0
+  damageType: 3
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1109 &2545217923611968774
@@ -3521,6 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 0
   Damage: 0
+  damageType: 0
   hitStopTime: 0
   minFrame: 0
 --- !u!1101 &2862318681915299028
@@ -4458,6 +4470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 0
   Damage: 0
+  damageType: 5
   hitStopTime: 0
 --- !u!1101 &5708946686127872950
 AnimatorStateTransition:
@@ -4697,6 +4710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1.3
   Damage: 0
+  damageType: 0
   hitStopTime: 0
   minFrame: 0.433
 --- !u!1101 &6535759634123561406
@@ -4738,6 +4752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2.5
   Damage: 0
+  damageType: 5
   hitStopTime: 0.04
   minFrame: 0.414
 --- !u!1101 &6699718215165252703
@@ -4883,7 +4898,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25f58d540f5c8df4b872cae2ed3ee75f, type: 3}
   m_Name: 
@@ -5055,6 +5070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 5
   Damage: 0
+  damageType: 4
   hitStopTime: 0.05
 --- !u!114 &7380673278053056779
 MonoBehaviour:
@@ -5149,6 +5165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 2.9
   Damage: 0
+  damageType: 1
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &7745182279930307600

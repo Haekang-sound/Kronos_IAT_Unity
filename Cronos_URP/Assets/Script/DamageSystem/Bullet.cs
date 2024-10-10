@@ -96,7 +96,6 @@ public class Bullet : Projectile
             amount = damageAmount,
             damageSource = transform.position,
             damager = this,
-            stopCamera = false,
             throwing = true
         };
 
