@@ -139,7 +139,7 @@ public class EffectManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
         if (Input.GetKeyDown(KeyCode.Alpha5))
-            CreateAbsorbFX(player.transform);
+            CreateAbsorbFX(player.transform, 12);
     }
 
     private void OnValidate()
@@ -233,6 +233,24 @@ public class EffectManager : MonoBehaviour
             {
                 GameObject instance = Instantiate(effect);
                 instance.transform.position = pos;
+                return instance;
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject SpawnEffect(string name, Vector3 pos, float value)
+    {
+        foreach (GameObject effect in effectArray)
+        {
+            if (effect.name == name)
+            {
+                GameObject instance = Instantiate(effect);
+                instance.transform.position = pos;
+                if (instance.GetComponent<AheadToHUD>() != null)
+                instance.GetComponent<AheadToHUD>().BurstNumber = value;
+
                 return instance;
             }
         }
@@ -492,10 +510,10 @@ public class EffectManager : MonoBehaviour
         Destroy(slashed, 1.0f);
     }
 
-    public void CreateAbsorbFX(Transform trans)
+    public void CreateAbsorbFX(Transform trans, float burstNum)
     {
         // 1초 뒤에 hud로 돌진하는 파티클 만들기
-        GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0));
+        GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
         Destroy(ab, 3.0f);
     }
 
