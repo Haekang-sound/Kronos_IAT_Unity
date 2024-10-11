@@ -19,7 +19,6 @@ public class JasonSaveLoader : MonoBehaviour
 	public void Initialize()
 	{
 		// StreamReader를 사용하여 BOM을 무시하고 파일을 UTF-8로 읽기
-		Debug.Log(Application.dataPath);
 		string ScenefilePath = Application.dataPath + "/output/SceneName.json";
 		string LoadingfilePath = Application.dataPath + "/output/LoadingText.json";
 		string QuestfilePath = Application.dataPath + "/output/Quest.json";

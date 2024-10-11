@@ -178,16 +178,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	void Start()
 	{
-		adjuster = GetComponentInChildren<BoxColliderAdjuster>();
-
-		if (adjuster != null)
-		{
-			Debug.Log("박스콜라이더 어쩌구 찾았습니다");
-		}
-		else
-		{
-			Debug.Log("개뿔이 못찾았습니다.");
-		}
 		// TEST: 데이터 로드 
 		Load();
 
