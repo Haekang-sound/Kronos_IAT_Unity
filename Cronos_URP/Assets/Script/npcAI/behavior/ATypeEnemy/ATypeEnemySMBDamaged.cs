@@ -8,8 +8,6 @@ public class ATypeEnemySMBDamaged : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.ResetAiming();
         _monoBehaviour.ChangeDebugText("DAMAGED");
-
-        _monoBehaviour.SetUseKnockback(true);
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,7 +18,7 @@ public class ATypeEnemySMBDamaged : SceneLinkedSMB<ATypeEnemyBehavior>
         {
             // STRAFE - 범위 안에 있을 때
             Vector3 toTarget = currentTarget.transform.position - _monoBehaviour.transform.position;
-            float strafeDistance = _monoBehaviour.strafeDistance;
+            float strafeDistance = _monoBehaviour.normalAttackDistance;
             if (toTarget.sqrMagnitude < strafeDistance * strafeDistance)
             {
                 _monoBehaviour.TriggerStrafe();
@@ -36,6 +34,5 @@ public class ATypeEnemySMBDamaged : SceneLinkedSMB<ATypeEnemyBehavior>
     public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _monoBehaviour.UseBulletTimeScale();
-        _monoBehaviour.SetUseKnockback(false);
     }
 }
