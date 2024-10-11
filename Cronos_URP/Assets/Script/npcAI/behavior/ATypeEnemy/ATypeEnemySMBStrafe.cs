@@ -81,6 +81,10 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
             {
                 _monoBehaviour.TriggerAttack();
             }
+            else if(_monoBehaviour.IsInNormalAttackRange())
+            {
+                _monoBehaviour.TriggerAttackNormal();
+            }
             else if (_monoBehaviour.IsInStrongAttackRange() == false)
             {
                 _monoBehaviour.TriggerStrongAttack();

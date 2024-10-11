@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using static ScreenFader;
 
 
+
 /// <summary>
 /// Player가 갖는 정보를 한 눈에 볼 수 있는 플레이어 스크립트
 /// 1. status
@@ -137,6 +138,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public GameObject spcCubeR;
 	public float spcDelay;
 	public PlayerStateMachine psm;
+	public BoxColliderAdjuster adjuster; 
 	//public float spcActivateTime;
 
 
@@ -150,7 +152,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 		targetting = GetComponentInChildren<AutoTargetting>();
-	}
+
+		
+}
 	private void OnValidate()
 	{
 		CapsuleColldierUtility.Initialize(gameObject);
@@ -174,6 +178,16 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	void Start()
 	{
+		adjuster = GetComponentInChildren<BoxColliderAdjuster>();
+
+		if (adjuster != null)
+		{
+			Debug.Log("박스콜라이더 어쩌구 찾았습니다");
+		}
+		else
+		{
+			Debug.Log("개뿔이 못찾았습니다.");
+		}
 		// TEST: 데이터 로드 
 		Load();
 
