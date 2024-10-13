@@ -509,6 +509,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea1d47d1050efe04f81053f28ad41aff, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2886257374581986146}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea1d47d1050efe04f81053f28ad41aff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3190329738897861452}
     - targetCorrespondingSourceObject: {fileID: -3310747131198191732, guid: ea1d47d1050efe04f81053f28ad41aff, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6539322176549346325}
@@ -1902,6 +1905,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliders: []
+  Damageable: {fileID: 3190329738897861452}
+--- !u!114 &3190329738897861452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759066550737780681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c807bc4a94ff6449756000c7ad95cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 0
+  currentHitPoints: 0
+  invulnerabiltyTime: 0
+  hitAngle: 360
+  hitForwardRotation: 360
+  defensible: {fileID: 0}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReceiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitWhileInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBecomeVulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageMessageReceivers: []
 --- !u!1 &9175490357683557860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1745487796339611516, guid: ea1d47d1050efe04f81053f28ad41aff, type: 3}

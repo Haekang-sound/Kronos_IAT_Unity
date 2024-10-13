@@ -1,11 +1,13 @@
+using Message;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fracture : MonoBehaviour
+public class Fracture : MonoBehaviour, IMessageReceiver
 {
 	public Collider[] colliders;
-
+	public Damageable Damageable;
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
@@ -23,20 +25,54 @@ public class Fracture : MonoBehaviour
     {
         
     }
-
-	private void OnTriggerEnter(Collider other)
+	private void Update()
 	{
-		 if(other.tag == "Player")
+        if (Damageable.currentHitPoints <= 0f)
 		{
-			GetComponent<Renderer>().enabled = false;
-			foreach(Collider c in colliders)
-			{
-				if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower") continue;
-
-				c.gameObject.GetComponent<Renderer>().enabled = true;
-				Rigidbody rb = c.gameObject.GetComponent <Rigidbody>();
-				rb.constraints = (RigidbodyConstraints)0;
-			}
+			Death();
 		}
+	}
+
+	public void OnReceiveMessage(MessageType type, object sender, object msg)
+	{
+		switch (type)
+		{
+			case MessageType.DAMAGED:
+				{
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)msg;
+
+					Damaged(damageData);
+				}
+				break;
+			case MessageType.DEAD:
+				{
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)msg;
+					Death(/*damageData*/);
+				}
+				break;
+			case MessageType.RESPAWN:
+				{
+
+				}
+				break;
+		}
+	}
+
+	private void Death()
+	{
+		GetComponent<Renderer>().enabled = false;
+		foreach (Collider c in colliders)
+		{
+			if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower") continue;
+
+			c.gameObject.GetComponent<Renderer>().enabled = true;
+			Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
+			rb.constraints = (RigidbodyConstraints)0;
+		}
+	}
+
+	private void Damaged(Damageable.DamageMessage damageData)
+	{
+		throw new NotImplementedException();
 	}
 }
