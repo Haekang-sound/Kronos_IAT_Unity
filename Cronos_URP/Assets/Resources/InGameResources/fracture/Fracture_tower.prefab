@@ -1757,6 +1757,7 @@ GameObject:
   - component: {fileID: 6689910633617757739}
   - component: {fileID: 6541299154980902389}
   - component: {fileID: 5140179958825325848}
+  - component: {fileID: 4626951741732195885}
   m_Layer: 8
   m_Name: Fracture_tower
   m_TagString: Untagged
@@ -1933,7 +1934,19 @@ MonoBehaviour:
   defensible: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7132720289400283415}
+        m_TargetAssemblyTypeName: Fracture, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnReceiveDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -1947,6 +1960,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onDamageMessageReceivers: []
+--- !u!114 &4626951741732195885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5184103482322515824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49bbd6d58be6d734491cfcc5a9ffef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6395230673337908400
 GameObject:
   m_ObjectHideFlags: 0

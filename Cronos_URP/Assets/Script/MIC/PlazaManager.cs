@@ -27,12 +27,15 @@ public class PlazaManager : MonoBehaviour
         RegisterDestroyEvents();
     }
 
-    void RegisterDestroyEvents()
+	void RegisterDestroyEvents()
     {
-        lock1.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
-        lock2.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
-        lock3.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
-    }
+        //lock1.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
+        lock1.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
+        //lock2.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
+        lock2.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
+		//lock3.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
+        lock3.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
+	}
 
     void ObjectDestroyed()
     {

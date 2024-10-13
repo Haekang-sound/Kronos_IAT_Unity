@@ -8,13 +8,15 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 {
 	public Collider[] colliders;
 	public Damageable Damageable;
+	public event Action OnDeath;
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
-		foreach (Collider c in colliders) 
+		foreach (Collider c in colliders)
 		{
-			if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower") continue;
-
+			if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower"
+				|| c.name == "Fracture_tower1" || c.name == "Fracture_tower2"
+				|| c.name == "Fracture_tower3") continue;
 			c.gameObject.GetComponent<Renderer>().enabled = false;
 			Rigidbody rb = c.GetComponent<Rigidbody>();
 			rb.constraints = (RigidbodyConstraints)126;
@@ -22,14 +24,14 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	}
 
 	void Start()
-    {
-        
-    }
+	{
+
+	}
 	private void Update()
 	{
-        if (Damageable.currentHitPoints <= 0f)
+		if (Damageable.currentHitPoints <= 0f)
 		{
-			Death();
+			Damageable.JustDead();
 		}
 	}
 
@@ -58,12 +60,15 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 		}
 	}
 
-	private void Death()
+	public void Death()
 	{
+		OnDeath?.Invoke();
 		GetComponent<Renderer>().enabled = false;
 		foreach (Collider c in colliders)
 		{
-			if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower") continue;
+			if (c.name == "Fracture_box_Test" || c.name == "Fracture_tower"
+				|| c.name == "Fracture_tower1" || c.name == "Fracture_tower2"
+				 || c.name == "Fracture_tower3") continue;
 
 			c.gameObject.GetComponent<Renderer>().enabled = true;
 			Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
