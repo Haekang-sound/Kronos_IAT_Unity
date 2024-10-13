@@ -65,6 +65,26 @@ public class UIManager : MonoBehaviour
     public int sceneIdx = 0;
     public int objectiveIdx = 0;
 
+    [SerializeField]
+    private GameObject interactor;
+    // lazy initialization
+    // 프로퍼티에 할당하기 전에 다른 스크립트가 불러서
+    // 퍼블릭 오브젝트를 바로 할당하기 싫으니까
+    // 초기화 전에 요구한다면, 인스펙터에서 할당한 값으로 초기화하고 리턴
+    private GameObject interactProp;
+    public GameObject Interactor
+    {
+        get
+        {
+            if (interactProp == null)
+            {
+                interactProp = interactor;
+            }
+            return interactProp;
+        }
+        private set { interactProp = value; }
+    }
+
 	// Start is called before the first frame update
 	void Start()
     {

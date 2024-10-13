@@ -58,7 +58,7 @@ public class UI_TPCPHUD : UI_TPCP
         instance = this;
 
         Bind<TextMeshProUGUI>(typeof(Texts));
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = Player.Instance;
 
         if (player == null)
         {

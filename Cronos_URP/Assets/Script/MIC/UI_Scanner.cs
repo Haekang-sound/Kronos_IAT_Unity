@@ -12,7 +12,7 @@ public class UI_Scanner : MonoBehaviour
     private void Start()
     {
         player = Player.Instance.gameObject;
-        interText = GameObject.Find("UI_Interact");
+        interText = UIManager.Instance.Interactor;
         abilityUnlock = GameObject.Find("AbilityUnlock");
         interText.SetActive(false);
         isPopup = false;
