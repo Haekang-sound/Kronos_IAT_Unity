@@ -58,6 +58,9 @@ public class EffectManager : MonoBehaviour
     public float parryTime = 1.0f;
     public float fadeTime = 0.3f;
 
+    // 플레이어 평타 이펙트 관련
+    Vector3 swordMagicOffest = new Vector3(90, 180, 0);
+
     // 강화 검기 관련
     public bool isSwordWave;
     [Range(0f, 200f)]
@@ -129,17 +132,17 @@ public class EffectManager : MonoBehaviour
         swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
         swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
-        // 보스 이펙트 데모로 나오게
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //    BossFireShoot(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //    BossFiveSpear(player.transform);
-         if (Input.GetKeyDown(KeyCode.Alpha3))
-             BossMoon(player.transform);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            CreateAbsorbFX(player.transform, 12);
+        //보스 이펙트 데모로 나오게
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            StartCoroutine(BossEightBeamCoroutine(player.transform));
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            BossFireShoot(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BossFiveSpear(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            BossMoon(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    CreateAbsorbFX(player.transform, 12);
     }
 
     private void OnValidate()
@@ -161,7 +164,7 @@ public class EffectManager : MonoBehaviour
         }
         if (eVolume == null)
         {
-            // 비용이 크다지만 알빠냐
+            // 비용이 크다지만 알빠냐 볼륨이 없다는데
             GameObject eVol = GameObject.Find("Effect Volume");
             eVolume = eVol.GetComponent<Volume>();
         }
@@ -325,8 +328,7 @@ public class EffectManager : MonoBehaviour
         // 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
         soundManager.PlaySFX("Attack_SE", player.transform);
         GameObject slash = SpawnEffect(fxName, player.transform.position);
-        slash.transform.rotation = player.playerSword.transform.rotation;
-        slash.transform.Rotate(90f, 180f, 0);
+        slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
         float newY = player.playerSword.transform.position.y;
         slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
         Destroy(slash, 0.7f);
