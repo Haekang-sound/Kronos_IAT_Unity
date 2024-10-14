@@ -248,7 +248,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         ResetAllTriggers();
 
         AnimatorSetTrigger("groggy");
-        _behaviortreeRunner.play = false;
     }
 
     public void EndGroggy()
@@ -256,7 +255,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         AnimatorSetTrigger("idle");
         
         _groggyStack.ResetStack();
-        _behaviortreeRunner.play = true;
 
         if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
