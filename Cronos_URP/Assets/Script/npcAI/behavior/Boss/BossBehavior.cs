@@ -276,9 +276,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         }
     }
 
-    public void PauseBT(bool pause)
+    public void PlayBT(bool paly)
     {
-        _behaviortreeRunner.play = !pause;
+        _behaviortreeRunner.play = paly;
     }
 
     // -----

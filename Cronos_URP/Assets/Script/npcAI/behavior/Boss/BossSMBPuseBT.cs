@@ -6,6 +6,6 @@ public class BossSMBPuseBT : SceneLinkedSMB<BossBehavior>
 {
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _monoBehaviour.PauseBT(true);
+        _monoBehaviour.PlayBT(false);
     }
 }
