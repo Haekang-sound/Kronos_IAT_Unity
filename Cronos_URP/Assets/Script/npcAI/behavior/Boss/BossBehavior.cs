@@ -211,6 +211,12 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         rotationSpeed = 16f;
     }
 
+    public bool CheckDistanceWithTarget(float distance)
+    {
+        Vector3 toTarget = target.transform.position - transform.position;
+        return toTarget.sqrMagnitude < distance * distance;
+    }
+
     public void LightSpeedRushUpgrade()
     {
         //GameObject obj = Resources.Load<GameObject>("Models/Boss/LightSpeedRush_Clon");
@@ -242,7 +248,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         ResetAllTriggers();
 
         AnimatorSetTrigger("groggy");
-        _behaviortreeRunner.play = false;
     }
 
     public void EndGroggy()
@@ -250,7 +255,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         AnimatorSetTrigger("idle");
         
         _groggyStack.ResetStack();
-        _behaviortreeRunner.play = true;
 
         if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
@@ -270,6 +274,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
+    }
+
+    public void PlayBT(bool paly)
+    {
+        _behaviortreeRunner.play = paly;
     }
 
     // -----

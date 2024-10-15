@@ -3,13 +3,21 @@
 class AnimatorSetTrigger : ActionNode
 {
     public string parameterName;
+    public float waitTime = 0.5f;
+
+    //[SerializeField]
+    private float _timer;
 
     protected override void OnStart()
     {
+        var animator = context.animator.GetComponent<Animator>();
+        animator.SetTrigger(parameterName);
+        _timer = waitTime;
     }
 
     protected override void OnStop()
     {
+        _timer = 0f;
     }
 
     protected override State OnUpdate()
@@ -19,15 +27,13 @@ class AnimatorSetTrigger : ActionNode
             return State.Failure;
         }
 
-        var animator = context.animator.GetComponent<Animator>();
+        _timer -= Time.deltaTime * BulletTime.Instance.GetCurrentSpeed();
 
-        if (animator == null)
+        if(_timer < 0f)
         {
-            return State.Failure;
+            return State.Success;
         }
 
-        animator.SetTrigger(parameterName);
-
-        return State.Success;
+        return State.Running;
     }
 }
