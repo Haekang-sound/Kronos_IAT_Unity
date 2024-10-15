@@ -64,6 +64,7 @@ public class BossLightRushCloneBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(activeTime);
         Rush();
+        OffAim();
     }
 
     private void Rush()
@@ -72,5 +73,18 @@ public class BossLightRushCloneBehavior : MonoBehaviour
         {
             animator.SetTrigger("rush");
         }
+    }
+    
+    // 이펙트 때문에 만들어야지
+    // by MIC
+    public void ChargeAim()
+    {
+        gameObject.GetComponent<BossChargeAimer>().DoAim();
+    }
+
+    // 1 + 1
+    public void OffAim()
+    {
+        gameObject.GetComponent<BossChargeAimer>().OffAim();
     }
 }

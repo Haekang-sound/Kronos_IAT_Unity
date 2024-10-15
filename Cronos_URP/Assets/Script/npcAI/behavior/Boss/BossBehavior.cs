@@ -319,5 +319,18 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         yield return new WaitForSeconds(seconds);
         _animator.SetTrigger("rush");
+        OffAim();
+    }
+
+    // 여기도 있지롱 보스 이펙트
+    public void ChargeAim()
+    {
+        gameObject.GetComponent<BossChargeAimer>().DoAim();
+    }
+
+    // 1 + 1
+    public void OffAim()
+    {
+        gameObject.GetComponent<BossChargeAimer>().OffAim();
     }
 }

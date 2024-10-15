@@ -607,6 +607,9 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+    // 보스 돌진 예고 반짝
+    
+
 
     // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
