@@ -15,7 +15,6 @@ public class ColldierAdjustBehaviour : StateMachineBehaviour
 		if (Size == Vector3.zero)
 		{
 			Player.Instance.meleeWeapon.bAdjuster.Reset();
-			Player.Instance.meleeWeapon.bAdjuster.Adjust();
 
 		}
 		else
