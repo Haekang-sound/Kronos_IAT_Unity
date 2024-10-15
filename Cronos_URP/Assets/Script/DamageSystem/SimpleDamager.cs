@@ -66,19 +66,24 @@ public class SimpleDamager : MonoBehaviour
 
     public bool DamageCheck(Collider other)
     {
+        if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
+        {
+            return false;
+        }
+
         var damageable = other.GetComponent<Damageable>();
 
-        if(!inAttack)
+        if (damageable == null)
+        {
+            damageable = other.GetComponentInParent<Damageable>();
+        }
+
+        if (!inAttack)
         {
             return false;
         }
 
         if (damageable == null)
-        {
-            return false;
-        }
-
-        if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
         {
             return false;
         }
