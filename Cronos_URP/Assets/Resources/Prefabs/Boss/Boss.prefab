@@ -6103,6 +6103,7 @@ GameObject:
   - component: {fileID: 3326145331922590434}
   - component: {fileID: 7683453723291258127}
   - component: {fileID: 6351657802909329031}
+  - component: {fileID: 7686874498894248034}
   - component: {fileID: 6311857566572068782}
   m_Layer: 8
   m_Name: Boss
@@ -6283,7 +6284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   target: {fileID: 0}
-  targetDistance: 10
+  active: 0
   rotationSpeed: 1080
   phaseOne: {fileID: 11400000, guid: b320de41ecdc8bf41a0efb08c5ca3db4, type: 2}
   phaseTwo: {fileID: 11400000, guid: 6271fc6702d17e64184914fbd78f9a08, type: 2}
@@ -6345,6 +6346,19 @@ MonoBehaviour:
   time: 0.2
   distance: 0.1
   delayBetweenShakes: 0
+--- !u!114 &7686874498894248034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751960732937434445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9dd56c499b0fd47b217d85737e119f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
 --- !u!114 &6311857566572068782
 MonoBehaviour:
   m_ObjectHideFlags: 0
