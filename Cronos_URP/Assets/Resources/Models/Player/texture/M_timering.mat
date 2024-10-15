@@ -12,14 +12,13 @@ Material:
   m_Parent: {fileID: 2100000, guid: 134c2ffc15730614abe5c5df69fcda01, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _DISPLACEMENT_LOCK_TILING_SCALE
   - _DOUBLESIDED_ON
   - _EMISSION
-  - _EMISSION_FRESNEL
-  - _MASKMAP
-  - _NORMALMAP
   - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
   - _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
+  - _WEATHER_ON
   m_InvalidKeywords:
   - _HORIZONOCCLUSION_OFF
   m_LightmapFlags: 2
@@ -34,32 +33,36 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: a8cc6cfb480e818499064c747bf48069, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2ec892025f16ee468d68fc161e4cdbb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 779f90553920d9e48ab05ebb8c0df194, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2ec892025f16ee468d68fc161e4cdbb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a8cc6cfb480e818499064c747bf48069, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2ec892025f16ee468d68fc161e4cdbb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 09749249f47ca294896d5fb6877c272b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 3d329bffe3518ac4fa2c2287b489d258, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AORemapMax: 1
-    - _EmissionScale: 1.43
+    - _AlphaCutoffEnable: 1
+    - _EmissionFresnelPower: 0.01
+    - _EmissionScale: 6.53
+    - _EnableEmissionFresnel: 0
     - _MetallicRemapMax: 0.8618159
     - _MetallicRemapMin: 0
     - _SmoothnessRemapMax: 0.8661341
+    - _WeatherEnable: 1
     m_Colors:
-    - _EmissionColor: {r: 0.26415092, g: 0.12335349, b: 0.12335349, a: 1}
+    - _EmissionColor: {r: 0.6603774, g: 0, b: 0.28552812, a: 1}
   m_BuildTextureStacks: []
