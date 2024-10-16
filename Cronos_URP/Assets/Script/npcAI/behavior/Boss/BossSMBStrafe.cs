@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 {
@@ -28,6 +25,8 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
             _previusSpeed = _monoBehaviour.controller.GetNavemeshAgentSpeed();
             _monoBehaviour.controller.SetNavemeshAgentSpeed(1f);
         }
+
+        _monoBehaviour.UseGravity(false);
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -55,6 +54,8 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.UseGravity(true);
+
         _monoBehaviour.controller.SetFollowNavmeshAgent(false);
         _monoBehaviour.controller.UseNavemeshAgentRotation(true);
 

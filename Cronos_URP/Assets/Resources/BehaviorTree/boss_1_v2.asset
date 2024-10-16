@@ -46,7 +46,7 @@ MonoBehaviour:
   description: attack_firezone
   drawGizmos: 0
   parameterName: attack_firezone
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-8662573329454556787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   description: attack_combo3-1
   drawGizmos: 0
   parameterName: attack_combo3-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-7991984966761441007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   description: attack_combo1-1
   drawGizmos: 0
   parameterName: attack_combo1-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-6796994299464535712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: ce4de121c3a00cd488048e9c58ebd495
   position: {x: -797.93243, y: 330.43466}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03242357c585b3442ba5c329b98bba11, type: 3}
   m_Name: RandomSelector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 1e597b1e4ec351c49a52fd6e0fc7cff7
   position: {x: 456.15005, y: 569.4501}
@@ -144,6 +144,7 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   children:
+  - {fileID: 8715953615928333360}
   - {fileID: 1474480085951398223}
 --- !u!114 &-5901845929476283792
 MonoBehaviour:
@@ -168,7 +169,7 @@ MonoBehaviour:
   description: attack_combo2-1
   drawGizmos: 0
   parameterName: attack_combo2-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-5742285507704487129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   description: dodge_right
   drawGizmos: 0
   parameterName: dodge_right
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-5525123536936766581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +217,7 @@ MonoBehaviour:
   description: attack_jump2
   drawGizmos: 0
   parameterName: attack_jump2
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-5390687036643766367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 2158f0671e9e38a4293241add4e2dcb1
   position: {x: 1510.9414, y: 395.93915}
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 8429adb6eb1408a4981b4723b39e5b5a
   position: {x: 2454.7, y: 587.35004}
@@ -291,7 +292,7 @@ MonoBehaviour:
   description: attack_jump2
   drawGizmos: 0
   parameterName: attack_jump2
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-4462934740927916319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +369,7 @@ MonoBehaviour:
   description: attack_spin
   drawGizmos: 0
   parameterName: attack_spin
-  waitTime: 1
+  waitTime: 0.3
 --- !u!114 &-1448434049564022546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +393,7 @@ MonoBehaviour:
   description: attack_combo1-1
   drawGizmos: 0
   parameterName: attack_combo1-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c802f3af2236b4f94bc3fea6b1db4c, type: 3}
   m_Name: CheckTargetDistance
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 4c809282eee3bc24e9ed91242cec5c5f
   position: {x: -1044, y: 499}
@@ -526,7 +527,7 @@ MonoBehaviour:
   description: attack_combo2-1
   drawGizmos: 0
   parameterName: attack_combo2-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &595732876082617434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +600,7 @@ MonoBehaviour:
   description: strafe
   drawGizmos: 0
   parameterName: strafe
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &1520074431773755632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +624,7 @@ MonoBehaviour:
   description: attack_combo3-1
   drawGizmos: 0
   parameterName: 
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &2221318259388286776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: 03c9cfa851de57443b6801e5b1ed2544
   position: {x: 2512.9412, y: 416.93918}
@@ -786,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 109b83a9ea8268541b082e66b484c34a
   position: {x: 169.39621, y: 331.0589}
@@ -812,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c802f3af2236b4f94bc3fea6b1db4c, type: 3}
   m_Name: CheckTargetDistance
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 6c51c4f7da4cfd34b8b925113808966a
   position: {x: 940.9412, y: 570.9393}
@@ -911,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: e28608ea67475c447b4a70b18c563262
   position: {x: 2703.4502, y: 585.6501}
@@ -922,7 +923,7 @@ MonoBehaviour:
   description: attack_shoderpush
   drawGizmos: 0
   parameterName: attack_shoderpush
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &8106870901192276762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,7 +939,7 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 7ce3b5790415a924da63de11db9ead48
-  position: {x: 1736.9414, y: 925.93915}
+  position: {x: 1734.355, y: 926}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -959,7 +960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ed72674b1a1ab43bcd2a25954862cb, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: 43141fdb66ccf37448151bc56bf7cc9d
   position: {x: 2010.9412, y: 212.93918}
@@ -995,7 +996,7 @@ MonoBehaviour:
   description: dodge_left
   drawGizmos: 0
   parameterName: dodge_left
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &8715953615928333360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,10 +1009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 6d84189e55f13a64ab79b79b92496b27
-  position: {x: 785.4501, y: 823.4001}
+  position: {x: 377.90005, y: 745.95013}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
@@ -1019,7 +1020,7 @@ MonoBehaviour:
   description: attack_shoderpush
   drawGizmos: 0
   parameterName: attack_shoderpush
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &8750459475825227405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 588b45730d5be3d4a9b3200cf8bd43de
   position: {x: -924, y: 165}
@@ -1043,4 +1044,4 @@ MonoBehaviour:
   description: strafe
   drawGizmos: 0
   parameterName: strafe
-  waitTime: 0.5
+  waitTime: 0.3

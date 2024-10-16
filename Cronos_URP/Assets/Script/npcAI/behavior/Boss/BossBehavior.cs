@@ -25,6 +25,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private HitShake _hitShake;
     private Animator _animator;
+    private Rigidbody _rigidbody;
     private Damageable _damageable;
     private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
@@ -41,15 +42,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void Awake()
     {
-        shoulderDamager.SetActive(false);
-        impactDamager.SetActive(false);
-
         _blackboard = new Blackboard();
 
         controller = GetComponent<EnemyController>();
 
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
         _damageable = GetComponent<Damageable>();
         _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
@@ -67,10 +66,14 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void OnEnable()
     {
+        shoulderDamager.SetActive(false);
+        impactDamager.SetActive(false);
+
         SceneLinkedSMB<BossBehavior>.Initialise(_animator, this);
 
         _blackboard.target = target;
-        //_blackboard.monobehaviour = gameObject;
+
+        UseGravity(true);
 
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
@@ -221,11 +224,18 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BeginImpactAttack()
     {
         impactDamager?.SetActive(true);
+        UseGravity(false);
     }
 
     public void EndImpactAttack()
     {
         impactDamager?.SetActive(false);
+        UseGravity(true);
+    }
+
+    public void UseGravity(bool gravity)
+    {
+        _rigidbody.useGravity = gravity;
     }
 
     public void BeginAiming()
@@ -275,9 +285,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BeginGroggy()
     {
         ResetAllTriggers();
-
-        EndAttack();
-
         AnimatorSetTrigger("groggy");
     }
 
