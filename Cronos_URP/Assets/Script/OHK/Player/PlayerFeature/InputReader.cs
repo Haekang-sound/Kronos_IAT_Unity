@@ -193,7 +193,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	// E
 	public void OnFlashSlash_E(InputAction.CallbackContext context)
 	{
-		if (context.started) { onFlashSlashStart.Invoke(); }
+		if (context.started) { onFlashSlashStart?.Invoke(); }
 		else if (context.performed) { onFlashSlashPerformed?.Invoke(); }
 		else if (context.canceled) { onFlashSlashCanceled?.Invoke(); }
 	}

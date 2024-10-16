@@ -12,6 +12,7 @@ public class PlayerAttackState : PlayerBaseState
 	[SerializeField] float moveForce;
 	bool attackBool = false;
 
+
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 	AnimatorStateInfo currentStateInfo;
@@ -64,25 +65,29 @@ public class PlayerAttackState : PlayerBaseState
 		}
 
 		CalculateMoveDirection();   // 방향을 계산하고
-		
+
 
 		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 		{
 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}
-		else if(stateMachine.Animator.deltaPosition != null)
+		else if (stateMachine.Animator.deltaPosition != null)
 		{
 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}
 	}
 	public override void FixedTick()
 	{
-// 		Vector3 dir = Camera.main.transform.forward;
-// 		dir.y = 0f;
-// 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation,
-// 		Quaternion.LookRotation(dir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
+		// 		Vector3 dir = Camera.main.transform.forward;
+		// 		dir.y = 0f;
+		// 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation,
+		// 		Quaternion.LookRotation(dir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
 
-		FaceMoveDirection();
+		///트랜지션 중일때만 발동
+		if (stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex))
+		{
+			FaceMoveDirection();
+		}
 		Float();
 	}
 	public override void LateTick() { }

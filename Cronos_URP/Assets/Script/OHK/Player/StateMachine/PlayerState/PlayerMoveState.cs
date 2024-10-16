@@ -55,12 +55,6 @@ public class PlayerMoveState : PlayerBaseState
 
 	}
 
-	// 시간베기
-	public void FlashSlash()
-	{
-		Debug.Log("심판의 일섬!");
-		stateMachine.Animator.SetTrigger("FlashSlash");
-	}
 
 	// state의 update라 볼 수 있지
 	public override void Tick()
@@ -71,14 +65,13 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.Player.SetSpeed(moveSpeed);
 
-		if(stateMachine.Velocity.magnitude > 0f)
+		if (stateMachine.Velocity.magnitude != 0f)
 		{
-			stateMachine.Animator.SetBool("isMove",true);
+			stateMachine.Animator.SetBool("isMove", true);
 		}
 		else
 		{
-			stateMachine.Animator.SetBool("isMove",false);
-
+			stateMachine.Animator.SetBool("isMove", false);
 		}
 
 		// 시간베기 테스트용
@@ -223,7 +216,7 @@ public class PlayerMoveState : PlayerBaseState
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
 		}
-		else if(stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
+		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
 		{
 			stateMachine.Animator.SetTrigger(CPBoombHash);
 		}
@@ -261,6 +254,17 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
+
+	// 시간베기
+	public void FlashSlash()
+	{
+		Debug.Log("심판의 일섬!");
+		if (stateMachine.Animator.GetBool("isFlashSlash"))
+		{
+			stateMachine.Animator.SetTrigger("FlashSlash");
+		}
+	}
+
 }
 
 

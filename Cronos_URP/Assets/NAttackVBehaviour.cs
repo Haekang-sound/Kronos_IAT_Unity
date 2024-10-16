@@ -36,6 +36,7 @@ public class NAttackVBehaviour : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		PlayerStateMachine.GetInstance().InputReader.onRAttackStart -= RAttack;
+		PlayerStateMachine.GetInstance().Animator.ResetTrigger("Rattack");
 	}
 
 	// OnStateMove is called before OnStateMove is called on any state inside this state machine

@@ -27,6 +27,7 @@ public class PlayerStateMachine : StateMachine
 	public float MoveForce {  get; set; }
 	public bool IsGrounded {  get;  set; }
 	
+	public int currentLayerIndex;
 
 	public AnimatorStateInfo currentStateInformable { get; set; }
 	public float minf {  get; set; }
