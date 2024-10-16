@@ -50,7 +50,7 @@ public class PlayerStateMachine : StateMachine
 		GroundChecker = GetComponent<GroundChecker>();
 
 		// 시작 상태를 정해준다.
-		SwitchState(new PlayerIdleState(this));
+		SwitchState(new PlayerMoveState(this));
 	}
 
 	public void SwitchParryState()
