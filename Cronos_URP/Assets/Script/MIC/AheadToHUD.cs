@@ -60,6 +60,9 @@ public class AheadToHUD : MonoBehaviour
         Player.Instance.TP += Player.Instance.TPGain() * burstNumber;
         Debug.Log("Player current TP : " + Player.Instance.TP);
 
+        // 파티클 트리거 되었을 때 TP HUD 초록색으로
+        UI_TPCPHUD uiHud = UI_TPCPHUD.GetInstance();
+        uiHud.ChangeGreen();
 
         // 파티클 배열 생성 및 가져오기
         //ParticleSystem.Particle[] particles = new ParticleSystem.Particle[ps.particleCount];
