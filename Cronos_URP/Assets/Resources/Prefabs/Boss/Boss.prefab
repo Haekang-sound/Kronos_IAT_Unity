@@ -6015,7 +6015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6586109041990688713}
-  - component: {fileID: 1899049963934251244}
+  - component: {fileID: 8639208384206892621}
   - component: {fileID: 69628757099147452}
   m_Layer: 8
   m_Name: Damager
@@ -6039,7 +6039,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4335450133893656820}
   m_LocalEulerAnglesHint: {x: -8.971, y: -35.271, z: 82.007}
---- !u!114 &1899049963934251244
+--- !u!114 &8639208384206892621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6048,7 +6048,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8678772640339566417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5cd88515cb5d774d830ef4f9a144cf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3366e92a106e53047a012176e253befe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1
@@ -6060,6 +6060,14 @@ MonoBehaviour:
   isAcitveSkill: 0
   currentDamageType: 0
   OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  _isGuard: 0
+  _isParrying: 0
+  beParryied:
+    m_PersistentCalls:
+      m_Calls: []
+  parrying:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &69628757099147452
@@ -6284,7 +6292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   target: {fileID: 0}
-  active: 0
   rotationSpeed: 1080
   phaseOne: {fileID: 11400000, guid: b320de41ecdc8bf41a0efb08c5ca3db4, type: 2}
   phaseTwo: {fileID: 11400000, guid: 6271fc6702d17e64184914fbd78f9a08, type: 2}
