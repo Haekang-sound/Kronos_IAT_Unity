@@ -152,8 +152,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 		targetting = GetComponentInChildren<AutoTargetting>();
-
-		
 }
 	private void OnValidate()
 	{
@@ -195,11 +193,22 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		// 문제해결을 위해 옮김 
 		meleeWeapon.SetOwner(gameObject);
+		
+		// simpleDamager없어지지 않았나?
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+		meleeWeapon.parryDamaer.damageAmount = currentDamage;
+
+		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
+
 
 		totalspeed = Speed;
 		_damageable.maxHitPoints = maxTP;
 		_damageable.currentHitPoints = currentTP;
+	}
+
+	private void ChangeParryState()
+	{
+		PlayerFSM.SwitchParryState();
 	}
 
 	public void ChargeCP(Collider other)
@@ -256,6 +265,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 	}
 	private void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			meleeWeapon.parryDamaer.parrying?.Invoke();
+		}
+
 		// 버프중이라면
 		if (isBuff)
 		{

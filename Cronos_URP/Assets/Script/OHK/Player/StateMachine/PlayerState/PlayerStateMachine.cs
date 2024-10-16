@@ -52,5 +52,10 @@ public class PlayerStateMachine : StateMachine
 		// 시작 상태를 정해준다.
 		SwitchState(new PlayerIdleState(this));
 	}
+
+	public void SwitchParryState()
+	{
+		SwitchState(new PlayerParryState(this));
+	}
 	
 }

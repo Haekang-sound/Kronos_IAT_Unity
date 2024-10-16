@@ -26,6 +26,7 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
+		stateMachine.Animator.ResetTrigger("ParryAttack");
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
