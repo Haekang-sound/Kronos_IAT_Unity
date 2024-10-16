@@ -17,9 +17,9 @@ public class UI_TPCPHUD : UI_TPCP
     [SerializeField]
     RectTransform FxHolder;
     [SerializeField]
-    Image circleImageTP;
+    Image[] circleImageTPs;
     [SerializeField]
-    [Range(0, 1)] float TPprogress = 0f;
+    [Range(0, 1)] float[] TPprogress;
     [SerializeField]
     GameObject Tpfx;
     [SerializeField]
@@ -39,14 +39,17 @@ public class UI_TPCPHUD : UI_TPCP
     float cp;
     float MaxTp;
     float MaxCp;
+    public float TpInterval = 60.0f;
 
     Transform parentTrans;
     ParticleSystem ps;
     Quaternion prevParentRot;
     ParticleSystem.MainModule psMain;
 
-    Vector4 orange = new Vector4(1, 0.5f, 0, 1);
-    Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
+    //Vector4 orange = new Vector4(1, 0.5f, 0, 1);
+    //Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
+    Vector4 green = Color.green;
+    Vector4 dGreen = new Vector4(0, 0.8f, 0, 1);
     Vector4 red = Color.red;
     Vector4 dRed = new Vector4(0.8f, 0, 0, 1);
     Vector4 gray = new Vector4(0.8f, 0.8f, 0.8f, 1);
@@ -74,22 +77,17 @@ public class UI_TPCPHUD : UI_TPCP
     // Update is called once per frame
     void Update()
     {
-        // 플레이어의 TP를 받아온다.
-        MaxTp = player.MaxTP;
-        tp = player.TP;
-        textTP.text = tp.ToString("000");
-        TPprogress = tp / MaxTp;
-        // 원형 슬라이더를 현재/최대로 계산해서 줄여준다.
-        circleImageTP.fillAmount = TPprogress;
+        UpdateTpSlider();
+
         // 파티클 시스템을 슬라이더에 맞게 회전한다.
-        FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress * 360));
-        TpGlow.GetComponent<ParticleSystem>().transform.rotation = FxHolder.rotation;
+        //FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress * 360));
+        //TpGlow.GetComponent<ParticleSystem>().transform.rotation = FxHolder.rotation;
 
-        if (Input.GetKeyDown(KeyCode.T))
-            ChangeOrange();
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    ChangeGreen();
 
-        if (Input.GetKeyDown(KeyCode.Y))
-            ChangeRed();
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //    ChangeRed();
 
 
         // 플레이어의 CP를 받아온다.
@@ -97,25 +95,42 @@ public class UI_TPCPHUD : UI_TPCP
         MaxCp = player.MaxCP;
         CPprogress = cp / MaxCp;
         circleImageCP.fillAmount = CPprogress;
-        CpHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CPprogress * -360));
+        //CpHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CPprogress * -360));
+    }
+
+    void UpdateTpSlider()
+    {
+        // 플레이어의 TP를 받아온다.
+        //MaxTp = player.MaxTP;
+        //TPprogress = tp / MaxTp;
+        tp = player.TP;
+        textTP.text = tp.ToString("000");
+
+        // 원형 슬라이더를 현재/최대로 계산해서 줄여준다.
+        //circleImageTP.fillAmount = TPprogress;
+        for (int i = 0; i < circleImageTPs.Length; i++)
+        {
+            TPprogress[i] = ((tp - (TpInterval * i)) / TpInterval);
+            circleImageTPs[i].fillAmount = TPprogress[i];
+        }  
     }
 
     // 파티클이 회전해도 한 방향으로 뿜어져 나오려면
-    private void LateUpdate()
-    {
-        // 현재 부모 회전
-        Quaternion curParentRot = parentTrans.rotation;
-        // 부모 회전의 변화량
-        Quaternion rotChange = curParentRot * Quaternion.Inverse(prevParentRot);
-        // 그걸 반대로 하고
-        Quaternion inverseRotChange = Quaternion.Inverse(rotChange);
-        // 자식 회전을 그걸로 적용
-        ps.transform.rotation = inverseRotChange * ps.transform.rotation;
-        // 이전 부모 회전 업데이트
-        prevParentRot = curParentRot;
-    }
+    //private void LateUpdate()
+    //{
+    //    // 현재 부모 회전
+    //    Quaternion curParentRot = parentTrans.rotation;
+    //    // 부모 회전의 변화량
+    //    Quaternion rotChange = curParentRot * Quaternion.Inverse(prevParentRot);
+    //    // 그걸 반대로 하고
+    //    Quaternion inverseRotChange = Quaternion.Inverse(rotChange);
+    //    // 자식 회전을 그걸로 적용
+    //    ps.transform.rotation = inverseRotChange * ps.transform.rotation;
+    //    // 이전 부모 회전 업데이트
+    //    prevParentRot = curParentRot;
+    //}
 
-    // 노가드 람다
+    // 빨간색 람다
     public void ChangeRed()
     {
         StartCoroutine(ChangeColorScale(red, () =>
@@ -125,10 +140,10 @@ public class UI_TPCPHUD : UI_TPCP
         }));
     }
 
-    // 가드 람다
-    public void ChangeOrange()
+    // 초록색 람다
+    public void ChangeGreen()
     {
-        StartCoroutine(ChangeColorScale(orange, () =>
+        StartCoroutine(ChangeColorScale(green, () =>
         {
             TpGlow.SetActive(true);
             psMain.startColor = new ParticleSystem.MinMaxGradient(Color.white, gray);
@@ -146,12 +161,13 @@ public class UI_TPCPHUD : UI_TPCP
 
             textTP.color = Color.Lerp(color, Color.white, elapsedTime / uiDuration);
             textTP.transform.localScale = Vector3.Lerp(hitScale, originScale, elapsedTime / uiDuration);
-            circleImageTP.color = Color.Lerp(color, Color.white, elapsedTime / uiDuration);
-            circleImageTP.transform.localScale = Vector3.Lerp(hitScale, originScale, elapsedTime / uiDuration);
+            // 슬라이더 색은 안바꾼다
+            //circleImageTP.color = Color.Lerp(color, Color.white, elapsedTime / uiDuration);
+            //circleImageTP.transform.localScale = Vector3.Lerp(hitScale, originScale, elapsedTime / uiDuration);
             
-            if (color == orange)
+            if (color == green)
             {
-                psMain.startColor = new ParticleSystem.MinMaxGradient(orange, dOrange);
+                psMain.startColor = new ParticleSystem.MinMaxGradient(green, dGreen);
             }
             if (color == red)
             {
