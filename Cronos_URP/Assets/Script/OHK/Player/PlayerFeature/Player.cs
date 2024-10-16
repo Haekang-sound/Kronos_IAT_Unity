@@ -199,6 +199,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon.parryDamaer.damageAmount = currentDamage;
 
 		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
+		
 
 
 		totalspeed = Speed;
@@ -351,6 +352,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
+	private void OnDestroy()
+	{
+		meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
+	}
+
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
 		switch (type)
@@ -382,7 +388,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
 		// 
 		if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-			PlayerFSM.GetState().ToString() == "PlayerParryState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
 			rigidImmunity || isEnforced)
 		{

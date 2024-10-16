@@ -21,11 +21,11 @@ public class PlayerParryState : PlayerBaseState
 	public override void Enter()
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
+		stateMachine.Animator.SetTrigger("ParryAttack");
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
-		stateMachine.Animator.ResetTrigger("ParryAttack");
-
-		stateMachine.InputReader.onLAttackStart += Attack;
+		//stateMachine.Animator.ResetTrigger("ParryAttack");
+		//stateMachine.InputReader.onLAttackStart += Attack;
 	}
 	public override void Tick()
 	{
@@ -38,10 +38,12 @@ public class PlayerParryState : PlayerBaseState
 
 	public override void Exit()
 	{
+		stateMachine.InputReader.onLAttackStart -= Attack;
 	}
 	private void Attack()
 	{
-		stateMachine.Animator.SetTrigger("ParryAttack");
+		Debug.Log("패리어택");
+		//stateMachine.Animator.SetTrigger("ParryAttack");
 	}
 
 
