@@ -35,6 +35,8 @@ public class LookatTarget : ActionNode
     public override void OnDrawGizmos()
     {
 #if UNITY_EDITOR
+        if (context == null) return;
+
         var c = Color.blue;
         c.a = 0.3f;
         UnityEditor.Handles.color = c;

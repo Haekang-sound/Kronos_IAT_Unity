@@ -7,21 +7,24 @@ using UnityEngine.Playables;
 public class BossBehavior : MonoBehaviour, IMessageReceiver
 {
     public bool drawGizmos;
-    public GameObject target;
 
-    public float rotationSpeed = 1.0f;
-
+    [Header("Behavior Tree")]
     public BehaviorTree phaseOne;
     public BehaviorTree phaseTwo;
     public BehaviorTree phaseTree;
-    private Blackboard _blackboard;
 
-    [SerializeField]
+    [Header("Damager")]
+    public GameObject shoulderDamager;
+    public GameObject impactDamager;
+
+    [HideInInspector]
+    public GameObject target;
+
+    [HideInInspector]
     public EnemyController controller;
 
-    private Animator _animator;
-
     private HitShake _hitShake;
+    private Animator _animator;
     private Damageable _damageable;
     private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
@@ -33,9 +36,14 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private bool _onPhaseTwo;
     private bool _onPhaseTree;
 
+    private Blackboard _blackboard;
+    private float _rotationSpeed = 16f;
 
     void Awake()
     {
+        shoulderDamager.SetActive(false);
+        impactDamager.SetActive(false);
+
         _blackboard = new Blackboard();
 
         controller = GetComponent<EnemyController>();
@@ -66,6 +74,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
+
+        // For Test
+        if (_behaviortreeRunner.tree != null)
+        {
+            _behaviortreeRunner.tree.blackboard = _blackboard;
+            _behaviortreeRunner.Bind();
+        }
     }
 
     //private void OnDisable()
@@ -80,9 +95,16 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     //{
     //}
 
+    private bool _aimtarget;
+
     void Update()
     {
         UpdateBehaviorTree();
+
+        if(_aimtarget)
+        {
+            LookAtTarget();
+        }
     }
 
     //void FixedUpdate()
@@ -148,16 +170,16 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _onPhaseOne = true;
     }
 
-    public void LookAtTarget()
+    private void LookAtTarget()
     {
         if (target == null) return;
-        if (rotationSpeed < 0.1f) return;
+        if (_rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _rotationSpeed);
     }
 
     public void Strafe(bool isRingth = true)
@@ -186,19 +208,36 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _meleeWeapon.EndAttack();
     }
 
+    public void BeginSoulderAttack()
+    {
+        shoulderDamager?.SetActive(true);
+    }
+
+    public void EndSoulderAttack()
+    {
+        shoulderDamager?.SetActive(false);
+    }
+    
+    public void BeginImpactAttack()
+    {
+        impactDamager?.SetActive(true);
+    }
+
+    public void EndImpactAttack()
+    {
+        impactDamager?.SetActive(false);
+    }
+
     public void BeginAiming()
     {
-        rotationSpeed = 100f;
+        //_rotationSpeed = 100f;
+        _aimtarget = true;
     }
 
     public void StopAiming()
     {
-        rotationSpeed = 0f;
-    }
-
-    public void ResetAiming()
-    {
-        rotationSpeed = 16f;
+        //_rotationSpeed = 0f;
+        _aimtarget = false;
     }
 
     public bool CheckDistanceWithTarget(float distance)
@@ -236,6 +275,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BeginGroggy()
     {
         ResetAllTriggers();
+
+        EndAttack();
 
         AnimatorSetTrigger("groggy");
     }

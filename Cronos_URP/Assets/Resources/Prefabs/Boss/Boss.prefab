@@ -5032,6 +5032,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8019028873866878148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7001280144252760717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6904202538180584823}
+  - component: {fileID: 9049460026417087514}
+  - component: {fileID: 8511620015178322317}
+  m_Layer: 8
+  m_Name: Impact Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6904202538180584823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001280144252760717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5501103, y: 0.66250426, z: 0.3966018, w: -0.31807837}
+  m_LocalPosition: {x: -0.0061448477, y: 0.0021655923, z: 0.012367248}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222735906175801009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &9049460026417087514
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001280144252760717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.025
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8511620015178322317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001280144252760717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5cd88515cb5d774d830ef4f9a144cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  damageAmount: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  inAttack: 1
+  isAcitveSkill: 0
+  currentDamageType: 0
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7155922815043948064
 GameObject:
   m_ObjectHideFlags: 0
@@ -5223,6 +5300,7 @@ Transform:
   - {fileID: 5026153419808919624}
   - {fileID: 8019028873866878148}
   - {fileID: 2674933960806974792}
+  - {fileID: 6904202538180584823}
   - {fileID: 4335450133893656820}
   m_Father: {fileID: 1204977178792929141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5449,6 +5527,83 @@ Transform:
   - {fileID: 2010321453615780772}
   m_Father: {fileID: 5915706418861549162}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7503910460922505618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4130702160754306137}
+  - component: {fileID: 5332748339011483906}
+  - component: {fileID: 7888720594530576698}
+  m_Layer: 8
+  m_Name: Soulder Damager
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4130702160754306137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503910460922505618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.002615736, y: 0.0072114994, z: -0.004636109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3297713228509500585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5332748339011483906
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503910460922505618}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.013
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7888720594530576698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503910460922505618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5cd88515cb5d774d830ef4f9a144cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  damageAmount: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  inAttack: 1
+  isAcitveSkill: 0
+  currentDamageType: 0
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7626098046106534383
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,6 +5824,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4130702160754306137}
   - {fileID: 3040576776376654468}
   - {fileID: 7715717384485945306}
   m_Father: {fileID: 1131058179719416221}
@@ -6020,7 +6176,7 @@ GameObject:
   m_Layer: 8
   m_Name: Damager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6291,11 +6447,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1
-  target: {fileID: 0}
-  rotationSpeed: 1080
   phaseOne: {fileID: 11400000, guid: b320de41ecdc8bf41a0efb08c5ca3db4, type: 2}
   phaseTwo: {fileID: 11400000, guid: 6271fc6702d17e64184914fbd78f9a08, type: 2}
   phaseTree: {fileID: 11400000, guid: e814999f5d72fff4bbed1ea24364e849, type: 2}
+  shoulderDamager: {fileID: 7503910460922505618}
+  impactDamager: {fileID: 7001280144252760717}
+  target: {fileID: 0}
   controller: {fileID: 433410041497287839}
 --- !u!114 &3326145331922590434
 MonoBehaviour:

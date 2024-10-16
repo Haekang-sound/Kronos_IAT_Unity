@@ -15,6 +15,5 @@ public class BossSMBLightSpeedRush : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _monoBehaviour.ResetAiming();
     }
 }

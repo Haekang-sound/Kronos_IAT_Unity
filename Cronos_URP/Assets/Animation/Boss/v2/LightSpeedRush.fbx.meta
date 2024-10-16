@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5ca31b3da5128d45a89cb2e66b8bd41
+guid: 6e17fd32be0bffa4cb775942e53cc94f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -157,7 +157,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: RIG-origin|skill02_01
+      name: Attack Liaght Rush
       takeName: RIG-origin|skill02_01
       internalID: 151881332855842696
       firstFrame: 0
@@ -173,10 +173,10 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -190,6 +190,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.91796875
         functionName: StopAiming
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9941973
+        functionName: BeginAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

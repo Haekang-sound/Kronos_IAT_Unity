@@ -40,6 +40,8 @@ class CheckTargetDistance : ActionNode
     }
     public override void OnDrawGizmos()
     {
+        if(context == null) return;
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(context.transform.position, distance);
     }
