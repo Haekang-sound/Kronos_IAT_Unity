@@ -9,11 +9,13 @@ using UnityEngine.UI;
 
 public class UI_BossHUD : MonoBehaviour
 {
-	// ΩÃ±€∫°±€≈œ
+	// ΩÃ±€∫°±€≈œ <- ¥Á√÷ ø÷
 	static UI_BossHUD instance;
 	public static UI_BossHUD GetInstance() { return instance; }
 
 	public float speed = 1f ;
+
+	public GameObject Boss;
 
 	[SerializeField]
 	[Range(0, 1)] float BossTPProgress = 0f;
@@ -50,8 +52,8 @@ public class UI_BossHUD : MonoBehaviour
 	{
 		instance = this;
 
-		BossGroggyStack = GameObject.Find("Boss").GetComponent<GroggyStack>();
-		BossTP = GameObject.Find("Boss").GetComponent<Damageable>();
+		BossGroggyStack = Boss.GetComponent<GroggyStack>();
+		BossTP = Boss.GetComponent<Damageable>();
 
 		if (BossGroggyStack == null || BossTP == null)
 		{

@@ -9,7 +9,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public bool drawGizmos;
     public GameObject target;
 
-    public float targetDistance;
+    public bool active;
     public float rotationSpeed = 1.0f;
 
     public BehaviorTree phaseOne;
@@ -94,9 +94,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         if (drawGizmos == false) return;
 
-        // 감지 범위
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, targetDistance);
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
@@ -136,9 +133,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         if (_onPhaseOne == false)
         {
             Vector3 toTarget = target.transform.position - transform.position;
-            bool checkDistance = toTarget.sqrMagnitude < targetDistance * targetDistance;
 
-            if (checkDistance)
+            if (active)
             {
                 ChangePhase(phaseOne);
                 _onPhaseOne = true;
@@ -156,6 +152,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             ChangePhase(phaseTree);
             _onPhaseTree = true;
         }
+    }
+
+    public void Active()
+    {
+        active = true;
     }
 
     public void LookAtTarget()
