@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -34,6 +36,8 @@ public class PlayerMoveState : PlayerBaseState
 	public override void Enter()
 	{
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
+		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
+
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
@@ -51,6 +55,13 @@ public class PlayerMoveState : PlayerBaseState
 
 	}
 
+	// 시간베기
+	public void FlashSlash()
+	{
+		Debug.Log("심판의 일섬!");
+		stateMachine.Animator.SetTrigger("FlashSlash");
+	}
+
 	// state의 update라 볼 수 있지
 	public override void Tick()
 	{
@@ -59,6 +70,16 @@ public class PlayerMoveState : PlayerBaseState
 		moveSpeed = 1f;
 
 		stateMachine.Player.SetSpeed(moveSpeed);
+
+		if(stateMachine.Velocity.magnitude > 0f)
+		{
+			stateMachine.Animator.SetBool("isMove",true);
+		}
+		else
+		{
+			stateMachine.Animator.SetBool("isMove",false);
+
+		}
 
 		// 시간베기 테스트용
 		if (Input.GetKeyDown(KeyCode.R))
@@ -137,6 +158,8 @@ public class PlayerMoveState : PlayerBaseState
 	public override void Exit()
 	{
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
+		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
+
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
@@ -160,7 +183,6 @@ public class PlayerMoveState : PlayerBaseState
 	private void StopRun() { isRun = false; }
 	private void LockOn()
 	{
-		Debug.Log("누름");
 		// 락온 상태가 아니라면
 		if (!stateMachine.Player.IsLockOn)
 		{
@@ -225,7 +247,7 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true);
+		stateMachine.Animator.SetBool(attackHash, true);
 	}
 	private void Dodge()
 	{

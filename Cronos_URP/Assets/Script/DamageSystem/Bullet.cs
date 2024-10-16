@@ -48,9 +48,12 @@ public class Bullet : Projectile
         }
     }
 
+	private Vector3 _currentVelocity;
     private void FixedUpdate()
     {
-        m_sinceFired += Time.deltaTime;
+		m_rigidBody.velocity = _currentVelocity * BulletTime.Instance.GetCurrentSpeed();
+
+		m_sinceFired += Time.deltaTime;
 
         if (m_sinceFired > 0.2f)
         {
@@ -79,7 +82,11 @@ public class Bullet : Projectile
         m_shooter = shooter;
 
         m_rigidBody.velocity = GetVelocity(target);
-        m_rigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
+		
+		//ÀÛ¾÷Áß
+		_currentVelocity = m_rigidBody.velocity;
+
+		m_rigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
 
         m_rigidBody.detectCollisions = false;
 

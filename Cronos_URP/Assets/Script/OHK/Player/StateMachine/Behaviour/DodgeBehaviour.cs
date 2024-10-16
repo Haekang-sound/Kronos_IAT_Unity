@@ -17,7 +17,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 		// 상태전환
 		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 		animator.ResetTrigger(attackHash);
-		PlayerStateMachine.GetInstance().SwitchState(new PlayerParryState(PlayerStateMachine.GetInstance()));
+		PlayerStateMachine.GetInstance().SwitchState(new PlayerDodgeState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
 		PlayerStateMachine.GetInstance().MoveForce = moveForce;
