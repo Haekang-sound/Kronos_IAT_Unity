@@ -51,8 +51,6 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
-
-
 	}
 
 
