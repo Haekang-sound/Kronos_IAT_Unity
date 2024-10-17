@@ -4905,8 +4905,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3292366012322232623}
-  - component: {fileID: 5554338354176793373}
   - component: {fileID: 1376209453327522128}
+  - component: {fileID: 373118913077615945}
   m_Layer: 0
   m_Name: damager
   m_TagString: Untagged
@@ -4929,8 +4929,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8538045562123488178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5554338354176793373
-BoxCollider:
+--- !u!114 &1376209453327522128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543870058540188200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48120b7c96da708458efc7e58dbe01e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  damageAmount: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  inAttack: 1
+  isAcitveSkill: 0
+  currentDamageType: 0
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  _elapse: 0
+  period: 1
+--- !u!135 &373118913077615945
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4948,32 +4973,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 3, z: 12}
+  m_Radius: 9.5
   m_Center: {x: 0, y: 0, z: -10}
---- !u!114 &1376209453327522128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3543870058540188200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48120b7c96da708458efc7e58dbe01e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawGizmos: 1
-  damageAmount: 1
-  stopCamera: 0
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  _inAttack: 1
-  OnAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  _elapse: 0
-  period: 1
 --- !u!1 &6695282895686766764
 GameObject:
   m_ObjectHideFlags: 0

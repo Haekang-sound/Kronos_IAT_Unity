@@ -5,12 +5,17 @@ using UnityEngine.InputSystem.XR;
 
 public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 {
+    public float minTime = 2f;
+    public float maxTime = 5f;
+    private float _timer;
+
     private float _previusSpeed;
     private float _strafeSpeed;
 
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _strafeSpeed = Random.Range(0, 2);
+        _strafeSpeed = Random.Range(0, 2) == 0 ? -1f : 1f;
+        _timer = Random.Range(minTime, maxTime);
 
         _monoBehaviour.controller.animator.SetFloat("strafe_speed", _strafeSpeed);
 
@@ -21,7 +26,7 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
         if (_monoBehaviour.controller.useAnimatiorSpeed == false)
         {
             _previusSpeed = _monoBehaviour.controller.GetNavemeshAgentSpeed();
-            _monoBehaviour.controller.SetNavemeshAgentSpeed(1);
+            _monoBehaviour.controller.SetNavemeshAgentSpeed(1f);
         }
 
         _monoBehaviour.ResetAiming();
@@ -29,13 +34,18 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 루트 애니메이션의 위치 실제 위치에 반영
-        //_monoBehaviour.transform.position += animator.deltaPosition;
-
         if (_monoBehaviour.target == null) return;
 
+        _timer -= Time.deltaTime * BulletTime.Instance.GetCurrentSpeed();
+
+        if (_timer <= 0)
+        {
+            _monoBehaviour.AnimatorSetTrigger("idle");
+        }
+
+
         // 이동
-        if (_strafeSpeed > 0.5f)
+        if (_strafeSpeed > 0f)
         {
             _monoBehaviour.Strafe(true);
         }

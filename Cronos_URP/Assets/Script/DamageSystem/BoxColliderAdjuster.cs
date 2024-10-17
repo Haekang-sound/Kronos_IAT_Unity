@@ -7,11 +7,8 @@ public class BoxColliderAdjuster : MonoBehaviour
     public Vector3 newCenter;
     public Vector3 newSize;
 
-    public Vector3 _originalCenter;
-    public Vector3 _originalSize;
-
-	private Vector3 _initCenter;
-	private Vector3 _initSize;
+	public Vector3 _originalCenter;
+	public Vector3 _originalSize;
 
 	private Collider _collider;
 

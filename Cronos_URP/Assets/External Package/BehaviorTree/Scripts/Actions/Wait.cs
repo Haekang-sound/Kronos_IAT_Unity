@@ -3,7 +3,7 @@ using UnityEngine;
 public class Wait : ActionNode
 {
     public float duration = 1;
-    [SerializeField] float _elapse;
+    float _elapse;
 
     protected override void OnStart()
     {

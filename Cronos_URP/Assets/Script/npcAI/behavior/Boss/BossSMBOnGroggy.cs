@@ -5,8 +5,8 @@ using UnityEngine;
 public class BossSMBOnGroggy : SceneLinkedSMB<BossBehavior>
 {
 
-    public float groggyTime;
-    [SerializeField] private float _timer;
+    public float groggyTime = 8f;
+    private float _timer;
 
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

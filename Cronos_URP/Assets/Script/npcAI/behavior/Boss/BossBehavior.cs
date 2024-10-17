@@ -9,7 +9,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public bool drawGizmos;
     public GameObject target;
 
-    public float targetDistance;
     public float rotationSpeed = 1.0f;
 
     public BehaviorTree phaseOne;
@@ -94,9 +93,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         if (drawGizmos == false) return;
 
-        // 감지 범위
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, targetDistance);
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
@@ -133,29 +129,23 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void UpdateBehaviorTree()
     {
-        if (_onPhaseOne == false)
-        {
-            Vector3 toTarget = target.transform.position - transform.position;
-            bool checkDistance = toTarget.sqrMagnitude < targetDistance * targetDistance;
-
-            if (checkDistance)
-            {
-                ChangePhase(phaseOne);
-                _onPhaseOne = true;
-            }
-        }
-
-        if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        if (_onPhaseOne == true && _damageable.GetHealthPercentage() < 70f)
         {
             ChangePhase(phaseTwo);
             _onPhaseTwo = true;
         }
 
-        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        if (_onPhaseTwo == true && _damageable.GetHealthPercentage() < 30f)
         {
             ChangePhase(phaseTree);
             _onPhaseTree = true;
         }
+    }
+
+    public void Active()
+    {
+        ChangePhase(phaseOne);
+        _onPhaseOne = true;
     }
 
     public void LookAtTarget()
@@ -211,6 +201,12 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         rotationSpeed = 16f;
     }
 
+    public bool CheckDistanceWithTarget(float distance)
+    {
+        Vector3 toTarget = target.transform.position - transform.position;
+        return toTarget.sqrMagnitude < distance * distance;
+    }
+
     public void LightSpeedRushUpgrade()
     {
         //GameObject obj = Resources.Load<GameObject>("Models/Boss/LightSpeedRush_Clon");
@@ -242,7 +238,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         ResetAllTriggers();
 
         AnimatorSetTrigger("groggy");
-        _behaviortreeRunner.play = false;
     }
 
     public void EndGroggy()
@@ -250,7 +245,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         AnimatorSetTrigger("idle");
         
         _groggyStack.ResetStack();
-        _behaviortreeRunner.play = true;
 
         if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
@@ -270,6 +264,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
+    }
+
+    public void PlayBT(bool paly)
+    {
+        _behaviortreeRunner.play = paly;
     }
 
     // -----
