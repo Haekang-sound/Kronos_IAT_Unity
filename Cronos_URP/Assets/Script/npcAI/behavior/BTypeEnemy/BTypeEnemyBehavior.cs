@@ -255,12 +255,12 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     internal void UseBulletTimeScale()
     {
-        _bulletTimeScalable.active = true;
+        _bulletTimeScalable.SetActive(true);
     }
 
     internal void UnuseBulletTimeScale()
     {
-        _bulletTimeScalable.active = false;
+        _bulletTimeScalable.SetActive(false);
     }
 
     internal void SetFollowerDataRequire(bool val)

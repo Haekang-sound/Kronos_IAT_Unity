@@ -12,6 +12,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public BehaviorTree phaseTwo;
     public BehaviorTree phaseTree;
 
+    public float bulletTimeUnactiveDelay = 3f;
+
     [Header("Damager")]
     public GameObject shoulderDamager;
     public GameObject impactDamager;
@@ -31,6 +33,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
+    private BulletTimeScalable _bulletTimeScalable;
 
     private bool _onPhaseOne;
     private bool _onPhaseTwo;
@@ -38,6 +41,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private Blackboard _blackboard;
     private readonly float _rotationSpeed = 18f;
+
 
     void Awake()
     {
@@ -54,8 +58,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
+        _bulletTimeScalable = GetComponent<BulletTimeScalable>();
 
-		if (target == null)
+        if (target == null)
 			target = Player.Instance.gameObject;
     }
 
@@ -71,6 +76,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         SceneLinkedSMB<BossBehavior>.Initialise(_animator, this);
 
         _blackboard.target = target;
+        _blackboard.bulletTimeScalable = _bulletTimeScalable;
 
         UseGravity(true);
 
@@ -83,6 +89,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             _behaviortreeRunner.tree.blackboard = _blackboard;
             _behaviortreeRunner.Bind();
         }
+
+        BulletTime.Instance.OnActive.AddListener(() => StartCoroutine(WhenBulletTimeActived(bulletTimeUnactiveDelay)));
+        BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
 
     //private void OnDisable()
@@ -163,13 +172,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void UpdateBehaviorTree()
     {
-        if (_onPhaseOne == true && _damageable.GetHealthPercentage() < 70f)
+        if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
         {
             ChangePhase(phaseTwo);
             _onPhaseTwo = true;
         }
 
-        if (_onPhaseTwo == true && _damageable.GetHealthPercentage() < 30f)
+        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
             ChangePhase(phaseTree);
             _onPhaseTree = true;
@@ -180,6 +189,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         ChangePhase(phaseOne);
         _onPhaseOne = true;
+    }
+
+    public float GetDeltaTime()
+    {
+        return _bulletTimeScalable.GetDeltaTime();
     }
 
     private void LookAtTarget()
@@ -329,6 +343,15 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     // -----
 
+
+    public IEnumerator WhenBulletTimeActived(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _bulletTimeScalable.SetActive(false);
+    }
+
+
     private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float  delay)
     {
         yield return new WaitForSeconds(delay);
@@ -338,9 +361,15 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void ChangePhase(BehaviorTree bt)
     {
+        ResetAllTriggers();
+
+        _behaviortreeRunner.play = false;
+
         _behaviortreeRunner.tree = bt;
         _behaviortreeRunner.tree.blackboard = _blackboard;
-        _behaviortreeRunner.Bind();
+        _behaviortreeRunner.BindTree();
+
+        _behaviortreeRunner.play = true;
     }
 
     private void StartResetAllTriggers()

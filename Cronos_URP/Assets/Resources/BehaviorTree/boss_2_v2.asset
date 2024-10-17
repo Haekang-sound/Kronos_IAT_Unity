@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 40ee3fd9277a2c44b8fff0fa124f0998
   position: {x: 231.149, y: -168}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -4462934740927916319}
@@ -42,7 +42,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_firezone
   drawGizmos: 0
   parameterName: attack_firezone
@@ -66,7 +66,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo3-1
   drawGizmos: 0
   parameterName: attack_combo3-1
@@ -90,7 +90,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_summonskill
   drawGizmos: 0
   parameterName: attack_summonskill
@@ -114,7 +114,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -141,7 +141,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -166,7 +166,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_magicball
   drawGizmos: 0
   parameterName: attack_magicball
@@ -190,7 +190,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: dodge_right
   drawGizmos: 0
   parameterName: dodge_right
@@ -214,7 +214,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_lightdash
   drawGizmos: 0
   parameterName: attack_lightdash
@@ -238,7 +238,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -265,7 +265,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
@@ -289,7 +289,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_lightdash
   drawGizmos: 0
   parameterName: attack_lightdash
@@ -313,7 +313,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -332,20 +332,20 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: f15a730487e544c4ca2bd3f7c822af7b
   position: {x: 231.9503, y: -44.274834}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
+  - {fileID: 7006698977590476675}
   - {fileID: 8750459475825227405}
   - {fileID: 5901033334376792335}
   - {fileID: 8518207435825161847}
-  - {fileID: 7006698977590476675}
 --- !u!114 &-3402741920563354884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,11 +361,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b93340eb33c32ef4583d8a1970008f68
-  position: {x: 248.22505, y: 737.4525}
+  position: {x: 246, y: 737}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_spin
   drawGizmos: 0
   parameterName: attack_spin
@@ -389,7 +389,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo1-1
   drawGizmos: 0
   parameterName: attack_combo1-1
@@ -456,7 +456,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
 --- !u!114 &13587638371181878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,11 +472,11 @@ MonoBehaviour:
   state: 1
   started: 0
   guid: 4c809282eee3bc24e9ed91242cec5c5f
-  position: {x: -1210.3293, y: 492.9659}
+  position: {x: -1213.9675, y: 494.3225}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 'D>6
 
     return Success'
@@ -502,7 +502,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_magicball
   drawGizmos: 0
   parameterName: attack_magicball
@@ -526,7 +526,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -551,7 +551,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo2-1
   drawGizmos: 0
   parameterName: attack_combo2-1
@@ -575,7 +575,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -600,7 +600,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo1-2
   drawGizmos: 0
   parameterName: attack_combo1-2
@@ -624,7 +624,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_bigstep
   drawGizmos: 0
   parameterName: attack_bigstep
@@ -648,7 +648,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: strafe
   drawGizmos: 0
   parameterName: strafe
@@ -672,7 +672,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_bigstep
   drawGizmos: 0
   parameterName: attack_bigstep
@@ -696,7 +696,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -722,7 +722,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 'D>4
 
     Success'
@@ -748,7 +748,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
@@ -766,13 +766,13 @@ MonoBehaviour:
   m_Name: Start
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 60564fdbcb869b6488085b2e1ccbefce
   position: {x: 230.95032, y: -274.2748}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -9066970086742775746}
@@ -795,7 +795,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -821,7 +821,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -846,7 +846,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -872,7 +872,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 'D<4
 
     Success'
@@ -898,7 +898,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -919,11 +919,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 32160f34e3cd1c44c87e4fc5c85abba3
-  position: {x: 2963.9412, y: 199.93918}
+  position: {x: -1242.5004, y: 174.00002}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   duration: 1
@@ -946,7 +946,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -971,7 +971,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 8 / 2
   drawGizmos: 0
   children:
@@ -999,7 +999,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_shoderpush
   drawGizmos: 0
   parameterName: attack_shoderpush
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: dodge_left
   drawGizmos: 0
   parameterName: dodge_left
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: attack_shoderpush
   drawGizmos: 0
   parameterName: attack_shoderpush
@@ -1113,18 +1113,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 2
-  started: 0
+  state: 0
+  started: 1
   guid: 588b45730d5be3d4a9b3200cf8bd43de
-  position: {x: -982.3293, y: 158.9659}
+  position: {x: -893, y: 174.00002}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: strafe
   drawGizmos: 0
   parameterName: strafe
-  waitTime: 0.3
+  waitTime: 0.5
 --- !u!114 &9215139268079194706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1144,7 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: 0
+    bulletTimeScalable: {fileID: 0}
   description: 2 / 8
   drawGizmos: 0
   children:

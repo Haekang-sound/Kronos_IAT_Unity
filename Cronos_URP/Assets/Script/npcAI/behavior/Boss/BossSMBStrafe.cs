@@ -33,7 +33,7 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
     {
         if (_monoBehaviour.target == null) return;
 
-        _timer -= Time.deltaTime * BulletTime.Instance.GetCurrentSpeed();
+        _timer -= _monoBehaviour.GetDeltaTime();
 
         if (_timer <= 0)
         {

@@ -200,6 +200,7 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetTrigger(timeStopHash);
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
+			BulletTime.Instance.OnActive.Invoke();
 		}
 		else if(stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
 		{

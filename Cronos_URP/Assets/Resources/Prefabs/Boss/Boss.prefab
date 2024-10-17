@@ -6424,8 +6424,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   phaseOne: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
-  phaseTwo: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
-  phaseTree: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
+  phaseTwo: {fileID: 11400000, guid: 628ea2ba76aa7e94a843b38c9f11d3a0, type: 2}
+  phaseTree: {fileID: 11400000, guid: eae79bd13c809d14b806cd5533c74c21, type: 2}
+  bulletTimeUnactiveDelay: 3
   shoulderDamager: {fileID: 7503910460922505618}
   impactDamager: {fileID: 7001280144252760717}
   target: {fileID: 0}
@@ -6442,7 +6443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1b18c5320d1f8468857de41ef184e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
+  tree: {fileID: 0}
   play: 1
 --- !u!54 &7683453723291258127
 Rigidbody:
@@ -6499,6 +6500,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
+  OnActive:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7062134607530597408}
+        m_TargetAssemblyTypeName: BossBehavior, Assembly-CSharp
+        m_MethodName: BulletTimOnActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6311857566572068782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6515,7 +6531,7 @@ MonoBehaviour:
   OnMaxStack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7062134607530597408}
+      - m_Target: {fileID: 8751960732937434445}
         m_TargetAssemblyTypeName: BossBehavior, Assembly-CSharp
         m_MethodName: BeginGroggy
         m_Mode: 1

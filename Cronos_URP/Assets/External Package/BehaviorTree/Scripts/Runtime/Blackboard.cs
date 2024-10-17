@@ -9,10 +9,9 @@ public class Blackboard
 
     public GameObject target;
     public Vector3 moveToPosition;
-    public float timer;
+    public BulletTimeScalable bulletTimeScalable;
 
     public void Update()
     {
-        timer -= Time.deltaTime;
     }
 }

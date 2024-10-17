@@ -43,13 +43,6 @@ public class FollowTarget : ActionNode
         {
             context.agent.acceleration = acceleration;
             context.agent.speed = speed;
-
-            if (BulletTime.Instance)
-            {
-                float bulletTimeSpeed = BulletTime.Instance.GetCurrentSpeed();
-                context.agent.acceleration *= bulletTimeSpeed;
-                context.agent.speed *= bulletTimeSpeed;
-            }
         }
 
         if (context.agent.pathPending)
