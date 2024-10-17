@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -37,6 +38,7 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
+		stateMachine.InputReader.onRunStart += TimeSlash;
 
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
@@ -150,6 +152,7 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
+		stateMachine.InputReader.onRunStart -= TimeSlash;
 
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
@@ -253,15 +256,29 @@ public class PlayerMoveState : PlayerBaseState
 		}
 	}
 
-	// 시간베기
+	// 일섬
 	public void FlashSlash()
 	{
-		Debug.Log("심판의 일섬!");
 		if (stateMachine.Animator.GetBool("isFlashSlash"))
 		{
 			stateMachine.Animator.SetTrigger("FlashSlash");
 		}
 	}
+
+	// 시간베기
+	public void TimeSlash()
+	{
+		Debug.Log("시간베기!");
+		if (stateMachine.Animator.GetBool("isTimeSlash"))
+		{
+			if (!stateMachine.AutoTargetting.FindTarget())
+				
+				return;
+			stateMachine.Player.IsLockOn = true;
+			stateMachine.Animator.SetTrigger("TimeSlash");
+		}
+	}
+
 
 }
 
