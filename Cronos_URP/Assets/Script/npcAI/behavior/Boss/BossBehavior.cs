@@ -1,7 +1,6 @@
 using Message;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.Playables;
 
 public class BossBehavior : MonoBehaviour, IMessageReceiver
@@ -38,7 +37,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private bool _onPhaseTree;
 
     private Blackboard _blackboard;
-    private float _rotationSpeed = 16f;
+    private readonly float _rotationSpeed = 18f;
 
     void Awake()
     {
@@ -186,7 +185,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private void LookAtTarget()
     {
         if (target == null) return;
-        if (_rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
