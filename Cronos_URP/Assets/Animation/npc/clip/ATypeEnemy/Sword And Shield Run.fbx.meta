@@ -56,7 +56,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: EndAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -566,8 +573,7 @@ ModelImporter:
     - name: mixamorig:Head
       parentName: mixamorig:Neck
       position: {x: 0.000011208055, y: 0.098684385, z: 0.042651527}
-      rotation: {x: 0.000000029802319, y: -4.6566123e-10, z: -0.0000000019499564,
-        w: 1}
+      rotation: {x: 0.000000029802319, y: -4.6566123e-10, z: -0.0000000019499564, w: 1}
       scale: {x: 1.0000001, y: 1, z: 1.0000001}
     - name: mixamorig:HeadTop_End
       parentName: mixamorig:Head
@@ -602,14 +608,12 @@ ModelImporter:
     - name: mixamorig:LeftHandThumb2
       parentName: mixamorig:LeftHandThumb1
       position: {x: 6.661338e-17, y: 0.031002576, z: 7.389644e-15}
-      rotation: {x: -0.000000059604638, y: 0.00000004097819, z: 0.00000004936009,
-        w: 1}
+      rotation: {x: -0.000000059604638, y: 0.00000004097819, z: 0.00000004936009, w: 1}
       scale: {x: 1.0000004, y: 1.0000002, z: 1.0000002}
     - name: mixamorig:LeftHandThumb3
       parentName: mixamorig:LeftHandThumb2
       position: {x: 0.00000011662432, y: 0.031970646, z: 0.0000001582174}
-      rotation: {x: 0.000000014901159, y: 0.0000000037252899, z: -0.0000000027939682,
-        w: 1}
+      rotation: {x: 0.000000014901159, y: 0.0000000037252899, z: -0.0000000027939682, w: 1}
       scale: {x: 1.0000002, y: 1.0000005, z: 1.0000007}
     - name: mixamorig:LeftHandThumb4
       parentName: mixamorig:LeftHandThumb3
