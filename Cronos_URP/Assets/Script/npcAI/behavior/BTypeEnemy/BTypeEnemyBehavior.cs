@@ -202,7 +202,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         var lookPosition = CurrentTarget.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed * BulletTime.Instance.GetCurrentSpeed());
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)

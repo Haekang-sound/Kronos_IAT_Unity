@@ -17,5 +17,6 @@ public class BossSMBAttack : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
     }
 }

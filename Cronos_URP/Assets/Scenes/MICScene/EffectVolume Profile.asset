@@ -32,6 +32,7 @@ MonoBehaviour:
   - {fileID: -4825185789113903188}
   - {fileID: 2209717655425068244}
   - {fileID: 484805883995895223}
+  - {fileID: 3164391734565607936}
 --- !u!114 &484805883995895223
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -103,3 +104,28 @@ MonoBehaviour:
   bladeRotation:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &3164391734565607936
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d55d8b2a03ee44483311417b016932, type: 3}
+  m_Name: RadialBlurPostProcess
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 10
+  center:
+    m_OverrideState: 1
+    m_Value: {x: 50, y: 50}
+  delay:
+    m_OverrideState: 1
+    m_Value: 0
+  numberOfSamples:
+    m_OverrideState: 1
+    m_Value: 64

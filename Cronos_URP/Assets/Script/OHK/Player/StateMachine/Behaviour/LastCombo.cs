@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
+
 
 //using UnityEditorInternal;
 using UnityEngine;
@@ -18,6 +20,8 @@ public class LastCombo : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.ResetTrigger("Attack");
+		PlayerStateMachine.GetInstance().SwitchState(new PlayerAttackState(PlayerStateMachine.GetInstance()));
+		PlayerStateMachine.GetInstance().currentLayerIndex = layerIndex;
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
         PlayerStateMachine.GetInstance().MoveForce = moveForce;
         PlayerStateMachine.GetInstance().Player.IsEnforced = true;
