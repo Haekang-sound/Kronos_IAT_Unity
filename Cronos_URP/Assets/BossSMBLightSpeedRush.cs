@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class BossSMBLightSpeedRush : SceneLinkedSMB<BossBehavior>
 {
-    public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
-    {
-    }
+    [SerializeField]
+    private float _scale = 2f;
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        var toTarget = _monoBehaviour.target.transform.position - _monoBehaviour.transform.position;
+        
+        var rootmotion = animator.deltaPosition;
+
+        _scale = toTarget.magnitude * rootmotion.magnitude;
+
+        rootmotion *= _scale;
+
+        _monoBehaviour.transform.position += rootmotion;
     }
 
-    public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
 }
