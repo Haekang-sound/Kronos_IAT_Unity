@@ -49,7 +49,7 @@ public class EffectManager : MonoBehaviour
     MotionBlur mBlur;
     ChromaticAberration cAber;
     DepthOfField dOF;
-    public float mBlurVal = 0.7f;
+    public float mBlurVal = 1.0f;
     public float cAberVal = 0.7f;
     public float dofFDistance = 2.0f;
     public float dofFLength = 100.0f;
@@ -137,8 +137,8 @@ public class EffectManager : MonoBehaviour
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //    BossFiveSpear(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -540,7 +540,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
         StartCoroutine(ParryCAberrationCoroutine(cAberVal));
         StartCoroutine(ParryDepthOfFieldCoroutine());
-        StartCoroutine(ParryTime(0.3f));
+        StartCoroutine(ParryTime(0.2f));
         
     }
 
@@ -607,6 +607,9 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+    // 보스 돌진 예고 반짝
+    
+
 
     // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
@@ -668,10 +671,12 @@ public class EffectManager : MonoBehaviour
         // val 만큼 타임스케일 줄였다 원래대로 돌리기
         Time.timeScale = val;
         float elapsedTime = 0.0f;
-        while (elapsedTime < 0.5f)
+        // n초에 걸쳐서 돌아가기
+        float backTime = 0.6f;
+        while (elapsedTime < backTime)
         {
             elapsedTime += Time.deltaTime;
-            Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / 0.5f);
+            Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / backTime);
             yield return null;
         }
     }
