@@ -147,12 +147,12 @@ public partial class Damageable : MonoBehaviour
 
         if (currentHitPoints <= 0)
         {
-            Debug.Log("데미지를 받아 죽었다");
+            //Debug.Log("데미지를 받아 죽었다");
             schedule += OnDeath.Invoke; //This avoid race condition when objects kill each other.
         }
         else
         {
-            Debug.Log("데미지를 받았다");
+            //Debug.Log("데미지를 받았다");
             OnReceiveDamage.Invoke();
         }
 

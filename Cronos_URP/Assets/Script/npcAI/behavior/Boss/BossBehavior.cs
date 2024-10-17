@@ -147,7 +147,17 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BossFireShoot()
     {
-        _effectManager.BossFireShoot(transform);
+        _effectManager?.BossFireShoot(transform);
+    }
+
+    public void BossFiveSpear()
+    {
+        _effectManager?.BossFiveSpear(transform);
+    }
+
+    public void BossMoon()
+    {
+        _effectManager?.BossMoon(transform);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////

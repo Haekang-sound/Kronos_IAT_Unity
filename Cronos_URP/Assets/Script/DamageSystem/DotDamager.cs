@@ -19,7 +19,7 @@ public class DotDamager : SimpleDamager
             if (damaged)
             {
                 _elapse = 0f;
-                Debug.Log("µµÆ®´ï");
+                //Debug.Log("µµÆ®´ï");
             }
         }
     }
