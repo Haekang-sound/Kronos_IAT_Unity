@@ -172,6 +172,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
 		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX); 
+		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState); 
 	}
 
 	void Start()
@@ -490,6 +491,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void BeginGuard()
 	{
+		meleeWeapon?.EndAttack();
 		shieldWeapon?.BeginGuard();
 	}
 
