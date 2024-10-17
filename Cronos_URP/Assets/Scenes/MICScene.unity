@@ -2370,7 +2370,6 @@ GameObject:
   - component: {fileID: 635295889}
   - component: {fileID: 635295888}
   - component: {fileID: 635295887}
-  - component: {fileID: 635295892}
   m_Layer: 11
   m_Name: Plane1
   m_TagString: Untagged
@@ -2476,33 +2475,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &635295892
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 635295886}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1025513866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,6 +3315,10 @@ PrefabInstance:
     - target: {fileID: 9045432339617800354, guid: 2adec6c4d75793b478e0498b70196ef6, type: 3}
       propertyPath: m_Name
       value: Plaza
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045432339617800354, guid: 2adec6c4d75793b478e0498b70196ef6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
