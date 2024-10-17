@@ -9,7 +9,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public bool drawGizmos;
     public GameObject target;
 
-    public bool active;
     public float rotationSpeed = 1.0f;
 
     public BehaviorTree phaseOne;
@@ -130,24 +129,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void UpdateBehaviorTree()
     {
-        if (_onPhaseOne == false)
-        {
-            Vector3 toTarget = target.transform.position - transform.position;
-
-            if (active)
-            {
-                ChangePhase(phaseOne);
-                _onPhaseOne = true;
-            }
-        }
-
-        if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
+        if (_onPhaseOne == true && _damageable.GetHealthPercentage() < 70f)
         {
             ChangePhase(phaseTwo);
             _onPhaseTwo = true;
         }
 
-        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        if (_onPhaseTwo == true && _damageable.GetHealthPercentage() < 30f)
         {
             ChangePhase(phaseTree);
             _onPhaseTree = true;
@@ -156,7 +144,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void Active()
     {
-        active = true;
+        ChangePhase(phaseOne);
+        _onPhaseOne = true;
     }
 
     public void LookAtTarget()

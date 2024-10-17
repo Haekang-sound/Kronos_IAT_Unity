@@ -67,8 +67,6 @@ public class PauseManager : MonoBehaviour
 
     public void UnPauseGame()
     {
-        //playerCam.gameObject.SetActive(true);
-        Debug.Log("Unpause");
         playerInput?.SwitchCurrentActionMap("Player");
         if (player != null)
         {
@@ -79,4 +77,28 @@ public class PauseManager : MonoBehaviour
 		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
 		PlayerStateMachine.GetInstance().isPaused = false;
 	}
+
+    public void PausePlayer()
+    {
+        //PlayerStateMachine.GetInstance().isPaused = true;
+        GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
+
+        playerInput?.SwitchCurrentActionMap("CutScene");
+        if (player != null)
+        {
+            player.gameObject.GetComponent<InputReader>().enabled = false;
+        }
+    }
+
+    public void UnPausePlayer()
+    {
+        playerInput?.SwitchCurrentActionMap("Player");
+        if (player != null)
+        {
+            player.gameObject.GetComponent<InputReader>().enabled = true;
+        }
+
+        GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
+        //PlayerStateMachine.GetInstance().isPaused = false;
+    }
 }
