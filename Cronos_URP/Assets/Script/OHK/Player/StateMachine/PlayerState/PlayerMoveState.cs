@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -36,6 +35,11 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Enter()
 	{
+		stateMachine.Animator.SetBool(guradHash, false);
+		stateMachine.Animator.ResetTrigger("Attack");
+		stateMachine.Animator.ResetTrigger("Rattack");
+		stateMachine.Animator.ResetTrigger("ParryAttack");
+
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
 		stateMachine.InputReader.onRunStart += TimeSlash;
@@ -63,7 +67,7 @@ public class PlayerMoveState : PlayerBaseState
 		//stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 		moveSpeed = 1f;
 
-		stateMachine.Player.SetSpeed(moveSpeed);
+
 
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
@@ -246,11 +250,6 @@ public class PlayerMoveState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (stateMachine.Player.CP < 10f)
-		{
-			return;
-		}
-		stateMachine.Player.CP -= 10f;
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
@@ -273,9 +272,8 @@ public class PlayerMoveState : PlayerBaseState
 		if (stateMachine.Animator.GetBool("isTimeSlash"))
 		{
 			if (!stateMachine.AutoTargetting.FindTarget())
-				
+
 				return;
-			stateMachine.Player.IsLockOn = true;
 			stateMachine.Animator.SetTrigger("TimeSlash");
 		}
 	}

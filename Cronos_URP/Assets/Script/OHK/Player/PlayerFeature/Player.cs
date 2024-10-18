@@ -269,7 +269,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		if(Input.GetKeyDown(KeyCode.P))
 		{
-			meleeWeapon.parryDamaer.parrying?.Invoke();
+			//BulletTime.Instance.DecelerateSpeed();
+			//Time.timeScale = 0.1f;
+		}
+		if (Input.GetKeyDown(KeyCode.O))
+		{	
+			BulletTime.Instance.SetNormalSpeed();
+			//Time.timeScale = 1f;
 		}
 
 		// 버프중이라면

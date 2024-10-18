@@ -30,8 +30,8 @@ public class ComboBehaviour : StateMachineBehaviour
 		Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
 
 		animator.SetBool(nextComboHash, false);
-		animator.ResetTrigger("Attack");
-		animator.ResetTrigger("Rattack");
+// 		animator.ResetTrigger("Attack");
+// 		animator.ResetTrigger("Rattack");
 	}
 
 

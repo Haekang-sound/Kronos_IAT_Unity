@@ -24,6 +24,7 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
 		stateMachine.Animator.SetBool(nextComboHash, false);
+		stateMachine.Animator.SetBool(guradHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
 		stateMachine.Animator.ResetTrigger("ParryAttack");
@@ -112,11 +113,6 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (stateMachine.Player.CP < 10f)
-		{
-			return;
-		}
-		stateMachine.Player.CP -= 10f;
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
 			stateMachine.Animator.SetBool(nextComboHash, false);
