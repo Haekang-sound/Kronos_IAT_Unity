@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BulletTime : MonoBehaviour
 {
@@ -10,6 +9,9 @@ public class BulletTime : MonoBehaviour
     public float targetSpeed = 1f;
     public float acceleration = 1f;
     public float deceleration = 1f;
+
+
+    public UnityEvent OnActive, OnNormalrize;
 
     private static BulletTime _instance;
 
@@ -71,11 +73,13 @@ public class BulletTime : MonoBehaviour
     public void DecelerateSpeed()
     {
         targetSpeed = 0.01f;
+        OnActive.Invoke();
     }
 
     public void SetNormalSpeed()
     {
         targetSpeed = 1f;
+        OnNormalrize.Invoke();
     }
 
     public float GetCurrentSpeed()

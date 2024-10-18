@@ -24,12 +24,7 @@ public class RandomWait : ActionNode
     {
         float speed = 1;
 
-        if (BulletTime.Instance)
-        {
-            speed = BulletTime.Instance.GetCurrentSpeed();
-        }
-
-        _elapse += Time.deltaTime * speed;
+        _elapse += blackboard.bulletTimeScalable.GetDeltaTime();
 
         if (_elapse > _duration)
         {

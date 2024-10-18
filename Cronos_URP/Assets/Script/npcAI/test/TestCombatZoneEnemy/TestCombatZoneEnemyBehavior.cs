@@ -277,6 +277,6 @@ public class TestCombatZoneEnemyBehavior : MonoBehaviour, IMessageReceiver
 
     public void SetBulletTimeScalable(bool val)
     {
-        _bulletTimeScalable.active = val;
+        _bulletTimeScalable.SetActive(val);
     }
 }

@@ -19683,8 +19683,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2376653655312660055}
-  - component: {fileID: 4574489079557079928}
   - component: {fileID: 7503156397163632899}
+  - component: {fileID: 5593558955909410019}
   m_Layer: 0
   m_Name: Damader
   m_TagString: Untagged
@@ -19707,29 +19707,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5656634030659286373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4574489079557079928
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4688993869630434383}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.3
-  m_Height: 5
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 2.5}
 --- !u!114 &7503156397163632899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19744,14 +19721,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawGizmos: 1
   damageAmount: 1
-  stopCamera: 0
   targetLayers:
     serializedVersion: 2
     m_Bits: 512
-  _inAttack: 1
+  inAttack: 0
+  isAcitveSkill: 0
+  currentDamageType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
+--- !u!135 &5593558955909410019
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688993869630434383}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5733546943354329107
 GameObject:
   m_ObjectHideFlags: 0

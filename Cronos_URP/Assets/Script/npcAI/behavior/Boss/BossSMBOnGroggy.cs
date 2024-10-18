@@ -21,8 +21,4 @@ public class BossSMBOnGroggy : SceneLinkedSMB<BossBehavior>
             _monoBehaviour.EndGroggy();
         }
     }
-
-    public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
 }

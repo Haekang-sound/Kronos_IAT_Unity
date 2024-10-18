@@ -7,8 +7,10 @@ public class MeleeWeapon : MonoBehaviour
 
     private void Awake()
     {
-        simpleDamager = GetComponentInChildren<SimpleDamager>();
-        parryDamaer = GetComponentInChildren<ParryDamager>();
+        if (simpleDamager == null )
+            simpleDamager = GetComponentInChildren<SimpleDamager>();
+        if (parryDamaer == null)
+            parryDamaer = GetComponentInChildren<ParryDamager>();
 		bAdjuster = GetComponentInChildren<BoxColliderAdjuster>();
 
 		simpleDamager?.gameObject.SetActive(false);
