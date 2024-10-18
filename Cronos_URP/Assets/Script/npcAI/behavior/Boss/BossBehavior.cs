@@ -141,7 +141,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
-				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
+                Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
                 _animator.SetTrigger("death");
@@ -212,7 +212,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationSpeed * _bulletTimeScalable.GetDeltaTime());
     }
 
     public void Strafe(bool isRingth = true)
@@ -323,25 +323,26 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         AnimatorSetTrigger("idle");
 
         _groggyStack.ResetStack();
+        
+        StartResetAllTriggers();
 
-        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        var currentHP = _damageable.GetHealthPercentage();
+        if (currentHP > 70f)
         {
-            StartResetAllTriggers();
-            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
-            _onPhaseTree = true;
-        }
-        else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
-        {
-            StartResetAllTriggers();
-            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
-            _onPhaseTwo = true;
-        }
-        else
-        {
-            StartResetAllTriggers();
             StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
+        else if (_onPhaseTwo == false && currentHP > 30f)
+        {
+            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
+            _onPhaseTwo = true;
+        }
+        else //if (_onPhaseTree == false && currentHP <= 30f)
+        {
+            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
+            _onPhaseTree = true;
+        }
+        
     }
 
     public void PlayBT(bool paly)

@@ -863,6 +863,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CutScene"",
+            ""id"": ""7b92a099-1da3-4128-acc5-ff28fdbb7ac2"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""6aef2d7c-286a-48c6-b5a0-989084ef1caf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5aab151e-8388-403b-a3eb-4383742014dc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -921,6 +949,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // CutScene
+        m_CutScene = asset.FindActionMap("CutScene", throwIfNotFound: true);
+        m_CutScene_Newaction = m_CutScene.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1230,6 +1261,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // CutScene
+    private readonly InputActionMap m_CutScene;
+    private List<ICutSceneActions> m_CutSceneActionsCallbackInterfaces = new List<ICutSceneActions>();
+    private readonly InputAction m_CutScene_Newaction;
+    public struct CutSceneActions
+    {
+        private @Controls m_Wrapper;
+        public CutSceneActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_CutScene_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_CutScene; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CutSceneActions set) { return set.Get(); }
+        public void AddCallbacks(ICutSceneActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CutSceneActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CutSceneActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(ICutSceneActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(ICutSceneActions instance)
+        {
+            if (m_Wrapper.m_CutSceneActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICutSceneActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CutSceneActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CutSceneActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CutSceneActions @CutScene => new CutSceneActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -1275,5 +1352,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface ICutSceneActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
