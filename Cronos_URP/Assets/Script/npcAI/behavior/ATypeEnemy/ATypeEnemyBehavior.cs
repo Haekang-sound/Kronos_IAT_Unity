@@ -19,7 +19,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     [Header("Speed")]
     public float strafeSpeed = 1f;
-    private float rotationSpeed = 1.0f;
+    public float rotationSpeed = 1.0f;
 
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
