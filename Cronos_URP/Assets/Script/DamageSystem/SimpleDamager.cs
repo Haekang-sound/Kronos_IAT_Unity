@@ -16,6 +16,7 @@ public class SimpleDamager : MonoBehaviour
 	public bool isAcitveSkill = false;
 
     public Damageable.DamageType currentDamageType = Damageable.DamageType.None;
+    public Damageable.ComboType currentComboType = Damageable.ComboType.None;
 
     public delegate void TriggerEnterAction(Collider other);
     public event TriggerEnterAction OnTriggerEnterEvent;
@@ -96,6 +97,7 @@ public class SimpleDamager : MonoBehaviour
             direction = (transform.position - other.transform.position).normalized,
             damageSource = transform.position,
             damageType = currentDamageType,
+            comboType = currentComboType,
            
         };
 

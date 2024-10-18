@@ -2,7 +2,13 @@ using UnityEngine;
 
 public partial class Damageable : MonoBehaviour
 {
-    public enum DamageType
+	public enum ComboType
+	{
+        None = 0,
+		ACombo,
+		BCombo
+	}
+	public enum DamageType
     {
         None = 0,
         ATypeHit,
@@ -23,5 +29,6 @@ public partial class Damageable : MonoBehaviour
         public bool isActiveSkill;
 
         public DamageType damageType;
+        public ComboType comboType;
     }
 }

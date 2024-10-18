@@ -188,6 +188,7 @@ public partial class Damageable : MonoBehaviour
         data.throwing = false;
 		data.isActiveSkill = false;
         data.damageType = Damageable.DamageType.None;
+        data.comboType = Damageable.ComboType.None;
 
         for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
         {

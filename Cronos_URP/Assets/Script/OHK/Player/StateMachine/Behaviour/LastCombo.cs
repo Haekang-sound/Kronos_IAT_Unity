@@ -11,8 +11,9 @@ public class LastCombo : StateMachineBehaviour
     [SerializeField] float moveForce;
     [SerializeField] float Damage;
     public Damageable.DamageType damageType;
+	public Damageable.ComboType comboType;
 
-    public float hitStopTime;
+	public float hitStopTime;
     [Range(0.0f, 1.0f)] public float minFrame;
     AnimatorStateInfo currentStateInfo;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -28,8 +29,9 @@ public class LastCombo : StateMachineBehaviour
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
-        Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
-    }
+		Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
+		Player.Instance.meleeWeapon.simpleDamager.currentComboType = comboType;
+	}
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{ 
