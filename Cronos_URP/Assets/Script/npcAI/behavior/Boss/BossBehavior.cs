@@ -12,6 +12,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public BehaviorTree phaseTwo;
     public BehaviorTree phaseTree;
 
+    [Header("Phase 3 Option")]
     public float bulletTimeUnactiveDelay = 3f;
 
     [Header("Damager")]
@@ -61,7 +62,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _bulletTimeScalable = GetComponent<BulletTimeScalable>();
 
         if (target == null)
-			target = Player.Instance.gameObject;
+            target = Player.Instance.gameObject;
     }
 
     //void Start()
@@ -83,6 +84,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
 
+        _groggyStack.OnMaxStack.AddListener(BeginGroggy);
+
         // For Test
         if (_behaviortreeRunner.tree != null)
         {
@@ -90,7 +93,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             _behaviortreeRunner.Bind();
         }
 
-        BulletTime.Instance.OnActive.AddListener(() => StartCoroutine(WhenBulletTimeActived(bulletTimeUnactiveDelay)));
+        BulletTime.Instance.OnActive.AddListener(InvalidateBulletTime);
         BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
 
@@ -112,7 +115,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         UpdateBehaviorTree();
 
-        if(_aimtarget)
+        if (_aimtarget)
         {
             LookAtTarget();
         }
@@ -137,6 +140,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             case MessageType.DAMAGED:
                 break;
             case MessageType.DEAD:
+                _animator.SetTrigger("death");
                 break;
             case MessageType.RESPAWN:
                 break;
@@ -213,13 +217,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         Vector3 offsetPlayer = target.transform.position - transform.position;
 
-        if(isRingth == false)
+        if (isRingth == false)
         {
             offsetPlayer = transform.position - target.transform.position;
         }
 
         Vector3 direction = Vector3.Cross(offsetPlayer, Vector3.up);
-        controller.SetTarget(transform.position + direction.normalized) ;
+        controller.SetTarget(transform.position + direction.normalized);
 
         LookAtTarget();
     }
@@ -242,7 +246,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         shoulderDamager?.SetActive(false);
     }
-    
+
     public void BeginImpactAttack()
     {
         impactDamager?.SetActive(true);
@@ -313,7 +317,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void EndGroggy()
     {
         AnimatorSetTrigger("idle");
-        
+
         _groggyStack.ResetStack();
 
         if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
@@ -351,8 +355,15 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _bulletTimeScalable.SetActive(false);
     }
 
+    private void InvalidateBulletTime()
+    {
+        if (phaseTree)
+        {
+            StartCoroutine(WhenBulletTimeActived(bulletTimeUnactiveDelay));
+        }
+    }
 
-    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float  delay)
+    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float delay)
     {
         yield return new WaitForSeconds(delay);
 

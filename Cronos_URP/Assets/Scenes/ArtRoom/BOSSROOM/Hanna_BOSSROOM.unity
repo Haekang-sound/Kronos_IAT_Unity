@@ -3273,6 +3273,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7171224109925757377, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: maxTP
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171224109925757377, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: currentTP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945108375219279421, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8701460384968956547, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: m_Intensity
       value: 0.3
@@ -14481,7 +14493,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.03254743, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.085465476, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -14492,7 +14504,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0.1427176, g: 0.5920133, b: 0.793191, a: 0}
-    - _WindDirection: {r: 0.03254743, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.085465476, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!4 &1546958200 stripped
 Transform:
@@ -16903,8 +16915,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6311857566572068782, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: maxStack
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6311857566572068782, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: OnMaxStack.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311857566572068782, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: OnMaxStack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1893037003}
     - target: {fileID: 6387593637759844574, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8730553

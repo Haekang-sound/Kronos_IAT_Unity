@@ -5,6 +5,7 @@ public class GroggyStack : MonoBehaviour
 {
     public int maxStack;
 
+    [HideInInspector]
     public UnityEvent OnMaxStack;
 
     [SerializeField]
