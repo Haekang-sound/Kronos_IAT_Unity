@@ -24,6 +24,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
 
+    [HideInInspector]
+    public bool inAttack;
+
     public EnemyController Controller { get { return _controller; } }
 
     private HitShake _hitShake;
@@ -215,6 +218,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void Damaged(Damageable.DamageMessage msg)
     {
+        if (inAttack && msg.comboType == Damageable.ComboType.UninterruptibleCombo) 
+            return;
+
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
