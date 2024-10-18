@@ -73,13 +73,13 @@ public class BulletTime : MonoBehaviour
     public void DecelerateSpeed()
     {
         targetSpeed = 0.01f;
-        OnActive.Invoke();
+        OnActive?.Invoke();
     }
 
     public void SetNormalSpeed()
     {
         targetSpeed = 1f;
-        OnNormalrize.Invoke();
+        OnNormalrize?.Invoke();
     }
 
     public float GetCurrentSpeed()

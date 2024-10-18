@@ -73,7 +73,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Deceleration"",
+                    ""name"": ""Deceleration_Q"",
                     ""type"": ""Button"",
                     ""id"": ""9f8c0e93-515b-482d-be7f-db0ecbebfe6d"",
                     ""expectedControlType"": ""Button"",
@@ -109,9 +109,27 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": "" Run"",
+                    ""name"": "" Run_LShift"",
                     ""type"": ""Button"",
                     ""id"": ""93756864-77d5-490a-903b-6c7b6c4cbf07"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InterActive_F"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5a57a18-3c31-44c0-92bc-c312314de89c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlashSlash_E"",
+                    ""type"": ""Button"",
+                    ""id"": ""bea49534-d0f9-403d-b56c-1e7de172981c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -258,7 +276,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Deceleration"",
+                    ""action"": ""Deceleration_Q"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -302,7 +320,29 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": "" Run"",
+                    ""action"": "" Run_LShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31d0837f-8d72-40d5-9bb9-8c852cf1a840"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InterActive_F"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b0f367d-2561-4b35-bffc-87480629f078"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashSlash_E"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -862,11 +902,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LAttack = m_Player.FindAction("L.Attack", throwIfNotFound: true);
         m_Player_RAttack = m_Player.FindAction("R.Attack", throwIfNotFound: true);
-        m_Player_Deceleration = m_Player.FindAction("Deceleration", throwIfNotFound: true);
+        m_Player_Deceleration_Q = m_Player.FindAction("Deceleration_Q", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_LockOn = m_Player.FindAction("LockOn", throwIfNotFound: true);
         m_Player_UnlockAbility = m_Player.FindAction("UnlockAbility", throwIfNotFound: true);
-        m_Player_Run = m_Player.FindAction(" Run", throwIfNotFound: true);
+        m_Player_Run_LShift = m_Player.FindAction(" Run_LShift", throwIfNotFound: true);
+        m_Player_InterActive_F = m_Player.FindAction("InterActive_F", throwIfNotFound: true);
+        m_Player_FlashSlash_E = m_Player.FindAction("FlashSlash_E", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -945,11 +987,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LAttack;
     private readonly InputAction m_Player_RAttack;
-    private readonly InputAction m_Player_Deceleration;
+    private readonly InputAction m_Player_Deceleration_Q;
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_LockOn;
     private readonly InputAction m_Player_UnlockAbility;
-    private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Run_LShift;
+    private readonly InputAction m_Player_InterActive_F;
+    private readonly InputAction m_Player_FlashSlash_E;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -959,11 +1003,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LAttack => m_Wrapper.m_Player_LAttack;
         public InputAction @RAttack => m_Wrapper.m_Player_RAttack;
-        public InputAction @Deceleration => m_Wrapper.m_Player_Deceleration;
+        public InputAction @Deceleration_Q => m_Wrapper.m_Player_Deceleration_Q;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
         public InputAction @UnlockAbility => m_Wrapper.m_Player_UnlockAbility;
-        public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Run_LShift => m_Wrapper.m_Player_Run_LShift;
+        public InputAction @InterActive_F => m_Wrapper.m_Player_InterActive_F;
+        public InputAction @FlashSlash_E => m_Wrapper.m_Player_FlashSlash_E;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -988,9 +1034,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RAttack.started += instance.OnRAttack;
             @RAttack.performed += instance.OnRAttack;
             @RAttack.canceled += instance.OnRAttack;
-            @Deceleration.started += instance.OnDeceleration;
-            @Deceleration.performed += instance.OnDeceleration;
-            @Deceleration.canceled += instance.OnDeceleration;
+            @Deceleration_Q.started += instance.OnDeceleration_Q;
+            @Deceleration_Q.performed += instance.OnDeceleration_Q;
+            @Deceleration_Q.canceled += instance.OnDeceleration_Q;
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
@@ -1000,9 +1046,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UnlockAbility.started += instance.OnUnlockAbility;
             @UnlockAbility.performed += instance.OnUnlockAbility;
             @UnlockAbility.canceled += instance.OnUnlockAbility;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
+            @Run_LShift.started += instance.OnRun_LShift;
+            @Run_LShift.performed += instance.OnRun_LShift;
+            @Run_LShift.canceled += instance.OnRun_LShift;
+            @InterActive_F.started += instance.OnInterActive_F;
+            @InterActive_F.performed += instance.OnInterActive_F;
+            @InterActive_F.canceled += instance.OnInterActive_F;
+            @FlashSlash_E.started += instance.OnFlashSlash_E;
+            @FlashSlash_E.performed += instance.OnFlashSlash_E;
+            @FlashSlash_E.canceled += instance.OnFlashSlash_E;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1022,9 +1074,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RAttack.started -= instance.OnRAttack;
             @RAttack.performed -= instance.OnRAttack;
             @RAttack.canceled -= instance.OnRAttack;
-            @Deceleration.started -= instance.OnDeceleration;
-            @Deceleration.performed -= instance.OnDeceleration;
-            @Deceleration.canceled -= instance.OnDeceleration;
+            @Deceleration_Q.started -= instance.OnDeceleration_Q;
+            @Deceleration_Q.performed -= instance.OnDeceleration_Q;
+            @Deceleration_Q.canceled -= instance.OnDeceleration_Q;
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
@@ -1034,9 +1086,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UnlockAbility.started -= instance.OnUnlockAbility;
             @UnlockAbility.performed -= instance.OnUnlockAbility;
             @UnlockAbility.canceled -= instance.OnUnlockAbility;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
+            @Run_LShift.started -= instance.OnRun_LShift;
+            @Run_LShift.performed -= instance.OnRun_LShift;
+            @Run_LShift.canceled -= instance.OnRun_LShift;
+            @InterActive_F.started -= instance.OnInterActive_F;
+            @InterActive_F.performed -= instance.OnInterActive_F;
+            @InterActive_F.canceled -= instance.OnInterActive_F;
+            @FlashSlash_E.started -= instance.OnFlashSlash_E;
+            @FlashSlash_E.performed -= instance.OnFlashSlash_E;
+            @FlashSlash_E.canceled -= instance.OnFlashSlash_E;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1197,11 +1255,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLAttack(InputAction.CallbackContext context);
         void OnRAttack(InputAction.CallbackContext context);
-        void OnDeceleration(InputAction.CallbackContext context);
+        void OnDeceleration_Q(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnUnlockAbility(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
+        void OnRun_LShift(InputAction.CallbackContext context);
+        void OnInterActive_F(InputAction.CallbackContext context);
+        void OnFlashSlash_E(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

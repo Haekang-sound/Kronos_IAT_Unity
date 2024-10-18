@@ -38,6 +38,8 @@ public class BulletTimeScalable : MonoBehaviour
     }
 
 
+	private float _timer;
+
     private void Update()
     {
         if (active == false)

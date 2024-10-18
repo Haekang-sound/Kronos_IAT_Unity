@@ -2,9 +2,9 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerParryState : PlayerBaseState
+public class PlayerDodgeState : PlayerBaseState
 {
-	public PlayerParryState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+	public PlayerDodgeState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	private readonly int attackHash = Animator.StringToHash("Attack");
 	public override void Enter()
 	{
@@ -16,7 +16,7 @@ public class PlayerParryState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-		if (stateMachine.MoveForce > 1f)
+		if (stateMachine.Velocity.magnitude != 0f)
 		{
 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}

@@ -152,8 +152,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 		targetting = GetComponentInChildren<AutoTargetting>();
-
-		
 }
 	private void OnValidate()
 	{
@@ -173,7 +171,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		CapsuleColldierUtility.Initialize(gameObject);
 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
-		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
+		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX); 
+		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState); 
 	}
 
 	void Start()
@@ -195,11 +194,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		// 문제해결을 위해 옮김 
 		meleeWeapon.SetOwner(gameObject);
+		
+		// simpleDamager없어지지 않았나?
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+		meleeWeapon.parryDamaer.damageAmount = currentDamage;
+
+		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
+		
+
 
 		totalspeed = Speed;
 		_damageable.maxHitPoints = maxTP;
 		_damageable.currentHitPoints = currentTP;
+	}
+
+	private void ChangeParryState()
+	{
+		PlayerFSM.SwitchParryState();
 	}
 
 	public void ChargeCP(Collider other)
@@ -256,6 +267,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 	}
 	private void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			//BulletTime.Instance.DecelerateSpeed();
+			//Time.timeScale = 0.1f;
+		}
+		if (Input.GetKeyDown(KeyCode.O))
+		{	
+			BulletTime.Instance.SetNormalSpeed();
+			//Time.timeScale = 1f;
+		}
+
 		// 버프중이라면
 		if (isBuff)
 		{
@@ -269,7 +291,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 특정 조건을 만족할 때 애니메이션을 종료하고 targetStateName으로 전환
 		if (buffTimer > buffTime)
 		{
-			PlayerFSM.Animator.SetBool("isMove",true);
+			//PlayerFSM.Animator.SetBool("combMove",false);
+			PlayerFSM.Animator.SetBool("isEnforced",false);
 			effectManager.SwordAuraOff(); 
 		}
 
@@ -336,6 +359,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
+	private void OnDestroy()
+	{
+		meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
+	}
+
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
 		switch (type)
@@ -367,7 +395,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
 		// 
 		if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-			PlayerFSM.GetState().ToString() == "PlayerParryState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
 			rigidImmunity || isEnforced)
 		{
@@ -469,6 +497,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void BeginGuard()
 	{
+		meleeWeapon?.EndAttack();
 		shieldWeapon?.BeginGuard();
 	}
 
