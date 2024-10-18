@@ -5,8 +5,8 @@ public partial class Damageable : MonoBehaviour
 	public enum ComboType
 	{
         None = 0,
-		ACombo,
-		BCombo
+		InterruptibleCombo, // enemy가 공격중일때는 피격상태로 넘어가지 않음
+		UninterruptibleCombo // 이전과 똑같음
 	}
 	public enum DamageType
     {
