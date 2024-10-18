@@ -84,7 +84,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
 
-        _groggyStack.OnMaxStack.AddListener(BeginGroggy);
+		_damageable.onDamageMessageReceivers.Add(this);
+
+		_groggyStack.OnMaxStack.AddListener(BeginGroggy);
 
         // For Test
         if (_behaviortreeRunner.tree != null)
@@ -124,6 +126,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     //void FixedUpdate()
     //{
     //}
+	
 
     private void OnDrawGizmos()
     {
@@ -138,6 +141,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
+				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
                 _animator.SetTrigger("death");
@@ -357,7 +361,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void InvalidateBulletTime()
     {
-        if (phaseTree)
+        if (_onPhaseTree == true)
         {
             StartCoroutine(WhenBulletTimeActived(bulletTimeUnactiveDelay));
         }

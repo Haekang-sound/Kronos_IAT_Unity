@@ -267,11 +267,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 	}
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.P))
+		if(Input.GetKeyDown(KeyCode.R))
 		{
-			//BulletTime.Instance.DecelerateSpeed();
-			//Time.timeScale = 0.1f;
+
 		}
+		
 		if (Input.GetKeyDown(KeyCode.O))
 		{	
 			BulletTime.Instance.SetNormalSpeed();
