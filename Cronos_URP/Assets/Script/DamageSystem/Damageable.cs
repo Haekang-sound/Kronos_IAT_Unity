@@ -93,11 +93,11 @@ public partial class Damageable : MonoBehaviour
 
     public void ApplyDamage(DamageMessage data)
     {
-        if (currentHitPoints <= 0)
+        if (currentHitPoints < 0)
         {
             // 이미 죽은 상태라면 데미지를 더는 받지 않는다.
             // 만일 이미 죽은 뒤에도 데미지를 받는 것을 감지하고 싶다면 이부분 수정할 것
-            //return;
+            return;
         }
 
         if (isInvulnerable)
