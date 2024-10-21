@@ -1,24 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class TimeSlashReadyBehaviour : StateMachineBehaviour
 {
+	float currentTime = 0f;
+	bool timeSlash;
+	PlayerStateMachine stateMachine;
+	[SerializeField] public AnimationCurve TimeSlashCurve;
 	// OnStateEnter is called before OnStateEnter is called on any state inside this state machine
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		// 1) Á¶ÁØ,
+		
+		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.SwitchState(new PlayerTimeSlashState(stateMachine));
 
-		// 2) ½Ã°£¸ØÃã
-		BulletTime.Instance.DecelerateSpeed();
-		// 3) ¶ô¿ÂÅ¸°ÙÀÌ ³ª¿È
-		Player.Instance.IsLockOn = true;
+
+
+
 	}
 
 	// OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-
+// 
+// 		if (timeSlash)
+// 		{
+// 			currentTime += Time.unscaledDeltaTime;
+// 			Player.Instance.currentTime = currentTime;
+// 			PlayerStateMachine.GetInstance().Rigidbody.velocity 
+// 				= Player.Instance.transform.forward * TimeSlashCurve.Evaluate(currentTime);
+// 
+// 			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
+// 			Debug.Log(Player.Instance.transform.forward);
+// 			if (currentTime > 1f)
+// 			{
+// 				timeSlash = false;
+// 				currentTime = 0f;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			animator.SetTrigger("TimeSlash");
+// 		}
 	}
 
 	// OnStateExit is called before OnStateExit is called on any state inside this state machine

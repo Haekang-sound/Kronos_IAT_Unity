@@ -265,13 +265,32 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		return TPAbsorptionRatio /** currentDamage*/;
 	}
+
+	public float currentTime = 0f;
+	bool timeSlash;
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.R))
-		{
+// 		if(Input.GetKeyDown(KeyCode.R))
+// 		{
+// 			timeSlash = true;
+// 		}
+// 
+// 		if(timeSlash)
+// 		{
+// 			currentTime += Time.deltaTime;
+// 			PlayerFSM.Rigidbody.velocity = transform.forward*TimeSlashCurve.Evaluate(currentTime);
+// 			if(currentTime > 1f)
+// 			{
+// 				timeSlash = false;
+// 				currentTime = 0f;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			currentTime = 0f;
+// 		}
 
-		}
-		
+
 		if (Input.GetKeyDown(KeyCode.O))
 		{	
 			BulletTime.Instance.SetNormalSpeed();

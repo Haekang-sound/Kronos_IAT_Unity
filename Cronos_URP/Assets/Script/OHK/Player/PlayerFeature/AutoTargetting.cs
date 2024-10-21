@@ -29,7 +29,7 @@ public class AutoTargetting : MonoBehaviour
 	private Vector3 direction;
 	private float xDotResult;
 	private float yDotResult;
-	private bool isTargetting = false;
+	public bool isTargetting = false;
 	private bool isFacing = false;
 
 

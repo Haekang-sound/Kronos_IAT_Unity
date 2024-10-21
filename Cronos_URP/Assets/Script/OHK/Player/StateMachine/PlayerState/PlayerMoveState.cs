@@ -274,7 +274,7 @@ public class PlayerMoveState : PlayerBaseState
 			if (!stateMachine.AutoTargetting.FindTarget())
 
 				return;
-			stateMachine.Animator.SetTrigger("TimeSlash");
+			stateMachine.Animator.SetTrigger("TimeSlashReady");
 		}
 	}
 
