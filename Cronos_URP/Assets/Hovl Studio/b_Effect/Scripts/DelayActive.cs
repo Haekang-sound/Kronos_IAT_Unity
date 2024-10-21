@@ -8,7 +8,7 @@ public class DelayActive : MonoBehaviour
     public float m_delayTime;
     float m_time;
 
-    private void Start()
+    private void OnEnable()
     {
         m_time = Time.time;
     }

@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DissolveInstancings : MonoBehaviour
 {
     // 몇 초 있다 디졸브 될 것인가
     public float delaySec = 2.0f;
+
+    public UnityEvent Vanished;
 
     // 디졸브 될 초
     [SerializeField]
@@ -38,6 +41,8 @@ public class DissolveInstancings : MonoBehaviour
 
             yield return null;
         }
+
+        Vanished?.Invoke();
 
         // 부모 째로 없앤다
         //gameObject.SetActive(false);
