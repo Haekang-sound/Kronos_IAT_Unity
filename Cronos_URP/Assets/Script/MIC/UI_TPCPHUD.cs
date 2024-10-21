@@ -56,6 +56,8 @@ public class UI_TPCPHUD : UI_TPCP
     public Vector3 hitScale = new Vector3(1.2f, 1.2f, 1.2f);
     Vector3 originScale = new Vector3(1, 1, 1);
 
+    public GameObject speedLineUI;
+
     private void Start()
     {
         instance = this;
@@ -129,6 +131,7 @@ public class UI_TPCPHUD : UI_TPCP
     //    // 이전 부모 회전 업데이트
     //    prevParentRot = curParentRot;
     //}
+
 
     // 빨간색 람다
     public void ChangeRed()

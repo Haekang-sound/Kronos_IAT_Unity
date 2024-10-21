@@ -143,6 +143,8 @@ public class EffectManager : MonoBehaviour
         //    BossMoon(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha5))
         //    CreateAbsorbFX(player.transform, 12);
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            SpeedLine();
     }
 
     private void OnValidate()
@@ -605,6 +607,19 @@ public class EffectManager : MonoBehaviour
             moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
             moon.transform.position += moon.transform.forward * bossMoonDistance;
         }
+    }
+
+    // 집중선 켰다가 끄기
+    IEnumerator SpeedLineCoroutine()
+    {
+        UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        UI_TPCPHUD.GetInstance().speedLineUI.SetActive(false);
+    }
+
+    public void SpeedLine()
+    {
+        StartCoroutine(SpeedLineCoroutine());
     }
 
     // 보스 돌진 예고 반짝
