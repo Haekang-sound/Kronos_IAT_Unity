@@ -84,9 +84,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
 
-		_damageable.onDamageMessageReceivers.Add(this);
+        _damageable.onDamageMessageReceivers.Add(this);
 
-		_groggyStack.OnMaxStack.AddListener(BeginGroggy);
+        _groggyStack.OnMaxStack.AddListener(BeginGroggy);
 
         // For Test
         if (_behaviortreeRunner.tree != null)
@@ -126,7 +126,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     //void FixedUpdate()
     //{
     //}
-	
+
 
     private void OnDrawGizmos()
     {
@@ -144,7 +144,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
                 Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
-                _animator.SetTrigger("death");
                 break;
             case MessageType.RESPAWN:
                 break;
@@ -323,7 +322,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         AnimatorSetTrigger("idle");
 
         _groggyStack.ResetStack();
-        
+
         StartResetAllTriggers();
 
         var currentHP = _damageable.GetHealthPercentage();
@@ -342,7 +341,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
             _onPhaseTree = true;
         }
-        
+
     }
 
     public void PlayBT(bool paly)
@@ -350,8 +349,38 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _behaviortreeRunner.play = paly;
     }
 
-    // -----
+    public void Death()
+    {
+        _animator.SetTrigger("death");
+        SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer renderer in renderers)
+        {
+            string originalName = renderer.materials[0].name;
+            string modifiedName = originalName.Replace(" (Instance)", "");
+            string path = "Materials/Boss/" + modifiedName + "_Dissolve";
+            Material material = Resources.Load<Material>(path);
+            //material.SetFloat("DissolveAmount", 0f);
 
+
+            if (material != null)
+            {
+                material.SetFloat("DissolveAmount", 0f);
+
+                // 새로운 배열을 생성하여 교체
+                Material[] newMaterials = renderer.materials;
+                newMaterials[0] = material;
+                renderer.materials = newMaterials;
+            }
+            else
+            {
+                Debug.LogError("Material not found at path: " + path);
+            }
+
+            GetComponent<DissolveInstancings>().DoVanish();
+        }
+    }
+
+    // -----
 
     public IEnumerator WhenBulletTimeActived(float delay)
     {

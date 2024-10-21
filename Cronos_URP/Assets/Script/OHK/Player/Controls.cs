@@ -866,12 +866,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         },
         {
             ""name"": ""CutScene"",
-            ""id"": ""7b92a099-1da3-4128-acc5-ff28fdbb7ac2"",
+            ""id"": ""70b38a1e-a27a-4c50-8315-58a40c67c0d3"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Skip"",
                     ""type"": ""Button"",
-                    ""id"": ""6aef2d7c-286a-48c6-b5a0-989084ef1caf"",
+                    ""id"": ""ebb10419-d82d-49da-9806-fe9346d148d4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -881,12 +881,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""5aab151e-8388-403b-a3eb-4383742014dc"",
-                    ""path"": """",
+                    ""id"": ""a8b5b8dc-ead2-46e4-862f-d7fd30d29377"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Gamepad;Keyboard and Mouse"",
+                    ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -951,7 +951,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // CutScene
         m_CutScene = asset.FindActionMap("CutScene", throwIfNotFound: true);
-        m_CutScene_Newaction = m_CutScene.FindAction("New action", throwIfNotFound: true);
+        m_CutScene_Skip = m_CutScene.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1265,12 +1265,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // CutScene
     private readonly InputActionMap m_CutScene;
     private List<ICutSceneActions> m_CutSceneActionsCallbackInterfaces = new List<ICutSceneActions>();
-    private readonly InputAction m_CutScene_Newaction;
+    private readonly InputAction m_CutScene_Skip;
     public struct CutSceneActions
     {
         private @Controls m_Wrapper;
         public CutSceneActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_CutScene_Newaction;
+        public InputAction @Skip => m_Wrapper.m_CutScene_Skip;
         public InputActionMap Get() { return m_Wrapper.m_CutScene; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1280,16 +1280,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CutSceneActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CutSceneActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
         }
 
         private void UnregisterCallbacks(ICutSceneActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
         }
 
         public void RemoveCallbacks(ICutSceneActions instance)
@@ -1355,6 +1355,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     }
     public interface ICutSceneActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }
