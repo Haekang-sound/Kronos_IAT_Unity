@@ -14,7 +14,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public BehaviorTree phaseTree;
 
     [Header("Phase 3 Option")]
-    public float bulletTimeUnactiveDelay = 3f;
+    public float timeStopInvaliDelay = 3f;
+    public UnityEvent TimeStopInvalidate;
 
     [Header("Damager")]
     public GameObject shoulderDamager;
@@ -388,13 +389,14 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         yield return new WaitForSeconds(delay);
 
         _bulletTimeScalable.SetActive(false);
+        TimeStopInvalidate?.Invoke();
     }
 
     private void InvalidateBulletTime()
     {
         if (_onPhaseTree == true)
         {
-            StartCoroutine(WhenBulletTimeActived(bulletTimeUnactiveDelay));
+            StartCoroutine(WhenBulletTimeActived(timeStopInvaliDelay));
         }
     }
 
