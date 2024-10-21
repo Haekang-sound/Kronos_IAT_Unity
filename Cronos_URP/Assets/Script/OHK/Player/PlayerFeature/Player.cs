@@ -80,6 +80,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private Checkpoint _currentCheckpoint;
 
+
+	// 감지하고자 하는 레이어를 지정합니다.
+    public LayerMask targetLayer; // Inspector에서 설정 가능
+
 	// Property
 	private float totalspeed;
 	public float moveSpeed { get { return totalspeed; } }
