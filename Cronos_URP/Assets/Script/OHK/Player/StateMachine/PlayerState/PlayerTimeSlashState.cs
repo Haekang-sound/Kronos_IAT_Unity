@@ -26,18 +26,18 @@ public class PlayerTimeSlashState : PlayerBaseState
 		
 		if (stateMachine.AutoTargetting.isTargetting)
 		{
-			currentTime += Time.deltaTime;
-			Player.Instance.currentTime = currentTime;
-			PlayerStateMachine.GetInstance().Rigidbody.velocity
-				= Player.Instance.transform.forward * Player.Instance.TimeSlashCurve.Evaluate(currentTime) *300000f;
-
-			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
-			Debug.Log(Player.Instance.transform.forward);
-			if (currentTime > 1f)
-			{
-				timeSlash = false;
-				currentTime = 0f;
-			}
+// 			currentTime += Time.deltaTime;
+// 			Player.Instance.currentTime = currentTime;
+// 			PlayerStateMachine.GetInstance().Rigidbody.velocity
+// 				= Player.Instance.transform.forward * Player.Instance.TimeSlashCurve.Evaluate(currentTime) *300000f;
+// 
+// 			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
+// 			Debug.Log(Player.Instance.transform.forward);
+// 			if (currentTime > 1f)
+// 			{
+// 				timeSlash = false;
+// 				currentTime = 0f;
+// 			}
 		}
 		else
 		{
