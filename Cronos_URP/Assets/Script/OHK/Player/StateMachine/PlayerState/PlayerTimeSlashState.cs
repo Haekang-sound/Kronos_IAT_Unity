@@ -18,33 +18,37 @@ public class PlayerTimeSlashState : PlayerBaseState
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
 		stateMachine.GroundChecker.ToggleChecker = false;
+		
 	}
 	public override void Tick()
 	{
-
-		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-
-		Vector3 temp = stateMachine.AutoTargetting.GetTarget().position - stateMachine.transform.position;
+			Vector3 temp = stateMachine.AutoTargetting.GetTarget().position;
+			temp.y -= stateMachine.AutoTargetting.GetTarget().localPosition.y;
+			stateMachine.transform.position = temp - stateMachine.transform.forward;
 		
-
-		if(temp.magnitude < 1f)
-		{
-			Debug.Log("°¡±õ³× ¸Ø­Ÿ~");
-		}
-		else if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
-		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
-		}
-		else if (stateMachine.Animator.deltaPosition != null)
-		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
-		}
 
 
 
 	}
 	public override void FixedTick()
 	{
+// 		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+// 
+// 		Vector3 temp = stateMachine.AutoTargetting.GetTarget().position - stateMachine.transform.position;
+// 
+// 
+// 		if (temp.magnitude < 1f)
+// 		{
+// 			Debug.Log("°¡±õ³× ¸Ø­Ÿ~");
+// 		}
+// 		else if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+// 		{
+// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.fixedDeltaTime) * stateMachine.MoveForce + gravity;
+// 		}
+// 		else if (stateMachine.Animator.deltaPosition != null)
+// 		{
+// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.fixedDeltaTime) + gravity;
+// 		}
 		Float();
 	}
 	public override void LateTick() { }
