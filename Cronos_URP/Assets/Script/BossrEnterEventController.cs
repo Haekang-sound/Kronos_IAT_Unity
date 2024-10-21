@@ -17,12 +17,6 @@ public class BossrEnterEventController : MonoBehaviour
     {
         _playerbleDirector = timeline.GetComponent<PlayableDirector>();
     }
-
-    void Start()
-    {
-        timeline.SetActive(false);
-    }
-
     private void Update()
     {
         if (_playerbleDirector.state == PlayState.Playing && Input.GetKeyUp(KeyCode.LeftShift))
