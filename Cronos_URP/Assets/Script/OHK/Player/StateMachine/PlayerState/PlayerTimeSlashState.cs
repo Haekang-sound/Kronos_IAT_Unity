@@ -11,6 +11,7 @@ public class PlayerTimeSlashState : PlayerBaseState
 	[Range(0.0f, 1.0f)] public float minFrame;
 	private bool isArrive;
 
+	Vector3 TargetPosition;
 	public override void Enter()
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
@@ -18,37 +19,39 @@ public class PlayerTimeSlashState : PlayerBaseState
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
 		stateMachine.GroundChecker.ToggleChecker = false;
-		
+
+		// µµÂøÇØ¾ßÇÒ À§Ä¡
+		TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
+
 	}
+
 	public override void Tick()
 	{
-			Vector3 temp = stateMachine.AutoTargetting.GetTarget().position;
-			temp.y -= stateMachine.AutoTargetting.GetTarget().localPosition.y;
-			stateMachine.transform.position = temp - stateMachine.transform.forward;
-		
+		// Å¸°Ù°ú Ä³¸¯ÅÍ»çÀÌÀÇ °Å¸®°¡ 1º¸´Ù Å©´Ù¸é Å¸°ÙÂÊÀ¸·Î ´Ù°¡°£´Ù.
+		if ((TargetPosition - stateMachine.transform.position).magnitude > 1f)
+		{
+			// ¹æÇâº¤ÅÍÀÇ Å©±â°¡ 10º¸´Ù ÀÛÀ¸¸é
+			if ((TargetPosition - stateMachine.transform.position).magnitude < 10f)
+			{
+				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized
+				* (TargetPosition - stateMachine.transform.position).magnitude;
+			}
+			else// ¹æÇâº¤ÅÍÀÇ Å©±â°¡ 10º¸´Ù Å©¸é
+			{
+				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized * 10f;
+			}
 
+		}
+		else // µµÂøÇÏ¸é ¸ØÃá´Ù.
+		{
+			stateMachine.Rigidbody.velocity = Vector3.zero;
+		}
 
 
 	}
+
 	public override void FixedTick()
 	{
-// 		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-// 
-// 		Vector3 temp = stateMachine.AutoTargetting.GetTarget().position - stateMachine.transform.position;
-// 
-// 
-// 		if (temp.magnitude < 1f)
-// 		{
-// 			Debug.Log("°¡±õ³× ¸Ø­Ÿ~");
-// 		}
-// 		else if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
-// 		{
-// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.fixedDeltaTime) * stateMachine.MoveForce + gravity;
-// 		}
-// 		else if (stateMachine.Animator.deltaPosition != null)
-// 		{
-// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.fixedDeltaTime) + gravity;
-// 		}
 		Float();
 	}
 	public override void LateTick() { }
@@ -57,7 +60,16 @@ public class PlayerTimeSlashState : PlayerBaseState
 
 		stateMachine.GroundChecker.ToggleChecker = true;
 	}
-
+	Transform GetTopParent(Transform current)
+	{
+		// ºÎ¸ğ°¡ ¾øÀ¸¸é ÀÚ½ÅÀÌ ÃÖ»óÀ§
+		if (current.parent == null || current.CompareTag("Respawn"))
+		{
+			return current;
+		}
+		// ºÎ¸ğ°¡ ÀÖÀ¸¸é ºÎ¸ğ·Î Àç±ÍÀûÀ¸·Î ¿Ã¶ó°¨
+		return GetTopParent(current.parent);
+	}
 
 
 }

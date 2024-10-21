@@ -7,28 +7,10 @@ public class PlayerTimeSlashReadyState : PlayerBaseState
 	public PlayerTimeSlashReadyState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	bool timeSlash;
 	float currentTime = 0f;
+	Ray frontRay;
 	public override void Enter()
 	{
-
-// 		if (timeSlash)
-// 		{
-// 			currentTime += Time.unscaledDeltaTime;
-// 			Player.Instance.currentTime = currentTime;
-// 			PlayerStateMachine.GetInstance().Rigidbody.velocity
-// 				= Player.Instance.transform.forward * Player.Instance.TimeSlashCurve.Evaluate(currentTime) * 100f;
-// 
-// 			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
-// 			Debug.Log(Player.Instance.transform.forward);
-// 			if (currentTime > 1f)
-// 			{
-// 				timeSlash = false;
-// 				currentTime = 0f;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			stateMachine.Animator.SetTrigger("TimeSlash");
-// 		}
+		// 0) 캐릭터와 몬스터 사이에 장애물이 있으면 멈춘다.
 
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 		stateMachine.Animator.ResetTrigger("TimeSlash");
