@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 89c8cb6c5f2dfed4aae788d535af7176
+guid: 860402c6fe4832b408c1f287a554a57c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,14 +19,14 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 18.039743 mm\n\t'calf_l' : position error = 8.495767 mm\n\t'foot_l'
-      : position error = 44.888577 mm\n\t'thigh_r' : position error = 18.039751 mm\n\t'calf_r'
-      : position error = 9.208385 mm\n\t'foot_r' : position error = 44.894886 mm\n"
+      : position error = 18.039743 mm\n\t'calf_l' : position error = 7.739256 mm\n\t'foot_l'
+      : position error = 44.885166 mm\n\t'thigh_r' : position error = 18.039747 mm\n\t'calf_r'
+      : position error = 7.777364 mm\n\t'foot_r' : position error = 44.889824 mm\n"
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Unreal Take' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'calf_r' has translation animation that
-      will be discarded.\n"
+    animationImportWarnings: "\nClip 'root|root|Unreal Take|Base Layer' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'calf_r' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -40,11 +40,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Unreal Take
-      takeName: Unreal Take
-      internalID: 8993902097722301239
+      name: root|root|Unreal Take|Base Layer
+      takeName: root|root|Unreal Take|Base Layer
+      internalID: -3224687577188114559
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 69
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,8 +64,29 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: AttackEnd
+      - time: 0.08880309
+        functionName: BeginAiming
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.25173745
+        functionName: StopAiming
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.28571427
+        functionName: BeginAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4208494
+        functionName: EndAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
