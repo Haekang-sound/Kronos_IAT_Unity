@@ -10,6 +10,26 @@ public class PlayerTimeSlashReadyState : PlayerBaseState
 	public override void Enter()
 	{
 
+// 		if (timeSlash)
+// 		{
+// 			currentTime += Time.unscaledDeltaTime;
+// 			Player.Instance.currentTime = currentTime;
+// 			PlayerStateMachine.GetInstance().Rigidbody.velocity
+// 				= Player.Instance.transform.forward * Player.Instance.TimeSlashCurve.Evaluate(currentTime) * 100f;
+// 
+// 			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
+// 			Debug.Log(Player.Instance.transform.forward);
+// 			if (currentTime > 1f)
+// 			{
+// 				timeSlash = false;
+// 				currentTime = 0f;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			stateMachine.Animator.SetTrigger("TimeSlash");
+// 		}
+
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 		stateMachine.Animator.ResetTrigger("TimeSlash");
 		// 1) ¡∂¡ÿ,

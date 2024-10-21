@@ -9,10 +9,7 @@ public class PlayerTimeSlashState : PlayerBaseState
 	[SerializeField] float moveForce;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
-	AnimatorStateInfo currentStateInfo;
-
-	float currentTime = 0f;
-	bool timeSlash;
+	private bool isArrive;
 
 	public override void Enter()
 	{
@@ -24,38 +21,26 @@ public class PlayerTimeSlashState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-		CalculateMoveDirection();   // ¹æÇâÀ» °è»êÇÏ°í
 
-// 		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-// 		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
-// 		{
-// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
-// 		}
-// 		else if (stateMachine.Animator.deltaPosition != null)
-// 		{
-// 			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
-// 		}
+		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
+		Vector3 temp = stateMachine.AutoTargetting.GetTarget().position - stateMachine.transform.position;
+		
 
-		if (timeSlash)
+		if(temp.magnitude < 1f)
 		{
-			currentTime += Time.unscaledDeltaTime;
-			Player.Instance.currentTime = currentTime;
-			PlayerStateMachine.GetInstance().Rigidbody.velocity
-				= Player.Instance.transform.forward * Player.Instance.TimeSlashCurve.Evaluate(currentTime);
-
-			Debug.Log(Player.Instance.TimeSlashCurve.Evaluate(currentTime));
-			Debug.Log(Player.Instance.transform.forward);
-			if (currentTime > 1f)
-			{
-				timeSlash = false;
-				currentTime = 0f;
-			}
+			Debug.Log("°¡±õ³× ¸Ø­Ÿ~");
 		}
-		else
+		else if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 		{
-			stateMachine.Animator.SetTrigger("TimeSlash");
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
 		}
+		else if (stateMachine.Animator.deltaPosition != null)
+		{
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+		}
+
+
 
 	}
 	public override void FixedTick()
