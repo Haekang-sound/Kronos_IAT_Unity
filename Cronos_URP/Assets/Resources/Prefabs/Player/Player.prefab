@@ -1864,13 +1864,13 @@ MonoBehaviour:
   moveCoefficient: 0.001
   maxTP: 500
   maxCP: 100
-  currentDamage: 20
+  currentDamage: 0
   attackSpeed: 0
   chargeAttack: 0
-  currentTP: 300
-  currentCP: 100
+  currentTP: 60
+  currentCP: 0
   chargingCP: 10
-  TPAbsorptionRatio: 1
+  TPAbsorptionRatio: 3
   CPDecayRatio: 1
   isEnforced: 0
   isLockOn: 0
@@ -1927,6 +1927,7 @@ MonoBehaviour:
   isPaused: 0
   Velocity: {x: 0, y: 0, z: 0}
   AutoTargetting: {fileID: 3156401455160865116}
+  currentLayerIndex: 0
 --- !u!114 &2009777031317607246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2309,7 +2310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeRing: {fileID: 5699057701119094389}
-  rotateSpeed: 180
   tex1: {fileID: 2100000, guid: 34a8bdaa1136cf04e9570fc74c36fad2, type: 2}
   tex2: {fileID: 2100000, guid: 34a6b950ec7626d459339e50ac79365d, type: 2}
   tex3: {fileID: 2100000, guid: 0761dc405008b2d4c9da98d9ec1cb0bd, type: 2}
