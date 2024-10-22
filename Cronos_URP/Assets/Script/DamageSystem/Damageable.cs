@@ -93,11 +93,11 @@ public partial class Damageable : MonoBehaviour
 
     public void ApplyDamage(DamageMessage data)
     {
-        if (currentHitPoints <= 0)
+        if (currentHitPoints < 0)
         {
             // 이미 죽은 상태라면 데미지를 더는 받지 않는다.
             // 만일 이미 죽은 뒤에도 데미지를 받는 것을 감지하고 싶다면 이부분 수정할 것
-            //return;
+            return;
         }
 
         if (isInvulnerable)
@@ -147,12 +147,12 @@ public partial class Damageable : MonoBehaviour
 
         if (currentHitPoints <= 0)
         {
-            Debug.Log("데미지를 받아 죽었다");
+            //Debug.Log("데미지를 받아 죽었다");
             schedule += OnDeath.Invoke; //This avoid race condition when objects kill each other.
         }
         else
         {
-            Debug.Log("데미지를 받았다");
+            //Debug.Log("데미지를 받았다");
             OnReceiveDamage.Invoke();
         }
 
@@ -188,6 +188,7 @@ public partial class Damageable : MonoBehaviour
         data.throwing = false;
 		data.isActiveSkill = false;
         data.damageType = Damageable.DamageType.None;
+        data.comboType = Damageable.ComboType.None;
 
         for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
         {

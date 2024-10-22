@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8871378980285125561
 Transform:
   m_ObjectHideFlags: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   inAttack: 0
   isAcitveSkill: 0
   currentDamageType: 0
+  currentComboType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -442,12 +443,13 @@ MonoBehaviour:
   OnDown:
     m_PersistentCalls:
       m_Calls: []
-  drawGizmos: 0
-  meleeAttackDistance: 1.8
-  normalAttackDistance: 2.4
-  strongAttackDistance: 3
+  drawGizmos: 1
+  meleeAttackDistance: 3
+  normalAttackDistance: 4
+  strongAttackDistance: 5
   strafeSpeed: 0.8
   rotationSpeed: 1
+  inAttack: 0
 --- !u!114 &2166233687412480796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,13 +684,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7566870579031645809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.787408, y: 0.010397266, z: 0.045764107, w: 0.6146432}
+  m_LocalRotation: {x: 0.7065406, y: 0.030226227, z: 0.03434587, w: 0.706192}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.010000003, y: 0.010000003, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1360384001517190983}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 95.23401, y: -89.858, z: -89.52399}
 --- !u!65 &4223867018747628312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -708,8 +710,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 1.5, z: 0.5}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.09635654, y: 0.8263247, z: 0.07446788}
+  m_Center: {x: 0.0022500744, y: 0.1631614, z: -0.0035145392}
 --- !u!114 &2922199211655598650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,13 +725,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1
-  damageAmount: 1
+  damageAmount: 10
   targetLayers:
     serializedVersion: 2
     m_Bits: 512
   inAttack: 0
   isAcitveSkill: 0
   currentDamageType: 0
+  currentComboType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -1613,6 +1616,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6646882942596473924, guid: b36d2b9da18d9b74cb349685c6f5c3ea, type: 3}
+      propertyPath: TargetTransform
+      value: 
+      objectReference: {fileID: 3907471215388030343}
     - target: {fileID: 8828972337593751634, guid: b36d2b9da18d9b74cb349685c6f5c3ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

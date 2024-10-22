@@ -18,12 +18,7 @@ public class Wait : ActionNode
     {
         float speed = 1;
 
-        if (BulletTime.Instance)
-        {
-            speed = BulletTime.Instance.GetCurrentSpeed();
-        }
-
-        _elapse += Time.deltaTime * speed;
+        _elapse += blackboard.bulletTimeScalable.GetDeltaTime();
 
         if (_elapse > duration)
         {

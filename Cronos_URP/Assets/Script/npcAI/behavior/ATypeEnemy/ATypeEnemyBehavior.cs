@@ -17,12 +17,15 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public float normalAttackDistance = 2.4f;
     public float strongAttackDistance = 3f;
 
-
+    [Header("Speed")]
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
 
     public Vector3 BasePosition { get; private set; }
     private float _baseTolerance = 0.6f;
+
+    [HideInInspector]
+    public bool inAttack;
 
     public EnemyController Controller { get { return _controller; } }
 
@@ -215,6 +218,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void Damaged(Damageable.DamageMessage msg)
     {
+        if (inAttack && msg.comboType == Damageable.ComboType.UninterruptibleCombo) 
+            return;
+
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
@@ -287,12 +293,12 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     internal void UseBulletTimeScale()
     {
-        _bulletTimeScalable.active = true;
+        _bulletTimeScalable.SetActive(true);
     }
 
     internal void UnuseBulletTimeScale()
     {
-        _bulletTimeScalable.active = false;
+        _bulletTimeScalable.SetActive(false);
     }
 
     public void TriggerDown()

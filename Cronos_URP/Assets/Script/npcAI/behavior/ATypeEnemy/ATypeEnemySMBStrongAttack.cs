@@ -7,7 +7,7 @@ public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _monoBehaviour.ChangeDebugText("STRONG ATTACK");
-        _monoBehaviour.ResetTriggerDown();
+        _monoBehaviour.inAttack = true;
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,5 +28,10 @@ public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.EndAttack();
         _monoBehaviour.ResetAiming();
+    }
+
+    public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _monoBehaviour.inAttack = false;
     }
 }

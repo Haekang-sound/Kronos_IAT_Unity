@@ -10,8 +10,9 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 
     [SerializeField] float Damage;
     public Damageable.DamageType damageType;
+	public Damageable.ComboType comboType;
 
-    [Range(0.0f, 1.0f)] public float minFrame;
+	[Range(0.0f, 1.0f)] public float minFrame;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -23,11 +24,12 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 		stateMachine.Player.DodgeAttack = true;
 
-        Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
-        Player.Instance.CurrentDamage = Damage;
-        Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
+		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
+		Player.Instance.CurrentDamage = Damage;
+		Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
+		Player.Instance.meleeWeapon.simpleDamager.currentComboType = comboType;
 
-        animator.ResetTrigger("Attack");
+		animator.ResetTrigger("Attack");
 
 	}
 

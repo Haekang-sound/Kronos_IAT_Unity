@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -18,7 +18,6 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
-		//animator.SetFloat(animSpeedHash, animSpeed);
 
 	}
 

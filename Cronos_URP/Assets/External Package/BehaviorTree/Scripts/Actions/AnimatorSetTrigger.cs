@@ -27,7 +27,8 @@ class AnimatorSetTrigger : ActionNode
             return State.Failure;
         }
 
-        _timer -= Time.deltaTime * BulletTime.Instance.GetCurrentSpeed();
+
+        _timer -= blackboard.bulletTimeScalable.GetDeltaTime();
 
         if(_timer < 0f)
         {

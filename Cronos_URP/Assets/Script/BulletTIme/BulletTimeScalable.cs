@@ -1,16 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class BulletTimeScalable : MonoBehaviour
 {
-    public bool active = true;
+    [SerializeField]
+    private bool active = true;
 
     protected Animator _animator;
     protected NavMeshAgent _navMeshAgent;
+
+    // -----
+
+    public void SetActive(bool set)
+    {
+        active = set;
+    }
+
+    public float GetDeltaTime()
+    {
+        if (active == true)
+        {
+            return Time.deltaTime * BulletTime.Instance.GetCurrentSpeed();
+        }
+
+        return Time.deltaTime;
+    }
+
+    // -----
 
     private void OnEnable()
     {
@@ -18,6 +37,8 @@ public class BulletTimeScalable : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+
+	private float _timer;
 
     private void Update()
     {

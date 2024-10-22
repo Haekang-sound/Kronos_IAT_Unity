@@ -63,7 +63,8 @@ public class PlayerBuffState : PlayerBaseState
 
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
-		    stateMachine.Animator.SetBool("combMove", true);
+			stateMachine.Animator.SetTrigger("combMove");
+		    stateMachine.Animator.SetBool("isEnforced", true);
 		}
 
 		// 플레이어의 cp 를 이동속도에 반영한다.

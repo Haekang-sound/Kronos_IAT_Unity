@@ -1864,13 +1864,13 @@ MonoBehaviour:
   moveCoefficient: 0.001
   maxTP: 500
   maxCP: 100
-  currentDamage: 20
+  currentDamage: 0
   attackSpeed: 0
   chargeAttack: 0
-  currentTP: 300
-  currentCP: 100
+  currentTP: 60
+  currentCP: 0
   chargingCP: 10
-  TPAbsorptionRatio: 1
+  TPAbsorptionRatio: 3
   CPDecayRatio: 1
   isEnforced: 0
   isLockOn: 0
@@ -1927,6 +1927,7 @@ MonoBehaviour:
   isPaused: 0
   Velocity: {x: 0, y: 0, z: 0}
   AutoTargetting: {fileID: 3156401455160865116}
+  currentLayerIndex: 0
 --- !u!114 &2009777031317607246
 MonoBehaviour:
   m_ObjectHideFlags: 0

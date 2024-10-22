@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
+  started: 0
   guid: 40ee3fd9277a2c44b8fff0fa124f0998
   position: {x: 231.149, y: -168}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -4462934740927916319}
@@ -38,15 +38,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 8cf44b2a0bed4584fb81e4127d4095d9
-  position: {x: 1622, y: 921}
+  position: {x: 1978.2704, y: 916.43475}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: attack_firezone
   drawGizmos: 0
   parameterName: attack_firezone
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-8662573329454556787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,15 +62,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: e4ffb0f7766b35c4d96bff02bdcf297b
-  position: {x: 2022, y: 911}
+  position: {x: 2377.2705, y: 914.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo3-1
   drawGizmos: 0
   parameterName: attack_combo3-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-7991984966761441007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,18 +83,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 59127c23d207ca047860041be43d5878
-  position: {x: 2208, y: 738}
+  position: {x: 2780.7004, y: 758.0001}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_combo1-2
+    bulletTimeScalable: {fileID: 0}
+  description: attack_combo1-1
   drawGizmos: 0
-  parameterName: attack_combo1-2
-  waitTime: 0.5
+  parameterName: attack_combo1-1
+  waitTime: 0.3
 --- !u!114 &-6796994299464535712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,14 +107,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: ce4de121c3a00cd488048e9c58ebd495
   position: {x: -797.93243, y: 330.43466}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -133,18 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03242357c585b3442ba5c329b98bba11, type: 3}
   m_Name: RandomSelector
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 1e597b1e4ec351c49a52fd6e0fc7cff7
-  position: {x: 340, y: 566}
+  position: {x: 456.15005, y: 569.4501}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
-  - {fileID: 325813075255334449}
+  - {fileID: 8715953615928333360}
   - {fileID: 1474480085951398223}
 --- !u!114 &-5901845929476283792
 MonoBehaviour:
@@ -161,15 +161,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 9ed86df13c652dc4182569bb50eb692b
-  position: {x: 2364, y: 737}
+  position: {x: 2939.45, y: 756.65015}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo2-1
   drawGizmos: 0
   parameterName: attack_combo2-1
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-5742285507704487129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,15 +185,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 849d76765f417ab4bbd35862f1221364
-  position: {x: 1049, y: 735}
+  position: {x: 1405.2704, y: 730.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: dodge_right
   drawGizmos: 0
   parameterName: dodge_right
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &-5525123536936766581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,18 +206,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: 8eda734aff4cad341a82d26be1249547
-  position: {x: -610, y: 513}
+  position: {x: -593.8077, y: 502.99997}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_jump2
+    bulletTimeScalable: {fileID: 0}
+  description: attack_jump
   drawGizmos: 0
-  parameterName: attack_jump2
-  waitTime: 0.5
+  parameterName: attack_jump
+  waitTime: 0.3
 --- !u!114 &-5390687036643766367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,11 +233,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 2158f0671e9e38a4293241add4e2dcb1
-  position: {x: 1238, y: 389}
+  position: {x: 1594.2704, y: 384.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -264,11 +264,35 @@ MonoBehaviour:
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
   angleThreshold: 6
+--- !u!114 &-5093414591643252709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
+  m_Name: AnimatorSetTrigger
+  m_EditorClassIdentifier: 
+  state: 2
+  started: 0
+  guid: 8429adb6eb1408a4981b4723b39e5b5a
+  position: {x: 2403, y: 578}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    bulletTimeScalable: {fileID: 0}
+  description: attack_jump
+  drawGizmos: 0
+  parameterName: attack_jump
+  waitTime: 0.3
 --- !u!114 &-4462934740927916319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,13 +306,13 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
+  started: 0
   guid: f15a730487e544c4ca2bd3f7c822af7b
   position: {x: 231.9503, y: -44.274834}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -311,11 +335,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: af2e7c12e58786747a30f6f664d1cb3e
-  position: {x: 2365, y: 572}
+  position: {x: 2940.4502, y: 591.6501}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -337,14 +361,14 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b93340eb33c32ef4583d8a1970008f68
-  position: {x: 20, y: 741}
+  position: {x: 136, y: 745}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_combo3-1
+    bulletTimeScalable: {fileID: 0}
+  description: attack_spin
   drawGizmos: 0
-  parameterName: attack_combo3-1
+  parameterName: attack_spin
   waitTime: 0.5
 --- !u!114 &-1448434049564022546
 MonoBehaviour:
@@ -361,15 +385,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: c60ad1277d418eb40861f2857bf0798f
-  position: {x: -355.01614, y: 577.2524}
+  position: {x: -240, y: 580}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_combo2-1
+    bulletTimeScalable: {fileID: 0}
+  description: attack_combo1-1
   drawGizmos: 0
-  parameterName: attack_combo2-1
-  waitTime: 0.5
+  parameterName: attack_combo1-1
+  waitTime: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +424,6 @@ MonoBehaviour:
   - {fileID: -3402741920563354884}
   - {fileID: 7006698977590476675}
   - {fileID: -6785352910529320773}
-  - {fileID: 325813075255334449}
   - {fileID: 1474480085951398223}
   - {fileID: 8518207435825161847}
   - {fileID: 6601328209896319862}
@@ -424,10 +447,12 @@ MonoBehaviour:
   - {fileID: -5239782182661201303}
   - {fileID: 8106870901192276762}
   - {fileID: 3011548604093691375}
+  - {fileID: -5093414591643252709}
+  - {fileID: 8715953615928333360}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
 --- !u!114 &13587638371181878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,40 +468,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 4c809282eee3bc24e9ed91242cec5c5f
-  position: {x: -1044, y: 499}
+  position: {x: -1046, y: 499}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: 'D>8
-
-    return Success'
+    bulletTimeScalable: {fileID: 0}
+  description: D>4
   drawGizmos: 1
-  distance: 8
+  distance: 4
   comparison: 0
---- !u!114 &325813075255334449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 4b5af576cecd68247aebfa48e54e48d8
-  position: {x: 223, y: 745}
-  blackboard:
-    target: {fileID: 0}
-    moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: 
-  drawGizmos: 0
-  duration: 1
 --- !u!114 &374615552281728654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,11 +492,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b4cabcf3a0f48d143a5370968f79f970
-  position: {x: 1141, y: 560}
+  position: {x: 1497.2704, y: 555.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -514,18 +514,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 0efe2a3f8fe374d4c875014de5c083ef
-  position: {x: 1810, y: 920}
+  position: {x: 2170.2705, y: 914.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_combo1-2
+    bulletTimeScalable: {fileID: 0}
+  description: attack_combo2-1
   drawGizmos: 0
-  parameterName: attack_combo1-2
-  waitTime: 0.5
+  parameterName: attack_combo2-1
+  waitTime: 0.3
 --- !u!114 &595732876082617434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,11 +541,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: d3d334af167424045becdbf58b77cad4
-  position: {x: -69.878685, y: 569.7297}
+  position: {x: 46.149883, y: 573.4501}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -563,17 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 4b61a8eb86617be43925bbc1095c5813
-  position: {x: -188.87875, y: 744.7296}
+  position: {x: -72.850136, y: 748.45}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_spin
+    bulletTimeScalable: {fileID: 0}
+  description: attack_combo1-2
   drawGizmos: 0
-  parameterName: attack_spin
+  parameterName: attack_combo1-2
   waitTime: 0.5
 --- !u!114 &1474480085951398223
 MonoBehaviour:
@@ -590,15 +590,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 70ad550d771823b4a83931ce369375f8
-  position: {x: 439, y: 740}
+  position: {x: 555.15, y: 743.4501}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: strafe
   drawGizmos: 0
   parameterName: strafe
-  waitTime: 0.5
+  waitTime: 0.3
 --- !u!114 &1520074431773755632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,15 +614,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b760fd6478663f44ab71c0ad8ef3fd8f
-  position: {x: 2521, y: 738}
+  position: {x: 3097.1504, y: 758.0001}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: attack_combo3-1
   drawGizmos: 0
-  parameterName: 
-  waitTime: 0.5
+  parameterName: attack_combo3-1
+  waitTime: 0.3
 --- !u!114 &2221318259388286776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,14 +635,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: 43ffb900ebd429646b3b459462c7547d
-  position: {x: 1462, y: 736}
+  position: {x: 1818.2704, y: 731.43463}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -661,14 +661,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c802f3af2236b4f94bc3fea6b1db4c, type: 3}
   m_Name: CheckTargetDistance
   m_EditorClassIdentifier: 
-  state: 2
+  state: 1
   started: 0
   guid: a9ca240644653434ab5ffd6f098a7d73
-  position: {x: 1286, y: 918}
+  position: {x: 1642.2704, y: 913.43475}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 'D>4
 
     Success'
@@ -690,11 +690,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: abdbb6fc829daa243a751262fc70082b
-  position: {x: 925, y: 562}
+  position: {x: 1281.2704, y: 557.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
@@ -712,13 +712,13 @@ MonoBehaviour:
   m_Name: Start
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
+  started: 0
   guid: 60564fdbcb869b6488085b2e1ccbefce
   position: {x: 230.95032, y: -274.2748}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -9066970086742775746}
@@ -737,14 +737,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 03c9cfa851de57443b6801e5b1ed2544
-  position: {x: 2240, y: 410}
+  position: {x: 2612.6934, y: 411.75296}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
+  - {fileID: -5093414591643252709}
   - {fileID: 7751686502303507577}
   - {fileID: -3716549099198130064}
 --- !u!114 &5901033334376792335
@@ -759,14 +760,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ed72674b1a1ab43bcd2a25954862cb, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: a9b64da03f77df5408c691f113b7af9c
   position: {x: -239.60379, y: 150.0589}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -784,14 +785,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab98ca1df9df1248a69d22ebdab24d0, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 109b83a9ea8268541b082e66b484c34a
   position: {x: 169.39621, y: 331.0589}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -813,17 +814,17 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 6c51c4f7da4cfd34b8b925113808966a
-  position: {x: 668, y: 564}
+  position: {x: 1024.2704, y: 559.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: 'D>4
+    bulletTimeScalable: {fileID: 0}
+  description: 'D<4
 
     Success'
   drawGizmos: 1
   distance: 4
-  comparison: 0
+  comparison: 1
 --- !u!114 &6680290226393868591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,11 +840,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: f7f0b6cf5aaa956459522293f1484bc7
-  position: {x: 1899, y: 737}
+  position: {x: 2255.2705, y: 732.43475}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -861,14 +862,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb796873f9312634ba17da5ae6db935f, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   started: 0
   guid: 32160f34e3cd1c44c87e4fc5c85abba3
-  position: {x: 2691, y: 193}
+  position: {x: 2960.482, y: 199.99998}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   duration: 1
@@ -887,11 +888,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: b33c52a04ce9d3e4583623874f4314ec
-  position: {x: 1659, y: 570}
+  position: {x: 2015.2704, y: 565.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -912,15 +913,15 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: e28608ea67475c447b4a70b18c563262
-  position: {x: 2128, y: 566}
+  position: {x: 2617.9004, y: 580.25006}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
-  description: attack_combo1-1
+    bulletTimeScalable: {fileID: 0}
+  description: attack_shoderpush
   drawGizmos: 0
-  parameterName: attack_combo1-1
-  waitTime: 0.5
+  parameterName: attack_shoderpush
+  waitTime: 0.3
 --- !u!114 &8106870901192276762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,11 +937,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 7ce3b5790415a924da63de11db9ead48
-  position: {x: 1464.1503, y: 919.00006}
+  position: {x: 1817.2704, y: 914.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 1
   rotationSpeed: 20
@@ -960,11 +961,11 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 43141fdb66ccf37448151bc56bf7cc9d
-  position: {x: 1738, y: 206}
+  position: {x: 2010.9412, y: 212.93918}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
@@ -985,15 +986,39 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: ebb70831e7a60394f939031f45a025c1
-  position: {x: 1237, y: 738}
+  position: {x: 1593.2704, y: 733.4347}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: dodge_left
   drawGizmos: 0
   parameterName: dodge_left
-  waitTime: 0.5
+  waitTime: 0.3
+--- !u!114 &8715953615928333360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
+  m_Name: AnimatorSetTrigger
+  m_EditorClassIdentifier: 
+  state: 2
+  started: 0
+  guid: 6d84189e55f13a64ab79b79b92496b27
+  position: {x: 377.90005, y: 745.95013}
+  blackboard:
+    target: {fileID: 0}
+    moveToPosition: {x: 0, y: 0, z: 0}
+    bulletTimeScalable: {fileID: 0}
+  description: attack_shoderpush
+  drawGizmos: 0
+  parameterName: attack_shoderpush
+  waitTime: 0.3
 --- !u!114 &8750459475825227405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,14 +1031,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bedf938c3a608f48854467420cc7220, type: 3}
   m_Name: AnimatorSetTrigger
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 2
+  started: 0
   guid: 588b45730d5be3d4a9b3200cf8bd43de
   position: {x: -924, y: 165}
   blackboard:
     target: {fileID: 0}
     moveToPosition: {x: 0, y: 0, z: 0}
-    timer: -3.3121276
+    bulletTimeScalable: {fileID: 0}
   description: strafe
   drawGizmos: 0
   parameterName: strafe

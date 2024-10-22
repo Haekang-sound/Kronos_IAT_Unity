@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -33,7 +35,15 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Enter()
 	{
+		stateMachine.Animator.SetBool(guradHash, false);
+		stateMachine.Animator.ResetTrigger("Attack");
+		stateMachine.Animator.ResetTrigger("Rattack");
+		stateMachine.Animator.ResetTrigger("ParryAttack");
+
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
+		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
+		stateMachine.InputReader.onRunStart += TimeSlash;
+
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
@@ -47,9 +57,8 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
-
-
 	}
+
 
 	// state의 update라 볼 수 있지
 	public override void Tick()
@@ -58,7 +67,16 @@ public class PlayerMoveState : PlayerBaseState
 		//stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 		moveSpeed = 1f;
 
-		stateMachine.Player.SetSpeed(moveSpeed);
+
+
+		if (stateMachine.Velocity.magnitude != 0f)
+		{
+			stateMachine.Animator.SetBool("isMove", true);
+		}
+		else
+		{
+			stateMachine.Animator.SetBool("isMove", false);
+		}
 
 		// 시간베기 테스트용
 		if (Input.GetKeyDown(KeyCode.R))
@@ -137,6 +155,9 @@ public class PlayerMoveState : PlayerBaseState
 	public override void Exit()
 	{
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
+		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
+		stateMachine.InputReader.onRunStart -= TimeSlash;
+
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
@@ -160,7 +181,6 @@ public class PlayerMoveState : PlayerBaseState
 	private void StopRun() { isRun = false; }
 	private void LockOn()
 	{
-		Debug.Log("누름");
 		// 락온 상태가 아니라면
 		if (!stateMachine.Player.IsLockOn)
 		{
@@ -200,8 +220,9 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetTrigger(timeStopHash);
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
+			BulletTime.Instance.OnActive.Invoke();
 		}
-		else if(stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
+		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
 		{
 			stateMachine.Animator.SetTrigger(CPBoombHash);
 		}
@@ -225,20 +246,37 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true);
+		stateMachine.Animator.SetBool(attackHash, true);
 	}
 	private void Dodge()
 	{
-		if (stateMachine.Player.CP < 10f)
-		{
-			return;
-		}
-		stateMachine.Player.CP -= 10f;
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
+
+	// 일섬
+	public void FlashSlash()
+	{
+		if (stateMachine.Animator.GetBool("isFlashSlash"))
+		{
+			stateMachine.Animator.SetTrigger("FlashSlash");
+		}
+	}
+
+	// 시간베기
+	public void TimeSlash()
+	{
+		Debug.Log("시간베기!");
+		if (stateMachine.Animator.GetBool("isTimeSlash"))
+		{
+			if (!stateMachine.AutoTargetting.FindTarget()) return;
+			stateMachine.Animator.SetTrigger("TimeSlashReady");
+		}
+	}
+
+
 }
 
 

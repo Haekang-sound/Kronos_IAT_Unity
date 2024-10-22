@@ -22,7 +22,7 @@ public class SkillProgressLine : ProgressBar
 
     private void OnDestroy()
     {
-        node.OnUpdated.RemoveListener(OnSkillAmountChanged);
+        //node.OnUpdated.RemoveListener(OnSkillAmountChanged);
     }
 
     public void OnSkillAmountChanged()

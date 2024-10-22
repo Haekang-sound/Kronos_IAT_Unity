@@ -29,7 +29,7 @@ public class AutoTargetting : MonoBehaviour
 	private Vector3 direction;
 	private float xDotResult;
 	private float yDotResult;
-	private bool isTargetting = false;
+	public bool isTargetting = false;
 	private bool isFacing = false;
 
 
@@ -41,8 +41,7 @@ public class AutoTargetting : MonoBehaviour
 	{
 		instance = this;    // 싱글턴으로 쓰겠다.
 		MonsterList = new List<GameObject>(); // 몬스터를 담자
-											  //PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
-
+		//PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
 	}
 
 	public Transform GetTarget()

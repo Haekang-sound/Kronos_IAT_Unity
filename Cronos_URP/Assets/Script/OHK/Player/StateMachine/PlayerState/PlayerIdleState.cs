@@ -124,7 +124,7 @@ public class PlayerIdleState : PlayerBaseState
 	private void SwitchToParryState()
 	{
 		Debug.Log("±¸¸¥´Ù");
-		stateMachine.SwitchState(new PlayerParryState(stateMachine));
+		stateMachine.SwitchState(new PlayerDodgeState(stateMachine));
 	}
 	private void SwitchToMoveState()
 	{

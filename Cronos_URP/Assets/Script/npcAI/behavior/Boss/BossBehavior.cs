@@ -1,37 +1,49 @@
 using Message;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 public class BossBehavior : MonoBehaviour, IMessageReceiver
 {
     public bool drawGizmos;
-    public GameObject target;
 
-    public float rotationSpeed = 1.0f;
-
+    [Header("Behavior Tree")]
     public BehaviorTree phaseOne;
     public BehaviorTree phaseTwo;
     public BehaviorTree phaseTree;
-    private Blackboard _blackboard;
 
-    [SerializeField]
+    [Header("Phase 3 Option")]
+    public float timeStopInvaliDelay = 3f;
+    public UnityEvent TimeStopInvalidate;
+
+    [Header("Damager")]
+    public GameObject shoulderDamager;
+    public GameObject impactDamager;
+
+    [HideInInspector]
+    public GameObject target;
+
+    [HideInInspector]
     public EnemyController controller;
 
-    private Animator _animator;
-
     private HitShake _hitShake;
+    private Animator _animator;
+    private Rigidbody _rigidbody;
     private Damageable _damageable;
     private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
     private EffectManager _effectManager;
     private PlayableDirector _playableDirector;
     private BehaviorTreeRunner _behaviortreeRunner;
+    private BulletTimeScalable _bulletTimeScalable;
 
     private bool _onPhaseOne;
     private bool _onPhaseTwo;
     private bool _onPhaseTree;
+
+    private Blackboard _blackboard;
+    private readonly float _rotationSpeed = 18f;
 
 
     void Awake()
@@ -42,15 +54,17 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
         _damageable = GetComponent<Damageable>();
         _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
         _effectManager = EffectManager.Instance;
         _playableDirector = GetComponent<PlayableDirector>();
         _behaviortreeRunner = GetComponent<BehaviorTreeRunner>();
+        _bulletTimeScalable = GetComponent<BulletTimeScalable>();
 
-		if (target == null)
-			target = Player.Instance.gameObject;
+        if (target == null)
+            target = Player.Instance.gameObject;
     }
 
     //void Start()
@@ -59,13 +73,32 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void OnEnable()
     {
+        shoulderDamager.SetActive(false);
+        impactDamager.SetActive(false);
+
         SceneLinkedSMB<BossBehavior>.Initialise(_animator, this);
 
         _blackboard.target = target;
-        //_blackboard.monobehaviour = gameObject;
+        _blackboard.bulletTimeScalable = _bulletTimeScalable;
+
+        UseGravity(true);
 
         controller.SetFollowNavmeshAgent(false);
         controller.UseNavemeshAgentRotation(true);
+
+        _damageable.onDamageMessageReceivers.Add(this);
+
+        _groggyStack.OnMaxStack.AddListener(BeginGroggy);
+
+        // For Test
+        if (_behaviortreeRunner.tree != null)
+        {
+            _behaviortreeRunner.tree.blackboard = _blackboard;
+            _behaviortreeRunner.Bind();
+        }
+
+        BulletTime.Instance.OnActive.AddListener(InvalidateBulletTime);
+        BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
 
     //private void OnDisable()
@@ -80,14 +113,22 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     //{
     //}
 
+    private bool _aimtarget;
+
     void Update()
     {
         UpdateBehaviorTree();
+
+        if (_aimtarget)
+        {
+            LookAtTarget();
+        }
     }
 
     //void FixedUpdate()
     //{
     //}
+
 
     private void OnDrawGizmos()
     {
@@ -102,6 +143,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
+                Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
                 break;
@@ -122,20 +164,30 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BossFireShoot()
     {
-        _effectManager.BossFireShoot(transform);
+        _effectManager?.BossFireShoot(transform);
+    }
+
+    public void BossFiveSpear()
+    {
+        _effectManager?.BossFiveSpear(transform);
+    }
+
+    public void BossMoon()
+    {
+        _effectManager?.BossMoon(transform);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
 
     private void UpdateBehaviorTree()
     {
-        if (_onPhaseOne == true && _damageable.GetHealthPercentage() < 70f)
+        if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
         {
             ChangePhase(phaseTwo);
             _onPhaseTwo = true;
         }
 
-        if (_onPhaseTwo == true && _damageable.GetHealthPercentage() < 30f)
+        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
         {
             ChangePhase(phaseTree);
             _onPhaseTree = true;
@@ -148,16 +200,20 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _onPhaseOne = true;
     }
 
-    public void LookAtTarget()
+    public float GetDeltaTime()
+    {
+        return _bulletTimeScalable.GetDeltaTime();
+    }
+
+    private void LookAtTarget()
     {
         if (target == null) return;
-        if (rotationSpeed < 0.1f) return;
 
         // 바라보는 방향 설정
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationSpeed * _bulletTimeScalable.GetDeltaTime());
     }
 
     public void Strafe(bool isRingth = true)
@@ -166,13 +222,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         Vector3 offsetPlayer = target.transform.position - transform.position;
 
-        if(isRingth == false)
+        if (isRingth == false)
         {
             offsetPlayer = transform.position - target.transform.position;
         }
 
         Vector3 direction = Vector3.Cross(offsetPlayer, Vector3.up);
-        controller.SetTarget(transform.position + direction.normalized) ;
+        controller.SetTarget(transform.position + direction.normalized);
 
         LookAtTarget();
     }
@@ -186,19 +242,43 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _meleeWeapon.EndAttack();
     }
 
+    public void BeginSoulderAttack()
+    {
+        shoulderDamager?.SetActive(true);
+    }
+
+    public void EndSoulderAttack()
+    {
+        shoulderDamager?.SetActive(false);
+    }
+
+    public void BeginImpactAttack()
+    {
+        impactDamager?.SetActive(true);
+        UseGravity(false);
+    }
+
+    public void EndImpactAttack()
+    {
+        impactDamager?.SetActive(false);
+        UseGravity(true);
+    }
+
+    public void UseGravity(bool gravity)
+    {
+        _rigidbody.useGravity = gravity;
+    }
+
     public void BeginAiming()
     {
-        rotationSpeed = 100f;
+        //_rotationSpeed = 100f;
+        _aimtarget = true;
     }
 
     public void StopAiming()
     {
-        rotationSpeed = 0f;
-    }
-
-    public void ResetAiming()
-    {
-        rotationSpeed = 16f;
+        //_rotationSpeed = 0f;
+        _aimtarget = false;
     }
 
     public bool CheckDistanceWithTarget(float distance)
@@ -236,34 +316,34 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BeginGroggy()
     {
         ResetAllTriggers();
-
         AnimatorSetTrigger("groggy");
     }
 
     public void EndGroggy()
     {
         AnimatorSetTrigger("idle");
-        
+
         _groggyStack.ResetStack();
 
-        if (_onPhaseTree == false && _damageable.GetHealthPercentage() < 30f)
+        StartResetAllTriggers();
+
+        var currentHP = _damageable.GetHealthPercentage();
+        if (currentHP > 70f)
         {
-            StartResetAllTriggers();
-            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
-            _onPhaseTree = true;
-        }
-        else if (_onPhaseTwo == false && _damageable.GetHealthPercentage() < 70f)
-        {
-            StartResetAllTriggers();
-            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
-            _onPhaseTwo = true;
-        }
-        else
-        {
-            StartResetAllTriggers();
             StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
+        else if (_onPhaseTwo == false && currentHP > 30f)
+        {
+            StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
+            _onPhaseTwo = true;
+        }
+        else //if (_onPhaseTree == false && currentHP <= 30f)
+        {
+            StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
+            _onPhaseTree = true;
+        }
+
     }
 
     public void PlayBT(bool paly)
@@ -271,9 +351,56 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         _behaviortreeRunner.play = paly;
     }
 
+    public void Death()
+    {
+        _animator.SetTrigger("death");
+        SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer renderer in renderers)
+        {
+            string originalName = renderer.materials[0].name;
+            string modifiedName = originalName.Replace(" (Instance)", "");
+            string path = "Materials/Boss/" + modifiedName + "_Dissolve";
+            Material material = Resources.Load<Material>(path);
+            //material.SetFloat("DissolveAmount", 0f);
+
+
+            if (material != null)
+            {
+                material.SetFloat("DissolveAmount", 0f);
+
+                // 새로운 배열을 생성하여 교체
+                Material[] newMaterials = renderer.materials;
+                newMaterials[0] = material;
+                renderer.materials = newMaterials;
+            }
+            else
+            {
+                Debug.LogError("Material not found at path: " + path);
+            }
+
+            GetComponent<DissolveInstancings>().DoVanish();
+        }
+    }
+
     // -----
 
-    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float  delay)
+    public IEnumerator WhenBulletTimeActived(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _bulletTimeScalable.SetActive(false);
+        TimeStopInvalidate?.Invoke();
+    }
+
+    private void InvalidateBulletTime()
+    {
+        if (_onPhaseTree == true)
+        {
+            StartCoroutine(WhenBulletTimeActived(timeStopInvaliDelay));
+        }
+    }
+
+    private IEnumerator ChangePhaseAfterDelay(BehaviorTree bt, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -282,9 +409,15 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void ChangePhase(BehaviorTree bt)
     {
+        ResetAllTriggers();
+
+        _behaviortreeRunner.play = false;
+
         _behaviortreeRunner.tree = bt;
         _behaviortreeRunner.tree.blackboard = _blackboard;
-        _behaviortreeRunner.Bind();
+        _behaviortreeRunner.BindTree();
+
+        _behaviortreeRunner.play = true;
     }
 
     private void StartResetAllTriggers()

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public partial class Damageable : MonoBehaviour
 {
-    public enum DamageType
+	public enum ComboType
+	{
+        None = 0,
+		InterruptibleCombo, // enemy가 공격중일때는 피격상태로 넘어가지 않음
+		UninterruptibleCombo // 이전과 똑같음
+	}
+	public enum DamageType
     {
         None = 0,
         ATypeHit,
@@ -23,5 +29,6 @@ public partial class Damageable : MonoBehaviour
         public bool isActiveSkill;
 
         public DamageType damageType;
+        public ComboType comboType;
     }
 }
