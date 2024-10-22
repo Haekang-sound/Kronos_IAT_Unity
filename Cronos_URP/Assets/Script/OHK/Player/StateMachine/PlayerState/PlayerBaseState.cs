@@ -86,7 +86,7 @@ public abstract class PlayerBaseState : State
 		// 		stateMachine.Rigidbody.velocity = /*velocity*/ AdjustKeyDirectionToSlope(stateMachine.Animator.deltaPosition)/** Time.fixedDeltaTime * stateMachine.Player.moveSpeed*/
 		// 	  * stateMachine.Animator.speed + gravity;
 
-		Float();
+		//Float();
 
 	}
 
