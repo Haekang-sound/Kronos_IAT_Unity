@@ -349,7 +349,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 실시간으로 TP 감소
 		if (_damageable.currentHitPoints > 0f)
 		{
-			_damageable.currentHitPoints -= Time.deltaTime * 5;
+			_damageable.currentHitPoints -= Time.deltaTime;
 		}
 
 		// 실시간으로 CP감소

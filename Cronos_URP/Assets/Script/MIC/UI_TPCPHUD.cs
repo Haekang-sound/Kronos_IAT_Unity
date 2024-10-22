@@ -109,7 +109,7 @@ public class UI_TPCPHUD : UI_TPCP
         //CpHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CPprogress * -360));
     }
 
-    void UpdateTpSlider()
+    void UpdateTpSlider()     
     {
         // 플레이어의 TP를 받아온다.
         //MaxTp = player.MaxTP;
