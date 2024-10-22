@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,21 +40,30 @@ public class UI_TPCPHUD : UI_TPCP
     public float TpInterval = 60.0f;
 
     Transform parentTrans;
-    ParticleSystem ps;
+    ParticleSystem fxPs;
+    ParticleSystem glowPs;
     Quaternion prevParentRot;
-    ParticleSystem.MainModule psMain;
+    ParticleSystem.MainModule fxMain;
+    ParticleSystem.MainModule glowMain;
 
-    //Vector4 orange = new Vector4(1, 0.5f, 0, 1);
-    //Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
     Vector4 green = Color.green;
     Vector4 dGreen = new Vector4(0, 0.8f, 0, 1);
     Vector4 red = Color.red;
-    Vector4 dRed = new Vector4(0.8f, 0, 0, 1);
+    Vector4 red2 = new Vector4(0.8f, 0, 0, 1);
     Vector4 gray = new Vector4(0.8f, 0.8f, 0.8f, 1);
     public Vector3 hitScale = new Vector3(1.2f, 1.2f, 1.2f);
     Vector3 originScale = new Vector3(1, 1, 1);
 
     public GameObject speedLineUI;
+
+    Vector4 yellow = Color.yellow;
+    Vector4 yellow2 = new Vector4(1, 0.8f, 0, 1);
+    Vector4 orange = new Vector4(1, 0.5f, 0, 1);
+    Vector4 orange2 = new Vector4(0.8f, 0.5f, 0, 1);
+    Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
+    Vector4 dOrange2 = new Vector4(0.8f, 0.3f, 0, 1);
+    Vector4 burgundy = new Vector4(1, 0, 0.3f, 1);
+    Vector4 burgundy2 = new Vector4(0.8f, 0, 0.3f, 1);
 
     private void Start()
     {
@@ -71,8 +78,10 @@ public class UI_TPCPHUD : UI_TPCP
         }
 
         parentTrans = FxHolder.transform;
-        ps = Tpfx.GetComponent<ParticleSystem>();
-        psMain = ps.main;
+        fxPs = Tpfx.GetComponent<ParticleSystem>();
+        glowPs = TpGlow.GetComponent<ParticleSystem>();
+        fxMain = fxPs.main;
+        glowMain = glowPs.main;
         prevParentRot = parentTrans.rotation;
     }
 
@@ -82,14 +91,14 @@ public class UI_TPCPHUD : UI_TPCP
         UpdateTpSlider();
 
         // 파티클 시스템을 슬라이더에 맞게 회전한다.
-        //FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress * 360));
+        //FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress * 360f));
         //TpGlow.GetComponent<ParticleSystem>().transform.rotation = FxHolder.rotation;
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //    ChangeGreen();
+        if (Input.GetKeyDown(KeyCode.T))
+            ChangeGreen();
 
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //    ChangeRed();
+        if (Input.GetKeyDown(KeyCode.Y))
+            ChangeRed();
 
 
         // 플레이어의 CP를 받아온다.
@@ -114,23 +123,30 @@ public class UI_TPCPHUD : UI_TPCP
         {
             TPprogress[i] = ((tp - (TpInterval * i)) / TpInterval);
             circleImageTPs[i].fillAmount = TPprogress[i];
-        }  
+
+            if (TPprogress[i] < 1 && TPprogress[i] > 0)
+                CheckGlowColor(i);
+
+            // 파티클 시스템을 슬라이더에 맞게 회전한다.
+            FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress[i] * 360f));
+            TpGlow.GetComponent<ParticleSystem>().transform.rotation = FxHolder.rotation;
+        }
     }
 
-    // 파티클이 회전해도 한 방향으로 뿜어져 나오려면
-    //private void LateUpdate()
-    //{
-    //    // 현재 부모 회전
-    //    Quaternion curParentRot = parentTrans.rotation;
-    //    // 부모 회전의 변화량
-    //    Quaternion rotChange = curParentRot * Quaternion.Inverse(prevParentRot);
-    //    // 그걸 반대로 하고
-    //    Quaternion inverseRotChange = Quaternion.Inverse(rotChange);
-    //    // 자식 회전을 그걸로 적용
-    //    ps.transform.rotation = inverseRotChange * ps.transform.rotation;
-    //    // 이전 부모 회전 업데이트
-    //    prevParentRot = curParentRot;
-    //}
+    //파티클이 회전해도 한 방향으로 뿜어져 나오려면
+    private void LateUpdate()
+    {
+        // 현재 부모 회전
+        Quaternion curParentRot = parentTrans.rotation;
+        // 부모 회전의 변화량
+        Quaternion rotChange = curParentRot * Quaternion.Inverse(prevParentRot);
+        // 그걸 반대로 하고
+        Quaternion inverseRotChange = Quaternion.Inverse(rotChange);
+        // 자식 회전을 그걸로 적용
+        fxPs.transform.rotation = inverseRotChange * fxPs.transform.rotation;
+        // 이전 부모 회전 업데이트
+        prevParentRot = curParentRot;
+    }
 
 
     // 빨간색 람다
@@ -138,8 +154,8 @@ public class UI_TPCPHUD : UI_TPCP
     {
         StartCoroutine(ChangeColorScale(red, () =>
         {
-            TpGlow.SetActive(true);
-            psMain.startColor = new ParticleSystem.MinMaxGradient(Color.white, gray);
+            //TpGlow.SetActive(true);
+            fxMain.startColor = new ParticleSystem.MinMaxGradient(Color.white, gray);
         }));
     }
 
@@ -148,9 +164,35 @@ public class UI_TPCPHUD : UI_TPCP
     {
         StartCoroutine(ChangeColorScale(green, () =>
         {
-            TpGlow.SetActive(true);
-            psMain.startColor = new ParticleSystem.MinMaxGradient(Color.white, gray);
+            //TpGlow.SetActive(true);
+            fxMain.startColor = new ParticleSystem.MinMaxGradient(Color.white, gray);
         }));
+    }
+
+    public void CheckGlowColor(int i)
+    {
+        Debug.Log("Current TP check zone : " + i);
+
+        switch (i)
+        {
+            case 4:
+                glowMain.startColor = new ParticleSystem.MinMaxGradient(yellow, yellow2);
+                break;
+            case 3:
+                glowMain.startColor = new ParticleSystem.MinMaxGradient(orange, orange2);
+                break;
+            case 2:
+                glowMain.startColor = new ParticleSystem.MinMaxGradient(dOrange, dOrange2);
+                break;
+            case 1:
+                glowMain.startColor = new ParticleSystem.MinMaxGradient(red, red2);
+                break;
+            case 0:
+                glowMain.startColor = new ParticleSystem.MinMaxGradient(burgundy, burgundy2);
+                break;
+            default: 
+                break;
+        }
     }
 
     // 슬라이더/텍스트의 크기를 키우고 색을 바꾼다.
@@ -170,13 +212,13 @@ public class UI_TPCPHUD : UI_TPCP
             
             if (color == green)
             {
-                psMain.startColor = new ParticleSystem.MinMaxGradient(green, dGreen);
+                fxMain.startColor = new ParticleSystem.MinMaxGradient(green, dGreen);
             }
             if (color == red)
             {
-                psMain.startColor = new ParticleSystem.MinMaxGradient(red, dRed);
+                fxMain.startColor = new ParticleSystem.MinMaxGradient(red, red2);
             }
-            TpGlow.SetActive(false);
+            //TpGlow.SetActive(false);
             yield return null;
         }
 
