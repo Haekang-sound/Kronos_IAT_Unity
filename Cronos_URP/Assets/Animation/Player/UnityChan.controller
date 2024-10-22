@@ -786,7 +786,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 15
   damageType: 3
-  comboType: 0
+  comboType: 2
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &-6130925670275204267
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   moveForce: 1.3
   Damage: 30
   damageType: 4
-  comboType: 0
+  comboType: 1
   hitStopTime: 0.05
   minFrame: 0.4
 --- !u!114 &-5474965037399157733
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   hitStopTime: 0.04
   Damage: 0
   damageType: 3
-  comboType: 0
+  comboType: 1
   minFrame: 0.5
 --- !u!1101 &-5073566405331926085
 AnimatorStateTransition:
@@ -1230,8 +1230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1.3
   Damage: 0
-  damageType: 0
-  comboType: 0
+  damageType: 6
+  comboType: 1
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1102 &-4769547401054879031
@@ -1520,8 +1520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 7
   Damage: 0
-  damageType: 0
-  comboType: 0
+  damageType: 3
+  comboType: 1
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &-4128343833648735148
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 30
   damageType: 5
-  comboType: 0
+  comboType: 1
   hitStopTime: 0.06
 --- !u!1101 &-3161619818504497173
 AnimatorStateTransition:
@@ -2039,8 +2039,6 @@ AnimatorStateMachine:
     - {fileID: 1758906489119718432}
     - {fileID: -1587547279203260226}
     - {fileID: 238355293268892508}
-  - first: {fileID: 3996534933792411687}
-    second: []
   - first: {fileID: 4709733735613252092}
     second:
     - {fileID: 3624047856668659846}
@@ -2048,6 +2046,8 @@ AnimatorStateMachine:
     - {fileID: 9093649816371052631}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
+  - first: {fileID: 3996534933792411687}
+    second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 920, y: 430, z: 0}
   m_EntryPosition: {x: 920, y: 330, z: 0}
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   moveForce: -2.5
   Damage: 5
   damageType: 1
-  comboType: 0
+  comboType: 2
   hitStopTime: 0.05
   minFrame: 0.328
 --- !u!1102 &-881464399840993649
@@ -2661,22 +2661,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aceab151563e21340a4496539a90bcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 8.2
+  time: 7
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 3
-      inSlope: 7.3115034
-      outSlope: 7.3115034
+      inSlope: 8.601769
+      outSlope: 8.601769
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.2325103
-      value: 4.7
+      value: 5
       inSlope: -4.06747
       outSlope: -4.06747
       tangentMode: 0
@@ -2686,8 +2686,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 3
-      inSlope: -2.2150133
-      outSlope: -2.2150133
+      inSlope: -2.6058981
+      outSlope: -2.6058981
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -2765,7 +2765,7 @@ MonoBehaviour:
   moveForce: 1
   Damage: 10
   damageType: 1
-  comboType: 0
+  comboType: 2
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &-290126547666885164
@@ -2783,7 +2783,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 30
   damageType: 5
-  comboType: 0
+  comboType: 1
   hitStopTime: 0.04
   minFrame: 0
 --- !u!1101 &-119523204972760793
@@ -2903,7 +2903,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: NorAttackVariation
     m_Type: 4
@@ -3182,8 +3182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 1
   Damage: 50
-  damageType: 0
-  comboType: 0
+  damageType: 5
+  comboType: 1
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &550255494032006098
@@ -3866,7 +3866,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4739926640310392915}
-    m_Position: {x: 780, y: 360, z: 0}
+    m_Position: {x: 780, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2962371233910720741}
     m_Position: {x: 50, y: 370, z: 0}
@@ -5426,7 +5426,7 @@ MonoBehaviour:
   moveForce: 1.5
   Damage: 30
   damageType: 5
-  comboType: 0
+  comboType: 1
   hitStopTime: 0.04
   minFrame: 0.414
 --- !u!1101 &6699718215165252703
@@ -5815,7 +5815,7 @@ MonoBehaviour:
   moveForce: 0
   Damage: 0
   damageType: 4
-  comboType: 0
+  comboType: 1
   hitStopTime: 0.05
 --- !u!114 &7380673278053056779
 MonoBehaviour:
@@ -5921,7 +5921,7 @@ MonoBehaviour:
   moveForce: 1
   Damage: 5
   damageType: 2
-  comboType: 0
+  comboType: 2
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &7745182279930307600
