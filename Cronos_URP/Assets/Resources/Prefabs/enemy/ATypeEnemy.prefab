@@ -74,6 +74,7 @@ MonoBehaviour:
   inAttack: 0
   isAcitveSkill: 0
   currentDamageType: 0
+  currentComboType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -442,12 +443,13 @@ MonoBehaviour:
   OnDown:
     m_PersistentCalls:
       m_Calls: []
-  drawGizmos: 0
-  meleeAttackDistance: 1.8
-  normalAttackDistance: 2.4
-  strongAttackDistance: 3
+  drawGizmos: 1
+  meleeAttackDistance: 3
+  normalAttackDistance: 4
+  strongAttackDistance: 5
   strafeSpeed: 0.8
   rotationSpeed: 1
+  inAttack: 0
 --- !u!114 &2166233687412480796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,13 +725,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1
-  damageAmount: 1
+  damageAmount: 10
   targetLayers:
     serializedVersion: 2
     m_Bits: 512
   inAttack: 0
   isAcitveSkill: 0
   currentDamageType: 0
+  currentComboType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -1613,6 +1616,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6646882942596473924, guid: b36d2b9da18d9b74cb349685c6f5c3ea, type: 3}
+      propertyPath: TargetTransform
+      value: 
+      objectReference: {fileID: 3907471215388030343}
     - target: {fileID: 8828972337593751634, guid: b36d2b9da18d9b74cb349685c6f5c3ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

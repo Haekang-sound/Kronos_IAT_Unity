@@ -68,17 +68,17 @@ public abstract class PlayerBaseState : State
 	protected void Move()
 	{
 
-		bool isOnSlope = IsOnSlope();
-		if (isOnSlope)
-		{
-			stateMachine.Rigidbody.useGravity = false;
-		}
-		else
-		{
-			stateMachine.Rigidbody.useGravity = true;
-		}
-		Vector3 velocity = isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) : stateMachine.Velocity;//.normalized;
-		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+// 		bool isOnSlope = IsOnSlope();
+// 		if (isOnSlope)
+// 		{
+// 			stateMachine.Rigidbody.useGravity = false;
+// 		}
+// 		else
+// 		{
+// 			stateMachine.Rigidbody.useGravity = true;
+// 		}
+		Vector3 velocity = /*isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) :*/ stateMachine.Velocity;//.normalized;
+		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
 		stateMachine.Rigidbody.velocity = velocity * Time.fixedDeltaTime * stateMachine.Player.moveSpeed
 			 * stateMachine.Animator.speed + gravity;
@@ -93,20 +93,20 @@ public abstract class PlayerBaseState : State
 	protected void Move(Vector3 moveVector)
 	{
 
-		bool isOnSlope = IsOnSlope();
-		if (isOnSlope)
-		{
-			stateMachine.Rigidbody.useGravity = false;
-		}
-		else
-		{
-			stateMachine.Rigidbody.useGravity = true;
-		}
+// 		bool isOnSlope = IsOnSlope();
+// 		if (isOnSlope)
+// 		{
+// 			stateMachine.Rigidbody.useGravity = false;
+// 		}
+// 		else
+// 		{
+// 			stateMachine.Rigidbody.useGravity = true;
+// 		}
 		Vector3 velocity = moveVector;// AdjustKeyDirectionToSlope( moveVector);
-		Vector3 gravity = isOnSlope ? Vector3.zero : Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+		Vector3 gravity = /*isOnSlope ? Vector3.zero : */Vector3.down * /*Mathf.Abs(stateMachine.Rigidbody.velocity.y)*/9.81f;
 
 		//stateMachine.Rigidbody.velocity = new Vector3(10, 0, 0);
-		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition;//velocity;// * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
+		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition + gravity; ;//velocity;// * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
 // 		Debug.Log(stateMachine.Rigidbody.velocity);
 		/** stateMachine.Animator.speed + gravity;*/
 

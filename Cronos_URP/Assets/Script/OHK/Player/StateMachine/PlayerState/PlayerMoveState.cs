@@ -271,10 +271,8 @@ public class PlayerMoveState : PlayerBaseState
 		Debug.Log("시간베기!");
 		if (stateMachine.Animator.GetBool("isTimeSlash"))
 		{
-			if (!stateMachine.AutoTargetting.FindTarget())
-
-				return;
-			stateMachine.Animator.SetTrigger("TimeSlash");
+			if (!stateMachine.AutoTargetting.FindTarget()) return;
+			stateMachine.Animator.SetTrigger("TimeSlashReady");
 		}
 	}
 

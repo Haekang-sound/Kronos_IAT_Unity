@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class TimeSlashReadyBehaviour : StateMachineBehaviour
 {
+	float currentTime = 0f;
+	bool timeSlash;
+	PlayerStateMachine stateMachine;
+	[SerializeField] public AnimationCurve TimeSlashCurve;
 	// OnStateEnter is called before OnStateEnter is called on any state inside this state machine
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		// 1) ¡∂¡ÿ,
+		
+		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.SwitchState(new PlayerTimeSlashReadyState(stateMachine));
 
-		// 2) Ω√∞£∏ÿ√„
-		BulletTime.Instance.DecelerateSpeed();
-		// 3) ∂Ùø¬≈∏∞Ÿ¿Ã ≥™ø»
-		Player.Instance.IsLockOn = true;
 	}
 
 	// OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine

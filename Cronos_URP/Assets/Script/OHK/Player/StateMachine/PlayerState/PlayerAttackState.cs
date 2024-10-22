@@ -32,6 +32,8 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
+
+		stateMachine.GroundChecker.ToggleChecker = false;
 	}
 	public override void Tick()
 	{
@@ -68,14 +70,14 @@ public class PlayerAttackState : PlayerBaseState
 
 		CalculateMoveDirection();   // 방향을 계산하고
 
-
+		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
 		}
 		else if (stateMachine.Animator.deltaPosition != null)
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime);
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity; 
 		}
 	}
 	public override void FixedTick()
@@ -95,6 +97,8 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
+
+		stateMachine.GroundChecker.ToggleChecker = true;
 	}
 
 	private void Attack()

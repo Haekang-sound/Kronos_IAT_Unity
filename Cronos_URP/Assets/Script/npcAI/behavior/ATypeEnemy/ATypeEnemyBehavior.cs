@@ -17,7 +17,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public float normalAttackDistance = 2.4f;
     public float strongAttackDistance = 3f;
 
-
+    [Header("Speed")]
     public float strafeSpeed = 1f;
     public float rotationSpeed = 1.0f;
 

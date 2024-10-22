@@ -80,6 +80,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private Checkpoint _currentCheckpoint;
 
+
+	// 감지하고자 하는 레이어를 지정합니다.
+    public LayerMask targetLayer; // Inspector에서 설정 가능
+
 	// Property
 	private float totalspeed;
 	public float moveSpeed { get { return totalspeed; } }
@@ -265,13 +269,32 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		return TPAbsorptionRatio /** currentDamage*/;
 	}
+
+	public float currentTime = 0f;
+	bool timeSlash;
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.R))
-		{
+// 		if(Input.GetKeyDown(KeyCode.R))
+// 		{
+// 			timeSlash = true;
+// 		}
+// 
+// 		if(timeSlash)
+// 		{
+// 			currentTime += Time.deltaTime;
+// 			PlayerFSM.Rigidbody.velocity = transform.forward*TimeSlashCurve.Evaluate(currentTime);
+// 			if(currentTime > 1f)
+// 			{
+// 				timeSlash = false;
+// 				currentTime = 0f;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			currentTime = 0f;
+// 		}
 
-		}
-		
+
 		if (Input.GetKeyDown(KeyCode.O))
 		{	
 			BulletTime.Instance.SetNormalSpeed();

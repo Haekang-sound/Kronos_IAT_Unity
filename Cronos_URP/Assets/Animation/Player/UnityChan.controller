@@ -506,6 +506,24 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-7009660918526579255
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd36cface9787647b7dc5dbb84af794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeSlashCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1102 &-6980027445638407695
 AnimatorState:
   serializedVersion: 6
@@ -768,7 +786,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 15
   damageType: 3
-  comboType: 2
+  comboType: 0
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &-6130925670275204267
@@ -1059,7 +1077,7 @@ MonoBehaviour:
   moveForce: 1.3
   Damage: 30
   damageType: 4
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.05
   minFrame: 0.4
 --- !u!114 &-5474965037399157733
@@ -1077,7 +1095,7 @@ MonoBehaviour:
   moveForce: 2
   Damage: 40
   damageType: 4
-  comboType: 2
+  comboType: 0
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1101 &-5449367887995219412
@@ -1248,6 +1266,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: animSpeed
+--- !u!1101 &-4769139898400618455
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: TimeSlash
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 618403687392718063}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.90625
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-4557386971832963429
 AnimatorState:
   serializedVersion: 6
@@ -1475,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 0
+  moveForce: 7
   Damage: 0
   damageType: 0
   comboType: 0
@@ -1624,6 +1667,31 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
+--- !u!1101 &-3977133880514354236
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: goIdle
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3223448887807297641}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.7916667
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-3945854630758729181
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1871,7 +1939,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 30
   damageType: 5
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.06
 --- !u!1101 &-3161619818504497173
 AnimatorStateTransition:
@@ -1991,13 +2059,6 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 3996534933792411687}
-    second: []
-  - first: {fileID: 2341847357346862668}
-    second:
-    - {fileID: 1758906489119718432}
-    - {fileID: -1587547279203260226}
-    - {fileID: 238355293268892508}
   - first: {fileID: 4709733735613252092}
     second:
     - {fileID: 3624047856668659846}
@@ -2005,6 +2066,13 @@ AnimatorStateMachine:
     - {fileID: 9093649816371052631}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
+  - first: {fileID: 3996534933792411687}
+    second: []
+  - first: {fileID: 2341847357346862668}
+    second:
+    - {fileID: 1758906489119718432}
+    - {fileID: -1587547279203260226}
+    - {fileID: 238355293268892508}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 920, y: 430, z: 0}
   m_EntryPosition: {x: 920, y: 330, z: 0}
@@ -2235,7 +2303,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8993902097722301239, guid: ae59c5b8dacfe3b4bbc97a5a6653e0f8, type: 3}
+  m_Motion: {fileID: 8993902097722301239, guid: cb1fb662ccb23b842a10862a67e17d13, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2548,31 +2616,9 @@ MonoBehaviour:
   moveForce: -2.5
   Damage: 5
   damageType: 1
-  comboType: 2
+  comboType: 0
   hitStopTime: 0.05
   minFrame: 0.328
---- !u!1101 &-892165856759080777
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 618403687392718063}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.90625
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &-881464399840993649
 AnimatorState:
   serializedVersion: 6
@@ -2580,7 +2626,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_4Combo_3
+  m_Name: Anim_Player_ParryingAttack_Ready
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2744,7 +2790,7 @@ MonoBehaviour:
   moveForce: 1
   Damage: 10
   damageType: 1
-  comboType: 2
+  comboType: 0
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &-290126547666885164
@@ -2762,7 +2808,7 @@ MonoBehaviour:
   moveForce: 1.2
   Damage: 30
   damageType: 5
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.04
   minFrame: 0
 --- !u!1101 &-119523204972760793
@@ -3004,6 +3050,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: TimeSlashReady
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   - m_Name: -------------VALUE-------------
     m_Type: 1
     m_DefaultFloat: 0
@@ -3156,7 +3208,7 @@ MonoBehaviour:
   moveForce: 1
   Damage: 50
   damageType: 0
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &550255494032006098
@@ -3221,7 +3273,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6150214147532590623}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 4643652582033610127}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3230,7 +3283,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0e19bf3f6f981db42b6f7869717c7ad8, type: 2}
+  m_Motion: {fileID: 8993902097722301239, guid: cb1fb662ccb23b842a10862a67e17d13, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3492,7 +3545,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 1ca28c1af76ff454c968d44e99f26704, type: 3}
+  m_Motion: {fileID: 8993902097722301239, guid: 8673067d64d12194cadf23879328d40b, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4722,7 +4775,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: TimeSlash
+    m_ConditionEvent: TimeSlashReady
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7284854147249810079}
@@ -4803,7 +4856,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &4550094988236342173
+--- !u!114 &4643652582033610127
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4812,9 +4865,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd36cface9787647b7dc5dbb84af794, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c3b3a9879f5f934eaa5d086635becd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveForce: 0
+  Damage: 0
+  damageType: 3
+  comboType: 0
+  hitStopTime: 0
+  minFrame: 0
 --- !u!1107 &4709733735613252092
 AnimatorStateMachine:
   serializedVersion: 6
@@ -4886,7 +4945,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -1969951384520403494}
-    m_Position: {x: 390, y: 30, z: 0}
+    m_Position: {x: 390, y: 20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -4969,7 +5028,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_4Combo_4
+  m_Name: Anim_Player_ParryingAttack_Slash
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -5330,10 +5389,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 1.3
+  moveForce: 10
   Damage: 0
   damageType: 0
-  comboType: 2
+  comboType: 0
   hitStopTime: 0
   minFrame: 0.433
 --- !u!1101 &6535759634123561406
@@ -5376,7 +5435,7 @@ MonoBehaviour:
   moveForce: 1.5
   Damage: 30
   damageType: 5
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.04
   minFrame: 0.414
 --- !u!1101 &6699718215165252703
@@ -5670,9 +5729,10 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -892165856759080777}
+  - {fileID: -4769139898400618455}
+  - {fileID: -3977133880514354236}
   m_StateMachineBehaviours:
-  - {fileID: 4550094988236342173}
+  - {fileID: -7009660918526579255}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -5681,7 +5741,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8993902097722301239, guid: a789a6e348577e14a95ce6f1d89abcf8, type: 3}
+  m_Motion: {fileID: -3224687577188114559, guid: 31d25e1a999635548a99f4b029a0cf37, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5765,7 +5825,7 @@ MonoBehaviour:
   moveForce: 0
   Damage: 0
   damageType: 4
-  comboType: 1
+  comboType: 0
   hitStopTime: 0.05
 --- !u!114 &7380673278053056779
 MonoBehaviour:
@@ -5889,7 +5949,7 @@ MonoBehaviour:
   moveForce: 1
   Damage: 5
   damageType: 2
-  comboType: 2
+  comboType: 0
   hitStopTime: 0.01
   minFrame: 0
 --- !u!1101 &7745182279930307600
