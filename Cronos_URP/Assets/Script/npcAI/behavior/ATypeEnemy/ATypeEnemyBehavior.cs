@@ -228,7 +228,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
         if (Player.Instance != null)
         {
-            Player.Instance.TP += Player.Instance.TPGain();
+            //Player.Instance.TP += Player.Instance.TPGain();
         }
 
         _knockBack?.Begin(msg.damageSource);

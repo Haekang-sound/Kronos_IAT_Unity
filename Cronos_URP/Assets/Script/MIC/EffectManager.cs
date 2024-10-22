@@ -141,8 +141,8 @@ public class EffectManager : MonoBehaviour
             BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //    CreateAbsorbFX(player.transform, 12);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CreateAbsorbFX(player.transform, 12);
     }
 
     private void OnValidate()
@@ -505,8 +505,10 @@ public class EffectManager : MonoBehaviour
         frag.transform.Rotate(-15f, 0, 0);
         Destroy(frag, 2.0f);
 
-        // ««∞›¿Ã∆Â∆Æ
-        Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
+		CreateAbsorbFX(targetTrans, dmgMsg.amount);
+
+		// ««∞›¿Ã∆Â∆Æ
+		Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
         GameObject slashed = SpawnEffect("UpSlash", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         Destroy(slashed, 1.0f);
