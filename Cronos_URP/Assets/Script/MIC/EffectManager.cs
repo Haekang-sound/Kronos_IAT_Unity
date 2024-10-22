@@ -129,8 +129,8 @@ public class EffectManager : MonoBehaviour
     // 기획 쪽에서 조정이 끝나면 별도로 구현한다
     void Update()
     {
-        swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
-        swordWaveDistance = enforceSlashSpeed * 2f / 5f;
+        //swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
+        //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
         //보스 이펙트 데모로 나오게
         //if (Input.GetKeyDown(KeyCode.Alpha1))
