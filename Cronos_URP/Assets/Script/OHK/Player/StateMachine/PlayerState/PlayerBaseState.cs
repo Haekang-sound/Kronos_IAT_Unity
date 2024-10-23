@@ -110,7 +110,7 @@ public abstract class PlayerBaseState : State
 // 		Debug.Log(stateMachine.Rigidbody.velocity);
 		/** stateMachine.Animator.speed + gravity;*/
 
-		//Float();
+		Float();
 
 	}
 
