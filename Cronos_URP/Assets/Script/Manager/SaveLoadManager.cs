@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class SaveLoadManager : MonoBehaviour
 {
+
+    private static AbilityTree _abilityUnlock;
+
     public static SaveLoadManager Instance
     {
         get
@@ -27,28 +30,31 @@ public class SaveLoadManager : MonoBehaviour
         return instance;
     }
 
-    // =====
-
     // -----
 
     public static void SaveAllData()
     {
         Player.Instance.Save();
-
-        var at = GameObject.Find("AbilityUnlock").GetComponent<AbilityTree>();
-        if (at != null)
-        {
-            at.SaveData();
-        }
+        _abilityUnlock.SaveData();
     }
 
     public static void LoadAllData()
     {
         Player.Instance.Load();
+        _abilityUnlock.LoadData();
     }
 
     public static void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();
     }
+
+    // -----
+
+    private void Awake()
+    {
+        _abilityUnlock = GameObject.Find("AbilityUnlock").GetComponent<AbilityTree>();
+    }
+
+    // -----
 }
