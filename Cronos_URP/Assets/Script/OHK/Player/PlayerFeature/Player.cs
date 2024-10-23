@@ -183,9 +183,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX); 
 		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState); 
 	}
-
 	void Start()
 	{
+		Cursor.visible = false;
 		// TEST: 데이터 로드 
 		Load();
 
@@ -501,7 +501,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		BulletTime.Instance.SetNormalSpeed();
 	}
 
-	void SetCursorInactive()
+	public void SetCursorInactive()
 	{
 		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
 		if (Cursor.visible)
