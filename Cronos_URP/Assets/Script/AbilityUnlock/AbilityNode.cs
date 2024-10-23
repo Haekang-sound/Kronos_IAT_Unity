@@ -81,7 +81,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void Start()
     {
-        InitRender();
+        Render();
         button.onClick.AddListener(OnClickButton);
     }
 
@@ -130,14 +130,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         _videoPlayer?.Pause();
     }
 
-    public void InitRender()
-    {
-        description.text = levelData.descriptionText;
-        subdescription.text = $"CP {levelData.pointNeeded} ÇÊ¿ä";
-
-        Render();
-    }
-
     public void UpdateChilds()
     {
         if (levelData.currentPoint == levelData.nextNodeUnlockCondition ||
@@ -163,14 +155,10 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         isFocaus = val;
     }
 
-    private void Render()
+    public void Render()
     {
-        //abilityName.text = $"{abilityLevel.abilityName} ({abilityLevel.currentPoint}/{abilityLevel.maxPoint})";
-        abilityName.text = $"{levelData.abilityName}";
-
         if (levelData.currentPoint == 1)
         {
-            //skillIcon.SetGrayscale(0f);
             skillIcon.Reset();
             background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
             background.GetComponent<RotateUI>().active = true;
