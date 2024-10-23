@@ -522,6 +522,8 @@ public class EffectManager : MonoBehaviour
         frag.transform.Rotate(-15f, 0, 0);
         Destroy(frag, 2.0f);
 
+		CreateAbsorbFX(targetTrans, dmgMsg.amount);
+
         // �ǰ�����Ʈ
         Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
         GameObject slashed = SpawnEffect("Nor_Damage", newPos);
