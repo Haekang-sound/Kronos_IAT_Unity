@@ -274,10 +274,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	bool timeSlash;
 	private void Update()
 	{
-// 		if(Input.GetKeyDown(KeyCode.R))
-// 		{
-// 			timeSlash = true;
-// 		}
+		if(Input.GetKeyDown(KeyCode.H))
+ 		{
+			transform.position += transform.forward*5f;
+ 		}
 // 
 // 		if(timeSlash)
 // 		{
@@ -350,7 +350,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (_damageable.currentHitPoints > 0f)
 		{
 			_damageable.currentHitPoints -= Time.deltaTime;
-		}
+
+            if (TP <= 0)
+            {
+                _damageable.JustDead();
+            }
+        }
 
 		// 실시간으로 CP감소
 		if (IsDecreaseCP && CP > 0)
@@ -363,12 +368,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		TP = _damageable.currentHitPoints;
-
-
-		if (TP <= 0)
-		{
-			_damageable.JustDead();
-		}
 
 		// 움직일 때마다 spc큐브를 활성화.
 		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
@@ -401,7 +400,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DEAD:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-					Death(/*damageData*/);
+					//Death(/*damageData*/);
 				}
 				break;
 			case MessageType.RESPAWN:
@@ -436,9 +435,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// 죽었을 때 호출되는 함수
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
-		if (ScreenFader.Instance == null) return;
-
-		StartCoroutine(DeathScequence());
+        StartCoroutine(DeathScequence());
 	}
 
 	private IEnumerator DeathScequence()
@@ -450,26 +447,42 @@ public class Player : MonoBehaviour, IMessageReceiver
 			yield return null;
 		}
 
-		yield return new WaitForSeconds(3);
+        yield return new WaitForSecondsRealtime(3);
 
-		yield return ScreenFader.FadeSceneOut(FadeType.Black);
+		//PauseManager.Instance.PauseGame();
 
-		while (ScreenFader.IsFading)
-		{
-			yield return null;
-		}
+        yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
 
-		Respawn();
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
 
-		yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+        yield return ScreenFader.FadeSceneOut(FadeType.Black);
 
-		while (ScreenFader.IsFading)
-		{
-			yield return null;
-		}
 
-		yield return ScreenFader.FadeSceneIn(FadeType.Black);
-	}
+        while (ScreenFader.IsFading)
+        {
+            yield return null;
+        }
+
+        //Respawn();
+        if (_currentCheckpoint != null)
+        {
+			//GetComponent<Rigidbody>().enable
+            transform.position = _currentCheckpoint.transform.position;
+            transform.rotation = _currentCheckpoint.transform.rotation;
+        }
+        else
+        {
+            Debug.LogError("체크포인트가 없는 데스");
+        }
+
+        //PauseManager.Instance.UnPauseGame();
+
+        yield return ScreenFader.FadeSceneIn(FadeType.Black);
+
+    }
 
 	/// <summary>
 	/// 감속상태 정상화
@@ -724,12 +737,28 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		_currentCheckpoint = checkpoint;
+        TP += checkpoint.tp;
 	}
 
 	public void Respawn()
 	{
-		StartCoroutine(RespawnRoutine());
-	}
+        if (_currentCheckpoint != null)
+        {
+            transform.position = _currentCheckpoint.transform.position;
+            transform.rotation = _currentCheckpoint.transform.rotation;
+        }
+        else
+        {
+            Debug.LogError("체크포인트가 없는 데스");
+        }
+
+        /// TODO - 오해강: 초기화 함수를 따로 만들 것
+
+        // TP 초기화 - 적용안됨
+        TP = maxTP;
+        // CP 초기화
+        currentCP = 0f;
+    }
 
 	protected IEnumerator RespawnRoutine()
 	{
@@ -746,26 +775,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		//spawn.enabled = true;
 
 		// If there is a checkpoint, move Ellen to it.
-		if (_currentCheckpoint != null)
-		{
-			transform.position = _currentCheckpoint.transform.position;
-			transform.rotation = _currentCheckpoint.transform.rotation;
-		}
-		else
-		{
-			Debug.LogError("체크포인트가 없는 데스");
-		}
-
-		// 1초 동안 페이드 아웃
-		//yield return StartCoroutine(ScreenFader.FadeSceneIn());
-
-		/// TODO - 오해강: 초기화 함수를 따로 만들 것
-
-		// TP 초기화 - 적용안됨
-		_damageable.ResetDamage();
-		TP = maxTP;
-		// CP 초기화
-		currentCP = 0f;
+		
 	}
 
 	internal void Save()

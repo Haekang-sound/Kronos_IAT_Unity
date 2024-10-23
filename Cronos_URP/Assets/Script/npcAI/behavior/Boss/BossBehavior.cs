@@ -143,7 +143,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
-                Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
+				EffectManager.Instance.CreateHitFX(dmgMsg, transform);
+				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
                 break;

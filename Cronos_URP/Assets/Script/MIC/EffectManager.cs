@@ -8,110 +8,110 @@ using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
 {
-    // ½Ì±ÛÅÏ
-    private static EffectManager instance;
-    // GetÇÏ´Â ÇÁ·ÎÆÛÆ¼
-    public static EffectManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<EffectManager>();
-                if (instance == null)
-                {
-                    GameObject effectManager = new GameObject(typeof(EffectManager).Name);
-                    instance = effectManager.AddComponent<EffectManager>();
+	// ï¿½Ì±ï¿½ï¿½ï¿½
+	private static EffectManager instance;
+	// Getï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼
+	public static EffectManager Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = FindObjectOfType<EffectManager>();
+				if (instance == null)
+				{
+					GameObject effectManager = new GameObject(typeof(EffectManager).Name);
+					instance = effectManager.AddComponent<EffectManager>();
 
-                    DontDestroyOnLoad(effectManager);
-                }
-            }
-            return instance;
-        }
-    }
-    
-    // ÇÃ·¹ÀÌ¾î °ü·Ã
-    [SerializeField]
-    Player player;
-    public GameObject pSword;
+					DontDestroyOnLoad(effectManager);
+				}
+			}
+			return instance;
+		}
+	}
 
-    SoundManager soundManager;
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+	[SerializeField]
+	Player player;
+	public GameObject pSword;
 
-    // ·¹ÀÌÄ³½ºÆ® °ü·Ã
-    float forwardVal = 1.6f;
-    float yUpVal = 1.5f;
-    public LayerMask groundLayer;
-    public float rayMaxDist = 2.0f;
+	SoundManager soundManager;
 
-    // ±Û·Î¹ú º¼·ý
-    [SerializeField]
-    Volume eVolume;
-    MotionBlur mBlur;
-    ChromaticAberration cAber;
-    DepthOfField dOF;
-    public float mBlurVal = 1.0f;
-    public float cAberVal = 0.7f;
-    public float dofFDistance = 2.0f;
-    public float dofFLength = 100.0f;
-    public float dofAperture = 6.0f;
+	// ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+	float forwardVal = 1.6f;
+	float yUpVal = 1.5f;
+	public LayerMask groundLayer;
+	public float rayMaxDist = 2.0f;
 
-    public float parryTime = 1.0f;
-    public float fadeTime = 0.3f;
+	// ï¿½Û·Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+	[SerializeField]
+	Volume eVolume;
+	MotionBlur mBlur;
+	ChromaticAberration cAber;
+	DepthOfField dOF;
+	public float mBlurVal = 1.0f;
+	public float cAberVal = 0.7f;
+	public float dofFDistance = 2.0f;
+	public float dofFLength = 100.0f;
+	public float dofAperture = 6.0f;
 
-    // Ä³¸¯ÅÍ ÆòÅ¸ °¢µµ¸¦ ¸ÂÃß±â À§ÇØ¼­
-    Vector3 swordMagicOffest = new Vector3(90, 180, 0);
-    Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
+	public float parryTime = 1.0f;
+	public float fadeTime = 0.3f;
 
-    // °­È­ °Ë±â °ü·Ã
-    public bool isSwordWave;
-    [Range(0f, 200f)]
-    public float enforceSlashSpeed = 30.0f;
-    public float swordWaveSpeed = 20.0f;
-    public float swordWaveDistance = 12.0f;
-    public GameObject invisibleSlash;
-    public bool isGroundEnforced;
-    public bool showInvisibleMesh;
+	// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+	Vector3 swordMagicOffest = new Vector3(90, 180, 0);
+	Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
 
-    // °­È­ »óÅÂ ¿À¿ì¶ó
-    public GameObject swordAura;
+	// ï¿½ï¿½È­ ï¿½Ë±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public bool isSwordWave;
+	[Range(0f, 200f)]
+	public float enforceSlashSpeed = 30.0f;
+	public float swordWaveSpeed = 20.0f;
+	public float swordWaveDistance = 12.0f;
+	public GameObject invisibleSlash;
+	public bool isGroundEnforced;
+	public bool showInvisibleMesh;
 
-    // ÆÄÆ¼Å¬À» »¡¾ÆµéÀÌ´Â ¹Ú½º
-    public GameObject absorbBox;
+	// ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+	public GameObject swordAura;
 
-    // º¸½º ÀÌÆåÆ® °ü·Ã
-    public float bossBeamDistance = 4.0f;
-    public float bossBeamTerm = 0.2f;
-    public float bossBeamDupeTime = 8.0f;
+	// ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½Æµï¿½ï¿½Ì´ï¿½ ï¿½Ú½ï¿½
+	public GameObject absorbBox;
 
-    public float bossMoonHeight = 4.0f;
-    public float bossMoonDistance = 5.0f;
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+	public float bossBeamDistance = 4.0f;
+	public float bossBeamTerm = 0.2f;
+	public float bossBeamDupeTime = 8.0f;
 
-    // »ç¿ëÇÒ ÀÌÆåÆ® ¸®½ºÆ®
-    static List<GameObject> effects = new List<GameObject>();
-    GameObject[] effectArray;
+	public float bossMoonHeight = 4.0f;
+	public float bossMoonDistance = 5.0f;
 
-    // ÀÌÆåÆ®¸¦ ·ÎµåÇÏ´Â ´Ü°è
-    protected void Awake()
-    {
-        // ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÑ´Ù¸é
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            Debug.Log(gameObject.name + " destroyed");
-            return;
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("Effect Manager called on " + gameObject.name);
-        }
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®
+	static List<GameObject> effects = new List<GameObject>();
+	GameObject[] effectArray;
+
+	// ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ï´ï¿½ ï¿½Ü°ï¿½
+	protected void Awake()
+	{
+		// ï¿½Ì¹ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½
+		if (instance != null && instance != this)
+		{
+			Destroy(gameObject);
+			Debug.Log(gameObject.name + " destroyed");
+			return;
+		}
+		else
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+			Debug.Log("Effect Manager called on " + gameObject.name);
+		}
 		SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+	}
 
 	/// <summary>
-	/// ¾ÀÀüÈ¯ ÃÊ±âÈ­¸¦ À§ÇÑ ÇÔ¼ö
-	/// ¹Îµ¿ÈÖ´Â °íÄ¡´ø°¡ 
+	/// ï¿½ï¿½ï¿½ï¿½È¯ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+	/// ï¿½Îµï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ 
 	/// By OHK
 	/// </summary>
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,21 +119,21 @@ public class EffectManager : MonoBehaviour
 		//Initialize();
 	}
 
-	// ·ÎµåÇÑ ÀÌÆåÆ®¿¡ °ÔÀÓ ¿ÀºêÁ§Æ® ÇÒ´ç
+	// ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò´ï¿½
 	void Start()
     {
         Initialize();
         StartCoroutine(LoadEffectCoroutine());
     }
 
-    // µð¹ö±×¸¦ À§ÇØ¼­ ÀÏ´Ü ¾÷µ¥ÀÌÆ®¿¡ ³Ö¾î³õ¾Ò´Ù
-    // ±âÈ¹ ÂÊ¿¡¼­ Á¶Á¤ÀÌ ³¡³ª¸é º°µµ·Î ±¸ÇöÇÑ´Ù
+    // ï¿½ï¿½ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½Ò´ï¿½
+    // ï¿½ï¿½È¹ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
     void Update()
     {
         //swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
         //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
-        //º¸½º ÀÌÆåÆ® µ¥¸ð·Î ³ª¿À°Ô
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //if (Input.GetKeyDown(KeyCode.Alpha1))
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -167,7 +167,7 @@ public class EffectManager : MonoBehaviour
         }
         if (eVolume == null)
         {
-            // ºñ¿ëÀÌ Å©´ÙÁö¸¸ ¾Ëºü³Ä º¼·ýÀÌ ¾ø´Ù´Âµ¥
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ëºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù´Âµï¿½
             GameObject eVol = GameObject.Find("Effect Volume");
             eVolume = eVol.GetComponent<Volume>();
         }
@@ -290,8 +290,8 @@ public class EffectManager : MonoBehaviour
         return null;
     }
 
-    // ºÎ¸ð ¿ÀºêÁ§Æ®¿¡¼­ ÀÌ¸§À» °¡Áø ÀÚ½Ä ¿ÀºêÁ§Æ®¸¦ ¸®ÅÏ
-    // ÀÌÆåÆ®°¡ ³ª¿Ã ÀÚ½Ä ¿ÀºêÁ§Æ® À§Ä¡ Ã£´Â µ¥ »ç¿ëÇÏ´Â Áß
+    // ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ä¡ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
     GameObject FindChild(GameObject parent, string name)
     {
         GameObject result = GameObject.Find(name);
@@ -310,7 +310,7 @@ public class EffectManager : MonoBehaviour
     {
         if (invisibleSlash != null)
         {
-            // ÇÁ¸®ÆÕ ÀÎ½ºÅÏ½º¿¡¼­ MeshRenderer¸¦ Ã£°í È°¼ºÈ­/ºñÈ°¼ºÈ­
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ MeshRendererï¿½ï¿½ Ã£ï¿½ï¿½ È°ï¿½ï¿½È­/ï¿½ï¿½È°ï¿½ï¿½È­
             MeshRenderer meshRenderer = invisibleSlash.GetComponentInChildren<MeshRenderer>();
             if (meshRenderer != null)
             {
@@ -323,12 +323,12 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î °ü·Ã ÀÌÆåÆ®
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     public void NormalSlashFX(string fxName)
     {
-        // ÀÌÆåÆ® »Ì°í ·ÎÅ×ÀÌ¼ÇÀ» Ä®ÀÇ ·ÎÅ×ÀÌ¼Ç°ú ¸ÂÃá´Ù.
-        // Ä®°ú ÀÌÆåÆ®ÀÇ ±âÁØÀÌ ´Ù¸£¹Ç·Î ÀÌ°Ç ÀÌÆåÆ®¸¶´Ù ¸ÅÁ÷ ³Ñ¹ö°¡ ÇÊ¿äÇÔ
-        // À§Ä¡´Â y ÁÂÇ¥¸¸ Ä®°ú °°°Ô, ³ª¸ÓÁö´Â ÇÃ·¹ÀÌ¾î Æ®·£½ºÆû¿¡¼­
+        // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        // Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ç·ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ y ï¿½ï¿½Ç¥ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         soundManager.PlaySFX("Attack_SE", player.transform);
         GameObject slash = SpawnEffect(fxName, player.transform.position);
         slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
@@ -337,7 +337,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // ÀÏ¹Ý °­°ø°Ý ½ºÇÉ
+    // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void NormalStrongFX()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -347,7 +347,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // °­È­ ¿À¶ó È°¼ºÈ­
+    // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
@@ -358,7 +358,7 @@ public class EffectManager : MonoBehaviour
         swordAura.SetActive(false);
     }
 
-    // ±¸¸£±â °ø°Ý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void DodgeAttack()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -369,7 +369,7 @@ public class EffectManager : MonoBehaviour
         Destroy(dttack, 4.0f);
     }
 
-    // ¾îºô¸®Æ¼ °ø°Ý 1
+    // ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ 1
     public void AbilitySlash()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -380,12 +380,12 @@ public class EffectManager : MonoBehaviour
         Destroy(aSlash, 2.0f);
     }
 
-    // ÀûÀÇ ±ÙÁ¢ ±âº»°ø°Ý
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½
     public void EnemySlash(Transform enemy)
     {
-        // ÀÌÆåÆ® »Ì°í ·ÎÅ×ÀÌ¼ÇÀ» Ä®ÀÇ ·ÎÅ×ÀÌ¼Ç°ú ¸ÂÃá´Ù.
-        // Ä®°ú ÀÌÆåÆ®ÀÇ ±âÁØÀÌ ´Ù¸£¹Ç·Î ÀÌ°Ç ÀÌÆåÆ®¸¶´Ù ¸ÅÁ÷ ³Ñ¹ö°¡ ÇÊ¿äÇÔ
-        // À§Ä¡´Â y ÁÂÇ¥¸¸ Ä®°ú °°°Ô, ³ª¸ÓÁö´Â ÇÃ·¹ÀÌ¾î Æ®·£½ºÆû¿¡¼­
+        // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        // Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ç·ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ y ï¿½ï¿½Ç¥ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         GameObject slash = SpawnEffect("EnemyAttack", enemy.position);
         slash.transform.rotation = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
             enemySword.transform.rotation * Quaternion.Euler(enemyMagicOffset);
@@ -395,7 +395,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // Àû ±ÙÁ¢ µ¹Áø°ø°Ý
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void EnemyCharge(Transform enemy)
     {
         GameObject charge = SpawnEffect("EnemyCharge", enemy.position);
@@ -404,11 +404,11 @@ public class EffectManager : MonoBehaviour
         Destroy(charge, 2.0f);
     }
 
-    // Áö¸éÀÇ °¢µµ¿¡ ¸Â°Ô ÀÌÆåÆ®¸¦ ³²±â·Á¸é ¾î¶»°Ô ÇØ¾ßÇÒ±î
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ò±ï¿½
     public void GroundCheckFX()
     {
-        // ·¹ÀÌ¸¦ ½ò À§Ä¡ ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡ + Á¤¸éÀ¸·Î Á¶±Ý ¾ÕÀ¸·Î + Á¶±Ý À§·Î
-        // ±âÁØÀ» ÇÃ·¹ÀÌ¾î Æ÷¿öµå¿¡¼­ Ä® ·ÎÄÃ Áß½ÉÀ¸·Î Á¶±Ý ¹Ù²Þ
+        // ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ Ä® ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
         Vector3 rayTrans = player.transform.position + 
             //player.transform.forward * forwardVal + 
             pSword.transform.up * -1 * forwardVal + 
@@ -418,7 +418,7 @@ public class EffectManager : MonoBehaviour
         {
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
-            // ProjectOnPlaneÀº Ã¹¹øÂ° ¸Å°³º¯¼ö º¤ÅÍ¸¦ µÎ¹øÂ° ¸Å°³º¯¼ö ³ë¸»¿¡ Åõ¿µµÈ º¤ÅÍ¸¦ ¹ÝÈ¯ÇÑ´Ù. 
+            // ProjectOnPlaneï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Î¹ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
             Quaternion fxRot = Quaternion.LookRotation(
                 //Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
@@ -426,7 +426,7 @@ public class EffectManager : MonoBehaviour
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
             
             Destroy(impact, 2.0f);
-            // ´É·Â°³¹æµÇ¾ú´Ù¸é ÀÌ°Íµµ ³ª¿È
+            // ï¿½É·Â°ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ù¸ï¿½ ï¿½Ì°Íµï¿½ ï¿½ï¿½ï¿½ï¿½
             if (isGroundEnforced)
             {
                 GameObject cir = SpawnEffect("EnforceGround", hitPoint, fxRot);
@@ -439,21 +439,21 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // ¹Ù´Ú¿¡ »óÃ³¸¸ ³²±â´Â Nor_Attack_4 Àü¿ë
-    // ÀÌ¾ú´Âµ¥ ÀÌÁ¦ ´É·Â°³¹æ¿¡¼­µµ ½á¼­ º¯¼ö ¹Þ¾Æ¾ßµÊ
+    // ï¿½Ù´Ú¿ï¿½ ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Nor_Attack_4 ï¿½ï¿½ï¿½ï¿½
+    // ï¿½Ì¾ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·Â°ï¿½ï¿½æ¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½á¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¾ßµï¿½
     public void GroundScar(string name)
     {
-        Debug.Log("¶¥ Ã¼Å© ½ÃÀÛ");
+        Debug.Log("ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ï¿½ï¿½");
         Vector3 rayTrans = player.transform.position +
             pSword.transform.up * -1 * forwardVal +
             new Vector3(0, yUpVal, 0);
         Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
-            Debug.Log("¹üÀ§¿¡ ¶¥ÀÌ ÀÖ´Ù");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½");
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
-            // ProjectOnPlaneÀº Ã¹¹øÂ° ¸Å°³º¯¼ö º¤ÅÍ¸¦ µÎ¹øÂ° ¸Å°³º¯¼ö ³ë¸»¿¡ Åõ¿µµÈ º¤ÅÍ¸¦ ¹ÝÈ¯ÇÑ´Ù. 
+            // ProjectOnPlaneï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Î¹ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
             Quaternion fxRot = Quaternion.LookRotation(
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
@@ -467,7 +467,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // °Ë±â ³¯¸®±â
+    // ï¿½Ë±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void SwordWave()
     {
         if (isSwordWave)
@@ -513,16 +513,16 @@ public class EffectManager : MonoBehaviour
             Destroy(wav);
     }
 
-    // ÀÌÆåÆ®¸Å´ÏÀú°¡ µé°í ÀÖ´Â°Ô ³ªÀ» °Í °°Àºµ¥
+    // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
     {
-        // ÆÄÆí¸¸µé±â
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         GameObject frag = SpawnEffect("FragFX", targetTrans.position);
         frag.transform.LookAt(dmgMsg.damageSource);
         frag.transform.Rotate(-15f, 0, 0);
         Destroy(frag, 2.0f);
 
-        // ÇÇ°ÝÀÌÆåÆ®
+        // ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
         GameObject slashed = SpawnEffect("Nor_Damage", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
@@ -534,7 +534,7 @@ public class EffectManager : MonoBehaviour
 
     public void CreateAbsorbFX(Transform trans, float burstNum)
     {
-        // 1ÃÊ µÚ¿¡ hud·Î µ¹ÁøÇÏ´Â ÆÄÆ¼Å¬ ¸¸µé±â
+        // 1ï¿½ï¿½ ï¿½Ú¿ï¿½ hudï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½
         GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
         Destroy(ab, 3.0f);
     }
@@ -554,7 +554,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(FadeOutLightsCoroutine(parr));
         Destroy(parr, 1.0f);
         CreateGuardFX();
-        // ±Û·Î¹úº¼·ýÀÌ ¾ø´Ù¸é ³ª°¡
+        // ï¿½Û·Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (eVolume == null)
             return;
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
@@ -564,7 +564,7 @@ public class EffectManager : MonoBehaviour
         
     }
 
-    // º¸½º 8¹æÇâ ºö
+    // ï¿½ï¿½ï¿½ï¿½ 8ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
     {
         for (int i = 0; i < bossBeamDupeTime; i++)
@@ -585,7 +585,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // º¸½º ºÒ ÀåÆÇ ¸¸µé±â
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     public void BossFireShoot(Transform bosstrans)
     {
         GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
@@ -593,7 +593,7 @@ public class EffectManager : MonoBehaviour
         fire.transform.position += new Vector3(0, 1.0f, 0);
     }
 
-    // º¸½º Ã¢ 5°³ ½î±â
+    // ï¿½ï¿½ï¿½ï¿½ Ã¢ 5ï¿½ï¿½ ï¿½ï¿½ï¿½
     public void BossFiveSpear(Transform bossTrans)
     {
         Vector3 forward = bossTrans.forward;
@@ -604,14 +604,14 @@ public class EffectManager : MonoBehaviour
         Destroy(spears, 15.0f);
     }
 
-    // Ã¢ Áö¸é ÀÌÆåÆ®
+    // Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     public void SpearImpact(Vector3 pos)
     {
         GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
         Destroy(imp, 3.0f);
     }
 
-    // º¸½º À§¼º ¸¸µé±â
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     public void BossMoon(Transform bossTrans)
     {
         List<int> moonNums = new List<int>();
@@ -627,7 +627,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // ÁýÁß¼± Ä×´Ù°¡ ²ô±â
+    // ï¿½ï¿½ï¿½ß¼ï¿½ ï¿½×´Ù°ï¿½ ï¿½ï¿½ï¿½
     IEnumerator SpeedLineCoroutine()
     {
         UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
@@ -640,11 +640,11 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(SpeedLineCoroutine());
     }
 
-    // º¸½º µ¹Áø ¿¹°í ¹ÝÂ¦
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¦
     
 
 
-    // ÆÐ¸®ÇßÀ» ¶§ ¸ð¼Ç ºí·¯
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     IEnumerator ParryMotionBlurCoroutine(float val)
     {
         mBlur.intensity.value = val;
@@ -660,7 +660,7 @@ public class EffectManager : MonoBehaviour
         mBlur.intensity.value = 0f;
     }
 
-    // ÆÐ¸®ÇßÀ» ¶§ Å©·Î¸¶Æ½ ¾Ö¹ö·¹ÀÌ¼Ç
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å©ï¿½Î¸ï¿½Æ½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½
     IEnumerator ParryCAberrationCoroutine(float val)
     {
         cAber.intensity.value = val;
@@ -676,7 +676,7 @@ public class EffectManager : MonoBehaviour
         cAber.intensity.value = 0f;
     }
 
-    // ÆÐ¸®ÇßÀ» ¶§ µª½º ¿Àºê ÇÊµå ½Ã°£Àº ´Ù¸¥ È¿°úº¸´Ù Á¶±Ý »¡¸® ³¡³ª°Ô
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     IEnumerator ParryDepthOfFieldCoroutine()
     {
         dOF.focusDistance.value = dofFDistance;
@@ -698,13 +698,13 @@ public class EffectManager : MonoBehaviour
         dOF.aperture.value = 1f;
     }
 
-    // ÆÐ¸®ÇßÀ» ¶§ ½Ã°£ ÁÙÀÌ±â
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
     IEnumerator ParryTime(float val)
     {
-        // val ¸¸Å­ Å¸ÀÓ½ºÄÉÀÏ ÁÙ¿´´Ù ¿ø·¡´ë·Î µ¹¸®±â
+        // val ï¿½ï¿½Å­ Å¸ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Time.timeScale = val;
         float elapsedTime = 0.0f;
-        // nÃÊ¿¡ °ÉÃÄ¼­ µ¹¾Æ°¡±â
+        // nï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½
         float backTime = 0.6f;
         while (elapsedTime < backTime)
         {
@@ -732,32 +732,32 @@ public class EffectManager : MonoBehaviour
     }
 
 
-    // elements °³ÀÇ ¿ø¼Ò¸¦ ³ÖÀ¸¸é result °³ÀÇ ·£´ý °ªÀ» ¾Õ¿¡¼­ »Ì´Â
-    // ÇÇ¼Å-¿¹ÀÌÃ÷ ¾Ë°í¸®Áò
+    // elements ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ result ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½Ì´ï¿½
+    // ï¿½Ç¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½
     public List<int> FisherYatesShuffles(int elements, int result)
     {
-        // 0ºÎÅÍ elements°³ÀÇ ¼ýÀÚ¸¦ ¸®½ºÆ®·Î »ý¼º
+        // 0ï¿½ï¿½ï¿½ï¿½ elementsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         List<int> numbers = new List<int>();
         for (int i = 0; i < elements; i++)
         {
             numbers.Add(i);
         }
 
-        // ·£´ý °´Ã¼ »ý¼º
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
         System.Random rand = new System.Random();
 
-        // ÇÇ¼Å-¿¹ÀÌÃ÷ ¾Ë°í¸®ÁòÀ¸·Î ¸®½ºÆ® ¼ÅÇÃ
+        // ï¿½Ç¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         for (int i = numbers.Count - 1; i > 0; i--)
         {
-            int j = rand.Next(0, i + 1); // 0ºÎÅÍ i±îÁöÀÇ ÀÎµ¦½º Áß ÇÏ³ª¸¦ ¼±ÅÃ
-            // numbers[i]¿Í numbers[j]¸¦ swap
+            int j = rand.Next(0, i + 1); // 0ï¿½ï¿½ï¿½ï¿½ iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // numbers[i]ï¿½ï¿½ numbers[j]ï¿½ï¿½ swap
             int temp = numbers[i];
             numbers[i] = numbers[j];
             numbers[j] = temp;
         }
 
-        // °á°ú Ãâ·Â
-        Debug.Log("·£´ý ¹è¿­: " + string.Join(", ", numbers));
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­: " + string.Join(", ", numbers));
 
         List<int> numbers2 = new List<int>();
         for (int i = 0; i < result; i++)
@@ -765,7 +765,7 @@ public class EffectManager : MonoBehaviour
             numbers2.Add(numbers[i]);
         }
 
-        Debug.Log("number2 ¹è¿­: " + string.Join(", ", numbers2));
+        Debug.Log("number2 ï¿½è¿­: " + string.Join(", ", numbers2));
 
         return numbers2;
     }

@@ -187,7 +187,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             _abilityNodes[i].levelData = LoadedlevelDatas[i];
             _abilityNodes[i].levelData.currentPoint = loadedUserDatas[i];
-            _abilityNodes[i].InitRender();
+            _abilityNodes[i].Render();
         }
     }
 

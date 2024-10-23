@@ -11,8 +11,8 @@ public class AbilityLevel
     [SerializeField] public int nextNodeUnlockCondition = 1;
     [SerializeField] public List<int> childIdNodes = new List<int>();
 
-    [SerializeField] public string abilityName;
-    [SerializeField] public string descriptionText;
+    //[SerializeField] public string abilityName;
+    //[SerializeField] public string descriptionText;
 
     public bool IsNextNodeUnlock()
     {

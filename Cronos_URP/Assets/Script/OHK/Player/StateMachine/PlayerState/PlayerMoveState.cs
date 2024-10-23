@@ -42,7 +42,8 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
-		stateMachine.InputReader.onRunStart += TimeSlash;
+		//stateMachine.InputReader.onRunStart += TimeSlash;
+		stateMachine.InputReader.onRunStart += RushAttack;
 
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
@@ -58,6 +59,8 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 	}
+
+	
 
 
 	// state의 update라 볼 수 있지
@@ -156,7 +159,8 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
-		stateMachine.InputReader.onRunStart -= TimeSlash;
+		//stateMachine.InputReader.onRunStart -= TimeSlash;
+		stateMachine.InputReader.onRunStart -= RushAttack;
 
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
@@ -250,8 +254,9 @@ public class PlayerMoveState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f  && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
+			CoolTimeCounter.Instance.isDodgeUsed = true;
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
@@ -276,7 +281,16 @@ public class PlayerMoveState : PlayerBaseState
 		}
 	}
 
-
+	private void RushAttack()
+	{
+		Debug.Log("돌진공격!");
+		if (stateMachine.Animator.GetBool("isRushAttack")&& !CoolTimeCounter.Instance.isRushAttackUsed)
+		{
+			CoolTimeCounter.Instance.isRushAttackUsed = true;
+			//if (!stateMachine.AutoTargetting.FindTarget()) return;
+			stateMachine.Animator.SetTrigger("RushAttack");
+		}
+	}
 }
 
 

@@ -117,8 +117,9 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (stateMachine.Velocity.magnitude != 0f)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f && stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
+			CoolTimeCounter.Instance.isDodgeUsed = true;
 			stateMachine.Animator.SetBool(nextComboHash, false);
 			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 			stateMachine.Animator.SetTrigger(dodgeHash);

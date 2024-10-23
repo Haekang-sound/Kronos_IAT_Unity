@@ -230,13 +230,9 @@ public class PlayerBuffState : PlayerBaseState
 
 	private void Dodge()
 	{
-		if (stateMachine.Player.CP < 10f)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f && stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
-			return;
-		}
-		stateMachine.Player.CP -= 10f;
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
-		{
+			CoolTimeCounter.Instance.isDodgeUsed = true;
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
