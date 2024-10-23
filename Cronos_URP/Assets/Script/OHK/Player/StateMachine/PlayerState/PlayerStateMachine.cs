@@ -13,40 +13,40 @@ public class PlayerStateMachine : StateMachine
 	/// <summary>
 	///  이건 우클릭 콤보용
 	/// </summary>
-	public bool IsRattack {  get; set; }
+	public bool IsRattack { get; set; }
 	public Vector3 Velocity;
-    public Player Player { get; private set; }
-    public InputReader InputReader { get; private set; }
-    public Animator Animator { get; private set; }
+	public Player Player { get; private set; }
+	public InputReader InputReader { get; private set; }
+	public Animator Animator { get; private set; }
 	public Rigidbody Rigidbody { get; private set; }
-    public Transform MainCamera { get; private set; }
-    public Transform PlayerTransform { get; private set; }
-    public HitStop HitStop { get; private set; }
+	public Transform MainCamera { get; private set; }
+	public Transform PlayerTransform { get; private set; }
+	public HitStop HitStop { get; private set; }
 	public GroundChecker GroundChecker { get; private set; }
 	public AutoTargetting AutoTargetting;
-	public float MoveForce {  get; set; }
-	public bool IsGrounded {  get;  set; }
-	
+	public float MoveForce { get; set; }
+	public bool IsGrounded { get; set; }
+
 	public int currentLayerIndex;
 
 	public AnimatorStateInfo currentStateInformable { get; set; }
-	public float minf {  get; set; }
+	public float minf { get; set; }
 
 	public void Awake()
 	{
 		instance = this;
 	}
 	public void OnEnable()
-    {
+	{
 
-        Player = GetComponent<Player>();
-        InputReader = GetComponent<InputReader>();
+		Player = GetComponent<Player>();
+		InputReader = GetComponent<InputReader>();
 		Rigidbody = GetComponent<Rigidbody>();
-        Animator = GetComponent<Animator>();
+		Animator = GetComponent<Animator>();
 
-        MainCamera = Camera.main.transform;
-        PlayerTransform = GetComponent<Transform>();
-        HitStop = GetComponent<HitStop>();
+		MainCamera = Camera.main.transform;
+		PlayerTransform = GetComponent<Transform>();
+		HitStop = GetComponent<HitStop>();
 		GroundChecker = GetComponent<GroundChecker>();
 
 		// 시작 상태를 정해준다.
@@ -55,7 +55,10 @@ public class PlayerStateMachine : StateMachine
 
 	public void SwitchParryState()
 	{
-		SwitchState(new PlayerParryState(this));
+		if (Player.Instance.isParry)
+		{
+			SwitchState(new PlayerParryState(this));
+		}
 	}
-	
+
 }

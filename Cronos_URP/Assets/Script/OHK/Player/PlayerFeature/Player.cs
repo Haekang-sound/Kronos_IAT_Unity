@@ -142,7 +142,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public GameObject spcCubeR;
 	public float spcDelay;
 	public PlayerStateMachine psm;
-	public BoxColliderAdjuster adjuster; 
+	public BoxColliderAdjuster adjuster;
+
+	public bool useKnockback;
+	public bool isParry;
 	//public float spcActivateTime;
 
 
@@ -410,7 +413,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 		}
 	}
-	public bool useKnockback;
+
+
 	public void SetUseKnockback(bool val) => useKnockback = val;
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{

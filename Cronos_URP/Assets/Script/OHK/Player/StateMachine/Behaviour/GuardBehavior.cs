@@ -20,10 +20,10 @@ public class GuardBehavior : StateMachineBehaviour
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-// 		if (!animator.IsInTransition(layerIndex))
-// 		{
-// 			stateMachine.Player.EndParry();
-// 		}
+		if (!animator.IsInTransition(layerIndex))
+		{
+			stateMachine.Player.EndParry();
+		}
 
 		// 이동키입력을 받으면
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
@@ -39,7 +39,7 @@ public class GuardBehavior : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		// 체크용 
-		stateMachine.Player.EndParry();
+		//stateMachine.Player.EndParry();
 
 		Player.Instance.SetUseKnockback(false);
 	}
