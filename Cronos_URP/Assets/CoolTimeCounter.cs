@@ -37,8 +37,8 @@ public class CoolTimeCounter : MonoBehaviour
 	public float rushAttackCoolTime;
 	public float dodgeCoolTime;
 
-	[SerializeField] private float rushATimer;
-	[SerializeField] private float dodgeTimer;
+	private float rushATimer;
+	private float dodgeTimer;
 
 	private void Update()
 	{
