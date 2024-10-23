@@ -69,7 +69,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                 // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
                 popup.OpenPopup("확실합니까?", () =>
                 {
-                    if (value.Increment() == true)
+                    if (value.Increase() == true)
                     {
                         // 확인 버튼을 눌렀을 때 실행할 동작
                         abilityAmounts.UpdateSpent(value.levelData.pointNeeded);
@@ -103,9 +103,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             obserable.Subscribe(this);
         }
 
-        abilityTreeCanvas.enabled = false;
-        //playerVirtualCam = PlayerCamControler.Instance.VirtualCamera;
-
         if (mainVirtualCam == null)
         {
             mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
@@ -118,24 +115,14 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
         rootAbilityNode.SetInteractable(true);
 
-        if (useParser)
+        // 인덱스 부여
+        for (int i = 0; i < _abilityNodes.Count; i++)
         {
-            LoadAbilityLevelData();
-            InitChildNodeDatas();
-        }
-        else
-        {
-            // 인덱스 부여
-            for (int i = 0; i < _abilityNodes.Count; i++)
-            {
-                _abilityNodes[i].levelData.id = i;
-            }
-
-            // 로드 및 초기화
-            LoadData();
+            _abilityNodes[i].levelData.id = i;
         }
 
-
+        // 로드 및 초기화
+        LoadData();
     }
 
     public void SaveData()
@@ -148,12 +135,24 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public void LoadData()
     {
+        var edges = GetComponentsInChildren<SkillProgressLine>();
+        foreach(var edge in  edges)
+        {
+            edge.Reset();
+        }
+
+        foreach (var node in _abilityNodes)
+        {
+            node.Reset();
+        }
+
+        rootAbilityNode.interactable = true;
+
         foreach (var node in _abilityNodes)
         {
             node.Load();
         }
     }
-
 
     public void EnterAbility()
     {
@@ -178,18 +177,18 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
     }
 
-    public void LoadAbilityLevelData()
-    {
-        var LoadedlevelDatas = parser.LoadLevelDataXML();
-        var loadedUserDatas = parser.LoadUserDataXML();
+    //public void LoadAbilityLevelData()
+    //{
+    //    var LoadedlevelDatas = parser.LoadLevelDataXML();
+    //    var loadedUserDatas = parser.LoadUserDataXML();
 
-        for (int i = 0; i < _abilityNodes.Count; i++)
-        {
-            _abilityNodes[i].levelData = LoadedlevelDatas[i];
-            _abilityNodes[i].levelData.currentPoint = loadedUserDatas[i];
-            _abilityNodes[i].Render();
-        }
-    }
+    //    for (int i = 0; i < _abilityNodes.Count; i++)
+    //    {
+    //        _abilityNodes[i].levelData = LoadedlevelDatas[i];
+    //        _abilityNodes[i].levelData.currentPoint = loadedUserDatas[i];
+    //        _abilityNodes[i].Render();
+    //    }
+    //}
 
     public void InitChildNodeDatas()
     {
@@ -234,7 +233,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             yield return null;
         }
 
-        abilityTreeCanvas.enabled = true;
         abilityAmounts.UpdatePlayerTimePoint();
 
         SetEnabledButtons(true);
@@ -263,7 +261,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
             yield return null;
         }
 
-        abilityTreeCanvas.enabled = false;
+        //abilityTreeCanvas.enabled = false;
         SetPlayerCamPriority(10);
         canvasGroup.alpha = 0f;
         SetEnabledButtons(false);

@@ -23,6 +23,11 @@ public class ProgressBar : MonoBehaviour
         //barImage.fillAmount = 0f;
     }
 
+    public void Reset()
+    {
+        barImage.fillAmount = 0f;
+    }
+
     public virtual void Start()
     {
         percentage = DefaultPercentage;
