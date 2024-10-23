@@ -695,6 +695,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 			impulseCam.Shake();
 	}
 
+	public void SpeedLine()
+	{
+		if (effectManager != null)
+			effectManager.SpeedLine();
+	}
+
 	IEnumerator ActivateSpcCubes(float delay)
 	{
 		yield return new WaitForSeconds(delay);
@@ -714,7 +720,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void DeactivateSCube()
 	{
-
+		if (spcCubeL.activeSelf)
+			spcCubeL.SetActive(false);
+		if (spcCubeR.activeSelf)
+			spcCubeR.SetActive(false);
 	}
 
 	public void SetCheckpoint(Checkpoint checkpoint)
