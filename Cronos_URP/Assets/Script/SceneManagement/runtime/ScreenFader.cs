@@ -102,7 +102,7 @@ public class ScreenFader : MonoBehaviour
                 break;
         }
 
-        yield return Instance.StartCoroutine(Instance.Fade(0f, canvasGroup));
+        yield return Instance.Fade(0f, canvasGroup);
 
         canvasGroup.gameObject.SetActive(false);
     }
@@ -126,6 +126,6 @@ public class ScreenFader : MonoBehaviour
 
         canvasGroup.gameObject.SetActive(true);
 
-        yield return Instance.StartCoroutine(Instance.Fade(1f, canvasGroup));
+        yield return Instance.Fade(1f, canvasGroup);
     }
 }

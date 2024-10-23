@@ -43,8 +43,8 @@ public class AbilityDataParser
             
             readLevel.childIdNodes = node.GetAttribute(elementChildNodeID).Split(',').Select(int.Parse).ToList<int>();
 
-            readLevel.abilityName = System.Convert.ToString(node.GetAttribute(elementAbilityName));
-            readLevel.descriptionText = System.Convert.ToString(node.GetAttribute(elementDescriptionText));
+            //readLevel.abilityName = System.Convert.ToString(node.GetAttribute(elementAbilityName));
+            //readLevel.descriptionText = System.Convert.ToString(node.GetAttribute(elementDescriptionText));
 
             //가져온 데이터를 리스트에 입력
             levelDatas.Add(readLevel);

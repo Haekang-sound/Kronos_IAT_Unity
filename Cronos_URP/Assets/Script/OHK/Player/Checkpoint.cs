@@ -1,26 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
     public int priority;
+    public float tp;
+
+    private bool _isActive;
+
+    public UnityEvent OnActive;
 
     private void Awake()
     {
-		int a =  LayerMask.NameToLayer("Checkpoint");
-		gameObject.layer = LayerMask.NameToLayer("Checkpoint");
+		//gameObject.layer = LayerMask.NameToLayer("Checkpoint");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Player controller = other.GetComponent<Player>();
+        if (_isActive == true)
+        {
+            return;
+        }
 
-        if (controller == null)
+        Player player = other.GetComponent<Player>();
+
+        if (player == null)
             return;
 
-        controller.SetCheckpoint(this);
+        OnActive?.Invoke();
+        _isActive = true;
+
+        player.SetCheckpoint(this);
     }
 
     void OnDrawGizmos()
