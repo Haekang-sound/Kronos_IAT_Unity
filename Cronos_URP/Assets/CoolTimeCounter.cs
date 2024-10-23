@@ -25,6 +25,9 @@ public class CoolTimeCounter : MonoBehaviour
 
 	[SerializeField] private Image dodgeImage;
 	[SerializeField] private Image rushAttackImage;
+	[SerializeField] private Image slash;
+	[SerializeField] private Image timeStop;
+	[SerializeField] private Image bomb;
 
 	// 사용여부
 	public bool isRushAttackUsed { get; set; }
@@ -34,8 +37,8 @@ public class CoolTimeCounter : MonoBehaviour
 	public float rushAttackCoolTime;
 	public float dodgeCoolTime;
 
-	[SerializeField] private float rushATimer;
-	[SerializeField] private float dodgeTimer;
+	private float rushATimer;
+	private float dodgeTimer;
 
 	private void Update()
 	{
@@ -63,7 +66,34 @@ public class CoolTimeCounter : MonoBehaviour
 				return;
 			}
 		}
-		
+
+		if(Player.Instance.CP >= 20f)
+		{
+			slash.enabled = true;
+		}
+		else
+		{
+			slash.enabled = false;
+		}
+
+		if (Player.Instance.CP >= 100f)
+		{
+			timeStop.enabled = true;
+		}
+		else
+		{
+			timeStop.enabled = false;
+		}
+
+		if (Player.Instance.IsDecreaseCP) 
+		{ 
+			bomb.enabled = true;
+		}
+		else 
+		{
+			bomb.enabled = false;
+		}
+
 	}
 
 
