@@ -249,6 +249,11 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         EffectManager.Instance.EnemySlash(gameObject.transform);
     }
 
+    public void EnemyCharge()
+    {
+        EffectManager.Instance.EnemyCharge(gameObject.transform);
+    }
+
     public void BeginAttack()
     {
         _meleeWeapon.BeginAttack();

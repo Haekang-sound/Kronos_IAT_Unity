@@ -380,6 +380,7 @@ public class EffectManager : MonoBehaviour
         Destroy(aSlash, 2.0f);
     }
 
+    // 적의 근접 기본공격
     public void EnemySlash(Transform enemy)
     {
         // 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
@@ -392,6 +393,15 @@ public class EffectManager : MonoBehaviour
             enemySword.transform.position.y;
         slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
         Destroy(slash, 0.7f);
+    }
+
+    // 적 근접 돌진공격
+    public void EnemyCharge(Transform enemy)
+    {
+        GameObject charge = SpawnEffect("EnemyCharge", enemy.position);
+        charge.transform.position += new Vector3(0, 1f, 0);
+        charge.transform.forward = enemy.forward;
+        Destroy(charge, 2.0f);
     }
 
     // 지면의 각도에 맞게 이펙트를 남기려면 어떻게 해야할까
@@ -517,7 +527,8 @@ public class EffectManager : MonoBehaviour
         GameObject slashed = SpawnEffect("Nor_Damage", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         slashed.transform.position += new Vector3(0, 1, 0);
-        //slashed.transform.rotation *= Quaternion.Euler(player.playerSword.transform.position);
+        slashed.transform.rotation = player.playerSword.transform.rotation *
+            Quaternion.Euler(new Vector3(90f, 0, 0));
         Destroy(slashed, 1.0f);
     }
 
