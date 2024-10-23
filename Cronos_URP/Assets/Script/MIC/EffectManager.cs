@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
 {
-	// ½Ì±ÛÅÏ
+	// ï¿½Ì±ï¿½ï¿½ï¿½
 	private static EffectManager instance;
-	// GetÇÏ´Â ÇÁ·ÎÆÛÆ¼
+	// Getï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼
 	public static EffectManager Instance
 	{
 		get
@@ -30,20 +30,20 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
-	// ÇÃ·¹ÀÌ¾î °ü·Ã
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
 	[SerializeField]
 	Player player;
 	public GameObject pSword;
 
 	SoundManager soundManager;
 
-	// ·¹ÀÌÄ³½ºÆ® °ü·Ã
+	// ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	float forwardVal = 1.6f;
 	float yUpVal = 1.5f;
 	public LayerMask groundLayer;
 	public float rayMaxDist = 2.0f;
 
-	// ±Û·Î¹ú º¼·ý
+	// ï¿½Û·Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	[SerializeField]
 	Volume eVolume;
 	MotionBlur mBlur;
@@ -58,11 +58,11 @@ public class EffectManager : MonoBehaviour
 	public float parryTime = 1.0f;
 	public float fadeTime = 0.3f;
 
-	// Ä³¸¯ÅÍ ÆòÅ¸ °¢µµ¸¦ ¸ÂÃß±â À§ÇØ¼­
+	// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
 	Vector3 swordMagicOffest = new Vector3(90, 180, 0);
 	Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
 
-	// °­È­ °Ë±â °ü·Ã
+	// ï¿½ï¿½È­ ï¿½Ë±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public bool isSwordWave;
 	[Range(0f, 200f)]
 	public float enforceSlashSpeed = 30.0f;
@@ -72,13 +72,13 @@ public class EffectManager : MonoBehaviour
 	public bool isGroundEnforced;
 	public bool showInvisibleMesh;
 
-	// °­È­ »óÅÂ ¿À¿ì¶ó
+	// ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	public GameObject swordAura;
 
-	// ÆÄÆ¼Å¬À» »¡¾ÆµéÀÌ´Â ¹Ú½º
+	// ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½Æµï¿½ï¿½Ì´ï¿½ ï¿½Ú½ï¿½
 	public GameObject absorbBox;
 
-	// º¸½º ÀÌÆåÆ® °ü·Ã
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	public float bossBeamDistance = 4.0f;
 	public float bossBeamTerm = 0.2f;
 	public float bossBeamDupeTime = 8.0f;
@@ -86,14 +86,14 @@ public class EffectManager : MonoBehaviour
 	public float bossMoonHeight = 4.0f;
 	public float bossMoonDistance = 5.0f;
 
-	// »ç¿ëÇÒ ÀÌÆåÆ® ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®
 	static List<GameObject> effects = new List<GameObject>();
 	GameObject[] effectArray;
 
-	// ÀÌÆåÆ®¸¦ ·ÎµåÇÏ´Â ´Ü°è
+	// ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ï´ï¿½ ï¿½Ü°ï¿½
 	protected void Awake()
 	{
-		// ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÑ´Ù¸é
+		// ï¿½Ì¹ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½
 		if (instance != null && instance != this)
 		{
 			Destroy(gameObject);
@@ -110,8 +110,8 @@ public class EffectManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ¾ÀÀüÈ¯ ÃÊ±âÈ­¸¦ À§ÇÑ ÇÔ¼ö
-	/// ¹Îµ¿ÈÖ´Â °íÄ¡´ø°¡ 
+	/// ï¿½ï¿½ï¿½ï¿½È¯ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+	/// ï¿½Îµï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ 
 	/// By OHK
 	/// </summary>
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,645 +119,654 @@ public class EffectManager : MonoBehaviour
 		//Initialize();
 	}
 
-	// ·ÎµåÇÑ ÀÌÆåÆ®¿¡ °ÔÀÓ ¿ÀºêÁ§Æ® ÇÒ´ç
+	// ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò´ï¿½
 	void Start()
-	{
-		Initialize();
-		StartCoroutine(LoadEffectCoroutine());
-	}
-
-	// µð¹ö±×¸¦ À§ÇØ¼­ ÀÏ´Ü ¾÷µ¥ÀÌÆ®¿¡ ³Ö¾î³õ¾Ò´Ù
-	// ±âÈ¹ ÂÊ¿¡¼­ Á¶Á¤ÀÌ ³¡³ª¸é º°µµ·Î ±¸ÇöÇÑ´Ù
-	void Update()
-	{
-		//swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
-		//swordWaveDistance = enforceSlashSpeed * 2f / 5f;
-
-		//º¸½º ÀÌÆåÆ® µ¥¸ð·Î ³ª¿À°Ô
-		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-		//if (Input.GetKeyDown(KeyCode.Alpha2))
-		//    BossFireShoot(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha3))
-		//    BossFiveSpear(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha4))
-		//    BossMoon(player.transform);
-		if (Input.GetKeyDown(KeyCode.Alpha5))
-			CreateAbsorbFX(player.transform, 12);
-		if (Input.GetKeyDown(KeyCode.Alpha6))
-			SpeedLine();
-	}
-
-	private void OnValidate()
-	{
-		if (invisibleSlash != null)
-		{
-			ToggleMeshRenderer();
-		}
-	}
-
-	void Initialize()
-	{
-		soundManager = SoundManager.Instance;
-		player = Player.Instance;
-
-		if (player != null)
-		{
-			pSword = player.GetComponent<Player>().playerSword;
-		}
-		if (eVolume == null)
-		{
-			// ºñ¿ëÀÌ Å©´ÙÁö¸¸ ¾Ëºü³Ä º¼·ýÀÌ ¾ø´Ù´Âµ¥
-			GameObject eVol = GameObject.Find("Effect Volume");
-			eVolume = eVol.GetComponent<Volume>();
-		}
-
-		if (eVolume != null)
-			InitializeVol(eVolume);
-		groundLayer = LayerMask.GetMask("Ground");
-
-		if (invisibleSlash != null)
-		{
-			ToggleMeshRenderer();
-		}
-		if (swordAura == null)
-			swordAura = GameObject.Find("Com_Ready");
-
-		if (swordAura != null)
-			swordAura.SetActive(false);
-
-		if (absorbBox == null)
-			absorbBox = GameObject.Find("AbsorbBox");
-	}
-
-	void InitializeVol(Volume vol)
-	{
-		vol.profile.TryGet(out mBlur);
-		vol.profile.TryGet(out cAber);
-		vol.profile.TryGet(out dOF);
-
-		if (mBlur != null)
-		{
-			mBlur.active = true;
-			mBlur.intensity.value = 0.0f;
-		}
-
-		if (cAber != null)
-		{
-			cAber.active = true;
-			cAber.intensity.value = 0.0f;
-		}
-
-		if (dOF != null)
-		{
-			dOF.active = true;
-			dOF.focusDistance.value = 0.0f;
-			dOF.focalLength.value = 0.0f;
-			dOF.aperture.value = 0.0f;
-		}
-	}
-
-	IEnumerator LoadEffectCoroutine()
-	{
-		effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
-		foreach (GameObject effect in effectArray)
-		{
-			GameObject effectInstance = Instantiate(effect);
-			effectInstance.name = effect.name;
-			effects.Add(effectInstance);
-			effectInstance.SetActive(false);
-
-			yield return null;
-		}
-	}
-
-	public GameObject SpawnEffect(string name, Vector3 pos)
-	{
-		foreach (GameObject effect in effectArray)
-		{
-			if (effect.name == name)
-			{
-				GameObject instance = Instantiate(effect);
-				instance.transform.position = pos;
-				return instance;
-			}
-		}
-
-		return null;
-	}
-
-	public GameObject SpawnEffect(string name, Vector3 pos, float value)
-	{
-		foreach (GameObject effect in effectArray)
-		{
-			if (effect.name == name)
-			{
-				GameObject instance = Instantiate(effect);
-				instance.transform.position = pos;
-				if (instance.GetComponent<AheadToHUD>() != null)
-					instance.GetComponent<AheadToHUD>().BurstNumber = value;
-
-				return instance;
-			}
-		}
-
-		return null;
-	}
-
-	public GameObject SpawnEffect(string name, Vector3 pos, Quaternion rot)
-	{
-		foreach (GameObject effect in effectArray)
-		{
-			if (effect.name == name)
-			{
-				GameObject instance = Instantiate(effect);
-				instance.transform.position = pos;
-				instance.transform.rotation = rot;
-				return instance;
-			}
-		}
-
-		return null;
-	}
-
-	GameObject FindName(string name)
-	{
-		foreach (GameObject effect in effects)
-		{
-			if (effect.name == name)
-				return effect;
-		}
-		return null;
-	}
-
-	// ºÎ¸ð ¿ÀºêÁ§Æ®¿¡¼­ ÀÌ¸§À» °¡Áø ÀÚ½Ä ¿ÀºêÁ§Æ®¸¦ ¸®ÅÏ
-	// ÀÌÆåÆ®°¡ ³ª¿Ã ÀÚ½Ä ¿ÀºêÁ§Æ® À§Ä¡ Ã£´Â µ¥ »ç¿ëÇÏ´Â Áß
-	GameObject FindChild(GameObject parent, string name)
-	{
-		GameObject result = GameObject.Find(name);
-		if (result != null)
-			return result;
-		foreach (GameObject gameObject in parent.GetComponentsInChildren<GameObject>())
-		{
-			result = FindChild(gameObject, name);
-			if (result != null)
-				return result;
-		}
-		return null;
-	}
-
-	void ToggleMeshRenderer()
-	{
-		if (invisibleSlash != null)
-		{
-			// ÇÁ¸®ÆÕ ÀÎ½ºÅÏ½º¿¡¼­ MeshRenderer¸¦ Ã£°í È°¼ºÈ­/ºñÈ°¼ºÈ­
-			MeshRenderer meshRenderer = invisibleSlash.GetComponentInChildren<MeshRenderer>();
-			if (meshRenderer != null)
-			{
-				meshRenderer.enabled = showInvisibleMesh;
-			}
-			else
-			{
-				Debug.LogWarning("MeshRenderer not found on prefab instance.");
-			}
-		}
-	}
-
-	// ÇÃ·¹ÀÌ¾î °ü·Ã ÀÌÆåÆ®
-	public void NormalSlashFX(string fxName)
-	{
-		// ÀÌÆåÆ® »Ì°í ·ÎÅ×ÀÌ¼ÇÀ» Ä®ÀÇ ·ÎÅ×ÀÌ¼Ç°ú ¸ÂÃá´Ù.
-		// Ä®°ú ÀÌÆåÆ®ÀÇ ±âÁØÀÌ ´Ù¸£¹Ç·Î ÀÌ°Ç ÀÌÆåÆ®¸¶´Ù ¸ÅÁ÷ ³Ñ¹ö°¡ ÇÊ¿äÇÔ
-		// À§Ä¡´Â y ÁÂÇ¥¸¸ Ä®°ú °°°Ô, ³ª¸ÓÁö´Â ÇÃ·¹ÀÌ¾î Æ®·£½ºÆû¿¡¼­
-		soundManager.PlaySFX("Attack_SE", player.transform);
-		GameObject slash = SpawnEffect(fxName, player.transform.position);
-		slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
-		float newY = player.playerSword.transform.position.y;
-		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
-		Destroy(slash, 0.7f);
-	}
-
-	// ÀÏ¹Ý °­°ø°Ý ½ºÇÉ
-	public void NormalStrongFX()
-	{
-		soundManager.PlaySFX("Attack_SE", player.transform);
-		GameObject slash = SpawnEffect("Nor_S_Attack", player.transform.position);
-		float newY = player.playerSword.transform.position.y;
-		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
-		Destroy(slash, 0.7f);
-	}
-
-	// °­È­ ¿À¶ó È°¼ºÈ­
-	public void SwordAuraOn()
-	{
-		swordAura.SetActive(true);
-	}
-
-	public void SwordAuraOff()
-	{
-		swordAura.SetActive(false);
-	}
-
-	// ±¸¸£±â °ø°Ý
-	public void DodgeAttack()
-	{
-		soundManager.PlaySFX("Attack_SE", player.transform);
-		GameObject dttack = SpawnEffect("DodgeAttack", player.transform.position);
-		float newY = player.playerSword.transform.position.y;
-		dttack.transform.position = new Vector3(dttack.transform.position.x, newY, dttack.transform.position.z);
-		dttack.transform.forward = player.transform.forward;
-		Destroy(dttack, 4.0f);
-	}
-
-	// ¾îºô¸®Æ¼ °ø°Ý 1
-	public void AbilitySlash()
-	{
-		soundManager.PlaySFX("Attack_SE", player.transform);
-		GameObject aSlash = SpawnEffect("AbilitySlash", player.transform.position);
-		aSlash.transform.rotation = player.playerSword.transform.rotation;
-		float newY = player.playerSword.transform.position.y;
-		aSlash.transform.position = new Vector3(aSlash.transform.position.x, newY, aSlash.transform.position.z);
-		Destroy(aSlash, 2.0f);
-	}
-
-	public void EnemySlash(Transform enemy)
-	{
-		// ÀÌÆåÆ® »Ì°í ·ÎÅ×ÀÌ¼ÇÀ» Ä®ÀÇ ·ÎÅ×ÀÌ¼Ç°ú ¸ÂÃá´Ù.
-		// Ä®°ú ÀÌÆåÆ®ÀÇ ±âÁØÀÌ ´Ù¸£¹Ç·Î ÀÌ°Ç ÀÌÆåÆ®¸¶´Ù ¸ÅÁ÷ ³Ñ¹ö°¡ ÇÊ¿äÇÔ
-		// À§Ä¡´Â y ÁÂÇ¥¸¸ Ä®°ú °°°Ô, ³ª¸ÓÁö´Â ÇÃ·¹ÀÌ¾î Æ®·£½ºÆû¿¡¼­
-		GameObject slash = SpawnEffect("EnemyAttack", enemy.position);
-		slash.transform.rotation = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
-			enemySword.transform.rotation * Quaternion.Euler(enemyMagicOffset);
-		float newY = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
-			enemySword.transform.position.y;
-		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
-		Destroy(slash, 0.7f);
-	}
-
-	// Áö¸éÀÇ °¢µµ¿¡ ¸Â°Ô ÀÌÆåÆ®¸¦ ³²±â·Á¸é ¾î¶»°Ô ÇØ¾ßÇÒ±î
-	public void GroundCheckFX()
-	{
-		// ·¹ÀÌ¸¦ ½ò À§Ä¡ ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡ + Á¤¸éÀ¸·Î Á¶±Ý ¾ÕÀ¸·Î + Á¶±Ý À§·Î
-		// ±âÁØÀ» ÇÃ·¹ÀÌ¾î Æ÷¿öµå¿¡¼­ Ä® ·ÎÄÃ Áß½ÉÀ¸·Î Á¶±Ý ¹Ù²Þ
-		Vector3 rayTrans = player.transform.position +
-			//player.transform.forward * forwardVal + 
-			pSword.transform.up * -1 * forwardVal +
-			new Vector3(0, yUpVal, 0);
-		Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
-		if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
-		{
-			Vector3 hitPoint = hit.point;
-			Vector3 hitNormal = hit.normal;
-			// ProjectOnPlaneÀº Ã¹¹øÂ° ¸Å°³º¯¼ö º¤ÅÍ¸¦ µÎ¹øÂ° ¸Å°³º¯¼ö ³ë¸»¿¡ Åõ¿µµÈ º¤ÅÍ¸¦ ¹ÝÈ¯ÇÑ´Ù. 
-			Quaternion fxRot = Quaternion.LookRotation(
-				//Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
-				Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
-			fxRot *= Quaternion.Euler(0, -90f, 0);
-			GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
-
-			Destroy(impact, 2.0f);
-			// ´É·Â°³¹æµÇ¾ú´Ù¸é ÀÌ°Íµµ ³ª¿È
-			if (isGroundEnforced)
-			{
-				GameObject cir = SpawnEffect("EnforceGround", hitPoint, fxRot);
-				Destroy(cir, 1.0f);
-			}
-		}
-		else
-		{
-			Debug.Log("no ground impact");
-		}
-	}
-
-	// ¹Ù´Ú¿¡ »óÃ³¸¸ ³²±â´Â Nor_Attack_4 Àü¿ë
-	// ÀÌ¾ú´Âµ¥ ÀÌÁ¦ ´É·Â°³¹æ¿¡¼­µµ ½á¼­ º¯¼ö ¹Þ¾Æ¾ßµÊ
-	public void GroundScar(string name)
-	{
-		Debug.Log("¶¥ Ã¼Å© ½ÃÀÛ");
-		Vector3 rayTrans = player.transform.position +
-			pSword.transform.up * -1 * forwardVal +
-			new Vector3(0, yUpVal, 0);
-		Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
-		if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
-		{
-			Debug.Log("¹üÀ§¿¡ ¶¥ÀÌ ÀÖ´Ù");
-			Vector3 hitPoint = hit.point;
-			Vector3 hitNormal = hit.normal;
-			// ProjectOnPlaneÀº Ã¹¹øÂ° ¸Å°³º¯¼ö º¤ÅÍ¸¦ µÎ¹øÂ° ¸Å°³º¯¼ö ³ë¸»¿¡ Åõ¿µµÈ º¤ÅÍ¸¦ ¹ÝÈ¯ÇÑ´Ù. 
-			Quaternion fxRot = Quaternion.LookRotation(
-				Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
-			fxRot *= Quaternion.Euler(0, -90f, 0);
-			GameObject impact = SpawnEffect(name, hitPoint, fxRot);
-
-			Destroy(impact, 2.0f);
-		}
-		else
-		{
-			Debug.Log("no ground impact");
-		}
-	}
-
-	// °Ë±â ³¯¸®±â
-	public void SwordWave()
-	{
-		if (isSwordWave)
-		{
-			GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
-			slsh.transform.position += new Vector3(0, 1f, 0);
-			slsh.transform.forward = player.transform.forward;
-			slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
-			var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
-			main.startSpeed = enforceSlashSpeed;
-			Destroy(slsh, 1.0f);
-
-			GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
-			invislash.transform.position += new Vector3(0, 1f, 0);
-			invislash.transform.forward = player.transform.forward;
-			invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
-			StartCoroutine(MoveWaveCoroutine(invislash));
-		}
-	}
-
-	IEnumerator MoveWaveCoroutine(GameObject proj)
-	{
-		Vector3 startPos = proj.transform.position;
-		Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
-		//Destroy(proj, 0.7f);
-		StartCoroutine(DestroyWaveCoroutine(proj));
-
-		while (proj != null && Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
-		{
-			if (proj == null)
-				yield break;
-
-			proj.transform.position = Vector3.MoveTowards(proj.transform.position, DestPos, swordWaveSpeed * Time.deltaTime);
-
-			yield return null;
-		}
-	}
-
-	IEnumerator DestroyWaveCoroutine(GameObject wav)
-	{
-		yield return new WaitForSeconds(0.7f);
-		if (wav != null)
-			Destroy(wav);
-	}
-
-	// ÀÌÆåÆ®¸Å´ÏÀú°¡ µé°í ÀÖ´Â°Ô ³ªÀ» °Í °°Àºµ¥
-	public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
-	{
-		// ÆÄÆí¸¸µé±â
-		GameObject frag = SpawnEffect("FragFX", targetTrans.position);
-		frag.transform.LookAt(dmgMsg.damageSource);
-		frag.transform.Rotate(-15f, 0, 0);
-		Destroy(frag, 2.0f);
-
-		CreateAbsorbFX(targetTrans, dmgMsg.amount);
-
-		// ÇÇ°ÝÀÌÆåÆ®
-		Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
-		GameObject slashed = SpawnEffect("Nor_Damage", newPos);
-		slashed.transform.forward = Camera.main.transform.forward;
-		slashed.transform.position += new Vector3(0, 1, 0);
-		//slashed.transform.rotation *= Quaternion.Euler(player.playerSword.transform.position);
-		Destroy(slashed, 1.0f);
-	}
-
-	public void CreateAbsorbFX(Transform trans, float burstNum)
-	{
-		// 1ÃÊ µÚ¿¡ hud·Î µ¹ÁøÇÏ´Â ÆÄÆ¼Å¬ ¸¸µé±â
-		GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
-		Destroy(ab, 3.0f);
-	}
-
-	public void CreateGuardFX()
-	{
-		Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
-		GameObject grd = SpawnEffect("GuardFX", grdPos);
-		Destroy(grd, 1.0f);
-	}
-
-	public void CreateParryFX()
-	{
-		soundManager.PlaySFX("Parry_Sound_SE", player.transform);
-		Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
-		GameObject parr = SpawnEffect("GuardFlare", parrPos);
-		StartCoroutine(FadeOutLightsCoroutine(parr));
-		Destroy(parr, 1.0f);
-		CreateGuardFX();
-		// ±Û·Î¹úº¼·ýÀÌ ¾ø´Ù¸é ³ª°¡
-		if (eVolume == null)
-			return;
-		StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
-		StartCoroutine(ParryCAberrationCoroutine(cAberVal));
-		StartCoroutine(ParryDepthOfFieldCoroutine());
-		StartCoroutine(ParryTime(0.2f));
-
-	}
-
-	// º¸½º 8¹æÇâ ºö
-	public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
-	{
-		for (int i = 0; i < bossBeamDupeTime; i++)
-		{
-			soundManager.PlaySFX("Beam_SE", player.transform);
-
-			for (int j = 0; j < 8; j++)
-			{
-				GameObject beam = SpawnEffect("BossFX_1Beam", bossTrans.position);
-				beam.transform.Rotate(0, 45.0f * j, 0);
-
-				GameObject beamBase = beam.transform.GetChild(0).gameObject;
-				beamBase.transform.position += beamBase.transform.right * (bossBeamDistance * i);
-
-				Destroy(beam, 0.6f);
-			}
-			yield return new WaitForSeconds(bossBeamTerm);
-		}
-	}
-
-	// º¸½º ºÒ ÀåÆÇ ¸¸µé±â
-	public void BossFireShoot(Transform bosstrans)
-	{
-		GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
-		fire.transform.forward = bosstrans.transform.forward;
-		fire.transform.position += new Vector3(0, 1.0f, 0);
-	}
-
-	// º¸½º Ã¢ 5°³ ½î±â
-	public void BossFiveSpear(Transform bossTrans)
-	{
-		Vector3 forward = bossTrans.forward;
-		Vector3 newOffset = new Vector3(0, 3.5f, 0);
-		Vector3 newPos = bossTrans.TransformPoint(newOffset);
-		GameObject spears = SpawnEffect("BossFX_Spears", newPos);
-		spears.transform.forward = forward;
-		Destroy(spears, 15.0f);
-	}
-
-	// Ã¢ Áö¸é ÀÌÆåÆ®
-	public void SpearImpact(Vector3 pos)
-	{
-		GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
-		Destroy(imp, 3.0f);
-	}
-
-	// º¸½º À§¼º ¸¸µé±â
-	public void BossMoon(Transform bossTrans)
-	{
-		List<int> moonNums = new List<int>();
-		moonNums = FisherYatesShuffles(8, 5);
-		Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
-		Vector3 newPos = bossTrans.TransformPoint(newOffset);
-
-		for (int i = 0; i < moonNums.Count; i++)
-		{
-			GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
-			moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
-			moon.transform.position += moon.transform.forward * bossMoonDistance;
-		}
-	}
-
-	// ÁýÁß¼± Ä×´Ù°¡ ²ô±â
-	IEnumerator SpeedLineCoroutine()
-	{
-		UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
-		yield return new WaitForSeconds(1.5f);
-		UI_TPCPHUD.GetInstance().speedLineUI.SetActive(false);
-	}
-
-	public void SpeedLine()
-	{
-		StartCoroutine(SpeedLineCoroutine());
-	}
-
-	// º¸½º µ¹Áø ¿¹°í ¹ÝÂ¦
-
-
-
-	// ÆÐ¸®ÇßÀ» ¶§ ¸ð¼Ç ºí·¯
-	IEnumerator ParryMotionBlurCoroutine(float val)
-	{
-		mBlur.intensity.value = val;
-		float elapsedTime = 0.0f;
-		while (elapsedTime < parryTime)
-		{
-			mBlur.intensity.value = Mathf.Lerp(val, 0f, elapsedTime / parryTime);
-			elapsedTime += Time.deltaTime;
-			Debug.Log("blur intensity : " + mBlur.intensity.value);
-			yield return null;
-		}
-
-		mBlur.intensity.value = 0f;
-	}
-
-	// ÆÐ¸®ÇßÀ» ¶§ Å©·Î¸¶Æ½ ¾Ö¹ö·¹ÀÌ¼Ç
-	IEnumerator ParryCAberrationCoroutine(float val)
-	{
-		cAber.intensity.value = val;
-		float elapsedTime = 0.0f;
-		while (elapsedTime < parryTime)
-		{
-			cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
-			elapsedTime += Time.deltaTime;
-			Debug.Log("aberration intensity : " + cAber.intensity.value);
-			yield return null;
-		}
-
-		cAber.intensity.value = 0f;
-	}
-
-	// ÆÐ¸®ÇßÀ» ¶§ µª½º ¿Àºê ÇÊµå ½Ã°£Àº ´Ù¸¥ È¿°úº¸´Ù Á¶±Ý »¡¸® ³¡³ª°Ô
-	IEnumerator ParryDepthOfFieldCoroutine()
-	{
-		dOF.focusDistance.value = dofFDistance;
-		dOF.focalLength.value = dofFLength;
-		dOF.aperture.value = dofAperture;
-		float elapsedTime = 0.0f;
-		float dofTime = 0.3f;
-		while (elapsedTime < parryTime)
-		{
-			elapsedTime += Time.deltaTime;
-			dOF.focusDistance.value = Mathf.Lerp(dofFDistance, 0.1f, elapsedTime / dofTime);
-			dOF.focalLength.value = Mathf.Lerp(dofFLength, 1f, elapsedTime / dofTime);
-			dOF.aperture.value = Mathf.Lerp(dofAperture, 1f, elapsedTime / dofTime);
-			yield return null;
-		}
-
-		dOF.focusDistance.value = 0.1f;
-		dOF.focalLength.value = 1f;
-		dOF.aperture.value = 1f;
-	}
-
-	// ÆÐ¸®ÇßÀ» ¶§ ½Ã°£ ÁÙÀÌ±â
-	IEnumerator ParryTime(float val)
-	{
-		// val ¸¸Å­ Å¸ÀÓ½ºÄÉÀÏ ÁÙ¿´´Ù ¿ø·¡´ë·Î µ¹¸®±â
-		Time.timeScale = val;
-		float elapsedTime = 0.0f;
-		// nÃÊ¿¡ °ÉÃÄ¼­ µ¹¾Æ°¡±â
-		float backTime = 0.6f;
-		while (elapsedTime < backTime)
-		{
-			elapsedTime += Time.deltaTime;
-			Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / backTime);
-			yield return null;
-		}
-	}
-
-	IEnumerator FadeOutLightsCoroutine(GameObject flare)
-	{
-		float elapsedTime = 0.0f;
-		Light light = flare.GetComponent<Light>();
-		LensFlareComponentSRP lens = flare.GetComponent<LensFlareComponentSRP>();
-		while (elapsedTime < fadeTime)
-		{
-			elapsedTime += Time.deltaTime;
-			light.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
-			lens.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
-			yield return null;
-		}
-
-		light.intensity = 0f;
-		lens.intensity = 0f;
-	}
-
-
-	// elements °³ÀÇ ¿ø¼Ò¸¦ ³ÖÀ¸¸é result °³ÀÇ ·£´ý °ªÀ» ¾Õ¿¡¼­ »Ì´Â
-	// ÇÇ¼Å-¿¹ÀÌÃ÷ ¾Ë°í¸®Áò
-	public List<int> FisherYatesShuffles(int elements, int result)
-	{
-		// 0ºÎÅÍ elements°³ÀÇ ¼ýÀÚ¸¦ ¸®½ºÆ®·Î »ý¼º
-		List<int> numbers = new List<int>();
-		for (int i = 0; i < elements; i++)
-		{
-			numbers.Add(i);
-		}
-
-		// ·£´ý °´Ã¼ »ý¼º
-		System.Random rand = new System.Random();
-
-		// ÇÇ¼Å-¿¹ÀÌÃ÷ ¾Ë°í¸®ÁòÀ¸·Î ¸®½ºÆ® ¼ÅÇÃ
-		for (int i = numbers.Count - 1; i > 0; i--)
-		{
-			int j = rand.Next(0, i + 1); // 0ºÎÅÍ i±îÁöÀÇ ÀÎµ¦½º Áß ÇÏ³ª¸¦ ¼±ÅÃ
-										 // numbers[i]¿Í numbers[j]¸¦ swap
-			int temp = numbers[i];
-			numbers[i] = numbers[j];
-			numbers[j] = temp;
-		}
-
-		// °á°ú Ãâ·Â
-		Debug.Log("·£´ý ¹è¿­: " + string.Join(", ", numbers));
-
-		List<int> numbers2 = new List<int>();
-		for (int i = 0; i < result; i++)
-		{
-			numbers2.Add(numbers[i]);
-		}
-
-		Debug.Log("number2 ¹è¿­: " + string.Join(", ", numbers2));
-
-		return numbers2;
-	}
+    {
+        Initialize();
+        StartCoroutine(LoadEffectCoroutine());
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½Ò´ï¿½
+    // ï¿½ï¿½È¹ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
+    void Update()
+    {
+        //swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
+        //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
+
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    BossFireShoot(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    BossFiveSpear(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    BossMoon(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CreateAbsorbFX(player.transform, 12);
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            SpeedLine();
+    }
+
+    private void OnValidate()
+    {
+        if (invisibleSlash != null)
+        {
+            ToggleMeshRenderer();
+        }
+    }
+
+    void Initialize()
+    {
+        soundManager = SoundManager.Instance;
+        player = Player.Instance;
+
+        if(player != null)
+        {
+            pSword = player.GetComponent<Player>().playerSword;
+        }
+        if (eVolume == null)
+        {
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ëºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù´Âµï¿½
+            GameObject eVol = GameObject.Find("Effect Volume");
+            eVolume = eVol.GetComponent<Volume>();
+        }
+
+        if (eVolume != null)
+            InitializeVol(eVolume);
+        groundLayer = LayerMask.GetMask("Ground");
+
+        if (invisibleSlash != null)
+        {
+            ToggleMeshRenderer();
+        }
+        if (swordAura == null)
+            swordAura = GameObject.Find("Com_Ready");
+
+        if (swordAura != null)
+            swordAura.SetActive(false);
+
+        if (absorbBox == null)
+            absorbBox = GameObject.Find("AbsorbBox");
+    }
+
+    void InitializeVol(Volume vol)
+    {
+        vol.profile.TryGet(out mBlur);
+        vol.profile.TryGet(out cAber);
+        vol.profile.TryGet(out dOF);
+
+        if(mBlur != null)
+        {
+            mBlur.active = true;
+            mBlur.intensity.value = 0.0f;
+        }
+
+        if(cAber != null)
+        {
+            cAber.active = true;
+            cAber.intensity.value = 0.0f;
+        }
+
+        if (dOF != null)
+        {
+            dOF.active = true;
+            dOF.focusDistance.value = 0.0f;
+            dOF.focalLength.value = 0.0f;
+            dOF.aperture.value = 0.0f;
+        }
+    }
+
+    IEnumerator LoadEffectCoroutine()
+    {
+        effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
+        foreach (GameObject effect in effectArray)
+        {
+            GameObject effectInstance = Instantiate(effect);
+            effectInstance.name = effect.name;
+            effects.Add(effectInstance);
+            effectInstance.SetActive(false);
+
+            yield return null;
+        }
+    }
+
+    public GameObject SpawnEffect(string name, Vector3 pos)
+    {
+        foreach (GameObject effect in effectArray)
+        {
+            if (effect.name == name)
+            {
+                GameObject instance = Instantiate(effect);
+                instance.transform.position = pos;
+                return instance;
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject SpawnEffect(string name, Vector3 pos, float value)
+    {
+        foreach (GameObject effect in effectArray)
+        {
+            if (effect.name == name)
+            {
+                GameObject instance = Instantiate(effect);
+                instance.transform.position = pos;
+                if (instance.GetComponent<AheadToHUD>() != null)
+                instance.GetComponent<AheadToHUD>().BurstNumber = value;
+
+                return instance;
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject SpawnEffect(string name, Vector3 pos, Quaternion rot)
+    {
+        foreach (GameObject effect in effectArray)
+        {
+            if (effect.name == name)
+            {
+                GameObject instance = Instantiate(effect);
+                instance.transform.position = pos;
+                instance.transform.rotation = rot;
+                return instance;
+            }
+        }
+
+        return null;
+    }
+
+    GameObject FindName(string name)
+    {
+        foreach (GameObject effect in effects)
+        {
+            if (effect.name == name)
+                return effect;
+        }
+        return null;
+    }
+
+    // ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ä¡ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
+    GameObject FindChild(GameObject parent, string name)
+    {
+        GameObject result = GameObject.Find(name);
+        if (result != null)
+            return result;
+        foreach (GameObject gameObject in parent.GetComponentsInChildren<GameObject>())
+        {
+            result = FindChild(gameObject, name);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    void ToggleMeshRenderer()
+    {
+        if (invisibleSlash != null)
+        {
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ MeshRendererï¿½ï¿½ Ã£ï¿½ï¿½ È°ï¿½ï¿½È­/ï¿½ï¿½È°ï¿½ï¿½È­
+            MeshRenderer meshRenderer = invisibleSlash.GetComponentInChildren<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                meshRenderer.enabled = showInvisibleMesh;
+            }
+            else
+            {
+                Debug.LogWarning("MeshRenderer not found on prefab instance.");
+            }
+        }
+    }
+
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    public void NormalSlashFX(string fxName)
+    {
+        // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        // Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ç·ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ y ï¿½ï¿½Ç¥ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject slash = SpawnEffect(fxName, player.transform.position);
+        slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
+        float newY = player.playerSword.transform.position.y;
+        slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
+        Destroy(slash, 0.7f);
+    }
+
+    // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void NormalStrongFX()
+    {
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject slash = SpawnEffect("Nor_S_Attack", player.transform.position);
+        float newY = player.playerSword.transform.position.y;
+        slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
+        Destroy(slash, 0.7f);
+    }
+
+    // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
+    public void SwordAuraOn()
+    {
+        swordAura.SetActive(true);
+    }
+
+    public void SwordAuraOff()
+    {
+        swordAura.SetActive(false);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void DodgeAttack()
+    {
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject dttack = SpawnEffect("DodgeAttack", player.transform.position);
+        float newY = player.playerSword.transform.position.y;
+        dttack.transform.position = new Vector3(dttack.transform.position.x, newY, dttack.transform.position.z);
+        dttack.transform.forward = player.transform.forward;
+        Destroy(dttack, 4.0f);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ 1
+    public void AbilitySlash()
+    {
+        soundManager.PlaySFX("Attack_SE", player.transform);
+        GameObject aSlash = SpawnEffect("AbilitySlash", player.transform.position);
+        aSlash.transform.rotation = player.playerSword.transform.rotation;
+        float newY = player.playerSword.transform.position.y;
+        aSlash.transform.position = new Vector3(aSlash.transform.position.x, newY, aSlash.transform.position.z);
+        Destroy(aSlash, 2.0f);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½
+    public void EnemySlash(Transform enemy)
+    {
+        // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        // Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ç·ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Ä¡ï¿½ï¿½ y ï¿½ï¿½Ç¥ï¿½ï¿½ Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        GameObject slash = SpawnEffect("EnemyAttack", enemy.position);
+        slash.transform.rotation = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
+            enemySword.transform.rotation * Quaternion.Euler(enemyMagicOffset);
+        float newY = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
+            enemySword.transform.position.y;
+        slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
+        Destroy(slash, 0.7f);
+    }
+
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void EnemyCharge(Transform enemy)
+    {
+        GameObject charge = SpawnEffect("EnemyCharge", enemy.position);
+        charge.transform.position += new Vector3(0, 1f, 0);
+        charge.transform.forward = enemy.forward;
+        Destroy(charge, 2.0f);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ò±ï¿½
+    public void GroundCheckFX()
+    {
+        // ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ Ä® ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
+        Vector3 rayTrans = player.transform.position + 
+            //player.transform.forward * forwardVal + 
+            pSword.transform.up * -1 * forwardVal + 
+            new Vector3(0, yUpVal, 0);
+        Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
+        if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
+        {
+            Vector3 hitPoint = hit.point;
+            Vector3 hitNormal = hit.normal;
+            // ProjectOnPlaneï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Î¹ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
+            Quaternion fxRot = Quaternion.LookRotation(
+                //Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
+                Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
+            fxRot *= Quaternion.Euler(0, -90f, 0);
+            GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
+            
+            Destroy(impact, 2.0f);
+            // ï¿½É·Â°ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ù¸ï¿½ ï¿½Ì°Íµï¿½ ï¿½ï¿½ï¿½ï¿½
+            if (isGroundEnforced)
+            {
+                GameObject cir = SpawnEffect("EnforceGround", hitPoint, fxRot);
+                Destroy(cir, 1.0f);
+            }
+        }
+        else
+        {
+            Debug.Log("no ground impact");
+        }
+    }
+
+    // ï¿½Ù´Ú¿ï¿½ ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Nor_Attack_4 ï¿½ï¿½ï¿½ï¿½
+    // ï¿½Ì¾ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·Â°ï¿½ï¿½æ¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½á¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¾ßµï¿½
+    public void GroundScar(string name)
+    {
+        Debug.Log("ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ï¿½ï¿½");
+        Vector3 rayTrans = player.transform.position +
+            pSword.transform.up * -1 * forwardVal +
+            new Vector3(0, yUpVal, 0);
+        Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
+        if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
+        {
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½");
+            Vector3 hitPoint = hit.point;
+            Vector3 hitNormal = hit.normal;
+            // ProjectOnPlaneï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Î¹ï¿½Â° ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½. 
+            Quaternion fxRot = Quaternion.LookRotation(
+                Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
+            fxRot *= Quaternion.Euler(0, -90f, 0);
+            GameObject impact = SpawnEffect(name, hitPoint, fxRot);
+
+            Destroy(impact, 2.0f);
+        }
+        else
+        {
+            Debug.Log("no ground impact");
+        }
+    }
+
+    // ï¿½Ë±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void SwordWave()
+    {
+        if (isSwordWave)
+        {
+            GameObject slsh = SpawnEffect("EnforceSwordWave", player.transform.position);
+            slsh.transform.position += new Vector3(0, 1f, 0);
+            slsh.transform.forward = player.transform.forward;
+            slsh.transform.rotation *= Quaternion.Euler(0, 0, -90f);
+            var main = slsh.transform.GetChild(1).GetComponent<ParticleSystem>().main;
+            main.startSpeed = enforceSlashSpeed;
+            Destroy(slsh, 1.0f);
+
+            GameObject invislash = SpawnEffect("InvisibleSlash", player.transform.position);
+            invislash.transform.position += new Vector3(0, 1f, 0);
+            invislash.transform.forward = player.transform.forward;
+            invislash.transform.rotation *= Quaternion.Euler(90f, 0f, 90f);
+            StartCoroutine(MoveWaveCoroutine(invislash));
+        }
+    }
+
+    IEnumerator MoveWaveCoroutine(GameObject proj)
+    {
+        Vector3 startPos = proj.transform.position;
+        Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
+        //Destroy(proj, 0.7f);
+        StartCoroutine(DestroyWaveCoroutine(proj));
+
+        while (proj != null && Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
+        {
+            if (proj == null)
+                yield break;
+
+            proj.transform.position = Vector3.MoveTowards(proj.transform.position, DestPos, swordWaveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+    }
+
+    IEnumerator DestroyWaveCoroutine(GameObject wav)
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (wav != null)
+            Destroy(wav);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
+    {
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        GameObject frag = SpawnEffect("FragFX", targetTrans.position);
+        frag.transform.LookAt(dmgMsg.damageSource);
+        frag.transform.Rotate(-15f, 0, 0);
+        Destroy(frag, 2.0f);
+
+        // ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+        Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
+        GameObject slashed = SpawnEffect("Nor_Damage", newPos);
+        slashed.transform.forward = Camera.main.transform.forward;
+        slashed.transform.position += new Vector3(0, 1, 0);
+        slashed.transform.rotation = player.playerSword.transform.rotation *
+            Quaternion.Euler(new Vector3(90f, 0, 0));
+        Destroy(slashed, 1.0f);
+    }
+
+    public void CreateAbsorbFX(Transform trans, float burstNum)
+    {
+        // 1ï¿½ï¿½ ï¿½Ú¿ï¿½ hudï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½
+        GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
+        Destroy(ab, 3.0f);
+    }
+
+    public void CreateGuardFX()
+    {
+        Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+        GameObject grd = SpawnEffect("GuardFX", grdPos);
+        Destroy(grd, 1.0f);
+    }
+
+    public void CreateParryFX()
+    {
+        soundManager.PlaySFX("Parry_Sound_SE", player.transform);
+        Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
+        GameObject parr = SpawnEffect("GuardFlare", parrPos);
+        StartCoroutine(FadeOutLightsCoroutine(parr));
+        Destroy(parr, 1.0f);
+        CreateGuardFX();
+        // ï¿½Û·Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (eVolume == null)
+            return;
+        StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
+        StartCoroutine(ParryCAberrationCoroutine(cAberVal));
+        StartCoroutine(ParryDepthOfFieldCoroutine());
+        StartCoroutine(ParryTime(0.2f));
+        
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ 8ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
+    {
+        for (int i = 0; i < bossBeamDupeTime; i++)
+        {
+            soundManager.PlaySFX("Beam_SE", player.transform);
+
+            for (int j = 0; j < 8; j++)
+            {
+                GameObject beam = SpawnEffect("BossFX_1Beam", bossTrans.position);
+                beam.transform.Rotate(0, 45.0f * j, 0);
+
+                GameObject beamBase = beam.transform.GetChild(0).gameObject;
+                beamBase.transform.position += beamBase.transform.right * (bossBeamDistance * i);
+
+                Destroy(beam, 0.6f);
+            }
+            yield return new WaitForSeconds(bossBeamTerm);
+        }
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void BossFireShoot(Transform bosstrans)
+    {
+        GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
+        fire.transform.forward = bosstrans.transform.forward;
+        fire.transform.position += new Vector3(0, 1.0f, 0);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ Ã¢ 5ï¿½ï¿½ ï¿½ï¿½ï¿½
+    public void BossFiveSpear(Transform bossTrans)
+    {
+        Vector3 forward = bossTrans.forward;
+        Vector3 newOffset = new Vector3(0, 3.5f, 0);
+        Vector3 newPos = bossTrans.TransformPoint(newOffset);
+        GameObject spears = SpawnEffect("BossFX_Spears", newPos);
+        spears.transform.forward = forward;
+        Destroy(spears, 15.0f);
+    }
+
+    // Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    public void SpearImpact(Vector3 pos)
+    {
+        GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
+        Destroy(imp, 3.0f);
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void BossMoon(Transform bossTrans)
+    {
+        List<int> moonNums = new List<int>();
+        moonNums = FisherYatesShuffles(8, 5);
+        Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
+        Vector3 newPos = bossTrans.TransformPoint(newOffset);
+
+        for (int i = 0; i < moonNums.Count; i++)
+        {
+            GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
+            moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
+            moon.transform.position += moon.transform.forward * bossMoonDistance;
+        }
+    }
+
+    // ï¿½ï¿½ï¿½ß¼ï¿½ ï¿½×´Ù°ï¿½ ï¿½ï¿½ï¿½
+    IEnumerator SpeedLineCoroutine()
+    {
+        UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        UI_TPCPHUD.GetInstance().speedLineUI.SetActive(false);
+    }
+
+    public void SpeedLine()
+    {
+        StartCoroutine(SpeedLineCoroutine());
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¦
+    
+
+
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    IEnumerator ParryMotionBlurCoroutine(float val)
+    {
+        mBlur.intensity.value = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < parryTime)
+        {
+            mBlur.intensity.value = Mathf.Lerp(val, 0f, elapsedTime / parryTime);
+            elapsedTime += Time.deltaTime;
+            Debug.Log("blur intensity : " + mBlur.intensity.value);
+            yield return null;
+        }
+
+        mBlur.intensity.value = 0f;
+    }
+
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å©ï¿½Î¸ï¿½Æ½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½
+    IEnumerator ParryCAberrationCoroutine(float val)
+    {
+        cAber.intensity.value = val;
+        float elapsedTime = 0.0f;
+        while (elapsedTime < parryTime)
+        {
+            cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
+            elapsedTime += Time.deltaTime;
+            Debug.Log("aberration intensity : " + cAber.intensity.value);
+            yield return null;
+        }
+
+        cAber.intensity.value = 0f;
+    }
+
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    IEnumerator ParryDepthOfFieldCoroutine()
+    {
+        dOF.focusDistance.value = dofFDistance;
+        dOF.focalLength.value = dofFLength;
+        dOF.aperture.value = dofAperture;
+        float elapsedTime = 0.0f;
+        float dofTime = 0.3f;
+        while (elapsedTime < parryTime)
+        {
+            elapsedTime += Time.deltaTime;
+            dOF.focusDistance.value = Mathf.Lerp(dofFDistance, 0.1f, elapsedTime / dofTime);
+            dOF.focalLength.value = Mathf.Lerp(dofFLength, 1f, elapsedTime / dofTime);
+            dOF.aperture.value = Mathf.Lerp(dofAperture, 1f, elapsedTime / dofTime);
+            yield return null;
+        }
+
+        dOF.focusDistance.value = 0.1f;
+        dOF.focalLength.value = 1f;
+        dOF.aperture.value = 1f;
+    }
+
+    // ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
+    IEnumerator ParryTime(float val)
+    {
+        // val ï¿½ï¿½Å­ Å¸ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Time.timeScale = val;
+        float elapsedTime = 0.0f;
+        // nï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½
+        float backTime = 0.6f;
+        while (elapsedTime < backTime)
+        {
+            elapsedTime += Time.deltaTime;
+            Time.timeScale = Mathf.Lerp(val, 1f, elapsedTime / backTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeOutLightsCoroutine(GameObject flare)
+    {
+        float elapsedTime = 0.0f;
+        Light light = flare.GetComponent<Light>();
+        LensFlareComponentSRP lens = flare.GetComponent<LensFlareComponentSRP>();
+        while (elapsedTime < fadeTime)
+        {
+            elapsedTime += Time.deltaTime;
+            light.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
+            lens.intensity = Mathf.Lerp(1.0f, 0f, elapsedTime / fadeTime);
+            yield return null;
+        }
+
+        light.intensity = 0f;
+        lens.intensity = 0f;
+    }
+
+
+    // elements ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ result ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½Ì´ï¿½
+    // ï¿½Ç¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½
+    public List<int> FisherYatesShuffles(int elements, int result)
+    {
+        // 0ï¿½ï¿½ï¿½ï¿½ elementsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        List<int> numbers = new List<int>();
+        for (int i = 0; i < elements; i++)
+        {
+            numbers.Add(i);
+        }
+
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+        System.Random rand = new System.Random();
+
+        // ï¿½Ç¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+        for (int i = numbers.Count - 1; i > 0; i--)
+        {
+            int j = rand.Next(0, i + 1); // 0ï¿½ï¿½ï¿½ï¿½ iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // numbers[i]ï¿½ï¿½ numbers[j]ï¿½ï¿½ swap
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­: " + string.Join(", ", numbers));
+
+        List<int> numbers2 = new List<int>();
+        for (int i = 0; i < result; i++)
+        {
+            numbers2.Add(numbers[i]);
+        }
+
+        Debug.Log("number2 ï¿½è¿­: " + string.Join(", ", numbers2));
+
+        return numbers2;
+    }
 }
