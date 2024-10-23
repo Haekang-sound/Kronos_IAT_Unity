@@ -638,7 +638,7 @@ public class EffectManager : MonoBehaviour
         {
             cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
             elapsedTime += Time.deltaTime;
-            Debug.Log("aberration intensity : " + cAber.intensity.value);
+            //Debug.Log("aberration intensity : " + cAber.intensity.value);
             yield return null;
         }
 
