@@ -47,6 +47,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         //PlayBGM("Demo_SE");
+        //SoundMixerNCamera.Instance.AdjustNewScene();
     }
 
     void Update()

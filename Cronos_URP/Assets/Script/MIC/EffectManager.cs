@@ -58,8 +58,9 @@ public class EffectManager : MonoBehaviour
     public float parryTime = 1.0f;
     public float fadeTime = 0.3f;
 
-    // 플레이어 평타 이펙트 관련
+    // 캐릭터 평타 각도를 맞추기 위해서
     Vector3 swordMagicOffest = new Vector3(90, 180, 0);
+    Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
 
     // 강화 검기 관련
     public bool isSwordWave;
@@ -137,12 +138,12 @@ public class EffectManager : MonoBehaviour
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            BossFiveSpear(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //    CreateAbsorbFX(player.transform, 12);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CreateAbsorbFX(player.transform, 12);
         if (Input.GetKeyDown(KeyCode.Alpha6))
             SpeedLine();
     }
@@ -379,15 +380,19 @@ public class EffectManager : MonoBehaviour
         Destroy(aSlash, 2.0f);
     }
 
-    // 일단 맨땅에 이펙트 만들기
-    //public void ComboStrongFX()
-    //{
-    //    Vector3 impTrans = player.transform.position + player.transform.forward * 1.6f;
-    //    GameObject impact = SpawnEffect("Nor04_Attack_Ground", impTrans);
-    //    impact.transform.rotation = player.transform.rotation;
-    //    impact.transform.Rotate(0, -90f, 0);
-    //    Destroy(impact, 2.0f);
-    //}
+    public void EnemySlash(Transform enemy)
+    {
+        // 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
+        // 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
+        // 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
+        GameObject slash = SpawnEffect("EnemyAttack", enemy.position);
+        slash.transform.rotation = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
+            enemySword.transform.rotation * Quaternion.Euler(enemyMagicOffset);
+        float newY = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
+            enemySword.transform.position.y;
+        slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
+        Destroy(slash, 0.7f);
+    }
 
     // 지면의 각도에 맞게 이펙트를 남기려면 어떻게 해야할까
     public void GroundCheckFX()
@@ -509,8 +514,10 @@ public class EffectManager : MonoBehaviour
 
         // 피격이펙트
         Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
-        GameObject slashed = SpawnEffect("UpSlash", newPos);
+        GameObject slashed = SpawnEffect("Nor_Damage", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
+        slashed.transform.position += new Vector3(0, 1, 0);
+        //slashed.transform.rotation *= Quaternion.Euler(player.playerSword.transform.position);
         Destroy(slashed, 1.0f);
     }
 
