@@ -57,6 +57,10 @@ public class TransitionPoint : MonoBehaviour
             {
                 TransitionInternal();
             }
+			else
+			{
+				Debug.Log("안들어왔어요!");
+			}
         }
     }
 

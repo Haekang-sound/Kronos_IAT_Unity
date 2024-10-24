@@ -268,7 +268,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			stateMachine.Animator.SetTrigger("FlashSlash");
 			Player.Instance.CP -= 20f;
-		}
+	 	}
 	}
 
 	// 시간베기
