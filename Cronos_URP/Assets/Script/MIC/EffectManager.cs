@@ -1,4 +1,4 @@
-using Sonity;
+﻿using Sonity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,110 +8,110 @@ using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
 {
-	// �̱���
-	private static EffectManager instance;
-	// Get�ϴ� ������Ƽ
-	public static EffectManager Instance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType<EffectManager>();
-				if (instance == null)
-				{
-					GameObject effectManager = new GameObject(typeof(EffectManager).Name);
-					instance = effectManager.AddComponent<EffectManager>();
+    // 싱글턴
+    private static EffectManager instance;
+    // Get하는 프로퍼티
+    public static EffectManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<EffectManager>();
+                if (instance == null)
+                {
+                    GameObject effectManager = new GameObject(typeof(EffectManager).Name);
+                    instance = effectManager.AddComponent<EffectManager>();
 
-					DontDestroyOnLoad(effectManager);
-				}
-			}
-			return instance;
-		}
-	}
+                    DontDestroyOnLoad(effectManager);
+                }
+            }
+            return instance;
+        }
+    }
+    
+    // 플레이어 관련
+    [SerializeField]
+    Player player;
+    public GameObject pSword;
 
-	// �÷��̾� ����
-	[SerializeField]
-	Player player;
-	public GameObject pSword;
+    SoundManager soundManager;
 
-	SoundManager soundManager;
+    // 레이캐스트 관련
+    float forwardVal = 1.6f;
+    float yUpVal = 1.5f;
+    public LayerMask groundLayer;
+    public float rayMaxDist = 2.0f;
 
-	// ����ĳ��Ʈ ����
-	float forwardVal = 1.6f;
-	float yUpVal = 1.5f;
-	public LayerMask groundLayer;
-	public float rayMaxDist = 2.0f;
+    // 글로벌 볼륨
+    [SerializeField]
+    Volume eVolume;
+    MotionBlur mBlur;
+    ChromaticAberration cAber;
+    DepthOfField dOF;
+    public float mBlurVal = 1.0f;
+    public float cAberVal = 0.7f;
+    public float dofFDistance = 2.0f;
+    public float dofFLength = 100.0f;
+    public float dofAperture = 6.0f;
 
-	// �۷ι� ����
-	[SerializeField]
-	Volume eVolume;
-	MotionBlur mBlur;
-	ChromaticAberration cAber;
-	DepthOfField dOF;
-	public float mBlurVal = 1.0f;
-	public float cAberVal = 0.7f;
-	public float dofFDistance = 2.0f;
-	public float dofFLength = 100.0f;
-	public float dofAperture = 6.0f;
+    public float parryTime = 1.0f;
+    public float fadeTime = 0.3f;
 
-	public float parryTime = 1.0f;
-	public float fadeTime = 0.3f;
+    // 캐릭터 평타 각도를 맞추기 위해서
+    Vector3 swordMagicOffest = new Vector3(90, 180, 0);
+    Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
 
-	// ĳ���� ��Ÿ ������ ���߱� ���ؼ�
-	Vector3 swordMagicOffest = new Vector3(90, 180, 0);
-	Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
+    // 강화 검기 관련
+    public bool isSwordWave;
+    [Range(0f, 200f)]
+    public float enforceSlashSpeed = 30.0f;
+    public float swordWaveSpeed = 20.0f;
+    public float swordWaveDistance = 12.0f;
+    public GameObject invisibleSlash;
+    public bool isGroundEnforced;
+    public bool showInvisibleMesh;
 
-	// ��ȭ �˱� ����
-	public bool isSwordWave;
-	[Range(0f, 200f)]
-	public float enforceSlashSpeed = 30.0f;
-	public float swordWaveSpeed = 20.0f;
-	public float swordWaveDistance = 12.0f;
-	public GameObject invisibleSlash;
-	public bool isGroundEnforced;
-	public bool showInvisibleMesh;
+    // 강화 상태 오우라
+    public GameObject swordAura;
 
-	// ��ȭ ���� �����
-	public GameObject swordAura;
+    // 파티클을 빨아들이는 박스
+    public GameObject absorbBox;
 
-	// ��ƼŬ�� ���Ƶ��̴� �ڽ�
-	public GameObject absorbBox;
+    // 보스 이펙트 관련
+    public float bossBeamDistance = 4.0f;
+    public float bossBeamTerm = 0.2f;
+    public float bossBeamDupeTime = 8.0f;
 
-	// ���� ����Ʈ ����
-	public float bossBeamDistance = 4.0f;
-	public float bossBeamTerm = 0.2f;
-	public float bossBeamDupeTime = 8.0f;
+    public float bossMoonHeight = 4.0f;
+    public float bossMoonDistance = 5.0f;
 
-	public float bossMoonHeight = 4.0f;
-	public float bossMoonDistance = 5.0f;
+    // 사용할 이펙트 리스트
+    static List<GameObject> effects = new List<GameObject>();
+    GameObject[] effectArray;
 
-	// ����� ����Ʈ ����Ʈ
-	static List<GameObject> effects = new List<GameObject>();
-	GameObject[] effectArray;
-
-	// ����Ʈ�� �ε��ϴ� �ܰ�
-	protected void Awake()
-	{
-		// �̹� �ν��Ͻ��� �����Ѵٸ�
-		if (instance != null && instance != this)
-		{
-			Destroy(gameObject);
-			Debug.Log(gameObject.name + " destroyed");
-			return;
-		}
-		else
-		{
-			instance = this;
-			DontDestroyOnLoad(gameObject);
-			Debug.Log("Effect Manager called on " + gameObject.name);
-		}
+    // 이펙트를 로드하는 단계
+    protected void Awake()
+    {
+        // 이미 인스턴스가 존재한다면
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            Debug.Log(gameObject.name + " destroyed");
+            return;
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("Effect Manager called on " + gameObject.name);
+        }
 		SceneManager.sceneLoaded += OnSceneLoaded;
-	}
+    }
 
 	/// <summary>
-	/// ����ȯ �ʱ�ȭ�� ���� �Լ�
-	/// �ε��ִ� ��ġ���� 
+	/// 씬전환 초기화를 위한 함수
+	/// 민동휘는 고치던가 
 	/// By OHK
 	/// </summary>
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,21 +119,21 @@ public class EffectManager : MonoBehaviour
 		//Initialize();
 	}
 
-	// �ε��� ����Ʈ�� ���� ������Ʈ �Ҵ�
+	// 로드한 이펙트에 게임 오브젝트 할당
 	void Start()
     {
         Initialize();
         StartCoroutine(LoadEffectCoroutine());
     }
 
-    // ����׸� ���ؼ� �ϴ� ������Ʈ�� �־���Ҵ�
-    // ��ȹ �ʿ��� ������ ������ ������ �����Ѵ�
+    // 디버그를 위해서 일단 업데이트에 넣어놓았다
+    // 기획 쪽에서 조정이 끝나면 별도로 구현한다
     void Update()
     {
         //swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
         //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
-        //���� ����Ʈ ����� ������
+        //보스 이펙트 데모로 나오게
         //if (Input.GetKeyDown(KeyCode.Alpha1))
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -144,8 +144,8 @@ public class EffectManager : MonoBehaviour
         //    BossMoon(player.transform);
         if (Input.GetKeyDown(KeyCode.Alpha5))
             CreateAbsorbFX(player.transform, 12);
-        //if (Input.GetKeyDown(KeyCode.Alpha6))
-        //    SpeedLine();
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            SpeedLine();
     }
 
     private void OnValidate()
@@ -167,7 +167,7 @@ public class EffectManager : MonoBehaviour
         }
         if (eVolume == null)
         {
-            // ����� ũ������ �˺��� ������ ���ٴµ�
+            // 비용이 크다지만 알빠냐 볼륨이 없다는데
             GameObject eVol = GameObject.Find("Effect Volume");
             eVolume = eVol.GetComponent<Volume>();
         }
@@ -290,8 +290,8 @@ public class EffectManager : MonoBehaviour
         return null;
     }
 
-    // �θ� ������Ʈ���� �̸��� ���� �ڽ� ������Ʈ�� ����
-    // ����Ʈ�� ���� �ڽ� ������Ʈ ��ġ ã�� �� ����ϴ� ��
+    // 부모 오브젝트에서 이름을 가진 자식 오브젝트를 리턴
+    // 이펙트가 나올 자식 오브젝트 위치 찾는 데 사용하는 중
     GameObject FindChild(GameObject parent, string name)
     {
         GameObject result = GameObject.Find(name);
@@ -310,7 +310,7 @@ public class EffectManager : MonoBehaviour
     {
         if (invisibleSlash != null)
         {
-            // ������ �ν��Ͻ����� MeshRenderer�� ã�� Ȱ��ȭ/��Ȱ��ȭ
+            // 프리팹 인스턴스에서 MeshRenderer를 찾고 활성화/비활성화
             MeshRenderer meshRenderer = invisibleSlash.GetComponentInChildren<MeshRenderer>();
             if (meshRenderer != null)
             {
@@ -323,12 +323,12 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // �÷��̾� ���� ����Ʈ
+    // 플레이어 관련 이펙트
     public void NormalSlashFX(string fxName)
     {
-        // ����Ʈ �̰� �����̼��� Į�� �����̼ǰ� �����.
-        // Į�� ����Ʈ�� ������ �ٸ��Ƿ� �̰� ����Ʈ���� ���� �ѹ��� �ʿ���
-        // ��ġ�� y ��ǥ�� Į�� ����, �������� �÷��̾� Ʈ����������
+        // 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
+        // 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
+        // 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
         soundManager.PlaySFX("Attack_SE", player.transform);
         GameObject slash = SpawnEffect(fxName, player.transform.position);
         slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
@@ -337,7 +337,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // �Ϲ� ������ ����
+    // 일반 강공격 스핀
     public void NormalStrongFX()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -347,7 +347,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // ��ȭ ���� Ȱ��ȭ
+    // 강화 오라 활성화
     public void SwordAuraOn()
     {
         swordAura.SetActive(true);
@@ -358,7 +358,7 @@ public class EffectManager : MonoBehaviour
         swordAura.SetActive(false);
     }
 
-    // ������ ����
+    // 구르기 공격
     public void DodgeAttack()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -369,7 +369,7 @@ public class EffectManager : MonoBehaviour
         Destroy(dttack, 4.0f);
     }
 
-    // ����Ƽ ���� 1
+    // 어빌리티 공격 1
     public void AbilitySlash()
     {
         soundManager.PlaySFX("Attack_SE", player.transform);
@@ -380,12 +380,12 @@ public class EffectManager : MonoBehaviour
         Destroy(aSlash, 2.0f);
     }
 
-    // ���� ���� �⺻����
+    // 적의 근접 기본공격
     public void EnemySlash(Transform enemy)
     {
-        // ����Ʈ �̰� �����̼��� Į�� �����̼ǰ� �����.
-        // Į�� ����Ʈ�� ������ �ٸ��Ƿ� �̰� ����Ʈ���� ���� �ѹ��� �ʿ���
-        // ��ġ�� y ��ǥ�� Į�� ����, �������� �÷��̾� Ʈ����������
+        // 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
+        // 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
+        // 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
         GameObject slash = SpawnEffect("EnemyAttack", enemy.position);
         slash.transform.rotation = enemy.gameObject.GetComponent<ATypeEnemyBehavior>().
             enemySword.transform.rotation * Quaternion.Euler(enemyMagicOffset);
@@ -395,7 +395,7 @@ public class EffectManager : MonoBehaviour
         Destroy(slash, 0.7f);
     }
 
-    // �� ���� ��������
+    // 적 근접 돌진공격
     public void EnemyCharge(Transform enemy)
     {
         GameObject charge = SpawnEffect("EnemyCharge", enemy.position);
@@ -404,11 +404,11 @@ public class EffectManager : MonoBehaviour
         Destroy(charge, 2.0f);
     }
 
-    // ������ ������ �°� ����Ʈ�� ������� ��� �ؾ��ұ�
+    // 지면의 각도에 맞게 이펙트를 남기려면 어떻게 해야할까
     public void GroundCheckFX()
     {
-        // ���̸� �� ��ġ �÷��̾��� ��ġ + �������� ���� ������ + ���� ����
-        // ������ �÷��̾� �����忡�� Į ���� �߽����� ���� �ٲ�
+        // 레이를 쏠 위치 플레이어의 위치 + 정면으로 조금 앞으로 + 조금 위로
+        // 기준을 플레이어 포워드에서 칼 로컬 중심으로 조금 바꿈
         Vector3 rayTrans = player.transform.position + 
             //player.transform.forward * forwardVal + 
             pSword.transform.up * -1 * forwardVal + 
@@ -418,7 +418,7 @@ public class EffectManager : MonoBehaviour
         {
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
-            // ProjectOnPlane�� ù��° �Ű����� ���͸� �ι�° �Ű����� �븻�� ������ ���͸� ��ȯ�Ѵ�. 
+            // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
             Quaternion fxRot = Quaternion.LookRotation(
                 //Vector3.ProjectOnPlane(player.transform.forward, hitNormal), hitNormal);
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
@@ -426,7 +426,7 @@ public class EffectManager : MonoBehaviour
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
             
             Destroy(impact, 2.0f);
-            // �ɷ°���Ǿ��ٸ� �̰͵� ����
+            // 능력개방되었다면 이것도 나옴
             if (isGroundEnforced)
             {
                 GameObject cir = SpawnEffect("EnforceGround", hitPoint, fxRot);
@@ -439,21 +439,21 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // �ٴڿ� ��ó�� ����� Nor_Attack_4 ����
-    // �̾��µ� ���� �ɷ°��濡���� �Ἥ ���� �޾ƾߵ�
+    // 바닥에 상처만 남기는 Nor_Attack_4 전용
+    // 이었는데 이제 능력개방에서도 써서 변수 받아야됨
     public void GroundScar(string name)
     {
-        Debug.Log("�� üũ ����");
+        Debug.Log("땅 체크 시작");
         Vector3 rayTrans = player.transform.position +
             pSword.transform.up * -1 * forwardVal +
             new Vector3(0, yUpVal, 0);
         Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
         if (Physics.Raycast(rayTrans, Vector3.down, out RaycastHit hit, rayMaxDist, groundLayer))
         {
-            Debug.Log("������ ���� �ִ�");
+            Debug.Log("범위에 땅이 있다");
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
-            // ProjectOnPlane�� ù��° �Ű����� ���͸� �ι�° �Ű����� �븻�� ������ ���͸� ��ȯ�Ѵ�. 
+            // ProjectOnPlane은 첫번째 매개변수 벡터를 두번째 매개변수 노말에 투영된 벡터를 반환한다. 
             Quaternion fxRot = Quaternion.LookRotation(
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
@@ -467,7 +467,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // �˱� ������
+    // 검기 날리기
     public void SwordWave()
     {
         if (isSwordWave)
@@ -513,18 +513,16 @@ public class EffectManager : MonoBehaviour
             Destroy(wav);
     }
 
-    // ����Ʈ�Ŵ����� ��� �ִ°� ���� �� ������
+    // 이펙트매니저가 들고 있는게 나을 것 같은데
     public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans)
     {
-        // ��������
+        // 파편만들기
         GameObject frag = SpawnEffect("FragFX", targetTrans.position);
         frag.transform.LookAt(dmgMsg.damageSource);
         frag.transform.Rotate(-15f, 0, 0);
         Destroy(frag, 2.0f);
 
-		CreateAbsorbFX(targetTrans, dmgMsg.amount);
-
-        // �ǰ�����Ʈ
+        // 피격이펙트
         Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
         GameObject slashed = SpawnEffect("Nor_Damage", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
@@ -536,7 +534,7 @@ public class EffectManager : MonoBehaviour
 
     public void CreateAbsorbFX(Transform trans, float burstNum)
     {
-        // 1�� �ڿ� hud�� �����ϴ� ��ƼŬ �����
+        // 1초 뒤에 hud로 돌진하는 파티클 만들기
         GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
         Destroy(ab, 3.0f);
     }
@@ -556,7 +554,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(FadeOutLightsCoroutine(parr));
         Destroy(parr, 1.0f);
         CreateGuardFX();
-        // �۷ι������� ���ٸ� ����
+        // 글로벌볼륨이 없다면 나가
         if (eVolume == null)
             return;
         StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
@@ -566,7 +564,7 @@ public class EffectManager : MonoBehaviour
         
     }
 
-    // ���� 8���� ��
+    // 보스 8방향 빔
     public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
     {
         for (int i = 0; i < bossBeamDupeTime; i++)
@@ -587,7 +585,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // ���� �� ���� �����
+    // 보스 불 장판 만들기
     public void BossFireShoot(Transform bosstrans)
     {
         GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
@@ -595,7 +593,7 @@ public class EffectManager : MonoBehaviour
         fire.transform.position += new Vector3(0, 1.0f, 0);
     }
 
-    // ���� â 5�� ���
+    // 보스 창 5개 쏘기
     public void BossFiveSpear(Transform bossTrans)
     {
         Vector3 forward = bossTrans.forward;
@@ -606,14 +604,14 @@ public class EffectManager : MonoBehaviour
         Destroy(spears, 15.0f);
     }
 
-    // â ���� ����Ʈ
+    // 창 지면 이펙트
     public void SpearImpact(Vector3 pos)
     {
         GameObject imp = SpawnEffect("BossFX_SpearImpact", pos);
         Destroy(imp, 3.0f);
     }
 
-    // ���� ���� �����
+    // 보스 위성 만들기
     public void BossMoon(Transform bossTrans)
     {
         List<int> moonNums = new List<int>();
@@ -629,7 +627,7 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    // ���߼� �״ٰ� ���
+    // 집중선 켰다가 끄기
     IEnumerator SpeedLineCoroutine()
     {
         UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
@@ -642,11 +640,11 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(SpeedLineCoroutine());
     }
 
-    // ���� ���� ���� ��¦
+    // 보스 돌진 예고 반짝
     
 
 
-    // �и����� �� ��� ���
+    // 패리했을 때 모션 블러
     IEnumerator ParryMotionBlurCoroutine(float val)
     {
         mBlur.intensity.value = val;
@@ -662,7 +660,7 @@ public class EffectManager : MonoBehaviour
         mBlur.intensity.value = 0f;
     }
 
-    // �и����� �� ũ�θ�ƽ �ֹ����̼�
+    // 패리했을 때 크로마틱 애버레이션
     IEnumerator ParryCAberrationCoroutine(float val)
     {
         cAber.intensity.value = val;
@@ -671,14 +669,14 @@ public class EffectManager : MonoBehaviour
         {
             cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
             elapsedTime += Time.deltaTime;
-            //Debug.Log("aberration intensity : " + cAber.intensity.value);
+            Debug.Log("aberration intensity : " + cAber.intensity.value);
             yield return null;
         }
 
         cAber.intensity.value = 0f;
     }
 
-    // �и����� �� ���� ���� �ʵ� �ð��� �ٸ� ȿ������ ���� ���� ������
+    // 패리했을 때 뎁스 오브 필드 시간은 다른 효과보다 조금 빨리 끝나게
     IEnumerator ParryDepthOfFieldCoroutine()
     {
         dOF.focusDistance.value = dofFDistance;
@@ -700,13 +698,13 @@ public class EffectManager : MonoBehaviour
         dOF.aperture.value = 1f;
     }
 
-    // �и����� �� �ð� ���̱�
+    // 패리했을 때 시간 줄이기
     IEnumerator ParryTime(float val)
     {
-        // val ��ŭ Ÿ�ӽ����� �ٿ��� ������� ������
+        // val 만큼 타임스케일 줄였다 원래대로 돌리기
         Time.timeScale = val;
         float elapsedTime = 0.0f;
-        // n�ʿ� ���ļ� ���ư���
+        // n초에 걸쳐서 돌아가기
         float backTime = 0.6f;
         while (elapsedTime < backTime)
         {
@@ -734,32 +732,32 @@ public class EffectManager : MonoBehaviour
     }
 
 
-    // elements ���� ���Ҹ� ������ result ���� ���� ���� �տ��� �̴�
-    // �Ǽ�-������ �˰����
+    // elements 개의 원소를 넣으면 result 개의 랜덤 값을 앞에서 뽑는
+    // 피셔-예이츠 알고리즘
     public List<int> FisherYatesShuffles(int elements, int result)
     {
-        // 0���� elements���� ���ڸ� ����Ʈ�� ����
+        // 0부터 elements개의 숫자를 리스트로 생성
         List<int> numbers = new List<int>();
         for (int i = 0; i < elements; i++)
         {
             numbers.Add(i);
         }
 
-        // ���� ��ü ����
+        // 랜덤 객체 생성
         System.Random rand = new System.Random();
 
-        // �Ǽ�-������ �˰�������� ����Ʈ ����
+        // 피셔-예이츠 알고리즘으로 리스트 셔플
         for (int i = numbers.Count - 1; i > 0; i--)
         {
-            int j = rand.Next(0, i + 1); // 0���� i������ �ε��� �� �ϳ��� ����
-            // numbers[i]�� numbers[j]�� swap
+            int j = rand.Next(0, i + 1); // 0부터 i까지의 인덱스 중 하나를 선택
+            // numbers[i]와 numbers[j]를 swap
             int temp = numbers[i];
             numbers[i] = numbers[j];
             numbers[j] = temp;
         }
 
-        // ��� ���
-        Debug.Log("���� �迭: " + string.Join(", ", numbers));
+        // 결과 출력
+        Debug.Log("랜덤 배열: " + string.Join(", ", numbers));
 
         List<int> numbers2 = new List<int>();
         for (int i = 0; i < result; i++)
@@ -767,7 +765,7 @@ public class EffectManager : MonoBehaviour
             numbers2.Add(numbers[i]);
         }
 
-        Debug.Log("number2 �迭: " + string.Join(", ", numbers2));
+        Debug.Log("number2 배열: " + string.Join(", ", numbers2));
 
         return numbers2;
     }
