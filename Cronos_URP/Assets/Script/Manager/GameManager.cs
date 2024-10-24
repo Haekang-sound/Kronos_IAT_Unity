@@ -35,8 +35,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        SaveLoadManager.DeleteAllData();
-
         DontDestroyOnLoad(gameObject);
     }
 

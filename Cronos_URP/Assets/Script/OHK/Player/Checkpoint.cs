@@ -1,22 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// 체크포인트는 
+/// - 한 번만 발동합니다
+/// - 
+/// </summary>
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
     public int priority;
     public float healTP;
-    public float healCP;
 
+    [Header("Event")]
+    public UnityEvent OnActive;
+
+    [SceneName]
+    private string _sceneName;
     private bool _isActive;
 
-    public UnityEvent OnActive;
 
     private void Awake()
     {
-		//gameObject.layer = LayerMask.NameToLayer("Checkpoint");
+        _sceneName = SceneManager.GetActiveScene().name;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,37 +39,28 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
-        //player.isDecreaseTP = false;
-
-
         OnActive?.Invoke();
         _isActive = true;
 
         player.SetCheckpoint(this);
 
         // 플레이어 TP 정보 저장
-        //Player.Instance.TP += healTP;
-		healTP = Player.Instance.TP;
-		healCP = Player.Instance.CP;
+        Player.Instance.TP += healTP;
 
         SaveLoadManager.SaveAllData();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (_isActive == true)
-        {
-            return;
-        }
-
         Player player = other.GetComponent<Player>();
 
         if (player == null)
             return;
 
-        player.isDecreaseTP = true;
-
-        Debug.Log("플레이어의 체력이 다시 줄어듦" + Player.Instance.TP);
+        if (_isActive == false)
+        {
+            player.isDecreaseTP = true;
+        }
     }
 
     void OnDrawGizmos()
