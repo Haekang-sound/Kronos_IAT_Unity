@@ -10,7 +10,6 @@ using UnityEngine.Video;
 
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
-
     public enum State
     {
         Deactivate = 0,
@@ -22,7 +21,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     [SerializeField] private AbilityNode.State _state;
 
     public int PointNeed { get { return _pointNeed; } }
-    private int _pointNeed;
+    [SerializeField] private int _pointNeed;
 
     public List<AbilityNode> childNodes;
 
