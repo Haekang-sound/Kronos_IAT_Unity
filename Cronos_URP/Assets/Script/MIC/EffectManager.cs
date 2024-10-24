@@ -142,10 +142,10 @@ public class EffectManager : MonoBehaviour
         //    BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            CreateAbsorbFX(player.transform, 12);
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            SpeedLine();
+//         if (Input.GetKeyDown(KeyCode.Alpha5))
+//             CreateAbsorbFX(player.transform, 12);
+//         if (Input.GetKeyDown(KeyCode.Alpha6))
+//             SpeedLine();
     }
 
     private void OnValidate()

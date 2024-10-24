@@ -47,7 +47,7 @@ public class UI_Scanner : MonoBehaviour
 
     void Update()
     {
-        if (isPopup && Input.GetKeyDown(KeyCode.E) && !isInteracting)
+        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
         {
             isInteracting = true;
             interText.SetActive(false);

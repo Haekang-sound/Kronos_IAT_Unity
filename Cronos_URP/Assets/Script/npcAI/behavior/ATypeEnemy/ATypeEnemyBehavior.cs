@@ -188,7 +188,8 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
                 break;
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
-                Dead();
+				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
+				Dead();
                 break;
             case MessageType.RESPAWN:
                 break;

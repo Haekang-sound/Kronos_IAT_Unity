@@ -6343,7 +6343,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 480831467}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1048091780}
+        m_TargetAssemblyTypeName: TitleScene, Assembly-CSharp
+        m_MethodName: Title
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &480831467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8140,6 +8152,14 @@ PrefabInstance:
       propertyPath: hitStopScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7442079448163984013, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442079448163984013, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
+      propertyPath: m_initialShaders.Array.data[0]
+      value: 
+      objectReference: {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
     - target: {fileID: 8515508979766762297, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -12284,6 +12304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048091779}
+  - component: {fileID: 1048091780}
   m_Layer: 0
   m_Name: Win Event
   m_TagString: Untagged
@@ -12307,6 +12328,22 @@ Transform:
   - {fileID: 37176472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1048091780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048091778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7821cc5291fb1439b455b4bd1bc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sButton: {fileID: 0}
+  oButton: {fileID: 0}
+  cButton: {fileID: 0}
+  eButton: {fileID: 0}
 --- !u!1001 &1052204996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17109,13 +17146,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3123625407668429631, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1398867586}
   m_SourcePrefab: {fileID: 100100000, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
 --- !u!4 &1398867584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3601974691658934541, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
   m_PrefabInstance: {fileID: 1398867583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1398867585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3123625407668429631, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+  m_PrefabInstance: {fileID: 1398867583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1398867586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398867585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa55817f3706504dbbd1aaae1a4549d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  interText: {fileID: 0}
+  abilityUnlock: {fileID: 0}
 --- !u!95 &1409903954 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1064308819828539652, guid: 5049c1130cc2be24480abdd21fbdabf3, type: 3}
@@ -18324,7 +18384,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.3271497, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.8362805, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18335,7 +18395,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.3271497, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.8362805, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:

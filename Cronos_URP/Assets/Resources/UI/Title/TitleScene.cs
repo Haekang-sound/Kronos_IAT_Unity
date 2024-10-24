@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleScene : MonoBehaviour
@@ -19,14 +20,13 @@ public class TitleScene : MonoBehaviour
 
     public void StartGame()
     {
-        //SceneManager.LoadScene("MICScene");
-        //SceneManager.LoadScene("OHK_Scene");
-		//GameManager.Instance.SwitchScene("OHK_Scene");
-		//GameManager.Instance.SceneTransition("OHK_Scene");
+		SceneManager.LoadScene("1_HN_Scene2");
+	}
 
-        // ºôµå ÀÎµ¦½º·Î ¾ÀÀ» ÀüÈ¯ÇÏ´Â ±¸Çö
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+	public void Title()
+	{
+		SceneManager.LoadScene("0_TitleTest");
+	}
 
     public void Option()
     {

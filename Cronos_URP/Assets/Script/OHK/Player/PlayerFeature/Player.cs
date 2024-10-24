@@ -149,6 +149,14 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public bool isDecreaseTP = true;
 
+	public void GoTime()
+	{
+		isDecreaseTP = true;
+	}
+	public void StopTime()
+	{
+		isDecreaseTP = false;
+	}
 
 	private void Awake()
 	{
@@ -243,15 +251,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			return;
 		}
+		if (CP < maxCP && !IsDecreaseCP)
 		{
-			if (CP < maxCP && !IsDecreaseCP)
-			{
-				CP += chargingCP;
+			CP += chargingCP;
 
-				if (CP > maxCP)
-				{
-					CP = maxCP;
-				}
+			if (CP > maxCP)
+			{
+				CP = maxCP;
 			}
 		}
 	}
@@ -277,6 +283,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public float currentTime = 0f;
 	bool timeSlash;
+	bool isDead = false;
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.H))
@@ -341,11 +349,14 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			_damageable.currentHitPoints -= Time.deltaTime;
 
-			if (TP <= 0)
-			{
-				_damageable.JustDead();
-			}
 		}
+		if(_damageable.currentHitPoints <= 0f && !isDead)
+		{
+			isDead = true;
+			_damageable.JustDead();
+		}
+
+
 
 		// 실시간으로 CP감소
 		if (IsDecreaseCP && CP > 0)
@@ -395,7 +406,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case MessageType.RESPAWN:
 				{
-
+					isDead = false;
 				}
 				break;
 		}

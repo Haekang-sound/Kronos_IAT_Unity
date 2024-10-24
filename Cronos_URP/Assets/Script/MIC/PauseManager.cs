@@ -56,6 +56,7 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
 		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
 		PlayerStateMachine.GetInstance().isPaused = true;
 		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
         //playerCam.gameObject.SetActive(false);
@@ -75,6 +76,7 @@ public class PauseManager : MonoBehaviour
             return;
 
 		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		playerInput?.SwitchCurrentActionMap("Player");
         if (player != null)
         {
