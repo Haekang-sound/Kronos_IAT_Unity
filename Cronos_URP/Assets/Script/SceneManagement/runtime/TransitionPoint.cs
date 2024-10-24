@@ -5,102 +5,107 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class TransitionPoint : MonoBehaviour
 {
-    public enum TransitionType
-    {
-        DifferentZone,
-        DifferentNonGameplayScene,
-        SameScene,
-    }
+	public enum TransitionType
+	{
+		DifferentZone,
+		DifferentNonGameplayScene,
+		SameScene,
+	}
 
 
-    public enum TransitionWhen
-    {
-        OnTriggerEnter,
-        ExternalCall,
-    }
+	public enum TransitionWhen
+	{
+		OnTriggerEnter,
+		ExternalCall,
+	}
 
 
-    [Tooltip("씬 전환이 될때 같이 이동될 게임 오브젝트입니다. (ex. 플레이어)")]
-    public GameObject transitioningGameObject;
-    [Tooltip("전환이 이 장면 내에서 이루어질지, 다른 영역으로 전환될지, 아니면 게임플레이가 아닌 장면으로 전환될지 결정합니다.")]
-    public TransitionType transitionType;
-    [SceneName]
-    public string newSceneName;
-    [Tooltip("이 씬에서 전환되는 게임 오브젝트가 텔레포트될 목적지입니다.")]
-    public TransitionPoint destinationTransform;
-    [Tooltip("씬 전환이 시작되도록 트리거해야 하는 항목.")]
-    public TransitionWhen transitionWhen;
+	[Tooltip("씬 전환이 될때 같이 이동될 게임 오브젝트입니다. (ex. 플레이어)")]
+	public GameObject transitioningGameObject;
+	[Tooltip("전환이 이 장면 내에서 이루어질지, 다른 영역으로 전환될지, 아니면 게임플레이가 아닌 장면으로 전환될지 결정합니다.")]
+	public TransitionType transitionType;
+	[SceneName]
+	public string newSceneName;
+	[Tooltip("이 씬에서 전환되는 게임 오브젝트가 텔레포트될 목적지입니다.")]
+	public TransitionPoint destinationTransform;
+	[Tooltip("씬 전환이 시작되도록 트리거해야 하는 항목.")]
+	public TransitionWhen transitionWhen;
 
-    bool m_transitioningGameObjectPresent;
+	bool m_transitioningGameObjectPresent;
 
-    void Start()
-    {
-        if (transitionWhen == TransitionWhen.ExternalCall)
-        {
-            m_transitioningGameObjectPresent = true;
-        }
+	void Start()
+	{
+		if (transitionWhen == TransitionWhen.ExternalCall)
+		{
+			m_transitioningGameObjectPresent = true;
+		}
 
-    }
+	}
 
-    void OnTriggerEnter(Collider other)
-    {
-		EffectManager.Instance.CreateParryFX();
+	void OnTriggerEnter(Collider other)
+	{
 		Debug.Log("트랜지션 포인트 트리거");
 		if (other.gameObject == transitioningGameObject)
-        {
-            m_transitioningGameObjectPresent = true;
+		{
+			m_transitioningGameObjectPresent = true;
 
-            if (ScreenFader.IsFading || SceneController.Transitioning)
-            {
-                return;
-            }
+// 			if (ScreenFader.IsFading)
+// 			{
+// 				EffectManager.Instance.CreateParryFX();
+// 				return;
+// 			}
+// 			if ( SceneController.Transitioning)
+// 			{
+// 				EffectManager.Instance.CreateGuardFX();
+// 				return;
+// 			}
 
-            if (transitionWhen == TransitionWhen.OnTriggerEnter)
-            {
-                TransitionInternal();
-            }
+			if (transitionWhen == TransitionWhen.OnTriggerEnter)
+			{
+				TransitionInternal();
+			}
 			else
 			{
-				
+				EffectManager.Instance.CreateGuardFX();
 			}
-        }
-    }
+		}
+	}
 
-    void OnTriggerExit(Collider other)
-    {
+	void OnTriggerExit(Collider other)
+	{
 		Debug.Log("트랜지션 포인트 나옴");
 		if (other.gameObject == transitioningGameObject)
-        {
-            m_transitioningGameObjectPresent = false;
-        }
-    }
+		{
+			m_transitioningGameObjectPresent = false;
+		}
+	}
 
-    protected void TransitionInternal()
-    {
-		
+	protected void TransitionInternal()
+	{
+
 		if (transitionType == TransitionType.SameScene)
-        {
-            GameObjectTeleporter.Teleport(transitioningGameObject, destinationTransform.transform);
-        }
-        else
-        {
-            SceneController.TransitionToScene(this);
-        }
-    }
+		{
+			GameObjectTeleporter.Teleport(transitioningGameObject, destinationTransform.transform);
+		}
+		else
+		{
+			SceneController.TransitionToScene(this);
+		}
+	}
 
-    public void Transition()
-    {
-        if (m_transitioningGameObjectPresent)
-        {
-            if (transitionWhen == TransitionWhen.ExternalCall)
-            {
-                TransitionInternal();
-            }
-        }
-    }
+	public void Transition()
+	{
+		if (m_transitioningGameObjectPresent)
+		{
+			if (transitionWhen == TransitionWhen.ExternalCall)
+			{
+				TransitionInternal();
+			}
+		}
+	}
 
-    public void Update()
-    {
+	public void Update()
+	{
 		Debug.Log("Im here" + transform.position);
-    }
+	}
 }
