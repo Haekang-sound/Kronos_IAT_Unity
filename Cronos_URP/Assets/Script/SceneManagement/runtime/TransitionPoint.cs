@@ -44,7 +44,9 @@ public class TransitionPoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == transitioningGameObject)
+		EffectManager.Instance.CreateParryFX();
+		Debug.Log("트랜지션 포인트 트리거");
+		if (other.gameObject == transitioningGameObject)
         {
             m_transitioningGameObjectPresent = true;
 
@@ -59,14 +61,15 @@ public class TransitionPoint : MonoBehaviour
             }
 			else
 			{
-				Debug.Log("안들어왔어요!");
+				
 			}
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == transitioningGameObject)
+		Debug.Log("트랜지션 포인트 나옴");
+		if (other.gameObject == transitioningGameObject)
         {
             m_transitioningGameObjectPresent = false;
         }
@@ -74,7 +77,8 @@ public class TransitionPoint : MonoBehaviour
 
     protected void TransitionInternal()
     {
-        if (transitionType == TransitionType.SameScene)
+		
+		if (transitionType == TransitionType.SameScene)
         {
             GameObjectTeleporter.Teleport(transitioningGameObject, destinationTransform.transform);
         }
@@ -97,6 +101,6 @@ public class TransitionPoint : MonoBehaviour
 
     public void Update()
     {
-
+		Debug.Log("Im here" + transform.position);
     }
 }
