@@ -283,22 +283,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			transform.position += transform.forward * 5f;
 		}
-		// 
-		// 		if(timeSlash)
-		// 		{
-		// 			currentTime += Time.deltaTime;
-		// 			PlayerFSM.Rigidbody.velocity = transform.forward*TimeSlashCurve.Evaluate(currentTime);
-		// 			if(currentTime > 1f)
-		// 			{
-		// 				timeSlash = false;
-		// 				currentTime = 0f;
-		// 			}
-		// 		}
-		// 		else
-		// 		{
-		// 			currentTime = 0f;
-		// 		}
-
 
 		if (Input.GetKeyDown(KeyCode.O))
 		{
@@ -353,7 +337,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 
 		// 실시간으로 TP 감소
-		if (isDecreaseTP && _damageable.currentHitPoints > 0f)
+		Debug.Log(isDecreaseTP);
+		if (isDecreaseTP && _damageable.currentHitPoints >= 0f)
 		{
 			_damageable.currentHitPoints -= Time.deltaTime;
 

@@ -31,7 +31,7 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
-        player.isDecreaseTP = false;
+        //player.isDecreaseTP = false;
 
 
         OnActive?.Invoke();
