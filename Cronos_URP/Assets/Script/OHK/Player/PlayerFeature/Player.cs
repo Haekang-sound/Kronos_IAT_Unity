@@ -142,7 +142,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public GameObject spcCubeR;
 	public float spcDelay;
 	public PlayerStateMachine psm;
-	public BoxColliderAdjuster adjuster; 
+	public BoxColliderAdjuster adjuster;
+
+	public bool useKnockback;
+	public bool isParry;
+	public bool isDecreaseTP;
+
 	//public float spcActivateTime;
 
 
@@ -178,9 +183,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX); 
 		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState); 
 	}
-
 	void Start()
 	{
+		Cursor.visible = false;
 		// TEST: 데이터 로드 
 		Load();
 
@@ -410,7 +415,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 		}
 	}
-	public bool useKnockback;
+
+
 	public void SetUseKnockback(bool val) => useKnockback = val;
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{
@@ -495,7 +501,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		BulletTime.Instance.SetNormalSpeed();
 	}
 
-	void SetCursorInactive()
+	public void SetCursorInactive()
 	{
 		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
 		if (Cursor.visible)
@@ -737,7 +743,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		_currentCheckpoint = checkpoint;
-        TP += checkpoint.tp;
+        TP += checkpoint.healTP;
 	}
 
 	public void Respawn()

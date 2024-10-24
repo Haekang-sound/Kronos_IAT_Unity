@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -24,13 +23,17 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public List<AbilityNode> childNodes;
 
     public bool isFocaus;
-    public bool  interactable;
+    public bool interactable;
     public Button button;
     public FadeEffector fadeUI;
 
     private CinemachineVirtualCamera _virtualCam;
     private IObserver<AbilityNode> _observer;
     private VideoPlayer _videoPlayer;
+
+    //Background
+    private Image _bgImage;
+    private RotateUI _bgRotateUI;
 
     public UnityEvent OnUpdated;
 
@@ -68,26 +71,29 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
         _videoPlayer = GetComponentInChildren<VideoPlayer>();
         _videoPlayer?.Pause();
-
-
-        //background.SetGrayscale(1f);
-        //skillIcon.SetGrayscale(1f);
+        _bgRotateUI = background.GetComponent<RotateUI>();
+        _bgImage = background.GetComponent<Image>();
     }
 
     private void OnEnable()
     {
         fadeUI.GetComponent<CanvasGroup>().alpha = 0f;
+
+        if (levelData.currentPoint == 1)
+        {
+            _bgRotateUI.active = true;
+        }
+        else
+        {
+            _bgRotateUI.active = false;
+        }
     }
 
     private void Start()
     {
-        Render();
+        //Render();
         button.onClick.AddListener(OnClickButton);
     }
-
-    //private void Update()
-    //{
-    //}
 
     private void OnDestroy()
     {
@@ -96,12 +102,16 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void SetInteractable(bool val)
     {
-        //button.interactable = val;
         interactable = val;
+        _bgImage.sprite = Resources.Load<Sprite>("UI/Skill/main_gear_dark");
 
-        if (interactable)
+        if (interactable == true)
         {
             background.SetGrayscale(0f);
+        }
+        else
+        {
+            background.SetGrayscale(1f);
         }
     }
 
@@ -112,6 +122,12 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     }
 
     // =====
+
+    public void Reset()
+    {
+        SetInteractable(false);
+        skillIcon.SetGrayscale(1f);
+    }
 
     public void FocusIn()
     {
@@ -160,12 +176,18 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         if (levelData.currentPoint == 1)
         {
             skillIcon.Reset();
-            background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
-            background.GetComponent<RotateUI>().active = true;
+            _bgImage.sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
+            _bgRotateUI.active = true;
+        }
+        if (levelData.currentPoint < 1)
+        {
+            _bgRotateUI.active = false;
+            _bgImage.sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
+            skillIcon.SetGrayscale(1f);
         }
     }
 
-    public bool Increment()
+    public bool Increase()
     {
         int addedPoint = levelData.currentPoint + 1;
 
@@ -203,16 +225,17 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
             if (num >= 1)
             {
                 SetInteractable(true);
-                background.SetGrayscale(0f);
+                //background.SetGrayscale(0f);
             }
 
             var point = PlayerPrefs.GetInt("currentPoint_" + levelData.id);
             for (int i = 0; i < point; i++)
             {
-                if(true == Increment());
+                if (true == Increase())
                     OnUpdated.Invoke();
             }
 
+            Render();
             Debug.Log("TreeNode( " + key + ": " + num + "  ) has Loaded");
         }
     }

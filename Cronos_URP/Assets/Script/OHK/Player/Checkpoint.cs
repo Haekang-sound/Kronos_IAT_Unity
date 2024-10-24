@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Checkpoint : MonoBehaviour
 {
     public int priority;
-    public float tp;
+    public float healTP;
 
     private bool _isActive;
 
@@ -30,10 +30,35 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
+        player.isDecreaseTP = false;
+
+
         OnActive?.Invoke();
         _isActive = true;
 
         player.SetCheckpoint(this);
+
+        // 플레이어 TP 정보 저장
+        Player.Instance.TP += healTP;
+
+        SaveLoadManager.SaveAllData();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (_isActive == true)
+        {
+            return;
+        }
+
+        Player player = other.GetComponent<Player>();
+
+        if (player == null)
+            return;
+
+        player.isDecreaseTP = true;
+
+        Debug.Log("플레이어의 체력이 다시 줄어듦" + Player.Instance.TP);
     }
 
     void OnDrawGizmos()
