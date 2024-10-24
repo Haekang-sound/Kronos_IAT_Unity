@@ -17,6 +17,8 @@ public class UI_BossHUD : MonoBehaviour
 
 	public GameObject Boss;
 
+	public BossNameShaker shaker;
+
 	[SerializeField]
 	[Range(0, 1)] float BossTPProgress = 0f;
 	[SerializeField]
@@ -65,8 +67,8 @@ public class UI_BossHUD : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		// 보스의 TP를 받아온다.
-		MaxTP = BossTP.maxHitPoints;
+        // 보스의 TP를 받아온다.
+        MaxTP = BossTP.maxHitPoints;
 		BossTp = BossTP.currentHitPoints;
 		BossTPProgress = BossTp / MaxTP;
 
@@ -85,7 +87,16 @@ public class UI_BossHUD : MonoBehaviour
 		ImageGPL.fillAmount = gdValue;
 		ImageGPR.fillAmount = gdValue;
 
-	}
+		if (GroggyProgress >= 1f)
+		{
+			shaker.isShaking = true;
+		}
+        else
+        {
+             shaker.isShaking = false;
+        }
+
+    }
 
 
 }
