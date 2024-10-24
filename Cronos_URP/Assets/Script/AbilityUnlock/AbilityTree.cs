@@ -225,6 +225,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         _isTransition = true;
 
         PauseManager.Instance.PauseGame();
+        PauseManager.Instance.abilityPause = true;
 
         yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
@@ -279,6 +280,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         }
 
         isFocaus = false;
+        PauseManager.Instance.abilityPause = false;
         PauseManager.Instance.UnPauseGame();
 
         _isTransition = false;

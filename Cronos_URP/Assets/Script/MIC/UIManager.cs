@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-	private List<string> sceneName;
-	
-	private List<string> Quest;
-
     private static UIManager instance;
     // Get하는 프로퍼티
     public static UIManager Instance
@@ -63,7 +60,10 @@ public class UIManager : MonoBehaviour
     public float ObjdurationTime = 3.0f;
 
     public int sceneIdx = 0;
-    public int objectiveIdx = 0;
+    // 코루틴 중 호출 시 멈추기 위해서
+    Coroutine curCoroutine;
+
+    QuestManager qm;
 
     [SerializeField]
     private GameObject interactor;
@@ -88,6 +88,7 @@ public class UIManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+        qm = QuestManager.Instance;
 		regionNameObj.SetActive(false);
         objectiveMainObj.SetActive(false);
         objectiveSubObj.SetActive(false);
@@ -104,10 +105,6 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ShowRegionNameCoroutine());
     }
 
-    public void StartMain()
-    {
-        StartCoroutine(AppearMainObjective());
-    }
 
     public void ClearSub()
     {
@@ -165,7 +162,7 @@ public class UIManager : MonoBehaviour
 
         // 첫 번째 목표는 여기서 띄우기
         yield return new WaitForSeconds(1.0f);
-        StartCoroutine(AppearMainObjective());
+        //StartCoroutine(AppearMainObjective());
 
         // 다음 지역이름으로 인덱스 올리기
         sceneIdx++;
@@ -173,14 +170,28 @@ public class UIManager : MonoBehaviour
 
     /// 메인 목표 박스 UI 애니메이션
     /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
+
+    /// 은 구버전이고,
+    /// 신버전은 QuestManager와 연동해서 팝업한다.
     /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
-    public IEnumerator AppearMainObjective()
+    /// 중간에 코루틴 난입을 대비해서 한번 더 함수로 감싸는게 맞나
+    public void StartAppearMain(int idx)
+    {
+        curCoroutine = StartCoroutine(AppearMainObjective(idx));
+    }
+
+    public IEnumerator AppearMainObjective(int idx)
     {
         Debug.Log("Show Main objective UI");
+        // 퀘스트 시작
+        qm.Questing();
 
         objectiveMainObj.SetActive(true);
+        objectiveSubObj.SetActive(false);
         mainText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+		//mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+        mainText.text = qm.QuestLines[idx];
+        subText.text = qm.QuestLines[idx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -230,20 +241,26 @@ public class UIManager : MonoBehaviour
         offset.y = 0.0f;
         mainBackImage.transform.localScale = offset;
 
-        StartCoroutine(AppearSubObjective());
+        //StartCoroutine(AppearSubObjective(idx));
+        StartAppearSub(idx);
         objectiveMainObj.SetActive(false);
-
+        curCoroutine = null;
     }
 
     /// 서브 목표 UI 띄우기
     /// 얘는 메인 목표가 나오면 무조건 호출된다.
     /// 단독으로 쓰일 일은 거의 없을 것 같다.
-    public IEnumerator AppearSubObjective()
+    public void StartAppearSub(int idx)
+    {
+        curCoroutine = StartCoroutine(AppearSubObjective(idx));
+    }
+    public IEnumerator AppearSubObjective(int idx)
     {
         Debug.Log("Show sub objective UI");
         objectiveSubObj.SetActive(true);
         subText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+        //subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
+        subText.text = qm.QuestLines[idx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
@@ -259,9 +276,23 @@ public class UIManager : MonoBehaviour
     }
 
     /// 목표 달성하면 서브 UI 띠용하고 지우기
-    /// 끝나고 자동으로 다음 메인 목표를 띄워야 할 수도 있다.
     public IEnumerator AchieveSubObjective()
     {
+        // curCoroutine은 이것을 위해서
+        if (curCoroutine != null)
+        {
+            StopCoroutine(curCoroutine);
+            objectiveMainObj.SetActive(false);
+            objectiveSubObj.SetActive(true);
+            subText.transform.localScale = Vector3.one;
+            subText.GetComponent<CanvasGroup>().alpha = 1.0f;
+            subBackImage.transform.localScale = Vector3.one;
+            curCoroutine = null;
+        }
+
+        // 끝났다
+        qm.QuestDone();
+
         Debug.Log("Achieve sub objective UI");
         Vector3 offset = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 sVec = offset;
@@ -292,13 +323,50 @@ public class UIManager : MonoBehaviour
         subText.GetComponent<CanvasGroup>().alpha = 0;
         subText.color = texColor;
         objectiveSubObj.SetActive(false);
-
-        // 목표가 달성되었으니 목표 인덱스 증가
-        objectiveIdx++;
-
-        // TODO: 다음 메인 목표 띄우기. 필요하다면
-//         if (objectiveIdx == 1)
-//             StartCoroutine(AppearMainObjective());
     }
 
+    /// 목표 실패하면 서브 UI 빨간색으로 지우기
+    public IEnumerator FailSubObjective()
+    {
+        // curCoroutine은 이것을 위해서
+        if (curCoroutine != null)
+        {
+            StopCoroutine(curCoroutine);
+            objectiveMainObj.SetActive(false);
+            objectiveSubObj.SetActive(true);
+            subText.transform.localScale = Vector3.one;
+            subText.GetComponent<CanvasGroup>().alpha = 1.0f;
+            subBackImage.transform.localScale = Vector3.one;
+            curCoroutine = null;
+        }
+
+        // 끝났다
+        qm.QuestDone();
+
+        Debug.Log("Failed to achieve sub objective UI");
+        Vector3 offset = new Vector3(1.3f, 1.3f, 1.3f);
+        Vector3 sVec = offset;
+        Vector3 eVec = new Vector3(1, 1, 1);
+        subText.color = Color.red;
+
+        float failedTime = 0.6f;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < failedTime)
+        {
+            elapsedTime += Time.deltaTime;
+            offset = Vector3.Lerp(eVec, sVec, elapsedTime / failedTime);
+            subText.transform.localScale = offset;
+            offset.y = Mathf.SmoothStep(1, 0, elapsedTime / failedTime);
+            subBackImage.transform.localScale = offset;
+            subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / failedTime);
+            yield return null;
+        }
+        subText.GetComponent<CanvasGroup>().alpha = 0;
+        subText.color = texColor;
+        subText.transform.localScale = eVec;
+        objectiveSubObj.SetActive(false);
+
+        yield return null;
+    }
 }
