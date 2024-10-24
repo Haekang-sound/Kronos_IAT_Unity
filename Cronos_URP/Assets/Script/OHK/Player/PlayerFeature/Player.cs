@@ -337,7 +337,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 
 		// 실시간으로 TP 감소
-		Debug.Log(isDecreaseTP);
 		if (isDecreaseTP && _damageable.currentHitPoints >= 0f)
 		{
 			_damageable.currentHitPoints -= Time.deltaTime;
