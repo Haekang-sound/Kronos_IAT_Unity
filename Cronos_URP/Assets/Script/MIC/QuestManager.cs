@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
     // 퀘스트 달성 배열
     [SerializeField]
     private bool curQuesting;
+    public bool abilityQuesting = false;
 
     UIManager uiManager;
 
@@ -52,6 +53,11 @@ public class QuestManager : MonoBehaviour
         // 다음 목표로
         //uiManager.StartCoroutine(uiManager.AppearMainObjective(idx));
         uiManager.StartAppearMain(idx);
+        // 크로노스 동상을 위해서
+        if (idx == 1)
+        {
+            abilityQuesting = true;
+        }
     }
 
     // 현재 목표 진행중입니다.
