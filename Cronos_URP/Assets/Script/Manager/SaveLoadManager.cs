@@ -3,7 +3,12 @@ using UnityEngine;
 public class SaveLoadManager : MonoBehaviour
 {
 
-    private static AbilityTree _abilityUnlock;
+    public Checkpoint currentCheckpoint;
+
+    private readonly string purpose = "_scene";
+    private readonly string sceneTp = "scene_TP";
+    private readonly string sceneCp = "scene_CP";
+    private AbilityTree _abilityTree;
 
     public static SaveLoadManager Instance
     {
@@ -30,31 +35,32 @@ public class SaveLoadManager : MonoBehaviour
         return instance;
     }
 
+
     // -----
 
-    public static void SaveAllData()
+    public void SaveSceneData()
     {
-        Player.Instance.Save();
-        _abilityUnlock.SaveData();
+        PlayerPrefs.SetFloat(sceneTp, Player.Instance.TP);
+        PlayerPrefs.SetFloat(sceneCp, Player.Instance.CP);
+
+        _abilityTree.SaveData(purpose);
     }
 
-    public static void LoadAllData()
+    public void LoadSceneData()
     {
-        Player.Instance.Load();
-        _abilityUnlock.LoadData();
-    }
+        if (PlayerPrefs.HasKey(sceneTp))
+        {
+            Player.Instance.TP = PlayerPrefs.GetFloat(sceneTp);
+            Player.Instance.CP = PlayerPrefs.GetFloat(sceneCp);
 
-    public static void DeleteAllData()
-    {
-        PlayerPrefs.DeleteAll();
+            _abilityTree.LoadData(purpose);
+        }
     }
 
     // -----
 
     private void Awake()
     {
-        _abilityUnlock = GameObject.Find("AbilityUnlock").GetComponent<AbilityTree>();
+        _abilityTree = FindObjectOfType<AbilityTree>();
     }
-
-    // -----
 }

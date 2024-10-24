@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-        SaveLoadManager.DeleteAllData();
+        //SaveLoadManager.DeleteAllData();
     }
 
     // 

@@ -160,15 +160,15 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         
     }
 
-    public void Save()
+    public void Save(string purpose)
     {
-        PlayerPrefs.SetInt(_nodeid, (int)_state);
+        PlayerPrefs.SetInt(_nodeid + purpose, (int)_state);
     }
 
-    public void Load()
+    public void Load(string purpose)
     {
         OnReset?.Invoke();
-        if (PlayerPrefs.HasKey(_nodeid))
+        if (PlayerPrefs.HasKey(_nodeid + purpose))
         {
             SetState((AbilityNode.State)PlayerPrefs.GetInt(_nodeid));
         }

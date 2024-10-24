@@ -171,7 +171,7 @@ public class UI_TPCPHUD : UI_TPCP
 
     public void CheckGlowColor(int i)
     {
-        Debug.Log("Current TP check zone : " + i);
+        //Debug.Log("Current TP check zone : " + i);
 
         switch (i)
         {

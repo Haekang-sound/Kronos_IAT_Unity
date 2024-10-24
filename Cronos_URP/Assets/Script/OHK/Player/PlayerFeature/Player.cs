@@ -79,9 +79,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
 
 
-	private Checkpoint _currentCheckpoint;
-
-
 	// 감지하고자 하는 레이어를 지정합니다.
 	public LayerMask targetLayer; // Inspector에서 설정 가능
 
@@ -454,13 +451,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 			yield return null;
 		}
 
-		if (_currentCheckpoint != null)
+		if (SaveLoadManager.Instance.currentCheckpoint != null)
 		{
-			_rigidbody.position = _currentCheckpoint.transform.position;
-			_rigidbody.rotation = _currentCheckpoint.transform.rotation;
+			_rigidbody.position = SaveLoadManager.Instance.currentCheckpoint.transform.position;
+			_rigidbody.rotation = SaveLoadManager.Instance.currentCheckpoint.transform.rotation;
 
-			SaveLoadManager.LoadAllData();
-		}
+            SaveLoadManager.Instance.currentCheckpoint.LoadData();
+        }
 		else
 		{
 			Debug.LogError("체크포인트가 없는 데스");
@@ -707,23 +704,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void SetCheckpoint(Checkpoint checkpoint)
 	{
-		if (_currentCheckpoint != null)
+		if (SaveLoadManager.Instance.currentCheckpoint != null)
 		{
-			if (_currentCheckpoint.priority > checkpoint.priority)
+			if (SaveLoadManager.Instance.currentCheckpoint.priority > checkpoint.priority)
 			{
 				return;
 			}
 		}
 
-		_currentCheckpoint = checkpoint;
+		SaveLoadManager.Instance.currentCheckpoint = checkpoint;
 	}
 
 	public void Respawn()
 	{
-		if (_currentCheckpoint != null)
+		if (SaveLoadManager.Instance.currentCheckpoint != null)
 		{
-			transform.position = _currentCheckpoint.transform.position;
-			transform.rotation = _currentCheckpoint.transform.rotation;
+			transform.position = SaveLoadManager.Instance.currentCheckpoint.transform.position;
+			transform.rotation = SaveLoadManager.Instance.currentCheckpoint.transform.rotation;
 		}
 		else
 		{

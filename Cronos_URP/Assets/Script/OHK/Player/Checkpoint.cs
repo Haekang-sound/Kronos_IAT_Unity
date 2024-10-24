@@ -21,10 +21,33 @@ public class Checkpoint : MonoBehaviour
     private string _sceneName;
     private bool _isActive;
 
+    private readonly string purpose = "_checkpoint";
+    private readonly string tp = "checkPoint_TP";
+
+    private AbilityTree _abilityTree;
+
+
+    // -----
+
+    public void LoadData()
+    {
+        Player.Instance.TP = PlayerPrefs.GetFloat(tp);
+
+        _abilityTree.LoadData(purpose);
+
+        if (_sceneName != SceneManager.GetActiveScene().name)
+        {
+            SceneController.TransitionToScene(_sceneName);
+        }
+    }
+
+    // -----
 
     private void Awake()
     {
         _sceneName = SceneManager.GetActiveScene().name;
+
+        _abilityTree = FindObjectOfType<AbilityTree>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,14 +63,14 @@ public class Checkpoint : MonoBehaviour
             return;
 
         OnActive?.Invoke();
+
         _isActive = true;
 
-        player.SetCheckpoint(this);
+        player.TP += healTP;
 
-        // 플레이어 TP 정보 저장
-        Player.Instance.TP += healTP;
+        // 데이터 저장
+        SaveData();
 
-        SaveLoadManager.SaveAllData();
     }
 
     private void OnTriggerExit(Collider other)
@@ -68,5 +91,16 @@ public class Checkpoint : MonoBehaviour
         Gizmos.color = Color.blue * 0.75f;
         Gizmos.DrawSphere(transform.position, 0.1f);
         Gizmos.DrawRay(transform.position, transform.forward);
+    }
+
+    // -----
+
+    private void SaveData()
+    {
+        SaveLoadManager.Instance.currentCheckpoint = this;
+
+        PlayerPrefs.SetFloat(tp, Player.Instance.TP);
+
+        _abilityTree.SaveData(purpose);
     }
 }

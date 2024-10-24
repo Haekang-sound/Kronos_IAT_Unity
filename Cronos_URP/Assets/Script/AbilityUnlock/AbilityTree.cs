@@ -109,19 +109,19 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         rootAbilityNode.SetState(AbilityNode.State.Interactible);
     }
 
-    public void SaveData()
+    public void SaveData(string purpose)
     {
         foreach (var node in _abilityNodes)
         {
-            node.Save();
+            node.Save(purpose);
         }
     }
 
-    public void LoadData()
+    public void LoadData(string purpose)
     {
         foreach (var node in _abilityNodes)
         {
-            node.Load();
+            node.Load(purpose);
         }
     }
 
