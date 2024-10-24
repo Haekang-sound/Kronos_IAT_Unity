@@ -161,7 +161,7 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(false);
 
         // 첫 번째 목표는 여기서 띄우기
-        yield return new WaitForSeconds(1.0f);
+        //yield return new WaitForSeconds(1.0f);
         //StartCoroutine(AppearMainObjective());
 
         // 다음 지역이름으로 인덱스 올리기
