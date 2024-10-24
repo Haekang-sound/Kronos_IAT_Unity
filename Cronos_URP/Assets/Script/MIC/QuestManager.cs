@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    // 호출할 지역 텍스트 배열
+    public string[] RegionNames;
+    
     // 호출할 퀘스트 텍스트 배열
     public string[] QuestLines;
 
@@ -76,6 +79,6 @@ public class QuestManager : MonoBehaviour
     {
         // 0번 누르면 퀘스트 달성
         if (Input.GetKeyDown(KeyCode.Alpha0))
-            uiManager.StartCoroutine(uiManager.AchieveSubObjective());
+            uiManager.Achieve();
     }
 }
