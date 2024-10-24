@@ -38,6 +38,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     [Header("Event")]
     public UnityEvent OnUpdated;
+    [HideInInspector]
+    public UnityEvent OnReset;
 
     [HideInInspector]
     public bool isFucus;
@@ -101,7 +103,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
                     skillIcon.SetGrayscale(0f);
                     _backgroundRotate.enabled = true;
 
-                    // 기타 업데이트 (진행도 바)
+                    // 적용될 스킬 업데이트
                     OnUpdated.Invoke();
                 }
                 break;
@@ -148,12 +150,14 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
                     // 자식 노드들을 Interactible로 변경
                     SetChildsInteractible();
-
-                    // 기타 업데이트 (진행도 바)
+                    // 적용될 스킬 업데이트
                     OnUpdated.Invoke();
                 }
                 break;
         }
+
+        // 기타 업데이트 (진행도 바)
+        
     }
 
     public void Save()
@@ -163,7 +167,8 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void Load()
     {
-        if(PlayerPrefs.HasKey(_nodeid))
+        OnReset?.Invoke();
+        if (PlayerPrefs.HasKey(_nodeid))
         {
             SetState((AbilityNode.State)PlayerPrefs.GetInt(_nodeid));
         }
