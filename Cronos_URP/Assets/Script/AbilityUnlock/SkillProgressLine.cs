@@ -27,22 +27,9 @@ public class SkillProgressLine : ProgressBar
 
     public void OnSkillAmountChanged()
     {
-        float percentageAmount = GetPercentageFromAmount();
-        if (percentageAmount > 0f)
+        if(node.CurrentState == AbilityNode.State.Activate)
         {
-            UpdatePercentage(percentageAmount);
+            UpdatePercentage(1f);
         }
-    }
-
-    private bool IsUnlocked()
-    {
-        return node.levelData.IsNextNodeUnlock();
-    }
-
-    private float GetPercentageFromAmount()
-    {
-        if (!IsUnlocked()) return 0f;
-
-        return node.levelData.GetPercentageOFNextNodeUnlock();
     }
 }

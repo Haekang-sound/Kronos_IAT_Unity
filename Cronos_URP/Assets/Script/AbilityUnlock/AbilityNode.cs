@@ -5,34 +5,174 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
-    public AbilityLevel levelData = new AbilityLevel();
 
-    public ImageGrayscale background;
-    public ImageGrayscale skillIcon;
+    public enum State
+    {
+        Deactivate = 0,
+        Interactible,
+        Activate
+    }
 
-    [SerializeField] public TMP_Text abilityName;
-    [SerializeField] public TMP_Text description;
-    [SerializeField] public TMP_Text subdescription;
+    public AbilityNode.State CurrentState { get { return _state; } }
+    [SerializeField] private AbilityNode.State _state;
 
-    //public Button[] childButton;
+    public int PointNeed { get { return _pointNeed; } }
+    private int _pointNeed;
+
     public List<AbilityNode> childNodes;
 
-    public bool isFocaus;
-    public bool  interactable;
-    public Button button;
+    [Header("Effect")]
+    public ImageGrayscale background;
+    public ImageGrayscale skillIcon;
     public FadeEffector fadeUI;
 
-    private CinemachineVirtualCamera _virtualCam;
-    private IObserver<AbilityNode> _observer;
-    private VideoPlayer _videoPlayer;
+    [Header("Text")]
+    public TMP_Text abilityName;
+    public TMP_Text description;
+    public TMP_Text subdescription;
 
+    [Header("Event")]
     public UnityEvent OnUpdated;
+
+    [HideInInspector]
+    public bool isFucus;
+
+    private string _nodeid;
+
+    private Button _button;
+    private VideoPlayer _videoPlayer;
+    private IObserver<AbilityNode> _observer;
+    private CinemachineVirtualCamera _virtualCam;
+
+    // BG
+    private Image _backgoundImage;
+    private RotateUI _backgroundRotate;
+    private UnityEngine.Sprite _backGroundActivate;
+    private UnityEngine.Sprite _backGroundDeactivate;
+
+    // -----
+
+    public void FocusIn()
+    {
+        StartCoroutine(SetFocausAfter(true, 2));
+        _virtualCam.Priority = 10;
+        fadeUI.StartFadeIn(1.4f);
+        _videoPlayer.time = 0;
+        _videoPlayer?.Play();
+    }
+
+    public void FocusOut()
+    {
+        StartCoroutine(SetFocausAfter(false, 2));
+        _virtualCam.Priority = 0;
+        fadeUI.StartFadeOut(1.0f);
+        _videoPlayer?.Pause();
+    }
+
+    public void Render()
+    {
+        switch (_state)
+        {
+            case AbilityNode.State.Deactivate:
+                {
+                    _backgoundImage.sprite = _backGroundDeactivate;
+                    background.SetGrayscale(1f);
+                    skillIcon.SetGrayscale(1f);
+                    _backgroundRotate.enabled = false;
+                }
+                break;
+            case AbilityNode.State.Interactible:
+                {
+                    _backgoundImage.sprite = _backGroundDeactivate;
+                    background.SetGrayscale(0f);
+                    skillIcon.SetGrayscale(1f);
+                    _backgroundRotate.enabled = false;
+                }
+                break;
+            case AbilityNode.State.Activate:
+                {
+                    _backgoundImage.sprite = _backGroundActivate;
+                    background.SetGrayscale(0f);
+                    skillIcon.SetGrayscale(0f);
+                    _backgroundRotate.enabled = true;
+
+                    // 기타 업데이트 (진행도 바)
+                    OnUpdated.Invoke();
+                }
+                break;
+        }
+    }
+
+    public void SetChildsInteractible()
+    {
+        foreach (var child in childNodes)
+        {
+            child.SetState(AbilityNode.State.Interactible);
+        }
+    }
+
+
+    public void SetState(AbilityNode.State state)
+    {
+        _state = state;
+
+        switch (_state)
+        {
+            case AbilityNode.State.Deactivate:
+                {
+                    _backgoundImage.sprite = _backGroundDeactivate;
+                    _backgroundRotate.enabled = false;
+                    background.SetGrayscale(1f);
+                    skillIcon.SetGrayscale(1f);
+                }
+                break;
+            case AbilityNode.State.Interactible:
+                {
+                    _backgoundImage.sprite = _backGroundDeactivate;
+                    _backgroundRotate.enabled = false;
+                    background.SetGrayscale(0f);
+                    skillIcon.SetGrayscale(1f);
+                }
+                break;
+            case AbilityNode.State.Activate:
+                {
+                    _backgoundImage.sprite = _backGroundActivate;
+                    _backgroundRotate.enabled = true;
+                    background.SetGrayscale(0f);
+                    skillIcon.Reset();
+
+                    // 자식 노드들을 Interactible로 변경
+                    SetChildsInteractible();
+
+                    // 기타 업데이트 (진행도 바)
+                    OnUpdated.Invoke();
+                }
+                break;
+        }
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt(_nodeid, (int)_state);
+    }
+
+    public void Load()
+    {
+        if(PlayerPrefs.HasKey(_nodeid))
+        {
+            SetState((AbilityNode.State)PlayerPrefs.GetInt(_nodeid));
+        }
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteKey(_nodeid);
+    }
 
     // IObservable /////////////////////////////////////////////////////////////
 
@@ -65,13 +205,19 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void Awake()
     {
+        _nodeid = gameObject.GetInstanceID().ToString();
+
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
         _videoPlayer = GetComponentInChildren<VideoPlayer>();
         _videoPlayer?.Pause();
 
+        _backgoundImage = background.GetComponent<Image>();
+        _backgroundRotate = background.GetComponent<RotateUI>();
 
-        //background.SetGrayscale(1f);
-        //skillIcon.SetGrayscale(1f);
+        _backGroundActivate = Resources.Load<UnityEngine.Sprite>("UI/Skill/main_gear_nolight");
+        _backGroundDeactivate = Resources.Load<UnityEngine.Sprite>("UI/Skill/main_gear_dark");
+
+        _button = GetComponentInChildren<Button>();
     }
 
     private void OnEnable()
@@ -82,65 +228,21 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Start()
     {
         Render();
-        button.onClick.AddListener(OnClickButton);
+        _button.onClick.AddListener(OnClickButton);
     }
-
-    //private void Update()
-    //{
-    //}
 
     private void OnDestroy()
     {
-        button.onClick.RemoveListener(OnClickButton);
-    }
-
-    public void SetInteractable(bool val)
-    {
-        //button.interactable = val;
-        interactable = val;
-
-        if (interactable)
-        {
-            background.SetGrayscale(0f);
-        }
+        _button.onClick.RemoveListener(OnClickButton);
     }
 
     private void OnDisable()
     {
-        isFocaus = false;
+        isFucus = false;
         _virtualCam.Priority = 0;
     }
 
-    // =====
-
-    public void FocusIn()
-    {
-        StartCoroutine(SetFocausAfter(true, 2));
-        _virtualCam.Priority = 10;
-        fadeUI.StartFadeIn(1.4f);
-        _videoPlayer.time = 0;
-        _videoPlayer?.Play();
-    }
-
-    public void FocusOut()
-    {
-        StartCoroutine(SetFocausAfter(false, 2));
-        _virtualCam.Priority = 0;
-        fadeUI.StartFadeOut(1.0f);
-        _videoPlayer?.Pause();
-    }
-
-    public void UpdateChilds()
-    {
-        if (levelData.currentPoint == levelData.nextNodeUnlockCondition ||
-            levelData.currentPoint >= levelData.maxPoint)
-        {
-            foreach (var child in childNodes)
-            {
-                child.SetInteractable(true);
-            }
-        }
-    }
+    // -----
 
     private void OnClickButton()
     {
@@ -152,68 +254,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         // 지정된 시간(2초) 대기
         yield return new WaitForSecondsRealtime(time);
 
-        isFocaus = val;
-    }
-
-    public void Render()
-    {
-        if (levelData.currentPoint == 1)
-        {
-            skillIcon.Reset();
-            background.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Skill/main_gear_nolight");
-            background.GetComponent<RotateUI>().active = true;
-        }
-    }
-
-    public bool Increment()
-    {
-        int addedPoint = levelData.currentPoint + 1;
-
-        bool result = addedPoint <= levelData.maxPoint;
-
-        if (result == true)
-        {
-            levelData.currentPoint = addedPoint;
-
-            // 자식 노드 활성화
-            UpdateChilds();
-            Render();
-        }
-
-        return result;
-    }
-
-    public void Save()
-    {
-        var key = "node_" + levelData.id;
-        var interactableInt = interactable ? 1 : 0;
-        PlayerPrefs.SetInt(key, interactableInt);
-        PlayerPrefs.SetInt("currentPoint_" + levelData.id, levelData.currentPoint);
-
-        Debug.Log("TreeNode( " + key + ": " + interactableInt + ") has Saved");
-    }
-
-    internal void Load()
-    {
-        var key = "node_" + levelData.id;
-
-        if (PlayerPrefs.HasKey("node_" + levelData.id))
-        {
-            var num = PlayerPrefs.GetInt(key);
-            if (num >= 1)
-            {
-                SetInteractable(true);
-                background.SetGrayscale(0f);
-            }
-
-            var point = PlayerPrefs.GetInt("currentPoint_" + levelData.id);
-            for (int i = 0; i < point; i++)
-            {
-                if(true == Increment());
-                    OnUpdated.Invoke();
-            }
-
-            Debug.Log("TreeNode( " + key + ": " + num + "  ) has Loaded");
-        }
+        isFucus = val;
     }
 }

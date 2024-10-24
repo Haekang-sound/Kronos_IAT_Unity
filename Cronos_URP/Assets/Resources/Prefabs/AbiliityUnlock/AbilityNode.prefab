@@ -286,26 +286,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4d3446fdbc503488faeb181dd67adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData:
-    id: 0
-    maxPoint: 1
-    currentPoint: 0
-    pointNeeded: 1
-    nextNodeUnlockCondition: 1
-    childIdNodes: 
+  _state: 0
+  childNodes: []
   background: {fileID: 3643857874803643767}
   skillIcon: {fileID: 8692272276668492045}
+  fadeUI: {fileID: 8809438620955173426}
   abilityName: {fileID: 8115271055873236503}
   description: {fileID: 6469240855321178029}
   subdescription: {fileID: 3109208758267289505}
-  childNodes: []
-  isFocaus: 0
-  interactable: 0
-  button: {fileID: 550256701757941436}
-  fadeUI: {fileID: 8809438620955173426}
   OnUpdated:
     m_PersistentCalls:
       m_Calls: []
+  isFucus: 0
 --- !u!1 &3983997692151261360
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,12 +878,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7469959909164640052}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24116595c83e89a46acdf504878e17a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
   axis: 2
   rotationSpeed: -10
 --- !u!1 &8722272209754030326
