@@ -9,7 +9,7 @@ public class UI_Collider : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            UIManager.Instance.StartCoroutine(UIManager.Instance.FadeRegionAlpha());
+            UIManager.Instance.StartCoroutine(UIManager.Instance.ShowRegionNameCoroutine());
             Destroy(gameObject);
         }
 

@@ -101,7 +101,7 @@ public class UIManager : MonoBehaviour
 
     public void StartRegion()
     {
-        StartCoroutine(FadeRegionAlpha());
+        StartCoroutine(ShowRegionNameCoroutine());
     }
 
     public void StartMain()
@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
 
     /// 지역이름 UI 애니메이션
     /// 새 지역으로 들어왔다면 이 코루틴을 호출
-    public IEnumerator FadeRegionAlpha()
+    public IEnumerator ShowRegionNameCoroutine()
     {
         Debug.Log("Begin Coroutine");
 
