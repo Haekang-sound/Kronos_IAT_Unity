@@ -1,6 +1,7 @@
 using Message;
 using System;
 using System.Collections;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
@@ -410,7 +411,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case MessageType.RESPAWN:
 				{
-
 				}
 				break;
 		}
@@ -476,9 +476,14 @@ public class Player : MonoBehaviour, IMessageReceiver
         if (_currentCheckpoint != null)
         {
 			//GetComponent<Rigidbody>().enable
-            transform.position = _currentCheckpoint.transform.position;
-            transform.rotation = _currentCheckpoint.transform.rotation;
-        }
+			PlayerFSM.Rigidbody.position = _currentCheckpoint.transform.position;
+			PlayerFSM.Rigidbody.rotation = _currentCheckpoint.transform.rotation;
+			TP = _currentCheckpoint.healTP;
+			CP = _currentCheckpoint.healCP;
+
+//             transform.position = _currentCheckpoint.transform.position;
+//             transform.rotation = _currentCheckpoint.transform.rotation;
+		}
         else
         {
             Debug.LogError("체크포인트가 없는 데스");
@@ -746,24 +751,31 @@ public class Player : MonoBehaviour, IMessageReceiver
         TP += checkpoint.healTP;
 	}
 
+	public void TempRespawn()
+	{
+
+
+	}
+
 	public void Respawn()
 	{
         if (_currentCheckpoint != null)
         {
             transform.position = _currentCheckpoint.transform.position;
             transform.rotation = _currentCheckpoint.transform.rotation;
+			TP = _currentCheckpoint.healTP;
+			CP = _currentCheckpoint.healCP;
         }
         else
         {
             Debug.LogError("체크포인트가 없는 데스");
-        }
+			TP = maxTP;
+			// CP 초기화
+			currentCP = 0f;
+		}
 
-        /// TODO - 오해강: 초기화 함수를 따로 만들 것
 
-        // TP 초기화 - 적용안됨
-        TP = maxTP;
-        // CP 초기화
-        currentCP = 0f;
+        
     }
 
 	protected IEnumerator RespawnRoutine()
