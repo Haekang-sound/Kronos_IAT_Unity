@@ -11,6 +11,7 @@ public class SkillProgressLine : ProgressBar
     private void Awake()
     {
         node.OnUpdated.AddListener(OnSkillAmountChanged);
+        node.OnReset.AddListener(OnReset);
     }
 
     public override void Start()
@@ -27,22 +28,18 @@ public class SkillProgressLine : ProgressBar
 
     public void OnSkillAmountChanged()
     {
-        float percentageAmount = GetPercentageFromAmount();
-        if (percentageAmount > 0f)
+        if(node.CurrentState == AbilityNode.State.Activate)
         {
-            UpdatePercentage(percentageAmount);
+            UpdatePercentage(1f);
+        }
+        else
+        {
+            UpdatePercentage(0f);
         }
     }
 
-    private bool IsUnlocked()
+    public void OnReset()
     {
-        return node.levelData.IsNextNodeUnlock();
-    }
-
-    private float GetPercentageFromAmount()
-    {
-        if (!IsUnlocked()) return 0f;
-
-        return node.levelData.GetPercentageOFNextNodeUnlock();
+        UpdatePercentage(0f);
     }
 }
