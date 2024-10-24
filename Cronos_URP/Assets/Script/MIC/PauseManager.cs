@@ -13,6 +13,9 @@ public class PauseManager : MonoBehaviour
 
     bool isPause = false;
 
+    // 무지성 불리언 아서 제가 참 좋아합니다
+    public bool abilityPause = false;
+
     // 그런 싱글턴으로 괜찮은가
     private static PauseManager instance;
     public static PauseManager Instance
@@ -68,6 +71,9 @@ public class PauseManager : MonoBehaviour
 
     public void UnPauseGame()
     {
+        if (abilityPause)
+            return;
+
 		Cursor.visible = false;
 		playerInput?.SwitchCurrentActionMap("Player");
         if (player != null)
@@ -76,7 +82,8 @@ public class PauseManager : MonoBehaviour
         }
         isPause = false;
         Time.timeScale = 1f;
-		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
+        Debug.Log("Unpause");
+        GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
 		PlayerStateMachine.GetInstance().isPaused = false;
 	}
 

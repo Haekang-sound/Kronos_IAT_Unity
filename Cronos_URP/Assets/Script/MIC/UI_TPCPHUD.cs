@@ -65,6 +65,8 @@ public class UI_TPCPHUD : UI_TPCP
     Vector4 burgundy = new Vector4(1, 0, 0.3f, 1);
     Vector4 burgundy2 = new Vector4(0.8f, 0, 0.3f, 1);
 
+    private int prevZone = -1;
+
     private void Start()
     {
         instance = this;
@@ -171,7 +173,12 @@ public class UI_TPCPHUD : UI_TPCP
 
     public void CheckGlowColor(int i)
     {
-        //Debug.Log("Current TP check zone : " + i);
+        // 이전 존과 같으면 호출하지 않음
+        if (prevZone == i)
+            return;
+
+        Debug.Log("Current TP check zone : " + i);
+        prevZone = i;
 
         switch (i)
         {
