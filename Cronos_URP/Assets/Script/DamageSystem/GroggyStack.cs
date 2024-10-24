@@ -37,6 +37,7 @@ public class GroggyStack : MonoBehaviour
         if (_isGroggy == false && _currentStack >= maxStack)
         {
             OnMaxStack.Invoke();
+			// 여기서 잠근다.
             _isGroggy = true;
         }
     }

@@ -522,8 +522,10 @@ public class EffectManager : MonoBehaviour
         frag.transform.Rotate(-15f, 0, 0);
         Destroy(frag, 2.0f);
 
-        // 피격이펙트
-        Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
+		CreateAbsorbFX(targetTrans, dmgMsg.amount);
+
+		// 피격이펙트
+		Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
         GameObject slashed = SpawnEffect("Nor_Damage", newPos);
         slashed.transform.forward = Camera.main.transform.forward;
         slashed.transform.position += new Vector3(0, 1, 0);

@@ -34,6 +34,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 	protected static Player instance;
+	public bool isParry;
 
 	public RenderObjects SkillRenderObj;
 
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 
 	// 감지하고자 하는 레이어를 지정합니다.
-    public LayerMask targetLayer; // Inspector에서 설정 가능
+	public LayerMask targetLayer; // Inspector에서 설정 가능
 
 	// Property
 	private float totalspeed;
@@ -133,6 +134,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public Damageable _damageable;
 	public Defensible _defnsible;
 	private KnockBack _knockBack;
+	private Rigidbody _rigidbody;
 
 	public SoundManager soundManager;
 	public EffectManager effectManager;
@@ -143,12 +145,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public float spcDelay;
 	public PlayerStateMachine psm;
 	public BoxColliderAdjuster adjuster;
-
-	public bool useKnockback;
-	public bool isParry;
-	public bool isDecreaseTP;
-
 	//public float spcActivateTime;
+
+	public bool isDecreaseTP = true;
 
 
 	private void Awake()
@@ -161,7 +160,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
 		targetting = GetComponentInChildren<AutoTargetting>();
-}
+		_rigidbody = GetComponent<Rigidbody>();
+	}
 	private void OnValidate()
 	{
 		CapsuleColldierUtility.Initialize(gameObject);
@@ -180,12 +180,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 		CapsuleColldierUtility.Initialize(gameObject);
 		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
-		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX); 
-		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState); 
+		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
+		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState);
 	}
+
 	void Start()
 	{
-		Cursor.visible = false;
 		// TEST: 데이터 로드 
 		Load();
 
@@ -203,13 +203,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		// 문제해결을 위해 옮김 
 		meleeWeapon.SetOwner(gameObject);
-		
+
 		// simpleDamager없어지지 않았나?
 		meleeWeapon.simpleDamager.damageAmount = currentDamage;
 		meleeWeapon.parryDamaer.damageAmount = currentDamage;
 
 		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
-		
+
 
 
 		totalspeed = Speed;
@@ -279,29 +279,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	bool timeSlash;
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.H))
- 		{
-			transform.position += transform.forward*5f;
- 		}
-// 
-// 		if(timeSlash)
-// 		{
-// 			currentTime += Time.deltaTime;
-// 			PlayerFSM.Rigidbody.velocity = transform.forward*TimeSlashCurve.Evaluate(currentTime);
-// 			if(currentTime > 1f)
-// 			{
-// 				timeSlash = false;
-// 				currentTime = 0f;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			currentTime = 0f;
-// 		}
-
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			transform.position += transform.forward * 5f;
+		}
 
 		if (Input.GetKeyDown(KeyCode.O))
-		{	
+		{
 			BulletTime.Instance.SetNormalSpeed();
 			//Time.timeScale = 1f;
 		}
@@ -320,8 +304,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (buffTimer > buffTime)
 		{
 			//PlayerFSM.Animator.SetBool("combMove",false);
-			PlayerFSM.Animator.SetBool("isEnforced",false);
-			effectManager.SwordAuraOff(); 
+			PlayerFSM.Animator.SetBool("isEnforced", false);
+			effectManager.SwordAuraOff();
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -351,16 +335,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
+
 		// 실시간으로 TP 감소
-		if (_damageable.currentHitPoints > 0f)
+		if (isDecreaseTP && _damageable.currentHitPoints >= 0f)
 		{
 			_damageable.currentHitPoints -= Time.deltaTime;
 
-            if (TP <= 0)
-            {
-                _damageable.JustDead();
-            }
-        }
+			if (TP <= 0)
+			{
+				_damageable.JustDead();
+			}
+		}
 
 		// 실시간으로 CP감소
 		if (IsDecreaseCP && CP > 0)
@@ -415,8 +400,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 		}
 	}
-
-
+	public bool useKnockback;
 	public void SetUseKnockback(bool val) => useKnockback = val;
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{
@@ -441,7 +425,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// 죽었을 때 호출되는 함수
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
-        StartCoroutine(DeathScequence());
+		StartCoroutine(DeathScequence());
 	}
 
 	private IEnumerator DeathScequence()
@@ -453,42 +437,40 @@ public class Player : MonoBehaviour, IMessageReceiver
 			yield return null;
 		}
 
-        yield return new WaitForSecondsRealtime(3);
+		yield return new WaitForSecondsRealtime(3);
 
-		//PauseManager.Instance.PauseGame();
+		yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
 
-        yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
-
-        yield return ScreenFader.FadeSceneOut(FadeType.Black);
+		yield return ScreenFader.FadeSceneOut(FadeType.Black);
 
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        //Respawn();
-        if (_currentCheckpoint != null)
-        {
-			//GetComponent<Rigidbody>().enable
-            transform.position = _currentCheckpoint.transform.position;
-            transform.rotation = _currentCheckpoint.transform.rotation;
-        }
-        else
-        {
-            Debug.LogError("체크포인트가 없는 데스");
-        }
+		if (_currentCheckpoint != null)
+		{
+			_rigidbody.position = _currentCheckpoint.transform.position;
+			_rigidbody.rotation = _currentCheckpoint.transform.rotation;
 
-        //PauseManager.Instance.UnPauseGame();
+			SaveLoadManager.LoadAllData();
+		}
+		else
+		{
+			Debug.LogError("체크포인트가 없는 데스");
+		}
 
-        yield return ScreenFader.FadeSceneIn(FadeType.Black);
+		//PauseManager.Instance.UnPauseGame();
 
-    }
+		yield return ScreenFader.FadeSceneIn(FadeType.Black);
+
+	}
 
 	/// <summary>
 	/// 감속상태 정상화
@@ -501,7 +483,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		BulletTime.Instance.SetNormalSpeed();
 	}
 
-	public void SetCursorInactive()
+	void SetCursorInactive()
 	{
 		Cursor.visible = !Cursor.visible; // 마우스 안보이게 하기
 		if (Cursor.visible)
@@ -701,12 +683,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			impulseCam.Shake();
 	}
 
-	public void SpeedLine()
-	{
-		if (effectManager != null)
-			effectManager.SpeedLine();
-	}
-
 	IEnumerator ActivateSpcCubes(float delay)
 	{
 		yield return new WaitForSeconds(delay);
@@ -726,10 +702,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void DeactivateSCube()
 	{
-		if (spcCubeL.activeSelf)
-			spcCubeL.SetActive(false);
-		if (spcCubeR.activeSelf)
-			spcCubeR.SetActive(false);
+
 	}
 
 	public void SetCheckpoint(Checkpoint checkpoint)
@@ -743,28 +716,27 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		_currentCheckpoint = checkpoint;
-        TP += checkpoint.healTP;
 	}
 
 	public void Respawn()
 	{
-        if (_currentCheckpoint != null)
-        {
-            transform.position = _currentCheckpoint.transform.position;
-            transform.rotation = _currentCheckpoint.transform.rotation;
-        }
-        else
-        {
-            Debug.LogError("체크포인트가 없는 데스");
-        }
+		if (_currentCheckpoint != null)
+		{
+			transform.position = _currentCheckpoint.transform.position;
+			transform.rotation = _currentCheckpoint.transform.rotation;
+		}
+		else
+		{
+			Debug.LogError("체크포인트가 없는 데스");
+		}
 
-        /// TODO - 오해강: 초기화 함수를 따로 만들 것
+		/// TODO - 오해강: 초기화 함수를 따로 만들 것
 
-        // TP 초기화 - 적용안됨
-        TP = maxTP;
-        // CP 초기화
-        currentCP = 0f;
-    }
+		// TP 초기화 - 적용안됨
+		TP = maxTP;
+		// CP 초기화
+		currentCP = 0f;
+	}
 
 	protected IEnumerator RespawnRoutine()
 	{
@@ -781,31 +753,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 		//spawn.enabled = true;
 
 		// If there is a checkpoint, move Ellen to it.
-		
+
 	}
 
 	internal void Save()
 	{
-		PlayerPrefs.SetFloat("maxTP", maxTP);
-		PlayerPrefs.SetFloat("maxCP", maxCP);
-
 		PlayerPrefs.SetFloat("currentTP", currentTP);
-		PlayerPrefs.SetFloat("currentCP", currentCP);
 	}
-	
+
 	internal void Load()
 	{
-		if (PlayerPrefs.HasKey("maxTP"))
-		{
-			maxTP = PlayerPrefs.GetFloat("maxTP");
-			maxCP = PlayerPrefs.GetFloat("maxCP");
-			currentTP = PlayerPrefs.GetFloat("currentTP");
-			currentCP = PlayerPrefs.GetFloat("currentCP");
-
-		}
-		//else
-		//{
-		//   Debug.Log("Player Load faile");
-		//}
+		if (PlayerPrefs.HasKey("currentTP"))
+			TP = PlayerPrefs.GetFloat("currentTP");
 	}
 }

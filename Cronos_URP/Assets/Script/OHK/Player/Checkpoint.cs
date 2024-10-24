@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour
 {
     public int priority;
     public float healTP;
+    public float healCP;
 
     private bool _isActive;
 
@@ -30,7 +31,7 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
-        player.isDecreaseTP = false;
+        //player.isDecreaseTP = false;
 
 
         OnActive?.Invoke();
@@ -39,7 +40,9 @@ public class Checkpoint : MonoBehaviour
         player.SetCheckpoint(this);
 
         // 플레이어 TP 정보 저장
-        Player.Instance.TP += healTP;
+        //Player.Instance.TP += healTP;
+		healTP = Player.Instance.TP;
+		healCP = Player.Instance.CP;
 
         SaveLoadManager.SaveAllData();
     }

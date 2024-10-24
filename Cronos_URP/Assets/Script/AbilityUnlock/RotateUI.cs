@@ -7,7 +7,6 @@ public class RotateUI : MonoBehaviour
         X, Y, Z
     }
 
-    public bool active;
     public Axis axis;
     public float rotationSpeed = 10f; // 회전 속도
 
@@ -20,21 +19,18 @@ public class RotateUI : MonoBehaviour
 
     void Update()
     {
-        if (active)
-        {
-            // 선택한 축을 기준으로 회전
+        // 선택한 축을 기준으로 회전
             switch (axis)
-            {
-                case Axis.X:
-                    rectTransform.Rotate(Vector3.right * rotationSpeed * Time.unscaledDeltaTime);
-                    break;
-                case Axis.Y:
-                    rectTransform.Rotate(Vector3.up * rotationSpeed * Time.unscaledDeltaTime);
-                    break;
-                case Axis.Z:
-                    rectTransform.Rotate(Vector3.forward * rotationSpeed * Time.unscaledDeltaTime);
-                    break;
-            }
+        {
+            case Axis.X:
+                rectTransform.Rotate(Vector3.right * rotationSpeed * Time.unscaledDeltaTime);
+                break;
+            case Axis.Y:
+                rectTransform.Rotate(Vector3.up * rotationSpeed * Time.unscaledDeltaTime);
+                break;
+            case Axis.Z:
+                rectTransform.Rotate(Vector3.forward * rotationSpeed * Time.unscaledDeltaTime);
+                break;
         }
     }
 }

@@ -44,7 +44,7 @@ public class SpawnEnemyWave : MonoBehaviour
             if (spawnTimer >= spawnCycleTime)
             {
                 pool.Get();
-
+				// 여기서 추가하자 
                 currentCapacity++;
                 spawnTimer = 0f;
             }

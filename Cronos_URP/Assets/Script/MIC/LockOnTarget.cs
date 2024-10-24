@@ -30,7 +30,7 @@ public class LockOnTarget : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (atTgt.GetTarget() != null)
+		if (atTgt && atTgt.GetTarget() != null)
 		{
 			target = atTgt.GetTarget();
 		}
