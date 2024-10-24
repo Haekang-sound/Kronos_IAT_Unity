@@ -1,6 +1,5 @@
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerTimeSlashState : PlayerBaseState
@@ -32,7 +31,7 @@ public class PlayerTimeSlashState : PlayerBaseState
 		if ((TargetPosition - stateMachine.transform.position).magnitude > 1f)
 		{
 			stateMachine.GetComponent<Collider>().isTrigger = true;
-			if (Mathf.Sqrt((TargetPosition - stateMachine.transform.position).magnitude) < 100f)
+			if (Mathf.Sqrt((TargetPosition - stateMachine.transform.position).magnitude) < 40f)
 			{
 				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized
 			* (TargetPosition - stateMachine.transform.position).magnitude * (TargetPosition - stateMachine.transform.position).magnitude;
@@ -40,7 +39,7 @@ public class PlayerTimeSlashState : PlayerBaseState
 			else
 			{
 				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized
-			* 100f;
+			* 40f;
 			}
 
 

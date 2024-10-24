@@ -37,6 +37,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     private MeleeWeapon _meleeWeapon;
     private Rigidbody _rigidbody;
 
+    // 애너미도 칼을 갖고있어야 한다.
+    public GameObject enemySword;
+
     // Animator Parameters
     public static readonly int hashDown = Animator.StringToHash("down");
     public static readonly int hashReturn = Animator.StringToHash("return");
@@ -226,11 +229,6 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         TriggerDamage(msg.damageType);
         _hitShake.Begin();
 
-        if (Player.Instance != null)
-        {
-            Player.Instance.TP += Player.Instance.TPGain();
-        }
-
         _knockBack?.Begin(msg.damageSource);
     }
 
@@ -240,10 +238,22 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _controller.Release();
     }
 
+    // 애너미 슬래시 효과
+    public void EnemySlash()
+    {
+        EffectManager.Instance.EnemySlash(gameObject.transform);
+    }
+
+    public void EnemyCharge()
+    {
+        EffectManager.Instance.EnemyCharge(gameObject.transform);
+    }
+
     public void BeginAttack()
     {
         _meleeWeapon.BeginAttack();
     }
+
 
     public void EndAttack()
     {

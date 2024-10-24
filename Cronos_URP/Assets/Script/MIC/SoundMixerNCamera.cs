@@ -35,9 +35,9 @@ public class SoundMixerNCamera : MonoBehaviour
     PauseMenu pauseMenu;
     CanvasGroup canvasGroup;
 
-    public int dMas = 70;
-    public int dBgm = 100;
-    public int dSfx = 100;
+    int dMas = 70;
+    int dBgm = 100;
+    int dSfx = 100;
     public int cMas;    // c 밸류, 슬라이더로 조절될 값
     public int cBgm;
     public int cSfx;
@@ -57,26 +57,53 @@ public class SoundMixerNCamera : MonoBehaviour
     public Vector2 cSpeed;     // c밸류, 슬라이더로 조절될 값
     public Vector2 aSpeed;     // a밸류, 적용될 최종값
 
+    int sMas;
+    int sBgm;
+    int sSfx;
+    public int sCamX;
+    public int sCamY;
+
     void Start()
     {
+        Initialize();
+    }
+
+    void Initialize()
+    {
+
         if (bgmSlider == null)
             Debug.LogWarning("bgmSlider is not assigned.");
         else
+        {
+            sBgm = PlayerPrefs.GetInt("BgmVolume", dBgm);
+            bgmSlider.value = ((float)sBgm / 100);
+            PlayerPrefs.SetInt("BgmVolume", sBgm);
             bgmSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("BgmVolume", AdjustVolume(x)));
+        }
 
         if (sfxSlider == null)
             Debug.LogWarning("sfxSlider is not assigned.");
         else
+        {
+            sSfx = PlayerPrefs.GetInt("SfxVolume", dSfx);
+            sfxSlider.value = ((float)sSfx / 100);
+            PlayerPrefs.SetInt("SfxVolume", sSfx);
             sfxSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("SfxVolume", AdjustVolume(x)));
+        }
 
         if (masterSlider == null)
             Debug.LogWarning("masterSlider is not assigned.");
         else
+        {
+            sMas = PlayerPrefs.GetInt("MasterVolume", dMas);
+            masterSlider.value = ((float)sMas / 100);
+            PlayerPrefs.SetInt("MasterVolume", sMas);
             masterSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("MasterVolume", AdjustVolume(x)));
+        }
 
-        aMas = dMas;
-        aBgm = dBgm;
-        aSfx = dSfx;
+        aMas = sMas;
+        aBgm = sBgm;
+        aSfx = sSfx;
 
         GameObject playerCam = GameObject.Find("PlayerCam");
         virCam = playerCam.GetComponent<CinemachineVirtualCamera>();
@@ -84,14 +111,22 @@ public class SoundMixerNCamera : MonoBehaviour
         if (camSlider == null)
             Debug.LogWarning("camSlider is not assigned");
         else
+        {
+            sCamX = PlayerPrefs.GetInt("PlayerCam", dCamX);                                                                 
+            sCamY = PlayerPrefs.GetInt("PlayerCamY", dCamY);
+            camSlider.value = ((float)sCamX / 100);
+            PlayerPrefs.SetInt("PlayerCam", sCamX);
+            PlayerPrefs.SetInt("PlayerCamY", sCamY);
             pov = virCam.GetCinemachineComponent<CinemachinePOV>();
+        }
 
         if (pov != null)
             Debug.Log("pov를 찾았습니다");
 
-        aSpeed.x = dCamX / 5;
-        aSpeed.y = dCamY / 5;
+        aSpeed.x = sCamX / 5;
+        aSpeed.y = sCamY / 5;
     }
+
 
     // 활성화되면 a밸류 채우기
     private void OnEnable()
@@ -128,7 +163,10 @@ public class SoundMixerNCamera : MonoBehaviour
         masVal.text = ((masterSlider.value) * 100f).ToString("0") + ("%");
         bgmVal.text = ((bgmSlider.value) * 100f).ToString("0") + ("%");
         sfxVal.text = ((sfxSlider.value) * 100f).ToString("0") + ("%");
-        camVal.text = ((camSlider.value) * 100f).ToString("0") + ("%");
+        // 구조상 5의 배수로만 반올림해서 보여줘야겠다
+        float roundVal = Mathf.Round(camSlider.value * 100f / 5f) * 5f;
+        camVal.text = roundVal.ToString("0") + ("%");
+        //camVal.text = ((camSlider.value) * 100f).ToString("0") + ("%");
     }
 
     // 적용하면 c밸류를 a밸류로 바꾼다.
@@ -137,8 +175,15 @@ public class SoundMixerNCamera : MonoBehaviour
         aMas = cMas;
         aBgm = cBgm;
         aSfx = cSfx;
+        PlayerPrefs.SetInt("MasterVolume", cMas);
+        PlayerPrefs.SetInt("BgmVolume", cBgm);
+        PlayerPrefs.SetInt("SfxVolume", cSfx);
 
         aSpeed = cSpeed;
+        PlayerPrefs.SetInt("PlayerCam", (int)cSpeed.x * 5);
+        PlayerPrefs.SetInt("PlayerCamY", (int)cSpeed.y * 5);
+        sCamX = PlayerPrefs.GetInt("PlayerCam", dCamX);
+        sCamY = PlayerPrefs.GetInt("PlayerCamY", dCamY);
     }
 
     // 확인하면 일단 c밸류가 a밸류와 같은지 확인한다.
@@ -198,6 +243,7 @@ public class SoundMixerNCamera : MonoBehaviour
         pov.m_VerticalAxis.m_MaxSpeed = aSpeed.x / 100f;
         pov.m_HorizontalAxis.m_MaxSpeed = aSpeed.y / 100f;
     }
+
 
     public void ExitPanel()
     {

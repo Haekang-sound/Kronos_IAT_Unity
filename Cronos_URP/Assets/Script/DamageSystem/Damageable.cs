@@ -195,6 +195,8 @@ public partial class Damageable : MonoBehaviour
             var receiver = onDamageMessageReceivers[i] as IMessageReceiver;
             receiver.OnReceiveMessage(MessageType.DEAD, this, data);
         }
+
+        OnDeath?.Invoke();
     }
 
     void LateUpdate()

@@ -1,26 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
     public int priority;
+    public float healTP;
+    public float healCP;
+
+    private bool _isActive;
+
+    public UnityEvent OnActive;
 
     private void Awake()
     {
-		int a =  LayerMask.NameToLayer("Checkpoint");
-		gameObject.layer = LayerMask.NameToLayer("Checkpoint");
+		//gameObject.layer = LayerMask.NameToLayer("Checkpoint");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Player controller = other.GetComponent<Player>();
+        if (_isActive == true)
+        {
+            return;
+        }
 
-        if (controller == null)
+        Player player = other.GetComponent<Player>();
+
+        if (player == null)
             return;
 
-        controller.SetCheckpoint(this);
+        //player.isDecreaseTP = false;
+
+
+        OnActive?.Invoke();
+        _isActive = true;
+
+        player.SetCheckpoint(this);
+
+        // 플레이어 TP 정보 저장
+        //Player.Instance.TP += healTP;
+		healTP = Player.Instance.TP;
+		healCP = Player.Instance.CP;
+
+        SaveLoadManager.SaveAllData();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (_isActive == true)
+        {
+            return;
+        }
+
+        Player player = other.GetComponent<Player>();
+
+        if (player == null)
+            return;
+
+        player.isDecreaseTP = true;
+
+        Debug.Log("플레이어의 체력이 다시 줄어듦" + Player.Instance.TP);
     }
 
     void OnDrawGizmos()

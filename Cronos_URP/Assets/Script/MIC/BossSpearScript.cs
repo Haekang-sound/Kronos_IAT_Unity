@@ -11,6 +11,7 @@ public class BossSpearScript : MonoBehaviour
     public float lookSpeed;
     public float incSpeed = 0.0f;
     public float elapsedTime;
+    public float spearDamage = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class BossSpearScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 플레이어를 향해 조준
         if (act)
         {
             Vector3 dir = (target.transform.position - transform.position).normalized;
@@ -29,39 +31,45 @@ public class BossSpearScript : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, lookSpeed);
             targetPos = target.transform.position;
         }
-
-        if (sat)
-        {
-            Vector3 dir = (targetPos - transform.position).normalized;
-            if (Vector3.Distance(transform.localPosition, targetPos) > 0.01f)
-            {
-                elapsedTime += Time.deltaTime;
-                incSpeed += (elapsedTime * elapsedTime);
-                transform.position += dir * incSpeed * Time.deltaTime;
-            }
-        }
-
     }
 
+    // 사출
     public IEnumerator Saturate(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         act = false;
         sat = true;
+
+        Vector3 dir = (targetPos - transform.position).normalized;
+        while (Vector3.Distance(transform.localPosition, targetPos) > 0.01f)
+        {
+            if (!sat)
+            {
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            incSpeed += (elapsedTime * elapsedTime);
+            transform.position += dir * incSpeed * Time.deltaTime;
+            yield return null;
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         int collisionLayer = collision.gameObject.layer;
         if (collisionLayer == LayerMask.NameToLayer("Player"))
         {
             // 플레이어한테 대미지박기
+            Debug.Log("충돌 : " + collision.gameObject.name);
+            //Player.Instance._damageable.currentHitPoints -= spearDamage;
         }
 
         if (collisionLayer == LayerMask.NameToLayer("Ground"))
         {
             sat = false;
+            Destroy(GetComponent<SimpleDamager>());
             Debug.Log("창 부딪침");
             EffectManager.Instance.SpearImpact(targetPos);
             Destroy(gameObject, 3.0f);

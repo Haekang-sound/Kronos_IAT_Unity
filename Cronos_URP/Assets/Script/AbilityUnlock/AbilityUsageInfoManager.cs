@@ -18,7 +18,7 @@ public class AbilityUsageInfoManager : MonoBehaviour
         abilityUsageInfo.DodgeAttack = true;
     }
 
-	//심판의 일섬 - Com_S_Attack_Aura
+	//심판의 칼날
 	public void Com_S_Attack_Aura()
 	{
 		EffectManager.Instance.isSwordWave = true;
@@ -51,25 +51,36 @@ public class AbilityUsageInfoManager : MonoBehaviour
 		PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", true);
 	}
 
+	// 운명의 굴레 - 패리어택
+	public void ParryAttack()
+	{
+		Player.Instance.isParry = true;
+	}
+
+	// 파괴의 도약 - 
+	public void RushAttack()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("isRushAttack", true);
+	}
 
 
-	//경직 면역
-	public void UseRigidImmunity()
-    {
-        abilityUsageInfo.RigidImmunity = true;
-    }
+	// 	//경직 면역
+	// 	public void UseRigidImmunity()
+	//     {
+	//         abilityUsageInfo.RigidImmunity = true;
+	//     }
 
-	// Nor_Attack 변환
-	public void UseNorAttackVariation()
-    {
-        abilityUsageInfo.NorAttackVariation = true;
-    }
-
-	// Com_Attack 변환
-	public void UseComAttackVariation()
-    {
-        abilityUsageInfo.ComAttackVariation = true;
-    }
+	// 	// Nor_Attack 변환
+	// 	public void UseNorAttackVariation()
+	//     {
+	//         abilityUsageInfo.NorAttackVariation = true;
+	//     }
+	// 
+	// 	// Com_Attack 변환
+	// 	public void UseComAttackVariation()
+	//     {
+	//         abilityUsageInfo.ComAttackVariation = true;
+	//     }
 
 	//Com_S_Attack 강 공격 강화
 	public void UseComSAttackUpgrade()

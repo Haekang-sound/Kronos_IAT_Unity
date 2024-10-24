@@ -171,6 +171,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
   meleeWeapon: {fileID: 0}
   _damageable: {fileID: 0}
   _defnsible: {fileID: 0}
@@ -183,6 +186,7 @@ MonoBehaviour:
   spcDelay: 0
   psm: {fileID: 0}
   adjuster: {fileID: 0}
+  currentTime: 0
   useKnockback: 0
 --- !u!114 &7961368793812106336
 MonoBehaviour:
@@ -200,6 +204,7 @@ MonoBehaviour:
   isPaused: 0
   Velocity: {x: 0, y: 0, z: 0}
   AutoTargetting: {fileID: 3078419922313236100}
+  currentLayerIndex: 0
 --- !u!114 &7544367144098382940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +482,7 @@ MonoBehaviour:
   radius: 0.3
   offset: 0.1
   drawGizmo: 1
+  ToggleChecker: 1
 --- !u!114 &5866121802836621044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,7 +1426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1307213647999691967
 Transform:
   m_ObjectHideFlags: 0
@@ -1458,6 +1464,7 @@ MonoBehaviour:
   lockOnAixsDamp: 0.99
   autoTargettingAixsDamp: 0
   exitValue: 0
+  isTargetting: 0
 --- !u!135 &4746640102676434198
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7118,6 +7125,7 @@ MonoBehaviour:
   inAttack: 0
   isAcitveSkill: 0
   currentDamageType: 0
+  currentComboType: 0
   OnAttack:
     m_PersistentCalls:
       m_Calls: []
