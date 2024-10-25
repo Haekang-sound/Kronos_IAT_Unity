@@ -11,41 +11,32 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
+    [SerializeField]
+    private bool _drawGizmo = true;
+
     public int priority;
     public float healTP;
+    private CheckpointData _data;
 
     [Header("Event")]
     public UnityEvent OnActive;
 
-    [SceneName]
-    private string _sceneName;
     private bool _isActive;
-
-    private readonly string purpose = "_checkpoint";
-    private readonly string tp = "checkPoint_TP";
 
     private AbilityTree _abilityTree;
 
-
-    // -----
-
-    public void LoadData()
-    {
-        Player.Instance.TP = PlayerPrefs.GetFloat(tp);
-
-        _abilityTree.LoadData(purpose);
-
-        if (_sceneName != SceneManager.GetActiveScene().name)
-        {
-            SceneController.TransitionToScene(_sceneName);
-        }
-    }
+    private readonly string k_purpose = "_checkpoint";
 
     // -----
 
     private void Awake()
     {
-        _sceneName = SceneManager.GetActiveScene().name;
+        _data = ScriptableObject.CreateInstance<CheckpointData>();
+
+        _data.priority = priority;
+        _data.healTP = healTP;
+        _data.sceneName = SceneManager.GetActiveScene().name;
+        _data.SpwanPos = transform;
 
         _abilityTree = FindObjectOfType<AbilityTree>();
     }
@@ -59,17 +50,18 @@ public class Checkpoint : MonoBehaviour
 
         Player player = other.GetComponent<Player>();
 
-        if (player == null)
-            return;
+        if (player != null)
+        {
 
-        OnActive?.Invoke();
+            OnActive?.Invoke();
 
-        _isActive = true;
+            _isActive = true;
 
-        player.TP += healTP;
+            player.TP += healTP;
 
-        // 데이터 저장
-        SaveData();
+            // 데이터 저장
+            _data.SaveData();
+        }
 
     }
 
@@ -80,7 +72,7 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
-        if (_isActive == false)
+        if (_isActive == true)
         {
             player.isDecreaseTP = true;
         }
@@ -88,19 +80,11 @@ public class Checkpoint : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue * 0.75f;
-        Gizmos.DrawSphere(transform.position, 0.1f);
-        Gizmos.DrawRay(transform.position, transform.forward);
+        if (_drawGizmo)
+        {
+            Gizmos.color = Color.blue * 0.75f;
+            Gizmos.DrawSphere(transform.position, 0.1f);
+        }
     }
 
-    // -----
-
-    private void SaveData()
-    {
-        SaveLoadManager.Instance.currentCheckpoint = this;
-
-        PlayerPrefs.SetFloat(tp, Player.Instance.TP);
-
-        _abilityTree.SaveData(purpose);
-    }
 }

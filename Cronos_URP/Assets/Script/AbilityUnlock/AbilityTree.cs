@@ -123,6 +123,11 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             node.Load(purpose);
         }
+
+        if(rootAbilityNode.CurrentState == AbilityNode.State.Deactivate)
+        {
+            rootAbilityNode.SetState(AbilityNode.State.Interactible);
+        }
     }
 
     public void ResetData()
