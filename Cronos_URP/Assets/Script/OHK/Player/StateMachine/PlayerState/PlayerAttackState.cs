@@ -77,7 +77,7 @@ public class PlayerAttackState : PlayerBaseState
 		}
 		else if (stateMachine.Animator.deltaPosition != null)
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity; 
+			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
 		}
 	}
 	public override void FixedTick()
@@ -118,14 +118,15 @@ public class PlayerAttackState : PlayerBaseState
 	private void Dodge()
 	{
 		// 키입력이 있을때, 트랜지션중일때, 닷지 쿨타임이 아닐때
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f 
-			&& stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) 
-			&& !CoolTimeCounter.Instance.isDodgeUsed)
+		//if (stateMachine.InputReader.moveComposite.magnitude != 0f 
+		//&& stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) 
+		//&&if ( !CoolTimeCounter.Instance.isDodgeUsed)
+		if (!CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			// 사용될 경우
-			CoolTimeCounter.Instance.isDodgeUsed = true;		// 쿨타임 사용체크한다.
-			stateMachine.Animator.SetBool(nextComboHash, false);	// 
-			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
+			stateMachine.Animator.SetBool(nextComboHash, false);    // 
+																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}
 	}
