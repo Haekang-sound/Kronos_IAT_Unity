@@ -12,7 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _DISPLACEMENT_LOCK_TILING_SCALE
+  - _DOUBLESIDED_ON
   - _EMISSION
   - _EMISSION_FRESNEL
   - _MASKMAP
@@ -23,7 +25,7 @@ Material:
   - _HORIZONOCCLUSION_OFF
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
@@ -233,7 +235,7 @@ Material:
     - _AlbedoAffectEmissive: 0
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaCutoffShadow: 0.5
     - _AlphaRemapMax: 1
     - _AlphaRemapMax1: 1
@@ -254,7 +256,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _CoatNormalEnable: 0
     - _CoatNormalScale: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoMapScale: 1
@@ -425,7 +427,7 @@ Material:
     - _BaseColor2: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor3: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
+    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 0.8962264, g: 0.6307119, b: 0.41006586, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _PuddlesFramesSize: {r: 1, g: 1, b: 0, a: 0}
