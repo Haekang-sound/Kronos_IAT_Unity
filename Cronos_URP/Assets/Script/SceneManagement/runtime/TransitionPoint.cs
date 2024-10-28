@@ -104,8 +104,4 @@ public class TransitionPoint : MonoBehaviour
 		}
 	}
 
-	public void Update()
-	{
-		Debug.Log("Im here" + transform.position);
-	}
 }
