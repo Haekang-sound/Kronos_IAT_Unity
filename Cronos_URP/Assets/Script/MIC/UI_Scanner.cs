@@ -47,7 +47,7 @@ public class UI_Scanner : MonoBehaviour
 
     void Update()
     {
-        if (isPopup && Input.GetKeyDown(KeyCode.E) && !isInteracting)
+        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
         {
             isInteracting = true;
             interText.SetActive(false);
@@ -60,6 +60,12 @@ public class UI_Scanner : MonoBehaviour
             abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
             interText.SetActive(true);
             isPopup = true;
+            // 크로노스 네이놈
+            if (QuestManager.Instance.abilityQuesting)
+            {
+                QuestManager.Instance.abilityQuesting = false;
+                UIManager.Instance.Achieve();
+            }
         }
     }
 

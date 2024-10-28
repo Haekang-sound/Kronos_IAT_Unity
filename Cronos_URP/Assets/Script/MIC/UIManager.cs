@@ -59,7 +59,6 @@ public class UIManager : MonoBehaviour
     [Tooltip("목표가 유지되는 시간입니다")]
     public float ObjdurationTime = 3.0f;
 
-    public int sceneIdx = 0;
     // 코루틴 중 호출 시 멈추기 위해서
     Coroutine curCoroutine;
 
@@ -100,9 +99,9 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void StartRegion()
+    public void StartRegion(int idx)
     {
-        StartCoroutine(ShowRegionNameCoroutine());
+        StartCoroutine(ShowRegionNameCoroutine(idx));
     }
 
 
@@ -113,15 +112,17 @@ public class UIManager : MonoBehaviour
 
     /// 지역이름 UI 애니메이션
     /// 새 지역으로 들어왔다면 이 코루틴을 호출
-    public IEnumerator ShowRegionNameCoroutine()
+    public IEnumerator ShowRegionNameCoroutine(int idx)
     {
         Debug.Log("Begin Coroutine");
 
         regionNameObj.SetActive(true);
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		/// 제이슨 로드하고 텍스트 뽑기
-		regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		/// 제이슨 로드하고 텍스트 뽑기는 서비스 종료다
+        /// 걍 싱글턴에서 스트링으로 받아오자
+		//regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+        regionText.text = qm.RegionNames[idx];
 
         float elapsedTime = 0.0f;
         // 배경 페이드
@@ -161,18 +162,18 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(false);
 
         // 첫 번째 목표는 여기서 띄우기
-        //yield return new WaitForSeconds(1.0f);
-        //StartCoroutine(AppearMainObjective());
-
-        // 다음 지역이름으로 인덱스 올리기
-        sceneIdx++;
+        if (idx == 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            StartAppearMain(idx);
+        }
     }
 
     /// 메인 목표 박스 UI 애니메이션
     /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
 
     /// 은 구버전이고,
-    /// 신버전은 QuestManager와 연동해서 팝업한다.
+    /// 신버전은 QuestManager의 인덱스와 연동해서 팝업한다.
     /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
     /// 중간에 코루틴 난입을 대비해서 한번 더 함수로 감싸는게 맞나
     public void StartAppearMain(int idx)
@@ -276,6 +277,10 @@ public class UIManager : MonoBehaviour
     }
 
     /// 목표 달성하면 서브 UI 띠용하고 지우기
+    public void Achieve()
+    {
+        StartCoroutine(AchieveSubObjective());
+    }
     public IEnumerator AchieveSubObjective()
     {
         // curCoroutine은 이것을 위해서
@@ -326,6 +331,11 @@ public class UIManager : MonoBehaviour
     }
 
     /// 목표 실패하면 서브 UI 빨간색으로 지우기
+    //public void Failed()
+    //{
+    //    // 쓸일 없음
+    //    StartCoroutine(FailSubObjective());
+    //}
     public IEnumerator FailSubObjective()
     {
         // curCoroutine은 이것을 위해서

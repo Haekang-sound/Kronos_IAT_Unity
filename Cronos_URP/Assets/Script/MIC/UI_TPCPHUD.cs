@@ -116,7 +116,15 @@ public class UI_TPCPHUD : UI_TPCP
         // 플레이어의 TP를 받아온다.
         //MaxTp = player.MaxTP;
         //TPprogress = tp / MaxTp;
-        tp = player.TP;
+        if(player.TP >= 0f)
+		{
+			tp = player.TP;
+		}
+        else
+        {
+			tp = 0f;
+        }
+
         textTP.text = tp.ToString("000");
 
         // 원형 슬라이더를 현재/최대로 계산해서 줄여준다.

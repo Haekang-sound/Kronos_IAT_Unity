@@ -26,7 +26,10 @@ public class PlazaManager : MonoBehaviour
             soundTrigger.SetActive(false);
         RegisterDestroyEvents();
     }
-
+	private void Update()
+	{
+		Debug.Log(destroyedCount);
+	}
 	void RegisterDestroyEvents()
     {
         //lock1.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;

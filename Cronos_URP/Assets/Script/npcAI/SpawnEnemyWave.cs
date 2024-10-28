@@ -98,4 +98,10 @@ public class SpawnEnemyWave : MonoBehaviour
     {
         Destroy(pooledObject.gameObject);
     }
+
+	public void DestroyMe()
+	{
+		pool.Clear();
+		Destroy(gameObject);
+	}
 }

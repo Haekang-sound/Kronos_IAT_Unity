@@ -13,6 +13,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	[SerializeField] private Collider myColldier;
 	[SerializeField] private Renderer myRenderer;
 
+	int deathCount = 0;
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
@@ -64,7 +65,11 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 
 	public void Death()
 	{
-		OnDeath?.Invoke();
+		if (deathCount == 0)
+		{
+			OnDeath?.Invoke();
+			deathCount = 1;
+		}
 		//GetComponent<Renderer>().enabled = false;
 		myRenderer.enabled = false;
 		foreach (Collider c in colliders)

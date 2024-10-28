@@ -117,10 +117,14 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f && stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) && !CoolTimeCounter.Instance.isDodgeUsed)
+		// 키입력이 있을때, 트랜지션중일때, 닷지 쿨타임이 아닐때
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f 
+			&& stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) 
+			&& !CoolTimeCounter.Instance.isDodgeUsed)
 		{
-			CoolTimeCounter.Instance.isDodgeUsed = true;
-			stateMachine.Animator.SetBool(nextComboHash, false);
+			// 사용될 경우
+			CoolTimeCounter.Instance.isDodgeUsed = true;		// 쿨타임 사용체크한다.
+			stateMachine.Animator.SetBool(nextComboHash, false);	// 
 			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 			stateMachine.Animator.SetTrigger(dodgeHash);
 		}

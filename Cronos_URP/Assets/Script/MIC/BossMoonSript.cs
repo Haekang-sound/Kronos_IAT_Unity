@@ -46,11 +46,11 @@ public class BossMoonSript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (fall && transform.position.y > 0.5f)
+		if (fall && transform.position.y > -2f)
 		{
 			transform.position -= new Vector3(0, fallSpeed * Time.deltaTime, 0);
 		}
-		else if (fall && transform.position.y <= 0.5f)
+		else if (fall && transform.position.y <= -2f)
 		{
 			fall = false;
 			gField.SetActive(true);
