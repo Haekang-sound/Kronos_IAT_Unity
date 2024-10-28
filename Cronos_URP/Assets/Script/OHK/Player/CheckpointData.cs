@@ -11,8 +11,8 @@ public class CheckpointData : ScriptableObject
     public Transform SpwanPos;
 
     private AbilityTree _abilityTree;
-    private readonly string k_tpKey = "checkPoint_TP";
-    private readonly string k_cpKey = "checkPoint_CP";
+    private readonly string r_tpKey = "checkPoint_TP";
+    private readonly string r_cpKey = "checkPoint_CP";
 
     public void LoadData()
     {
@@ -29,8 +29,8 @@ public class CheckpointData : ScriptableObject
         playerRigidbody.rotation = SpwanPos.rotation;
 
         // TP 및 CP 가져오기
-        Player.Instance.TP = PlayerPrefs.GetFloat(k_tpKey);
-        Player.Instance.CP = PlayerPrefs.GetFloat(k_cpKey);
+        Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
+        Player.Instance.CP = PlayerPrefs.GetFloat(r_cpKey);
 
         // 능력 개방 데이터 가져오기
         if (_abilityTree == null)
@@ -47,8 +47,8 @@ public class CheckpointData : ScriptableObject
 
         /// 플레이어
         // TP / CP 저장
-        PlayerPrefs.SetFloat(k_tpKey, Player.Instance.TP);
-        PlayerPrefs.SetFloat(k_cpKey, Player.Instance.CP);
+        PlayerPrefs.SetFloat(r_tpKey, Player.Instance.TP);
+        PlayerPrefs.SetFloat(r_cpKey, Player.Instance.CP);
 
         // 능력 개방 데이터 저장
         if (_abilityTree == null)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -38,7 +39,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     [Header("Event")]
     public UnityEvent OnUpdated;
     [HideInInspector]
-    public UnityEvent OnReset;
+    public UnityEvent OnLoaded;
 
     [HideInInspector]
     public bool isFucus;
@@ -161,15 +162,18 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void Save(string purpose)
     {
-        PlayerPrefs.SetInt(_nodeid + purpose, (int)_state);
+        string key = _nodeid + purpose;
+        PlayerPrefs.SetInt(key, (int)_state);
     }
 
     public void Load(string purpose)
     {
-        OnReset?.Invoke();
-        if (PlayerPrefs.HasKey(_nodeid + purpose))
+        string key = _nodeid + purpose;
+        if (PlayerPrefs.HasKey(key))
         {
-            SetState((AbilityNode.State)PlayerPrefs.GetInt(_nodeid));
+            AbilityNode.State loadedstate = (AbilityNode.State)PlayerPrefs.GetInt(key);
+            SetState(loadedstate);
+            OnLoaded?.Invoke();
         }
     }
 

@@ -11,7 +11,7 @@ public class SkillProgressLine : ProgressBar
     private void Awake()
     {
         node.OnUpdated.AddListener(OnSkillAmountChanged);
-        node.OnReset.AddListener(OnReset);
+        node.OnLoaded.AddListener(OnSkillAmountChanged);
     }
 
     public override void Start()
@@ -36,10 +36,5 @@ public class SkillProgressLine : ProgressBar
         {
             UpdatePercentage(0f);
         }
-    }
-
-    public void OnReset()
-    {
-        UpdatePercentage(0f);
     }
 }

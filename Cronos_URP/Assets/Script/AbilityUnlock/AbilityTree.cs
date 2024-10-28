@@ -107,6 +107,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private void Start()
     {
         rootAbilityNode.SetState(AbilityNode.State.Interactible);
+
+        if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
     }
 
     public void SaveData(string purpose)

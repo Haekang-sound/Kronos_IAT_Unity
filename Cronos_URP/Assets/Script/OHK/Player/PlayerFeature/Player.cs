@@ -205,11 +205,13 @@ public class Player : MonoBehaviour, IMessageReceiver
         meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
 
         totalspeed = Speed;
-        _damageable.maxHitPoints = maxTP;
-        //_damageable.currentHitPoints = currentTP;
-
+        
         // TEST: 데이터 로드 
-        SaveLoadManager.Instance.LoadSceneData();
+        //SaveLoadManager.Instance.LoadSceneData();
+
+        _damageable.maxHitPoints = maxTP;
+        _damageable.currentHitPoints = currentTP;
+
     }
 
     private void ChangeParryState()
