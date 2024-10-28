@@ -288,7 +288,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Update()
 	{
-		Debug.Log(_damageable.isInvulnerable);
 		if (Input.GetKeyDown(KeyCode.H))
 		{
 			_damageable.isInvulnerable = true;
