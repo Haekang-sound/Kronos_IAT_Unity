@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Events;
@@ -39,10 +40,10 @@ public class Checkpoint : MonoBehaviour
     }
     private bool _isActive;
 
-    private AbilityTree _abilityTree;
-
     private readonly string k_purpose = "_checkpoint";
 
+    private AbilityTree _abilityTree;
+    private int _enemyCount;
     // -----
 
     private void Awake()
@@ -56,12 +57,14 @@ public class Checkpoint : MonoBehaviour
         _data.SpwanRot = transform.rotation;
 
         _abilityTree = FindObjectOfType<AbilityTree>();
+
+        // ---
+
+        key = GetType().Name + "-" + _data.sceneName + "-" + id;
     }
 
     private void Start()
     {
-        key = GetType().Name + "-" + _data.sceneName + "-" + id;
-
         IsActive = System.Convert.ToBoolean(PlayerPrefs.GetInt(key));
     }
 
@@ -72,35 +75,61 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsActive == true)
+        var enemy = other.GetComponent<EnemyController>();
+
+        if (enemy != null)
         {
-            return;
+            _enemyCount++;
         }
+
+        // ---
 
         Player player = other.GetComponent<Player>();
 
-        if (player != null)
-        {
-            IsActive = true;
+        if (player == null) return;
 
-            player.TP += healTP;
+        player.isDecreaseTP = false;
 
-            // 데이터 저장
-            _data.SaveData();
-        }
+        if (IsActive == true) return;
 
+        IsActive = true;
+        player.TP += healTP;
+
+        // 데이터 저장
+        _data.SaveData();
     }
 
     private void OnTriggerExit(Collider other)
     {
+        var enemy = other.GetComponent<EnemyController>();
+
+        if (enemy != null)
+        {
+            _enemyCount--;
+        }
+
+        // ---
+
         Player player = other.GetComponent<Player>();
 
-        if (player == null)
-            return;
+        if (player == null) return;
 
-        if (IsActive == true)
+        player.isDecreaseTP = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player != null)
         {
-            player.isDecreaseTP = true;
+            if(_enemyCount > 0)
+            {
+                player.isDecreaseTP = true;
+            }
+            else
+            {
+                player.isDecreaseTP = false;
+            }
         }
     }
 
