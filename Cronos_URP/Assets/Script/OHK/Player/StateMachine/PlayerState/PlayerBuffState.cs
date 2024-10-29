@@ -31,16 +31,12 @@ public class PlayerBuffState : PlayerBaseState
 	public float targetSpeed = 0.5f;
 	float releaseLockOn = 0f;
 	bool isRelease = false;
-	bool isRun = false;
-	float timeLine;
-	bool timeslash = false;
 
 	public override void Enter()
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
         stateMachine.Animator.ResetTrigger(attackHash);
         stateMachine.Animator.ResetTrigger(idleHash);
-        //stateMachine.Animator.SetBool(BuffHash, true);
 
         stateMachine.InputReader.onLAttackStart += Attack;
         stateMachine.InputReader.onRAttackStart += Gurad;
@@ -50,8 +46,6 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
-		stateMachine.InputReader.onRunStart += Run;
-		stateMachine.InputReader.onRunCanceled += StopRun;
 
 		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
 
@@ -141,8 +135,6 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
-		stateMachine.InputReader.onRunStart -= Run;
-		stateMachine.InputReader.onRunCanceled -= StopRun;
 
 		stateMachine.InputReader.onLAttackCanceled -= ReleaseAttack;
 
@@ -161,8 +153,6 @@ public class PlayerBuffState : PlayerBaseState
 
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
 	public void ReleaseGuard() { stateMachine.Animator.SetBool(guradHash, false); }
-	private void Run() { isRun = true; }
-	private void StopRun() { isRun = false; }
 	private void LockOn()
 	{
 		Debug.Log("´©¸§");

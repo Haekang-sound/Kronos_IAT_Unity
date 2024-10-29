@@ -19,7 +19,7 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 		stateMachine = PlayerStateMachine.GetInstance();
 		
 		stateMachine.MoveForce = moveForce;
-		//stateMachine.SwitchState(new PlayerAttackState(stateMachine));
+		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 		stateMachine.Player.DodgeAttack = true;

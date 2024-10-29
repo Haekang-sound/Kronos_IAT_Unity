@@ -25,7 +25,7 @@ public class LastCombo : StateMachineBehaviour
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
         PlayerStateMachine.GetInstance().MoveForce = moveForce;
         PlayerStateMachine.GetInstance().Player.IsEnforced = true;
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
+		PlayerStateMachine.GetInstance().Player._damageable.enabled = false;
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
@@ -52,7 +52,7 @@ public class LastCombo : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = false;
+		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()

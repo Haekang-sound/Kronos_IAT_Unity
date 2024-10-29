@@ -75,7 +75,7 @@ public class PlayerMoveState : PlayerBaseState
 
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
-			stateMachine.Animator.SetBool("isMove", true);
+			//stateMachine.Animator.SetBool("isMove", true);
 		}
 		else
 		{

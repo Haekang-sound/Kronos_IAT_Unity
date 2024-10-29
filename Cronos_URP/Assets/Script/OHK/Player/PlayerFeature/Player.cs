@@ -285,7 +285,8 @@ public class Player : MonoBehaviour, IMessageReceiver
             //Time.timeScale = 1f;
         }
 
-        // 버프중이라면
+		// 버프중이라면
+		Debug.Log("buffTime : " + buffTime);
         if (isBuff)
         {
             buffTimer += Time.deltaTime;
@@ -298,7 +299,8 @@ public class Player : MonoBehaviour, IMessageReceiver
         // 특정 조건을 만족할 때 애니메이션을 종료하고 targetStateName으로 전환
         if (buffTimer > buffTime)
         {
-            //PlayerFSM.Animator.SetBool("combMove",false);
+			isBuff = false;
+            PlayerFSM.Animator.SetBool("isMove",true);
             PlayerFSM.Animator.SetBool("isEnforced", false);
             effectManager.SwordAuraOff();
         }
