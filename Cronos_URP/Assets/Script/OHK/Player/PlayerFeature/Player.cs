@@ -288,17 +288,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.H))
-		{
-			_damageable.isInvulnerable = true;
-			Debug.Log(_damageable.isInvulnerable);
-		}
 
-		if (Input.GetKeyDown(KeyCode.O))
-		{
-			BulletTime.Instance.SetNormalSpeed();
-			//Time.timeScale = 1f;
-		}
 
 		// 버프중이라면
 		if (isBuff)
@@ -383,6 +373,21 @@ public class Player : MonoBehaviour, IMessageReceiver
 			spcCubeR.SetActive(false);
 		}
 	}
+
+	private void FixedUpdate()
+	{
+// 		if (Input.GetKey(KeyCode.H))
+// 		{
+// 			// 45도 각도로 벡터를 쏜다.
+// 
+// 			PlayerFSM.Rigidbody.AddForce((transform.forward + transform.up + new Vector3(0f,9.81f,0f)) * 10f, ForceMode.Impulse);
+// 		}
+// 		else
+// 		{
+// 			PlayerFSM.Rigidbody.AddForce((-transform.up) * 10f, ForceMode.Impulse);
+// 		}
+
+	} 
 
 	private void OnDestroy()
 	{

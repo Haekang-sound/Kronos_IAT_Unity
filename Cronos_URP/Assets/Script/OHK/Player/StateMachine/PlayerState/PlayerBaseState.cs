@@ -60,6 +60,20 @@ public abstract class PlayerBaseState : State
 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDirection), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
 
 	}
+	protected void FaceMoveDirection(Vector3 faceDir)
+	{
+		faceDir.y = 0f;
+
+		// 이동속도가 없다면
+		if (faceDir == Vector3.zero)
+		{
+			// 아무것도 하지 않겠다.
+			return;
+		}
+		// 플레이어의 회전은 구면 선형보간의 형태로 이루어진다. 
+		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
+
+	}
 
 	/// <summary>
 	/// Player가 갖고 있는 데이터를 종합해서

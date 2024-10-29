@@ -288,8 +288,8 @@ public class PlayerMoveState : PlayerBaseState
 		Debug.Log("돌진공격!");
 		if (stateMachine.Animator.GetBool("isRushAttack")&& !CoolTimeCounter.Instance.isRushAttackUsed)
 		{
+			stateMachine.AutoTargetting.AutoTargeting();
 			CoolTimeCounter.Instance.isRushAttackUsed = true;
-			//if (!stateMachine.AutoTargetting.FindTarget()) return;
 			stateMachine.Animator.SetTrigger("RushAttack");
 		}
 	}

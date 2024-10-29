@@ -109,7 +109,7 @@ public class AutoTargetting : MonoBehaviour
 		{
 			if (direction.magnitude != 0f)
 			{
-				stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(direction.normalized), 0.1f));
+				stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(direction.normalized), 0.2f));
 
 			}
 		}
