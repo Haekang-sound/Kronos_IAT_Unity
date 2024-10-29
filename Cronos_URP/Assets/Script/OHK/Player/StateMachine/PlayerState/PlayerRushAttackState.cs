@@ -1,8 +1,10 @@
+using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
-public class PlayerAttackState : PlayerBaseState
+public class PlayerRushAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
-	public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+	public PlayerRushAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
 	private readonly int chargeHash = Animator.StringToHash("Charge");
 	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
@@ -10,109 +12,105 @@ public class PlayerAttackState : PlayerBaseState
 	private readonly int guradHash = Animator.StringToHash("isGuard");
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
-	bool attackBool = false;
 
 
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 	AnimatorStateInfo currentStateInfo;
+	Vector3 TargetPosition;
 	public override void Enter()
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
-		attackBool = false;
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.Animator.SetBool(nextComboHash, false);
 		stateMachine.Animator.SetBool(guradHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
 		stateMachine.Animator.ResetTrigger("ParryAttack");
 
-		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 
 		stateMachine.GroundChecker.ToggleChecker = false;
+		// 도착해야할 위치
+
 	}
 	public override void Tick()
 	{
-		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
+		/// 여기서 타겟을 바라본다.
+		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
-			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(nextComboHash, true);
-		}
+			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
+			stateMachine.Rigidbody.rotation = (Quaternion.LookRotation(TargetPosition - stateMachine.transform.position));
 
-		// 좌클릭 누르는 중에는 차징
-		if (stateMachine.InputReader.IsLAttackPressed)
-		{
-			float current = stateMachine.Animator.GetFloat(chargeHash);
-			stateMachine.Animator.SetFloat(chargeHash, current + Time.deltaTime);
-		}
-
-		// 누르고있으면 차징중이다
-		if (stateMachine.InputReader.IsLAttackPressed)
-		{
-			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(chargeAttackHash, true);
 		}
 		else
 		{
-			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(chargeAttackHash, false);
+			CalculateMoveDirection();   // 방향을 계산하고
 		}
-
-		// 좌클릭땔때 차징 비활성화
-		if (!stateMachine.InputReader.IsLAttackPressed)
-		{
-			stateMachine.Animator.SetFloat(chargeHash, 0);
-		}
-
-		CalculateMoveDirection();   // 방향을 계산하고
 
 		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+
+		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
+			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
+			if ((TargetPosition - stateMachine.transform.position).magnitude > 1.5f)
+			{
+				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+				{
+					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+				}
+				else if (stateMachine.Animator.deltaPosition != null)
+				{
+					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+				}
+			}
+			else // 도착하면 멈춘다.
+			{
+				stateMachine.Rigidbody.velocity = Vector3.zero;
+			}
+
 		}
-		else if (stateMachine.Animator.deltaPosition != null)
+		else
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+			if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+			{
+				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+			}
+			else if (stateMachine.Animator.deltaPosition != null)
+			{
+				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+			}
 		}
+
 	}
 	public override void FixedTick()
 	{
 		///트랜지션 중일때만 발동
 		if (stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex))
 		{
-			FaceMoveDirection();
+			if (stateMachine.AutoTargetting.GetTarget() != null)
+			{
+				FaceMoveDirection((TargetPosition - stateMachine.transform.position).normalized);
+			}
+			else
+			{
+				FaceMoveDirection();
+			}
 		}
 		Float();
 	}
 	public override void LateTick() { }
 	public override void Exit()
 	{
-		stateMachine.Animator.SetFloat(chargeHash, 0);
-		stateMachine.Animator.SetBool(chargeAttackHash, false);
-		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
 
 		stateMachine.GroundChecker.ToggleChecker = true;
 	}
 
-	private void Attack()
-	{
-		/// 좌클릭시
-		stateMachine.AutoTargetting.AutoTargeting();
-		attackBool = true;
-
-		if (attackBool && currentStateInfo.normalizedTime > minFrame)
-		{
-			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(nextComboHash, true);
-		}
-	}
 	private void Dodge()
 	{
 		if (!CoolTimeCounter.Instance.isDodgeUsed)
