@@ -85,7 +85,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	// 감지하고자 하는 레이어를 지정합니다.
 	public LayerMask targetLayer; // Inspector에서 설정 가능
-
+	public float targetdistance = 1f;
 	// Property
 	private float totalspeed;
 	public float moveSpeed { get { return totalspeed; } }
