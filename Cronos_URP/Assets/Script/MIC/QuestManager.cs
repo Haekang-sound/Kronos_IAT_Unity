@@ -1,23 +1,23 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    // È£ÃâÇÒ Áö¿ª ÅØ½ºÆ® ¹è¿­
+    // í˜¸ì¶œí•  ì§€ì—­ í…ìŠ¤íŠ¸ ë°°ì—´
     public string[] RegionNames;
     
-    // È£ÃâÇÒ Äù½ºÆ® ÅØ½ºÆ® ¹è¿­
+    // í˜¸ì¶œí•  í€˜ìŠ¤íŠ¸ í…ìŠ¤íŠ¸ ë°°ì—´
     public string[] QuestLines;
 
-    // Äù½ºÆ® ´Ş¼º ¹è¿­
+    // í€˜ìŠ¤íŠ¸ ë‹¬ì„± ë°°ì—´
     [SerializeField]
     private bool curQuesting;
     public bool abilityQuesting = false;
 
     UIManager uiManager;
 
-    // ¶Ç±ÛÅÏ
+    // ë˜ê¸€í„´
     private static QuestManager instance;
     public static QuestManager Instance
     {
@@ -38,38 +38,39 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // Äù½ºÆ® ¸ñÇ¥¸¦ È£ÃâÇÏ´Â ÇÔ¼ö
-    // ÀÎµ¦½º¹øÂ°ÀÇ ÅØ½ºÆ®¸¦ ¹è¿­¿¡¼­ ºÒ·¯¿Í ¶ç¿ï »Ó
+
+    // í€˜ìŠ¤íŠ¸ ëª©í‘œë¥¼ í˜¸ì¶œí•˜ëŠ” í•¨ìˆ˜
+    // ì¸ë±ìŠ¤ë²ˆì§¸ì˜ í…ìŠ¤íŠ¸ë¥¼ ë°°ì—´ì—ì„œ ë¶ˆëŸ¬ì™€ ë„ìš¸ ë¿
     public IEnumerator CallingQuest(int idx)
     {
-        // Áö±İ Äù½ºÆ®¸¦ ³¡³»Áö ¸øÇÑÃ¤·Î »õ ¸ñÇ¥¸¦ ºÒ·¯³Â´Ù¸é ½ÇÆĞ ¾Ö´Ï¸ŞÀÌ¼Ç
+        // ì§€ê¸ˆ í€˜ìŠ¤íŠ¸ë¥¼ ëë‚´ì§€ ëª»í•œì±„ë¡œ ìƒˆ ëª©í‘œë¥¼ ë¶ˆëŸ¬ëƒˆë‹¤ë©´ ì‹¤íŒ¨ ì• ë‹ˆë©”ì´ì…˜
         if (curQuesting)
         {
-            Debug.Log("¸ñÇ¥ Áß »õ·Î¿î ¸ñÇ¥ È£ÃâµÊ");
+            Debug.Log("ëª©í‘œ ì¤‘ ìƒˆë¡œìš´ ëª©í‘œ í˜¸ì¶œë¨");
             yield return uiManager.StartCoroutine(uiManager.FailSubObjective());
         }
 
-        // ÇöÀç Äù½ºÆ®°¡ ´Ş¼ºÀÌ µÇ¾ú´Ù¸é (!curQuesting)ÀÌ¶ó¸é
-        // ´ÙÀ½ ¸ñÇ¥·Î
+        // í˜„ì¬ í€˜ìŠ¤íŠ¸ê°€ ë‹¬ì„±ì´ ë˜ì—ˆë‹¤ë©´ (!curQuesting)ì´ë¼ë©´
+        // ë‹¤ìŒ ëª©í‘œë¡œ
         //uiManager.StartCoroutine(uiManager.AppearMainObjective(idx));
         uiManager.StartAppearMain(idx);
-        // Å©·Î³ë½º µ¿»óÀ» À§ÇØ¼­
+        // í¬ë¡œë…¸ìŠ¤ ë™ìƒì„ ìœ„í•´ì„œ
         if (idx == 1)
         {
             abilityQuesting = true;
         }
     }
 
-    // ÇöÀç ¸ñÇ¥ ÁøÇàÁßÀÔ´Ï´Ù.
+    // í˜„ì¬ ëª©í‘œ ì§„í–‰ì¤‘ì…ë‹ˆë‹¤.
     public void Questing()
     {
         curQuesting = true;
     }
 
-    // ÇöÀç ÁøÇàÁßÀÎ ¸ñÇ¥¸¦ ´Ş¼ºÇßµç ¾Æ´Ïµç ³¡³Â½À´Ï´Ù.
+    // í˜„ì¬ ì§„í–‰ì¤‘ì¸ ëª©í‘œë¥¼ ë‹¬ì„±í–ˆë“  ì•„ë‹ˆë“  ëëƒˆìŠµë‹ˆë‹¤.
     public void QuestDone()
     {
-        // ui¸Å´ÏÀú¿¡¼­ ºÎ¸£´ÂÁß
+        // uië§¤ë‹ˆì €ì—ì„œ ë¶€ë¥´ëŠ”ì¤‘
         curQuesting = false;
     }
 
@@ -83,7 +84,7 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 0¹ø ´©¸£¸é Äù½ºÆ® ´Ş¼º
+        // 0ë²ˆ ëˆ„ë¥´ë©´ í€˜ìŠ¤íŠ¸ ë‹¬ì„±
         if (Input.GetKeyDown(KeyCode.Alpha0))
             uiManager.Achieve();
     }

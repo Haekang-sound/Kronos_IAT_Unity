@@ -60,7 +60,7 @@ public class EffectManager : MonoBehaviour
 
     // 캐릭터 평타 각도를 맞추기 위해서
     Vector3 swordMagicOffest = new Vector3(90, 180, 0);
-    Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
+    Vector3 enemyMagicOffset = new Vector3(0, 90, 0);
 
     // 강화 검기 관련
     public bool isSwordWave;
