@@ -44,7 +44,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     [HideInInspector]
     public bool isFucus;
 
-    private string _nodeid;
+    public string id;
 
     private Button _button;
     private VideoPlayer _videoPlayer;
@@ -162,13 +162,13 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void Save(string purpose)
     {
-        string key = _nodeid + purpose;
+        string key = id + purpose;
         PlayerPrefs.SetInt(key, (int)_state);
     }
 
     public void Load(string purpose)
     {
-        string key = _nodeid + purpose;
+        string key = id + purpose;
         if (PlayerPrefs.HasKey(key))
         {
             AbilityNode.State loadedstate = (AbilityNode.State)PlayerPrefs.GetInt(key);
@@ -179,7 +179,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void Reset()
     {
-        PlayerPrefs.DeleteKey(_nodeid);
+        PlayerPrefs.DeleteKey(id);
     }
 
     // IObservable /////////////////////////////////////////////////////////////
@@ -213,8 +213,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private void Awake()
     {
-        _nodeid = gameObject.GetInstanceID().ToString();
-
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
         _videoPlayer = GetComponentInChildren<VideoPlayer>();
         _videoPlayer?.Pause();

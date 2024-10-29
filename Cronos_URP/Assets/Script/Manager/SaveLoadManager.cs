@@ -7,8 +7,8 @@ public class SaveLoadManager : MonoBehaviour
 {
     public enum Purpose
     {
-        _scene,
-        _checkpoint
+        scene,
+        checkpoint
     }
 
     [SerializeField]
@@ -59,20 +59,20 @@ public class SaveLoadManager : MonoBehaviour
     {
         _lastSavedScenename = SceneManager.GetActiveScene().name;
 
-        PlayerPrefs.SetFloat(_lastSavedScenename + "_TP", Player.Instance.TP);
-        PlayerPrefs.SetFloat(_lastSavedScenename + "_CP", Player.Instance.CP);
+        PlayerPrefs.SetFloat(_lastSavedScenename + "-TP", Player.Instance.TP);
+        PlayerPrefs.SetFloat(_lastSavedScenename + "-CP", Player.Instance.CP);
 
-        _abilityTree.SaveData(SaveLoadManager.Purpose._scene.ToString());
+        _abilityTree.SaveData(SaveLoadManager.Purpose.scene.ToString());
     }
 
     public void LoadSceneData()
     {
-        if (PlayerPrefs.HasKey(_lastSavedScenename + "_TP"))
+        if (PlayerPrefs.HasKey(_lastSavedScenename + "-TP"))
         {
-            Player.Instance.TP = PlayerPrefs.GetFloat(_lastSavedScenename + "_TP");
-            Player.Instance.CP = PlayerPrefs.GetFloat(_lastSavedScenename + "_CP");
+            Player.Instance.TP = PlayerPrefs.GetFloat(_lastSavedScenename + "-TP");
+            Player.Instance.CP = PlayerPrefs.GetFloat(_lastSavedScenename + "-CP");
 
-            _abilityTree.LoadData(SaveLoadManager.Purpose._scene.ToString());
+            _abilityTree.LoadData(SaveLoadManager.Purpose.scene.ToString());
         }
     }
 
@@ -84,7 +84,7 @@ public class SaveLoadManager : MonoBehaviour
             return;
         }
 
-        _currentCheckpoint.LoadData();
+        StartCoroutine(_currentCheckpoint.LoadData_test());
     }
 
     // -----

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class TransitionPoint : MonoBehaviour
 {
 	public enum TransitionType
@@ -102,10 +99,5 @@ public class TransitionPoint : MonoBehaviour
 				TransitionInternal();
 			}
 		}
-	}
-
-	public void Update()
-	{
-		Debug.Log("Im here" + transform.position);
 	}
 }

@@ -36,7 +36,8 @@ public class Checkpoint : MonoBehaviour
         _data.priority = priority;
         _data.healTP = healTP;
         _data.sceneName = SceneManager.GetActiveScene().name;
-        _data.SpwanPos = transform;
+        _data.SpwanPos = transform.position;
+        _data.SpwanRot = transform.rotation;
 
         _abilityTree = FindObjectOfType<AbilityTree>();
     }

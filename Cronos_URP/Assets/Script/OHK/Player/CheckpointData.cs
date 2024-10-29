@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "NewCheckpointData", menuName = "Game/Checkpoint Data")]
@@ -8,25 +8,27 @@ public class CheckpointData : ScriptableObject
     public int priority;
     public float healTP;
     public string sceneName;
-    public Transform SpwanPos;
+    public Vector3 SpwanPos;
+    public Quaternion SpwanRot;
 
     private AbilityTree _abilityTree;
-    private readonly string r_tpKey = "checkPoint_TP";
-    private readonly string r_cpKey = "checkPoint_CP";
+    private readonly string r_tpKey = "checkPoint-TP";
+    private readonly string r_cpKey = "checkPoint-CP";
 
     public void LoadData()
     {
         // 만일 씬을 옮겨야 하면 씬이동
         if (sceneName != SceneManager.GetActiveScene().name)
         {
-            SceneController.TransitionToScene(sceneName);
+            //SceneController.TransitionToScene(sceneName);
+            SceneLoader.Instance.LoadScene(sceneName);
         }
 
         /// 플레이어
         // 체크포인트로 이동시킴
         var playerRigidbody = Player.Instance.GetComponent<Rigidbody>();
-        playerRigidbody.position = SpwanPos.position;
-        playerRigidbody.rotation = SpwanPos.rotation;
+        playerRigidbody.position = SpwanPos;
+        playerRigidbody.rotation = SpwanRot;
 
         // TP 및 CP 가져오기
         Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
@@ -38,7 +40,43 @@ public class CheckpointData : ScriptableObject
             _abilityTree = FindObjectOfType<AbilityTree>();
         }
 
-        _abilityTree.LoadData(SaveLoadManager.Purpose._checkpoint.ToString());
+        _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());
+    }
+
+    public IEnumerator LoadData_test()
+    {
+        // 만일 씬을 옮겨야 하면 씬이동
+        if (sceneName != SceneManager.GetActiveScene().name)
+        {
+            yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
+
+            yield return SceneController.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(sceneName));
+
+            // 자기 자신을 재호출
+            yield return SceneController.Instance.StartCoroutine(LoadData_test());
+
+            yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
+        }
+        else
+        {
+            /// 플레이어
+            // 체크포인트로 이동시킴
+            var playerRigidbody = Player.Instance.GetComponent<Rigidbody>();
+            playerRigidbody.position = SpwanPos;
+            playerRigidbody.rotation = SpwanRot;
+
+            // TP 및 CP 가져오기
+            Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
+            Player.Instance.CP = PlayerPrefs.GetFloat(r_cpKey);
+
+            // 능력 개방 데이터 가져오기
+            if (_abilityTree == null)
+            {
+                _abilityTree = FindObjectOfType<AbilityTree>();
+            }
+
+            _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());
+        }
     }
 
     public void SaveData()
@@ -56,6 +94,6 @@ public class CheckpointData : ScriptableObject
             _abilityTree = FindObjectOfType<AbilityTree>();
         }
 
-        _abilityTree.SaveData(SaveLoadManager.Purpose._checkpoint.ToString());
+        _abilityTree.SaveData(SaveLoadManager.Purpose.checkpoint.ToString());
     }
 }

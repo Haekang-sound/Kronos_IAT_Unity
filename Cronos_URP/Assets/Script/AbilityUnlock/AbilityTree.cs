@@ -91,6 +91,12 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
         _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
+        for (int i = 0; i <_abilityNodes.LongCount(); i++)
+        {
+            var node = _abilityNodes[i];
+            node.id = i.ToString();
+        }
+
         foreach (var obserable in _obserables)
         {
             obserable.Subscribe(this);

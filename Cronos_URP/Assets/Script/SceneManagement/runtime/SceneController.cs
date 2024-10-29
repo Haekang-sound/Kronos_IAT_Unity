@@ -141,12 +141,15 @@ public class SceneController : MonoBehaviour
             entrance.OnReachDestination.Invoke();
         }
 
+        SaveLoadManager.Instance.LoadSceneData();
+
         yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
 
         //if (m_playerInput)
         //{
         //    m_playerInput.GainControl();
         //}
+
 
         m_transitioning = false;
     }
