@@ -18,21 +18,15 @@ public class UI_Collider2 : MonoBehaviour
         qm = QuestManager.Instance;
         if (qm == null)
             Debug.Log("qm doesn't assigned");
-        StartCoroutine(ShowRegionCoroutine());
     }
 
-    IEnumerator ShowRegionCoroutine()
+    private void OnTriggerStay(Collider other)
     {
-        yield return new WaitForSeconds(0.5f);
-        um.StartRegion(regionNum);
-        Debug.Log("Call Region Name");
+        if (other.gameObject == Player.Instance.gameObject)
+        {
+            um.StartRegion(regionNum);
+            Debug.Log("STAY");
+            Destroy(gameObject);
+        }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject == Player.Instance.gameObject)
-    //    {
-    //        um.StartRegion(regionNum);
-    //    }
-    //}
 }

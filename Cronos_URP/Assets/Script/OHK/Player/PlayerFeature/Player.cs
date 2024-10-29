@@ -141,8 +141,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public EffectManager effectManager;
 	public ImpulseCam impulseCam;
 	public GameObject playerSword;
-	public GameObject spcCubeL;
-	public GameObject spcCubeR;
+	//public GameObject spcCubeL;
+	//public GameObject spcCubeR;
 	public float spcDelay;
 	public PlayerStateMachine psm;
 	public BoxColliderAdjuster adjuster;
@@ -363,15 +363,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 		TP = _damageable.currentHitPoints;
 
 		// 움직일 때마다 spc큐브를 활성화.
-		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		{
-			StartCoroutine(ActivateSpcCubes(spcDelay));
-		}
-		else
-		{
-			spcCubeL.SetActive(false);
-			spcCubeR.SetActive(false);
-		}
+		//if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+		//{
+		//	StartCoroutine(ActivateSpcCubes(spcDelay));
+		//}
+		//else
+		//{
+		//	spcCubeL.SetActive(false);
+		//	spcCubeR.SetActive(false);
+		//}
 	}
 
 	private void FixedUpdate()
@@ -703,27 +703,27 @@ public class Player : MonoBehaviour, IMessageReceiver
 			impulseCam.Shake();
 	}
 
-	IEnumerator ActivateSpcCubes(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		{
-			spcCubeL.SetActive(true);
-			spcCubeR.SetActive(true);
-		}
-	}
+	//IEnumerator ActivateSpcCubes(float delay)
+	//{
+	//	yield return new WaitForSeconds(delay);
+	//	if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+	//	{
+	//		spcCubeL.SetActive(true);
+	//		spcCubeR.SetActive(true);
+	//	}
+	//}
 
 	// 플레이어 spcCube를 활성화 - 키프레임에서 이벤트로 호출
-	public void ActivateSCube()
-	{
-		spcCubeL.SetActive(true);
-		spcCubeR.SetActive(true);
-	}
+	//public void ActivateSCube()
+	//{
+	//	spcCubeL.SetActive(true);
+	//	spcCubeR.SetActive(true);
+	//}
 
-	public void DeactivateSCube()
-	{
+	//public void DeactivateSCube()
+	//{
 
-	}
+	//}
 
 	public void SetCheckpoint(Checkpoint checkpoint)
 	{
