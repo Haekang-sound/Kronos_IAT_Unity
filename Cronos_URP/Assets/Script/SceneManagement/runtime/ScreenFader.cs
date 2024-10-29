@@ -76,13 +76,28 @@ public class ScreenFader : MonoBehaviour
         }
 
         canvasGroup.alpha = finalAlpha;
-        m_isFading = false;
         canvasGroup.blocksRaycasts = false;
+        m_isFading = false; 
     }
 
-    public static void SetAlpha(float alpha)
+    public static void SetAlpha(float alpha, FadeType fadeType = FadeType.Black)
     {
-        Instance.faderCanvasGroup.alpha = alpha;
+        CanvasGroup canvasGroup;
+        switch (fadeType)
+        {
+            case FadeType.Black:
+                canvasGroup = Instance.faderCanvasGroup;
+                break;
+            case FadeType.GameOver:
+                canvasGroup = Instance.gameOverCanvasGroup;
+                break;
+            case FadeType.Loading:
+            default:
+                canvasGroup = Instance.loadingCanvasGroup;
+                break;
+        }
+
+        canvasGroup.alpha = alpha;
     }
 
     public static IEnumerator FadeSceneIn(FadeType fadeType = FadeType.Black)

@@ -100,11 +100,30 @@ public class SceneController : MonoBehaviour
     protected IEnumerator Transition(string newSceneName, TransitionPoint.TransitionType transitionType = TransitionPoint.TransitionType.DifferentZone)
     {
         m_transitioning = true;
+
+        SaveLoadManager.Instance.SaveSceneData();
+
+        //if (m_playerInput)
+        //{
+        //    m_playerInput.ReleaseControl();
+        //}
+        
         yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
 
+        //PersistentDataManager.ClearPersisters();
+
         /// 새 로딩 씬 테스트중
+        //yield return SceneManager.LoadSceneAsync(newSceneName);
         yield return SceneLoader.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(newSceneName));
 
+        //m_playerInput = FindObjectOfType<PlayerInput>();
+
+        //if (m_playerInput)
+        //{
+        //    m_playerInput.ReleaseControl();
+        //}
+
+        //PersistentDataManager.LoadAllData();
 
         SceneTransitionDestination entrance = GetDestination();
 
@@ -118,6 +137,13 @@ public class SceneController : MonoBehaviour
         }
 
         yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
+
+        //if (m_playerInput)
+        //{
+        //    m_playerInput.GainControl();
+        //}
+
+        //SaveLoadManager.Instance.LoadSceneData();
 
         m_transitioning = false;
     }

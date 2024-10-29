@@ -7,228 +7,236 @@ using UnityEngine;
 using UnityEngine.Events;
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
-    [SerializeField] public AbilityNode rootAbilityNode;
-    [SerializeField] public AbilityAmountLimit abilityAmounts;
+	[SerializeField] public AbilityNode rootAbilityNode;
+	[SerializeField] public AbilityAmountLimit abilityAmounts;
 
-    public Canvas abilityTreeCanvas;
-    public PopupController popup;
-    public CanvasGroup canvasGroup;
-    public CinemachineVirtualCamera mainVirtualCam;
+	public Canvas abilityTreeCanvas;
+	public PopupController popup;
+	public CanvasGroup canvasGroup;
+	public CinemachineVirtualCamera mainVirtualCam;
 
-    public bool useParser;
+	public bool useParser;
 
-    private bool isFocus;
-    private List<AbilityNode> _abilityNodes;
+	private bool isFocus;
+	private List<AbilityNode> _abilityNodes;
 
-    private List<IObservable<AbilityNode>> _obserables;
-    private List<IDisposable> _unsubscribers;
+	private List<IObservable<AbilityNode>> _obserables;
+	private List<IDisposable> _unsubscribers;
 
-    private AbilityNode _lastPressed;
+	private AbilityNode _lastPressed;
 
-    private bool _isTransition;
+	private bool _isTransition;
 
-    public UnityEvent OnEnter;
+	public UnityEvent OnEnter;
 
-    // IObserver /////////////////////////////////////////////////////////////
+	// IObserver /////////////////////////////////////////////////////////////
 
-    public virtual void Subscribe(IObservable<AbilityNode> provider)
-    {
-        if (provider != null)
-            _unsubscribers.Add(provider.Subscribe(this));
-    }
+	public virtual void Subscribe(IObservable<AbilityNode> provider)
+	{
+		if (provider != null)
+			_unsubscribers.Add(provider.Subscribe(this));
+	}
 
-    public virtual void OnCompleted()
-    {
-        this.Unsubscribe();
-    }
+	public virtual void OnCompleted()
+	{
+		this.Unsubscribe();
+	}
 
-    public virtual void OnError(Exception e)
-    {
-    }
+	public virtual void OnError(Exception e)
+	{
+	}
 
-    public virtual void OnNext(AbilityNode value)
-    {
-        if (value.isFucus == false)
-        {
-            value.FocusIn();
+	public virtual void OnNext(AbilityNode value)
+	{
+		if (value.isFucus == false)
+		{
+			value.FocusIn();
 
-            if (_lastPressed != null &&
-                _lastPressed != value)
-            {
-                _lastPressed.FocusOut();
-            }
-        }
-        else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
-        {
-            if (abilityAmounts.CanSpend(value.PointNeed) != -1)
-            {
-                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
-                popup.OpenPopup("확실합니까?", () =>
-                {
-                    // 확인 버튼을 눌렀을 때 실행할 동작
-                    value.SetState(AbilityNode.State.Activate);
-                    abilityAmounts.UpdateSpent(value.PointNeed);
-                });
-            }
-        }
-        _lastPressed = value;
-    }
+			if (_lastPressed != null &&
+				_lastPressed != value)
+			{
+				_lastPressed.FocusOut();
+			}
+		}
+		else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
+		{
+			if (abilityAmounts.CanSpend(value.PointNeed) != -1)
+			{
+				// 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+				popup.OpenPopup("확실합니까?", () =>
+				{
+					// 확인 버튼을 눌렀을 때 실행할 동작
+					value.SetState(AbilityNode.State.Activate);
+					abilityAmounts.UpdateSpent(value.PointNeed);
+				});
+			}
+		}
+		_lastPressed = value;
+	}
 
-    public virtual void Unsubscribe()
-    {
-        foreach (var unsubscriber in _unsubscribers)
-        {
-            unsubscriber.Dispose();
-            _unsubscribers.Remove(unsubscriber);
-        }
-    }
+	public virtual void Unsubscribe()
+	{
+		foreach (var unsubscriber in _unsubscribers)
+		{
+			unsubscriber.Dispose();
+			_unsubscribers.Remove(unsubscriber);
+		}
+	}
 
-    // MonoBehaviour /////////////////////////////////////////////////////////////
+	// MonoBehaviour /////////////////////////////////////////////////////////////
 
-    private void Awake()
-    {
-        // 구독자 구독
-        _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
-        _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
+	private void Awake()
+	{
+		// 구독자 구독
+		_obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
+		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
-        foreach (var obserable in _obserables)
-        {
-            obserable.Subscribe(this);
-        }
+		for (int i = 0; i < _abilityNodes.LongCount(); i++)
+		{
+			var node = _abilityNodes[i];
+			node.id = i.ToString();
+		}
 
-        abilityTreeCanvas.enabled = false;
+		foreach (var obserable in _obserables)
+		{
+			obserable.Subscribe(this);
+		}
 
-        if (mainVirtualCam == null)
-        {
-            mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
-        }
-    }
+		abilityTreeCanvas.enabled = false;
 
-    private void Start()
-    {
-        rootAbilityNode.SetState(AbilityNode.State.Interactible);
-    }
+		if (mainVirtualCam == null)
+		{
+			mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
+		}
 
-    public void SaveData()
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Save();
-        }
-    }
+		rootAbilityNode.SetState(AbilityNode.State.Interactible);
+	}
 
-    public void LoadData()
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Load();
-        }
-    }
+	private void Start()
+	{
+		if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
+	}
 
-    public void ResetData()
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Reset();
-        }
-    }
+	public void SaveData(string purpose)
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Save(purpose);
+		}
+	}
 
-    public void EnterAbility()
-    {
-        if (_isTransition == false)
-        {
-            if (isFocus == false)
-            {
-                StartCoroutine(Enter());
-                OnEnter.Invoke();
-            }
-        }
-    }
+	public void LoadData(string purpose)
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Load(purpose);
+		}
+	}
 
-    public void ExitAbility()
-    {
-        if (_isTransition == false)
-        {
-            if (isFocus == true)
-            {
-                StartCoroutine(Exit());
-            }
-        }
-    }
+	public void ResetData()
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Reset();
+		}
+	}
 
-    public IEnumerator Enter()
-    {
-        _isTransition = true;
+	public void EnterAbility()
+	{
+		if (_isTransition == false)
+		{
+			if (isFocus == false)
+			{
+				StartCoroutine(Enter());
+				OnEnter.Invoke();
+			}
+		}
+	}
 
-        PauseManager.Instance.PauseGame();
+	public void ExitAbility()
+	{
+		if (_isTransition == false)
+		{
+			if (isFocus == true)
+			{
+				StartCoroutine(Exit());
+			}
+		}
+	}
 
-        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+	public IEnumerator Enter()
+	{
+		_isTransition = true;
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		PauseManager.Instance.PauseGame();
 
-        abilityTreeCanvas.enabled = true;
-        abilityAmounts.UpdatePlayerTimePoint();
+		yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
-        SetEnabledButtons(true);
-        SetPlayerCamPriority(0);
-        canvasGroup.alpha = 1f;
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+		abilityTreeCanvas.enabled = true;
+		abilityAmounts.UpdatePlayerTimePoint();
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		SetEnabledButtons(true);
+		SetPlayerCamPriority(0);
+		canvasGroup.alpha = 1f;
 
-        isFocus = true;
-        _isTransition = false;
-    }
+		yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
-    public IEnumerator Exit()
-    {
-        _isTransition = true;
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+		isFocus = true;
+		_isTransition = false;
+	}
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+	public IEnumerator Exit()
+	{
+		_isTransition = true;
 
-        abilityTreeCanvas.enabled = false;
-        SetPlayerCamPriority(10);
-        canvasGroup.alpha = 0f;
-        SetEnabledButtons(false);
+		yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		abilityTreeCanvas.enabled = false;
+		SetPlayerCamPriority(10);
+		canvasGroup.alpha = 0f;
+		SetEnabledButtons(false);
 
-        isFocus = false;
-        PauseManager.Instance.UnPauseGame();
+		yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
-        _isTransition = false;
-    }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-    void SetPlayerCamPriority(int val)
-    {
-        if (mainVirtualCam != null)
-        {
-            mainVirtualCam.Priority = val;
-        }
-    }
+		isFocus = false;
+		PauseManager.Instance.UnPauseGame();
 
-    private void SetEnabledButtons(bool val)
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.gameObject.SetActive(val);
-        }
-    }
+		_isTransition = false;
+	}
+
+	void SetPlayerCamPriority(int val)
+	{
+		if (mainVirtualCam != null)
+		{
+			mainVirtualCam.Priority = val;
+		}
+	}
+
+	private void SetEnabledButtons(bool val)
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.gameObject.SetActive(val);
+		}
+	}
 }

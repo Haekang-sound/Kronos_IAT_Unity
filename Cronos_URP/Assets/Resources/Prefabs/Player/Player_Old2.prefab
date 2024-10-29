@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e08ef511b33964bba9efab48ccdd95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isParry: 0
   SkillRenderObj: {fileID: 3284934833646403677, guid: 222404a70980adb4594c9347f02f38b7, type: 2}
   CurrentState: 
   TimeSlashCurve:
@@ -186,6 +187,7 @@ MonoBehaviour:
   spcDelay: 0
   psm: {fileID: 0}
   adjuster: {fileID: 0}
+  isDecreaseTP: 1
   currentTime: 0
   useKnockback: 0
 --- !u!114 &7961368793812106336
@@ -305,7 +307,19 @@ MonoBehaviour:
   defensible: {fileID: 587706453333704833}
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7171224109925757377}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnReceiveDamage:
     m_PersistentCalls:
       m_Calls: []

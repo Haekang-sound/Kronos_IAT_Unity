@@ -35,15 +35,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        SaveLoadManager.DeleteAllData();
-
         DontDestroyOnLoad(gameObject);
     }
 
 
     private void Reset()
     {
-        SaveLoadManager.DeleteAllData();
+        //SaveLoadManager.DeleteAllData();
     }
 
     // 

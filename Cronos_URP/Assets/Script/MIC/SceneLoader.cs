@@ -34,12 +34,6 @@ public class SceneLoader : MonoBehaviour
     public Image loadingSpin;
     [SerializeField]
     TextMeshProUGUI loadingText;
-	void Start()
-	{}
-    private void OnEnable()
-    {
-        
-    }
 
     // 함수로 부를거라면 이걸 쓴다
     public void LoadScene(string indexName)
