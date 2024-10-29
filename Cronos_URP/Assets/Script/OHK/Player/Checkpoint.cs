@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 
 /// <summary>
@@ -14,6 +16,8 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private bool _drawGizmo = true;
 
+    public int id;
+    private string key;
     public int priority;
     public float healTP;
     private CheckpointData _data;
@@ -21,6 +25,19 @@ public class Checkpoint : MonoBehaviour
     [Header("Event")]
     public UnityEvent OnActive;
 
+    public bool IsActive
+    {
+        set
+        {
+            if (value == true)
+            {
+                OnActive?.Invoke();
+            }
+            _isActive = value;
+        }
+        get { return _isActive; }
+    }
+    [SerializeField]
     private bool _isActive;
 
     private AbilityTree _abilityTree;
@@ -42,9 +59,21 @@ public class Checkpoint : MonoBehaviour
         _abilityTree = FindObjectOfType<AbilityTree>();
     }
 
+    private void Start()
+    {
+        key = GetType().Name + "-" + _data.sceneName + "-" + id;
+
+        IsActive = System.Convert.ToBoolean(PlayerPrefs.GetInt(key));
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt(key, System.Convert.ToInt16(IsActive));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (_isActive == true)
+        if (IsActive == true)
         {
             return;
         }
@@ -53,10 +82,7 @@ public class Checkpoint : MonoBehaviour
 
         if (player != null)
         {
-
-            OnActive?.Invoke();
-
-            _isActive = true;
+            IsActive = true;
 
             player.TP += healTP;
 
@@ -73,7 +99,7 @@ public class Checkpoint : MonoBehaviour
         if (player == null)
             return;
 
-        if (_isActive == true)
+        if (IsActive == true)
         {
             player.isDecreaseTP = true;
         }
