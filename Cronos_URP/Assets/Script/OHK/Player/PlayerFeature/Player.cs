@@ -1,13 +1,9 @@
 using Message;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static ScreenFader;
-
-
 
 /// <summary>
 /// Player가 갖는 정보를 한 눈에 볼 수 있는 플레이어 스크립트
@@ -145,6 +141,7 @@ public class Player : MonoBehaviour, IMessageReceiver
     //public float spcActivateTime;
 
     public bool isDecreaseTP = true;
+    [SerializeField] private bool usePreiviousSceneData = true;
 
 
     private void Awake()
@@ -205,13 +202,13 @@ public class Player : MonoBehaviour, IMessageReceiver
         meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
 
         totalspeed = Speed;
-        
-        // TEST: 데이터 로드 
-        //SaveLoadManager.Instance.LoadSceneData();
 
         _damageable.maxHitPoints = maxTP;
         _damageable.currentHitPoints = currentTP;
+        _damageable.OnDeath.AddListener(Death);
 
+        if(usePreiviousSceneData)
+            SaveLoadManager.Instance.LoadSceneData();
     }
 
     private void ChangeParryState()
@@ -334,11 +331,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 
         // 실시간으로 TP 감소
-        if (isDecreaseTP && _damageable.currentHitPoints >= 0f)
+        if (isDecreaseTP && _damageable.currentHitPoints > 0f)
         {
             _damageable.currentHitPoints -= Time.deltaTime;
 
-            if (TP <= 0)
+            if (_damageable.currentHitPoints <= 0)
             {
                 _damageable.JustDead();
             }
@@ -348,7 +345,7 @@ public class Player : MonoBehaviour, IMessageReceiver
         if (IsDecreaseCP && CP > 0)
         {
             CP -= Time.deltaTime * CPDecayRatio;
-            if (CP <= 0)
+            if (CP <= 0f)
             {
                 TimeNormalization();
             }
@@ -371,9 +368,11 @@ public class Player : MonoBehaviour, IMessageReceiver
         }
     }
 
+
     private void OnDestroy()
     {
         meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
+        ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading);
     }
 
     public void OnReceiveMessage(MessageType type, object sender, object data)
@@ -430,7 +429,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
     private IEnumerator DeathScequence()
     {
-        yield return ScreenFader.FadeSceneOut(FadeType.GameOver);
+        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.GameOver));
 
         while (ScreenFader.IsFading)
         {
@@ -439,15 +438,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 
         yield return new WaitForSecondsRealtime(3);
 
-        yield return ScreenFader.FadeSceneIn(FadeType.GameOver);
+        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.GameOver));
 
         while (ScreenFader.IsFading)
         {
             yield return null;
         }
+        //ScreenFader.SetAlpha(0f, FadeType.GameOver);
 
-        yield return ScreenFader.FadeSceneOut(FadeType.Black);
-
+        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.Black));
 
         while (ScreenFader.IsFading)
         {
@@ -456,8 +455,14 @@ public class Player : MonoBehaviour, IMessageReceiver
 
         SaveLoadManager.Instance.LoadCheckpointData();
 
-        yield return ScreenFader.FadeSceneIn(FadeType.Black);
+        yield return new WaitForSecondsRealtime(3);
+        ScreenFader.SetAlpha(0f);
 
+        //yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
+        //while (ScreenFader.IsFading)
+        //{
+        //    yield return null;
+        //}
     }
 
     /// <summary>

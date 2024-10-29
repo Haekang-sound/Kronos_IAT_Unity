@@ -15,35 +15,7 @@ public class CheckpointData : ScriptableObject
     private readonly string r_tpKey = "checkPoint-TP";
     private readonly string r_cpKey = "checkPoint-CP";
 
-    public void LoadData()
-    {
-        // 만일 씬을 옮겨야 하면 씬이동
-        if (sceneName != SceneManager.GetActiveScene().name)
-        {
-            //SceneController.TransitionToScene(sceneName);
-            SceneLoader.Instance.LoadScene(sceneName);
-        }
-
-        /// 플레이어
-        // 체크포인트로 이동시킴
-        var playerRigidbody = Player.Instance.GetComponent<Rigidbody>();
-        playerRigidbody.position = SpwanPos;
-        playerRigidbody.rotation = SpwanRot;
-
-        // TP 및 CP 가져오기
-        Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
-        Player.Instance.CP = PlayerPrefs.GetFloat(r_cpKey);
-
-        // 능력 개방 데이터 가져오기
-        if (_abilityTree == null)
-        {
-            _abilityTree = FindObjectOfType<AbilityTree>();
-        }
-
-        _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());
-    }
-
-    public IEnumerator LoadData_test()
+    public IEnumerator LoadData()
     {
         // 만일 씬을 옮겨야 하면 씬이동
         if (sceneName != SceneManager.GetActiveScene().name)
@@ -53,7 +25,7 @@ public class CheckpointData : ScriptableObject
             yield return SceneController.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(sceneName));
 
             // 자기 자신을 재호출
-            yield return SceneController.Instance.StartCoroutine(LoadData_test());
+            yield return SceneController.Instance.StartCoroutine(LoadData());
 
             yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
         }

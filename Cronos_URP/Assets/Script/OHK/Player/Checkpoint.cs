@@ -37,7 +37,6 @@ public class Checkpoint : MonoBehaviour
         }
         get { return _isActive; }
     }
-    [SerializeField]
     private bool _isActive;
 
     private AbilityTree _abilityTree;

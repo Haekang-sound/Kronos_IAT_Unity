@@ -100,13 +100,8 @@ public class SceneController : MonoBehaviour
     protected IEnumerator Transition(string newSceneName, TransitionPoint.TransitionType transitionType = TransitionPoint.TransitionType.DifferentZone)
     {
         m_transitioning = true;
-        //PersistentDataManager.SaveAllData();
-        SaveLoadManager.Instance.SaveSceneData();
 
-        //if (m_playerInput == null)
-        //{
-        //    m_playerInput = FindObjectOfType<PlayerInput>();
-        //}
+        SaveLoadManager.Instance.SaveSceneData();
 
         //if (m_playerInput)
         //{
@@ -141,8 +136,6 @@ public class SceneController : MonoBehaviour
             entrance.OnReachDestination.Invoke();
         }
 
-        SaveLoadManager.Instance.LoadSceneData();
-
         yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
 
         //if (m_playerInput)
@@ -150,6 +143,7 @@ public class SceneController : MonoBehaviour
         //    m_playerInput.GainControl();
         //}
 
+        //SaveLoadManager.Instance.LoadSceneData();
 
         m_transitioning = false;
     }

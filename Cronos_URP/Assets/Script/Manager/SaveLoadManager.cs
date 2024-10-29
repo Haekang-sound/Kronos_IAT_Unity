@@ -84,7 +84,7 @@ public class SaveLoadManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(_currentCheckpoint.LoadData_test());
+        StartCoroutine(_currentCheckpoint.LoadData());
     }
 
     // -----
