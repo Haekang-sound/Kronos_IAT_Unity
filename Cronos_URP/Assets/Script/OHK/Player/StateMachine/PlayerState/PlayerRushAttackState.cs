@@ -42,7 +42,7 @@ public class PlayerRushAttackState : PlayerBaseState
 		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
 			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
-			stateMachine.Rigidbody.rotation = (Quaternion.LookRotation(TargetPosition - stateMachine.transform.position));
+			//stateMachine.Rigidbody.rotation = (Quaternion.LookRotation(TargetPosition - stateMachine.transform.position));
 
 		}
 		else

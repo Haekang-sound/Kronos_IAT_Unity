@@ -12,7 +12,7 @@ public class PlayerAttackState : PlayerBaseState
 	[SerializeField] float moveForce;
 	bool attackBool = false;
 
-
+	Vector3 TargetPosition;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 	AnimatorStateInfo currentStateInfo;
@@ -37,6 +37,14 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	public override void Tick()
 	{
+		if (stateMachine.AutoTargetting.GetTarget() != null)
+		{
+			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
+		}
+		else
+		{
+			CalculateMoveDirection();   // 방향을 계산하고
+		}
 		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		{
 			// NEXTCOMBO 활성화
@@ -85,7 +93,14 @@ public class PlayerAttackState : PlayerBaseState
 		///트랜지션 중일때만 발동
 		if (stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex))
 		{
-			FaceMoveDirection();
+			if (stateMachine.AutoTargetting.GetTarget() != null && stateMachine.InputReader.moveComposite.magnitude == 0f)
+			{
+				FaceMoveDirection((TargetPosition - stateMachine.transform.position).normalized);
+			}
+			else
+			{
+				FaceMoveDirection();
+			}
 		}
 		Float();
 	}
