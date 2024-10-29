@@ -34,7 +34,7 @@ public class AutoTargetting : MonoBehaviour
 
 
 	// 몬스터리스트
-	List<GameObject> MonsterList;
+	[SerializeField] private List<GameObject> MonsterList;
 	float? min = null;
 
 	private void Awake()
@@ -44,6 +44,11 @@ public class AutoTargetting : MonoBehaviour
 		//PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
 	}
 
+	private void OnDisable()
+	{
+		Target = null;
+		MonsterList.Clear();
+	}
 	public Transform GetTarget()
 	{
 		return Target;
