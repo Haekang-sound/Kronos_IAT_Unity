@@ -4636,10 +4636,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
-      propertyPath: m_Intensity
-      value: 0.39
-      objectReference: {fileID: 0}
     - target: {fileID: 949728824729607772, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.003
@@ -4711,6 +4707,10 @@ PrefabInstance:
     - target: {fileID: 8515508979766762297, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_Intensity
+      value: 0.39
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6521,7 +6521,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 480831467}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1048091780}
+        m_TargetAssemblyTypeName: TitleScene, Assembly-CSharp
+        m_MethodName: Title
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &480831467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12340,6 +12352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048091779}
+  - component: {fileID: 1048091780}
   m_Layer: 0
   m_Name: Win Event
   m_TagString: Untagged
@@ -12363,6 +12376,22 @@ Transform:
   - {fileID: 37176472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1048091780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048091778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7821cc5291fb1439b455b4bd1bc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sButton: {fileID: 0}
+  oButton: {fileID: 0}
+  cButton: {fileID: 0}
+  eButton: {fileID: 0}
 --- !u!1001 &1052204996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18314,7 +18343,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 2.0232096, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.7251803, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18325,7 +18354,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 2.0232096, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.7251803, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!4 &1562582733 stripped
 Transform:

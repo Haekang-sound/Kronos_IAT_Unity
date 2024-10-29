@@ -12,8 +12,10 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 
 	[SerializeField] private Collider myColldier;
 	[SerializeField] private Renderer myRenderer;
+	[SerializeField] private bool isDestroy;
 
 	int deathCount = 0;
+
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
@@ -32,7 +34,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	}
 	private void Update()
 	{
-		if (Damageable.currentHitPoints <= 0f)
+		if (Damageable.currentHitPoints <= 0f) 
 		{
 			Damageable.JustDead();
 		}
@@ -80,7 +82,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 			Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
 			rb.constraints = (RigidbodyConstraints)0;
 		}
-
+		if(isDestroy)
 		Destroy(gameObject, 3f);
 	}
 

@@ -1,6 +1,7 @@
 using Message;
 using System;
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
@@ -289,7 +290,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		if (Input.GetKeyDown(KeyCode.H))
 		{
-			transform.position += transform.forward * 5f;
+			_damageable.isInvulnerable = true;
+			Debug.Log(_damageable.isInvulnerable);
 		}
 
 		if (Input.GetKeyDown(KeyCode.O))
@@ -420,6 +422,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
+			PlayerFSM.GetState().ToString() == "PlayerTimeStopState" ||
 			rigidImmunity || isEnforced)
 		{
 			return;
@@ -489,6 +492,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void TimeNormalization()
 	{
 		IsDecreaseCP = false;
+		_damageable.enabled = true;
 		CP = 0;
 		SkillRenderObj.SetActive(false);
 		BulletTime.Instance.SetNormalSpeed();

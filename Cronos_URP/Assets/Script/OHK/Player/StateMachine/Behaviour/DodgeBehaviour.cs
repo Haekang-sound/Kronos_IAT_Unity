@@ -19,21 +19,24 @@ public class DodgeBehaviour : StateMachineBehaviour
 		animator.ResetTrigger(attackHash);
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerDodgeState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
+		PlayerStateMachine.GetInstance().Player._damageable.enabled = false;
 		PlayerStateMachine.GetInstance().MoveForce = moveForce;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-// 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-// 	{
-// 
-// 
-// 	}
+ 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+ 	{
+		if ( stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) )
+		{
+			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+		}
+
+	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = false;
+		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
