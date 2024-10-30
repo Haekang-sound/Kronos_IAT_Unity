@@ -28,7 +28,7 @@ public class DodgeBehaviour : StateMachineBehaviour
  	{
 		if ( stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) )
 		{
-			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity); 
 		}
 
 	}

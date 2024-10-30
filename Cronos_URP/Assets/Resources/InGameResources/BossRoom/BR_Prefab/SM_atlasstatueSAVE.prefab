@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3601974691658934541, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.7297115
       objectReference: {fileID: 0}
     - target: {fileID: 3601974691658934541, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
       propertyPath: m_LocalPosition.y
@@ -90,6 +90,42 @@ PrefabInstance:
     - target: {fileID: 3601974691658934541, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: sceneName
+      value: 1_HN_Scene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: _sceneName
+      value: 1_HN_Scene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7066741813241877716}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Emissive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AtralsEffect, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248776865107696104, guid: 1e3bc145658fcac4a9472c0daff25a45, type: 3}
+      propertyPath: OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -285,13 +321,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b5528e2b3f53844b7d740f990f5868, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7066741813241877716}
   m_SourcePrefab: {fileID: 100100000, guid: 81b5528e2b3f53844b7d740f990f5868, type: 3}
 --- !u!4 &4777923892461860846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81b5528e2b3f53844b7d740f990f5868, type: 3}
   m_PrefabInstance: {fileID: 5027179412105662469}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5261691847985212756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b5528e2b3f53844b7d740f990f5868, type: 3}
+  m_PrefabInstance: {fileID: 5027179412105662469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7066741813241877716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261691847985212756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f151b2beb92eb74d99bad89d7526605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
 --- !u!1001 &5101116074645112816
 PrefabInstance:
   m_ObjectHideFlags: 0

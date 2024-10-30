@@ -6,8 +6,6 @@ public class PlayerRushAttackState : PlayerBaseState
 	//private bool ismove = false;
 	public PlayerRushAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-	private readonly int chargeHash = Animator.StringToHash("Charge");
-	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
 	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	private readonly int guradHash = Animator.StringToHash("isGuard");
 	Vector3 totalMove;
@@ -32,18 +30,16 @@ public class PlayerRushAttackState : PlayerBaseState
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 
+		stateMachine.AutoTargetting.AutoTargeting();
+
 		stateMachine.GroundChecker.ToggleChecker = false;
-		// 도착해야할 위치
 
 	}
 	public override void Tick()
 	{
-		/// 여기서 타겟을 바라본다.
 		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
 			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
-			//stateMachine.Rigidbody.rotation = (Quaternion.LookRotation(TargetPosition - stateMachine.transform.position));
-
 		}
 		else
 		{
@@ -56,7 +52,8 @@ public class PlayerRushAttackState : PlayerBaseState
 		{
 			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
 			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
-			if ((TargetPosition - stateMachine.transform.position).magnitude > 1.5f)
+			if ((TargetPosition - stateMachine.transform.position).magnitude 
+				> stateMachine.Player.targetdistance)
 			{
 				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 				{

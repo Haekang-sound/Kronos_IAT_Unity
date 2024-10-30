@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.InputSystem.Interactions;
@@ -288,7 +289,9 @@ public class PlayerMoveState : PlayerBaseState
 		Debug.Log("돌진공격!");
 		if (stateMachine.Animator.GetBool("isRushAttack")&& !CoolTimeCounter.Instance.isRushAttackUsed)
 		{
-			stateMachine.AutoTargetting.AutoTargeting();
+			stateMachine.AutoTargetting.enabled = true;
+			PlayerStateMachine.GetInstance().AutoTargetting.sphere.enabled = true;
+			
 			CoolTimeCounter.Instance.isRushAttackUsed = true;
 			stateMachine.Animator.SetTrigger("RushAttack");
 		}

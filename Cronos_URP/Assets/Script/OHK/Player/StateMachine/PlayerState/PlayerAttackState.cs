@@ -79,13 +79,38 @@ public class PlayerAttackState : PlayerBaseState
 		CalculateMoveDirection();   // 방향을 계산하고
 
 		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-		if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
+			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
+			if ((TargetPosition - stateMachine.transform.position).magnitude 
+				> stateMachine.Player.targetdistance)
+			{
+				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+				{
+					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+				}
+				else if (stateMachine.Animator.deltaPosition != null)
+				{
+					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+				}
+			}
+			else // 도착하면 멈춘다.
+			{
+				stateMachine.Rigidbody.velocity = Vector3.zero;
+			}
+
 		}
-		else if (stateMachine.Animator.deltaPosition != null)
+		else
 		{
-			stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+			if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+			{
+				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+			}
+			else if (stateMachine.Animator.deltaPosition != null)
+			{
+				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+			}
 		}
 	}
 	public override void FixedTick()
