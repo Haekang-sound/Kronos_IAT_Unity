@@ -58,15 +58,16 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 	public virtual void OnNext(AbilityNode value)
 	{
-		if (value.isFucus == false)
+		//if (value.isFucus == false)
 		{
-			value.FocusIn();
 			_nodedetailEffector.StartFadeIn(1.5f);
-
+			value.FocusIn();
 
 			nodeCostText.text = "CP " + value.PointNeed + " 소모";
 			nodeDetailText.text = value.description;
 			abilityVideoPlayer.clip = value.videoClip;
+            abilityVideoPlayer.time = 0;
+            abilityVideoPlayer?.Play();
 
             if (_lastPressed != null &&
 				_lastPressed != value)
@@ -124,8 +125,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	{
         _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
 
-		// 구독자 구독
-		_obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
+        // 구독자 구독
+        _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
 		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
 		for (int i = 0; i < _abilityNodes.LongCount(); i++)

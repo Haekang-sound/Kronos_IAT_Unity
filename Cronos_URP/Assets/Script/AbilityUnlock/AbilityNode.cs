@@ -62,17 +62,17 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         StartCoroutine(SetFocausAfter(true, 2));
         _virtualCam.Priority = 10;
-        fadeUI.StartFadeIn(1.4f);
-        _videoPlayer.time = 0;
-        _videoPlayer?.Play();
+        //fadeUI.StartFadeIn(1.4f);
+        //_videoPlayer.time = 0;
+        //_videoPlayer?.Play();
     }
 
     public void FocusOut()
     {
         StartCoroutine(SetFocausAfter(false, 2));
         _virtualCam.Priority = 0;
-        fadeUI.StartFadeOut(1.0f);
-        _videoPlayer?.Pause();
+        //fadeUI.StartFadeOut(1.0f);
+        //_videoPlayer?.Pause();
     }
 
     public void Render()
