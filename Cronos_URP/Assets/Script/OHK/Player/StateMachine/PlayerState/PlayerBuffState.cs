@@ -57,7 +57,7 @@ public class PlayerBuffState : PlayerBaseState
 
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
-			stateMachine.Animator.SetTrigger("combMove");
+			stateMachine.Animator.SetTrigger("isMove");
 		    stateMachine.Animator.SetBool("isEnforced", true);
 		}
 

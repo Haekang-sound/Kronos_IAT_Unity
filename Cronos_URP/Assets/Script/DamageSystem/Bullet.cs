@@ -15,10 +15,12 @@ public class Bullet : Projectile
     public float projectileSpeed;
     public int damageAmount = 1;
     public LayerMask damageMask;
+	public Damageable.DamageType damageType;
     public float explosionRadius;
     public float explosionTimer;
 
-    protected float m_sinceFired;
+
+	protected float m_sinceFired;
 
     protected RangeWeapon m_shooter;
     protected Rigidbody m_rigidBody;
@@ -102,6 +104,7 @@ public class Bullet : Projectile
         {
             amount = damageAmount,
             damageSource = transform.position,
+			damageType = damageType,
             damager = this,
             throwing = true
         };

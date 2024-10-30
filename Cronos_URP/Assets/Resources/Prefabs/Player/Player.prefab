@@ -1427,6 +1427,8 @@ GameObject:
   - component: {fileID: 1401857715657822329}
   - component: {fileID: 1179874009595847517}
   - component: {fileID: 7203969770864860729}
+  - component: {fileID: 4076027401790380267}
+  - component: {fileID: 7968239667175195807}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1520,6 +1522,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
+  targetdistance: 1
   meleeWeapon: {fileID: 0}
   _damageable: {fileID: 0}
   _defnsible: {fileID: 0}
@@ -1533,6 +1536,7 @@ MonoBehaviour:
   psm: {fileID: 0}
   adjuster: {fileID: 0}
   isDecreaseTP: 1
+  usePreiviousSceneData: 1
   currentTime: 0
   useKnockback: 0
 --- !u!114 &4060873393987838079
@@ -1952,6 +1956,37 @@ MonoBehaviour:
   tex3: {fileID: 2100000, guid: 0761dc405008b2d4c9da98d9ec1cb0bd, type: 2}
   tex4: {fileID: 2100000, guid: 2e7a45b5e8178d149849c0afea36d155, type: 2}
   tex5: {fileID: 2100000, guid: 81cc9c4d8f92b704e9c07f6cf77464af, type: 2}
+--- !u!114 &4076027401790380267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603875368510613815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6449ae620abac4b84bdb49e03d9b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForcePower: 10
+--- !u!114 &7968239667175195807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603875368510613815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8bedf9fc2611a4cb74f300a728c101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStack: 0
+  OnMaxStack:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentStack: 0
+  _isGroggy: 0
 --- !u!1 &3626722945520995826
 GameObject:
   m_ObjectHideFlags: 0

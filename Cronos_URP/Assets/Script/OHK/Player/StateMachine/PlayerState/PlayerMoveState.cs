@@ -36,6 +36,8 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Enter()
 	{
+		Player.Instance.groggyStack.ResetStack();
+
 		stateMachine.Animator.SetBool(guradHash, false);
 		stateMachine.Animator.ResetTrigger("Attack");
 		stateMachine.Animator.ResetTrigger("Rattack");
@@ -61,7 +63,7 @@ public class PlayerMoveState : PlayerBaseState
 
 	}
 
-	
+
 
 
 	// state의 update라 볼 수 있지
@@ -252,11 +254,19 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		stateMachine.Animator.SetBool(attackHash, true);
+		if (!stateMachine.Player.isBuff)
+		{
+			stateMachine.Animator.SetTrigger(attackHash);
+		}
+		else
+		{
+			stateMachine.Animator.SetTrigger("combAttack");
+		}
+
 	}
 	private void Dodge()
 	{
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f  && !CoolTimeCounter.Instance.isDodgeUsed)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			CoolTimeCounter.Instance.isDodgeUsed = true;
 			stateMachine.Animator.SetTrigger(dodgeHash);
@@ -270,7 +280,7 @@ public class PlayerMoveState : PlayerBaseState
 		{
 			stateMachine.Animator.SetTrigger("FlashSlash");
 			Player.Instance.CP -= 20f;
-	 	}
+		}
 	}
 
 	// 시간베기
@@ -287,11 +297,11 @@ public class PlayerMoveState : PlayerBaseState
 	private void RushAttack()
 	{
 		Debug.Log("돌진공격!");
-		if (stateMachine.Animator.GetBool("isRushAttack")&& !CoolTimeCounter.Instance.isRushAttackUsed)
+		if (stateMachine.Animator.GetBool("isRushAttack") && !CoolTimeCounter.Instance.isRushAttackUsed)
 		{
 			stateMachine.AutoTargetting.enabled = true;
 			PlayerStateMachine.GetInstance().AutoTargetting.sphere.enabled = true;
-			
+
 			CoolTimeCounter.Instance.isRushAttackUsed = true;
 			stateMachine.Animator.SetTrigger("RushAttack");
 		}
