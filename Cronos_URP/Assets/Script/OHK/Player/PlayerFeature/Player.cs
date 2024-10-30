@@ -436,17 +436,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		// 여기서 리턴하면 애니메이션만 재생하지 않는다.
 		// 
-		if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-			PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
-			PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
-			PlayerFSM.GetState().ToString() == "PlayerDownState" ||
-			rigidImmunity || isEnforced)
+		if(PlayerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!PlayerFSM.Animator.GetBool("isGurad") && PlayerFSM.GetState().ToString() == "PlayerDamagedState")
+			if (!PlayerFSM.Animator.GetBool("isGurad") )
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
 
+			return;
+		}
+		if (PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDownState" ||
+			rigidImmunity || isEnforced)
+		{
 			return;
 		}
 
