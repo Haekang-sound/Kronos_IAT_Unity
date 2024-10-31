@@ -63,7 +63,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			_nodedetailEffector.StartFadeIn(1.5f);
 			value.FocusIn();
 
-			nodeCostText.text = "CP " + value.PointNeed + " 소모";
+			nodeCostText.text = "TP " + value.PointNeed + " 소모";
 			nodeDetailText.text = value.description;
 			abilityVideoPlayer.clip = value.videoClip;
             abilityVideoPlayer.time = 0;
