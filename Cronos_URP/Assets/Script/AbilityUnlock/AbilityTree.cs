@@ -61,6 +61,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		//if (value.isFucus == false)
 		{
 			_nodedetailEffector.StartFadeIn(1.5f);
+			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
 			nodeCostText.text = "CP " + value.PointNeed + " ¼Ò¸ð";
@@ -116,6 +117,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
                     abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
                 //});
                 _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
                 FocusOutAll();
             }
         }
@@ -153,6 +155,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private void OnEnable()
     {
 		abilityNodeDetail.alpha = 0f;
+        abilityNodeDetail.blocksRaycasts = false;
     }
 
     private void Start()
@@ -237,7 +240,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		SetPlayerCamPriority(0);
 		canvasGroup.alpha = 1f;
 
-		yield return StartCoroutine(ScreenFader.FadeSceneIn());
+        yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
 		while (ScreenFader.IsFading)
 		{
