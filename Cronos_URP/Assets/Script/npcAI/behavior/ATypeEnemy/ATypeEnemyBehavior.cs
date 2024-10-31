@@ -71,7 +71,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         OnDown.AddListener(TriggerDown);
         sm = SoundManager.Instance;
-		//_damageable.OnDeath.AddListener(Dead);
+		_damageable.OnDeath.AddListener(Dead);
 	}
 
 
@@ -193,7 +193,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
 				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
-				Dead();
+				//Dead();
                 break;
             case MessageType.RESPAWN:
                 break;
