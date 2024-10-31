@@ -80,7 +80,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 
         _damageable.onDamageMessageReceivers.Add(this);
-
+        _damageable.currentHitPoints = _damageable.maxHitPoints;
         _meleeWeapon.SetOwner(gameObject);
 
         _rigidbody.GetComponent<Rigidbody>();
