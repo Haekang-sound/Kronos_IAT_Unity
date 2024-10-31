@@ -3,14 +3,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Video;
+using static UnityEngine.Rendering.DebugUI;
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
 	[SerializeField] public AbilityNode rootAbilityNode;
 	[SerializeField] public AbilityAmountLimit abilityAmounts;
 
 	public Canvas abilityTreeCanvas;
+
+	[Header("Node Detail")]
+	public CanvasGroup abilityNodeDetail;
+	public VideoPlayer abilityVideoPlayer;
+	public TMP_Text nodeCostText;
+	public TMP_Text nodeDetailText;
+
 	public PopupController popup;
 	public CanvasGroup canvasGroup;
 	public CinemachineVirtualCamera mainVirtualCam;
@@ -18,14 +28,14 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	public bool useParser;
 
 	private bool isFocus;
-	private List<AbilityNode> _abilityNodes;
-
-	private List<IObservable<AbilityNode>> _obserables;
-	private List<IDisposable> _unsubscribers;
+	private bool _isTransition;
 
 	private AbilityNode _lastPressed;
+	private FadeEffector _nodedetailEffector;
 
-	private bool _isTransition;
+	private List<AbilityNode> _abilityNodes;
+	private List<IDisposable> _unsubscribers;
+	private List<IObservable<AbilityNode>> _obserables;
 
 	public UnityEvent OnEnter;
 
@@ -48,29 +58,37 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 	public virtual void OnNext(AbilityNode value)
 	{
-		if (value.isFucus == false)
+		//if (value.isFucus == false)
 		{
+			_nodedetailEffector.StartFadeIn(1.5f);
+			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
-			if (_lastPressed != null &&
+			nodeCostText.text = "TP " + value.PointNeed + " 소모";
+			nodeDetailText.text = value.description;
+			abilityVideoPlayer.clip = value.videoClip;
+            abilityVideoPlayer.time = 0;
+            abilityVideoPlayer?.Play();
+
+            if (_lastPressed != null &&
 				_lastPressed != value)
 			{
 				_lastPressed.FocusOut();
-			}
+            }
 		}
-		else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
-		{
-			if (abilityAmounts.CanSpend(value.PointNeed) != -1)
-			{
-				// 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
-				popup.OpenPopup("확실합니까?", () =>
-				{
-					// 확인 버튼을 눌렀을 때 실행할 동작
-					value.SetState(AbilityNode.State.Activate);
-					abilityAmounts.UpdateSpent(value.PointNeed);
-				});
-			}
-		}
+		//else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
+		//{
+		//	if (abilityAmounts.CanSpend(value.PointNeed) != -1)
+		//	{
+		//		// 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+		//		popup.OpenPopup("확실합니까?", () =>
+		//		{
+		//			// 확인 버튼을 눌렀을 때 실행할 동작
+		//			value.SetState(AbilityNode.State.Activate);
+		//			abilityAmounts.UpdateSpent(value.PointNeed);
+		//		});
+		//	}
+		//}
 		_lastPressed = value;
 	}
 
@@ -83,12 +101,34 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		}
 	}
 
-	// MonoBehaviour /////////////////////////////////////////////////////////////
+    // MonoBehaviour /////////////////////////////////////////////////////////////
+
+    public void UnlockAbility()
+	{
+        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
+        {
+            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
+            {
+                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+                //popup.OpenPopup("확실합니까?", () =>
+                //{
+                    // 확인 버튼을 눌렀을 때 실행할 동작
+                    _lastPressed.SetState(AbilityNode.State.Activate);
+                    abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
+                //});
+                _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
+                FocusOutAll();
+            }
+        }
+    }
 
 	private void Awake()
 	{
-		// 구독자 구독
-		_obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
+        _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
+
+        // 구독자 구독
+        _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
 		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
 		for (int i = 0; i < _abilityNodes.LongCount(); i++)
@@ -110,12 +150,28 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		}
 
 		rootAbilityNode.SetState(AbilityNode.State.Interactible);
+    }
+
+    private void OnEnable()
+    {
+		abilityNodeDetail.alpha = 0f;
+        abilityNodeDetail.blocksRaycasts = false;
+    }
+
+    private void Start()
+	{
+        if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
 	}
 
-	private void Start()
+	// -----
+
+	public void FocusOutAll()
 	{
-		if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
-	}
+        foreach (var button in _abilityNodes)
+        {
+            button.FocusOut();
+        }
+    }
 
 	public void SaveData(string purpose)
 	{
@@ -184,7 +240,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		SetPlayerCamPriority(0);
 		canvasGroup.alpha = 1f;
 
-		yield return StartCoroutine(ScreenFader.FadeSceneIn());
+        yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
 		while (ScreenFader.IsFading)
 		{

@@ -5,7 +5,7 @@ public class FadeEffector : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
 
-    private void Awake()
+    private void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
