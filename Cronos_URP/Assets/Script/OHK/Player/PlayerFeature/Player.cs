@@ -461,17 +461,20 @@ public class Player : MonoBehaviour, IMessageReceiver
 		positionToDamager -= transform.up * Vector3.Dot(transform.up, positionToDamager);
 		transform.rotation = Quaternion.LookRotation(positionToDamager);
 
-		soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 
 		switch (damageMessage.damageType)
 		{
 
 			case DamageType.ATypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedA");
-				break;
+				if(!PlayerFSM.Animator.GetBool("isGuard"))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+                break;
 			case DamageType.BTypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedB");
-				break;
+                if (!PlayerFSM.Animator.GetBool("isGuard"))
+                    soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+                break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger("down");
 				break;
