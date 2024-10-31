@@ -383,19 +383,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		TP = _damageable.currentHitPoints;
 
-		//// ������ ������ spcť�긦 Ȱ��ȭ.
-		//if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		//{
-		//	StartCoroutine(ActivateSpcCubes(spcDelay));
-		//}
-		//else
-		//{
-		//	if (spcCubeL)
-		//	{
-		//		spcCubeL.SetActive(false);
-		//		spcCubeR.SetActive(false);
-		//	}
-		//}
 	}
 
 
@@ -412,7 +399,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DAMAGED:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-
 					Damaged(damageData);
 
 				}
@@ -420,12 +406,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DEAD:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					PlayerFSM.InputReader.enabled = false;
 					//Death(/*damageData*/);
 				}
 				break;
 			case MessageType.RESPAWN:
 				{
-
+					
 				}
 				break;
 		}
@@ -518,7 +505,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		yield return new WaitForSecondsRealtime(3);
 		ScreenFader.SetAlpha(0f);
-
+		PlayerFSM.InputReader.enabled = true;
 		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
 		//while (ScreenFader.IsFading)
 		//{
