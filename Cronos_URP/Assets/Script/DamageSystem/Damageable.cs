@@ -48,7 +48,7 @@ public partial class Damageable : MonoBehaviour
 
     private void OnEnable()
     {
-        ResetDamage();
+        //ResetDamage();
     }
 
     void Start()
