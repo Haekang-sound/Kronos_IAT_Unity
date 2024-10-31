@@ -47,14 +47,14 @@ public class UI_Scanner : MonoBehaviour
 
     void Update()
     {
-        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
+        if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
         {
             isInteracting = true;
             interText.SetActive(false);
             abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
         }
 
-        if (isInteracting && Input.GetKeyDown(KeyCode.Tab))
+        if (isInteracting && Input.GetKeyDown(KeyCode.F))
         {
             isInteracting = false;
             abilityUnlock.GetComponent<AbilityTree>().ExitAbility();

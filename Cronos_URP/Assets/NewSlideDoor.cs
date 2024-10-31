@@ -23,13 +23,13 @@ public class NewSlideDoor : MonoBehaviour
 			{
 				_currentDistance += Time.deltaTime * speed;
 
-				Vector3 tempL = left.position;
-				Vector3 tempR = right.position;
+				Vector3 tempL = left.localPosition;
+				Vector3 tempR = right.localPosition;
 
 				tempL.x += _currentDistance;
 				tempR.x -= _currentDistance;
-				left.position = tempL;
-				right.position = tempR;
+				left.localPosition = tempL;
+				right.localPosition = tempR;
 			}
 
 			

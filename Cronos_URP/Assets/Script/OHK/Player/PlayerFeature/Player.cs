@@ -324,12 +324,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime)
+		if (buffTimer > buffTime && !isEnforced)
 		{
-			isBuff = false;
+			//isBuff = false;
 			PlayerFSM.Animator.SetBool("isMove", true);
 			PlayerFSM.Animator.SetBool("isEnforced", false);
-			effectManager.SwordAuraOff();
+			//effectManager.SwordAuraOff();
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))

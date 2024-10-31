@@ -19,28 +19,28 @@ public class EnemyColliderAdjustBehaviour : SceneLinkedSMB<ATypeEnemyBehavior>
 	[SerializeField]
 	public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-// 		if (Size == Vector3.zero)
-// 		{
-// 			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Reset();
-// 
-// 		}
-// 		else
-// 		{
-// 			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newCenter = Center;
-// 			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newSize = Size;
-// 		}
-// 
-// 		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Adjust();
-// 
-// 		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().simpleDamager.currentDamageType = damageType;
+		if (Size == Vector3.zero)
+		{
+			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Reset();
+
+		}
+		else
+		{
+			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newCenter = Center;
+			_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newSize = Size;
+		}
+
+		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Adjust();
+
+		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().simpleDamager.currentDamageType = damageType;
 	}
 
 	public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		base.OnSLStateExit(animator, stateInfo, layerIndex);
-// 		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Reset();
-// 		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newCenter = _monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster._originalCenter;
-// 		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newSize = _monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster._originalSize;
+		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.Reset();
+		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newCenter = _monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster._originalCenter;
+		_monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster.newSize = _monoBehaviour.enemySword.GetComponent<MeleeWeapon>().bAdjuster._originalSize;
 	}
 
 }
