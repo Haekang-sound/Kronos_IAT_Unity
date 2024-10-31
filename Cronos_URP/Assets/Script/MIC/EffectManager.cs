@@ -138,14 +138,14 @@ public class EffectManager : MonoBehaviour
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-//         if (Input.GetKeyDown(KeyCode.Alpha3))
-//             BossFiveSpear(player.transform);
+        //         if (Input.GetKeyDown(KeyCode.Alpha3))
+        //             BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-//         if (Input.GetKeyDown(KeyCode.Alpha5))
-//             CreateAbsorbFX(player.transform, 12);
-//         if (Input.GetKeyDown(KeyCode.Alpha6))
-//             SpeedLine();
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CreateAbsorbFX(player.transform, 12);
+        //         if (Input.GetKeyDown(KeyCode.Alpha6))
+        //             SpeedLine();
     }
 
     private void OnValidate()

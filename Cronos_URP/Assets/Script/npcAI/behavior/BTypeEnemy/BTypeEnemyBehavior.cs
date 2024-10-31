@@ -44,6 +44,8 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public static readonly int hashIdle = Animator.StringToHash("idle");
     public static readonly int hashParriableAttack = Animator.StringToHash("parriableAttack");
 
+    SoundManager sm;
+
     void Awake()
     {
         BasePosition = transform.position;
@@ -58,7 +60,10 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    // void Start()
+    void Start()
+    {
+        sm = SoundManager.Instance;
+    }
 
 
     void OnEnable()
@@ -246,6 +251,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         }
 
         GetComponent<ReplaceWithRagdoll>().Replace();
+        sm.PlaySFX("Enemy_Dead_Sound_SE", transform);
         _controller.Release();
     }
 
@@ -289,21 +295,27 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
                 break;
             case Damageable.DamageType.ATypeHit:
                 key = Animator.StringToHash("hit_a");
+                sm.PlaySFX("Enemy_Pain_1_Sound_SE", transform);
                 break;
             case Damageable.DamageType.BTypeHit:
                 key = Animator.StringToHash("hit_b");
+                sm.PlaySFX("Enemy_Pain_2_Sound_SE", transform);
                 break;
             case Damageable.DamageType.KockBack:
                 key = Animator.StringToHash("knock_back");
+                sm.PlaySFX("Enemy_Pain_3_Sound_SE", transform);
                 break;
             case Damageable.DamageType.Fall:
                 key = Animator.StringToHash("fall");
+                sm.PlaySFX("Enemy_Pain_4_Sound_SE", transform);
                 break;
             case Damageable.DamageType.OnFallDamaged:
                 key = Animator.StringToHash("on_fall_damaged");
+                sm.PlaySFX("Enemy_Pain_5_Sound_SE", transform);
                 break;
             case Damageable.DamageType.Down:
                 key = Animator.StringToHash("fall_down");
+                sm.PlaySFX("Enemy_Pain_6_Sound_SE", transform);
                 break;
         }
 

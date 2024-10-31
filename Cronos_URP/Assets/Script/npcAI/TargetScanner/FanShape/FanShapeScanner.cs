@@ -3,7 +3,7 @@ using static UnityEngine.Advertisements.Advertisement;
 
 // enemy 객체가 플레이를 찾고 추적하는 데 사용된다.
 [System.Serializable]
-public class FanShapeScanner: MonoBehaviour
+public class FanShapeScanner : MonoBehaviour
 {
     [SerializeField]
     private bool drawGizmos = true;
@@ -15,11 +15,21 @@ public class FanShapeScanner: MonoBehaviour
     public float maxHeightDifference;
     public LayerMask viewBlockerLayerMask;
 
-    public GameObject target { private get; set; }
+    [Header("Target Setting")]
+    [SerializeField]
+    private GameObject _target;
+    public GameObject target
+    {
+        private get => _target;
+        set => _target = value;
+    }
 
     void OnEnable()
     {
-        target = Player.Instance.gameObject;
+        if (target == null)
+        {
+            target = Player.Instance.gameObject;
+        }
     }
 
     /// <summary>
