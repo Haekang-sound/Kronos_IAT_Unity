@@ -412,7 +412,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case MessageType.RESPAWN:
 				{
-					
+
 				}
 				break;
 		}
@@ -423,9 +423,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		// ���⼭ �����ϸ� �ִϸ��̼Ǹ� ������� �ʴ´�.
 		// 
-		if(PlayerFSM.GetState().ToString() == "PlayerDamagedState")
+		if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!PlayerFSM.Animator.GetBool("isGurad") )
+			if (!PlayerFSM.Animator.GetBool("isGurad"))
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
@@ -454,25 +454,29 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 			case DamageType.ATypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedA");
-				if(!PlayerFSM.Animator.GetBool("isGuard"))
+				if (!PlayerFSM.Animator.GetBool("isGuard"))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				break;
 			case DamageType.BTypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedB");
-                if (!PlayerFSM.Animator.GetBool("isGuard"))
-                    soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				if (!PlayerFSM.Animator.GetBool("isGuard"))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger("down");
 				break;
 		}
 
 	}
-
+	bool isDeath = false;
 	// �׾��� �� ȣ��Ǵ� �Լ�
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
-		StartCoroutine(DeathScequence());
+		if (!isDeath)
+		{
+			StartCoroutine(DeathScequence());
+			isDeath = true;
+		}
 	}
 
 	private IEnumerator DeathScequence()
@@ -506,6 +510,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		yield return new WaitForSecondsRealtime(3);
 		ScreenFader.SetAlpha(0f);
 		PlayerFSM.InputReader.enabled = true;
+		isDeath = false;
 		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
 		//while (ScreenFader.IsFading)
 		//{
@@ -720,15 +725,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void SoundFoot1()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
+	}
 
 	public void SoundFoot2()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
+	}
 
 	// 기획에 전달하기 위해 플레이어 키프레임으로 호출되는 사운드 출력 함수들
 	public void ComSlash1()
@@ -737,23 +742,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
 	}
 
-    public void ComSlash2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
-    }
+	public void ComSlash2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+	}
 
-    public void ComSlash3()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
-    }
+	public void ComSlash3()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+	}
 
-    public void ComSlash4()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
-    }
+	public void ComSlash4()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+	}
 
 	public void NorSlash1()
 	{
@@ -761,13 +766,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
 	}
 
-    public void NorSlash2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
-    }
+	public void NorSlash2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+	}
 
-    public void Shake()
+	public void Shake()
 	{
 		if (impulseCam != null)
 			impulseCam.Shake();
