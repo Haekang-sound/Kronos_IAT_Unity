@@ -211,7 +211,10 @@ public partial class Damageable : MonoBehaviour
     // 적 발자국을 이렇게 할 수 있을까
     public void FootStep()
     {
-        soundManager.PlaySFX("Enemy_Walk_1_Sound_SE", transform);
+        if (gameObject.GetComponent<DestroyKey>() != null)
+            soundManager.PlaySFX("Boss_Walk_1_Sound_SE", transform);
+        else
+            soundManager.PlaySFX("Enemy_Walk_1_Sound_SE", transform);
     }
 
 #if UNITY_EDITOR

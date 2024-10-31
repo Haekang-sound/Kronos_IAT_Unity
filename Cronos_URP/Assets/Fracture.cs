@@ -16,6 +16,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 
 	int deathCount = 0;
 
+
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
@@ -32,6 +33,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	{
 
 	}
+
 	private void Update()
 	{
 		if (Damageable.currentHitPoints <= 0f) 
