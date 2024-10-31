@@ -44,7 +44,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public string id;
 
     private Button _button;
-    private VideoPlayer _videoPlayer;
     private IObserver<AbilityNode> _observer;
     private CinemachineVirtualCamera _virtualCam;
 
@@ -60,17 +59,12 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         StartCoroutine(SetFocausAfter(true, 2));
         _virtualCam.Priority = 10;
-        //fadeUI.StartFadeIn(1.4f);
-        //_videoPlayer.time = 0;
-        //_videoPlayer?.Play();
     }
 
     public void FocusOut()
     {
         StartCoroutine(SetFocausAfter(false, 2));
         _virtualCam.Priority = 0;
-        //fadeUI.StartFadeOut(1.0f);
-        //_videoPlayer?.Pause();
     }
 
     public void Render()
@@ -211,8 +205,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Awake()
     {
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
-        _videoPlayer = GetComponentInChildren<VideoPlayer>();
-        _videoPlayer?.Pause();
 
         _backgoundImage = background.GetComponent<Image>();
         _backgroundRotate = background.GetComponent<RotateUI>();
