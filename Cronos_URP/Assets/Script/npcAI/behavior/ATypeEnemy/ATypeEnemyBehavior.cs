@@ -71,10 +71,11 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         OnDown.AddListener(TriggerDown);
         sm = SoundManager.Instance;
-    }
+		//_damageable.OnDeath.AddListener(Dead);
+	}
 
 
-    void OnEnable()
+	void OnEnable()
     {
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 

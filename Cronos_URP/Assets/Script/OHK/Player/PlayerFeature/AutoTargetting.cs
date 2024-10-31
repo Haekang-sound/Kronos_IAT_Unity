@@ -80,20 +80,20 @@ public class AutoTargetting : MonoBehaviour
 
 	}
 
-	private void OnTriggerStay(Collider other)
-	{
-		if (other.CompareTag("Respawn"))
-		{
-			// 리스트 내부의 값과 비교해서 같다면 리턴
-			foreach (GameObject t in MonsterList)
-			{
-				if (t == FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject) return;
-			}
-			
-			// 살아남으면 넣어주마
-			MonsterList.Add(FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject);
-		}
-	}
+// 	private void OnTriggerStay(Collider other)
+// 	{
+// 		if (other.CompareTag("Respawn"))
+// 		{
+// 			// 리스트 내부의 값과 비교해서 같다면 리턴
+// 			foreach (GameObject t in MonsterList)
+// 			{
+// 				if (t == FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject) return;
+// 			}
+// 			
+// 			// 살아남으면 넣어주마
+// 			MonsterList.Add(FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject);
+// 		}
+// 	}
 
 	/// 콜라이더에서 몬스터가 나가면 리스트에서 제거한다.
 	private void OnTriggerExit(Collider other)
@@ -267,7 +267,7 @@ public class AutoTargetting : MonoBehaviour
 		// 현재 몬스터 목록을 순회한다.
 		for (int i = MonsterList.Count - 1; i >= 0; i--)
 		{
-			if (MonsterList[i] == null)
+			if (MonsterList[i] == null || !MonsterList[i].active)
 			{
 				MonsterList.RemoveAt(i);
 			}
