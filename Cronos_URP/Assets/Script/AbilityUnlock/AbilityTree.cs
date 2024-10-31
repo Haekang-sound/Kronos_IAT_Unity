@@ -244,7 +244,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		abilityTreeCanvas.enabled = false;
 		SetPlayerCamPriority(10);
 		canvasGroup.alpha = 0f;
-		SetEnabledButtons(false);
+        abilityNodeDetail.alpha = 0f;
+		abilityNodeDetail.blocksRaycasts = false;
+
+        SetEnabledButtons(false);
 
 		yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
