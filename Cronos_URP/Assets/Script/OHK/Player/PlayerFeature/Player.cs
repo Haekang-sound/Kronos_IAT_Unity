@@ -137,8 +137,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public EffectManager effectManager;
 	public ImpulseCam impulseCam;
 	public GameObject playerSword;
-	public GameObject spcCubeL;
-	public GameObject spcCubeR;
+	//public GameObject spcCubeL;
+	//public GameObject spcCubeR;
 	public float spcDelay;
 	public PlayerStateMachine psm;
 	public BoxColliderAdjuster adjuster;
@@ -383,19 +383,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		TP = _damageable.currentHitPoints;
 
-		// ������ ������ spcť�긦 Ȱ��ȭ.
-		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		{
-			StartCoroutine(ActivateSpcCubes(spcDelay));
-		}
-		else
-		{
-			if (spcCubeL)
-			{
-				spcCubeL.SetActive(false);
-				spcCubeR.SetActive(false);
-			}
-		}
+		//// ������ ������ spcť�긦 Ȱ��ȭ.
+		//if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+		//{
+		//	StartCoroutine(ActivateSpcCubes(spcDelay));
+		//}
+		//else
+		//{
+		//	if (spcCubeL)
+		//	{
+		//		spcCubeL.SetActive(false);
+		//		spcCubeR.SetActive(false);
+		//	}
+		//}
 	}
 
 
@@ -461,14 +461,20 @@ public class Player : MonoBehaviour, IMessageReceiver
 		positionToDamager -= transform.up * Vector3.Dot(transform.up, positionToDamager);
 		transform.rotation = Quaternion.LookRotation(positionToDamager);
 
+
 		switch (damageMessage.damageType)
 		{
+
 			case DamageType.ATypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedA");
-				break;
+				if(!PlayerFSM.Animator.GetBool("isGuard"))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+                break;
 			case DamageType.BTypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedB");
-				break;
+                if (!PlayerFSM.Animator.GetBool("isGuard"))
+                    soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+                break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger("down");
 				break;
@@ -725,33 +731,82 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Character_voice_SE", transform);
 	}
 
-	public void Shake()
+	public void SoundFoot1()
+	{
+        if (soundManager != null)
+            soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
+    }
+
+	public void SoundFoot2()
+	{
+        if (soundManager != null)
+            soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
+    }
+
+	// 기획에 전달하기 위해 플레이어 키프레임으로 호출되는 사운드 출력 함수들
+	public void ComSlash1()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
+	}
+
+    public void ComSlash2()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+    }
+
+    public void ComSlash3()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+    }
+
+    public void ComSlash4()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+    }
+
+	public void NorSlash1()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
+	}
+
+    public void NorSlash2()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+    }
+
+    public void Shake()
 	{
 		if (impulseCam != null)
 			impulseCam.Shake();
 	}
 
-	IEnumerator ActivateSpcCubes(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		{
-			spcCubeL.SetActive(true);
-			spcCubeR.SetActive(true);
-		}
-	}
+	//IEnumerator ActivateSpcCubes(float delay)
+	//{
+	//	yield return new WaitForSeconds(delay);
+	//	if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+	//	{
+	//		spcCubeL.SetActive(true);
+	//		spcCubeR.SetActive(true);
+	//	}
+	//}
 
-	// �÷��̾� spcCube�� Ȱ��ȭ - Ű�����ӿ��� �̺�Ʈ�� ȣ��
-	public void ActivateSCube()
-	{
-		spcCubeL.SetActive(true);
-		spcCubeR.SetActive(true);
-	}
+	//// �÷��̾� spcCube�� Ȱ��ȭ - Ű�����ӿ��� �̺�Ʈ�� ȣ��
+	//public void ActivateSCube()
+	//{
+	//	spcCubeL.SetActive(true);
+	//	spcCubeR.SetActive(true);
+	//}
 
-	public void DeactivateSCube()
-	{
+	//public void DeactivateSCube()
+	//{
 
-	}
+	//}
 
 	protected IEnumerator RespawnRoutine()
 	{

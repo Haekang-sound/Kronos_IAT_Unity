@@ -1537,6 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02c64eaab9973743aabe7cfc3893d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphere: {fileID: 0}
   PlayerCamera: {fileID: 0}
   CinemachinePOV: {fileID: 0}
   horizontalSpeed: 500
@@ -1548,6 +1549,7 @@ MonoBehaviour:
   autoTargettingAixsDamp: 0
   exitValue: 0
   isTargetting: 0
+  MonsterList: []
 --- !u!135 &9091533624918512758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1836,6 +1838,8 @@ GameObject:
   - component: {fileID: 7836693288841694907}
   - component: {fileID: 7698948627034736897}
   - component: {fileID: 3060845744804995102}
+  - component: {fileID: 1162213062361891129}
+  - component: {fileID: 3791168552399616019}
   m_Layer: 9
   m_Name: Player_Cape
   m_TagString: Player
@@ -1929,19 +1933,20 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
+  targetdistance: 1
   meleeWeapon: {fileID: 0}
   _damageable: {fileID: 0}
+  groggyStack: {fileID: 0}
   _defnsible: {fileID: 0}
   soundManager: {fileID: 0}
   effectManager: {fileID: 0}
   impulseCam: {fileID: 0}
   playerSword: {fileID: 4831757503715229307}
-  spcCubeL: {fileID: 0}
-  spcCubeR: {fileID: 0}
   spcDelay: 0.3
   psm: {fileID: 0}
   adjuster: {fileID: 0}
   isDecreaseTP: 1
+  usePreiviousSceneData: 1
   currentTime: 0
   useKnockback: 0
 --- !u!114 &8379121543114933469
@@ -2355,12 +2360,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcc1f7dc34b71148aa32f73a1f00864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRing: {fileID: 0}
+  timeRing: {fileID: 1843908922649762968}
   tex1: {fileID: 2100000, guid: 34a8bdaa1136cf04e9570fc74c36fad2, type: 2}
   tex2: {fileID: 2100000, guid: 34a6b950ec7626d459339e50ac79365d, type: 2}
   tex3: {fileID: 2100000, guid: 0761dc405008b2d4c9da98d9ec1cb0bd, type: 2}
   tex4: {fileID: 2100000, guid: 2e7a45b5e8178d149849c0afea36d155, type: 2}
   tex5: {fileID: 2100000, guid: 81cc9c4d8f92b704e9c07f6cf77464af, type: 2}
+--- !u!114 &1162213062361891129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737856591898675433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6449ae620abac4b84bdb49e03d9b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForcePower: 100
+--- !u!114 &3791168552399616019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737856591898675433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8bedf9fc2611a4cb74f300a728c101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStack: 0
+  OnMaxStack:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentStack: 0
+  _isGroggy: 0
 --- !u!1 &8008332620969851959
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,6 +3672,11 @@ MonoBehaviour:
   m_ReferenceObject: {fileID: 0}
   m_DistanceToObject: 20
   m_Multithread: 1
+--- !u!1 &1843908922649762968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3470323196854494862, guid: 4990f6213b71acb4e9553ed3a3f0c481, type: 3}
+  m_PrefabInstance: {fileID: 3008389066937416214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867666827956506923 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3482611819365395261, guid: 4990f6213b71acb4e9553ed3a3f0c481, type: 3}
