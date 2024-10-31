@@ -7700,6 +7700,22 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 24a4049acf52e8e419bd5141889e4c5e, type: 3}
+    - target: {fileID: 4614963538039155895, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614963538039155895, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1595783913126114908}
+    - target: {fileID: 4614963538039155895, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614963538039155895, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleScene, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5144899568715814407, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -8019,8 +8035,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4338624926701709159, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1595783913126114908}
   m_SourcePrefab: {fileID: 100100000, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+--- !u!1 &7084491302031444770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4338624926701709159, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
+  m_PrefabInstance: {fileID: 6801789140394847301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1595783913126114908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084491302031444770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7821cc5291fb1439b455b4bd1bc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sButton: {fileID: 0}
+  oButton: {fileID: 0}
+  cButton: {fileID: 0}
+  eButton: {fileID: 0}
 --- !u!224 &8151959700177155617 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3406228781046946404, guid: 91ffadb7afd9d9849922497428bb28a5, type: 3}
