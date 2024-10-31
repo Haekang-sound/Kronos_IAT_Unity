@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Video;
-using static UnityEngine.Rendering.DebugUI;
+
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
 	[SerializeField] public AbilityNode rootAbilityNode;
@@ -20,8 +21,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	public VideoPlayer abilityVideoPlayer;
 	public TMP_Text nodeCostText;
 	public TMP_Text nodeDetailText;
+	public Button buttonUnlock;
+	public Button buttonCancel;
 
-	public PopupController popup;
+    public PopupController popup;
 	public CanvasGroup canvasGroup;
 	public CinemachineVirtualCamera mainVirtualCam;
 
@@ -66,6 +69,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 			nodeCostText.text = "TP " + value.PointNeed + " 소모";
 			nodeDetailText.text = value.description;
+
 			abilityVideoPlayer.clip = value.videoClip;
             abilityVideoPlayer.time = 0;
             abilityVideoPlayer?.Play();
@@ -102,26 +106,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	}
 
     // MonoBehaviour /////////////////////////////////////////////////////////////
-
-    public void UnlockAbility()
-	{
-        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
-        {
-            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
-            {
-                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
-                //popup.OpenPopup("확실합니까?", () =>
-                //{
-                    // 확인 버튼을 눌렀을 때 실행할 동작
-                    _lastPressed.SetState(AbilityNode.State.Activate);
-                    abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
-                //});
-                _nodedetailEffector.StartFadeOut(1.5f);
-                abilityNodeDetail.blocksRaycasts = false;
-                FocusOutAll();
-            }
-        }
-    }
 
 	private void Awake()
 	{
@@ -161,17 +145,13 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
     private void Start()
 	{
         if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
-	}
 
-	// -----
+        buttonUnlock.onClick.AddListener(UnlockAbility);
 
-	public void FocusOutAll()
-	{
-        foreach (var button in _abilityNodes)
-        {
-            button.FocusOut();
-        }
+		buttonCancel.onClick.AddListener(FocusOutAll);
     }
+
+    // -----
 
 	public void SaveData(string purpose)
 	{
@@ -219,7 +199,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			}
 		}
 	}
-
 	public IEnumerator Enter()
 	{
 		_isTransition = true;
@@ -295,4 +274,32 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			node.gameObject.SetActive(val);
 		}
 	}
+
+    private void FocusOutAll()
+    {
+        foreach (var button in _abilityNodes)
+        {
+            button.FocusOut();
+        }
+    }
+
+    private void UnlockAbility()
+    {
+        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
+        {
+            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
+            {
+                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+                //popup.OpenPopup("확실합니까?", () =>
+                //{
+                // 확인 버튼을 눌렀을 때 실행할 동작
+                _lastPressed.SetState(AbilityNode.State.Activate);
+                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
+                //});
+                _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
+                FocusOutAll();
+            }
+        }
+    }
 }
