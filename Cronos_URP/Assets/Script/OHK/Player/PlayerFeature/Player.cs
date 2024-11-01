@@ -456,6 +456,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 		switch (damageMessage.damageType)
 		{
 
+			case DamageType.None:
+				PlayerFSM.Animator.SetTrigger("damagedA");
+				if (!PlayerFSM.Animator.GetBool("isGuard"))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.ATypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedA");
 				if (!PlayerFSM.Animator.GetBool("isGuard"))
