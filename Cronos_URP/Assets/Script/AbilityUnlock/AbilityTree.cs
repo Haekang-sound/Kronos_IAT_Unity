@@ -147,13 +147,40 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
 
         buttonUnlock.onClick.AddListener(UnlockAbility);
-
 		buttonCancel.onClick.AddListener(FocusOutAll);
     }
 
     // -----
 
-	public void SaveData(string purpose)
+    public void FocusOutAll()
+    {
+        foreach (var button in _abilityNodes)
+        {
+            button.FocusOut();
+        }
+    }
+
+    public void UnlockAbility()
+    {
+        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
+        {
+            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
+            {
+                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
+                //popup.OpenPopup("확실합니까?", () =>
+                //{
+                // 확인 버튼을 눌렀을 때 실행할 동작
+                _lastPressed.SetState(AbilityNode.State.Activate);
+                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
+                //});
+                _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
+                FocusOutAll();
+            }
+        }
+    }
+
+    public void SaveData(string purpose)
 	{
 		foreach (var node in _abilityNodes)
 		{
@@ -277,32 +304,4 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			node.gameObject.SetActive(val);
 		}
 	}
-
-    private void FocusOutAll()
-    {
-        foreach (var button in _abilityNodes)
-        {
-            button.FocusOut();
-        }
-    }
-
-    private void UnlockAbility()
-    {
-        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
-        {
-            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
-            {
-                // 팝업창을 열고, 확인 버튼을 눌렀을 때 수행할 동작을 정의
-                //popup.OpenPopup("확실합니까?", () =>
-                //{
-                // 확인 버튼을 눌렀을 때 실행할 동작
-                _lastPressed.SetState(AbilityNode.State.Activate);
-                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
-                //});
-                _nodedetailEffector.StartFadeOut(1.5f);
-                abilityNodeDetail.blocksRaycasts = false;
-                FocusOutAll();
-            }
-        }
-    }
 }
