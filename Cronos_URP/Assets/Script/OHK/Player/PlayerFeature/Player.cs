@@ -474,11 +474,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		if (!isDeath)
 		{
+			soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
 			StartCoroutine(DeathScequence());
 			isDeath = true;
 		}
-		soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
-		StartCoroutine(DeathScequence());
 	}
 
 	private IEnumerator DeathScequence()
