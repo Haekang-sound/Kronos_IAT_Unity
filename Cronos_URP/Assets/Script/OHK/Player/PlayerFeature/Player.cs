@@ -324,12 +324,16 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime && !isEnforced)
+		if (buffTimer > buffTime)
 		{
-			//isBuff = false;
+			isBuff = false;
 			PlayerFSM.Animator.SetBool("isMove", true);
 			PlayerFSM.Animator.SetBool("isEnforced", false);
-			//effectManager.SwordAuraOff();
+			if (CurrentState == "PlayerMoveState")
+			{
+				effectManager.SwordAuraOff();
+
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -744,23 +748,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
 	}
 
-    public void ComSound2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
-    }
+	public void ComSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+	}
 
-    public void ComSound3()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
-    }
+	public void ComSound3()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+	}
 
-    public void ComSound4()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
-    }
+	public void ComSound4()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+	}
 
 	public void NorSound1()
 	{
@@ -768,11 +772,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
 	}
 
-    public void NorSound2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
-    }
+	public void NorSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+	}
 
 	public void DodgeSound()
 	{
@@ -780,7 +784,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Player_Dodge_Sound_SE", transform);
 	}
 
-    public void Shake()
+	public void Shake()
 	{
 		if (impulseCam != null)
 			impulseCam.Shake();

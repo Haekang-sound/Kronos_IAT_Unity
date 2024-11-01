@@ -19,6 +19,10 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(dodgeHash);
 		
+		if(!Player.Instance.isBuff)
+		{
+			EffectManager.Instance.SwordAuraOff();
+		}
 
 	}
 
