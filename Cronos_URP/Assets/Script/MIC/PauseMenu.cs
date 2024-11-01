@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -116,5 +117,8 @@ public class PauseMenu : MonoBehaviour
         {
             ClosePauseMenu();
         }
+        // 버튼 하이라이트 초기화
+        Debug.Log("버튼 하이라이트 초기화");
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
