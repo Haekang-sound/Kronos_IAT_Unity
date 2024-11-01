@@ -46,29 +46,30 @@ public class UI_Scanner : MonoBehaviour
         Debug.Log("Exit InterAction");
     }
 
-    void Update()
-    {
-        if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
-        {
-            isInteracting = true;
-            sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
-            interText.SetActive(false);
-            abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
-        }
+	void Update()
+	{
+		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
+		{
+			isInteracting = true;
+			sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
+			interText.SetActive(false);
+			PauseManager.Instance.abilityPause = true;
+			abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
+		}
 
-        if (isInteracting && Input.GetKeyDown(KeyCode.F))
-        {
-            isInteracting = false;
-            abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
-            interText.SetActive(true);
-            isPopup = true;
-            // 크로노스 네이놈
-            if (QuestManager.Instance.abilityQuesting)
-            {
-                QuestManager.Instance.abilityQuesting = false;
-                UIManager.Instance.Achieve();
-            }
-        }
-    }
+		if (isInteracting && Input.GetKeyDown(KeyCode.F))
+		{
+			isInteracting = false;
+			abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
+			interText.SetActive(true);
+			isPopup = true;
+			// 크로노스 네이놈
+			if (QuestManager.Instance.abilityQuesting)
+			{
+				QuestManager.Instance.abilityQuesting = false;
+				UIManager.Instance.Achieve();
+			}
+		}
+	}
 
 }
