@@ -871,38 +871,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6523664378448629553}
     m_Modifications:
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: currentHitPoints
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8098764207893039564}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Death
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Fracture, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140179958825325848, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5184103482322515824, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
       propertyPath: m_Name
       value: Fracture_tower1
@@ -947,37 +915,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7132720289400283415, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: isDestroy
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7132720289400283415, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7132720289400283415, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: myColldier
-      value: 
-      objectReference: {fileID: 5214966609164320046}
-    - target: {fileID: 7132720289400283415, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-      propertyPath: myRenderer
-      value: 
-      objectReference: {fileID: 5642801608004026096}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
---- !u!65 &5214966609164320046 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 6541299154980902389, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-  m_PrefabInstance: {fileID: 1339843346066057435}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &5642801608004026096 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6689910633617757739, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-  m_PrefabInstance: {fileID: 1339843346066057435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6154651345120059307 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5184103482322515824, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
@@ -988,17 +930,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5225000032495919217, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
   m_PrefabInstance: {fileID: 1339843346066057435}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8098764207893039564 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7132720289400283415, guid: f0cef6d2e43b0dd4f91f051d84048c85, type: 3}
-  m_PrefabInstance: {fileID: 1339843346066057435}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154651345120059307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225b4389391d7b84ab60830d6a9f16f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1892648351001198797
 PrefabInstance:
   m_ObjectHideFlags: 0

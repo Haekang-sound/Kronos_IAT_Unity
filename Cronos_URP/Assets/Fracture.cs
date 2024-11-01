@@ -15,7 +15,7 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	[SerializeField] private bool isDestroy;
 
 	int deathCount = 0;
-
+	bool isBroke;
 
 	private void Awake()
 	{
@@ -86,6 +86,15 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 		}
 		if(isDestroy)
 		Destroy(gameObject, 3f);
+	}
+
+	public void SoundCrack()
+	{
+		if (!isBroke)
+		{
+			isBroke = true;
+			SoundManager.Instance.PlaySFX("Stone_Crack_1_Sound_SE", transform);
+		}
 	}
 
 	private void Damaged(Damageable.DamageMessage damageData)

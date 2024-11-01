@@ -485,6 +485,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// �׾��� �� ȣ��Ǵ� �Լ�
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
+		soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
 		StartCoroutine(DeathScequence());
 	}
 
@@ -600,6 +601,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void TimeStop()
 	{
+		soundManager.PlaySFX("TimeStop_Skill_Sound_SE", transform);
 		Vector3 temp = transform.position;
 		effectManager.SpawnEffect("TeraainScanner", temp);
 		SkillRenderObj.SetActive(true);
@@ -744,41 +746,47 @@ public class Player : MonoBehaviour, IMessageReceiver
     }
 
 	// 기획에 전달하기 위해 플레이어 키프레임으로 호출되는 사운드 출력 함수들
-	public void ComSlash1()
+	public void ComSound1()
 	{
 		if (soundManager != null)
 			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
 	}
 
-    public void ComSlash2()
+    public void ComSound2()
     {
         if (soundManager != null)
             soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
     }
 
-    public void ComSlash3()
+    public void ComSound3()
     {
         if (soundManager != null)
             soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
     }
 
-    public void ComSlash4()
+    public void ComSound4()
     {
         if (soundManager != null)
             soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
     }
 
-	public void NorSlash1()
+	public void NorSound1()
 	{
 		if (soundManager != null)
 			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
 	}
 
-    public void NorSlash2()
+    public void NorSound2()
     {
         if (soundManager != null)
             soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
     }
+
+	public void DodgeSound()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Dodge_Sound_SE", transform);
+	}
 
     public void Shake()
 	{

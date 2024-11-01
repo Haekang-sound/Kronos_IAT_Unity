@@ -138,12 +138,12 @@ public class EffectManager : MonoBehaviour
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-        //         if (Input.GetKeyDown(KeyCode.Alpha3))
-        //             BossFiveSpear(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            CreateAbsorbFX(player.transform, 12);
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    CreateAbsorbFX(player.transform, 12);
         //         if (Input.GetKeyDown(KeyCode.Alpha6))
         //             SpeedLine();
     }
@@ -424,7 +424,8 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
-            
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
+
             Destroy(impact, 2.0f);
             // 능력개방되었다면 이것도 나옴
             if (isGroundEnforced)
@@ -458,7 +459,7 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect(name, hitPoint, fxRot);
-
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
             Destroy(impact, 2.0f);
         }
         else

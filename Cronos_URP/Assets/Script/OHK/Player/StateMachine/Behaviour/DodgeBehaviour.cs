@@ -14,6 +14,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
 		stateMachine = PlayerStateMachine.GetInstance();
+		SoundManager.Instance.PlaySFX("Player_Dodge_Sound_SE", Player.Instance.transform);
 		// 상태전환
 		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 		animator.ResetTrigger(attackHash);

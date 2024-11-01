@@ -7,7 +7,7 @@ public class UI_Scanner : MonoBehaviour
     public GameObject abilityUnlock;
     bool isPopup;
     bool isInteracting;
-
+    SoundManager sm;
 
     private void Start()
     {
@@ -17,6 +17,7 @@ public class UI_Scanner : MonoBehaviour
         interText.SetActive(false);
         isPopup = false;
         isInteracting = false;
+        sm = SoundManager.Instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +51,7 @@ public class UI_Scanner : MonoBehaviour
         if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
         {
             isInteracting = true;
+            sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
             interText.SetActive(false);
             abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
         }
