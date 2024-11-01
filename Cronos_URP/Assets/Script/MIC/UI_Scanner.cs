@@ -48,7 +48,7 @@ public class UI_Scanner : MonoBehaviour
 
     void Update()
     {
-        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
+        if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
         {
             isInteracting = true;
             sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
@@ -56,7 +56,7 @@ public class UI_Scanner : MonoBehaviour
             abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
         }
 
-        if (isInteracting && Input.GetKeyDown(KeyCode.Tab))
+        if (isInteracting && Input.GetKeyDown(KeyCode.F))
         {
             isInteracting = false;
             abilityUnlock.GetComponent<AbilityTree>().ExitAbility();

@@ -324,12 +324,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime)
+		if (buffTimer > buffTime && !isEnforced)
 		{
-			isBuff = false;
+			//isBuff = false;
 			PlayerFSM.Animator.SetBool("isMove", true);
 			PlayerFSM.Animator.SetBool("isEnforced", false);
-			effectManager.SwordAuraOff();
+			//effectManager.SwordAuraOff();
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -383,19 +383,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		TP = _damageable.currentHitPoints;
 
-		//// ������ ������ spcť�긦 Ȱ��ȭ.
-		//if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		//{
-		//	StartCoroutine(ActivateSpcCubes(spcDelay));
-		//}
-		//else
-		//{
-		//	if (spcCubeL)
-		//	{
-		//		spcCubeL.SetActive(false);
-		//		spcCubeR.SetActive(false);
-		//	}
-		//}
 	}
 
 
@@ -412,7 +399,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DAMAGED:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-
 					Damaged(damageData);
 
 				}
@@ -420,6 +406,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DEAD:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					PlayerFSM.InputReader.enabled = false;
 					//Death(/*damageData*/);
 				}
 				break;
@@ -436,9 +423,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		// ���⼭ �����ϸ� �ִϸ��̼Ǹ� ������� �ʴ´�.
 		// 
-		if(PlayerFSM.GetState().ToString() == "PlayerDamagedState")
+		if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!PlayerFSM.Animator.GetBool("isGurad") )
+			if (!PlayerFSM.Animator.GetBool("isGurad"))
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
@@ -467,24 +454,29 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 			case DamageType.ATypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedA");
-				if(!PlayerFSM.Animator.GetBool("isGuard"))
+				if (!PlayerFSM.Animator.GetBool("isGuard"))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				break;
 			case DamageType.BTypeHit:
 				PlayerFSM.Animator.SetTrigger("damagedB");
-                if (!PlayerFSM.Animator.GetBool("isGuard"))
-                    soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				if (!PlayerFSM.Animator.GetBool("isGuard"))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger("down");
 				break;
 		}
 
 	}
-
+	bool isDeath = false;
 	// �׾��� �� ȣ��Ǵ� �Լ�
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
+		if (!isDeath)
+		{
+			StartCoroutine(DeathScequence());
+			isDeath = true;
+		}
 		soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
 		StartCoroutine(DeathScequence());
 	}
@@ -519,7 +511,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		yield return new WaitForSecondsRealtime(3);
 		ScreenFader.SetAlpha(0f);
-
+		PlayerFSM.InputReader.enabled = true;
+		isDeath = false;
 		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
 		//while (ScreenFader.IsFading)
 		//{
@@ -735,15 +728,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void SoundFoot1()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
+	}
 
 	public void SoundFoot2()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
+	}
 
 	// 기획에 전달하기 위해 플레이어 키프레임으로 호출되는 사운드 출력 함수들
 	public void ComSound1()
