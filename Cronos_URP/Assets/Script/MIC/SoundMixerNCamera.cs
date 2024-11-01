@@ -160,12 +160,12 @@ public class SoundMixerNCamera : MonoBehaviour
         }
 
         // 슬라이더 값을 텍스트로 보여주기
-        masVal.text = ((masterSlider.value) * 100f).ToString("0") + ("%");
-        bgmVal.text = ((bgmSlider.value) * 100f).ToString("0") + ("%");
-        sfxVal.text = ((sfxSlider.value) * 100f).ToString("0") + ("%");
-        // 구조상 5의 배수로만 반올림해서 보여줘야겠다
-        float roundVal = Mathf.Round(camSlider.value * 100f / 5f) * 5f;
-        camVal.text = roundVal.ToString("0") + ("%");
+        //masVal.text = ((masterSlider.value) * 100f).ToString("0") + ("%");
+        //bgmVal.text = ((bgmSlider.value) * 100f).ToString("0") + ("%");
+        //sfxVal.text = ((sfxSlider.value) * 100f).ToString("0") + ("%");
+        //// 구조상 5의 배수로만 반올림해서 보여줘야겠다
+        //float roundVal = Mathf.Round(camSlider.value * 100f / 5f) * 5f;
+        //camVal.text = roundVal.ToString("0") + ("%");
         //camVal.text = ((camSlider.value) * 100f).ToString("0") + ("%");
     }
 
