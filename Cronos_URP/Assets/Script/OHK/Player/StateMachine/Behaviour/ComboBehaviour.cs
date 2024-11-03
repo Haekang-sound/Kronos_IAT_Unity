@@ -15,6 +15,7 @@ public class ComboBehaviour : StateMachineBehaviour
 	public Damageable.DamageType damageType;
 	public Damageable.ComboType comboType;
 
+	[SerializeField] private bool stopDodge ;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 
@@ -22,6 +23,7 @@ public class ComboBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.DodgeBool = stopDodge;
 		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 
 		stateMachine.MoveForce = moveForce;

@@ -578,6 +578,7 @@ AnimatorState:
   - {fileID: -8405823756973384231}
   - {fileID: -3383923827197663467}
   - {fileID: 8358810734530579249}
+  - {fileID: 3039843964601043806}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
@@ -771,6 +772,7 @@ MonoBehaviour:
   Damage: 3
   damageType: 3
   comboType: 2
+  stopDodge: 0
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &-6130925670275204267
@@ -996,6 +998,7 @@ MonoBehaviour:
   Damage: 3
   damageType: 4
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.07
   minFrame: 0.4
 --- !u!114 &-5474965037399157733
@@ -1014,6 +1017,7 @@ MonoBehaviour:
   Damage: 15
   damageType: 4
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.05
   minFrame: 0
 --- !u!114 &-5108014782398091610
@@ -1075,6 +1079,7 @@ MonoBehaviour:
   Damage: 0
   damageType: 6
   comboType: 1
+  stopDodge: 1
   hitStopTime: 0.03
   minFrame: 0
 --- !u!1101 &-4769139898400618455
@@ -1222,6 +1227,7 @@ MonoBehaviour:
   Damage: 0
   damageType: 0
   comboType: 0
+  stopDodge: 1
   hitStopTime: 0
   minFrame: 0
 --- !u!206 &-4199296172620256160
@@ -1380,6 +1386,7 @@ MonoBehaviour:
   Damage: 50
   damageType: 0
   comboType: 0
+  stopDodge: 1
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &-4111901266409146672
@@ -2321,6 +2328,7 @@ MonoBehaviour:
   Damage: 2
   damageType: 1
   comboType: 2
+  stopDodge: 0
   hitStopTime: 0.06
   minFrame: 0.328
 --- !u!1102 &-881464399840993649
@@ -2495,6 +2503,7 @@ MonoBehaviour:
   Damage: 2
   damageType: 1
   comboType: 2
+  stopDodge: 0
   hitStopTime: 0.07
   minFrame: 0
 --- !u!114 &-290126547666885164
@@ -2513,6 +2522,7 @@ MonoBehaviour:
   Damage: 3
   damageType: 5
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &-119523204972760793
@@ -2556,6 +2566,7 @@ MonoBehaviour:
   Damage: 0
   damageType: 3
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.04
   minFrame: 0
 --- !u!91 &9100000
@@ -2572,259 +2583,259 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isMove
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: NextCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isGuard
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isFalling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isLockOn
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: chargeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: -------------Ability-------------
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: ComAttackBan
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: NorAttackBan
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: NorAttackVariation
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: ComAttackVariation
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: DodgeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: EnforcedCombo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isTimeStop
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isCPBoomb
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isFlashSlash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
   - m_Name: isTimeSlash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isRushAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
   - m_Name: -------------TRIGGER-------------
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: goIdle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Rattack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Dodge
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: TimeStop
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: CPBoomb
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: combMove
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: FlashSlash
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: ParryAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: TimeSlash
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: TimeSlashReady
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: RushAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: damagedA
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: damagedB
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: combAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: down
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: -------------VALUE-------------
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: MoveSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: SideWalk
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Charge
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: moveX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: moveY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: animSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2934,6 +2945,7 @@ MonoBehaviour:
   Damage: 10
   damageType: 5
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.07
   minFrame: 0
 --- !u!1101 &601806855193486767
@@ -3576,6 +3588,7 @@ MonoBehaviour:
   Damage: 0
   damageType: 0
   comboType: 0
+  stopDodge: 0
   hitStopTime: 0
   minFrame: 0
 --- !u!114 &2880978346683414034
@@ -3748,6 +3761,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &3039843964601043806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f58d540f5c8df4b872cae2ed3ee75f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!206 &3071117606666444350
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4877,6 +4902,7 @@ MonoBehaviour:
   Damage: 0
   damageType: 0
   comboType: 0
+  stopDodge: 0
   hitStopTime: 0
   minFrame: 0.433
 --- !u!1101 &6535759634123561406
@@ -4920,6 +4946,7 @@ MonoBehaviour:
   Damage: 3
   damageType: 5
   comboType: 1
+  stopDodge: 0
   hitStopTime: 0.08
   minFrame: 0.414
 --- !u!1101 &6699718215165252703
@@ -5409,6 +5436,7 @@ MonoBehaviour:
   Damage: 2
   damageType: 2
   comboType: 2
+  stopDodge: 0
   hitStopTime: 0.06
   minFrame: 0
 --- !u!1101 &7745182279930307600

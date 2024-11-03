@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
+
 
 
 //using UnityEditorInternal;
@@ -12,7 +14,8 @@ public class LastCombo : StateMachineBehaviour
     [SerializeField] float Damage;
     public Damageable.DamageType damageType;
 	public Damageable.ComboType comboType;
-
+	
+	[SerializeField] private bool stopDodge;
 	public float hitStopTime;
     [Range(0.0f, 1.0f)] public float minFrame;
     AnimatorStateInfo currentStateInfo;
@@ -20,12 +23,14 @@ public class LastCombo : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		animator.ResetTrigger("Attack");
+		PlayerStateMachine.GetInstance().DodgeBool = stopDodge;
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerAttackState(PlayerStateMachine.GetInstance()));
+        PlayerStateMachine.GetInstance().MoveForce = moveForce;
 		PlayerStateMachine.GetInstance().currentLayerIndex = layerIndex;
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
-        PlayerStateMachine.GetInstance().MoveForce = moveForce;
-        PlayerStateMachine.GetInstance().Player.IsEnforced = true;
-		PlayerStateMachine.GetInstance().Player._damageable.enabled = false;
+        
+		Player.Instance.IsEnforced = true;
+		Player.Instance._damageable.enabled = false;
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;

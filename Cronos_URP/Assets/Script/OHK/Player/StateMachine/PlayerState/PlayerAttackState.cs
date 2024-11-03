@@ -155,7 +155,7 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (!CoolTimeCounter.Instance.isDodgeUsed)
+		if (!CoolTimeCounter.Instance.isDodgeUsed && !stateMachine.DodgeBool)
 		{
 			// 사용될 경우
 			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.

@@ -31,6 +31,7 @@ public class PlayerStateMachine : StateMachine
 
 	public AnimatorStateInfo currentStateInformable { get; set; }
 	public float minf { get; set; }
+	public bool DodgeBool { get; set; }
 
 	public void Awake()
 	{

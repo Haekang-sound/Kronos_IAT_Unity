@@ -27,7 +27,6 @@ public class PlayerRushAttackState : PlayerBaseState
 		stateMachine.Animator.ResetTrigger("ParryAttack");
 
 		stateMachine.InputReader.onRAttackStart += Gurad;
-		stateMachine.InputReader.onJumpStart += Dodge;
 
 		stateMachine.AutoTargetting.AutoTargeting();
 
@@ -102,22 +101,10 @@ public class PlayerRushAttackState : PlayerBaseState
 	public override void Exit()
 	{
 		stateMachine.InputReader.onRAttackStart -= Gurad;
-		stateMachine.InputReader.onJumpStart -= Dodge;
 
 		stateMachine.GroundChecker.ToggleChecker = true;
 	}
 
-	private void Dodge()
-	{
-		if (!CoolTimeCounter.Instance.isDodgeUsed)
-		{
-			// 사용될 경우
-			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
-			stateMachine.Animator.SetBool(nextComboHash, false);    // 
-																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
-			stateMachine.Animator.SetTrigger(dodgeHash);
-		}
-	}
 	private void Gurad()
 	{
 		if (stateMachine.IsRattack)
