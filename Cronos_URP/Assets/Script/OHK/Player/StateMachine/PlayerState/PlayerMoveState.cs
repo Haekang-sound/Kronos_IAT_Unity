@@ -278,7 +278,7 @@ public class PlayerMoveState : PlayerBaseState
 		if (stateMachine.Animator.GetBool("isFlashSlash") && Player.Instance.CP >= 20f)
 		{
 			stateMachine.Animator.SetTrigger("FlashSlash");
-			Player.Instance.CP -= 20f;
+			Player.Instance.CP -= 25f;
 		}
 	}
 

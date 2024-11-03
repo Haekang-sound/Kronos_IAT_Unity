@@ -21,6 +21,7 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	//심판의 칼날
 	public void Com_S_Attack_Aura()
 	{
+		PlayerStateMachine.GetInstance().Animator.SetBool("isFlashSlash", true) ;
 		EffectManager.Instance.isSwordWave = true;
 	}
 
@@ -62,25 +63,6 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool("isRushAttack", true);
 	}
-
-
-	// 	//경직 면역
-	// 	public void UseRigidImmunity()
-	//     {
-	//         abilityUsageInfo.RigidImmunity = true;
-	//     }
-
-	// 	// Nor_Attack 변환
-	// 	public void UseNorAttackVariation()
-	//     {
-	//         abilityUsageInfo.NorAttackVariation = true;
-	//     }
-	// 
-	// 	// Com_Attack 변환
-	// 	public void UseComAttackVariation()
-	//     {
-	//         abilityUsageInfo.ComAttackVariation = true;
-	//     }
 
 	//Com_S_Attack 강 공격 강화
 	public void UseComSAttackUpgrade()
