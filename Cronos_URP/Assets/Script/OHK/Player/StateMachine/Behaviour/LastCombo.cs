@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class LastCombo : StateMachineBehaviour
 {
-	private readonly int moveHash = Animator.StringToHash("isMove");
     [SerializeField] float moveForce;
     [SerializeField] float Damage;
     public Damageable.DamageType damageType;
@@ -22,7 +21,7 @@ public class LastCombo : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.ResetTrigger("Attack");
+		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 		PlayerStateMachine.GetInstance().DodgeBool = stopDodge;
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerAttackState(PlayerStateMachine.GetInstance()));
         PlayerStateMachine.GetInstance().MoveForce = moveForce;
@@ -44,11 +43,11 @@ public class LastCombo : StateMachineBehaviour
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
 			// ¿Ãµø¡ﬂ
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 		else
 		{
-			animator.SetBool(moveHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 	}

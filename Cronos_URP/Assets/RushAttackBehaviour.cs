@@ -5,9 +5,7 @@ using UnityEngine;
 public class RushAttackBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-
+	
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
 

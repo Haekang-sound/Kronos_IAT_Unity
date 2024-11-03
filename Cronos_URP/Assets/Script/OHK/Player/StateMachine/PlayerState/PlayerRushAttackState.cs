@@ -4,9 +4,6 @@ public class PlayerRushAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
 	public PlayerRushAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
 
@@ -21,10 +18,10 @@ public class PlayerRushAttackState : PlayerBaseState
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.Animator.SetBool(guradHash, false);
-		stateMachine.Animator.ResetTrigger("Attack");
-		stateMachine.Animator.ResetTrigger("Rattack");
-		stateMachine.Animator.ResetTrigger("ParryAttack");
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
 		stateMachine.InputReader.onRAttackStart += Gurad;
 
@@ -112,7 +109,7 @@ public class PlayerRushAttackState : PlayerBaseState
 			stateMachine.IsRattack = false;
 			return;
 		}
-		stateMachine.Animator.SetBool(guradHash, true);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, true);
 	}
 
 }

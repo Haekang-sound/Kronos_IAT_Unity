@@ -9,22 +9,6 @@ public class PlayerBuffState : PlayerBaseState
 {
 
 	public PlayerBuffState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-    private readonly int attackHash = Animator.StringToHash("Attack");
-    private readonly int BuffHash = Animator.StringToHash("Buff");
-    private readonly int moveHash = Animator.StringToHash("isMove");
-    private readonly int idleHash = Animator.StringToHash("goIdle");
-    private readonly int dodgeHash = Animator.StringToHash("Dodge");
-    private readonly int guradHash = Animator.StringToHash("isGuard");
-	private readonly int MoveSpeedHash = Animator.StringToHash("MoveSpeed");
-	private readonly int SideWalkHash = Animator.StringToHash("SideWalk");
-	private readonly int moveXHash = Animator.StringToHash("moveX");
-	private readonly int moveYHash = Animator.StringToHash("moveY");
-	private readonly int timeStopHash = Animator.StringToHash("TimeStop");
-	private readonly int CPBoombHash = Animator.StringToHash("CPBoomb");
-// 	[SerializeField] private float buffTimer = 3f;
-// 	public float buffTime = 3f;
-
-
 	private const float AnimationDampTime = 0.1f;
 
 	float moveSpeed = 0.5f;
@@ -35,8 +19,8 @@ public class PlayerBuffState : PlayerBaseState
 	public override void Enter()
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
-        stateMachine.Animator.ResetTrigger(attackHash);
-        stateMachine.Animator.ResetTrigger(idleHash);
+        stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+        stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.goIdle);
 
         stateMachine.InputReader.onLAttackStart += Attack;
         stateMachine.InputReader.onRAttackStart += Gurad;
@@ -57,8 +41,8 @@ public class PlayerBuffState : PlayerBaseState
 
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
-			stateMachine.Animator.SetTrigger("isMove");
-		    stateMachine.Animator.SetBool("isEnforced", true);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.isMove);
+		    //stateMachine.Animator.SetBool(PlayerHashSet.Instance.isEnforced, true);
 		}
 
 		// 플레이어의 cp 를 이동속도에 반영한다.
@@ -83,25 +67,25 @@ public class PlayerBuffState : PlayerBaseState
 		if (stateMachine.Player.IsLockOn && moveSpeed < 0.6f)
 		{
 			// moveSpeed에 y값을곱해서 전방이동인지 후방이동인지 확인한다.
-			stateMachine.Animator.SetFloat(MoveSpeedHash,
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.isMove,
 											(moveSpeed * stateMachine.InputReader.moveComposite.y), AnimationDampTime, Time.deltaTime);
 		}
 		else
 		{
-			stateMachine.Animator.SetFloat(MoveSpeedHash, stateMachine.InputReader.moveComposite.sqrMagnitude > 0f ? moveSpeed : 0f, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.MoveSpeed, stateMachine.InputReader.moveComposite.sqrMagnitude > 0f ? moveSpeed : 0f, AnimationDampTime, Time.deltaTime);
 		}
 
 		if (stateMachine.Player.IsLockOn && moveSpeed < 0.7f)
 		{
 			float side = 0f;
 			side = stateMachine.InputReader.moveComposite.x * 0.75f;
-			stateMachine.Animator.SetFloat(SideWalkHash, side, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.SideWalk, side, AnimationDampTime, Time.deltaTime);
 		}
 		else
 		{
-			stateMachine.Animator.SetFloat(moveXHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
-			stateMachine.Animator.SetFloat(moveYHash, stateMachine.InputReader.moveComposite.y, AnimationDampTime, Time.deltaTime);
-			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.moveX, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.moveY, stateMachine.InputReader.moveComposite.y, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.SideWalk, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		//CalculateMoveDirection();   // 방향을 계산하고
 
@@ -144,15 +128,15 @@ public class PlayerBuffState : PlayerBaseState
     private void Attack()
     {
         stateMachine.AutoTargetting.AutoTargeting();
-        stateMachine.Animator.SetTrigger(attackHash);
+        stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
     }
 
-	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
+	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isGuard, true); }
 
 
 
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
-	public void ReleaseGuard() { stateMachine.Animator.SetBool(guradHash, false); }
+	public void ReleaseGuard() { stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false); }
 	private void LockOn()
 	{
 		Debug.Log("누름");
@@ -190,15 +174,15 @@ public class PlayerBuffState : PlayerBaseState
 
 	private void Deceleration()
 	{
-		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool("isTimeStop"))
+		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
 		{
-			stateMachine.Animator.SetTrigger(timeStopHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
 		}
-		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
+		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
 		{
-			stateMachine.Animator.SetTrigger(CPBoombHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
 		}
 
 	}
@@ -223,12 +207,12 @@ public class PlayerBuffState : PlayerBaseState
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f && stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			CoolTimeCounter.Instance.isDodgeUsed = true;
-			stateMachine.Animator.SetTrigger(dodgeHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
 	}
 
 	private void BuffOff()
 	{
-		stateMachine.Animator.SetTrigger(moveHash);
+		stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.isMove);
 	}
 }

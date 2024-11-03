@@ -55,7 +55,7 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	// 운명의 굴레 - 패리어택
 	public void ParryAttack()
 	{
-		Player.Instance.isParry = true;
+		PlayerStateMachine.GetInstance().Animator.SetBool("isParry", true);
 	}
 
 	// 파괴의 도약 - 

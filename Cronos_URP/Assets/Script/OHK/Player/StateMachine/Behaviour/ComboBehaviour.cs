@@ -6,9 +6,7 @@ using static Damageable;
 public class ComboBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-
+	
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
 
@@ -34,7 +32,7 @@ public class ComboBehaviour : StateMachineBehaviour
 		Player.Instance.meleeWeapon.simpleDamager.currentDamageType = damageType;
 		Player.Instance.meleeWeapon.simpleDamager.currentComboType = comboType;
 
-		animator.SetBool(nextComboHash, false);
+		animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
 // 		animator.ResetTrigger("Attack");
 // 		animator.ResetTrigger("Rattack");
 	}
@@ -50,12 +48,12 @@ public class ComboBehaviour : StateMachineBehaviour
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			// 이동중
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 		else// 혹은
 		{
 			// 이동아님
-			animator.SetBool(moveHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 	}

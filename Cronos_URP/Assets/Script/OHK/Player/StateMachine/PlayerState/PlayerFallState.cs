@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class PlayerFallState : PlayerBaseState
 {
-	private readonly int FallHash = Animator.StringToHash("isFalling");	// 전환될 애니메이션의 해쉬
-
 	public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	public override void Enter()
 	{
 		stateMachine.Velocity.y = 0f;
-		stateMachine.Animator.SetBool(FallHash, true);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isFalling, true);
 	}
 	public override void Tick()
 	{
 		if (stateMachine.GroundChecker.IsGrounded())
 		{
-			stateMachine.Animator.SetBool(FallHash, false);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isFalling, false);
 		}
 		CalculateMoveDirection();
 	}

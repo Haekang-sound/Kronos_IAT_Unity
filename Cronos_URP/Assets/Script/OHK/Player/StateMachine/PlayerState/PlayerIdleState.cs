@@ -27,7 +27,7 @@ public class PlayerIdleState : PlayerBaseState
 	{
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			stateMachine.Animator.SetTrigger("Attack");
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
 		}
 
 
@@ -35,7 +35,7 @@ public class PlayerIdleState : PlayerBaseState
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			// 이동상태로 바뀐다
-			stateMachine.Animator.SetBool("isMove", true);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
 			//stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		}
 
@@ -81,7 +81,7 @@ public class PlayerIdleState : PlayerBaseState
 
 	private void SwitchToLAttackState()
 	{
-		stateMachine.Animator.SetTrigger("Attack");
+		stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
 		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
 	}
 

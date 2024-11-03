@@ -56,7 +56,7 @@ public class PlayerStateMachine : StateMachine
 
 	public void SwitchParryState()
 	{
-		if (Player.Instance.isParry)
+		if (Animator.GetBool("isParry"))
 		{
 			SwitchState(new PlayerParryState(this));
 		}

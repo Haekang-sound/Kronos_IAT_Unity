@@ -7,15 +7,11 @@ public class IdleBehaviour : StateMachineBehaviour
 	PlayerStateMachine stateMachine;
 	Vector3 direction;
 
-	private readonly int attackHash = Animator.StringToHash("Attack");
-	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
-
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
-		animator.ResetTrigger("goIdle");
+		animator.ResetTrigger(PlayerHashSet.Instance.goIdle);
 		stateMachine.SwitchState(new PlayerIdleState(stateMachine));
 	}
 
@@ -24,21 +20,21 @@ public class IdleBehaviour : StateMachineBehaviour
 	{
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 		else
 		{
-			animator.SetBool(moveHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			animator.SetTrigger(attackHash);
+			animator.SetTrigger(PlayerHashSet.Instance.Attack);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Mouse1))
 		{
-			animator.SetBool(guradHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isGuard, true);
 		}
 	}
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

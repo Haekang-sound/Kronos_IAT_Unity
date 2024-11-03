@@ -59,7 +59,7 @@ public class SimpleDamager : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.3f);
         DrawGizmos();
     }
-
+	static int forTest = 0;
     private void OnTriggerEnter(Collider other)
     {
         DamageCheck(other);
@@ -71,8 +71,9 @@ public class SimpleDamager : MonoBehaviour
         {
             return false;
         }
+		Debug.Log(++forTest);
 
-        var damageable = other.GetComponent<Damageable>();
+		var damageable = other.GetComponent<Damageable>();
 
         if (damageable == null)
         {

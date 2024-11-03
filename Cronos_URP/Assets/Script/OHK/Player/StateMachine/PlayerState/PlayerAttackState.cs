@@ -3,11 +3,6 @@ public class PlayerAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
 	public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-	private readonly int chargeHash = Animator.StringToHash("Charge");
-	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
 	bool attackBool = false;
@@ -23,11 +18,11 @@ public class PlayerAttackState : PlayerBaseState
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.Animator.SetBool(nextComboHash, false);
-		stateMachine.Animator.SetBool(guradHash, false);
-		stateMachine.Animator.ResetTrigger("Attack");
-		stateMachine.Animator.ResetTrigger("Rattack");
-		stateMachine.Animator.ResetTrigger("ParryAttack");
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
@@ -48,32 +43,32 @@ public class PlayerAttackState : PlayerBaseState
 		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
 		{
 			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(nextComboHash, true);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
 
 		// 좌클릭 누르는 중에는 차징
 		if (stateMachine.InputReader.IsLAttackPressed)
 		{
-			float current = stateMachine.Animator.GetFloat(chargeHash);
-			stateMachine.Animator.SetFloat(chargeHash, current + Time.deltaTime);
+			float current = stateMachine.Animator.GetFloat(PlayerHashSet.Instance.Charge);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, current + Time.deltaTime);
 		}
 
 		// 누르고있으면 차징중이다
 		if (stateMachine.InputReader.IsLAttackPressed)
 		{
 			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(chargeAttackHash, true);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, true);
 		}
 		else
 		{
 			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(chargeAttackHash, false);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, false);
 		}
 
 		// 좌클릭땔때 차징 비활성화
 		if (!stateMachine.InputReader.IsLAttackPressed)
 		{
-			stateMachine.Animator.SetFloat(chargeHash, 0);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
 		}
 
 		CalculateMoveDirection();   // 방향을 계산하고
@@ -81,7 +76,6 @@ public class PlayerAttackState : PlayerBaseState
 		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
-			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
 			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
 			if ((TargetPosition - stateMachine.transform.position).magnitude 
 				> stateMachine.Player.targetdistance)
@@ -132,8 +126,8 @@ public class PlayerAttackState : PlayerBaseState
 	public override void LateTick() { }
 	public override void Exit()
 	{
-		stateMachine.Animator.SetFloat(chargeHash, 0);
-		stateMachine.Animator.SetBool(chargeAttackHash, false);
+		stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, false);
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onRAttackStart -= Gurad;
 		stateMachine.InputReader.onJumpStart -= Dodge;
@@ -150,7 +144,7 @@ public class PlayerAttackState : PlayerBaseState
 		if (attackBool && currentStateInfo.normalizedTime > minFrame)
 		{
 			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(nextComboHash, true);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
 	}
 	private void Dodge()
@@ -159,9 +153,9 @@ public class PlayerAttackState : PlayerBaseState
 		{
 			// 사용될 경우
 			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
-			stateMachine.Animator.SetBool(nextComboHash, false);    // 
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);    // 
 																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
-			stateMachine.Animator.SetTrigger(dodgeHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
 	}
 	private void Gurad()
@@ -171,7 +165,7 @@ public class PlayerAttackState : PlayerBaseState
 			stateMachine.IsRattack = false;
 			return;
 		}
-		stateMachine.Animator.SetBool(guradHash, true);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, true);
 	}
 
 }

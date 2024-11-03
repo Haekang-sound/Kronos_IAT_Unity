@@ -3,14 +3,12 @@ using UnityEngine;
 public class EnforcedComboBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int attackHash = Animator.StringToHash("Attack");
-	private readonly int moveHash = Animator.StringToHash("isMove");
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
-		animator.ResetTrigger(attackHash);
-		animator.SetBool("NextCombo", false);
+		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
 	}
 
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -19,22 +17,22 @@ public class EnforcedComboBehaviour : StateMachineBehaviour
 
 		if (Input.GetKey(KeyCode.Mouse0))
 		{
-			float current = animator.GetFloat("Charge");
-			animator.SetFloat("Charge", current + Time.deltaTime);
+			float current = animator.GetFloat(PlayerHashSet.Instance.Charge);
+			animator.SetFloat(PlayerHashSet.Instance.Charge, current + Time.deltaTime);
 		}
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			animator.SetBool("NextCombo", true);
+			animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
 		if (Input.GetKeyUp(KeyCode.Mouse0))
 		{
-			animator.SetFloat("Charge", 0);
+			animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
 		}
 
 		if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
 		{
 			// nextcombo 가 예정되어있다면
-			if (animator.GetBool("NextCombo"))
+			if (animator.GetBool(PlayerHashSet.Instance.NextCombo))
 			{
 				// 리턴
 				return;
