@@ -1,10 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
-
-
-
-//using UnityEditorInternal;
 using UnityEngine;
 
 public class LastCombo : StateMachineBehaviour
