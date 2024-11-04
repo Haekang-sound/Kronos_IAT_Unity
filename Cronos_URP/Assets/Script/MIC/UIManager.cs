@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
         // 배경 페이드
         while (elapsedTime < RegionfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / RegionfadeTime);
             yield return null;
         }
@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
         // 지역이름 페이드
         while (elapsedTime < RegionfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / RegionfadeTime);
             yield return null;
         }
@@ -152,7 +152,7 @@ public class UIManager : MonoBehaviour
         // 페이드 아웃
         while (elapsedTime < RegionfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / RegionfadeTime);
             regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / RegionfadeTime);
             yield return null;
@@ -211,7 +211,7 @@ public class UIManager : MonoBehaviour
         // 목표 배경 페이드
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset.y = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
             mainBackImage.transform.localScale = offset;
             yield return null;
@@ -224,7 +224,7 @@ public class UIManager : MonoBehaviour
         // 목표 텍스트 페이드
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
             yield return null;
         }
@@ -236,7 +236,7 @@ public class UIManager : MonoBehaviour
         // 텍스트 페이드아웃
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
             yield return null;
         }
@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
         // 배경 페이드아웃
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset.y = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
             mainBackImage.transform.localScale = offset;
             yield return null;
@@ -279,7 +279,7 @@ public class UIManager : MonoBehaviour
         float elapsedTime = 0.0f;
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset.y = Mathf.SmoothStep(0, 1, elapsedTime / ObjfadeTime);
             subBackImage.transform.localScale = offset;
             subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
@@ -319,7 +319,7 @@ public class UIManager : MonoBehaviour
         float elapsedTime = 0.0f;
         while (elapsedTime < 0.3f)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset = Vector3.Lerp(sVec, eVec, elapsedTime / 0.3f);
             subText.transform.localScale = offset;
             yield return null;
@@ -331,7 +331,7 @@ public class UIManager : MonoBehaviour
         elapsedTime = 0.0f;
         while (elapsedTime < ObjfadeTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset.y = Mathf.SmoothStep(1, 0, elapsedTime / ObjfadeTime);
             subBackImage.transform.localScale = offset;
             subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
@@ -343,11 +343,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// 목표 실패하면 서브 UI 빨간색으로 지우기
-    //public void Failed()
-    //{
-    //    // 쓸일 없음
-    //    StartCoroutine(FailSubObjective());
-    //}
+    
     public IEnumerator FailSubObjective()
     {
         // curCoroutine은 이것을 위해서
@@ -369,14 +365,14 @@ public class UIManager : MonoBehaviour
         Vector3 offset = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 sVec = offset;
         Vector3 eVec = new Vector3(1, 1, 1);
-        subText.color = Color.red;
+        //subText.color = Color.red;
 
         float failedTime = 0.6f;
         float elapsedTime = 0.0f;
 
         while (elapsedTime < failedTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             offset = Vector3.Lerp(eVec, sVec, elapsedTime / failedTime);
             subText.transform.localScale = offset;
             offset.y = Mathf.SmoothStep(1, 0, elapsedTime / failedTime);
