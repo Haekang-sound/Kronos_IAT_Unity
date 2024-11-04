@@ -18,6 +18,8 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
     {
         _monoBehaviour.ChangeDebugText("AIM");
 
+        SoundManager.Instance.PlaySFX("Enemy_Bow_load_Sound_SE", _monoBehaviour.transform);
+
         _monoBehaviour.Controller.SetFollowNavmeshAgent(true);
         _monoBehaviour.Controller.UseNavemeshAgentRotation(false);
 

@@ -10,16 +10,6 @@ using UnityEngine.Rendering.Universal;
 // 플레이어 기본상태를 상속받은 movestate
 public class PlayerMoveState : PlayerBaseState
 {
-	private readonly int MoveSpeedHash = Animator.StringToHash("MoveSpeed");
-	private readonly int SideWalkHash = Animator.StringToHash("SideWalk");
-	private readonly int moveXHash = Animator.StringToHash("moveX");
-	private readonly int moveYHash = Animator.StringToHash("moveY");
-	private readonly int attackHash = Animator.StringToHash("Attack");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
-	private readonly int timeStopHash = Animator.StringToHash("TimeStop");
-	private readonly int CPBoombHash = Animator.StringToHash("CPBoomb");
-
 	private const float AnimationDampTime = 0.1f;
 
 	float moveSpeed = 0.5f;
@@ -35,10 +25,12 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Enter()
 	{
-		stateMachine.Animator.SetBool(guradHash, false);
-		stateMachine.Animator.ResetTrigger("Attack");
-		stateMachine.Animator.ResetTrigger("Rattack");
-		stateMachine.Animator.ResetTrigger("ParryAttack");
+		Player.Instance.groggyStack.ResetStack();
+
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
@@ -60,7 +52,7 @@ public class PlayerMoveState : PlayerBaseState
 
 	}
 
-	
+
 
 
 	// state의 update라 볼 수 있지
@@ -74,11 +66,11 @@ public class PlayerMoveState : PlayerBaseState
 
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
-			stateMachine.Animator.SetBool("isMove", true);
+			//stateMachine.Animator.SetBool("isMove", true);
 		}
 		else
 		{
-			stateMachine.Animator.SetBool("isMove", false);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 		// 시간베기 테스트용
@@ -114,25 +106,25 @@ public class PlayerMoveState : PlayerBaseState
 		if (stateMachine.Player.IsLockOn && moveSpeed < 0.6f)
 		{
 			// moveSpeed에 y값을곱해서 전방이동인지 후방이동인지 확인한다.
-			stateMachine.Animator.SetFloat(MoveSpeedHash,
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.MoveSpeed,
 											(moveSpeed * stateMachine.InputReader.moveComposite.y), AnimationDampTime, Time.deltaTime);
 		}
 		else
 		{
-			stateMachine.Animator.SetFloat(MoveSpeedHash, stateMachine.InputReader.moveComposite.sqrMagnitude > 0f ? moveSpeed : 0f, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.MoveSpeed, stateMachine.InputReader.moveComposite.sqrMagnitude > 0f ? moveSpeed : 0f, AnimationDampTime, Time.deltaTime);
 		}
 
 		if (stateMachine.Player.IsLockOn && moveSpeed < 0.7f)
 		{
 			float side = 0f;
 			side = stateMachine.InputReader.moveComposite.x * 0.75f;
-			stateMachine.Animator.SetFloat(SideWalkHash, side, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.SideWalk, side, AnimationDampTime, Time.deltaTime);
 		}
 		else
 		{
-			stateMachine.Animator.SetFloat(moveXHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
-			stateMachine.Animator.SetFloat(moveYHash, stateMachine.InputReader.moveComposite.y, AnimationDampTime, Time.deltaTime);
-			stateMachine.Animator.SetFloat(SideWalkHash, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.moveX, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.moveY, stateMachine.InputReader.moveComposite.y, AnimationDampTime, Time.deltaTime);
+			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.SideWalk, stateMachine.InputReader.moveComposite.x, AnimationDampTime, Time.deltaTime);
 		}
 		CalculateMoveDirection();   // 방향을 계산하고
 	}
@@ -179,8 +171,8 @@ public class PlayerMoveState : PlayerBaseState
 
 
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
-	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(guradHash, true); }
-	public void ReleaseGuard() { stateMachine.Animator.SetBool(guradHash, false); }
+	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isGuard, true); }
+	public void ReleaseGuard() { stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false); }
 	private void Run() { isRun = true; }
 	private void StopRun() { isRun = false; }
 	private void LockOn()
@@ -219,16 +211,17 @@ public class PlayerMoveState : PlayerBaseState
 
 	private void Deceleration()
 	{
-		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool("isTimeStop"))
+		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
 		{
-			stateMachine.Animator.SetTrigger(timeStopHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
 			BulletTime.Instance.DecelerateSpeed();
 			stateMachine.Player.IsDecreaseCP = true;
+			stateMachine.Player._damageable.enabled = false;
 			BulletTime.Instance.OnActive.Invoke();
 		}
-		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool("isCPBoomb"))
+		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
 		{
-			stateMachine.Animator.SetTrigger(CPBoombHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
 		}
 
 	}
@@ -250,46 +243,54 @@ public class PlayerMoveState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		stateMachine.Animator.SetBool(attackHash, true);
+		if (!stateMachine.Player.isBuff)
+		{
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
+		}
+		else
+		{
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.combAttack);
+		}
+
 	}
 	private void Dodge()
 	{
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f  && !CoolTimeCounter.Instance.isDodgeUsed)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			CoolTimeCounter.Instance.isDodgeUsed = true;
-			stateMachine.Animator.SetTrigger(dodgeHash);
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
 	}
 
 	// 일섬
 	public void FlashSlash()
 	{
-		if (stateMachine.Animator.GetBool("isFlashSlash") && Player.Instance.CP >= 20f)
+		if (stateMachine.Animator.GetBool(PlayerHashSet.Instance.isFlashSlash) && Player.Instance.CP >= 20f)
 		{
-			stateMachine.Animator.SetTrigger("FlashSlash");
-			Player.Instance.CP -= 20f;
-	 	}
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.FlashSlash);
+			Player.Instance.CP -= 25f;
+		}
 	}
 
 	// 시간베기
 	public void TimeSlash()
 	{
-		Debug.Log("시간베기!");
-		if (stateMachine.Animator.GetBool("isTimeSlash"))
+		if (stateMachine.Animator.GetBool(PlayerHashSet.Instance.isTimeSlash))
 		{
 			if (!stateMachine.AutoTargetting.FindTarget()) return;
-			stateMachine.Animator.SetTrigger("TimeSlashReady");
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.TimeSlashReady);
 		}
 	}
 
 	private void RushAttack()
 	{
-		Debug.Log("돌진공격!");
-		if (stateMachine.Animator.GetBool("isRushAttack")&& !CoolTimeCounter.Instance.isRushAttackUsed)
+		if (stateMachine.Animator.GetBool(PlayerHashSet.Instance.isRushAttack) && !CoolTimeCounter.Instance.isRushAttackUsed)
 		{
+			stateMachine.AutoTargetting.enabled = true;
+			PlayerStateMachine.GetInstance().AutoTargetting.sphere.enabled = true;
+
 			CoolTimeCounter.Instance.isRushAttackUsed = true;
-			//if (!stateMachine.AutoTargetting.FindTarget()) return;
-			stateMachine.Animator.SetTrigger("RushAttack");
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.RushAttack);
 		}
 	}
 }

@@ -12,11 +12,13 @@ public class BossSpearScript : MonoBehaviour
     public float incSpeed = 0.0f;
     public float elapsedTime;
     public float spearDamage = 0.0f;
+    SoundManager sm;
 
     // Start is called before the first frame update
     void Start()
     {
         target = Player.Instance;
+        sm = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -72,6 +74,7 @@ public class BossSpearScript : MonoBehaviour
             Destroy(GetComponent<SimpleDamager>());
             Debug.Log("Ã¢ ºÎµúÄ§");
             EffectManager.Instance.SpearImpact(targetPos);
+            sm.PlaySFX("Ground_Impact_1_Sound_SE", transform);
             Destroy(gameObject, 3.0f);
         }
     }

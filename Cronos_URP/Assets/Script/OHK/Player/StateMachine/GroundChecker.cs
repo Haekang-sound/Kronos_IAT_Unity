@@ -8,8 +8,6 @@ public class GroundChecker : MonoBehaviour
 	[SerializeField] private bool drawGizmo;
 
 	public bool ToggleChecker = true;
-	private readonly int fallHash = Animator.StringToHash("isFalling");
-
 	private void OnDrawGizmos()
 	{
 		if (!drawGizmo)
@@ -24,7 +22,7 @@ public class GroundChecker : MonoBehaviour
 	{
 		if(!IsGrounded() && ToggleChecker)
 		{
-			PlayerStateMachine.GetInstance().Animator.SetBool(fallHash, true);
+			PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isFalling, true);
 		}
 	}
 

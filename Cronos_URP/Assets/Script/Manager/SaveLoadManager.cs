@@ -62,7 +62,8 @@ public class SaveLoadManager : MonoBehaviour
         PlayerPrefs.SetFloat(_lastSavedScenename + "-TP", Player.Instance.TP);
         PlayerPrefs.SetFloat(_lastSavedScenename + "-CP", Player.Instance.CP);
 
-        _abilityTree.SaveData(SaveLoadManager.Purpose.scene.ToString());
+		_abilityTree = FindObjectOfType<AbilityTree>();
+		_abilityTree.SaveData(SaveLoadManager.Purpose.scene.ToString());
     }
 
     public void LoadSceneData()
@@ -72,7 +73,8 @@ public class SaveLoadManager : MonoBehaviour
             Player.Instance.TP = PlayerPrefs.GetFloat(_lastSavedScenename + "-TP");
             Player.Instance.CP = PlayerPrefs.GetFloat(_lastSavedScenename + "-CP");
 
-            _abilityTree.LoadData(SaveLoadManager.Purpose.scene.ToString());
+			_abilityTree = FindObjectOfType<AbilityTree>();
+			_abilityTree.LoadData(SaveLoadManager.Purpose.scene.ToString());
         }
     }
 

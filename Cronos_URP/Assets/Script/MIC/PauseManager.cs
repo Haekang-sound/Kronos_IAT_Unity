@@ -72,12 +72,11 @@ public class PauseManager : MonoBehaviour
 
     public void UnPauseGame()
     {
-        if (abilityPause)
-            return;
-
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
-		playerInput?.SwitchCurrentActionMap("Player");
+        if (abilityPause)
+            return;
+        playerInput?.SwitchCurrentActionMap("Player");
         if (player != null)
         {
             player.gameObject.GetComponent<InputReader>().enabled = true;

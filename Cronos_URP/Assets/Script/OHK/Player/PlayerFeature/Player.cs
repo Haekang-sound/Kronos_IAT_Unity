@@ -1,723 +1,822 @@
 using Message;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using static Damageable;
 using static ScreenFader;
 
 /// <summary>
-/// Player°¡ °®´Â Á¤º¸¸¦ ÇÑ ´«¿¡ º¼ ¼ö ÀÖ´Â ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ®
+/// Playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
 /// 1. status
 /// 2. Item
-/// 3. µîµî
+/// 3. ï¿½ï¿½ï¿½
 /// </summary>
 public class Player : MonoBehaviour, IMessageReceiver
 {
-    // ½Ì±ÛÅÏ °´Ã¼ ÀÔ´Ï´Ù. 
-    public static Player Instance
-    {
-        get
-        {
-            if (instance != null)
-            {
-                return instance;
-            }
+	// ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ô´Ï´ï¿½. 
+	public static Player Instance
+	{
+		get
+		{
+			if (instance != null)
+			{
+				return instance;
+			}
 
-            // ÀÎ½ºÅÏ½º°¡ ¾ø´Ù¸é °èÃş ±¸Á¶Ã¢¿¡¼­ °Ë»öÇØ¼­ °¡Á®¿È.
-            instance = FindObjectOfType<Player>();
+			// ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+			instance = FindObjectOfType<Player>();
 
-            return instance;
-        }
-    }
-    protected static Player instance;
-    public bool isParry;
+			return instance;
+		}
+	}
+	protected static Player instance;
 
-    public RenderObjects SkillRenderObj;
+	public RenderObjects SkillRenderObj;
 
-    [Header("State")]
-    [SerializeField] private string CurrentState;
-    [SerializeField] public AnimationCurve TimeSlashCurve;
+	[Header("State")]
+	[SerializeField] private string CurrentState;
+	[SerializeField] public AnimationCurve TimeSlashCurve;
 
-    [Header("Move Option")]
-    [SerializeField] private float Speed = 1f;
-    [SerializeField] private float LookRotationDampFactor = 10f;
-    [SerializeField] private float attackCoefficient = 0.1f;
-    [SerializeField] private float moveCoefficient = 0.1f;
+	[Header("Move Option")]
+	[SerializeField] private float Speed = 1f;
+	[SerializeField] private float LookRotationDampFactor = 10f;
+	[SerializeField] private float attackCoefficient = 0.1f;
+	[SerializeField] private float moveCoefficient = 0.1f;
 
-    [SerializeField] private float maxTP;
-    [SerializeField] private float maxCP;
+	[SerializeField] private float maxTP;
+	[SerializeField] private float maxCP;
 
-    [SerializeField] private float currentDamage;
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private float chargeAttack = 0f;
+	[SerializeField] private float currentDamage;
+	[SerializeField] private float attackSpeed;
+	[SerializeField] private float chargeAttack = 0f;
 
-    [SerializeField] private float currentTP;
-    [SerializeField] private float currentCP;
-    [SerializeField] private float chargingCP = 10f;
-    [SerializeField] private float TPAbsorptionRatio = 1f;
-    [SerializeField] private float CPDecayRatio = 1f;
+	[SerializeField] private float currentTP;
+	[SerializeField] private float currentCP;
+	[SerializeField] private float chargingCP = 10f;
+	[SerializeField] private float TPAbsorptionRatio = 1f;
+	[SerializeField] private float CPDecayRatio = 1f;
 
-    [SerializeField] private bool isEnforced = false;
-    [SerializeField] private bool isLockOn = false;
-    [SerializeField] private bool rigidImmunity = false;
-    [SerializeField] private bool dodgeAttack = false;
+	[SerializeField] private bool isEnforced = false;
+	[SerializeField] private bool isLockOn = false;
+	[SerializeField] private bool rigidImmunity = false;
+	[SerializeField] private bool dodgeAttack = false;
 
-    public bool isBuff = false;
-    public float buffTimer = 3f;
-    public float buffTime = 3f;
+	public bool isBuff = false;
+	public float buffTimer = 3f;
+	public float buffTime = 3f;
 
-    /// <summary>
-    /// floating capsule¸¸µå´ÂÁß 
-    /// </summary>
-    [field: Header("Collisions")]
-    [field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
-    [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
-    [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
-
-
-    // °¨ÁöÇÏ°íÀÚ ÇÏ´Â ·¹ÀÌ¾î¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
-    public LayerMask targetLayer; // Inspector¿¡¼­ ¼³Á¤ °¡´É
-
-    // Property
-    private float totalspeed;
-    public float moveSpeed { get { return totalspeed; } }
-    public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
-    public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
-    public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
-
-    //     // ½ºÅ³ »ç¿ëÁ¤º¸
-    //     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
-
-    // chronos in game Option
-    public float MaxCP { get { return maxCP; } set { maxCP = value; } }
-    public float MaxTP { get { return maxTP; } set { maxTP = value; } }
-    public float CP { get { return currentCP; } set { currentCP = value; } }
-    public float TP
-    {
-        get { return currentTP; }
-        set
-        {
-            currentTP = value;
-            if (currentTP > maxTP)
-            {
-                maxTP = currentTP;
-            }
-            _damageable.currentHitPoints = currentTP;
-        }
-    }
-    public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
-    public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
-    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-    public float ChargeAttack { get { return chargeAttack; } set { chargeAttack = value; } }
-    public bool IsDecreaseCP { get; set; }
-    public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // °­È­»óÅÂ¸¦ À§ÇÑ ÇÁ·ÎÆÛÆ¼
-    public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
-    public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
-    public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
-
-    // ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ°í respawn½Ã ¹İ¿µÇÏ´Â µ¥ÀÌÅÍ
-    PlayerData playerData = new PlayerData();
-    Transform playerTransform;
-    AutoTargetting targetting;
-
-    public MeleeWeapon meleeWeapon;
-    ShieldWeapon shieldWeapon;
-    PlayerStateMachine PlayerFSM;
-
-    public Damageable _damageable;
-    public Defensible _defnsible;
-    private KnockBack _knockBack;
-    private Rigidbody _rigidbody;
-
-    public SoundManager soundManager;
-    public EffectManager effectManager;
-    public ImpulseCam impulseCam;
-    public GameObject playerSword;
-    public GameObject spcCubeL;
-    public GameObject spcCubeR;
-    public float spcDelay;
-    public PlayerStateMachine psm;
-    public BoxColliderAdjuster adjuster;
-    //public float spcActivateTime;
-
-    public bool isDecreaseTP = true;
-    [SerializeField] private bool usePreiviousSceneData = true;
+	/// <summary>
+	/// floating capsuleï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	/// </summary>
+	[field: Header("Collisions")]
+	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
+	[field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+	[field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
 
 
-    private void Awake()
-    {
-        _knockBack = GetComponent<KnockBack>();
-        _defnsible = GetComponent<Defensible>();
-        _damageable = GetComponent<Damageable>();
-        playerTransform = GetComponent<Transform>();
-        PlayerFSM = GetComponent<PlayerStateMachine>();
-        meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-        shieldWeapon = GetComponentInChildren<ShieldWeapon>();
-        targetting = GetComponentInChildren<AutoTargetting>();
-        _rigidbody = GetComponent<Rigidbody>();
-    }
-    private void OnValidate()
-    {
-        CapsuleColldierUtility.Initialize(gameObject);
-        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+	public LayerMask targetLayer; // Inspectorï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public float targetdistance = 1f;
 
-    }
-    protected void OnDisable()
-    {
-        _damageable.onDamageMessageReceivers.Remove(this);
-    }
+	// Property
+	private float totalspeed;
+	public float moveSpeed { get { return totalspeed; } }
+	public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
+	public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
+	public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
 
-    private void OnEnable()
-    {
-        _damageable.onDamageMessageReceivers.Add(this);
+	//     // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
 
-        CapsuleColldierUtility.Initialize(gameObject);
-        CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+	// chronos in game Option
+	public float MaxCP { get { return maxCP; } set { maxCP = value; } }
+	public float MaxTP { get { return maxTP; } set { maxTP = value; } }
+	public float CP { get { return currentCP; } set { currentCP = value; } }
+	public float TP
+	{
+		get { return currentTP; }
+		set
+		{
+			currentTP = value;
+			if (currentTP > maxTP)
+			{
+				maxTP = currentTP;
+			}
+			_damageable.currentHitPoints = currentTP;
+		}
+	}
+	public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
+	public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
+	public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+	public float ChargeAttack { get { return chargeAttack; } set { chargeAttack = value; } }
+	public bool IsDecreaseCP { get; set; }
+	public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // ï¿½ï¿½È­ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼
+	public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
+	public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
+	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
 
-        meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
-        meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState);
-    }
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ respawnï¿½ï¿½ ï¿½İ¿ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	PlayerData playerData = new PlayerData();
+	Transform playerTransform;
+	AutoTargetting targetting;
 
-    void Start()
-    {
-        // ¿©±â¿¡ ÃÊ±âÈ­
-        soundManager = SoundManager.Instance;
-        effectManager = EffectManager.Instance;
-        impulseCam = ImpulseCam.Instance;
-        if (soundManager != null)
-            Debug.Log("SoundManager found");
-        if (effectManager != null)
-            Debug.Log("EffectManager found");
-        if (impulseCam != null)
-            Debug.Log("ImpulseCam found");
-        psm = gameObject.GetComponent<PlayerStateMachine>();
+	public MeleeWeapon meleeWeapon;
+	ShieldWeapon shieldWeapon;
+	PlayerStateMachine PlayerFSM;
 
-        // ¹®Á¦ÇØ°áÀ» À§ÇØ ¿Å±è 
-        meleeWeapon.SetOwner(gameObject);
+	public Damageable _damageable;
+	public GroggyStack groggyStack;
+	public Defensible _defnsible;
+	private KnockBack _knockBack;
+	private Rigidbody _rigidbody;
 
-        // simpleDamager¾ø¾îÁöÁö ¾Ê¾Ò³ª?
-        meleeWeapon.simpleDamager.damageAmount = currentDamage;
-        meleeWeapon.parryDamaer.damageAmount = currentDamage;
+	public SoundManager soundManager;
+	public EffectManager effectManager;
+	public ImpulseCam impulseCam;
+	public GameObject playerSword;
+	//public GameObject spcCubeL;
+	//public GameObject spcCubeR;
+	public float spcDelay;
+	public PlayerStateMachine psm;
+	public BoxColliderAdjuster adjuster;
+	//public float spcActivateTime;
 
-        meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
-
-        totalspeed = Speed;
-
-        _damageable.maxHitPoints = maxTP;
-        _damageable.currentHitPoints = currentTP;
-        _damageable.OnDeath.AddListener(Death);
-
-        if(usePreiviousSceneData)
-            SaveLoadManager.Instance.LoadSceneData();
-    }
-
-    private void ChangeParryState()
-    {
-        PlayerFSM.SwitchParryState();
-    }
-
-    public void ChargeCP(Collider other)
-    {
-        {
-            if (CP < maxCP && !IsDecreaseCP)
-            {
-                CP += chargingCP;
-
-                if (CP > maxCP)
-                {
-                    CP = maxCP;
-                }
-            }
-        }
-    }
-    public void ChargeCP(bool isActiveSkill)
-    {
-        // ¾×Æ¼ºê½ºÅ³ÀÌ¶ó¸é cp¸¦ Ã¤¿ìÁö ¾Ê´Â´Ù.
-        if (isActiveSkill)
-        {
-            return;
-        }
-        {
-            if (CP < maxCP && !IsDecreaseCP)
-            {
-                CP += chargingCP;
-
-                if (CP > maxCP)
-                {
-                    CP = maxCP;
-                }
-            }
-        }
-    }
-    public void ChargeCP()
-    {
-        {
-            if (CP < maxCP && !IsDecreaseCP)
-            {
-                CP += chargingCP;
-
-                if (CP > maxCP)
-                {
-                    CP = maxCP;
-                }
-            }
-        }
-    }
-    // Å¸°İ½Ã tpÈí¼ö·®
-    public float TPGain()
-    {
-        return TPAbsorptionRatio /** currentDamage*/;
-    }
-
-    public float currentTime = 0f;
-    bool timeSlash;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            transform.position += transform.forward * 5f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            BulletTime.Instance.SetNormalSpeed();
-            //Time.timeScale = 1f;
-        }
-
-        // ¹öÇÁÁßÀÌ¶ó¸é
-        if (isBuff)
-        {
-            buffTimer += Time.deltaTime;
-        }
-        else // ¾Æ´Ï¶ó¸é
-        {
-            buffTimer = 0f;
-        }
-
-        // Æ¯Á¤ Á¶°ÇÀ» ¸¸Á·ÇÒ ¶§ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Á¾·áÇÏ°í targetStateNameÀ¸·Î ÀüÈ¯
-        if (buffTimer > buffTime)
-        {
-            //PlayerFSM.Animator.SetBool("combMove",false);
-            PlayerFSM.Animator.SetBool("isEnforced", false);
-            effectManager.SwordAuraOff();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SetCursorInactive();
-        }
-
-        // ´É·Â°³¹æÄ¡Æ®
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            PlayerFSM.Animator.SetBool("isCPBoomb", true);
-            PlayerFSM.Animator.SetBool("isTimeStop", true);
-            PlayerFSM.Animator.SetBool("ComAttackVariation", true);
-            PlayerFSM.Animator.SetBool("NorAttackVariation", true);
-            PlayerFSM.Animator.SetBool("DodgeAttack", true);
-            PlayerFSM.Animator.SetBool("EnforcedCombo", true);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            PlayerFSM.Animator.SetBool("isCPBoomb", false);
-            PlayerFSM.Animator.SetBool("isTimeStop", false);
-            PlayerFSM.Animator.SetBool("ComAttackVariation", false);
-            PlayerFSM.Animator.SetBool("NorAttackVariation", false);
-            PlayerFSM.Animator.SetBool("DodgeAttack", false);
-            PlayerFSM.Animator.SetBool("EnforcedCombo", false);
-        }
-
-        CurrentState = PlayerFSM.GetState().GetType().Name;
+	public bool isDecreaseTP = true;
+	[SerializeField] private bool usePreiviousSceneData = true;
 
 
-        // ½Ç½Ã°£À¸·Î TP °¨¼Ò
-        if (isDecreaseTP && _damageable.currentHitPoints > 0f)
-        {
-            _damageable.currentHitPoints -= Time.deltaTime;
+	private void Awake()
+	{
+		_knockBack = GetComponent<KnockBack>();
+		_defnsible = GetComponent<Defensible>();
+		_damageable = GetComponent<Damageable>();
+		playerTransform = GetComponent<Transform>();
+		PlayerFSM = GetComponent<PlayerStateMachine>();
+		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
+		targetting = GetComponentInChildren<AutoTargetting>();
+		_rigidbody = GetComponent<Rigidbody>();
+		groggyStack = GetComponent<GroggyStack>();
 
-            if (_damageable.currentHitPoints <= 0)
-            {
-                _damageable.JustDead();
-            }
-        }
+	}
+	private void OnValidate()
+	{
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
-        // ½Ç½Ã°£À¸·Î CP°¨¼Ò
-        if (IsDecreaseCP && CP > 0)
-        {
-            CP -= Time.deltaTime * CPDecayRatio;
-            if (CP <= 0f)
-            {
-                TimeNormalization();
-            }
-        }
+	}
+	protected void OnDisable()
+	{
+		_damageable.onDamageMessageReceivers.Remove(this);
+	}
 
-        TP = _damageable.currentHitPoints;
+	private void OnEnable()
+	{
+		_damageable.onDamageMessageReceivers.Add(this);
 
-        // ¿òÁ÷ÀÏ ¶§¸¶´Ù spcÅ¥ºê¸¦ È°¼ºÈ­.
-        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-        {
-            StartCoroutine(ActivateSpcCubes(spcDelay));
-        }
-        else
-        {
-            if (spcCubeL)
-            {
-                spcCubeL.SetActive(false);
-                spcCubeR.SetActive(false);
-            }
-        }
-    }
+		CapsuleColldierUtility.Initialize(gameObject);
+		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+
+		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
+		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState);
+	}
+
+	void Start()
+	{
+		// ï¿½ï¿½ï¿½â¿¡ ï¿½Ê±ï¿½È­
+		soundManager = SoundManager.Instance;
+		effectManager = EffectManager.Instance;
+		impulseCam = ImpulseCam.Instance;
+		if (soundManager != null)
+			Debug.Log("SoundManager found");
+		if (effectManager != null)
+			Debug.Log("EffectManager found");
+		if (impulseCam != null)
+			Debug.Log("ImpulseCam found");
+		psm = gameObject.GetComponent<PlayerStateMachine>();
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½ 
+		meleeWeapon.SetOwner(gameObject);
+
+		// simpleDamagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò³ï¿½?
+		meleeWeapon.simpleDamager.damageAmount = currentDamage;
+		meleeWeapon.parryDamaer.damageAmount = currentDamage;
+
+		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
+
+		totalspeed = Speed;
+
+		_damageable.maxHitPoints = maxTP;
+		_damageable.currentHitPoints = currentTP;
+		_damageable.OnDeath.AddListener(Death);
+
+		if (usePreiviousSceneData)
+			SaveLoadManager.Instance.LoadSceneData();
+
+		groggyStack.OnMaxStack.AddListener(Down);
+
+	}
+
+	private void Down()
+	{
+		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
+	}
+
+	private void ChangeParryState()
+	{
+		PlayerFSM.SwitchParryState();
+	}
+
+	public void ChargeCP(Collider other)
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
+
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+	public void ChargeCP(bool isActiveSkill)
+	{
+		// ï¿½ï¿½Æ¼ï¿½ê½ºÅ³ï¿½Ì¶ï¿½ï¿½ cpï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+		if (isActiveSkill)
+		{
+			return;
+		}
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
+
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+	public void ChargeCP()
+	{
+		{
+			if (CP < maxCP && !IsDecreaseCP)
+			{
+				CP += chargingCP;
+
+				if (CP > maxCP)
+				{
+					CP = maxCP;
+				}
+			}
+		}
+	}
+	// Å¸ï¿½İ½ï¿½ tpï¿½ï¿½ï¿½ï¿½ï¿½
+	public float TPGain()
+	{
+		return TPAbsorptionRatio /** currentDamage*/;
+	}
+
+	public float currentTime = 0f;
+	bool timeSlash;
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			TP += 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			TP -= 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			CP -= 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			CP += 10f;
+		}
+
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
+		}
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
+		}
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
+		if (isBuff)
+		{
+			buffTimer += Time.deltaTime;
+		}
+		else // ï¿½Æ´Ï¶ï¿½ï¿½
+		{
+			buffTimer = 0f;
+		}
+
+		// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ targetStateNameï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+		if (buffTimer > buffTime)
+		{
+			isBuff = false;
+			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
+			if (CurrentState == "PlayerMoveState")
+			{
+				effectManager.SwordAuraOff();
+
+			}
+		}
+// 
+// 		if (Input.GetKeyDown(KeyCode.Alpha4))
+// 		{
+// 			SetCursorInactive();
+// 		}
+
+		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 
-    private void OnDestroy()
-    {
-        meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
-        ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading);
-    }
+		// ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ TP ï¿½ï¿½ï¿½ï¿½
+		if (isDecreaseTP && _damageable.currentHitPoints > 0f)
+		{
+			_damageable.currentHitPoints -= Time.deltaTime;
 
-    public void OnReceiveMessage(MessageType type, object sender, object data)
-    {
-        switch (type)
-        {
-            case MessageType.DAMAGED:
-                {
+			if (_damageable.currentHitPoints <= 0)
+			{
+				_damageable.JustDead();
+			}
+		}
+
+		// ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ CPï¿½ï¿½ï¿½ï¿½
+		if (IsDecreaseCP && CP > 0)
+		{
+			CP -= Time.deltaTime * CPDecayRatio;
+			if (CP <= 0f)
+			{
+				TimeNormalization();
+			}
+		}
+
+		TP = _damageable.currentHitPoints;
+
+	}
+
+
+	private void OnDestroy()
+	{
+		meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
+		ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading);
+	}
+
+	public void OnReceiveMessage(MessageType type, object sender, object data)
+	{
+		switch (type)
+		{
+			case MessageType.DAMAGED:
+				{
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					Damaged(damageData);
+					effectManager.PlayerHitFX(damageData);
+				}
+				break;
+			case MessageType.DEAD:
+				{
                     Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+                    effectManager.PlayerHitFX(damageData);
+					PlayerFSM.InputReader.enabled = false;
+					//Death(/*damageData*/);
+				}
+				break;
+			case MessageType.RESPAWN:
+				{
 
-                    Damaged(damageData);
-                }
-                break;
-            case MessageType.DEAD:
-                {
-                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-                    //Death(/*damageData*/);
-                }
-                break;
-            case MessageType.RESPAWN:
-                {
+				}
+				break;
+		}
+	}
+	public bool useKnockback;
+	public void SetUseKnockback(bool val) => useKnockback = val;
+	void Damaged(Damageable.DamageMessage damageMessage)
+	{
+		// ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+		// 
+		if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
+		{
+			if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+			{
+				Player.Instance.groggyStack.AddStack();
+			}
 
-                }
-                break;
-        }
-    }
-    public bool useKnockback;
-    public void SetUseKnockback(bool val) => useKnockback = val;
-    void Damaged(Damageable.DamageMessage damageMessage)
-    {
-        // ¿©±â¼­ ¸®ÅÏÇÏ¸é ¾Ö´Ï¸ŞÀÌ¼Ç¸¸ Àç»ıÇÏÁö ¾Ê´Â´Ù.
-        // 
-        if (//PlayerFSM.GetState().ToString() == "PlayerDefenceState" ||
-            PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
-            PlayerFSM.GetState().ToString() == "PlayerDamagedState" ||
-            rigidImmunity || isEnforced)
-        {
-            return;
-        }
+			return;
+		}
+		if (PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDownState" ||
+			rigidImmunity || isEnforced)
+		{
+			return;
+		}
 
-        if (useKnockback)
-        {
-            _knockBack?.Begin(damageMessage.damageSource);
-        }
+		if (useKnockback)
+		{
+			_knockBack?.Begin(damageMessage.damageSource);
+		}
 
-        PlayerFSM.Animator.SetTrigger("Damaged");
-    }
-
-    // Á×¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
-    public void Death(/*Damageable.DamageMessage msg*/)
-    {
-        StartCoroutine(DeathScequence());
-    }
-
-    private IEnumerator DeathScequence()
-    {
-        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.GameOver));
-
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSecondsRealtime(3);
-
-        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.GameOver));
-
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
-        //ScreenFader.SetAlpha(0f, FadeType.GameOver);
-
-        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.Black));
-
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
-
-        SaveLoadManager.Instance.LoadCheckpointData();
-
-        yield return new WaitForSecondsRealtime(3);
-        ScreenFader.SetAlpha(0f);
-
-        //yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
-        //while (ScreenFader.IsFading)
-        //{
-        //    yield return null;
-        //}
-    }
-
-    /// <summary>
-    /// °¨¼Ó»óÅÂ Á¤»óÈ­
-    /// </summary>
-    public void TimeNormalization()
-    {
-        IsDecreaseCP = false;
-        CP = 0;
-        SkillRenderObj.SetActive(false);
-        BulletTime.Instance.SetNormalSpeed();
-    }
-
-    void SetCursorInactive()
-    {
-        Cursor.visible = !Cursor.visible; // ¸¶¿ì½º ¾Èº¸ÀÌ°Ô ÇÏ±â
-        if (Cursor.visible)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-
-    public void SetSpeed(float value)
-    {
-        totalspeed = value * Speed;
-    }
-
-    public void SavePlayerData()
-    {
-        playerData.saveScene = SceneManager.GetActiveScene().name; // ÇöÀç ¾ÀÀÇ ÀÌ¸§À» °¡Á®¿Â´Ù
-        playerData.TP = TP;
-        playerData.TP = CP;
-        playerData.RespawnPos = playerTransform.position;
-    }
-
-    // ÇÃ·¹ÀÌ¾î¸¦ Á×ÀÌÀÚ
-    public void AttackStart()
-    {
-        meleeWeapon?.BeginAttack();
-    }
-    public void AttackEnd()
-    {
-        meleeWeapon?.EndAttack();
-    }
-
-    public void BeginGuard()
-    {
-        meleeWeapon?.EndAttack();
-        shieldWeapon?.BeginGuard();
-    }
-
-    public void EndGuard()
-    {
-        shieldWeapon?.EndGuard();
-    }
-
-    public void BeginParry()
-    {
-        shieldWeapon?.BeginParry();
-    }
-
-    public void EndParry()
-    {
-        shieldWeapon?.EndParry();
-    }
-
-    /// <summary>
-    /// ½Ã°£Á¤Áö °ü·ÃÇÔ¼ö
-    /// </summary>
-
-    public void TimeStop()
-    {
-        Vector3 temp = transform.position;
-        effectManager.SpawnEffect("TeraainScanner", temp);
-        SkillRenderObj.SetActive(true);
-    }
-
-    public void CPBombGround()
-    {
-        if (effectManager != null)
-        {
-            GameObject bomb = effectManager.SpawnEffect("CPGround", transform.position);
-            Destroy(bomb, 5.0f);
-
-        }
-    }
-    public void CPBombSlash()
-    {
-        if (effectManager != null)
-        {
-            GameObject slash = effectManager.SpawnEffect("CPSlash", transform.position);
-
-            Destroy(slash, 3.0f);
-            Invoke("test", 1.5f);
-            Invoke("CPBoombDamager", 1.5f);
-            Invoke("TimeNormalization", 1.5f);
-        }
-    }
-
-    /// <summary>
-    ///  ½Ã°£Á¤Áö È¿°ú¸¦ ¸ØÃß´Â ÇÔ¼ö ¼öÁ¤ÇÒ°Í
-    /// </summary>
-    public void test()
-    {
-        SkillRenderObj.SetActive(false);
-    }
-    public void CPBoombDamager()
-    {
-        GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
-        Destroy(bombDamager, .5f);
-    }
-
-    public void CPBomb()
-    {
-        if (effectManager != null)
-        {
-            GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
-            Destroy(bomb, 3.0f);
+		Vector3 positionToDamager = damageMessage.damageSource - transform.position;
+		positionToDamager -= transform.up * Vector3.Dot(transform.up, positionToDamager);
+		transform.rotation = Quaternion.LookRotation(positionToDamager);
 
 
-            GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
-            Destroy(bombDamager, 3.0f);
-        }
-    }
+		switch (damageMessage.damageType)
+		{
 
-    public void TimeSlash(string name, Vector3 pos)
-    {
-        if (effectManager != null)
-            effectManager.SpawnEffect(name, pos);
-    }
+			case DamageType.None:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
+			case DamageType.ATypeHit:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
+			case DamageType.BTypeHit:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
+			case DamageType.Down:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
+				break;
+		}
+
+	}
+	bool isDeath = false;
+	// ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Ô¼ï¿½
+	public void Death(/*Damageable.DamageMessage msg*/)
+	{
+		if (!isDeath)
+		{
+			soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+			StartCoroutine(DeathScequence());
+			isDeath = true;
+		}
+	}
+
+	private IEnumerator DeathScequence()
+	{
+		yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.GameOver));
+
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
+
+		yield return new WaitForSecondsRealtime(3);
+
+		yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.GameOver));
+
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
+		//ScreenFader.SetAlpha(0f, FadeType.GameOver);
+
+		yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(FadeType.Black));
+
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
+
+		SaveLoadManager.Instance.LoadCheckpointData();
+
+		yield return new WaitForSecondsRealtime(3);
+		ScreenFader.SetAlpha(0f);
+		PlayerFSM.InputReader.enabled = true;
+		isDeath = false;
+		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
+		//while (ScreenFader.IsFading)
+		//{
+		//    yield return null;
+		//}
+	}
+
+	/// <summary>
+	/// ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+	/// </summary>
+	public void TimeNormalization()
+	{
+		IsDecreaseCP = false;
+		CP = 0;
+		SkillRenderObj.SetActive(false);
+		BulletTime.Instance.SetNormalSpeed();
+	}
+
+	void SetCursorInactive()
+	{
+		Cursor.visible = !Cursor.visible; // ï¿½ï¿½ï¿½ì½º ï¿½Èºï¿½ï¿½Ì°ï¿½ ï¿½Ï±ï¿½
+		if (Cursor.visible)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+	}
+
+	public void SetSpeed(float value)
+	{
+		totalspeed = value * Speed;
+	}
+
+	public void SavePlayerData()
+	{
+		playerData.saveScene = SceneManager.GetActiveScene().name; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
+		playerData.TP = TP;
+		playerData.TP = CP;
+		playerData.RespawnPos = playerTransform.position;
+	}
+
+	// ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void AttackStart()
+	{
+		meleeWeapon?.BeginAttack();
+	}
+	public void AttackEnd()
+	{
+		meleeWeapon?.EndAttack();
+	}
+
+	public void BeginGuard()
+	{
+		meleeWeapon?.EndAttack();
+		shieldWeapon?.BeginGuard();
+	}
+
+	public void EndGuard()
+	{
+		shieldWeapon?.EndGuard();
+	}
+
+	public void BeginParry()
+	{
+		shieldWeapon?.BeginParry();
+	}
+
+	public void EndParry()
+	{
+		shieldWeapon?.EndParry();
+	}
+
+	/// <summary>
+	/// ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
+	/// </summary>
+
+	public void TimeStop()
+	{
+		soundManager.PlaySFX("TimeStop_Skill_Sound_SE", transform);
+		Vector3 temp = transform.position;
+		effectManager.SpawnEffect("TeraainScanner", temp);
+		SkillRenderObj.SetActive(true);
+	}
+
+	public void CPBombGround()
+	{
+		if (effectManager != null)
+		{
+			GameObject bomb = effectManager.SpawnEffect("CPGround", transform.position);
+			Destroy(bomb, 5.0f);
+
+		}
+	}
+	public void CPBombSlash()
+	{
+		if (effectManager != null)
+		{
+			GameObject slash = effectManager.SpawnEffect("CPSlash", transform.position);
+
+			Destroy(slash, 3.0f);
+			Invoke("test", 1.5f);
+			Invoke("CPBoombDamager", 1.5f);
+			Invoke("TimeNormalization", 1.5f);
+		}
+	}
+
+	/// <summary>
+	///  ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½
+	/// </summary>
+	public void test()
+	{
+		SkillRenderObj.SetActive(false);
+	}
+	public void CPBoombDamager()
+	{
+		GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+		Destroy(bombDamager, .5f);
+	}
+
+	public void CPBomb()
+	{
+		if (effectManager != null)
+		{
+			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
+			Destroy(bomb, 3.0f);
 
 
-    // ±âº» ½½·¡½Ã FX
-    // ÀÌ¸§ÀÌ ¸ÁÇØºÎ·¶À¸¾ß
-    public void NormalSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalSlashFX("Nor_Attack");
-    }
+			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
+			Destroy(bombDamager, 3.0f);
+		}
+	}
 
-    public void EnforcedSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalSlashFX("Com_Attack");
-    }
+	public void TimeSlash(string name, Vector3 pos)
+	{
+		if (effectManager != null)
+			effectManager.SpawnEffect(name, pos);
+	}
 
-    public void DodgeSlash()
-    {
-        if (effectManager != null)
-            effectManager.DodgeAttack();
-    }
 
-    public void SwordAura()
-    {
-        if (effectManager != null)
-            effectManager.SwordAuraOn();
-    }
+	// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FX
+	// ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ØºÎ·ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void NormalSlash()
+	{
+		if (effectManager != null)
+			effectManager.NormalSlashFX("Nor_Attack");
+	}
 
-    public void NormalStrongSlash()
-    {
-        if (effectManager != null)
-            effectManager.NormalStrongFX();
-    }
+	public void EnforcedSlash()
+	{
+		if (effectManager != null)
+			effectManager.NormalSlashFX("Com_Attack");
+	}
 
-    public void ComboImpact()
-    {
-        if (effectManager != null)
-        {
-            effectManager.GroundCheckFX();
-            effectManager.SwordWave();
-        }
-    }
+	public void DodgeSlash()
+	{
+		if (effectManager != null)
+			effectManager.DodgeAttack();
+	}
 
-    public void GroundImpact()
-    {
-        if (effectManager != null)
-            effectManager.GroundCheckFX();
-    }
+	public void SwordAura()
+	{
+		if (effectManager != null)
+			effectManager.SwordAuraOn();
+	}
 
-    public void GroundScar()
-    {
-        if (effectManager != null)
-            effectManager.GroundScar("Nor04_Ground");
-    }
+	public void NormalStrongSlash()
+	{
+		if (effectManager != null)
+			effectManager.NormalStrongFX();
+	}
 
-    public void AbilitySlash()
-    {
-        if (effectManager != null)
-            effectManager.AbilitySlash();
-    }
+	public void ComboImpact()
+	{
+		if (effectManager != null)
+		{
+			effectManager.GroundCheckFX();
+			effectManager.SwordWave();
+		}
+	}
 
-    public void AbilityScar()
-    {
-        if (effectManager != null)
-            effectManager.GroundScar("AbilityGroundScar");
-    }
+	public void GroundImpact()
+	{
+		if (effectManager != null)
+			effectManager.GroundCheckFX();
+	}
 
-    public void SoundVoice()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Character_voice_SE", transform);
-    }
+	public void GroundScar()
+	{
+		if (effectManager != null)
+			effectManager.GroundScar("Nor04_Ground");
+	}
 
-    public void Shake()
-    {
-        if (impulseCam != null)
-            impulseCam.Shake();
-    }
+	public void AbilitySlash()
+	{
+		if (effectManager != null)
+			effectManager.AbilitySlash();
+	}
 
-    IEnumerator ActivateSpcCubes(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-        {
-            spcCubeL.SetActive(true);
-            spcCubeR.SetActive(true);
-        }
-    }
+	public void AbilityScar()
+	{
+		if (effectManager != null)
+			effectManager.GroundScar("AbilityGroundScar");
+	}
 
-    // ÇÃ·¹ÀÌ¾î spcCube¸¦ È°¼ºÈ­ - Å°ÇÁ·¹ÀÓ¿¡¼­ ÀÌº¥Æ®·Î È£Ãâ
-    public void ActivateSCube()
-    {
-        spcCubeL.SetActive(true);
-        spcCubeR.SetActive(true);
-    }
+	public void SoundVoice()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Character_voice_SE", transform);
+	}
 
-    public void DeactivateSCube()
-    {
+	public void SoundFoot1()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
+	}
 
-    }
+	public void SoundFoot2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
+	}
 
-    protected IEnumerator RespawnRoutine()
-    {
-        // 1ÃÊ µ¿¾È ÆäÀÌµå ¾Æ¿ô.
-        //yield return StartCoroutine(ScreenFader.FadeSceneOut());
+	// ê¸°íšì— ì „ë‹¬í•˜ê¸° ìœ„í•´ í”Œë ˆì´ì–´ í‚¤í”„ë ˆì„ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” ì‚¬ìš´ë“œ ì¶œë ¥ í•¨ìˆ˜ë“¤
+	public void ComSound1()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
+	}
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+	public void ComSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+	}
 
-        // Enable spawning.
-        //EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
-        //spawn.enabled = true;
+	public void ComSound3()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+	}
 
-        // If there is a checkpoint, move Ellen to it.
+	public void ComSound4()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+	}
 
-    }
+	public void NorSound1()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
+	}
 
-    internal void Save()
-    {
-        PlayerPrefs.SetFloat("currentTP", currentTP);
-    }
+	public void NorSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+	}
+
+	public void DodgeSound()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Dodge_Sound_SE", transform);
+	}
+
+	public void Shake()
+	{
+		if (impulseCam != null)
+			impulseCam.Shake();
+	}
+
+	//IEnumerator ActivateSpcCubes(float delay)
+	//{
+	//	yield return new WaitForSeconds(delay);
+	//	if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
+	//	{
+	//		spcCubeL.SetActive(true);
+	//		spcCubeR.SetActive(true);
+	//	}
+	//}
+
+	//// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ spcCubeï¿½ï¿½ È°ï¿½ï¿½È­ - Å°ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½
+	//public void ActivateSCube()
+	//{
+	//	spcCubeL.SetActive(true);
+	//	spcCubeR.SetActive(true);
+	//}
+
+	//public void DeactivateSCube()
+	//{
+
+	//}
+
+	protected IEnumerator RespawnRoutine()
+	{
+		// 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Æ¿ï¿½.
+		//yield return StartCoroutine(ScreenFader.FadeSceneOut());
+
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
+
+		// Enable spawning.
+		//EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
+		//spawn.enabled = true;
+
+		// If there is a checkpoint, move Ellen to it.
+
+	}
+
+	internal void Save()
+	{
+		PlayerPrefs.SetFloat("currentTP", currentTP);
+	}
 }

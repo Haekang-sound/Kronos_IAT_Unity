@@ -7,7 +7,6 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
 
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
 	//private readonly int animSpeedHash = Animator.StringToHash("animSpeed");
 	//[SerializeField] float animSpeed = 1f;
 
@@ -17,7 +16,12 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
-		animator.ResetTrigger(dodgeHash);
+		animator.ResetTrigger(PlayerHashSet.Instance.Dodge);
+		
+		if(!Player.Instance.isBuff)
+		{
+			EffectManager.Instance.SwordAuraOff();
+		}
 
 	}
 

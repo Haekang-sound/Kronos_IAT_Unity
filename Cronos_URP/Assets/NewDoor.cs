@@ -18,7 +18,6 @@ public class NewDoor : MonoBehaviour
 	{
 		if (isOpen)
 		{
-			Debug.Log(degree);
 			if (degree < time)
 			{
 				degree += Time.deltaTime * speed;

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerDefenceState : PlayerBaseState
 {
-    private readonly int guradHash = Animator.StringToHash("isGuard");
     public PlayerDefenceState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	public override void Enter()
 	{
@@ -17,7 +16,7 @@ public class PlayerDefenceState : PlayerBaseState
     {
        if (!stateMachine.InputReader.IsRAttackPressed)
        {
-			stateMachine.Animator.SetBool(guradHash, false);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
 		}
     }
 	public override void FixedTick()
@@ -33,14 +32,14 @@ public class PlayerDefenceState : PlayerBaseState
 	}
     public void ReleaseGuard()
     {
-        stateMachine.Animator.SetBool(guradHash, false);
+        stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
 	}
 
 	public void DefenceFalse()
 	{
 		Debug.Log("데미지를 받아야하는");
-		stateMachine.Animator.SetBool(guradHash, false);
-		stateMachine.Animator.SetTrigger("Damaged");
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
+		stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
 	}
 
 }

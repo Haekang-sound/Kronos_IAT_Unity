@@ -3,245 +3,306 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.Video;
+
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
-    [SerializeField] public AbilityNode rootAbilityNode;
-    [SerializeField] public AbilityAmountLimit abilityAmounts;
+	[SerializeField] public AbilityNode rootAbilityNode;
+	[SerializeField] public AbilityAmountLimit abilityAmounts;
 
-    public Canvas abilityTreeCanvas;
+	public Canvas abilityTreeCanvas;
+
+	[Header("Node Detail")]
+	public CanvasGroup abilityNodeDetail;
+	public VideoPlayer abilityVideoPlayer;
+	public TMP_Text nodeCostText;
+	public TMP_Text nodeDetailText;
+	public Button buttonUnlock;
+	public Button buttonCancel;
+
     public PopupController popup;
-    public CanvasGroup canvasGroup;
-    public CinemachineVirtualCamera mainVirtualCam;
+	public CanvasGroup canvasGroup;
+	public CinemachineVirtualCamera mainVirtualCam;
 
-    public bool useParser;
+	public bool useParser;
 
-    private bool isFocus;
-    private List<AbilityNode> _abilityNodes;
+	private bool isFocus;
+	private bool _isTransition;
 
-    private List<IObservable<AbilityNode>> _obserables;
-    private List<IDisposable> _unsubscribers;
+	private AbilityNode _lastPressed;
+	private FadeEffector _nodedetailEffector;
 
-    private AbilityNode _lastPressed;
+	private List<AbilityNode> _abilityNodes;
+	private List<IDisposable> _unsubscribers;
+	private List<IObservable<AbilityNode>> _obserables;
 
-    private bool _isTransition;
+	public UnityEvent OnEnter;
 
-    public UnityEvent OnEnter;
+	// IObserver /////////////////////////////////////////////////////////////
 
-    // IObserver /////////////////////////////////////////////////////////////
+	public virtual void Subscribe(IObservable<AbilityNode> provider)
+	{
+		if (provider != null)
+			_unsubscribers.Add(provider.Subscribe(this));
+	}
 
-    public virtual void Subscribe(IObservable<AbilityNode> provider)
-    {
-        if (provider != null)
-            _unsubscribers.Add(provider.Subscribe(this));
-    }
+	public virtual void OnCompleted()
+	{
+		this.Unsubscribe();
+	}
 
-    public virtual void OnCompleted()
-    {
-        this.Unsubscribe();
-    }
+	public virtual void OnError(Exception e)
+	{
+	}
 
-    public virtual void OnError(Exception e)
-    {
-    }
+	public virtual void OnNext(AbilityNode value)
+	{
+		//if (value.isFucus == false)
+		{
+			_nodedetailEffector.StartFadeIn(1.5f);
+			abilityNodeDetail.blocksRaycasts = true;
+			value.FocusIn();
 
-    public virtual void OnNext(AbilityNode value)
-    {
-        if (value.isFucus == false)
-        {
-            value.FocusIn();
+			nodeCostText.text = "TP " + value.PointNeed + " ï¿½Ò¸ï¿½";
+			nodeDetailText.text = value.description;
+
+			abilityVideoPlayer.clip = value.videoClip;
+            abilityVideoPlayer.time = 0;
+            abilityVideoPlayer?.Play();
 
             if (_lastPressed != null &&
-                _lastPressed != value)
-            {
-                _lastPressed.FocusOut();
+				_lastPressed != value)
+			{
+				_lastPressed.FocusOut();
             }
-        }
-        else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
-        {
-            if (abilityAmounts.CanSpend(value.PointNeed) != -1)
-            {
-                // ÆË¾÷Ã¢À» ¿­°í, È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ¼öÇàÇÒ µ¿ÀÛÀ» Á¤ÀÇ
-                popup.OpenPopup("È®½ÇÇÕ´Ï±î?", () =>
-                {
-                    // È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàÇÒ µ¿ÀÛ
-                    value.SetState(AbilityNode.State.Activate);
-                    abilityAmounts.UpdateSpent(value.PointNeed);
-                });
-            }
-        }
-        _lastPressed = value;
-    }
+		}
+		//else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
+		//{
+		//	if (abilityAmounts.CanSpend(value.PointNeed) != -1)
+		//	{
+		//		// ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//		popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
+		//		{
+		//			// È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//			value.SetState(AbilityNode.State.Activate);
+		//			abilityAmounts.UpdateSpent(value.PointNeed);
+		//		});
+		//	}
+		//}
+		_lastPressed = value;
+	}
 
-    public virtual void Unsubscribe()
-    {
-        foreach (var unsubscriber in _unsubscribers)
-        {
-            unsubscriber.Dispose();
-            _unsubscribers.Remove(unsubscriber);
-        }
-    }
+	public virtual void Unsubscribe()
+	{
+		foreach (var unsubscriber in _unsubscribers)
+		{
+			unsubscriber.Dispose();
+			_unsubscribers.Remove(unsubscriber);
+		}
+	}
 
     // MonoBehaviour /////////////////////////////////////////////////////////////
 
-    private void Awake()
-    {
-        // ±¸µ¶ÀÚ ±¸µ¶
+	private void Awake()
+	{
+        _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
-        _abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
+		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
-        for (int i = 0; i <_abilityNodes.LongCount(); i++)
-        {
-            var node = _abilityNodes[i];
-            node.id = i.ToString();
-        }
+		for (int i = 0; i < _abilityNodes.LongCount(); i++)
+		{
+			var node = _abilityNodes[i];
+			node.id = i.ToString();
+		}
 
-        foreach (var obserable in _obserables)
-        {
-            obserable.Subscribe(this);
-        }
+		foreach (var obserable in _obserables)
+		{
+			obserable.Subscribe(this);
+		}
 
-        abilityTreeCanvas.enabled = false;
+		abilityTreeCanvas.enabled = false;
 
-        if (mainVirtualCam == null)
-        {
-            mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
-        }
+		if (mainVirtualCam == null)
+		{
+			mainVirtualCam = PlayerCamControler.Instance.VirtualCamera;
+		}
+
+		rootAbilityNode.SetState(AbilityNode.State.Interactible);
+    }
+
+    private void OnEnable()
+    {
+		abilityNodeDetail.alpha = 0f;
+        abilityNodeDetail.blocksRaycasts = false;
     }
 
     private void Start()
-    {
-        rootAbilityNode.SetState(AbilityNode.State.Interactible);
-
+	{
         if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
+
+        buttonUnlock.onClick.AddListener(UnlockAbility);
+		buttonCancel.onClick.AddListener(FocusOutAll);
+    }
+
+    // -----
+
+    public void FocusOutAll()
+    {
+        foreach (var button in _abilityNodes)
+        {
+            button.FocusOut();
+        }
+    }
+
+    public void UnlockAbility()
+    {
+        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
+        {
+            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
+            {
+                // ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                //popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
+                //{
+                // È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                _lastPressed.SetState(AbilityNode.State.Activate);
+                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
+                //});
+                _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
+                FocusOutAll();
+            }
+        }
     }
 
     public void SaveData(string purpose)
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Save(purpose);
-        }
-    }
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Save(purpose);
+		}
+	}
 
-    public void LoadData(string purpose)
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Load(purpose);
-        }
+	public void LoadData(string purpose)
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Load(purpose);
+		}
+	}
 
-        if(rootAbilityNode.CurrentState == AbilityNode.State.Deactivate)
-        {
-            rootAbilityNode.SetState(AbilityNode.State.Interactible);
-        }
-    }
+	public void ResetData()
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.Reset();
+		}
+	}
 
-    public void ResetData()
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.Reset();
-        }
-    }
+	public void EnterAbility()
+	{
+		if (_isTransition == false)
+		{
+			if (isFocus == false)
+			{
+				StartCoroutine(Enter());
+				OnEnter.Invoke();
+			}
+		}
+	}
 
-    public void EnterAbility()
-    {
-        if (_isTransition == false)
-        {
-            if (isFocus == false)
-            {
-                StartCoroutine(Enter());
-                OnEnter.Invoke();
-            }
-        }
-    }
+	public void ExitAbility()
+	{
+		if (_isTransition == false)
+		{
+			if (isFocus == true)
+			{
+				StartCoroutine(Exit());
+			}
+		}
+	}
+	public IEnumerator Enter()
+	{
+		_isTransition = true;
 
-    public void ExitAbility()
-    {
-        if (_isTransition == false)
-        {
-            if (isFocus == true)
-            {
-                StartCoroutine(Exit());
-            }
-        }
-    }
+		PauseManager.Instance.PauseGame();
 
-    public IEnumerator Enter()
-    {
-        _isTransition = true;
+		yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
-        PauseManager.Instance.PauseGame();
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+		abilityTreeCanvas.enabled = true;
+		abilityAmounts.UpdatePlayerTimePoint();
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
-
-        abilityTreeCanvas.enabled = true;
-        abilityAmounts.UpdatePlayerTimePoint();
-
-        SetEnabledButtons(true);
-        SetPlayerCamPriority(0);
-        canvasGroup.alpha = 1f;
+		SetEnabledButtons(true);
+		SetPlayerCamPriority(0);
+		canvasGroup.alpha = 1f;
 
         yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        isFocus = true;
-        _isTransition = false;
-    }
+		isFocus = true;
+		_isTransition = false;
+	}
 
-    public IEnumerator Exit()
-    {
-        _isTransition = true;
+	public IEnumerator Exit()
+	{
+		_isTransition = true;
 
-        yield return StartCoroutine(ScreenFader.FadeSceneOut());
+		yield return StartCoroutine(ScreenFader.FadeSceneOut());
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        abilityTreeCanvas.enabled = false;
-        SetPlayerCamPriority(10);
-        canvasGroup.alpha = 0f;
+		abilityTreeCanvas.enabled = false;
+		SetPlayerCamPriority(10);
+		canvasGroup.alpha = 0f;
+        abilityNodeDetail.alpha = 0f;
+		abilityNodeDetail.blocksRaycasts = false;
+
         SetEnabledButtons(false);
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+		yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
-        while (ScreenFader.IsFading)
-        {
-            yield return null;
-        }
+		while (ScreenFader.IsFading)
+		{
+			yield return null;
+		}
 
-        isFocus = false;
-        PauseManager.Instance.UnPauseGame();
+		isFocus = false;
+		PauseManager.Instance.abilityPause = false;
+		PauseManager.Instance.UnPauseGame();
 
-        _isTransition = false;
-    }
+		_isTransition = false;
+	}
 
-    void SetPlayerCamPriority(int val)
-    {
-        if (mainVirtualCam != null)
-        {
-            mainVirtualCam.Priority = val;
-        }
-    }
+	void SetPlayerCamPriority(int val)
+	{
+		if (mainVirtualCam != null)
+		{
+			mainVirtualCam.Priority = val;
+		}
+	}
 
-    private void SetEnabledButtons(bool val)
-    {
-        foreach (var node in _abilityNodes)
-        {
-            node.gameObject.SetActive(val);
-        }
-    }
+	private void SetEnabledButtons(bool val)
+	{
+		foreach (var node in _abilityNodes)
+		{
+			node.gameObject.SetActive(val);
+		}
+	}
 }

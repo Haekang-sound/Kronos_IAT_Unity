@@ -46,7 +46,7 @@ public class Defensible : MonoBehaviour
 		Vector3 temp = data.direction;
 		temp.y = 0f;
 
-		PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
+		//PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
 
 		data.amount /= dampRatio;
     }

@@ -60,7 +60,7 @@ public class EffectManager : MonoBehaviour
 
     // 캐릭터 평타 각도를 맞추기 위해서
     Vector3 swordMagicOffest = new Vector3(90, 180, 0);
-    Vector3 enemyMagicOffset = new Vector3(0, 180, 0);
+    Vector3 enemyMagicOffset = new Vector3(0, 90, 0);
 
     // 강화 검기 관련
     public bool isSwordWave;
@@ -138,14 +138,14 @@ public class EffectManager : MonoBehaviour
         //    StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //    BossFiveSpear(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BossFiveSpear(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha4))
         //    BossMoon(player.transform);
-//         if (Input.GetKeyDown(KeyCode.Alpha5))
-//             CreateAbsorbFX(player.transform, 12);
-//         if (Input.GetKeyDown(KeyCode.Alpha6))
-//             SpeedLine();
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    CreateAbsorbFX(player.transform, 12);
+        //         if (Input.GetKeyDown(KeyCode.Alpha6))
+        //             SpeedLine();
     }
 
     private void OnValidate()
@@ -424,7 +424,8 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
-            
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
+
             Destroy(impact, 2.0f);
             // 능력개방되었다면 이것도 나옴
             if (isGroundEnforced)
@@ -458,7 +459,7 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect(name, hitPoint, fxRot);
-
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
             Destroy(impact, 2.0f);
         }
         else
@@ -532,6 +533,16 @@ public class EffectManager : MonoBehaviour
         slashed.transform.rotation = player.playerSword.transform.rotation *
             Quaternion.Euler(new Vector3(90f, 0, 0));
         Destroy(slashed, 1.0f);
+    }
+
+    // 플레이어가 맞을 때 나오는 이펙트
+    public void PlayerHitFX(Damageable.DamageMessage dmgMsg)
+    {
+        Vector3 newPos = new Vector3(player.transform.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, player.transform.position.z);
+        GameObject pHit = SpawnEffect("Eff_Player_Damage", newPos);
+        pHit.transform.position += new Vector3(0, 1, 0);
+        pHit.transform.forward = dmgMsg.direction;
+        Destroy(pHit, 1.0f);
     }
 
     public void CreateAbsorbFX(Transform trans, float burstNum)

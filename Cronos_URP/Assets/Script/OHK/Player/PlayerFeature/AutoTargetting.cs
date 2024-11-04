@@ -7,6 +7,7 @@ public class AutoTargetting : MonoBehaviour
 {
 	static AutoTargetting instance;
 	public static AutoTargetting GetInstance() { return instance; }
+	public Collider sphere;
 
 	public CinemachineVirtualCamera PlayerCamera;
 	public CinemachinePOV CinemachinePOV;
@@ -34,16 +35,21 @@ public class AutoTargetting : MonoBehaviour
 
 
 	// 몬스터리스트
-	List<GameObject> MonsterList;
+	[SerializeField] private List<GameObject> MonsterList;
 	float? min = null;
 
 	private void Awake()
 	{
 		instance = this;    // 싱글턴으로 쓰겠다.
 		MonsterList = new List<GameObject>(); // 몬스터를 담자
-		//PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
+											  //PlayerCamera = PlayerCamControler.Instance.gameObject.GetComponent<CinemachineVirtualCamera>();
 	}
 
+	private void OnDisable()
+	{
+		Target = null;
+ 		MonsterList.Clear();
+	}
 	public Transform GetTarget()
 	{
 		return Target;
@@ -73,6 +79,22 @@ public class AutoTargetting : MonoBehaviour
 		}
 
 	}
+
+// 	private void OnTriggerStay(Collider other)
+// 	{
+// 		if (other.CompareTag("Respawn"))
+// 		{
+// 			// 리스트 내부의 값과 비교해서 같다면 리턴
+// 			foreach (GameObject t in MonsterList)
+// 			{
+// 				if (t == FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject) return;
+// 			}
+// 			
+// 			// 살아남으면 넣어주마
+// 			MonsterList.Add(FindChildRecursive(other.gameObject.transform, "LockOnTarget").gameObject);
+// 		}
+// 	}
+
 	/// 콜라이더에서 몬스터가 나가면 리스트에서 제거한다.
 	private void OnTriggerExit(Collider other)
 	{
@@ -100,16 +122,15 @@ public class AutoTargetting : MonoBehaviour
 			LockOn();
 		}
 	}
-
 	private void FixedUpdate()
 	{
 		// Player가 몬스터 방향으로 몸을 돌린다.
 		if ((isTargetting || stateMachine.Player.IsLockOn || isFacing)
 			&& stateMachine.GetState().ToString() != "PlayerParryState")
 		{
-			if (direction.magnitude != 0f)
+			if (direction.magnitude != 0f && stateMachine.InputReader.moveComposite.magnitude == 0f)
 			{
-				stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(direction.normalized), 0.1f));
+				stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(direction.normalized), 0.2f));
 
 			}
 		}
@@ -158,24 +179,24 @@ public class AutoTargetting : MonoBehaviour
 	}
 	public void AutoTargeting()
 	{
-        if (Target == null)
-        {
-            if (FindTarget())
-            {
-                isTargetting = true;
-                StartCoroutine(AutoTarget());
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
-            isTargetting = true;
-            StartCoroutine(AutoTarget());
-        }
-    }
+		if (Target == null)
+		{
+			if (FindTarget())
+			{
+				isTargetting = true;
+				StartCoroutine(AutoTarget());
+			}
+			else
+			{
+				return;
+			}
+		}
+		else
+		{
+			isTargetting = true;
+			StartCoroutine(AutoTarget());
+		}
+	}
 	private IEnumerator AutoTarget()
 	{
 		isTargetting = true;
@@ -246,7 +267,7 @@ public class AutoTargetting : MonoBehaviour
 		// 현재 몬스터 목록을 순회한다.
 		for (int i = MonsterList.Count - 1; i >= 0; i--)
 		{
-			if (MonsterList[i] == null)
+			if (MonsterList[i] == null || !MonsterList[i].active)
 			{
 				MonsterList.RemoveAt(i);
 			}

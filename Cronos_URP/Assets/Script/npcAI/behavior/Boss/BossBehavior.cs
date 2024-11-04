@@ -147,8 +147,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
                 break;
             case MessageType.DEAD:
-				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
-				break;
+				EffectManager.Instance.CreateHitFX(dmgMsg, transform);
+                Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
+                break;
             case MessageType.RESPAWN:
                 break;
             default:

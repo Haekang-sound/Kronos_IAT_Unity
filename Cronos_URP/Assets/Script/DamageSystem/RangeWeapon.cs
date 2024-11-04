@@ -8,6 +8,8 @@ public class RangeWeapon : MonoBehaviour
     public Projectile projectile;
     public int pooledObejctNum;
 
+    SoundManager sm;
+
     public Projectile loadedProjectile
     {
         get { return m_loadedProjectile; }
@@ -20,6 +22,7 @@ public class RangeWeapon : MonoBehaviour
     {
         m_projectilePool = new ObjectPooler<Projectile>();
         m_projectilePool.Initialize(pooledObejctNum, projectile);
+        sm = SoundManager.Instance;
     }
 
     // TEST
@@ -41,6 +44,8 @@ public class RangeWeapon : MonoBehaviour
     public void Attack(Vector3 target)
     {
         AttackProjectile(target);
+        sm.PlaySFX("Enemy_Bow_Shoot_Sound_SE", gameObject.transform);
+
     }
 
     public void LoadProjectile()

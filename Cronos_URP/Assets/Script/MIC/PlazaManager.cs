@@ -20,11 +20,14 @@ public class PlazaManager : MonoBehaviour
 	public UnityEvent OnOpen;
     public GameObject soundTrigger;
 
+    UIManager um;
+
     void Start()
     {
         if (soundTrigger != null)
             soundTrigger.SetActive(false);
         RegisterDestroyEvents();
+        um = UIManager.Instance;
     }
 	private void Update()
 	{
@@ -48,6 +51,8 @@ public class PlazaManager : MonoBehaviour
 		{
 			// 여기서 문여는 함수를 호출? 
 			OnOpen.Invoke();
+            // 우승
+            um.Achieve();
 		}
     }
 

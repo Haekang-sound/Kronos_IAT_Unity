@@ -1,31 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
-
-
-//using UnityEditorInternal;
 using UnityEngine;
 
 public class LastCombo : StateMachineBehaviour
 {
-	private readonly int moveHash = Animator.StringToHash("isMove");
     [SerializeField] float moveForce;
     [SerializeField] float Damage;
     public Damageable.DamageType damageType;
 	public Damageable.ComboType comboType;
-
+	
+	[SerializeField] private bool stopDodge;
 	public float hitStopTime;
     [Range(0.0f, 1.0f)] public float minFrame;
     AnimatorStateInfo currentStateInfo;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.ResetTrigger("Attack");
+		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		PlayerStateMachine.GetInstance().DodgeBool = stopDodge;
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerAttackState(PlayerStateMachine.GetInstance()));
+        PlayerStateMachine.GetInstance().MoveForce = moveForce;
 		PlayerStateMachine.GetInstance().currentLayerIndex = layerIndex;
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
-        PlayerStateMachine.GetInstance().MoveForce = moveForce;
-        PlayerStateMachine.GetInstance().Player.IsEnforced = true;
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = true;
+        
+		Player.Instance.IsEnforced = true;
+		Player.Instance._damageable.enabled = false;
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
@@ -39,11 +38,11 @@ public class LastCombo : StateMachineBehaviour
 		if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
 			// ¿Ãµø¡ﬂ
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 		else
 		{
-			animator.SetBool(moveHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 	}
@@ -52,7 +51,7 @@ public class LastCombo : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
-		PlayerStateMachine.GetInstance().Player._damageable.isInvulnerable = false;
+		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()

@@ -16,7 +16,7 @@ public class PlayerTimeSlashState : PlayerBaseState
 	{
 		stateMachine.Rigidbody.velocity = Vector3.zero;
 		stateMachine.MoveForce = moveForce;
-		stateMachine.HitStop.hitStopTime = hitStopTime;
+		stateMachine.HitStop.hitStopTime = hitStopTime;  
 
 		stateMachine.GroundChecker.ToggleChecker = false;
 

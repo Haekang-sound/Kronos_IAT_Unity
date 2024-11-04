@@ -13,6 +13,7 @@ public class TimeRingScript : MonoBehaviour
     public Material tex4;
     public Material tex5;
 
+    //[SerializeField]
     float MaxHP;
     Damageable enemy;
 
@@ -53,7 +54,6 @@ public class TimeRingScript : MonoBehaviour
 
             ringRenderer.material = materials[index];
         }
-
         else
         {
             float curHP = enemy.currentHitPoints / MaxHP;

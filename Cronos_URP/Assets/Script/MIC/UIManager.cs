@@ -167,6 +167,18 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             StartAppearMain(idx);
         }
+
+        if (idx == 1)
+        {
+            yield return new WaitForSeconds(1.0f);
+            StartAppearMain(3);
+        }
+
+        if (idx == 2)
+        {
+            yield return new WaitForSeconds(1.0f);
+            StartAppearMain(6);
+        }
     }
 
     /// 메인 목표 박스 UI 애니메이션

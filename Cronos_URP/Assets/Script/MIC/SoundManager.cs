@@ -89,6 +89,15 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void PlayBGM(SoundEvent soev)
+    {
+        foreach (SoundEvent se in BgmList)
+        {
+            if (se == soev)
+                se.PlayMusic();
+        }
+    }
+
     public void PlaySFX(string name, Transform transform)
     {
         foreach (SoundEvent se in SfxList)
@@ -107,6 +116,7 @@ public class SoundManager : MonoBehaviour
                 se.PlayMusic();
         }
     }
+
 
     public void StopBGM(string name)
     {

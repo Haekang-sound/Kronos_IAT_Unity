@@ -6,12 +6,6 @@ using static Damageable;
 public class LastEnforcedCombo : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int chargeHash = Animator.StringToHash("Charge");
-	private readonly int chargeAttackHash = Animator.StringToHash("chargeAttack");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
     public Damageable.DamageType damageType;
@@ -44,12 +38,12 @@ public class LastEnforcedCombo : StateMachineBehaviour
         if (PlayerStateMachine.GetInstance().InputReader.moveComposite.magnitude != 0f)
 		{
 			// 이동중
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 		else// 혹은
 		{
 			// 이동아님
-			animator.SetBool(moveHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
 	}

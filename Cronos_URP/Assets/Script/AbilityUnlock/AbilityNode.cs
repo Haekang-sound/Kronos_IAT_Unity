@@ -2,10 +2,8 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -31,10 +29,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public ImageGrayscale skillIcon;
     public FadeEffector fadeUI;
 
-    [Header("Text")]
-    public TMP_Text abilityName;
-    public TMP_Text description;
-    public TMP_Text subdescription;
+    [Header("Resurces")]
+    public VideoClip videoClip;
+    public string description;
 
     [Header("Event")]
     public UnityEvent OnUpdated;
@@ -47,7 +44,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     public string id;
 
     private Button _button;
-    private VideoPlayer _videoPlayer;
     private IObserver<AbilityNode> _observer;
     private CinemachineVirtualCamera _virtualCam;
 
@@ -63,17 +59,12 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         StartCoroutine(SetFocausAfter(true, 2));
         _virtualCam.Priority = 10;
-        fadeUI.StartFadeIn(1.4f);
-        _videoPlayer.time = 0;
-        _videoPlayer?.Play();
     }
 
     public void FocusOut()
     {
         StartCoroutine(SetFocausAfter(false, 2));
         _virtualCam.Priority = 0;
-        fadeUI.StartFadeOut(1.0f);
-        _videoPlayer?.Pause();
     }
 
     public void Render()
@@ -157,18 +148,18 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         }
 
         // 기타 업데이트 (진행도 바)
-        
+
     }
 
     public void Save(string purpose)
     {
-        string key = id + purpose;
+        string key = purpose + id;
         PlayerPrefs.SetInt(key, (int)_state);
     }
 
     public void Load(string purpose)
     {
-        string key = id + purpose;
+        string key = purpose + id;
         if (PlayerPrefs.HasKey(key))
         {
             AbilityNode.State loadedstate = (AbilityNode.State)PlayerPrefs.GetInt(key);
@@ -214,8 +205,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void Awake()
     {
         _virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
-        _videoPlayer = GetComponentInChildren<VideoPlayer>();
-        _videoPlayer?.Pause();
 
         _backgoundImage = background.GetComponent<Image>();
         _backgroundRotate = background.GetComponent<RotateUI>();

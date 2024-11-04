@@ -1,103 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &703954237573387704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8871378980285125561}
-  - component: {fileID: 4448574179449900095}
-  - component: {fileID: 1971109317315612530}
-  m_Layer: 8
-  m_Name: Damager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8871378980285125561
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703954237573387704}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7405821, y: 0.0062258393, z: 0.047495265, w: 0.6702564}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.010000002, y: 0.010000001, z: 0.009999999}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1360384001517190983}
-  m_LocalEulerAnglesHint: {x: 97.17499, y: -39.050995, z: -35.700012}
---- !u!65 &4448574179449900095
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703954237573387704}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 1.4999889, z: 0.44442046}
-  m_Center: {x: -0.000017230877, y: 0.4999954, z: -0.02175703}
---- !u!114 &1971109317315612530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703954237573387704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3366e92a106e53047a012176e253befe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawGizmos: 1
-  damageAmount: 1
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  inAttack: 0
-  isAcitveSkill: 0
-  currentDamageType: 0
-  currentComboType: 0
-  OnAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  _isGuard: 0
-  _isParrying: 0
-  beParryied:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ATypeEnemyBehavior, Assembly-CSharp
-        m_MethodName: TriggerDown
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  parrying:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2698855783326452417
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,8 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   useAnimatiorSpeed: 1
-  interpolateTurning: 0
-  applyAnimationRotation: 0
+  interpolateTurning: 1
+  applyAnimationRotation: 1
   rotationLerpSpeed: 0
   useObjectPool: 0
 --- !u!136 &74958551394690362
@@ -443,9 +345,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   drawGizmos: 1
-  meleeAttackDistance: 3
-  normalAttackDistance: 4
-  strongAttackDistance: 5
+  meleeAttackDistance: 1.8
+  normalAttackDistance: 2.4
+  strongAttackDistance: 3
   strafeSpeed: 0.8
   rotationSpeed: 1
   inAttack: 0
@@ -524,6 +426,7 @@ MonoBehaviour:
   viewBlockerLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  _target: {fileID: 0}
 --- !u!114 &6261491467160807349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +572,7 @@ GameObject:
   - component: {fileID: 2392812095189494763}
   - component: {fileID: 4223867018747628312}
   - component: {fileID: 2922199211655598650}
+  - component: {fileID: 4530534594634024589}
   m_Layer: 8
   m_Name: Damager
   m_TagString: Untagged
@@ -756,6 +660,23 @@ MonoBehaviour:
   parrying:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4530534594634024589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566870579031645809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d5cea4fd8c41f40851cb5e8c7638f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 0
+  newCenter: {x: 0, y: 0, z: 0}
+  newSize: {x: 0, y: 0, z: 0}
+  _originalCenter: {x: 0, y: 0, z: 0}
+  _originalSize: {x: 0, y: 0, z: 0}
 --- !u!1 &8801721978891766922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,9 +1538,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7274022385850283920, guid: bb0965a1c4324fe40b20661acd2e8656, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2392812095189494763}
-    - targetCorrespondingSourceObject: {fileID: 7274022385850283920, guid: bb0965a1c4324fe40b20661acd2e8656, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8871378980285125561}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8050558711567494442, guid: bb0965a1c4324fe40b20661acd2e8656, type: 3}
       insertIndex: -1
@@ -1647,6 +1565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0feb28bf5f1e8314eaa8ae9f9c5324fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simpleDamager: {fileID: 0}
-  parryDamaer: {fileID: 0}
-  bAdjuster: {fileID: 0}
+  simpleDamager: {fileID: 2922199211655598650}
+  parryDamaer: {fileID: 2922199211655598650}
+  bAdjuster: {fileID: 4530534594634024589}

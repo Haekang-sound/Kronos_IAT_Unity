@@ -7,7 +7,7 @@ public class UI_Scanner : MonoBehaviour
     public GameObject abilityUnlock;
     bool isPopup;
     bool isInteracting;
-
+    SoundManager sm;
 
     private void Start()
     {
@@ -17,6 +17,7 @@ public class UI_Scanner : MonoBehaviour
         interText.SetActive(false);
         isPopup = false;
         isInteracting = false;
+        sm = SoundManager.Instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,28 +46,30 @@ public class UI_Scanner : MonoBehaviour
         Debug.Log("Exit InterAction");
     }
 
-    void Update()
-    {
-        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
-        {
-            isInteracting = true;
-            interText.SetActive(false);
-            abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
-        }
+	void Update()
+	{
+		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
+		{
+			isInteracting = true;
+			sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
+			interText.SetActive(false);
+			PauseManager.Instance.abilityPause = true;
+			abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
+		}
 
-        if (isInteracting && Input.GetKeyDown(KeyCode.Tab))
-        {
-            isInteracting = false;
-            abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
-            interText.SetActive(true);
-            isPopup = true;
-            // Å©·Î³ë½º ³×ÀÌ³ð
-            if (QuestManager.Instance.abilityQuesting)
-            {
-                QuestManager.Instance.abilityQuesting = false;
-                UIManager.Instance.Achieve();
-            }
-        }
-    }
+		if (isInteracting && Input.GetKeyDown(KeyCode.F))
+		{
+			isInteracting = false;
+			abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
+			interText.SetActive(true);
+			isPopup = true;
+			// Å©ï¿½Î³ë½º ï¿½ï¿½ï¿½Ì³ï¿½
+			if (QuestManager.Instance.abilityQuesting)
+			{
+				QuestManager.Instance.abilityQuesting = false;
+				UIManager.Instance.Achieve();
+			}
+		}
+	}
 
 }

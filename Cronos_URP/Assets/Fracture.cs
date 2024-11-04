@@ -9,11 +9,15 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	public Collider[] colliders;
 	public Damageable Damageable;
 	public event Action OnDeath;
+	public GameObject timeRing;
 
 	[SerializeField] private Collider myColldier;
 	[SerializeField] private Renderer myRenderer;
+	[SerializeField] private bool isDestroy;
 
 	int deathCount = 0;
+	bool isBroke;
+
 	private void Awake()
 	{
 		colliders = GetComponentsInChildren<Collider>();
@@ -30,9 +34,10 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 	{
 
 	}
+
 	private void Update()
 	{
-		if (Damageable.currentHitPoints <= 0f)
+		if (Damageable.currentHitPoints <= 0f) 
 		{
 			Damageable.JustDead();
 		}
@@ -80,8 +85,22 @@ public class Fracture : MonoBehaviour, IMessageReceiver
 			Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
 			rb.constraints = (RigidbodyConstraints)0;
 		}
+		if(isDestroy)
+		{
+			if (timeRing != null)
+				Destroy(timeRing);
 
-		Destroy(gameObject, 3f);
+			Destroy(gameObject, 3f);
+		}
+	}
+
+	public void SoundCrack()
+	{
+		if (!isBroke)
+		{
+			isBroke = true;
+			SoundManager.Instance.PlaySFX("Stone_Crack_1_Sound_SE", transform);
+		}
 	}
 
 	private void Damaged(Damageable.DamageMessage damageData)
