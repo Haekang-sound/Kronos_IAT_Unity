@@ -257,7 +257,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		}
 
 		isFocus = false;
-		PauseManager.Instance.UnPauseGame();
+        PauseManager.Instance.abilityPause = false;
+        PauseManager.Instance.UnPauseGame();
 
 		_isTransition = false;
 	}

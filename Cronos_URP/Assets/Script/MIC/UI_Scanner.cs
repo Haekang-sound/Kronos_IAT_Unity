@@ -53,6 +53,7 @@ public class UI_Scanner : MonoBehaviour
             isInteracting = true;
             sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
             interText.SetActive(false);
+            PauseManager.Instance.abilityPause = true;
             abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
         }
 
