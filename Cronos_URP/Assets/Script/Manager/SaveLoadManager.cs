@@ -91,6 +91,11 @@ public class SaveLoadManager : MonoBehaviour
         StartCoroutine(_currentCheckpoint.LoadData());
     }
 
+    public void DeleteDataAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     // -----
 
     private void Awake()
