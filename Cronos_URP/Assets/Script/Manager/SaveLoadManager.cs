@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
