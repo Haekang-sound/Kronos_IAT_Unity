@@ -32,7 +32,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 	protected static Player instance;
-	public bool isParry;
 
 	public RenderObjects SkillRenderObj;
 
@@ -222,7 +221,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Down()
 	{
-		PlayerFSM.Animator.SetTrigger("down");
+		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 	}
 
 	private void ChangeParryState()
@@ -306,11 +305,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		if (Input.GetKeyDown(KeyCode.H))
 		{
-			PlayerFSM.Animator.SetTrigger("down");
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 		}
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			PlayerFSM.Animator.SetTrigger("damagedB");
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
 		}
 
 		// �������̶��
@@ -324,37 +323,21 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime && !isEnforced)
+		if (buffTimer > buffTime)
 		{
-			//isBuff = false;
-			PlayerFSM.Animator.SetBool("isMove", true);
-			PlayerFSM.Animator.SetBool("isEnforced", false);
-			//effectManager.SwordAuraOff();
+			isBuff = false;
+			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
+			if (CurrentState == "PlayerMoveState")
+			{
+				effectManager.SwordAuraOff();
+
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
 			SetCursorInactive();
-		}
-
-		// �ɷ°���ġƮ
-		if (Input.GetKeyDown(KeyCode.Alpha0))
-		{
-			PlayerFSM.Animator.SetBool("isCPBoomb", true);
-			PlayerFSM.Animator.SetBool("isTimeStop", true);
-			PlayerFSM.Animator.SetBool("ComAttackVariation", true);
-			PlayerFSM.Animator.SetBool("NorAttackVariation", true);
-			PlayerFSM.Animator.SetBool("DodgeAttack", true);
-			PlayerFSM.Animator.SetBool("EnforcedCombo", true);
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha9))
-		{
-			PlayerFSM.Animator.SetBool("isCPBoomb", false);
-			PlayerFSM.Animator.SetBool("isTimeStop", false);
-			PlayerFSM.Animator.SetBool("ComAttackVariation", false);
-			PlayerFSM.Animator.SetBool("NorAttackVariation", false);
-			PlayerFSM.Animator.SetBool("DodgeAttack", false);
-			PlayerFSM.Animator.SetBool("EnforcedCombo", false);
 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
@@ -425,7 +408,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 
 		if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!PlayerFSM.Animator.GetBool("isGurad"))
+			if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
@@ -452,18 +435,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 		switch (damageMessage.damageType)
 		{
 
+			case DamageType.None:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.ATypeHit:
-				PlayerFSM.Animator.SetTrigger("damagedA");
-				if (!PlayerFSM.Animator.GetBool("isGuard"))
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 				break;
 			case DamageType.BTypeHit:
-				PlayerFSM.Animator.SetTrigger("damagedB");
-				if (!PlayerFSM.Animator.GetBool("isGuard"))
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 				break;
 			case DamageType.Down:
-				PlayerFSM.Animator.SetTrigger("down");
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 				break;
 		}
 
@@ -744,23 +732,23 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
 	}
 
-    public void ComSound2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
-    }
+	public void ComSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+	}
 
-    public void ComSound3()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
-    }
+	public void ComSound3()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+	}
 
-    public void ComSound4()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
-    }
+	public void ComSound4()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+	}
 
 	public void NorSound1()
 	{
@@ -768,11 +756,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
 	}
 
-    public void NorSound2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
-    }
+	public void NorSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+	}
 
 	public void DodgeSound()
 	{
@@ -780,7 +768,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			soundManager.PlaySFX("Player_Dodge_Sound_SE", transform);
 	}
 
-    public void Shake()
+	public void Shake()
 	{
 		if (impulseCam != null)
 			impulseCam.Shake();

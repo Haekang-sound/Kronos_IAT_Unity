@@ -272,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 4433217409526974451, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 107361781}
     - target: {fileID: 5432976119440392353, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1992518
@@ -313,6 +313,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6118922851539053544, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 107361781}
+    - target: {fileID: 6118922851539053544, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1271220378}
+    - target: {fileID: 6118922851539053544, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: targetUI
+      value: 
+      objectReference: {fileID: 1780888}
     - target: {fileID: 6620581494647019592, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -326,6 +338,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+--- !u!1 &1780888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8519713563527393179, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+  m_PrefabInstance: {fileID: 1780887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9681024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,6 +1493,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7737856591898675433, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
   m_PrefabInstance: {fileID: 107361778}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &107361781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3653870303936261969, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
+  m_PrefabInstance: {fileID: 107361778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107361780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e08ef511b33964bba9efab48ccdd95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &107943308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8893,7 +8921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: currentHitPoints
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
@@ -8926,6 +8954,10 @@ PrefabInstance:
     - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639208384206892621, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: damageAmount
+      value: 8.22
       objectReference: {fileID: 0}
     - target: {fileID: 8751960732937434445, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_Name
@@ -14841,6 +14873,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1601210491435547abb8c577b3e9203, type: 3}
+--- !u!20 &1271220378 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5087062709508721841, guid: d1601210491435547abb8c577b3e9203, type: 3}
+  m_PrefabInstance: {fileID: 1271220377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1281584237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16803,7 +16840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519902407162873035, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 519902407162873035, guid: 179cd84eb31af9f44a47ad688f615813, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -18142,7 +18179,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 3.7941108, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.5988167, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18153,7 +18190,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 3.7941108, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.5988167, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:

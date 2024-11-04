@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerDodgeState : PlayerBaseState
 {
 	public PlayerDodgeState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int attackHash = Animator.StringToHash("Attack");
 	public override void Enter()
 	{
 		stateMachine.InputReader.onLAttackStart += Attack;
@@ -38,6 +37,6 @@ public class PlayerDodgeState : PlayerBaseState
 	private void Attack()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
-		PlayerStateMachine.GetInstance().Animator.SetBool(attackHash, true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.Attack, true);
 	}
 }

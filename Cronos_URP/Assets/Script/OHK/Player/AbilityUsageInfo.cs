@@ -4,15 +4,15 @@ public struct AbilityUsageInfo
 	//콤보 강화
 	public bool EnforcedCombo 
 	{
-		get{ return PlayerStateMachine.GetInstance().Animator.GetBool("EnforcedCombo"); }
-		set { PlayerStateMachine.GetInstance().Animator.SetBool("EnforcedCombo", value); }
+		get{ return PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.EnforcedCombo); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.EnforcedCombo, value); }
 	}
 
 	//회피 공격
 	public bool DodgeAttack
 	{
-		get { return PlayerStateMachine.GetInstance().Animator.GetBool("DodgeAttack"); }
-		set { PlayerStateMachine.GetInstance().Animator.SetBool("DodgeAttack", value); }
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.DodgeAttack); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.DodgeAttack, value); }
 	}
 
 	//경직 면역
@@ -25,15 +25,15 @@ public struct AbilityUsageInfo
 	// Nor_Attack 변환
 	public bool NorAttackVariation
 	{
-		get { return PlayerStateMachine.GetInstance().Animator.GetBool("NorAttackVariation"); }
-		set { PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", value); }
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.NorAttackVariation); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, value); }
 	}
 
 	// Com_Attack 변환
 	public bool ComAttackVariation
 	{
-		get { return PlayerStateMachine.GetInstance().Animator.GetBool("ComAttackVariation"); }
-		set { PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", value); }
+		get { return PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.ComAttackVariation); }
+		set { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, value); }
 	}
 
 	/// 민동휘

@@ -31,6 +31,7 @@ public class PlayerStateMachine : StateMachine
 
 	public AnimatorStateInfo currentStateInformable { get; set; }
 	public float minf { get; set; }
+	public bool DodgeBool { get; set; }
 
 	public void Awake()
 	{
@@ -55,7 +56,7 @@ public class PlayerStateMachine : StateMachine
 
 	public void SwitchParryState()
 	{
-		if (Player.Instance.isParry)
+		if (Animator.GetBool("isParry"))
 		{
 			SwitchState(new PlayerParryState(this));
 		}

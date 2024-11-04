@@ -67,7 +67,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
-			nodeCostText.text = "TP " + value.PointNeed + " ¼Ò¸ð";
+			nodeCostText.text = "TP " + value.PointNeed + " ï¿½Ò¸ï¿½";
 			nodeDetailText.text = value.description;
 
 			abilityVideoPlayer.clip = value.videoClip;
@@ -84,10 +84,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		//{
 		//	if (abilityAmounts.CanSpend(value.PointNeed) != -1)
 		//	{
-		//		// ÆË¾÷Ã¢À» ¿­°í, È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ¼öÇàÇÒ µ¿ÀÛÀ» Á¤ÀÇ
-		//		popup.OpenPopup("È®½ÇÇÕ´Ï±î?", () =>
+		//		// ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//		popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
 		//		{
-		//			// È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàÇÒ µ¿ÀÛ
+		//			// È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		//			value.SetState(AbilityNode.State.Activate);
 		//			abilityAmounts.UpdateSpent(value.PointNeed);
 		//		});
@@ -111,7 +111,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	{
         _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
 
-        // ±¸µ¶ÀÚ ±¸µ¶
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
 		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
@@ -147,13 +147,40 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         if (mainVirtualCam == null) mainVirtualCam = GameObject.Find("PlayerCam").GetComponent<CinemachineVirtualCamera>();
 
         buttonUnlock.onClick.AddListener(UnlockAbility);
-
 		buttonCancel.onClick.AddListener(FocusOutAll);
     }
 
     // -----
 
-	public void SaveData(string purpose)
+    public void FocusOutAll()
+    {
+        foreach (var button in _abilityNodes)
+        {
+            button.FocusOut();
+        }
+    }
+
+    public void UnlockAbility()
+    {
+        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
+        {
+            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
+            {
+                // ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                //popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
+                //{
+                // È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                _lastPressed.SetState(AbilityNode.State.Activate);
+                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
+                //});
+                _nodedetailEffector.StartFadeOut(1.5f);
+                abilityNodeDetail.blocksRaycasts = false;
+                FocusOutAll();
+            }
+        }
+    }
+
+    public void SaveData(string purpose)
 	{
 		foreach (var node in _abilityNodes)
 		{
@@ -257,8 +284,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		}
 
 		isFocus = false;
-        PauseManager.Instance.abilityPause = false;
-        PauseManager.Instance.UnPauseGame();
+		PauseManager.Instance.abilityPause = false;
+		PauseManager.Instance.UnPauseGame();
 
 		_isTransition = false;
 	}
@@ -278,32 +305,4 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			node.gameObject.SetActive(val);
 		}
 	}
-
-    private void FocusOutAll()
-    {
-        foreach (var button in _abilityNodes)
-        {
-            button.FocusOut();
-        }
-    }
-
-    private void UnlockAbility()
-    {
-        if (_lastPressed.isFucus == true && _lastPressed.CurrentState == AbilityNode.State.Interactible)
-        {
-            if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
-            {
-                // ÆË¾÷Ã¢À» ¿­°í, È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ¼öÇàÇÒ µ¿ÀÛÀ» Á¤ÀÇ
-                //popup.OpenPopup("È®½ÇÇÕ´Ï±î?", () =>
-                //{
-                // È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàÇÒ µ¿ÀÛ
-                _lastPressed.SetState(AbilityNode.State.Activate);
-                abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
-                //});
-                _nodedetailEffector.StartFadeOut(1.5f);
-                abilityNodeDetail.blocksRaycasts = false;
-                FocusOutAll();
-            }
-        }
-    }
 }

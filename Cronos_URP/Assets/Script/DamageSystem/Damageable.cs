@@ -53,7 +53,8 @@ public partial class Damageable : MonoBehaviour
 
     void Start()
     {
-        player = Player.Instance;
+		ResetDamage();
+		player = Player.Instance;
         impCam = ImpulseCam.Instance;
         soundManager = SoundManager.Instance;
         //effectManager = EffectManager.Instance;
