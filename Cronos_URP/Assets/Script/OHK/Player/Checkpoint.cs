@@ -1,10 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
-
 
 /// <summary>
 /// 체크포인트는 
