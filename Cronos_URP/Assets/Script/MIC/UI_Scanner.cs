@@ -63,7 +63,7 @@ public class UI_Scanner : MonoBehaviour
 			abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
 			interText.SetActive(true);
 			isPopup = true;
-			// Å©·Î³ë½º ³×ÀÌ³ð
+			// Å©ï¿½Î³ë½º ï¿½ï¿½ï¿½Ì³ï¿½
 			if (QuestManager.Instance.abilityQuesting)
 			{
 				QuestManager.Instance.abilityQuesting = false;

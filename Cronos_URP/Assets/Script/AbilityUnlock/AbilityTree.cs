@@ -67,7 +67,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
-			nodeCostText.text = "TP " + value.PointNeed + " ¼Ò¸ð";
+			nodeCostText.text = "TP " + value.PointNeed + " ï¿½Ò¸ï¿½";
 			nodeDetailText.text = value.description;
 
 			abilityVideoPlayer.clip = value.videoClip;
@@ -84,10 +84,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		//{
 		//	if (abilityAmounts.CanSpend(value.PointNeed) != -1)
 		//	{
-		//		// ÆË¾÷Ã¢À» ¿­°í, È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ¼öÇàÇÒ µ¿ÀÛÀ» Á¤ÀÇ
-		//		popup.OpenPopup("È®½ÇÇÕ´Ï±î?", () =>
+		//		// ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//		popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
 		//		{
-		//			// È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàÇÒ µ¿ÀÛ
+		//			// È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		//			value.SetState(AbilityNode.State.Activate);
 		//			abilityAmounts.UpdateSpent(value.PointNeed);
 		//		});
@@ -111,7 +111,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	{
         _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
 
-        // ±¸µ¶ÀÚ ±¸µ¶
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
 		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
@@ -166,10 +166,10 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
             {
-                // ÆË¾÷Ã¢À» ¿­°í, È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ¼öÇàÇÒ µ¿ÀÛÀ» Á¤ÀÇ
-                //popup.OpenPopup("È®½ÇÇÕ´Ï±î?", () =>
+                // ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                //popup.OpenPopup("È®ï¿½ï¿½ï¿½Õ´Ï±ï¿½?", () =>
                 //{
-                // È®ÀÎ ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàÇÒ µ¿ÀÛ
+                // È®ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _lastPressed.SetState(AbilityNode.State.Activate);
                 abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
                 //});
