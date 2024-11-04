@@ -334,11 +334,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.Alpha4))
-		{
-			SetCursorInactive();
-		}
+// 
+// 		if (Input.GetKeyDown(KeyCode.Alpha4))
+// 		{
+// 			SetCursorInactive();
+// 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
