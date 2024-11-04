@@ -232,7 +232,8 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
-        _hitShake.Begin();
+        if(_hitShake)
+            _hitShake.Begin();
 
         _knockBack?.Begin(msg.damageSource);
     }
