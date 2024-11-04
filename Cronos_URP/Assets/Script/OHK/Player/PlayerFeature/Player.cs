@@ -383,12 +383,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
 					Damaged(damageData);
-
+					effectManager.PlayerHitFX(damageData);
 				}
 				break;
 			case MessageType.DEAD:
 				{
-					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+                    effectManager.PlayerHitFX(damageData);
 					PlayerFSM.InputReader.enabled = false;
 					//Death(/*damageData*/);
 				}
