@@ -21,7 +21,6 @@ public class CheckpointData : ScriptableObject
 
         yield return SceneController.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(sceneName));
 
-        // 자기 자신을 재호출
         yield return SceneController.Instance.StartCoroutine(LoadData2());
 
         yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
