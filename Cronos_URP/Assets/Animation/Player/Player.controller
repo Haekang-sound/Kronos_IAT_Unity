@@ -1479,6 +1479,18 @@ MonoBehaviour:
   drawGizmos: 0
   Center: {x: 0, y: -0.4, z: 0}
   Size: {x: 3, y: 2.7, z: 1}
+--- !u!114 &-3681910950120121203
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f665646a00624a47a80ed9e014878d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-3567282203650016640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1746,18 +1758,18 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 2341847357346862668}
-    second:
-    - {fileID: 1758906489119718432}
-    - {fileID: -1587547279203260226}
-  - first: {fileID: 3996534933792411687}
-    second: []
   - first: {fileID: 4709733735613252092}
     second:
     - {fileID: 3624047856668659846}
     - {fileID: -6945362514458829214}
     - {fileID: 2545217923611968774}
     - {fileID: 3805039686867106538}
+  - first: {fileID: 3996534933792411687}
+    second: []
+  - first: {fileID: 2341847357346862668}
+    second:
+    - {fileID: 1758906489119718432}
+    - {fileID: -1587547279203260226}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 920, y: 430, z: 0}
   m_EntryPosition: {x: 920, y: 330, z: 0}
@@ -2562,7 +2574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 2.3
+  moveForce: 1.5
   Damage: 0
   damageType: 3
   comboType: 1
@@ -2636,7 +2648,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: NorAttackVariation
     m_Type: 4
@@ -2654,7 +2666,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: EnforcedCombo
     m_Type: 4
@@ -3978,7 +3990,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1404596577890197784}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -3681910950120121203}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
