@@ -535,6 +535,16 @@ public class EffectManager : MonoBehaviour
         Destroy(slashed, 1.0f);
     }
 
+    // 플레이어가 맞을 때 나오는 이펙트
+    public void PlayerHitFX(Damageable.DamageMessage dmgMsg)
+    {
+        Vector3 newPos = new Vector3(player.transform.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, player.transform.position.z);
+        GameObject pHit = SpawnEffect("Eff_Player_Damage", newPos);
+        pHit.transform.position += new Vector3(0, 1, 0);
+        pHit.transform.forward = dmgMsg.direction;
+        Destroy(pHit, 1.0f);
+    }
+
     public void CreateAbsorbFX(Transform trans, float burstNum)
     {
         // 1초 뒤에 hud로 돌진하는 파티클 만들기
