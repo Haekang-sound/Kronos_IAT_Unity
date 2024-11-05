@@ -304,6 +304,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			CP += 10f;
+			if (CP >= 100)
+			{
+				CP = 100f;
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.H))

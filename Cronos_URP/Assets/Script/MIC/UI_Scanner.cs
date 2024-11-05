@@ -5,6 +5,10 @@ public class UI_Scanner : MonoBehaviour
     public GameObject player;
     public GameObject interText;
     public GameObject abilityUnlock;
+
+	public GameObject TPUI;
+	public GameObject KeyGuid;
+
     bool isPopup;
     bool isInteracting;
     SoundManager sm;
@@ -14,7 +18,11 @@ public class UI_Scanner : MonoBehaviour
         player = Player.Instance.gameObject;
         interText = UIManager.Instance.Interactor;
         abilityUnlock = GameObject.Find("AbilityUnlock");
-        interText.SetActive(false);
+
+		TPUI = GameObject.Find("HUD_TPCP");
+		KeyGuid = GameObject.Find("KeyGuide");
+
+		interText.SetActive(false);
         isPopup = false;
         isInteracting = false;
         sm = SoundManager.Instance;
@@ -51,10 +59,16 @@ public class UI_Scanner : MonoBehaviour
 		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
 		{
             Interaction();
+			TPUI.SetActive(false);
+			KeyGuid.SetActive(false);
+			PauseManager.Instance.escAvailable = false;
 		}
-		else if (isInteracting && Input.GetKeyDown(KeyCode.F))
+		else if (isInteracting && Input.GetKeyDown(KeyCode.Escape))
 		{
             TurnInteraction();
+			TPUI.SetActive(true);
+			KeyGuid.SetActive(true);
+			PauseManager.Instance.escAvailable = true;
 		}
 	}
 
