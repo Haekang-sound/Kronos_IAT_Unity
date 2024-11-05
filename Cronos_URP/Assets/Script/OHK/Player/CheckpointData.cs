@@ -40,7 +40,8 @@ public class CheckpointData : ScriptableObject
         // 능력 개방 데이터 가져오기
         if (_abilityTree == null)
         {
-            _abilityTree = FindObjectOfType<AbilityTree>();
+			Player.Instance.ResetAbilityData(); // 플레이어 강화 데이터를 초기화
+			_abilityTree = FindObjectOfType<AbilityTree>();
         }
 
         _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());

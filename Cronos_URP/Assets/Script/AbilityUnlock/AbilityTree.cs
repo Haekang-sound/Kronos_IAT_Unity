@@ -19,6 +19,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	[Header("Node Detail")]
 	public CanvasGroup abilityNodeDetail;
 	public VideoPlayer abilityVideoPlayer;
+	public TMP_Text skillNameText;
 	public TMP_Text nodeCostText;
 	public TMP_Text nodeDetailText;
 	public Button buttonUnlock;
@@ -67,7 +68,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
-			nodeCostText.text = "TP " + value.PointNeed + " �Ҹ�";
+            skillNameText.text = value.skillName.text;
+            nodeCostText.text = "TP " + value.PointNeed + " 필요";
 			nodeDetailText.text = value.description;
 
 			abilityVideoPlayer.clip = value.videoClip;

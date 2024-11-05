@@ -48,7 +48,7 @@ public class AutoTargetting : MonoBehaviour
 	private void OnDisable()
 	{
 		Target = null;
- 		MonsterList.Clear();
+ 		//MonsterList.Clear();
 	}
 	public Transform GetTarget()
 	{
