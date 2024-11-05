@@ -1898,7 +1898,7 @@ MonoBehaviour:
   currentDamage: 0
   attackSpeed: 0
   chargeAttack: 0
-  currentTP: 300
+  currentTP: 60
   currentCP: 0
   chargingCP: 3
   TPAbsorptionRatio: 1
@@ -1932,7 +1932,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  targetdistance: 1
+  targetdistance: 0.3
   meleeWeapon: {fileID: 0}
   _damageable: {fileID: 0}
   groggyStack: {fileID: 0}
@@ -2235,7 +2235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5ac770529272c4085ae06be808f05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeStrength: 0.6
+  rayStrength: 1
+  blackHoleStrength: 1
+  handsStrength: 1
 --- !u!114 &7836693288841694907
 MonoBehaviour:
   m_ObjectHideFlags: 0

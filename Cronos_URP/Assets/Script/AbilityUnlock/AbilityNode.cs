@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -27,9 +28,9 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     [Header("Effect")]
     public ImageGrayscale background;
     public ImageGrayscale skillIcon;
-    public FadeEffector fadeUI;
 
     [Header("Resurces")]
+    public TMP_Text skillName;
     public VideoClip videoClip;
     public string description;
 
@@ -213,11 +214,6 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
         _backGroundDeactivate = Resources.Load<UnityEngine.Sprite>("UI/Skill/main_gear_dark");
 
         _button = GetComponentInChildren<Button>();
-    }
-
-    private void OnEnable()
-    {
-        fadeUI.GetComponent<CanvasGroup>().alpha = 0f;
     }
 
     private void Start()

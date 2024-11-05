@@ -13,6 +13,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
 		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.AutoTargetting.enabled = false;
 		SoundManager.Instance.PlaySFX("Player_Dodge_Sound_SE", Player.Instance.transform);
 		// 상태전환
 		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
@@ -37,6 +38,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
+		stateMachine.AutoTargetting.enabled = true;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
