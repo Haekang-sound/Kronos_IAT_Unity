@@ -153,13 +153,13 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     public void Save(string purpose)
     {
-        string key = purpose + id;
+        string key = typeof(AbilityNode).ToString() + purpose + id;
         PlayerPrefs.SetInt(key, (int)_state);
     }
 
     public void Load(string purpose)
     {
-        string key = purpose + id;
+        string key = typeof(AbilityNode).ToString() + purpose + id;
         if (PlayerPrefs.HasKey(key))
         {
             AbilityNode.State loadedstate = (AbilityNode.State)PlayerPrefs.GetInt(key);

@@ -67,7 +67,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			abilityNodeDetail.blocksRaycasts = true;
 			value.FocusIn();
 
-			nodeCostText.text = "TP " + value.PointNeed + " �Ҹ�";
+			nodeCostText.text = "TP " + value.PointNeed + " 필요";
 			nodeDetailText.text = value.description;
 
 			abilityVideoPlayer.clip = value.videoClip;
