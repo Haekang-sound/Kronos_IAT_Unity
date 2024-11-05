@@ -24,8 +24,15 @@ public class ImpulseCam : MonoBehaviour
     }
 
     CinemachineImpulseSource impulse;
+    [Tooltip("8방향 광선의 셰이크 강도입니다.")]
     [Range(0, 10)]
-    public float shakeStrength = 1.0f;
+    public float rayStrength = 1.0f;
+    [Tooltip("블랙홀 폭발의 셰이크 강도입니다. 8개의 위성이 전부 호출합니다.")]
+    [Range(0, 10)]
+    public float blackHoleStrength = 1.0f;
+    [Tooltip("시침의 셰이크 강도입니다.")]
+    [Range(0, 10)]
+    public float handsStrength = 1.0f;
 
     // Start is called before the first frame update
     void Start()

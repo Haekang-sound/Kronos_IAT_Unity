@@ -60,6 +60,7 @@ public class BossMoonSript : MonoBehaviour
 
 	public void CallBlast()
 	{
+		ImpulseCam.Instance.Shake(ImpulseCam.Instance.blackHoleStrength);
 		GameObject boom = EffectManager.Instance.SpawnEffect("BossFX_MoonBlast", transform.position);
 		GameObject boomDamage = EffectManager.Instance.SpawnEffect("BossFX_GravityField_Damager", transform.position);
 		Destroy(boomDamage,0.5f);
