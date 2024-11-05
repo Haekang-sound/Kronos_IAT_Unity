@@ -12,6 +12,9 @@ public class PauseManager : MonoBehaviour
     GameObject playerCam;
 
     bool isPause = false;
+    // esc로 퍼즈할 수 있음을 허용하는 불리언
+    public bool escAvailable;
+
 
     // 무지성 불리언 아서 제가 참 좋아합니다
     public bool abilityPause = false;
@@ -46,6 +49,10 @@ public class PauseManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
     }
 
+    private void Start()
+    {
+        escAvailable = true;
+    }
 
     private void Update()
     {
@@ -110,5 +117,15 @@ public class PauseManager : MonoBehaviour
 
         GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
         //PlayerStateMachine.GetInstance().isPaused = false;
+    }
+
+    public void AvailableEsc()
+    {
+        escAvailable = true;
+    }
+
+    public void UnavailableEsc()
+    {
+        escAvailable = false;
     }
 }

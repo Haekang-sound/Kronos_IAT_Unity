@@ -21,6 +21,8 @@ public class PauseMenu : MonoBehaviour
     public bool isLoad;
     public bool isTitle;
 
+
+
     private void OnEnable()
     {
         pauseManager = PauseManager.Instance;
@@ -63,7 +65,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseManager.escAvailable)
         {
             if (!isPaused)
                 OpenPauseMenu();
