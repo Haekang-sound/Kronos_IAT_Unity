@@ -12,7 +12,7 @@ public class KeyGuidance : MonoBehaviour
 
     float fadeTime = 0.5f;
     public bool nowShowing;
-    Coroutine curCorutine;
+    Coroutine curCoroutine;
 
     public Vector2 showPos;
     public Vector2 hidePos;
@@ -20,7 +20,7 @@ public class KeyGuidance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nowShowing = true;
+        //nowShowing = true;
         showPos = keyGuide.GetComponent<RectTransform>().anchoredPosition;
         hidePos = new Vector2(fadePos, showPos.y);
     }
@@ -31,21 +31,37 @@ public class KeyGuidance : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab) && PauseManager.Instance.escAvailable)
         {
             if (!nowShowing)
-                curCorutine = StartCoroutine(ShowHUD());
+                curCoroutine = StartCoroutine(ShowHUD());
             else
-                curCorutine = StartCoroutine(HideHUD());
+                curCoroutine = StartCoroutine(HideHUD());
         }
+    }
+
+    public void ShowGuide()
+    {
+        if (curCoroutine != null)
+            StopCoroutine(curCoroutine);
+        curCoroutine = StartCoroutine(ShowHUD());
+        Debug.Log("Show key guide");
+    }
+
+    public void HideGuide()
+    {
+        if (curCoroutine != null)
+            StopCoroutine(curCoroutine);
+        curCoroutine = StartCoroutine(HideHUD());
+        Debug.Log("Hide key guide");
     }
 
     // 조작가이드를 show 하는 코루틴
     IEnumerator ShowHUD()
     {
-        if (curCorutine != null)
+        if (curCoroutine != null)
         {
-            StopCoroutine(curCorutine);
+            StopCoroutine(curCoroutine);
             keyGuide.GetComponent<CanvasGroup>().alpha = 0.0f;
             keyGuide.GetComponent<RectTransform>().anchoredPosition = hidePos;
-            curCorutine = null;
+            curCoroutine = null;
         }
         nowShowing = true;
 
@@ -61,18 +77,18 @@ public class KeyGuidance : MonoBehaviour
             yield return null;
         }
         keyGuide.GetComponent<CanvasGroup>().alpha = 1.0f;
-        curCorutine = null;
+        curCoroutine = null;
     }
 
     // 조작가이드를 hide하는 코루틴
     IEnumerator HideHUD()
     {
-        if (curCorutine != null)
+        if (curCoroutine != null)
         {
-            StopCoroutine(curCorutine);
+            StopCoroutine(curCoroutine);
             keyGuide.GetComponent<CanvasGroup>().alpha = 1.0f;
             keyGuide.GetComponent<RectTransform>().anchoredPosition = showPos;
-            curCorutine = null;
+            curCoroutine = null;
         }
         nowShowing = false;
 
@@ -87,6 +103,6 @@ public class KeyGuidance : MonoBehaviour
         }
         keyGuide.GetComponent<CanvasGroup>().alpha = 0.0f;
         keyGuide.SetActive(false);
-        curCorutine = null;
+        curCoroutine = null;
     }
 }
