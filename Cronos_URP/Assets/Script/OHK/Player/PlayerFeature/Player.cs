@@ -5,6 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using static Damageable;
 using static ScreenFader;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Player�� ���� ������ �� ���� �� �� �ִ� �÷��̾� ��ũ��Ʈ
@@ -169,6 +170,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	protected void OnDisable()
 	{
 		_damageable.onDamageMessageReceivers.Remove(this);
+
+		// 여기서 능력치를 전부 초기화해준다.
+
 	}
 
 	private void OnEnable()
@@ -333,11 +337,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 			}
 		}
-// 
-// 		if (Input.GetKeyDown(KeyCode.Alpha4))
-// 		{
-// 			SetCursorInactive();
-// 		}
+		// 
+		// 		if (Input.GetKeyDown(KeyCode.Alpha4))
+		// 		{
+		// 			SetCursorInactive();
+		// 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
@@ -387,8 +391,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case MessageType.DEAD:
 				{
-                    Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-                    effectManager.PlayerHitFX(damageData);
+					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					effectManager.PlayerHitFX(damageData);
 					PlayerFSM.InputReader.enabled = false;
 					//Death(/*damageData*/);
 				}
@@ -817,5 +821,20 @@ public class Player : MonoBehaviour, IMessageReceiver
 	internal void Save()
 	{
 		PlayerPrefs.SetFloat("currentTP", currentTP);
+	}
+
+	public void ResetAbilityData()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.EnforcedCombo, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.DodgeAttack, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isFlashSlash, false);
+		EffectManager.Instance.isSwordWave = false;
+		EffectManager.Instance.isGroundEnforced = false;
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isCPBoomb, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isTimeStop, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isParry, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isRushAttack, false);
 	}
 }
