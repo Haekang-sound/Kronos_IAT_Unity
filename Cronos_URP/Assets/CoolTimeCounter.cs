@@ -29,9 +29,15 @@ public class CoolTimeCounter : MonoBehaviour
 	[SerializeField] private Image timeStop;
 	[SerializeField] private Image bomb;
 
+
+	[SerializeField] private Image rushAttackMask;
+	[SerializeField] private Image slashMask;
+	[SerializeField] private Image timeStopMask;
+
+
 	// 사용여부
 	public bool isRushAttackUsed { get; set; }
-	public bool isDodgeUsed{ get; set; }
+	public bool isDodgeUsed { get; set; }
 
 	// 쿨타임
 	public float rushAttackCoolTime;
@@ -42,19 +48,27 @@ public class CoolTimeCounter : MonoBehaviour
 
 	private void Update()
 	{
-		if (isRushAttackUsed 
-			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isRushAttack))
+		if(PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isRushAttack))
 		{
-			rushATimer += Time.unscaledDeltaTime;
-			rushAttackImage.fillAmount = rushATimer/rushAttackCoolTime;
-			if (rushATimer >= rushAttackCoolTime)
+			rushAttackMask.enabled = false;
+			if (isRushAttackUsed)
 			{
-				isRushAttackUsed = false;
-				rushATimer = 0f ;
-				return;
+				rushATimer += Time.unscaledDeltaTime;
+				rushAttackImage.fillAmount = rushATimer / rushAttackCoolTime;
+				if (rushATimer >= rushAttackCoolTime)
+				{
+					isRushAttackUsed = false;
+					rushATimer = 0f;
+					return;
+				}
 			}
 		}
+		else
+		{
+			rushAttackMask.enabled = true;
+		}
 		
+
 
 		if (isDodgeUsed)
 		{
@@ -68,32 +82,47 @@ public class CoolTimeCounter : MonoBehaviour
 			}
 		}
 
-		if(Player.Instance.CP >= 20f
-			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isFlashSlash))
+		if (PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isFlashSlash))
 		{
-			slash.enabled = true;
+			slashMask.enabled = false;
+			if (Player.Instance.CP >= 20f)
+			{
+				slash.enabled = true;
+			}
+			else
+			{
+				slash.enabled = false;
+			}
 		}
 		else
 		{
-			slash.enabled = false;
+			slashMask.enabled = true;
 		}
 
-		if (Player.Instance.CP >= 100f
-			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
+		if(PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
 		{
-			timeStop.enabled = true;
+			timeStopMask.enabled = false;
+			if (Player.Instance.CP >= 100f)
+			{
+				timeStop.enabled = true;
+			}
+			else
+			{
+				timeStop.enabled = false;
+			}
 		}
 		else
 		{
-			timeStop.enabled = false;
+			timeStopMask.enabled = true;
 		}
+		
 
 		if (Player.Instance.IsDecreaseCP
 			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
-		{ 
+		{
 			bomb.enabled = true;
 		}
-		else 
+		else
 		{
 			bomb.enabled = false;
 		}
