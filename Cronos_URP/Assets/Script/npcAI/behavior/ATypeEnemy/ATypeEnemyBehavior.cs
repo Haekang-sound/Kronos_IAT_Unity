@@ -71,15 +71,16 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         OnDown.AddListener(TriggerDown);
         sm = SoundManager.Instance;
-    }
+		_damageable.OnDeath.AddListener(Dead);
+	}
 
 
-    void OnEnable()
+	void OnEnable()
     {
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 
         _damageable.onDamageMessageReceivers.Add(this);
-
+        _damageable.currentHitPoints = _damageable.maxHitPoints;
         _meleeWeapon.SetOwner(gameObject);
 
         _rigidbody.GetComponent<Rigidbody>();
@@ -192,7 +193,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
             case MessageType.DEAD:
                 EffectManager.Instance.CreateHitFX(dmgMsg, transform);
 				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
-				Dead();
+				//Dead();
                 break;
             case MessageType.RESPAWN:
                 break;
@@ -231,7 +232,8 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
-        _hitShake.Begin();
+        if(_hitShake)
+            _hitShake.Begin();
 
         _knockBack?.Begin(msg.damageSource);
     }

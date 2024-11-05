@@ -7,7 +7,7 @@ public class UI_Scanner : MonoBehaviour
     public GameObject abilityUnlock;
     bool isPopup;
     bool isInteracting;
-
+    SoundManager sm;
 
     private void Start()
     {
@@ -17,6 +17,7 @@ public class UI_Scanner : MonoBehaviour
         interText.SetActive(false);
         isPopup = false;
         isInteracting = false;
+        sm = SoundManager.Instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,28 +46,48 @@ public class UI_Scanner : MonoBehaviour
         Debug.Log("Exit InterAction");
     }
 
-    void Update()
-    {
-        if (isPopup && Input.GetKeyDown(KeyCode.Tab) && !isInteracting)
-        {
-            isInteracting = true;
-            interText.SetActive(false);
-            abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
-        }
+	void Update()
+	{
+		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
+		{
+            Interaction();
+		}
+		else if (isInteracting && Input.GetKeyDown(KeyCode.F))
+		{
+            TurnInteraction();
+		}
+	}
 
-        if (isInteracting && Input.GetKeyDown(KeyCode.Tab))
+    void Interaction()
+    {
+        isInteracting = true;
+        sm.PlaySFX("00 AbilityScreen_FadeIN_Sound_SE", transform);
+        interText.SetActive(false);
+        PauseManager.Instance.abilityPause = true;
+        abilityUnlock.GetComponent<AbilityTree>().EnterAbility();
+    }
+
+    void TurnInteraction()
+    {
+        isInteracting = false;
+        abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
+        Invoke("ShowIntext", 0.3f);
+        isPopup = true;
+        // 크로노스 네 이노오ㅗㅁ
+        if (QuestManager.Instance.abilityQuesting)
         {
-            isInteracting = false;
-            abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
-            interText.SetActive(true);
-            isPopup = true;
-            // ũ�γ뽺 ���̳�
-            if (QuestManager.Instance.abilityQuesting)
-            {
-                QuestManager.Instance.abilityQuesting = false;
-                UIManager.Instance.Achieve();
-            }
+            QuestManager.Instance.abilityQuesting = false;
+            Invoke("JustAchieve", 0.3f);
         }
     }
 
+    void ShowIntext()
+    {
+        interText.SetActive(true);
+    }
+
+    void JustAchieve()
+    {
+        UIManager.Instance.Achieve();
+    }
 }

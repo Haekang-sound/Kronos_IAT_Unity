@@ -21,6 +21,7 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	//심판의 칼날
 	public void Com_S_Attack_Aura()
 	{
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isFlashSlash, true) ;
 		EffectManager.Instance.isSwordWave = true;
 	}
 
@@ -33,54 +34,35 @@ public class AbilityUsageInfoManager : MonoBehaviour
 	//	CP 폭발 - Mov_TimeBomb
 	public void Mov_TimeBomb()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("isCPBoomb", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isCPBoomb, true);
 	}
 	//	시간 정지 - Mov_TimeStop
 	public void Mov_TimeStop()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("isTimeStop", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isTimeStop, true);
 	}
 	// 격렬한 강타 - Com_AbilityAttack
 	public void Com_AbilityAttack()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("ComAttackVariation", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, true);
 	}
 	// 격렬한 일격 - Nor_AbilityAttack
 	public void Nor_AbilityAttack()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("NorAttackVariation", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, true);
 	}
 
 	// 운명의 굴레 - 패리어택
 	public void ParryAttack()
 	{
-		Player.Instance.isParry = true;
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isParry, true);
 	}
 
 	// 파괴의 도약 - 
 	public void RushAttack()
 	{
-		PlayerStateMachine.GetInstance().Animator.SetBool("isRushAttack", true);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isRushAttack, true);
 	}
-
-
-	// 	//경직 면역
-	// 	public void UseRigidImmunity()
-	//     {
-	//         abilityUsageInfo.RigidImmunity = true;
-	//     }
-
-	// 	// Nor_Attack 변환
-	// 	public void UseNorAttackVariation()
-	//     {
-	//         abilityUsageInfo.NorAttackVariation = true;
-	//     }
-	// 
-	// 	// Com_Attack 변환
-	// 	public void UseComAttackVariation()
-	//     {
-	//         abilityUsageInfo.ComAttackVariation = true;
-	//     }
 
 	//Com_S_Attack 강 공격 강화
 	public void UseComSAttackUpgrade()

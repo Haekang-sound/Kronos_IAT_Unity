@@ -17,38 +17,36 @@ public class CheckpointData : ScriptableObject
 
     public IEnumerator LoadData()
     {
-        // 만일 씬을 옮겨야 하면 씬이동
-        if (sceneName != SceneManager.GetActiveScene().name)
+        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
+
+        yield return SceneController.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(sceneName));
+
+        yield return SceneController.Instance.StartCoroutine(LoadData2());
+
+        yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
+    }
+    public IEnumerator LoadData2()
+    {
+        /// 플레이어
+        // 체크포인트로 이동시킴
+        var playerRigidbody = Player.Instance.GetComponent<Rigidbody>();
+        playerRigidbody.position = SpwanPos;
+        playerRigidbody.rotation = SpwanRot;
+
+        // TP 및 CP 가져오기
+        Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
+        Player.Instance.CP = PlayerPrefs.GetFloat(r_cpKey);
+
+        // 능력 개방 데이터 가져오기
+        if (_abilityTree == null)
         {
-            yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
-
-            yield return SceneController.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(sceneName));
-
-            // 자기 자신을 재호출
-            yield return SceneController.Instance.StartCoroutine(LoadData());
-
-            yield return SceneController.Instance.StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));
+			Player.Instance.ResetAbilityData(); // 플레이어 강화 데이터를 초기화
+			_abilityTree = FindObjectOfType<AbilityTree>();
         }
-        else
-        {
-            /// 플레이어
-            // 체크포인트로 이동시킴
-            var playerRigidbody = Player.Instance.GetComponent<Rigidbody>();
-            playerRigidbody.position = SpwanPos;
-            playerRigidbody.rotation = SpwanRot;
 
-            // TP 및 CP 가져오기
-            Player.Instance.TP = PlayerPrefs.GetFloat(r_tpKey);
-            Player.Instance.CP = PlayerPrefs.GetFloat(r_cpKey);
+        _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());
 
-            // 능력 개방 데이터 가져오기
-            if (_abilityTree == null)
-            {
-                _abilityTree = FindObjectOfType<AbilityTree>();
-            }
-
-            _abilityTree.LoadData(SaveLoadManager.Purpose.checkpoint.ToString());
-        }
+        yield return null;
     }
 
     public void SaveData()

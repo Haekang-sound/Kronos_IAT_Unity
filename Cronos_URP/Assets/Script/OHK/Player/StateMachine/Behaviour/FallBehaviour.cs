@@ -6,7 +6,6 @@ using UnityEngine;
 public class FallBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int fallHash = Animator.StringToHash("isFalling");
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -22,7 +21,7 @@ public class FallBehaviour : StateMachineBehaviour
 		if (stateMachine.GroundChecker.isActiveAndEnabled
 			)
 		{
-			animator.SetBool(fallHash, false);
+			animator.SetBool(PlayerHashSet.Instance.isFalling, false);
 		}
 
 	}

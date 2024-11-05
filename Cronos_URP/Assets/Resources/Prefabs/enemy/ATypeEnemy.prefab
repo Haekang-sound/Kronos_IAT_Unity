@@ -239,8 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   useAnimatiorSpeed: 1
-  interpolateTurning: 0
-  applyAnimationRotation: 0
+  interpolateTurning: 1
+  applyAnimationRotation: 1
   rotationLerpSpeed: 0
   useObjectPool: 0
 --- !u!136 &74958551394690362
@@ -347,7 +347,7 @@ MonoBehaviour:
   drawGizmos: 1
   meleeAttackDistance: 1.8
   normalAttackDistance: 2.4
-  strongAttackDistance: 3
+  strongAttackDistance: 7
   strafeSpeed: 0.8
   rotationSpeed: 1
   inAttack: 0
@@ -426,6 +426,7 @@ MonoBehaviour:
   viewBlockerLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  _target: {fileID: 0}
 --- !u!114 &6261491467160807349
 MonoBehaviour:
   m_ObjectHideFlags: 0

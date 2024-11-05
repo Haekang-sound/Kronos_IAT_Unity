@@ -8,15 +8,15 @@ public class DodgeBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
 	Vector3 direction;
-	private readonly int attackHash = Animator.StringToHash("Attack");
-	[SerializeField] float moveForce;
+		[SerializeField] float moveForce;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
 		stateMachine = PlayerStateMachine.GetInstance();
+		SoundManager.Instance.PlaySFX("Player_Dodge_Sound_SE", Player.Instance.transform);
 		// 상태전환
 		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
-		animator.ResetTrigger(attackHash);
+		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerDodgeState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
 		PlayerStateMachine.GetInstance().Player._damageable.enabled = false;

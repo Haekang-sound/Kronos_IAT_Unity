@@ -43,7 +43,7 @@ public class CoolTimeCounter : MonoBehaviour
 	private void Update()
 	{
 		if (isRushAttackUsed 
-			&& PlayerStateMachine.GetInstance().Animator.GetBool("isRushAttack"))
+			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isRushAttack))
 		{
 			rushATimer += Time.unscaledDeltaTime;
 			rushAttackImage.fillAmount = rushATimer/rushAttackCoolTime;
@@ -69,7 +69,7 @@ public class CoolTimeCounter : MonoBehaviour
 		}
 
 		if(Player.Instance.CP >= 20f
-			&& PlayerStateMachine.GetInstance().Animator.GetBool("isFlashSlash"))
+			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isFlashSlash))
 		{
 			slash.enabled = true;
 		}
@@ -79,7 +79,7 @@ public class CoolTimeCounter : MonoBehaviour
 		}
 
 		if (Player.Instance.CP >= 100f
-			&& PlayerStateMachine.GetInstance().Animator.GetBool("isTimeStop"))
+			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
 		{
 			timeStop.enabled = true;
 		}
@@ -89,7 +89,7 @@ public class CoolTimeCounter : MonoBehaviour
 		}
 
 		if (Player.Instance.IsDecreaseCP
-			&& PlayerStateMachine.GetInstance().Animator.GetBool("isCPBoomb"))
+			&& PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
 		{ 
 			bomb.enabled = true;
 		}

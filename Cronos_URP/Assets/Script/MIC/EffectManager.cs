@@ -36,6 +36,7 @@ public class EffectManager : MonoBehaviour
     public GameObject pSword;
 
     SoundManager soundManager;
+    ImpulseCam ic;
 
     // 레이캐스트 관련
     float forwardVal = 1.6f;
@@ -134,16 +135,16 @@ public class EffectManager : MonoBehaviour
         //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
         //보스 이펙트 데모로 나오게
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
-        //         if (Input.GetKeyDown(KeyCode.Alpha3))
-        //             BossFiveSpear(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //    BossMoon(player.transform);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            CreateAbsorbFX(player.transform, 12);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BossFiveSpear(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            BossMoon(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    CreateAbsorbFX(player.transform, 12);
         //         if (Input.GetKeyDown(KeyCode.Alpha6))
         //             SpeedLine();
     }
@@ -160,6 +161,7 @@ public class EffectManager : MonoBehaviour
     {
         soundManager = SoundManager.Instance;
         player = Player.Instance;
+        ic = ImpulseCam.Instance;
 
         if(player != null)
         {
@@ -424,7 +426,8 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect("Nor04_Ground", hitPoint, fxRot);
-            
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
+
             Destroy(impact, 2.0f);
             // 능력개방되었다면 이것도 나옴
             if (isGroundEnforced)
@@ -458,7 +461,7 @@ public class EffectManager : MonoBehaviour
                 Vector3.ProjectOnPlane(pSword.transform.up * -1, hitNormal), hitNormal);
             fxRot *= Quaternion.Euler(0, -90f, 0);
             GameObject impact = SpawnEffect(name, hitPoint, fxRot);
-
+            soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
             Destroy(impact, 2.0f);
         }
         else
@@ -534,6 +537,16 @@ public class EffectManager : MonoBehaviour
         Destroy(slashed, 1.0f);
     }
 
+    // 플레이어가 맞을 때 나오는 이펙트
+    public void PlayerHitFX(Damageable.DamageMessage dmgMsg)
+    {
+        Vector3 newPos = new Vector3(player.transform.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, player.transform.position.z);
+        GameObject pHit = SpawnEffect("Eff_Player_Damage", newPos);
+        pHit.transform.position += new Vector3(0, 1, 0);
+        pHit.transform.forward = dmgMsg.direction;
+        Destroy(pHit, 1.0f);
+    }
+
     public void CreateAbsorbFX(Transform trans, float burstNum)
     {
         // 1초 뒤에 hud로 돌진하는 파티클 만들기
@@ -569,6 +582,8 @@ public class EffectManager : MonoBehaviour
     // 보스 8방향 빔
     public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
     {
+        ic.Shake(ic.rayStrength);
+
         for (int i = 0; i < bossBeamDupeTime; i++)
         {
             soundManager.PlaySFX("Beam_SE", player.transform);

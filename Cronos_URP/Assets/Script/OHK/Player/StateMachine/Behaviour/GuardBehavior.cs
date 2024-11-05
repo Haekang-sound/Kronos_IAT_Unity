@@ -6,8 +6,6 @@ using UnityEngine.InputSystem.XR;
 public class GuardBehavior : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	private readonly int moveHash = Animator.StringToHash("isMove");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,7 +27,7 @@ public class GuardBehavior : StateMachineBehaviour
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			// ¿Ãµø¡ﬂ
-			animator.SetBool(moveHash, true);
+			animator.SetBool(PlayerHashSet.Instance.isMove, true);
 		}
 
 

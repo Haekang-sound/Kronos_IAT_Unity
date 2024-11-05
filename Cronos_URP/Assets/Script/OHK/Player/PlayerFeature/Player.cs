@@ -1,11 +1,11 @@
 using Message;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using static Damageable;
 using static ScreenFader;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Player�� ���� ������ �� ���� �� �� �ִ� �÷��̾� ��ũ��Ʈ
@@ -32,7 +32,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 	protected static Player instance;
-	public bool isParry;
 
 	public RenderObjects SkillRenderObj;
 
@@ -171,6 +170,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	protected void OnDisable()
 	{
 		_damageable.onDamageMessageReceivers.Remove(this);
+
+		// 여기서 능력치를 전부 초기화해준다.
+
 	}
 
 	private void OnEnable()
@@ -222,7 +224,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Down()
 	{
-		PlayerFSM.Animator.SetTrigger("down");
+		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 	}
 
 	private void ChangeParryState()
@@ -306,11 +308,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		if (Input.GetKeyDown(KeyCode.H))
 		{
-			PlayerFSM.Animator.SetTrigger("down");
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 		}
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			PlayerFSM.Animator.SetTrigger("damagedB");
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
 		}
 
 		// �������̶��
@@ -327,35 +329,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (buffTimer > buffTime)
 		{
 			isBuff = false;
-			PlayerFSM.Animator.SetBool("isMove", true);
-			PlayerFSM.Animator.SetBool("isEnforced", false);
-			effectManager.SwordAuraOff();
-		}
+			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
+			if (CurrentState == "PlayerMoveState")
+			{
+				effectManager.SwordAuraOff();
 
-		if (Input.GetKeyDown(KeyCode.Alpha4))
-		{
-			SetCursorInactive();
+			}
 		}
-
-		// �ɷ°���ġƮ
-		if (Input.GetKeyDown(KeyCode.Alpha0))
-		{
-			PlayerFSM.Animator.SetBool("isCPBoomb", true);
-			PlayerFSM.Animator.SetBool("isTimeStop", true);
-			PlayerFSM.Animator.SetBool("ComAttackVariation", true);
-			PlayerFSM.Animator.SetBool("NorAttackVariation", true);
-			PlayerFSM.Animator.SetBool("DodgeAttack", true);
-			PlayerFSM.Animator.SetBool("EnforcedCombo", true);
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha9))
-		{
-			PlayerFSM.Animator.SetBool("isCPBoomb", false);
-			PlayerFSM.Animator.SetBool("isTimeStop", false);
-			PlayerFSM.Animator.SetBool("ComAttackVariation", false);
-			PlayerFSM.Animator.SetBool("NorAttackVariation", false);
-			PlayerFSM.Animator.SetBool("DodgeAttack", false);
-			PlayerFSM.Animator.SetBool("EnforcedCombo", false);
-		}
+		// 
+		// 		if (Input.GetKeyDown(KeyCode.Alpha4))
+		// 		{
+		// 			SetCursorInactive();
+		// 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 
@@ -383,19 +369,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		TP = _damageable.currentHitPoints;
 
-		//// ������ ������ spcť�긦 Ȱ��ȭ.
-		//if (psm.Velocity.x != 0f || psm.Velocity.z != 0f)
-		//{
-		//	StartCoroutine(ActivateSpcCubes(spcDelay));
-		//}
-		//else
-		//{
-		//	if (spcCubeL)
-		//	{
-		//		spcCubeL.SetActive(false);
-		//		spcCubeR.SetActive(false);
-		//	}
-		//}
 	}
 
 
@@ -412,14 +385,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 			case MessageType.DAMAGED:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
-
 					Damaged(damageData);
-
+					effectManager.PlayerHitFX(damageData);
 				}
 				break;
 			case MessageType.DEAD:
 				{
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
+					effectManager.PlayerHitFX(damageData);
+					PlayerFSM.InputReader.enabled = false;
 					//Death(/*damageData*/);
 				}
 				break;
@@ -436,9 +410,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		// ���⼭ �����ϸ� �ִϸ��̼Ǹ� ������� �ʴ´�.
 		// 
-		if(PlayerFSM.GetState().ToString() == "PlayerDamagedState")
+		if (PlayerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!PlayerFSM.Animator.GetBool("isGurad") )
+			if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
@@ -465,27 +439,37 @@ public class Player : MonoBehaviour, IMessageReceiver
 		switch (damageMessage.damageType)
 		{
 
-			case DamageType.ATypeHit:
-				PlayerFSM.Animator.SetTrigger("damagedA");
-				if(!PlayerFSM.Animator.GetBool("isGuard"))
+			case DamageType.None:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				break;
+			case DamageType.ATypeHit:
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.BTypeHit:
-				PlayerFSM.Animator.SetTrigger("damagedB");
-                if (!PlayerFSM.Animator.GetBool("isGuard"))
-                    soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
-                break;
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
+				if (!PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
+				break;
 			case DamageType.Down:
-				PlayerFSM.Animator.SetTrigger("down");
+				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
 				break;
 		}
 
 	}
-
+	bool isDeath = false;
 	// �׾��� �� ȣ��Ǵ� �Լ�
 	public void Death(/*Damageable.DamageMessage msg*/)
 	{
-		StartCoroutine(DeathScequence());
+		if (!isDeath)
+		{
+			soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+			StartCoroutine(DeathScequence());
+			isDeath = true;
+		}
 	}
 
 	private IEnumerator DeathScequence()
@@ -518,7 +502,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		yield return new WaitForSecondsRealtime(3);
 		ScreenFader.SetAlpha(0f);
-
+		PlayerFSM.InputReader.enabled = true;
+		isDeath = false;
 		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
 		//while (ScreenFader.IsFading)
 		//{
@@ -600,6 +585,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void TimeStop()
 	{
+		soundManager.PlaySFX("TimeStop_Skill_Sound_SE", transform);
 		Vector3 temp = transform.position;
 		effectManager.SpawnEffect("TeraainScanner", temp);
 		SkillRenderObj.SetActive(true);
@@ -733,54 +719,60 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	public void SoundFoot1()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_1_Sound_SE", transform);
+	}
 
 	public void SoundFoot2()
 	{
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
-    }
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Walk_2_Sound_SE", transform);
+	}
 
 	// 기획에 전달하기 위해 플레이어 키프레임으로 호출되는 사운드 출력 함수들
-	public void ComSlash1()
+	public void ComSound1()
 	{
 		if (soundManager != null)
 			soundManager.PlaySFX("Com_Attack_1_Sound_SE", transform);
 	}
 
-    public void ComSlash2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
-    }
+	public void ComSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_2_Sound_SE", transform);
+	}
 
-    public void ComSlash3()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
-    }
+	public void ComSound3()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_3_Sound_SE", transform);
+	}
 
-    public void ComSlash4()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
-    }
+	public void ComSound4()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Com_Attack_4_Sound_SE", transform);
+	}
 
-	public void NorSlash1()
+	public void NorSound1()
 	{
 		if (soundManager != null)
 			soundManager.PlaySFX("Player_Swing_1_Sound_SE", transform);
 	}
 
-    public void NorSlash2()
-    {
-        if (soundManager != null)
-            soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
-    }
+	public void NorSound2()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Swing_2_Sound_SE", transform);
+	}
 
-    public void Shake()
+	public void DodgeSound()
+	{
+		if (soundManager != null)
+			soundManager.PlaySFX("Player_Dodge_Sound_SE", transform);
+	}
+
+	public void Shake()
 	{
 		if (impulseCam != null)
 			impulseCam.Shake();
@@ -829,5 +821,20 @@ public class Player : MonoBehaviour, IMessageReceiver
 	internal void Save()
 	{
 		PlayerPrefs.SetFloat("currentTP", currentTP);
+	}
+
+	public void ResetAbilityData()
+	{
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.EnforcedCombo, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.DodgeAttack, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isFlashSlash, false);
+		EffectManager.Instance.isSwordWave = false;
+		EffectManager.Instance.isGroundEnforced = false;
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isCPBoomb, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isTimeStop, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isParry, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isRushAttack, false);
 	}
 }

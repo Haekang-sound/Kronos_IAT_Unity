@@ -56,7 +56,7 @@ public class SceneLoader : MonoBehaviour
 
         // 5개의 요소 중 하나 랜덤으로 뽑아서 텍스트로 나오게 하기
         List<int>rand = EffectManager.Instance.FisherYatesShuffles(5, 1);
-		 loadingText.text = JasonSaveLoader.LoadingTexts[rand[0]].text;
+		//loadingText.text = JasonSaveLoader.LoadingTexts[rand[0]].text;
 
 		float progress = 0;
 

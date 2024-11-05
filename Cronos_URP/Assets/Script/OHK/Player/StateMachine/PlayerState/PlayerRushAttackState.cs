@@ -1,13 +1,9 @@
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 public class PlayerRushAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
 	public PlayerRushAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	private readonly int nextComboHash = Animator.StringToHash("NextCombo");
-	private readonly int dodgeHash = Animator.StringToHash("Dodge");
-	private readonly int guradHash = Animator.StringToHash("isGuard");
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
 
@@ -22,13 +18,12 @@ public class PlayerRushAttackState : PlayerBaseState
 		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.Animator.SetBool(guradHash, false);
-		stateMachine.Animator.ResetTrigger("Attack");
-		stateMachine.Animator.ResetTrigger("Rattack");
-		stateMachine.Animator.ResetTrigger("ParryAttack");
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
 		stateMachine.InputReader.onRAttackStart += Gurad;
-		stateMachine.InputReader.onJumpStart += Dodge;
 
 		stateMachine.AutoTargetting.AutoTargeting();
 
@@ -103,22 +98,10 @@ public class PlayerRushAttackState : PlayerBaseState
 	public override void Exit()
 	{
 		stateMachine.InputReader.onRAttackStart -= Gurad;
-		stateMachine.InputReader.onJumpStart -= Dodge;
 
 		stateMachine.GroundChecker.ToggleChecker = true;
 	}
 
-	private void Dodge()
-	{
-		if (!CoolTimeCounter.Instance.isDodgeUsed)
-		{
-			// 사용될 경우
-			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
-			stateMachine.Animator.SetBool(nextComboHash, false);    // 
-																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
-			stateMachine.Animator.SetTrigger(dodgeHash);
-		}
-	}
 	private void Gurad()
 	{
 		if (stateMachine.IsRattack)
@@ -126,7 +109,7 @@ public class PlayerRushAttackState : PlayerBaseState
 			stateMachine.IsRattack = false;
 			return;
 		}
-		stateMachine.Animator.SetBool(guradHash, true);
+		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, true);
 	}
 
 }

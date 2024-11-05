@@ -1537,14 +1537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02c64eaab9973743aabe7cfc3893d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere: {fileID: 0}
+  sphere: {fileID: 9091533624918512758}
   PlayerCamera: {fileID: 0}
   CinemachinePOV: {fileID: 0}
   horizontalSpeed: 500
   verticalSpeed: 100
   Player: {fileID: 7737856591898675433}
   Target: {fileID: 0}
-  PlayerObject: {fileID: 0}
+  PlayerObject: {fileID: 3469454222243215837}
   lockOnAixsDamp: 0.99
   autoTargettingAixsDamp: 0
   exitValue: 0
@@ -1567,7 +1567,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 10.42
   m_Center: {x: 0, y: 0.75, z: 0}
@@ -1881,7 +1881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e08ef511b33964bba9efab48ccdd95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isParry: 0
   SkillRenderObj: {fileID: 3284934833646403677, guid: 222404a70980adb4594c9347f02f38b7, type: 2}
   CurrentState: 
   TimeSlashCurve:
@@ -1991,7 +1990,7 @@ Animator:
   m_GameObject: {fileID: 7737856591898675433}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c1e08b753adb94b4b8b683b3858059dc, type: 3}
-  m_Controller: {fileID: 9100000, guid: e98b11be82369ff48b789c31d7e9234b, type: 2}
+  m_Controller: {fileID: 9100000, guid: e1d9dad03adb2db41881acb4b6b9b37d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2274,14 +2273,14 @@ MonoBehaviour:
   - {fileID: 853246997726536481}
   m_UpdateRate: 60
   m_UpdateMode: 3
-  m_Damping: 0.08
+  m_Damping: 0.085
   m_DampingDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.2
+  m_Elasticity: 0.3
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve:
@@ -2391,7 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8bedf9fc2611a4cb74f300a728c101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStack: 0
+  maxStack: 2
   OnMaxStack:
     m_PersistentCalls:
       m_Calls: []
@@ -11742,7 +11741,7 @@ MonoBehaviour:
   - {fileID: 4800000, guid: 28a2664e1bbd1dd45a7f528eb0e5f51e, type: 3}
   m_shareMesh: 0
   m_meshCopy: 0
-  m_showEditorPanel: 0
+  m_showEditorPanel: 1
   m_editMode: 1
   m_shaderSensorPos: []
   m_shaderMotionDirection: []
