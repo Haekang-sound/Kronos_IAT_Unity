@@ -36,6 +36,7 @@ public class EffectManager : MonoBehaviour
     public GameObject pSword;
 
     SoundManager soundManager;
+    ImpulseCam ic;
 
     // 레이캐스트 관련
     float forwardVal = 1.6f;
@@ -134,14 +135,14 @@ public class EffectManager : MonoBehaviour
         //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
         //보스 이펙트 데모로 나오게
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            StartCoroutine(BossEightBeamCoroutine(player.transform));
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //    BossFireShoot(player.transform);
         if (Input.GetKeyDown(KeyCode.Alpha3))
             BossFiveSpear(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //    BossMoon(player.transform);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            BossMoon(player.transform);
         //if (Input.GetKeyDown(KeyCode.Alpha5))
         //    CreateAbsorbFX(player.transform, 12);
         //         if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -160,6 +161,7 @@ public class EffectManager : MonoBehaviour
     {
         soundManager = SoundManager.Instance;
         player = Player.Instance;
+        ic = ImpulseCam.Instance;
 
         if(player != null)
         {
@@ -580,6 +582,8 @@ public class EffectManager : MonoBehaviour
     // 보스 8방향 빔
     public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
     {
+        ic.Shake(ic.rayStrength);
+
         for (int i = 0; i < bossBeamDupeTime; i++)
         {
             soundManager.PlaySFX("Beam_SE", player.transform);

@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
         }
         regionText.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        yield return new WaitForSeconds(RegiondurationTime);
+        yield return new WaitForSecondsRealtime(RegiondurationTime);
         elapsedTime = 0.0f;
 
         // 페이드 아웃
@@ -230,7 +230,7 @@ public class UIManager : MonoBehaviour
         }
         mainText.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        yield return new WaitForSeconds(ObjdurationTime);
+        yield return new WaitForSecondsRealtime(ObjdurationTime);
 
         elapsedTime = 0.0f;
         // 텍스트 페이드아웃
@@ -326,7 +326,7 @@ public class UIManager : MonoBehaviour
         }
         subText.transform.localScale = eVec;
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsRealtime(2.0f);
 
         elapsedTime = 0.0f;
         while (elapsedTime < ObjfadeTime)

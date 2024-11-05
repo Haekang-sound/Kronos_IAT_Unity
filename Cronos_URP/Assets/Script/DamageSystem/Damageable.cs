@@ -131,7 +131,7 @@ public partial class Damageable : MonoBehaviour
         // 게임오브젝트 태그가 리스폰이면 == 적이면
         if (gameObject.tag == "Respawn")
         {
-            impCam.Shake(impCam.shakeStrength);
+            impCam.Shake(0.6f);
         }
 
         if (defensible)
