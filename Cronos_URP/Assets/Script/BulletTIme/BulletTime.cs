@@ -24,10 +24,10 @@ public class BulletTime : MonoBehaviour
                 _instance = FindObjectOfType<BulletTime>();
                 if (_instance == null)
                 {
-                    GameObject effectManager = new GameObject(typeof(BulletTime).Name);
-                    _instance = effectManager.AddComponent<BulletTime>();
+                    GameObject obj = new GameObject(typeof(BulletTime).Name);
+                    _instance = obj.AddComponent<BulletTime>();
 
-                    DontDestroyOnLoad(effectManager);
+                    DontDestroyOnLoad(obj);
                 }
             }
             return _instance;
