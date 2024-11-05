@@ -6,11 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class MouseLaoder : MonoBehaviour
 {
+	public bool isMousOn;
     // Start is called before the first frame update
     void Start()
     {
-		Cursor.visible = true;
-		Cursor.lockState = CursorLockMode.None;
+		if (isMousOn)
+		{
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+		
 	}
 
 }

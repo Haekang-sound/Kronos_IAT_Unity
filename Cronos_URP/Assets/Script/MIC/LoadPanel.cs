@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -32,7 +33,7 @@ public class LoadPanel : MonoBehaviour
 
     public void GoTitle()
     {
-
+		SceneManager.LoadScene("0_TitleTest");
     }
 
     public void ExitLoad()

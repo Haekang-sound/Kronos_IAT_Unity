@@ -636,6 +636,7 @@ AnimatorStateMachine:
   - {fileID: 4127287048738423422}
   - {fileID: 955888121269526523}
   - {fileID: 6151389802734053119}
+  - {fileID: -166316042184434184}
   m_EntryTransitions: []
   m_StateMachineTransitions:
   - first: {fileID: -2999757489222086815}
@@ -2830,6 +2831,34 @@ MonoBehaviour:
   stopDodge: 0
   hitStopTime: 0.04
   minFrame: 0
+--- !u!1101 &-166316042184434184
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isGuard
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: damagedB
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -8759769450427356536}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-119523204972760793
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
