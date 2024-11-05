@@ -27,9 +27,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     [HideInInspector]
     public EnemyController controller;
 
+    public Rigidbody thisRigidbody { get { return _rigidbody; } }
+
     private HitShake _hitShake;
-    private Animator _animator;
     private Rigidbody _rigidbody;
+    private Animator _animator;
     private Damageable _damageable;
     private GroggyStack _groggyStack;
     private MeleeWeapon _meleeWeapon;
@@ -286,8 +288,14 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public bool CheckDistanceWithTarget(float distance)
     {
-        Vector3 toTarget = target.transform.position - transform.position;
+        Vector3 toTarget = GetTargetDistance();
         return toTarget.sqrMagnitude < distance * distance;
+    }
+
+    public Vector3 GetTargetDistance()
+    {
+        Vector3 toTarget = target.transform.position - transform.position;
+        return toTarget;
     }
 
     public void LightSpeedRushUpgrade()
