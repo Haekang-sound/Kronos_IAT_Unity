@@ -134,15 +134,17 @@ public class EffectManager : MonoBehaviour
 		//swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
 		//swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
-        //보스 이펙트 데모로 나오게
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //    BossFireShoot(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //    BossFiveSpear(player.transform);
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //    BossMoon(player.transform);
+		//보스 이펙트 데모로 나오게
+		//if (Input.GetKeyDown(KeyCode.Alpha1))
+		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
+		//if (Input.GetKeyDown(KeyCode.Alpha2))
+		//    BossFireShoot(player.transform);
+		//if (Input.GetKeyDown(KeyCode.Alpha3))
+		//    BossFiveSpear(player.transform);
+		//if (Input.GetKeyDown(KeyCode.Alpha4))
+		//    BossMoon(player.transform);
+		if (Input.GetKeyDown(KeyCode.Alpha5))
+			QASkill();
         //if (Input.GetKeyDown(KeyCode.Alpha5))
         //    CreateAbsorbFX(player.transform, 12);
         //         if (Input.GetKeyDown(KeyCode.Alpha6))
