@@ -27,6 +27,7 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
         }
 
         _monoBehaviour.UseGravity(false);
+        _monoBehaviour.thisRigidbody.isKinematic = true;
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -54,6 +55,8 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _monoBehaviour.thisRigidbody.isKinematic = false;
+
         _monoBehaviour.UseGravity(true);
 
         _monoBehaviour.controller.SetFollowNavmeshAgent(false);
