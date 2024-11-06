@@ -29,7 +29,7 @@ public class BossEnterEventController : MonoBehaviour
     {
         if (_sceneSkipped == false)
         {
-            _playerbleDirector.time = 7f;
+            _playerbleDirector.time = 11f;
             _sceneSkipped = true;
         }
     }

@@ -25,6 +25,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	public Button buttonUnlock;
 	public Button buttonCancel;
 
+	[Header("Other UI")]
     public PopupController popup;
 	public CanvasGroup canvasGroup;
 	public CinemachineVirtualCamera mainVirtualCam;

@@ -119,7 +119,6 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 13587638371181878}
-  - {fileID: -5239782182661201303}
   - {fileID: -5525123536936766581}
 --- !u!114 &-6785352910529320773
 MonoBehaviour:
@@ -242,33 +241,8 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 6601328209896319862}
-  - {fileID: 3011548604093691375}
   - {fileID: 374615552281728654}
   - {fileID: 7256133002926468005}
---- !u!114 &-5239782182661201303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318454c716c393840b3947bf643160f0, type: 3}
-  m_Name: LookatTarget
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: 539259d49d762bb4ab856304f0954f8d
-  position: {x: -800, y: 504}
-  blackboard:
-    target: {fileID: 0}
-    moveToPosition: {x: 0, y: 0, z: 0}
-    bulletTimeScalable: {fileID: 0}
-  description: 
-  drawGizmos: 1
-  rotationSpeed: 20
-  angleThreshold: 6
 --- !u!114 &-5093414591643252709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,9 +418,6 @@ MonoBehaviour:
   - {fileID: 6680290226393868591}
   - {fileID: 593847416217255555}
   - {fileID: -8662573329454556787}
-  - {fileID: -5239782182661201303}
-  - {fileID: 8106870901192276762}
-  - {fileID: 3011548604093691375}
   - {fileID: -5093414591643252709}
   - {fileID: 8715953615928333360}
   blackboard:
@@ -647,7 +618,6 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 2262554136464475011}
-  - {fileID: 8106870901192276762}
   - {fileID: -8914068130043381622}
 --- !u!114 &2262554136464475011
 MonoBehaviour:
@@ -675,30 +645,6 @@ MonoBehaviour:
   drawGizmos: 0
   distance: 4
   comparison: 0
---- !u!114 &3011548604093691375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318454c716c393840b3947bf643160f0, type: 3}
-  m_Name: LookatTarget
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: abdbb6fc829daa243a751262fc70082b
-  position: {x: 1281.2704, y: 557.4347}
-  blackboard:
-    target: {fileID: 0}
-    moveToPosition: {x: 0, y: 0, z: 0}
-    bulletTimeScalable: {fileID: 0}
-  description: 
-  drawGizmos: 1
-  rotationSpeed: 20
-  angleThreshold: 6
 --- !u!114 &3270656969878124865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,30 +868,6 @@ MonoBehaviour:
   drawGizmos: 0
   parameterName: attack_shoderpush
   waitTime: 0.3
---- !u!114 &8106870901192276762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318454c716c393840b3947bf643160f0, type: 3}
-  m_Name: LookatTarget
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: 7ce3b5790415a924da63de11db9ead48
-  position: {x: 1817.2704, y: 914.4347}
-  blackboard:
-    target: {fileID: 0}
-    moveToPosition: {x: 0, y: 0, z: 0}
-    bulletTimeScalable: {fileID: 0}
-  description: 
-  drawGizmos: 1
-  rotationSpeed: 20
-  angleThreshold: 6
 --- !u!114 &8518207435825161847
 MonoBehaviour:
   m_ObjectHideFlags: 0
