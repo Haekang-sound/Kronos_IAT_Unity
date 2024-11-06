@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class PlayerAttackState : PlayerBaseState
 {
 	//private bool ismove = false;
@@ -145,6 +146,11 @@ public class PlayerAttackState : PlayerBaseState
 		{
 			// NEXTCOMBO È°¼ºÈ­
 			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
+		}
+		else
+		{
+			Player.Instance.isBuff = false;
+			Player.Instance.buffTimer = 0f;
 		}
 	}
 	private void Dodge()
