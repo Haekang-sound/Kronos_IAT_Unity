@@ -58,17 +58,17 @@ public class UI_Scanner : MonoBehaviour
 	{
 		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
 		{
+			PauseManager.Instance.UnavailableEsc();
             Interaction();
 			TPUI.SetActive(false);
 			KeyGuid.SetActive(false);
-			PauseManager.Instance.escAvailable = false;
 		}
-		else if (isInteracting && Input.GetKeyDown(KeyCode.Escape))
+		else if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !ScreenFader.Instance.faderCanvasGroup.gameObject.activeSelf)
 		{
             TurnInteraction();
 			TPUI.SetActive(true);
 			KeyGuid.SetActive(true);
-			PauseManager.Instance.escAvailable = true;
+            PauseManager.Instance.AvailableEsc();
 		}
 	}
 
@@ -84,6 +84,7 @@ public class UI_Scanner : MonoBehaviour
     void TurnInteraction()
     {
         isInteracting = false;
+        sm.PlaySFX("01 AbilityScreenFadeOut_Effect_Sound_SE", transform);
         abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
         Invoke("ShowIntext", 0.3f);
         isPopup = true;

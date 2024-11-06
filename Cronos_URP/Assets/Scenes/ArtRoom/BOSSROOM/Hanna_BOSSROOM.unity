@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: targetUI
       value: 
       objectReference: {fileID: 1780888}
+    - target: {fileID: 6410405721207551496, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6620581494647019592, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1341,6 +1345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_Intensity
+      value: 0.39
+      objectReference: {fileID: 0}
     - target: {fileID: 2671637398612028343, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: hitStopTime
       value: 0.1
@@ -1351,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653870303936261969, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: currentTP
-      value: 6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5384916197114032611, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: sphere
@@ -1420,10 +1428,6 @@ PrefabInstance:
     - target: {fileID: 9091533624918512758, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
-      propertyPath: m_Intensity
-      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
       propertyPath: m_Intensity
@@ -8834,6 +8838,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1096854305}
     m_Modifications:
+    - target: {fileID: 2221193927175358838, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: Vanished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1214237383}
     - target: {fileID: 4467352948813670711, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.88
@@ -8892,7 +8900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8109977669758520242, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -9890,11 +9898,35 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1878906389}
+          m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+          m_MethodName: UnavailableEsc
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1878906389}
           m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
           m_MethodName: UnPausePlayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1878906389}
+          m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+          m_MethodName: AvailableEsc
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13970,6 +14002,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f84feb5057cb7da4c83ec11a37231300, type: 3}
+--- !u!1 &1214237383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4389826826750405710, guid: 387de53606aef364ca87f03e55c41c64, type: 3}
+  m_PrefabInstance: {fileID: 2123368820}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1222235432
 GameObject:
   m_ObjectHideFlags: 0
@@ -18141,7 +18178,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.8128597, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.056541163, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18152,7 +18189,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.8128597, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.056541163, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:

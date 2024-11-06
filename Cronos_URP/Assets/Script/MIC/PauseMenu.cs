@@ -65,7 +65,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseManager.escAvailable)
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseManager.escAvailable && !ScreenFader.Instance.faderCanvasGroup.gameObject.activeSelf)
         {
             if (!isPaused)
                 OpenPauseMenu();

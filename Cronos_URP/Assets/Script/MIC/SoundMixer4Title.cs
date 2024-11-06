@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SoundMixerNCamera : MonoBehaviour
+public class SoundMixer4Title : MonoBehaviour
 {
     // 볼륨 조절 관련
     [SerializeField]
@@ -16,23 +16,11 @@ public class SoundMixerNCamera : MonoBehaviour
     [SerializeField]
     Slider sfxSlider;
     [SerializeField]
-    TextMeshProUGUI masVal;
-    [SerializeField]
-    TextMeshProUGUI bgmVal;
-    [SerializeField]
-    TextMeshProUGUI sfxVal;
-    [SerializeField]
-    TextMeshProUGUI camVal;
-    [SerializeField]
     Button applyButton;
     [SerializeField]
     GameObject confirmPopUp;
     [SerializeField]
     GameObject optionPanel;
-    [SerializeField]
-    GameObject pausePanel;
-    [SerializeField]
-    PauseMenu pauseMenu;
     CanvasGroup canvasGroup;
 
     int dMas = 70;
@@ -90,9 +78,10 @@ public class SoundMixerNCamera : MonoBehaviour
             sfxSlider.value = ((float)sSfx / 100);
             PlayerPrefs.SetInt("SfxVolume", sSfx);
             Debug.Log("volume saved value is " + PlayerPrefs.GetInt("SfxVolume"));
+
             sfxSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("SfxVolume", AdjustVolume(x)));
         }
-
+        
         if (masterSlider == null)
             Debug.LogWarning("masterSlider is not assigned.");
         else
@@ -110,6 +99,8 @@ public class SoundMixerNCamera : MonoBehaviour
         aSfx = sSfx;
 
         GameObject playerCam = GameObject.Find("PlayerCam");
+        if (playerCam == null)
+            return;
         virCam = playerCam.GetComponent<CinemachineVirtualCamera>();
 
         if (camSlider == null)
@@ -244,8 +235,8 @@ public class SoundMixerNCamera : MonoBehaviour
         bgmSlider.value = aBgm / 100f;
         sfxSlider.value = aSfx / 100f;
         camSlider.value = aSpeed.x * 5 / 100f;
-        pov.m_VerticalAxis.m_MaxSpeed = aSpeed.x / 100f;
-        pov.m_HorizontalAxis.m_MaxSpeed = aSpeed.y / 100f;
+        //pov.m_VerticalAxis.m_MaxSpeed = aSpeed.x / 100f;
+        //pov.m_HorizontalAxis.m_MaxSpeed = aSpeed.y / 100f;
     }
 
 
@@ -254,8 +245,7 @@ public class SoundMixerNCamera : MonoBehaviour
         // 레이캐스트 돌려놓고가
         canvasGroup.blocksRaycasts = true;
         optionPanel.SetActive(false);
-        pausePanel.SetActive(true);
-        pauseMenu.isOption = false;
+        PlayerPrefs.Save();
     }
 
     // 선형 슬라이더에 로그 페이더 값을 변형시키려면...
