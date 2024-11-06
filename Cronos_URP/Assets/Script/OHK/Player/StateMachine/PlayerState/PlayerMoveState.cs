@@ -25,7 +25,10 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Enter()
 	{
-		Player.Instance.groggyStack.ResetStack();
+		if (Player.Instance.groggyStack != null)
+		{
+			Player.Instance.groggyStack.ResetStack();
+		}
 
 		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);

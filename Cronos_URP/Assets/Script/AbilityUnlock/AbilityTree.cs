@@ -28,6 +28,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 	[Header("Other UI")]
     public PopupController popup;
 	public CanvasGroup canvasGroup;
+	public CanvasGroup esc;
 	public CinemachineVirtualCamera mainVirtualCam;
 
 	public bool useParser;
@@ -248,8 +249,9 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		SetEnabledButtons(true);
 		SetPlayerCamPriority(0);
 		canvasGroup.alpha = 1f;
+		esc.alpha = 1f;
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn());
+		yield return StartCoroutine(ScreenFader.FadeSceneIn());
 
 		while (ScreenFader.IsFading)
 		{
@@ -274,7 +276,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		abilityTreeCanvas.enabled = false;
 		SetPlayerCamPriority(10);
 		canvasGroup.alpha = 0f;
-        abilityNodeDetail.alpha = 0f;
+		esc.alpha = 0f;
+		abilityNodeDetail.alpha = 0f;
 		abilityNodeDetail.blocksRaycasts = false;
 
         SetEnabledButtons(false);
