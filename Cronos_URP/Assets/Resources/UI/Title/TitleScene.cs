@@ -13,6 +13,9 @@ public class TitleScene : MonoBehaviour
     [SerializeField]
     Button eButton;
 
+    [SerializeField]
+    GameObject optionPanel;
+
     void Update()
     {
 
@@ -30,7 +33,7 @@ public class TitleScene : MonoBehaviour
 
     public void Option()
     {
-		
+        optionPanel.SetActive(true);
 	}
 
     public void Credit()

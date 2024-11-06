@@ -66,6 +66,7 @@ public class SoundMixer4Title : MonoBehaviour
             sBgm = PlayerPrefs.GetInt("BgmVolume", dBgm);
             bgmSlider.value = ((float)sBgm / 100);
             PlayerPrefs.SetInt("BgmVolume", sBgm);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("BgmVolume"));
             bgmSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("BgmVolume", AdjustVolume(x)));
         }
 
@@ -76,9 +77,11 @@ public class SoundMixer4Title : MonoBehaviour
             sSfx = PlayerPrefs.GetInt("SfxVolume", dSfx);
             sfxSlider.value = ((float)sSfx / 100);
             PlayerPrefs.SetInt("SfxVolume", sSfx);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("SfxVolume"));
+
             sfxSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("SfxVolume", AdjustVolume(x)));
         }
-
+        
         if (masterSlider == null)
             Debug.LogWarning("masterSlider is not assigned.");
         else
@@ -86,6 +89,8 @@ public class SoundMixer4Title : MonoBehaviour
             sMas = PlayerPrefs.GetInt("MasterVolume", dMas);
             masterSlider.value = ((float)sMas / 100);
             PlayerPrefs.SetInt("MasterVolume", sMas);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("MasterVolume"));
+
             masterSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("MasterVolume", AdjustVolume(x)));
         }
 
@@ -94,6 +99,8 @@ public class SoundMixer4Title : MonoBehaviour
         aSfx = sSfx;
 
         GameObject playerCam = GameObject.Find("PlayerCam");
+        if (playerCam == null)
+            return;
         virCam = playerCam.GetComponent<CinemachineVirtualCamera>();
 
         if (camSlider == null)
@@ -228,8 +235,8 @@ public class SoundMixer4Title : MonoBehaviour
         bgmSlider.value = aBgm / 100f;
         sfxSlider.value = aSfx / 100f;
         camSlider.value = aSpeed.x * 5 / 100f;
-        pov.m_VerticalAxis.m_MaxSpeed = aSpeed.x / 100f;
-        pov.m_HorizontalAxis.m_MaxSpeed = aSpeed.y / 100f;
+        //pov.m_VerticalAxis.m_MaxSpeed = aSpeed.x / 100f;
+        //pov.m_HorizontalAxis.m_MaxSpeed = aSpeed.y / 100f;
     }
 
 
@@ -238,6 +245,7 @@ public class SoundMixer4Title : MonoBehaviour
         // 레이캐스트 돌려놓고가
         canvasGroup.blocksRaycasts = true;
         optionPanel.SetActive(false);
+        PlayerPrefs.Save();
     }
 
     // 선형 슬라이더에 로그 페이더 값을 변형시키려면...
