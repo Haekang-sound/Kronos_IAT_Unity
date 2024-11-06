@@ -8,10 +8,9 @@ public class ScnenEnterEventController : MonoBehaviour
 {
     public PlayableDirector playerbleDirector;
 
-    [SerializeField]
     private string _key;
-    [SerializeField]
     private bool _haskey;
+    private bool _sceneSkipped;
 
     private void Awake()
     {
@@ -33,6 +32,23 @@ public class ScnenEnterEventController : MonoBehaviour
             playerbleDirector.Play();
             Debug.Log("타임 라인을 재생합니다.");
             PlayerPrefs.SetInt(_key, 1);
+        }
+    }
+
+    private void Update()
+    {
+        if (playerbleDirector.state == PlayState.Playing && Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Skip();
+        }
+    }
+
+    private void Skip()
+    {
+        if (_sceneSkipped == false)
+        {
+            playerbleDirector.time = 11f;
+            _sceneSkipped = true;
         }
     }
 

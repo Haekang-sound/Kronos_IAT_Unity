@@ -92,7 +92,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("퍼즈메뉴닫기");
     }
 
-    void ClosePanel()
+    public void ClosePanel()
     {
         if (isOption)
         {
