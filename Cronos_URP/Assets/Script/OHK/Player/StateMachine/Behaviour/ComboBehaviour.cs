@@ -6,14 +6,14 @@ using static Damageable;
 public class ComboBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
-	
+
 	[SerializeField] float moveForce;
 	[SerializeField] float Damage;
 
 	public Damageable.DamageType damageType;
 	public Damageable.ComboType comboType;
 
-	[SerializeField] private bool stopDodge ;
+	[SerializeField] private bool stopDodge;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
 
@@ -33,8 +33,8 @@ public class ComboBehaviour : StateMachineBehaviour
 		Player.Instance.meleeWeapon.simpleDamager.currentComboType = comboType;
 
 		animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
-// 		animator.ResetTrigger("Attack");
-// 		animator.ResetTrigger("Rattack");
+		// 		animator.ResetTrigger("Attack");
+		// 		animator.ResetTrigger("Rattack");
 	}
 
 
@@ -59,7 +59,12 @@ public class ComboBehaviour : StateMachineBehaviour
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){}
+	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
+		Player.Instance.isBuff = false;
+		Player.Instance.buffTimer = 0f;
+	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
