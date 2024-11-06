@@ -30,7 +30,7 @@ public class TitleScene : MonoBehaviour
 
     public void Option()
     {
-		SceneManager.LoadScene("3_EJ_Scene2");
+		
 	}
 
     public void Credit()
