@@ -78,6 +78,7 @@ public class SoundMixerNCamera : MonoBehaviour
             sBgm = PlayerPrefs.GetInt("BgmVolume", dBgm);
             bgmSlider.value = ((float)sBgm / 100);
             PlayerPrefs.SetInt("BgmVolume", sBgm);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("BgmVolume"));
             bgmSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("BgmVolume", AdjustVolume(x)));
         }
 
@@ -88,6 +89,7 @@ public class SoundMixerNCamera : MonoBehaviour
             sSfx = PlayerPrefs.GetInt("SfxVolume", dSfx);
             sfxSlider.value = ((float)sSfx / 100);
             PlayerPrefs.SetInt("SfxVolume", sSfx);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("SfxVolume"));
             sfxSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("SfxVolume", AdjustVolume(x)));
         }
 
@@ -98,6 +100,8 @@ public class SoundMixerNCamera : MonoBehaviour
             sMas = PlayerPrefs.GetInt("MasterVolume", dMas);
             masterSlider.value = ((float)sMas / 100);
             PlayerPrefs.SetInt("MasterVolume", sMas);
+            Debug.Log("volume saved value is " + PlayerPrefs.GetInt("MasterVolume"));
+
             masterSlider.onValueChanged.AddListener(x => audioMixer.SetFloat("MasterVolume", AdjustVolume(x)));
         }
 

@@ -25,6 +25,7 @@ public class CoolTimeCounter : MonoBehaviour
 
 	[SerializeField] private Image dodgeImage;
 	[SerializeField] private Image rushAttackImage;
+	[SerializeField] private Image rushAttackBackground;
 	[SerializeField] private Image slash;
 	[SerializeField] private Image timeStop;
 	[SerializeField] private Image bomb;
@@ -51,6 +52,8 @@ public class CoolTimeCounter : MonoBehaviour
 		if(PlayerStateMachine.GetInstance().Animator.GetBool(PlayerHashSet.Instance.isRushAttack))
 		{
 			rushAttackMask.enabled = false;
+			rushAttackImage.enabled = true;
+			rushAttackBackground.enabled = true;
 			if (isRushAttackUsed)
 			{
 				rushATimer += Time.unscaledDeltaTime;
@@ -66,6 +69,8 @@ public class CoolTimeCounter : MonoBehaviour
 		else
 		{
 			rushAttackMask.enabled = true;
+			rushAttackImage.enabled = false;
+			rushAttackBackground.enabled = false;
 		}
 		
 
