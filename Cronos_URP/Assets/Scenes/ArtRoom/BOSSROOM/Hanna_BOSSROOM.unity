@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: targetUI
       value: 
       objectReference: {fileID: 1780888}
+    - target: {fileID: 6410405721207551496, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6620581494647019592, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1423,14 +1427,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091533624918512758, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
-      propertyPath: m_Intensity
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3493876232567770463, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
-      propertyPath: m_Intensity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
@@ -9898,11 +9894,35 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1878906389}
+          m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+          m_MethodName: UnavailableEsc
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1878906389}
           m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
           m_MethodName: UnPausePlayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1878906389}
+          m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+          m_MethodName: AvailableEsc
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -15235,8 +15255,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1852297776}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1306848884
@@ -18199,7 +18218,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.863741, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 1.8662959, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18210,7 +18229,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.863741, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 1.8662959, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:
@@ -24797,3 +24816,4 @@ SceneRoots:
   - {fileID: 1941612922}
   - {fileID: 1385775235}
   - {fileID: 683859510}
+  - {fileID: 1305905667}
