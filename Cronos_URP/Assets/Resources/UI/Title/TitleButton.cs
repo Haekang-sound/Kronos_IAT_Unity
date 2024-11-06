@@ -9,7 +9,7 @@ public class TitleButton : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         EventSystem.current.SetSelectedGameObject(gameObject);
-        Debug.Log("Now selecting : " + gameObject.name);
+        //Debug.Log("Now selecting : " + gameObject.name);
     }
 
     // Start is called before the first frame update
