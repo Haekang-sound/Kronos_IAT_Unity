@@ -34,6 +34,6 @@ public class RIGgauge : MonoBehaviour
         mat.SetFloat(dissolveAmount, setAmount);
         //mp.SetFloat(dissolveAmount, setAmount);
         //renderer.SetPropertyBlock(mp);
-        Debug.Log("mat : " + mat.GetFloat(dissolveAmount));
+        //Debug.Log("mat : " + mat.GetFloat(dissolveAmount));
     }
 }

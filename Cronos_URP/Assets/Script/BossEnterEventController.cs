@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using static Controls;
 
-public class BossrEnterEventController : MonoBehaviour
+public class BossEnterEventController : MonoBehaviour
 {
     public GameObject timeline;
 
