@@ -50,6 +50,8 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
         }
 
         _monoBehaviour.rotationSpeed = 8f;
+
+        _monoBehaviour.UseBulletTimeScale();
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

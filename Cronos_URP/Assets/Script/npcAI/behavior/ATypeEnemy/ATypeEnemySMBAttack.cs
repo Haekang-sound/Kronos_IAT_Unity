@@ -6,6 +6,7 @@ public class ATypeEnemySMBAttack : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         //_monoBehaviour.ChangeDebugText("ATTACK");
         _monoBehaviour.inAttack = true;
+        _monoBehaviour.UseBulletTimeScale();
     }
 
     //public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
