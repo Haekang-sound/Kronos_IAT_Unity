@@ -6,9 +6,11 @@ public class UI_Scanner : MonoBehaviour
     public GameObject interText;
     public GameObject abilityUnlock;
 
-	public GameObject TPUI;
+	public GameObject CPUI;
+	public GameObject SkillUI;
 	public GameObject KeyGuid;
 
+	bool keyguid;
     bool isPopup;
     bool isInteracting;
     SoundManager sm;
@@ -19,7 +21,8 @@ public class UI_Scanner : MonoBehaviour
         interText = UIManager.Instance.Interactor;
         abilityUnlock = GameObject.Find("AbilityUnlock");
 
-		TPUI = GameObject.Find("HUD_TPCP");
+		CPUI = GameObject.Find("HUD_CP");
+		SkillUI = GameObject.Find("HUD_Skills");
 		KeyGuid = GameObject.Find("KeyGuide");
 
 		interText.SetActive(false);
@@ -60,14 +63,17 @@ public class UI_Scanner : MonoBehaviour
 		{
 			PauseManager.Instance.UnavailableEsc();
             Interaction();
-			TPUI.SetActive(false);
+			CPUI.SetActive(false);
+			SkillUI.SetActive(false);
+			keyguid = KeyGuid.activeSelf;
 			KeyGuid.SetActive(false);
 		}
 		else if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !ScreenFader.Instance.faderCanvasGroup.gameObject.activeSelf)
 		{
             TurnInteraction();
-			TPUI.SetActive(true);
-			KeyGuid.SetActive(true);
+			CPUI.SetActive(true);
+			SkillUI.SetActive(true);
+			KeyGuid.SetActive(keyguid);
             PauseManager.Instance.AvailableEsc();
 		}
 	}

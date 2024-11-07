@@ -8842,6 +8842,10 @@ PrefabInstance:
       propertyPath: Vanished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1214237383}
+    - target: {fileID: 3311931140004549475, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     - target: {fileID: 4467352948813670711, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.88
@@ -8888,7 +8892,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
     - target: {fileID: 7683453723291258127, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_Mass
-      value: 300
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7683453723291258127, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_IsKinematic
@@ -18182,7 +18186,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 1.645058, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.2256958, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18193,7 +18197,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 1.645058, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.2256958, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:
@@ -18502,7 +18506,8 @@ MonoBehaviour:
   player: {fileID: 0}
   interText: {fileID: 0}
   abilityUnlock: {fileID: 0}
-  TPUI: {fileID: 0}
+  CPUI: {fileID: 0}
+  SkillUI: {fileID: 0}
   KeyGuid: {fileID: 0}
 --- !u!1001 &1599704902
 PrefabInstance:

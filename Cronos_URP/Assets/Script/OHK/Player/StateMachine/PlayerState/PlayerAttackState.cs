@@ -150,6 +150,7 @@ public class PlayerAttackState : PlayerBaseState
 		else
 		{
 			Player.Instance.isBuff = false;
+			EffectManager.Instance.SwordAuraOff();
 			Player.Instance.buffTimer = 0f;
 		}
 	}

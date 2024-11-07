@@ -64,6 +64,7 @@ public class ComboBehaviour : StateMachineBehaviour
 		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
 		Player.Instance.isBuff = false;
 		Player.Instance.buffTimer = 0f;
+		EffectManager.Instance.SwordAuraOff();
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
