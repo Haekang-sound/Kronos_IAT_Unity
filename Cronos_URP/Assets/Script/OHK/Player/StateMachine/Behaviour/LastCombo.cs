@@ -52,7 +52,9 @@ public class LastCombo : StateMachineBehaviour
 	{
 		PlayerStateMachine.GetInstance().Player.IsEnforced = false;
 		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
-	}
+		//Player.Instance.isBuff = false;
+		Player.Instance.buffTimer = 0f;
+}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

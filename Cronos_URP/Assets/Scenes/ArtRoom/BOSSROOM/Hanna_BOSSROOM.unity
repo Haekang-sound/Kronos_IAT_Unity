@@ -1345,10 +1345,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
-      propertyPath: m_Intensity
-      value: 0.39
-      objectReference: {fileID: 0}
     - target: {fileID: 2671637398612028343, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: hitStopTime
       value: 0.1
@@ -1428,6 +1424,10 @@ PrefabInstance:
     - target: {fileID: 9091533624918512758, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
+      propertyPath: m_Intensity
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
       propertyPath: m_Intensity
@@ -8842,6 +8842,10 @@ PrefabInstance:
       propertyPath: Vanished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1214237383}
+    - target: {fileID: 3311931140004549475, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     - target: {fileID: 4467352948813670711, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.88
@@ -8889,6 +8893,10 @@ PrefabInstance:
     - target: {fileID: 7683453723291258127, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683453723291258127, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683453723291258127, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_CollisionDetection
@@ -12105,7 +12113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 692c1fc2f3d5a1449bfb145806f3a4cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.24
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 692c1fc2f3d5a1449bfb145806f3a4cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18178,7 +18186,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.056541163, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.2256958, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18189,7 +18197,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.056541163, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.2256958, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:
@@ -18498,7 +18506,8 @@ MonoBehaviour:
   player: {fileID: 0}
   interText: {fileID: 0}
   abilityUnlock: {fileID: 0}
-  TPUI: {fileID: 0}
+  CPUI: {fileID: 0}
+  SkillUI: {fileID: 0}
   KeyGuid: {fileID: 0}
 --- !u!1001 &1599704902
 PrefabInstance:

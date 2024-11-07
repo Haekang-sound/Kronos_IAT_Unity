@@ -6,6 +6,8 @@ public class ATypeEnemySMBIdle : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.ChangeDebugText("IDLE");
         _monoBehaviour.StopPursuit();
+
+        _monoBehaviour.UseBulletTimeScale();
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

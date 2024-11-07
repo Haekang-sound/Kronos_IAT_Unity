@@ -36,9 +36,9 @@ public class ColldierAdjustBehaviour : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		Player.Instance.meleeWeapon.bAdjuster.Reset();
-		Player.Instance.meleeWeapon.bAdjuster.newCenter = Player.Instance.meleeWeapon.bAdjuster._originalCenter;
-		Player.Instance.meleeWeapon.bAdjuster.newSize = Player.Instance.meleeWeapon.bAdjuster._originalSize;
+		//Player.Instance.meleeWeapon.bAdjuster.Reset();
+		//Player.Instance.meleeWeapon.bAdjuster.newCenter = Player.Instance.meleeWeapon.bAdjuster._originalCenter;
+		//Player.Instance.meleeWeapon.bAdjuster.newSize = Player.Instance.meleeWeapon.bAdjuster._originalSize;
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove()

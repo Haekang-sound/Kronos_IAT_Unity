@@ -54,6 +54,12 @@ public class SceneController : MonoBehaviour
 
     void Awake()
     {
+
+#if UNITY_STANDALONE
+        Screen.SetResolution(1920, 1080, true);
+        //Screen.fullScreen = true;
+#endif
+
         if (Instance != this)
         {
             Destroy(gameObject);
@@ -107,7 +113,7 @@ public class SceneController : MonoBehaviour
         //{
         //    m_playerInput.ReleaseControl();
         //}
-        
+
         yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));
 
         //PersistentDataManager.ClearPersisters();
@@ -151,7 +157,7 @@ public class SceneController : MonoBehaviour
     protected SceneTransitionDestination GetDestination()
     {
         SceneTransitionDestination entrances = FindObjectOfType<SceneTransitionDestination>();
-        if (entrances != null) 
+        if (entrances != null)
         {
             return entrances;
         }
@@ -168,7 +174,7 @@ public class SceneController : MonoBehaviour
             return;
         }
         Transform entranceLocation = entrance.transform;
-        Transform enteringTransform = entrance.transitioningGameObject.transform;	
+        Transform enteringTransform = entrance.transitioningGameObject.transform;
         enteringTransform.position = entranceLocation.position;
         enteringTransform.rotation = entranceLocation.rotation;
     }

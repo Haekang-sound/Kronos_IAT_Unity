@@ -336,17 +336,12 @@ public class Player : MonoBehaviour, IMessageReceiver
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
 			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
-			if (CurrentState == "PlayerMoveState")
-			{
+// 			if (CurrentState == "PlayerMoveState")
+// 			{
 				effectManager.SwordAuraOff();
 
-			}
+//			}
 		}
-		// 
-		// 		if (Input.GetKeyDown(KeyCode.Alpha4))
-		// 		{
-		// 			SetCursorInactive();
-		// 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 

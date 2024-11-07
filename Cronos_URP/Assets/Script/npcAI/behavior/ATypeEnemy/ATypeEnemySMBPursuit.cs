@@ -20,6 +20,8 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 
         // Damaged - 상태에서 피격 당했을 때
         _monoBehaviour.ResetTriggerDamaged();
+
+        _monoBehaviour.UseBulletTimeScale();
     }
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,6 +38,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 
         if (_monoBehaviour.CurrentTarget != null)
         {
+            _monoBehaviour.LookAtTarget();
             _monoBehaviour.RequestTargetPosition();
 
             if (purpose == PursuitFor.Normal)
