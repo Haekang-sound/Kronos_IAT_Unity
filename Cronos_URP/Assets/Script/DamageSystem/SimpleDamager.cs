@@ -75,7 +75,7 @@ public class SimpleDamager : MonoBehaviour
 
         if (damageable == null)
         {
-            damageable = other.GetComponentInParent<Damageable>();
+            damageable = other.GetComponent<Damageable>();
         }
 
         if (!inAttack)
