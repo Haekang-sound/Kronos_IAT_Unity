@@ -36,7 +36,6 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
 
 		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
-
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 	}
@@ -142,6 +141,8 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onJumpStart -= Dodge;
 		//stateMachine.Animator.SetBool(BuffHash, false);
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
+		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
+		stateMachine.InputReader.onRunStart -= RushAttack;
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
