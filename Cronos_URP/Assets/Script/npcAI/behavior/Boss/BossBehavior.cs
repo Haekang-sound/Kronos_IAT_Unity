@@ -56,7 +56,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
         _hitShake = GetComponent<HitShake>();
         _animator = GetComponent<Animator>();
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponentInChildren<Rigidbody>();
         _damageable = GetComponent<Damageable>();
         _groggyStack = GetComponent<GroggyStack>();
         _meleeWeapon = GetComponentInChildren<MeleeWeapon>();
