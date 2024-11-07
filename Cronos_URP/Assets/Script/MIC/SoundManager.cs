@@ -138,4 +138,24 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    public void ButtonEnter()
+    {
+        PlaySFX("UI_MouseON_Effect_Sound_SE", transform);
+    }
+
+    public void ButtonClick()
+    {
+        PlaySFX("UI_MouseClick_Sound_SE", transform);
+    }
+
+    public void NextPage()
+    {
+        PlaySFX("Manual_Nextpage_Sound_SE", transform);
+    }
+
+    public void StartButtonSound()
+    {
+        PlaySFX("UI_GameStart_Button_Sound_SE", transform);
+    }
 }

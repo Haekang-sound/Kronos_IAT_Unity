@@ -355,9 +355,12 @@ public class EffectManager : MonoBehaviour
 	public void SwordAuraOn()
 	{
 		swordAura.SetActive(true);
-	}
+		soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
+        //soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
 
-	public void SwordAuraOff()
+    }
+
+    public void SwordAuraOff()
 	{
 		swordAura.SetActive(false);
 	}
@@ -590,14 +593,18 @@ public class EffectManager : MonoBehaviour
 
 	public void CreateGuardFX()
 	{
-		Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+        soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
+
+        Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
 		GameObject grd = SpawnEffect("GuardFX", grdPos);
 		Destroy(grd, 1.0f);
 	}
 
 	public void CreateParryFX()
 	{
-		soundManager.PlaySFX("Parry_Sound_SE", player.transform);
+        //soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
+
+        soundManager.PlaySFX("Parry_Sound_SE", player.transform);
 		Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
 		GameObject parr = SpawnEffect("GuardFlare", parrPos);
 		StartCoroutine(FadeOutLightsCoroutine(parr));

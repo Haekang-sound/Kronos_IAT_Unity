@@ -45,6 +45,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 	public UnityEvent OnEnter;
 
+	SoundManager sm;
+
 	// IObserver /////////////////////////////////////////////////////////////
 
 	public virtual void Subscribe(IObservable<AbilityNode> provider)
@@ -152,6 +154,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
         buttonUnlock.onClick.AddListener(UnlockAbility);
 		buttonCancel.onClick.AddListener(FocusOutAll);
+
+		sm = SoundManager.Instance;
     }
 
     // -----
@@ -170,10 +174,13 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
             {
-                // �˾�â�� ����, Ȯ�� ��ư�� ������ �� ������ ������ ����
-                //popup.OpenPopup("Ȯ���մϱ�?", () =>
-                //{
-                // Ȯ�� ��ư�� ������ �� ������ ����
+				// �˾�â�� ����, Ȯ�� ��ư�� ������ �� ������ ������ ����
+				//popup.OpenPopup("Ȯ���մϱ�?", () =>
+				//{
+				// Ȯ�� ��ư�� ������ �� ������ ����
+				// 사운드?
+				AbilityOpenSound();
+
                 _lastPressed.SetState(AbilityNode.State.Activate);
                 abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
                 //});
@@ -311,4 +318,9 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			node.gameObject.SetActive(val);
 		}
 	}
+
+    public void AbilityOpenSound()
+    {
+        sm.PlaySFX("02 Ability_Open_Sound_SE", transform);
+    }
 }

@@ -93,6 +93,7 @@ public class Checkpoint : MonoBehaviour
 
         // 데이터 저장
         _data.SaveData();
+        SoundManager.Instance.PlaySFX("Effect_CheckPoint_On_Sound_SE", transform);
     }
 
     private void OnTriggerExit(Collider other)

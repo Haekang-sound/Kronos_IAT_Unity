@@ -1,3 +1,4 @@
+using Sonity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using static Damageable;
 
 public class Defensible : MonoBehaviour
 {
+    SoundManager sm;
+
 	public Action onDefensFalse;
 	public bool isDefending;
     [Range(1.0f, 100.0f)]
@@ -19,6 +22,11 @@ public class Defensible : MonoBehaviour
     [Range(0.0f, 360.0f)]
     [FormerlySerializedAs("hitForwardRoation")] //SHAME!
     public float hitForwardRotation = 360.0f;
+
+    private void Start()
+    {
+        sm = SoundManager.Instance;
+    }
 
     public void ApplyDamage(ref DamageMessage data)
     {
@@ -46,9 +54,9 @@ public class Defensible : MonoBehaviour
 		Vector3 temp = data.direction;
 		temp.y = 0f;
 
-		//PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
-
-		data.amount /= dampRatio;
+        //PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
+        
+        data.amount /= dampRatio;
     }
 
 #if UNITY_EDITOR
