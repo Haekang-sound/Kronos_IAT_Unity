@@ -33,6 +33,7 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.combAttack);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
@@ -249,10 +250,15 @@ public class PlayerMoveState : PlayerBaseState
 		if (!stateMachine.Player.isBuff)
 		{
 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
+			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			Player.Instance.isBuff = false;
 		}
 		else
 		{
+			Debug.Log("현재 버프상태는 : " + stateMachine.Player.isBuff);
+			stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.combAttack);
+
 		}
 
 	}
