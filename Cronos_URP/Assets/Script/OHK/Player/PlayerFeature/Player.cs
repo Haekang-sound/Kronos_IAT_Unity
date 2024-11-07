@@ -220,6 +220,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		groggyStack.OnMaxStack.AddListener(Down);
 
+		SkillRenderObj.SetActive(false);
 	}
 
 	private void Down()
