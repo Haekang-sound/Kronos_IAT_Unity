@@ -234,6 +234,10 @@ public class PlayerBuffState : PlayerBaseState
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f && stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			CoolTimeCounter.Instance.isDodgeUsed = true;
+			if (stateMachine.InputReader.moveComposite.magnitude != 0)
+			{
+				stateMachine.Rigidbody.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+			}
 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
 	}
