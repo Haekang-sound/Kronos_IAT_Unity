@@ -1,5 +1,6 @@
 using Message;
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -143,6 +144,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public BoxColliderAdjuster adjuster;
 	//public float spcActivateTime;
 
+	bool isRelease = false;
+	float releaseLockOn = 0f;
+
 	public bool isDecreaseTP = true;
 	[SerializeField] private bool usePreiviousSceneData = true;
 
@@ -171,12 +175,16 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		_damageable.onDamageMessageReceivers.Remove(this);
 
-		// 여기서 능력치를 전부 초기화해준다.
-
+		PlayerFSM.InputReader.onLockOnPerformed -= ReleaseLockOn;
+		PlayerFSM.InputReader.onLockOnStart -= LockOn;
+		PlayerFSM.InputReader.onLockOnCanceled -= ReleaseReset;
 	}
 
 	private void OnEnable()
 	{
+		PlayerFSM.InputReader.onLockOnPerformed += ReleaseLockOn;
+		PlayerFSM.InputReader.onLockOnStart += LockOn;
+		PlayerFSM.InputReader.onLockOnCanceled += ReleaseReset;
 		_damageable.onDamageMessageReceivers.Add(this);
 
 		CapsuleColldierUtility.Initialize(gameObject);
@@ -221,8 +229,24 @@ public class Player : MonoBehaviour, IMessageReceiver
 		groggyStack.OnMaxStack.AddListener(Down);
 
 		SkillRenderObj.SetActive(false);
+
 	}
 
+	private void LockOn()
+	{
+		// 락온 상태가 아니라면
+		if (!IsLockOn)
+		{
+			// 대상을 찾고
+			bool temp = IsLockOn = PlayerFSM.AutoTargetting.FindTarget();
+			Debug.Log(temp);
+		}
+		// 락온상태라면 타겟을 변경한다.
+		else
+		{
+			PlayerFSM.AutoTargetting.SwitchTarget();
+		}
+	}
 	private void Down()
 	{
 		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
@@ -317,6 +341,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
 		}
 
+		// 휠꾹
+		if (isRelease)
+		{
+			releaseLockOn += Time.deltaTime;
+
+			if (releaseLockOn > 1f)
+			{
+				PlayerFSM.AutoTargetting.LockOff();
+			}
+		}
+
 		// �������̶��
 		if (isBuff)
 		{
@@ -403,6 +438,26 @@ public class Player : MonoBehaviour, IMessageReceiver
 	}
 	public bool useKnockback;
 	public void SetUseKnockback(bool val) => useKnockback = val;
+
+	private void ReleaseLockOn()
+	{
+		isRelease = true;
+
+		//Debug.Log("누르는중");
+		releaseLockOn += Time.deltaTime;
+
+		if (releaseLockOn > 1f)
+		{
+			PlayerFSM.AutoTargetting.LockOff();
+		}
+	}
+	private void ReleaseReset()
+	{
+		isRelease = false;
+		releaseLockOn = 0f;
+	}
+
+
 	void Damaged(Damageable.DamageMessage damageMessage)
 	{
 		// ���⼭ �����ϸ� �ִϸ��̼Ǹ� ������� �ʴ´�.

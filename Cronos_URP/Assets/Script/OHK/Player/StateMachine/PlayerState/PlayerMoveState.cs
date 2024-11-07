@@ -14,8 +14,8 @@ public class PlayerMoveState : PlayerBaseState
 
 	float moveSpeed = 0.5f;
 	public float targetSpeed = 0.5f;
-	float releaseLockOn = 0f;
-	bool isRelease = false;
+	
+	
 	bool isRun = false;
 	float timeLine;
 	bool timeslash = false;
@@ -39,10 +39,6 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
 		stateMachine.InputReader.onRunStart += RushAttack;
-
-		stateMachine.InputReader.onLockOnStart += LockOn;
-		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
-		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
 
 		stateMachine.InputReader.onLAttackStart += Attack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
@@ -72,33 +68,7 @@ public class PlayerMoveState : PlayerBaseState
 			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isMove, false);
 		}
 
-		// 시간베기 테스트용
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			timeslash = true;
-		}
-		// 시간베기 테스트용
-		if (timeslash)
-		{
-			timeLine += Time.deltaTime;
-			stateMachine.Rigidbody.AddForce(stateMachine.transform.forward * stateMachine.Player.TimeSlashCurve.Evaluate(timeLine / 0.5f), ForceMode.Impulse);
-			if (timeLine > 0.5f)
-			{
-				timeslash = false;
-				timeLine = 0f;
-			}
-		}
 
-		// 휠꾹
-		if (isRelease)
-		{
-			releaseLockOn += Time.deltaTime;
-
-			if (releaseLockOn > 1f)
-			{
-				stateMachine.AutoTargetting.LockOff();
-			}
-		}
 
 		// 애니메이터 movespeed의 파라메터의 값을 정한다.
 		// 락온 상태일때 && 달리기가 아닐때
@@ -152,9 +122,6 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
 		stateMachine.InputReader.onRunStart -= RushAttack;
 
-		stateMachine.InputReader.onLockOnStart -= LockOn;
-		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
-		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
 
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onLAttackCanceled -= ReleaseAttack;
@@ -169,39 +136,9 @@ public class PlayerMoveState : PlayerBaseState
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
 	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isGuard, true); }
 	public void ReleaseGuard() { stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false); }
-	private void LockOn()
-	{
-		// 락온 상태가 아니라면
-		if (!stateMachine.Player.IsLockOn)
-		{
-			// 대상을 찾고
-			bool temp = stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
-			Debug.Log(temp);
-		}
-		// 락온상태라면 타겟을 변경한다.
-		else
-		{
-			stateMachine.AutoTargetting.SwitchTarget();
-		}
-	}
+	
 
-	private void ReleaseLockOn()
-	{
-		isRelease = true;
 
-		//Debug.Log("누르는중");
-		releaseLockOn += Time.deltaTime;
-
-		if (releaseLockOn > 1f)
-		{
-			stateMachine.AutoTargetting.LockOff();
-		}
-	}
-	private void ReleaseReset()
-	{
-		isRelease = false;
-		releaseLockOn = 0f;
-	}
 
 	private void Deceleration()
 	{

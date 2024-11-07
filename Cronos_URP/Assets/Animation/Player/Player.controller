@@ -981,14 +981,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 805f76b80df48d349bbad3a089bc93af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 2.3
   hitStopTime: 0.04
-  Damage: 0
+  Damage: 2
   damageType: 3
   comboType: 1
   minFrame: 0.5
@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f32986d52b218ba469fe040c686c46cc, type: 3}
   m_Name: 
@@ -2571,13 +2571,13 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: isCPBoomb
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: isFlashSlash
     m_Type: 4
@@ -2595,7 +2595,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: isParry
     m_Type: 4
@@ -3059,7 +3059,6 @@ AnimatorState:
   m_Transitions:
   - {fileID: 8354866696981265666}
   m_StateMachineBehaviours:
-  - {fileID: 7872988825182568587}
   - {fileID: 8807793261027111396}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -5397,18 +5396,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &7872988825182568587
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b803df959ed234d92396c8e8d156b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1102 &7910421595478925460
 AnimatorState:
   serializedVersion: 6

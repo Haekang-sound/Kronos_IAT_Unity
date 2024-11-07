@@ -37,7 +37,6 @@ public class PlayerDodgeState : PlayerBaseState
 	}
 	private void Attack()
 	{
-		stateMachine.AutoTargetting.AutoTargeting();
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.Attack, true);
 	}
 }

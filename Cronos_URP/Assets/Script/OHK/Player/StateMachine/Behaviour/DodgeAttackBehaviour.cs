@@ -17,12 +17,10 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
-		
-		stateMachine.MoveForce = moveForce;
-		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
+		stateMachine.SwitchState(new PlayerDodgeAttackState(stateMachine));
 
+		stateMachine.MoveForce = moveForce;
 		stateMachine.HitStop.hitStopTime = hitStopTime;
-		stateMachine.Player.DodgeAttack = true;
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
@@ -30,6 +28,7 @@ public class DodgeAttackBehaviour : StateMachineBehaviour
 		Player.Instance.meleeWeapon.simpleDamager.currentComboType = comboType;
 
 		animator.ResetTrigger("Attack");
+		stateMachine.Player.DodgeAttack = true;
 
 	}
 
