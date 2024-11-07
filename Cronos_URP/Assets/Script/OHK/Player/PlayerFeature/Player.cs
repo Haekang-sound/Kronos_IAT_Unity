@@ -297,7 +297,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			TP -= 10f;
+			TP = 10f;
 		}
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
@@ -305,11 +305,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			CP += 10f;
-			if (CP >= 100)
-			{
-				CP = 100f;
-			}
+			CP = 100f;
 		}
 
 		if (Input.GetKeyDown(KeyCode.H))
