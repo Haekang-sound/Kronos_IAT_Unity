@@ -48,7 +48,7 @@ public class PlayerRushAttackState : PlayerBaseState
 			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
 			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
 			if ((TargetPosition - stateMachine.transform.position).magnitude 
-				> stateMachine.Player.targetdistance)
+				> 1f)
 			{
 				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
 				{

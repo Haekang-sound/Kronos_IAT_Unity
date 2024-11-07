@@ -179,7 +179,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 				//{
 				// Ȯ�� ��ư�� ������ �� ������ ����
 				// 사운드?
-				AbilityOpenSound();
+				//AbilityOpenSound();
 
                 _lastPressed.SetState(AbilityNode.State.Activate);
                 abilityAmounts.UpdateSpent(_lastPressed.PointNeed);

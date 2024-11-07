@@ -62,11 +62,6 @@ public class EnemyController : MonoBehaviour
 
         _rigidbody = GetComponentInChildren<Rigidbody>();
 
-        if (_rigidbody == null)
-        {
-            _rigidbody = gameObject.AddComponent<Rigidbody>();
-        }
-
         //_rigidbody.drag = 10f;
         //_rigidbody.isKinematic = false;
         //_rigidbody.useGravity = false;

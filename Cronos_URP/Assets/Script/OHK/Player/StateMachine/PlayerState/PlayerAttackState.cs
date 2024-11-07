@@ -156,14 +156,23 @@ public class PlayerAttackState : PlayerBaseState
 	}
 	private void Dodge()
 	{
-		if (!CoolTimeCounter.Instance.isDodgeUsed && !stateMachine.DodgeBool)
+		if (stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
-			// 사용될 경우
-			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
+			CoolTimeCounter.Instance.isDodgeUsed = true;
+			if (stateMachine.InputReader.moveComposite.magnitude != 0)
+			{
+				stateMachine.Rigidbody.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+			}
 			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);    // 
-																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
+// 		if (!CoolTimeCounter.Instance.isDodgeUsed && !stateMachine.DodgeBool)
+// 		{
+// 			// 사용될 경우
+// 			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
+// 																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+// 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
+// 		}
 	}
 	private void Gurad()
 	{

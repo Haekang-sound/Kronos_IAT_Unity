@@ -3,13 +3,13 @@ using UnityEngine;
 public class LevelDoorDamagerbleTrigger : MonoBehaviour
 {
     public Damageable damageable;
+    public GameObject timeline;
 
     void Awake()
     {
-        var doorCtrl = GetComponent<DoorController>();
-        if (doorCtrl != null)
+        if (timeline != null)
         {
-            damageable?.OnDeath.AddListener(doorCtrl.PlayTimeline);
+            damageable?.OnDeath.AddListener(() => timeline.SetActive(true));
         }
     }
 

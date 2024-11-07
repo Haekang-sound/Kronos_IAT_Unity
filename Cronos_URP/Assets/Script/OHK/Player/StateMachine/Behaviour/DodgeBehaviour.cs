@@ -8,15 +8,18 @@ public class DodgeBehaviour : StateMachineBehaviour
 {
 	PlayerStateMachine stateMachine;
 	Vector3 direction;
-		[SerializeField] float moveForce;
+	[SerializeField] float moveForce;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-   {
+	{
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.AutoTargetting.enabled = false;
 		SoundManager.Instance.PlaySFX("Player_Dodge_Sound_SE", Player.Instance.transform);
 		// 상태전환
-		stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+		if (stateMachine.InputReader.moveComposite.magnitude != 0)
+		{
+			stateMachine.Rigidbody.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+		}
 		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerDodgeState(PlayerStateMachine.GetInstance()));
 		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
@@ -25,12 +28,12 @@ public class DodgeBehaviour : StateMachineBehaviour
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
- 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
- 	{
-		if ( stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) )
-		{
-			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity); 
-		}
+	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		// 		if ( stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex) )
+		// 		{
+		// 			stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity); 
+		// 		}
 
 	}
 
@@ -44,7 +47,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 	// OnStateMove is called right after Animator.OnAnimatorMove()
 	override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-	    // Implement code that processes and affects root motion
+		// Implement code that processes and affects root motion
 	}
 
 	// OnStateIK is called right after Animator.OnAnimatorIK()
