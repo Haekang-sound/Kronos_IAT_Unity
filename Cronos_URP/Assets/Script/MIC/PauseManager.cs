@@ -11,12 +11,13 @@ public class PauseManager : MonoBehaviour
     [SerializeField]
     GameObject playerCam;
 
-    bool isPause = false;
+    
+    public bool isPause = false;
     // esc로 퍼즈할 수 있음을 허용하는 불리언
     public bool escAvailable;
 
 
-    // 무지성 불리언 아서 제가 참 좋아합니다
+    // 현재 능력개방 상태로 들어갔으니 tp를 멈추기 위한 불리언
     public bool abilityPause = false;
 
     // 그런 싱글턴으로 괜찮은가

@@ -56,7 +56,8 @@ public class UI_Scanner : MonoBehaviour
 
 	void Update()
 	{
-		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting)
+		if (isPopup && Input.GetKeyDown(KeyCode.F) && !isInteracting
+            && !PauseManager.Instance.isPause)
 		{
 			PauseManager.Instance.UnavailableEsc();
             Interaction();

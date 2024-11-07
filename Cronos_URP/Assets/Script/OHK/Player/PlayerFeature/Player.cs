@@ -225,9 +225,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	private void Down()
 	{
 		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-	}
+        soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+    }
 
-	private void ChangeParryState()
+    private void ChangeParryState()
 	{
 		PlayerFSM.SwitchParryState();
 	}
@@ -460,7 +461,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-				break;
+                soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+                break;
 		}
 
 	}
@@ -590,6 +592,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void TimeStop()
 	{
 		soundManager.PlaySFX("TimeStop_Skill_Sound_SE", transform);
+		soundManager.PlaySFX("Ult_SE", transform);
 		Vector3 temp = transform.position;
 		effectManager.SpawnEffect("TeraainScanner", temp);
 		SkillRenderObj.SetActive(true);

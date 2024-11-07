@@ -153,4 +153,9 @@ public class SoundManager : MonoBehaviour
     {
         PlaySFX("Manual_Nextpage_Sound_SE", transform);
     }
+
+    public void StartButtonSound()
+    {
+        PlaySFX("UI_GameStart_Button_Sound_SE", transform);
+    }
 }
