@@ -99,21 +99,13 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             _behaviortreeRunner.Bind();
         }
 
+    }
+
+    void Start()
+    {
         BulletTime.Instance.OnActive.AddListener(InvalidateBulletTime);
         BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
-
-    //private void OnDisable()
-    //{
-    //}
-
-    //private void OnDisable()
-    //{
-    //}
-
-    //void OnDestroy()
-    //{
-    //}
 
     private bool _aimtarget;
 
