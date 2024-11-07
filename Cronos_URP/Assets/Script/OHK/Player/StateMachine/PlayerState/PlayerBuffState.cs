@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,11 +23,14 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
         stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.goIdle);
 
-        stateMachine.InputReader.onLAttackStart += Attack;
+		stateMachine.InputReader.onDecelerationStart += Deceleration;
+		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
+		stateMachine.InputReader.onRunStart += RushAttack;
+
+		stateMachine.InputReader.onLAttackStart += Attack;
         stateMachine.InputReader.onRAttackStart += Gurad;
         stateMachine.InputReader.onJumpStart += Dodge;
 
-		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
@@ -36,6 +40,28 @@ public class PlayerBuffState : PlayerBaseState
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 	}
+
+	private void RushAttack()
+	{
+		if (stateMachine.Animator.GetBool(PlayerHashSet.Instance.isRushAttack) && !CoolTimeCounter.Instance.isRushAttackUsed)
+		{
+			stateMachine.AutoTargetting.enabled = true;
+			PlayerStateMachine.GetInstance().AutoTargetting.sphere.enabled = true;
+
+			CoolTimeCounter.Instance.isRushAttackUsed = true;
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.RushAttack);
+		}
+	}
+
+	private void FlashSlash()
+	{
+		if (stateMachine.Animator.GetBool(PlayerHashSet.Instance.isFlashSlash) && Player.Instance.CP >= 20f)
+		{
+			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.FlashSlash);
+			Player.Instance.CP -= 25f;
+		}
+	}
+
 	public override void Tick()
 	{
 
