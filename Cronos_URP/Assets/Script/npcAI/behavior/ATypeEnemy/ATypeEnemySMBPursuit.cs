@@ -38,6 +38,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 
         if (_monoBehaviour.CurrentTarget != null)
         {
+            _monoBehaviour.LookAtTarget();
             _monoBehaviour.RequestTargetPosition();
 
             if (purpose == PursuitFor.Normal)
