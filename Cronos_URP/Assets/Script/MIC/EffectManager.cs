@@ -355,7 +355,7 @@ public class EffectManager : MonoBehaviour
 	public void SwordAuraOn()
 	{
 		swordAura.SetActive(true);
-		soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
+		//soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
         //soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
 
     }
