@@ -1,34 +1,56 @@
+using Cinemachine.Editor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// 조작법. 매우매우 러프하게 만들었다
 public class ControlPanel : MonoBehaviour
 {
-    //[SerializeField]
-    //Image keyMouGuide;
-    //[SerializeField]
-    //Image padGuide;
-    //[SerializeField]
-    //Button keyMouButton;
-    //[SerializeField]
-    //Button padButton;
-    //[SerializeField]
-    //GameObject keyMouTitle;
-    //[SerializeField]
-    //GameObject padTitle;
+    
     [SerializeField]
     PauseMenu pauseMenu;
 
+    [SerializeField]
+    int guideNum = 0;
+    public int guideLength;
+
+    public GameObject[] guides;
+
     private void Start()
     {
+        guideLength = guides.Length - 1;
+    }
 
+    public void ResetGuideNum()
+    {
+        guideNum = 0;
+    }
+
+    public void CallGuide()
+    {
+        if (guideNum == guideLength)
+        {
+            ExitControl();
+            return;
+        }
+
+        for (int i = 0; i < guides.Length; i++)
+        {
+            guides[i].SetActive(false);
+            guides[guideNum + 1].SetActive(true);
+        }
+
+        guideNum++;
     }
 
     void OnEnable()
     {
-        //EventSystem.current.SetSelectedGameObject(keyMouButton.gameObject);
-        //padGuide.gameObject.SetActive(false);
-        //padTitle.gameObject.SetActive(false);
+        foreach (GameObject g in guides)
+        {
+            g.SetActive(false);
+        }
+
+        guides[0].SetActive(true);
     }
 
     public void ShowKeyMou()
@@ -49,6 +71,7 @@ public class ControlPanel : MonoBehaviour
 
     public void ExitControl()
     {
+        ResetGuideNum();
         gameObject.SetActive(false);
         pauseMenu.isControl = false;
     }

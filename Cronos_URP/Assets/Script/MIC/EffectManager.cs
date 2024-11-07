@@ -333,7 +333,7 @@ public class EffectManager : MonoBehaviour
 		// 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
 		// 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
 		// 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
-		soundManager.PlaySFX("Attack_SE", player.transform);
+		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject slash = SpawnEffect(fxName, player.transform.position);
 		slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
 		float newY = player.playerSword.transform.position.y;
@@ -344,7 +344,7 @@ public class EffectManager : MonoBehaviour
 	// 일반 강공격 스핀
 	public void NormalStrongFX()
 	{
-		soundManager.PlaySFX("Attack_SE", player.transform);
+		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject slash = SpawnEffect("Nor_S_Attack", player.transform.position);
 		float newY = player.playerSword.transform.position.y;
 		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
@@ -355,7 +355,7 @@ public class EffectManager : MonoBehaviour
 	public void SwordAuraOn()
 	{
 		swordAura.SetActive(true);
-		soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
+		//soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
         //soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
 
     }
@@ -379,7 +379,7 @@ public class EffectManager : MonoBehaviour
 	// 어빌리티 공격 1
 	public void AbilitySlash()
 	{
-		soundManager.PlaySFX("Attack_SE", player.transform);
+		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject aSlash = SpawnEffect("AbilitySlash", player.transform.position);
 		aSlash.transform.rotation = player.playerSword.transform.rotation;
 		float newY = player.playerSword.transform.position.y;
