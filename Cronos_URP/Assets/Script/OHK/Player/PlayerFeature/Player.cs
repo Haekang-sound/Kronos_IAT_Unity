@@ -596,8 +596,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject bomb = effectManager.SpawnEffect("CPGround", transform.position);
 			Destroy(bomb, 5.0f);
-
-		}
+            if (soundManager != null)
+                soundManager.PlaySFX("TempoExplosion_Sound_SE", transform);
+        }
 	}
 	public void CPBombSlash()
 	{
@@ -605,7 +606,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject slash = effectManager.SpawnEffect("CPSlash", transform.position);
 
-			Destroy(slash, 3.0f);
+            Destroy(slash, 3.0f);
 			Invoke("test", 1.5f);
 			Invoke("CPBoombDamager", 1.5f);
 			Invoke("TimeNormalization", 1.5f);
@@ -631,6 +632,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
 			Destroy(bomb, 3.0f);
+
 
 
 			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
