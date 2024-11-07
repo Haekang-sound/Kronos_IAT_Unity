@@ -36,7 +36,7 @@ public class Checkpoint : MonoBehaviour
     }
     private bool _isActive;
 
-    private readonly string k_purpose = "_checkpoint";
+    //private readonly string k_purpose = "_checkpoint";
 
     private AbilityTree _abilityTree;
     private int _enemyCount;

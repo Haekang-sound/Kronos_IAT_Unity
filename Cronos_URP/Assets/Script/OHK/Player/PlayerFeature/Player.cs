@@ -1,6 +1,5 @@
 using Message;
 using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -78,7 +77,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 
 	// �����ϰ��� �ϴ� ���̾ �����մϴ�.
-	public LayerMask targetLayer; // Inspector���� ���� ����
+	public LayerMask targetLayer;
 	public float targetdistance = 1f;
 
 	// Property
@@ -175,6 +174,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		_damageable.onDamageMessageReceivers.Remove(this);
 
+		PlayerFSM.InputReader.onDecelerationStart -= Deceleration;
 		PlayerFSM.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		PlayerFSM.InputReader.onLockOnStart -= LockOn;
 		PlayerFSM.InputReader.onLockOnCanceled -= ReleaseReset;
@@ -182,9 +182,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void OnEnable()
 	{
-		PlayerFSM.InputReader.onLockOnPerformed += ReleaseLockOn;
-		PlayerFSM.InputReader.onLockOnStart += LockOn;
-		PlayerFSM.InputReader.onLockOnCanceled += ReleaseReset;
+
 		_damageable.onDamageMessageReceivers.Add(this);
 
 		CapsuleColldierUtility.Initialize(gameObject);
@@ -230,6 +228,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		SkillRenderObj.SetActive(false);
 
+		PlayerFSM.InputReader.onDecelerationStart += Deceleration;
+		PlayerFSM.InputReader.onLockOnPerformed += ReleaseLockOn;
+		PlayerFSM.InputReader.onLockOnStart += LockOn;
+		PlayerFSM.InputReader.onLockOnCanceled += ReleaseReset;
+
 	}
 
 	private void LockOn()
@@ -250,10 +253,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	private void Down()
 	{
 		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-        soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
-    }
+		soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+	}
 
-    private void ChangeParryState()
+	private void ChangeParryState()
 	{
 		PlayerFSM.SwitchParryState();
 	}
@@ -368,11 +371,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
 			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
-// 			if (CurrentState == "PlayerMoveState")
-// 			{
-				effectManager.SwordAuraOff();
+			// 			if (CurrentState == "PlayerMoveState")
+			// 			{
+			effectManager.SwordAuraOff();
 
-//			}
+			//			}
 		}
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
@@ -439,6 +442,24 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public bool useKnockback;
 	public void SetUseKnockback(bool val) => useKnockback = val;
 
+	private void Deceleration()
+	{
+		if (CP >= 100 && PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
+		{
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
+			BulletTime.Instance.DecelerateSpeed();
+			IsDecreaseCP = true;
+			_damageable.enabled = false;
+			BulletTime.Instance.OnActive.Invoke();
+		}
+		else if (IsDecreaseCP
+			&& PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb)
+		&& !PlayerFSM.Animator.IsInTransition(PlayerFSM.currentLayerIndex))
+		{
+			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
+		}
+	}
+
 	private void ReleaseLockOn()
 	{
 		isRelease = true;
@@ -473,6 +494,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 		if (PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
 			PlayerFSM.GetState().ToString() == "PlayerDownState" ||
+			PlayerFSM.GetState().ToString() == "PlayerRushAttackState" ||
+			PlayerFSM.GetState().ToString() == "PlayerDodgeAttackState" ||
 			rigidImmunity || isEnforced)
 		{
 			return;
@@ -508,8 +531,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-                soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
-                break;
+				soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+				break;
 		}
 
 	}
@@ -651,9 +674,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject bomb = effectManager.SpawnEffect("CPGround", transform.position);
 			Destroy(bomb, 5.0f);
-            if (soundManager != null)
-                soundManager.PlaySFX("TempoExplosion_Sound_SE", transform);
-        }
+			if (soundManager != null)
+				soundManager.PlaySFX("TempoExplosion_Sound_SE", transform);
+		}
 	}
 	public void CPBombSlash()
 	{
@@ -661,7 +684,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject slash = effectManager.SpawnEffect("CPSlash", transform.position);
 
-            Destroy(slash, 3.0f);
+			Destroy(slash, 3.0f);
 			Invoke("test", 1.5f);
 			Invoke("CPBoombDamager", 1.5f);
 			Invoke("TimeNormalization", 1.5f);

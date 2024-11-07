@@ -23,7 +23,6 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
         stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.goIdle);
 
-		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
 		stateMachine.InputReader.onRunStart += RushAttack;
 
@@ -31,9 +30,6 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onRAttackStart += Gurad;
         stateMachine.InputReader.onJumpStart += Dodge;
 
-		stateMachine.InputReader.onLockOnStart += LockOn;
-		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
-		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
 
 		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
@@ -140,12 +136,8 @@ public class PlayerBuffState : PlayerBaseState
         stateMachine.InputReader.onRAttackStart -= Gurad;
         stateMachine.InputReader.onJumpStart -= Dodge;
 		//stateMachine.Animator.SetBool(BuffHash, false);
-		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
 		stateMachine.InputReader.onRunStart -= RushAttack;
-		stateMachine.InputReader.onLockOnStart -= LockOn;
-		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
-		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
 
 		stateMachine.InputReader.onLAttackCanceled -= ReleaseAttack;
 
@@ -164,55 +156,7 @@ public class PlayerBuffState : PlayerBaseState
 
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
 	public void ReleaseGuard() { stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false); }
-	private void LockOn()
-	{
-		Debug.Log("누름");
-		// 락온 상태가 아니라면
-		if (!stateMachine.Player.IsLockOn)
-		{
-			// 대상을 찾고
-			bool temp = stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
-			Debug.Log(temp);
-		}
-		// 락온상태라면 타겟을 변경한다.
-		else
-		{
-			stateMachine.AutoTargetting.SwitchTarget();
-		}
-	}
 
-	private void ReleaseLockOn()
-	{
-		isRelease = true;
-
-		//Debug.Log("누르는중");
-		releaseLockOn += Time.deltaTime;
-
-		if (releaseLockOn > 1f)
-		{
-			stateMachine.AutoTargetting.LockOff();
-		}
-	}
-	private void ReleaseReset()
-	{
-		isRelease = false;
-		releaseLockOn = 0f;
-	}
-
-	private void Deceleration()
-	{
-		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
-		{
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
-			BulletTime.Instance.DecelerateSpeed();
-			stateMachine.Player.IsDecreaseCP = true;
-		}
-		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
-		{
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
-		}
-
-	}
 	// 값 변화를 부드럽게 주자
 	IEnumerator SmoothChangeSpeed()
 	{

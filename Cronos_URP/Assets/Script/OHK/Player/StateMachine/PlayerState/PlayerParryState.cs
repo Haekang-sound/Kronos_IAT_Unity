@@ -8,7 +8,6 @@ public class PlayerParryState : PlayerBaseState
 
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
-	bool attackBool = false;
 
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;

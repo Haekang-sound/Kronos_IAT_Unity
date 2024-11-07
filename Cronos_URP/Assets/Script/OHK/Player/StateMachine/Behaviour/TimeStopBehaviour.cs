@@ -9,6 +9,7 @@ public class TimeStopBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		stateMachine = PlayerStateMachine.GetInstance();
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.CPBoomb);
 		stateMachine.SwitchState(new PlayerTimeStopState(stateMachine));
 
 	}

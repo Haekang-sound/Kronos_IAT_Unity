@@ -6,8 +6,6 @@ public class PlayerTimeSlashReadyState : PlayerBaseState
 {
 	public PlayerTimeSlashReadyState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	bool timeSlash;
-	float currentTime = 0f;
-	Ray frontRay;
 	public override void Enter()
 	{
 		// 0) 캐릭터와 몬스터 사이에 장애물이 있으면 멈춘다.

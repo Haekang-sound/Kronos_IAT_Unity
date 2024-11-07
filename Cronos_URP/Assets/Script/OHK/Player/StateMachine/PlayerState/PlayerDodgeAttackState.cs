@@ -6,7 +6,6 @@ public class PlayerDodgeAttackState : PlayerBaseState
 	public PlayerDodgeAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	Vector3 totalMove;
 	[SerializeField] float moveForce;
-	bool attackBool = false;
 
 	Vector3 TargetPosition;
 	public float hitStopTime;

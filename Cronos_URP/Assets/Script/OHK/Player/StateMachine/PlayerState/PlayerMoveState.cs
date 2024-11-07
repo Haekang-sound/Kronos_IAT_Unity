@@ -14,13 +14,6 @@ public class PlayerMoveState : PlayerBaseState
 
 	float moveSpeed = 0.5f;
 	public float targetSpeed = 0.5f;
-	
-	
-	bool isRun = false;
-	float timeLine;
-	bool timeslash = false;
-
-	Vector3 totalMove;
 	public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 	public override void Enter()
@@ -36,7 +29,7 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.combAttack);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
-		stateMachine.InputReader.onDecelerationStart += Deceleration;
+		
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
 		stateMachine.InputReader.onRunStart += RushAttack;
 
@@ -118,7 +111,6 @@ public class PlayerMoveState : PlayerBaseState
 
 	public override void Exit()
 	{
-		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
 		stateMachine.InputReader.onRunStart -= RushAttack;
 
@@ -140,22 +132,7 @@ public class PlayerMoveState : PlayerBaseState
 
 
 
-	private void Deceleration()
-	{
-		if (stateMachine.Player.CP >= 100 && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
-		{
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
-			BulletTime.Instance.DecelerateSpeed();
-			stateMachine.Player.IsDecreaseCP = true;
-			stateMachine.Player._damageable.enabled = false;
-			BulletTime.Instance.OnActive.Invoke();
-		}
-		else if (stateMachine.Player.IsDecreaseCP && stateMachine.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb))
-		{
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
-		}
 
-	}
 	// 값 변화를 부드럽게 주자
 	IEnumerator SmoothChangeSpeed()
 	{

@@ -267,7 +267,7 @@ public class AutoTargetting : MonoBehaviour
 		// 현재 몬스터 목록을 순회한다.
 		for (int i = MonsterList.Count - 1; i >= 0; i--)
 		{
-			if (MonsterList[i] == null || !MonsterList[i].active)
+			if (MonsterList[i] == null || !MonsterList[i].activeSelf)
 			{
 				MonsterList.RemoveAt(i);
 			}

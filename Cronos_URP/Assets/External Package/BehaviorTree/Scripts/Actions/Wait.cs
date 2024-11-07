@@ -16,7 +16,7 @@ public class Wait : ActionNode
 
     protected override State OnUpdate()
     {
-        float speed = 1;
+        //float speed = 1;
 
         _elapse += blackboard.bulletTimeScalable.GetDeltaTime();
 
