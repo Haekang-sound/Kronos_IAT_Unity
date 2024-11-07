@@ -38,20 +38,17 @@ public class PlayerMoveState : PlayerBaseState
 
 		stateMachine.InputReader.onDecelerationStart += Deceleration;
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
-		//stateMachine.InputReader.onRunStart += TimeSlash;
 		stateMachine.InputReader.onRunStart += RushAttack;
 
 		stateMachine.InputReader.onLockOnStart += LockOn;
 		stateMachine.InputReader.onLockOnPerformed += ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled += ReleaseReset;
-		stateMachine.InputReader.onRunStart += Run;
-		stateMachine.InputReader.onRunCanceled += StopRun;
 
 		stateMachine.InputReader.onLAttackStart += Attack;
-		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
 		stateMachine.InputReader.onRAttackStart += Gurad;
 		stateMachine.InputReader.onJumpStart += Dodge;
 
+		stateMachine.InputReader.onLAttackCanceled += ReleaseAttack;
 		stateMachine.InputReader.onRAttackCanceled += ReleaseGuard;
 
 	}
@@ -65,8 +62,6 @@ public class PlayerMoveState : PlayerBaseState
 		// 플레이어의 cp 를 이동속도에 반영한다.
 		//stateMachine.Animator.speed = stateMachine.Player.CP * stateMachine.Player.MoveCoefficient + 1f;
 		moveSpeed = 1f;
-
-
 
 		if (stateMachine.Velocity.magnitude != 0f)
 		{
@@ -155,14 +150,11 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		stateMachine.InputReader.onDecelerationStart -= Deceleration;
 		stateMachine.InputReader.onFlashSlashStart -= FlashSlash;
-		//stateMachine.InputReader.onRunStart -= TimeSlash;
 		stateMachine.InputReader.onRunStart -= RushAttack;
 
 		stateMachine.InputReader.onLockOnStart -= LockOn;
 		stateMachine.InputReader.onLockOnPerformed -= ReleaseLockOn;
 		stateMachine.InputReader.onLockOnCanceled -= ReleaseReset;
-		stateMachine.InputReader.onRunStart -= Run;
-		stateMachine.InputReader.onRunCanceled -= StopRun;
 
 		stateMachine.InputReader.onLAttackStart -= Attack;
 		stateMachine.InputReader.onLAttackCanceled -= ReleaseAttack;
@@ -177,8 +169,6 @@ public class PlayerMoveState : PlayerBaseState
 	private void ReleaseAttack() { stateMachine.InputReader.clickCondition = false; }
 	private void Gurad() { PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isGuard, true); }
 	public void ReleaseGuard() { stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false); }
-	private void Run() { isRun = true; }
-	private void StopRun() { isRun = false; }
 	private void LockOn()
 	{
 		// 락온 상태가 아니라면
@@ -267,6 +257,10 @@ public class PlayerMoveState : PlayerBaseState
 		if (stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.isDodgeUsed)
 		{
 			CoolTimeCounter.Instance.isDodgeUsed = true;
+			if (stateMachine.InputReader.moveComposite.magnitude != 0)
+			{
+				stateMachine.Rigidbody.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+			}
 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
 	}

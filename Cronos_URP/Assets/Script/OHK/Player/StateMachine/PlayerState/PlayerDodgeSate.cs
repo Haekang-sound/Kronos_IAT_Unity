@@ -23,6 +23,7 @@ public class PlayerDodgeState : PlayerBaseState
 		{
 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(stateMachine.Animator.deltaPosition / Time.deltaTime);
 		}
+		
 	}
 	public override void FixedTick()
 	{
@@ -32,7 +33,7 @@ public class PlayerDodgeState : PlayerBaseState
 
 	public override void Exit()
 	{
-		stateMachine.InputReader.onLAttackStart += Attack;
+		stateMachine.InputReader.onLAttackStart -= Attack;
 	}
 	private void Attack()
 	{
