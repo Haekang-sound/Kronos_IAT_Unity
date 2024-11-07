@@ -46,6 +46,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private Blackboard _blackboard;
     private readonly float _rotationSpeed = 18f;
+    SoundManager sm;
 
 
     void Awake()
@@ -69,9 +70,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             target = Player.Instance.gameObject;
     }
 
-    //void Start()
-    //{
-    //}
 
     void OnEnable()
     {
@@ -103,6 +101,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void Start()
     {
+        sm = SoundManager.Instance;
         BulletTime.Instance.OnActive.AddListener(InvalidateBulletTime);
         BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
@@ -467,5 +466,30 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void OffAim()
     {
         gameObject.GetComponent<BossChargeAimer>().OffAim();
+    }
+
+    /// 기획에 전달할 보스 공격 사운드 함수
+    public void BossAtkSound1()
+    {
+        if (sm != null)
+            sm.PlaySFX("Boss_SwingSword_1_Sound_SE", transform);
+    }
+
+    public void BossAtkSound2()
+    {
+        if (sm != null)
+            sm.PlaySFX("Boss_SwingSword_2_Sound_SE", transform);
+    }
+
+    public void BossAtkSound3()
+    {
+        if (sm != null)
+            sm.PlaySFX("Boss_SwingSword_3_Sound_SE", transform);
+    }
+
+    public void BossAtkSound4()
+    {
+        if (sm != null)
+            sm.PlaySFX("Boss_SwingSword_4_Sound_SE", transform);
     }
 }
