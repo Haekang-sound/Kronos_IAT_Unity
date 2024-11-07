@@ -29,10 +29,6 @@ public class PlazaManager : MonoBehaviour
         RegisterDestroyEvents();
         um = UIManager.Instance;
     }
-	private void Update()
-	{
-		Debug.Log(destroyedCount);
-	}
 	void RegisterDestroyEvents()
     {
         //lock1.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
