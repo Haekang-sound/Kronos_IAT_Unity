@@ -321,7 +321,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public void AbilityOpenSound()
     {
-		if (sm != null)
-			sm.PlaySFX("02 Ability_Open_Sound_SE", transform);
+		if (SoundManager.Instance != null)
+			SoundManager.Instance.PlaySFX("02 Ability_Open_Sound_SE", transform);
     }
 }
