@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class MouseLaoder : MonoBehaviour
 {
 	public bool isMousOn;
-    // Start is called before the first frame update
-    void Start()
+	public RenderObjects SkillRenderObj;
+	// Start is called before the first frame update
+	void Start()
     {
 		if (isMousOn)
 		{
@@ -20,7 +22,9 @@ public class MouseLaoder : MonoBehaviour
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
-		
+
+		if(SkillRenderObj != null)	SkillRenderObj.SetActive(false);
+
 	}
 
 }
