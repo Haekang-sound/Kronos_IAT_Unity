@@ -479,4 +479,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         if (sm != null)
             sm.PlaySFX("Boss_Walk_1_Sound_SE", transform);
     }
+
+    public void BossDown()
+    {
+        EffectManager.Instance.BossDown(transform);
+    }
 }
