@@ -141,9 +141,9 @@ public class EffectManager : MonoBehaviour
 		//    BossFireShoot(player.transform);
 		//if (Input.GetKeyDown(KeyCode.Alpha3))
 		//    BossFiveSpear(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha4))
-		//    BossMoon(player.transform);
-		if (Input.GetKeyDown(KeyCode.Alpha5))
+		if (Input.GetKeyDown(KeyCode.Alpha6))
+            StartCoroutine(BossEightBeamCoroutine(player.transform));
+        if (Input.GetKeyDown(KeyCode.Alpha5))
 			QASkill();
         //if (Input.GetKeyDown(KeyCode.Alpha5))
         //    CreateAbsorbFX(player.transform, 12);
@@ -627,8 +627,6 @@ public class EffectManager : MonoBehaviour
 
 		for (int i = 0; i < bossBeamDupeTime; i++)
 		{
-			soundManager.PlaySFX("Beam_SE", player.transform);
-
 			for (int j = 0; j < 8; j++)
 			{
 				GameObject beam = SpawnEffect("BossFX_1Beam", bossTrans.position);
@@ -636,8 +634,8 @@ public class EffectManager : MonoBehaviour
 
 				GameObject beamBase = beam.transform.GetChild(0).gameObject;
 				beamBase.transform.position += beamBase.transform.right * (bossBeamDistance * i);
-
-				Destroy(beam, 0.6f);
+                //soundManager.PlaySFX("Boss_Ground_Impact_Sound_SE", player.transform);
+                Destroy(beam, 0.6f);
 			}
 			yield return new WaitForSeconds(bossBeamTerm);
 		}
@@ -683,6 +681,7 @@ public class EffectManager : MonoBehaviour
 			moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
 			moon.transform.position += moon.transform.forward * bossMoonDistance;
 		}
+
 	}
 
 	// 집중선 켰다가 끄기

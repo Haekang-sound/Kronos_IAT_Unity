@@ -1,3 +1,4 @@
+using Sonity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class BossMoonSript : MonoBehaviour
 	public float colorDuration = 3.0f;
 	float count = 0;
 	Material mat;
+	SoundManager sm;
 
 	// 여기 넣어주면 좋지 않아? ㅎ
 	public GameObject gField;
@@ -40,6 +42,7 @@ public class BossMoonSript : MonoBehaviour
 		mat = blackHoleSphere.gameObject.GetComponent<Renderer>().material;
 
 		Invoke("MoonFall", 1.0f);
+		sm = SoundManager.Instance;
 		//Destroy(gameObject, 28.0f);
 	}
 
@@ -53,15 +56,19 @@ public class BossMoonSript : MonoBehaviour
 		else if (fall && transform.position.y <= -2f)
 		{
 			fall = false;
+			sm.PlaySFX("Boss_BlackHole_Drop_Sound_SE", transform);
 			gField.SetActive(true);
 			StartCoroutine(ChangeColorCoroutine(blackColor, blueColor));
-		}
+            sm.PlaySFX("Boss_BlackHole_Base_Sound_SE", transform);
+        }
 	}
 
 	public void CallBlast()
 	{
 		ImpulseCam.Instance.Shake(ImpulseCam.Instance.blackHoleStrength);
 		GameObject boom = EffectManager.Instance.SpawnEffect("BossFX_MoonBlast", transform.position);
+		
+        sm.PlaySFX("Boss_BlackHole_Bomb_Sound_SE", transform);
 		GameObject boomDamage = EffectManager.Instance.SpawnEffect("BossFX_GravityField_Damager", transform.position);
 		Destroy(boomDamage,0.5f);
 		Destroy(boom, 2.0f);
@@ -174,7 +181,7 @@ public class BossMoonSript : MonoBehaviour
 			//Debug.Log("enough counts");
 			yield return new WaitForSeconds(5.0f);
 			StartCoroutine(ChangeColorCoroutine(redColor, blackColor));
-			yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f);
 			CallBlast();
 		}
 	}

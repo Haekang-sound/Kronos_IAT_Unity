@@ -134,7 +134,7 @@ public class SoundManager : MonoBehaviour
             if (se.name == name)
             {
                 Debug.Log($"Found {se.name} in SfxList");
-                se.StopMusic(false);
+                se.StopMusic();
             }
         }
     }

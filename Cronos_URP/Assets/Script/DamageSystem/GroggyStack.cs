@@ -39,6 +39,7 @@ public class GroggyStack : MonoBehaviour
             OnMaxStack?.Invoke();
 			// 여기서 잠근다.
             _isGroggy = true;
+            SoundManager.Instance.PlaySFX("Boss_Groggy_Sound_SE", transform);
         }
     }
 
