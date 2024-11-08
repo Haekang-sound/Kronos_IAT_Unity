@@ -40,6 +40,7 @@ public partial class Damageable : MonoBehaviour
 	//EffectManager effectManager;
 	Player player;
 	ImpulseCam impCam;
+	UI_TPCPHUD uiHud;
 
 	private void Awake()
 	{
@@ -61,7 +62,7 @@ public partial class Damageable : MonoBehaviour
 		player = Player.Instance;
 		impCam = ImpulseCam.Instance;
 		soundManager = SoundManager.Instance;
-		//effectManager = EffectManager.Instance;
+		uiHud = UI_TPCPHUD.GetInstance();
 	}
 
 	void Update()
@@ -136,6 +137,12 @@ public partial class Damageable : MonoBehaviour
         if (gameObject.tag == "Respawn")
         {
             impCam.Shake(0.6f);
+        }
+
+		// TP red 팝업을 위한 조건문
+		if (gameObject.tag == "Player")
+		{
+			uiHud.ChangeRed();
         }
 
 		if (defensible)

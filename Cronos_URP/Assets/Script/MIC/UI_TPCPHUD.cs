@@ -96,11 +96,11 @@ public class UI_TPCPHUD : UI_TPCP
         //FxHolder.rotation = Quaternion.Euler(new Vector3(0, 0, TPprogress * 360f));
         //TpGlow.GetComponent<ParticleSystem>().transform.rotation = FxHolder.rotation;
 
-        if (Input.GetKeyDown(KeyCode.T))
-            ChangeGreen();
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    ChangeGreen();
 
-        if (Input.GetKeyDown(KeyCode.Y))
-            ChangeRed();
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //    ChangeRed();
 
 
         // 플레이어의 CP를 받아온다.
