@@ -634,6 +634,12 @@ public class EffectManager : MonoBehaviour
 
 	}
 
+	public void BossDown(Transform t)
+	{
+		GameObject down = SpawnEffect("DownSlash", t.position);
+		Destroy(down, 0.5f);
+	}
+
 	// 보스 8방향 빔
 	public IEnumerator BossEightBeamCoroutine(Transform bossTrans)
 	{
