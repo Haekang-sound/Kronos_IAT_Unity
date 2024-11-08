@@ -156,7 +156,8 @@ public partial class Damageable : MonoBehaviour
 
 		// 죽든 살든 맞는 소리는 나와야 하니까
 		if (gameObject.tag != "Player")
-			soundManager.PlaySFX("Hit_Metal_SE", transform);
+			//soundManager.PlaySFX("Hit_Metal_SE", transform);
+			soundManager.PlaySFX("Enemy_Slash_SE", transform);
 
 		if (currentHitPoints <= 0)
 		{

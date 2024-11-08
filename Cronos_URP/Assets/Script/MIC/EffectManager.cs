@@ -408,9 +408,9 @@ public class EffectManager : MonoBehaviour
 	{
 		GameObject slash = SpawnEffect("BossSlash", trans.position);
 		slash.transform.rotation = trans.gameObject.GetComponent<BossBehavior>().
-			impactDamager.transform.rotation * Quaternion.Euler(bossMagicOffset);
+			bossSword.transform.rotation * Quaternion.Euler(bossMagicOffset);
 		float newY = trans.gameObject.GetComponent<BossBehavior>().
-			impactDamager.transform.position.y;
+            bossSword.transform.position.y;
 		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
 		Destroy(slash, 0.7f);
 	}
