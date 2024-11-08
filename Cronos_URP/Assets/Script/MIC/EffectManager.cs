@@ -62,6 +62,7 @@ public class EffectManager : MonoBehaviour
 	// 캐릭터 평타 각도를 맞추기 위해서
 	Vector3 swordMagicOffest = new Vector3(90, 180, 0);
 	Vector3 enemyMagicOffset = new Vector3(0, 90, 0);
+	Vector3 bossMagicOffset = new Vector3(0, 90, 70);
 
 	// 강화 검기 관련
 	public bool isSwordWave;
@@ -402,6 +403,18 @@ public class EffectManager : MonoBehaviour
 		Destroy(slash, 0.7f);
 	}
 
+	// 보스 슬래시가 없더라
+	public void BossSlash(Transform trans)
+	{
+		GameObject slash = SpawnEffect("BossSlash", trans.position);
+		slash.transform.rotation = trans.gameObject.GetComponent<BossBehavior>().
+			impactDamager.transform.rotation * Quaternion.Euler(bossMagicOffset);
+		float newY = trans.gameObject.GetComponent<BossBehavior>().
+			impactDamager.transform.position.y;
+		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
+		Destroy(slash, 0.7f);
+	}
+
 	// 적 근접 돌진공격
 	public void EnemyCharge(Transform enemy)
 	{
@@ -579,6 +592,7 @@ public class EffectManager : MonoBehaviour
 	{
 		Vector3 newPos = new Vector3(player.transform.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, player.transform.position.z);
 		GameObject pHit = SpawnEffect("Eff_Player_Damage", newPos);
+		soundManager.PlaySFX("Hit_SE", player.transform);
 		pHit.transform.position += new Vector3(0, 1, 0);
 		pHit.transform.forward = dmgMsg.direction;
 		Destroy(pHit, 1.0f);

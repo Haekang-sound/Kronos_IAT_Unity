@@ -468,5 +468,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         gameObject.GetComponent<BossChargeAimer>().OffAim();
     }
 
-    
+    public void BossAtk()
+    {
+        EffectManager.Instance.BossSlash(transform);
+    }
 }
