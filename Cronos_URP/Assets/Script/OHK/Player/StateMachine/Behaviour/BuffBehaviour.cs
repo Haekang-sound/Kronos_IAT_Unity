@@ -10,6 +10,7 @@ public class BuffBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		Player.Instance.isBuff = true;
+		Player.Instance.IsEnforced = true;
 		EffectManager.Instance.SwordAuraOn();
 
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerBuffState(PlayerStateMachine.GetInstance()));
