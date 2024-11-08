@@ -31,26 +31,20 @@ public class SaveLoadManager : MonoBehaviour
     {
         get
         {
-            if (instance != null)
-                return instance;
-            instance = FindObjectOfType<SaveLoadManager>();
-            if (instance != null)
-                return instance;
-
-            Create();
-            return instance;
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SaveLoadManager>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("SaveLoadManager");
+                    _instance = go.AddComponent<SaveLoadManager>();
+                }
+            }
+            return _instance;
         }
     }
 
-    protected static SaveLoadManager instance;
-
-    public static SaveLoadManager Create()
-    {
-        GameObject dataManagerGameObject = new GameObject("PersistentDataManager");
-        DontDestroyOnLoad(dataManagerGameObject);
-        instance = dataManagerGameObject.AddComponent<SaveLoadManager>();
-        return instance;
-    }
+    protected static SaveLoadManager _instance;
 
     // -----
 
@@ -100,6 +94,14 @@ public class SaveLoadManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         _abilityTree = FindObjectOfType<AbilityTree>();
     }
 }

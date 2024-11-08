@@ -365,20 +365,15 @@ public class Player : MonoBehaviour, IMessageReceiver
 			buffTimer = 0f;
 		}
 
+		CurrentState = PlayerFSM.GetState().GetType().Name;
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime)
+		if (buffTimer > buffTime && CurrentState == "PlayerMoveState")
 		{
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
-			//PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isEnforced, false);
-			// 			if (CurrentState == "PlayerMoveState")
-			// 			{
 			effectManager.SwordAuraOff();
-
-			//			}
 		}
 
-		CurrentState = PlayerFSM.GetState().GetType().Name;
 
 
 		// �ǽð����� TP ����
