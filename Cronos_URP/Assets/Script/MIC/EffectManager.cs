@@ -520,6 +520,13 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
+	public void BossScar(Transform trans)
+	{
+        GameObject impact = SpawnEffect("BossGrounder", trans.position - new Vector3(0, 0.7f, 0));
+        soundManager.PlaySFX("Ground_Impact_2_Sound_SE", transform);
+		Destroy(impact, 1.5f);
+    }
+
 	// 검기 날리기
 	public void SwordWave()
 	{
@@ -665,6 +672,7 @@ public class EffectManager : MonoBehaviour
 	public void BossFireShoot(Transform bosstrans)
 	{
 		GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
+		soundManager.PlaySFX("Boss_Flame_Sound_SE", bosstrans);
 		fire.transform.forward = bosstrans.transform.forward;
 		fire.transform.position += new Vector3(0, 1.0f, 0);
 	}
