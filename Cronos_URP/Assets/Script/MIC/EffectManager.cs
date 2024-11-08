@@ -143,14 +143,14 @@ public class EffectManager : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.Alpha3))
 		//    BossFiveSpear(player.transform);
 		if (Input.GetKeyDown(KeyCode.Alpha6))
-            StartCoroutine(BossEightBeamCoroutine(player.transform));
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+			StartCoroutine(BossEightBeamCoroutine(player.transform));
+		if (Input.GetKeyDown(KeyCode.Alpha5))
 			QASkill();
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //    CreateAbsorbFX(player.transform, 12);
-        //         if (Input.GetKeyDown(KeyCode.Alpha6))
-        //             SpeedLine();
-    }
+		//if (Input.GetKeyDown(KeyCode.Alpha5))
+		//    CreateAbsorbFX(player.transform, 12);
+		//         if (Input.GetKeyDown(KeyCode.Alpha6))
+		//             SpeedLine();
+	}
 
 	private void OnValidate()
 	{
@@ -357,11 +357,11 @@ public class EffectManager : MonoBehaviour
 	{
 		swordAura.SetActive(true);
 		//soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
-        //soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
+		//soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
 
-    }
+	}
 
-    public void SwordAuraOff()
+	public void SwordAuraOff()
 	{
 		swordAura.SetActive(false);
 	}
@@ -410,7 +410,7 @@ public class EffectManager : MonoBehaviour
 		slash.transform.rotation = trans.gameObject.GetComponent<BossBehavior>().
 			bossSword.transform.rotation * Quaternion.Euler(bossMagicOffset);
 		float newY = trans.gameObject.GetComponent<BossBehavior>().
-            bossSword.transform.position.y;
+			bossSword.transform.position.y;
 		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
 		Destroy(slash, 0.7f);
 	}
@@ -522,10 +522,10 @@ public class EffectManager : MonoBehaviour
 
 	public void BossScar(Transform trans)
 	{
-        GameObject impact = SpawnEffect("BossGrounder", trans.position - new Vector3(0, 0.7f, 0));
-        soundManager.PlaySFX("Ground_Impact_2_Sound_SE", transform);
+		GameObject impact = SpawnEffect("BossGrounder", trans.position - new Vector3(0, 0.7f, 0));
+		soundManager.PlaySFX("Ground_Impact_2_Sound_SE", transform);
 		Destroy(impact, 1.5f);
-    }
+	}
 
 	// 검기 날리기
 	public void SwordWave()
@@ -594,6 +594,27 @@ public class EffectManager : MonoBehaviour
 		Destroy(slashed, 1.0f);
 	}
 
+	public void CreateHitFX(Damageable.DamageMessage dmgMsg, Transform targetTrans, bool isSpawner)
+	{
+		// 파편만들기
+		GameObject frag = SpawnEffect("FragFX", targetTrans.position);
+		frag.transform.LookAt(dmgMsg.damageSource);
+		frag.transform.Rotate(-15f, 0, 0);
+		Destroy(frag, 2.0f);
+
+		if (!isSpawner)
+			CreateAbsorbFX(targetTrans, dmgMsg.amount);
+
+		// 피격이펙트
+		Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
+		GameObject slashed = SpawnEffect("Nor_Damage", newPos);
+		slashed.transform.forward = Camera.main.transform.forward;
+		slashed.transform.position += new Vector3(0, 1, 0);
+		slashed.transform.rotation = player.playerSword.transform.rotation *
+			Quaternion.Euler(new Vector3(90f, 0, 0));
+		Destroy(slashed, 1.0f);
+	}
+
 	// 플레이어가 맞을 때 나오는 이펙트
 	public void PlayerHitFX(Damageable.DamageMessage dmgMsg)
 	{
@@ -614,18 +635,18 @@ public class EffectManager : MonoBehaviour
 
 	public void CreateGuardFX()
 	{
-        soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
+		soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
 
-        Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
+		Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
 		GameObject grd = SpawnEffect("GuardFX", grdPos);
 		Destroy(grd, 1.0f);
 	}
 
 	public void CreateParryFX()
 	{
-        //soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
+		//soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
 
-        soundManager.PlaySFX("Parry_Sound_SE", player.transform);
+		soundManager.PlaySFX("Parry_Sound_SE", player.transform);
 		Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
 		GameObject parr = SpawnEffect("GuardFlare", parrPos);
 		StartCoroutine(FadeOutLightsCoroutine(parr));
@@ -661,8 +682,8 @@ public class EffectManager : MonoBehaviour
 
 				GameObject beamBase = beam.transform.GetChild(0).gameObject;
 				beamBase.transform.position += beamBase.transform.right * (bossBeamDistance * i);
-                //soundManager.PlaySFX("Boss_Ground_Impact_Sound_SE", player.transform);
-                Destroy(beam, 0.6f);
+				//soundManager.PlaySFX("Boss_Ground_Impact_Sound_SE", player.transform);
+				Destroy(beam, 0.6f);
 			}
 			yield return new WaitForSeconds(bossBeamTerm);
 		}
