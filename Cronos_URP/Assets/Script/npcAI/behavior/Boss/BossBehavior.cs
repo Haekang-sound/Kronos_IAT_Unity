@@ -45,7 +45,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private bool _onPhaseTree;
 
     private Blackboard _blackboard;
-    private readonly float _rotationSpeed = 8f;
+    private readonly float _rotationSpeed = 18f;
+    SoundManager sm;
 
 
     void Awake()
@@ -69,9 +70,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             target = Player.Instance.gameObject;
     }
 
-    //void Start()
-    //{
-    //}
 
     void OnEnable()
     {
@@ -103,6 +101,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     void Start()
     {
+        sm = SoundManager.Instance;
         BulletTime.Instance.OnActive.AddListener(InvalidateBulletTime);
         BulletTime.Instance.OnNormalrize.AddListener(() => _bulletTimeScalable.SetActive(true));
     }
@@ -468,4 +467,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         gameObject.GetComponent<BossChargeAimer>().OffAim();
     }
+
+    
 }

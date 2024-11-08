@@ -258,5 +258,31 @@ public partial class Damageable : MonoBehaviour
 			Gizmos.DrawSphere(drawPos, 0.5f);
 		}
 	}
+
+    /// 기획에 전달할 보스 공격 사운드 함수 
+	/// 여기 넣으면 보스말고 일반 몹에서도 부를 수 있지 않을까
+    public void BossAtkSound1()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Boss_SwingSword_1_Sound_SE", transform);
+    }
+
+    public void BossAtkSound2()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Boss_SwingSword_2_Sound_SE", transform);
+    }
+
+    public void BossAtkSound3()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Boss_SwingSword_3_Sound_SE", transform);
+    }
+
+    public void BossAtkSound4()
+    {
+        if (soundManager != null)
+            soundManager.PlaySFX("Boss_SwingSword_4_Sound_SE", transform);
+    }
 #endif
 }
