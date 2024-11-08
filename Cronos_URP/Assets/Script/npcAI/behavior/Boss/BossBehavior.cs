@@ -46,7 +46,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private bool _onPhaseTree;
 
     private Blackboard _blackboard;
-    private readonly float _rotationSpeed = 18f;
+
+    private readonly float _rotationSpeed = 8f;
+
     SoundManager sm;
     public GameObject bossSword;
 
