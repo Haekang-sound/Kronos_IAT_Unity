@@ -1,4 +1,5 @@
 using Message;
+using Sonity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -483,5 +484,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BossDown()
     {
         EffectManager.Instance.BossDown(bossSword.transform);
+        EffectManager.Instance.BossScar(bossSword.transform);
     }
+
 }
