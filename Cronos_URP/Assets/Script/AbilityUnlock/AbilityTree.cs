@@ -179,9 +179,9 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 				//{
 				// Ȯ�� ��ư�� ������ �� ������ ����
 				// 사운드?
-				//AbilityOpenSound();
+				AbilityOpenSound();
 
-                _lastPressed.SetState(AbilityNode.State.Activate);
+				_lastPressed.SetState(AbilityNode.State.Activate);
                 abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
                 //});
                 _nodedetailEffector.StartFadeOut(1.5f);
@@ -321,6 +321,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
     public void AbilityOpenSound()
     {
-        sm.PlaySFX("02 Ability_Open_Sound_SE", transform);
+		if (sm != null)
+			sm.PlaySFX("02 Ability_Open_Sound_SE", transform);
     }
 }
