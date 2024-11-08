@@ -939,7 +939,6 @@ GameObject:
   - component: {fileID: 6087797847802644465}
   - component: {fileID: 1679491459091059707}
   - component: {fileID: 6573591889997010919}
-  - component: {fileID: 2256032226258395242}
   - component: {fileID: 9142316877881510784}
   m_Layer: 5
   m_Name: PlayButton
@@ -1062,7 +1061,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2256032226258395242}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SaveLoadManager, Assembly-CSharp
         m_MethodName: DeleteDataAll
         m_Mode: 1
@@ -1086,19 +1085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782d361d84f032a4e8e839369e20b517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2256032226258395242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237691483466986283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ca2ee73fc6b4b48aa8ca4ef79f9ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentCheckpoint: {fileID: 0}
 --- !u!114 &9142316877881510784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,7 +1120,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-          m_MethodName: ButtonClick
+          m_MethodName: StartButtonSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
