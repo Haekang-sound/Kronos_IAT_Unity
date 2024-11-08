@@ -47,6 +47,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private Blackboard _blackboard;
     private readonly float _rotationSpeed = 18f;
     SoundManager sm;
+    public GameObject bossSword;
 
 
     void Awake()
@@ -471,5 +472,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void BossAtk()
     {
         EffectManager.Instance.BossSlash(transform);
+    }
+
+    public void BossFoot()
+    {
+        if (sm != null)
+            sm.PlaySFX("Boss_Walk_1_Sound_SE", transform);
     }
 }
