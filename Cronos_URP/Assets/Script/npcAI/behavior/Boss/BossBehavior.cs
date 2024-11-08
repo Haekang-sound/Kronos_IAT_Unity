@@ -482,6 +482,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BossDown()
     {
-        EffectManager.Instance.BossDown(transform);
+        EffectManager.Instance.BossDown(bossSword.transform);
     }
 }
