@@ -62,7 +62,7 @@ public partial class Damageable : MonoBehaviour
 		player = Player.Instance;
 		impCam = ImpulseCam.Instance;
 		soundManager = SoundManager.Instance;
-		uiHud = UI_TPCPHUD.GetInstance();
+		uiHud = UI_TPCPHUD.Instance;
 	}
 
 	void Update()
@@ -139,13 +139,14 @@ public partial class Damageable : MonoBehaviour
             impCam.Shake(0.6f);
         }
 
-		// TP red 팝업을 위한 조건문
-		if (gameObject.tag == "Player")
-		{
-			uiHud.ChangeRed();
+        //TP red 팝업을 위한 조건문
+
+        if (gameObject.tag == "Player")
+        {
+            uiHud.ChangeRed();
         }
 
-		if (defensible)
+        if (defensible)
 		{
 			defensible.ApplyDamage(ref data);
 		}

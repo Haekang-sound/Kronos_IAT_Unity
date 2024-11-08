@@ -8,7 +8,26 @@ public class UI_TPCPHUD : UI_TPCP
 {
     // ΩÃ±€∫°±€≈œ
     static UI_TPCPHUD instance;
-    public static UI_TPCPHUD GetInstance() { return instance; }
+
+    public static UI_TPCPHUD Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<UI_TPCPHUD>();
+                if (instance == null)
+                {
+                    GameObject hud = new GameObject(typeof(UI_TPCPHUD).Name);
+                    instance = hud.AddComponent<UI_TPCPHUD>();
+
+                    DontDestroyOnLoad(hud);
+                }
+            }
+            return instance;
+        }
+    }
+
 
     [SerializeField]
     TextMeshProUGUI textTP;

@@ -688,9 +688,9 @@ public class EffectManager : MonoBehaviour
 	// 집중선 켰다가 끄기
 	IEnumerator SpeedLineCoroutine()
 	{
-		UI_TPCPHUD.GetInstance().speedLineUI.SetActive(true);
+		UI_TPCPHUD.Instance.speedLineUI.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
-		UI_TPCPHUD.GetInstance().speedLineUI.SetActive(false);
+		UI_TPCPHUD.Instance.speedLineUI.SetActive(false);
 	}
 
 	public void SpeedLine()
