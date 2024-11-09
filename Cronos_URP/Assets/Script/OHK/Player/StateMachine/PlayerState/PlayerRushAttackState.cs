@@ -32,6 +32,7 @@ public class PlayerRushAttackState : PlayerBaseState
 	public override void Tick()
 	{
 		stateMachine.AutoTargetting.AutoTargeting();
+
 		if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
 			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
@@ -41,9 +42,11 @@ public class PlayerRushAttackState : PlayerBaseState
 			CalculateMoveDirection();   // 방향을 계산하고
 		}
 
+
 		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
-		if (stateMachine.AutoTargetting.GetTarget() != null)
+		if (Time.deltaTime == 0f) return;
+		else if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
 			Debug.Log((TargetPosition - stateMachine.transform.position).magnitude);
 			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.

@@ -40,7 +40,8 @@ public class PlayerDodgeAttackState : PlayerBaseState
 		CalculateMoveDirection();   // 방향을 계산하고
 
 		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
-		if (stateMachine.AutoTargetting.GetTarget() != null)
+		if (Time.deltaTime == 0f) return;
+		else if (stateMachine.AutoTargetting.GetTarget() != null)
 		{
 			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
 			if ((TargetPosition - stateMachine.transform.position).magnitude > 1f)
