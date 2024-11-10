@@ -739,6 +739,7 @@ public class EffectManager : MonoBehaviour
 
 	public void BossMoonFixedPosition()
 	{
+		if (bossMoontarget == null) return;
 		List<int> moonNums = new List<int>();
 		moonNums = FisherYatesShuffles(8, 5);
 		Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
