@@ -371,6 +371,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			isEnforced = false;
 			effectManager.SwordAuraOff();
 		}
 

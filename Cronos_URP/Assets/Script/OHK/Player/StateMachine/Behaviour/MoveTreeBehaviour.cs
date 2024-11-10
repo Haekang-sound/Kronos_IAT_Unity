@@ -22,6 +22,7 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		
 		if(!Player.Instance.isBuff)
 		{
+			Player.Instance.IsEnforced = false;
 			EffectManager.Instance.SwordAuraOff();
 		}
 
