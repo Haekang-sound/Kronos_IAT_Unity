@@ -17,6 +17,8 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
 		stateMachine.AutoTargetting.Target = null;
 		animator.ResetTrigger(PlayerHashSet.Instance.Dodge);
+		animator.ResetTrigger(PlayerHashSet.Instance.Respawn);
+		animator.ResetTrigger(PlayerHashSet.Instance.Death);
 		
 		if(!Player.Instance.isBuff)
 		{
