@@ -87,6 +87,8 @@ public class EffectManager : MonoBehaviour
 
 	public float bossMoonHeight = 4.0f;
 	public float bossMoonDistance = 5.0f;
+	public Vector3 bossMoonScale;
+	public Transform bossMoontarget;
 
 	// 사용할 이펙트 리스트
 	static List<GameObject> effects = new List<GameObject>();
@@ -146,6 +148,8 @@ public class EffectManager : MonoBehaviour
 			StartCoroutine(BossEightBeamCoroutine(player.transform));
 		if (Input.GetKeyDown(KeyCode.Alpha5))
 			QASkill();
+		if (Input.GetKeyDown(KeyCode.Alpha7))
+			BossMoonFixedPosition();
 		//if (Input.GetKeyDown(KeyCode.Alpha5))
 		//    CreateAbsorbFX(player.transform, 12);
 		//         if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -732,6 +736,24 @@ public class EffectManager : MonoBehaviour
 		}
 
 	}
+
+	public void BossMoonFixedPosition()
+	{
+		List<int> moonNums = new List<int>();
+		moonNums = FisherYatesShuffles(8, 5);
+		Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
+		Vector3 newPos = bossMoontarget.TransformPoint(newOffset);
+
+		for (int i = 0; i < moonNums.Count; i++)
+		{
+			GameObject moon = SpawnEffect("BossFX_BlackHole", newPos);
+			moon.transform.Rotate(0, 45.0f * moonNums[i], 0);
+			moon.transform.position += moon.transform.forward * bossMoonDistance;
+			moon.transform.localScale += bossMoonScale;
+		}
+
+	}
+
 
 	// 집중선 켰다가 끄기
 	IEnumerator SpeedLineCoroutine()

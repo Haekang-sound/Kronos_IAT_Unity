@@ -174,7 +174,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BossMoon()
     {
-        _effectManager?.BossMoon(transform);
+        //_effectManager?.BossMoon(transform);
+		_effectManager?.BossMoonFixedPosition();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
