@@ -38,8 +38,8 @@ public class TitleScene : MonoBehaviour
 
     public void Credit()
     {
-
-    }
+		SceneManager.LoadScene("5_Ending");
+	}
 
     public void ExitGame()
     {
