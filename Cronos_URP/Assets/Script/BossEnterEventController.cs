@@ -25,11 +25,11 @@ public class BossEnterEventController : MonoBehaviour
         }
     }
 
-    private void Skip()
+    public void Skip()
     {
         if (_sceneSkipped == false)
         {
-            _playerbleDirector.time = 11f;
+            _playerbleDirector.time = 41f;
             _sceneSkipped = true;
         }
     }
