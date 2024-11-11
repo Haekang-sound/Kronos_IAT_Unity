@@ -99,6 +99,7 @@ public class PauseManager : MonoBehaviour
     public void PausePlayer()
     {
         //PlayerStateMachine.GetInstance().isPaused = true;
+		Player.Instance.isDecreaseTP = false;
         GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
 
         playerInput?.SwitchCurrentActionMap("CutScene");
@@ -110,7 +111,8 @@ public class PauseManager : MonoBehaviour
 
     public void UnPausePlayer()
     {
-        playerInput?.SwitchCurrentActionMap("Player");
+		Player.Instance.isDecreaseTP = true;
+		playerInput?.SwitchCurrentActionMap("Player");
         if (player != null)
         {
             player.gameObject.GetComponent<InputReader>().enabled = true;
