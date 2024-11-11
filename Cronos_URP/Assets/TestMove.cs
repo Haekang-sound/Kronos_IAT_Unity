@@ -13,9 +13,9 @@ public class TestMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.H))
-		{
-			transform.position += transform.forward * 5f;
-		}
+// 		if (Input.GetKeyDown(KeyCode.H))
+// 		{
+// 			transform.position += transform.forward * 5f;
+// 		}
 	}
 }
