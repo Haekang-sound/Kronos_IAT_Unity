@@ -505,4 +505,12 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             sm.PlaySFX("Player_ComboChange_Sound_SE", transform);
         }
     }
+
+    public void BossDodge()
+    {
+        if (sm != null)
+        {
+            sm.PlaySFX("Player_Dodge_Sound_SE", transform);
+        }
+    }
 }
