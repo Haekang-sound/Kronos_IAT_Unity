@@ -158,4 +158,14 @@ public class SoundManager : MonoBehaviour
     {
         PlaySFX("UI_GameStart_Button_Sound_SE", transform);
     }
+
+	public void BossIntro()
+	{
+		PlayBGM("Vitus_intro_MP_SE");
+	}
+
+	public void BossLoop()
+	{
+		PlayBGM("chronos_boss_loop_SE");
+	}
 }
