@@ -15,7 +15,8 @@ public class PlayerDodgeState : PlayerBaseState
 	}
 	public override void Tick()
 	{
-		if (stateMachine.Velocity.magnitude != 0f)
+		if (Time.deltaTime == 0f) return;
+		else if(stateMachine.Velocity.magnitude != 0f)
 		{
 			stateMachine.Rigidbody.velocity = AdjustDirectionToSlope(stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce;
 		}

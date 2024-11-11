@@ -52,6 +52,7 @@ public class LastEnforcedCombo : StateMachineBehaviour
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		Player.Instance.isBuff = false;
+		Player.Instance.IsEnforced = false;
 		EffectManager.Instance.SwordAuraOff();
 		Player.Instance.buffTimer = 0f;
 

@@ -17,7 +17,18 @@ public abstract class PlayerBaseState : State
 		this.stateMachine = stateMachine;
 		slopeData = stateMachine.Player.CapsuleColldierUtility.SlopeData;
 	}
-
+	
+	// 벨로시티가 잘못되면 리턴
+	protected bool WrongVelocity()
+	{
+		if (!float.IsNaN(stateMachine.Animator.deltaPosition.x )
+		&& !float.IsNaN(stateMachine.Animator.deltaPosition.y)
+		&& !float.IsNaN((stateMachine.Animator.deltaPosition.z)))
+		{
+			return false;	
+		}
+		return true;
+	}
 
 
 	/// <summary>
@@ -26,6 +37,9 @@ public abstract class PlayerBaseState : State
 	/// </summary>
 	protected void CalculateMoveDirection()
 	{
+		if (stateMachine.InputReader == null)
+			return;
+
 		// 스테이트 머신에 들어있는 카메라 정보를 기반으로
 		// 카메라의 전방, 좌우 벡터를 저장한다.
 		Vector3 cameraForward = new(stateMachine.MainCamera.forward.x, 0, stateMachine.MainCamera.forward.z);
@@ -81,49 +95,20 @@ public abstract class PlayerBaseState : State
 	/// </summary>
 	protected void Move()
 	{
-
-// 		bool isOnSlope = IsOnSlope();
-// 		if (isOnSlope)
-// 		{
-// 			stateMachine.Rigidbody.useGravity = false;
-// 		}
-// 		else
-// 		{
-// 			stateMachine.Rigidbody.useGravity = true;
-// 		}
-		Vector3 velocity = /*isOnSlope ? AdjustDirectionToSlope(stateMachine.Velocity) :*/ stateMachine.Velocity;//.normalized;
-		Vector3 gravity = /*isOnSlope ? Vector3.zero :*/ Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+		Vector3 velocity = stateMachine.Velocity;
+		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
 
 		stateMachine.Rigidbody.velocity = velocity * Time.fixedDeltaTime * stateMachine.Player.moveSpeed
 			 * stateMachine.Animator.speed + gravity;
-
-		// 		stateMachine.Rigidbody.velocity = /*velocity*/ AdjustKeyDirectionToSlope(stateMachine.Animator.deltaPosition)/** Time.fixedDeltaTime * stateMachine.Player.moveSpeed*/
-		// 	  * stateMachine.Animator.speed + gravity;
-
 		Float();
-
 	}
 
 	protected void Move(Vector3 moveVector)
 	{
+		Vector3 velocity = moveVector;
+		Vector3 gravity = Vector3.down * 9.81f;
 
-// 		bool isOnSlope = IsOnSlope();
-// 		if (isOnSlope)
-// 		{
-// 			stateMachine.Rigidbody.useGravity = false;
-// 		}
-// 		else
-// 		{
-// 			stateMachine.Rigidbody.useGravity = true;
-// 		}
-		Vector3 velocity = moveVector;// AdjustKeyDirectionToSlope( moveVector);
-		Vector3 gravity = /*isOnSlope ? Vector3.zero : */Vector3.down * /*Mathf.Abs(stateMachine.Rigidbody.velocity.y)*/9.81f;
-
-		//stateMachine.Rigidbody.velocity = new Vector3(10, 0, 0);
-		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition + gravity; ;//velocity;// * stateMachine.Animator.speed ;// * Time.fixedDeltaTime
-// 		Debug.Log(stateMachine.Rigidbody.velocity);
-		/** stateMachine.Animator.speed + gravity;*/
-
+		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition + gravity; ;
 		Float();
 
 	}

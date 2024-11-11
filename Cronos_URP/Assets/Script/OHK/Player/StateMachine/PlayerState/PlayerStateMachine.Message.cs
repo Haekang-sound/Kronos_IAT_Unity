@@ -57,6 +57,8 @@ public class PlayerHashSet
 		damagedB = Animator.StringToHash("damagedB");
 		combAttack = Animator.StringToHash("combAttack");
 		down = Animator.StringToHash("down");
+		Death = Animator.StringToHash("Death");
+		Respawn = Animator.StringToHash("Respawn");
 
 		MoveSpeed = Animator.StringToHash("MoveSpeed");
 		SideWalk = Animator.StringToHash("SideWalk");
@@ -105,6 +107,8 @@ public class PlayerHashSet
 	public int damagedB { get; set; }
 	public int combAttack { get; set; }
 	public int down { get; set; }
+	public int Death { get; set; }
+	public int Respawn { get; set; }
 	/// Value
 	public int MoveSpeed { get; set; }
 	public int SideWalk { get; set; }

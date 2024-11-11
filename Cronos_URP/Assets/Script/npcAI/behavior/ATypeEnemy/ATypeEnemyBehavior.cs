@@ -26,6 +26,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     [HideInInspector]
     public bool inAttack;
+    public bool isSpawner;
 
     public EnemyController Controller { get { return _controller; } }
 
@@ -71,11 +72,11 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         OnDown.AddListener(TriggerDown);
         sm = SoundManager.Instance;
-		_damageable.OnDeath.AddListener(Dead);
-	}
+        _damageable.OnDeath.AddListener(Dead);
+    }
 
 
-	void OnEnable()
+    void OnEnable()
     {
         SceneLinkedSMB<ATypeEnemyBehavior>.Initialise(_controller.animator, this);
 
@@ -187,13 +188,13 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         switch (type)
         {
             case MessageType.DAMAGED:
-                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
+                EffectManager.Instance.CreateHitFX(dmgMsg, transform, isSpawner);
                 Damaged(dmgMsg);
                 break;
             case MessageType.DEAD:
-                EffectManager.Instance.CreateHitFX(dmgMsg, transform);
-				Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
-				//Dead();
+                EffectManager.Instance.CreateHitFX(dmgMsg, transform, isSpawner);
+                Player.Instance.ChargeCP(dmgMsg.isActiveSkill);
+                //Dead();
                 break;
             case MessageType.RESPAWN:
                 break;
@@ -226,13 +227,17 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void Damaged(Damageable.DamageMessage msg)
     {
-        if (inAttack && msg.comboType == Damageable.ComboType.UninterruptibleCombo) 
-            return;
+
+        if (isSpawner != true)
+        {
+            if (inAttack && msg.comboType == Damageable.ComboType.UninterruptibleCombo)
+                return;
+        }
 
         Player.Instance.ChargeCP(msg.isActiveSkill);
         UnuseBulletTimeScale();
         TriggerDamage(msg.damageType);
-        if(_hitShake)
+        if (_hitShake)
             _hitShake.Begin();
 
         _knockBack?.Begin(msg.damageSource);

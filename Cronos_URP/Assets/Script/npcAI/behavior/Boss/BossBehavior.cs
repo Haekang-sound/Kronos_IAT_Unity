@@ -46,7 +46,9 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     private bool _onPhaseTree;
 
     private Blackboard _blackboard;
-    private readonly float _rotationSpeed = 18f;
+
+    private readonly float _rotationSpeed = 8f;
+
     SoundManager sm;
     public GameObject bossSword;
 
@@ -172,7 +174,8 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BossMoon()
     {
-        _effectManager?.BossMoon(transform);
+        //_effectManager?.BossMoon(transform);
+		_effectManager?.BossMoonFixedPosition();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -337,12 +340,12 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             StartCoroutine(ChangePhaseAfterDelay(phaseOne, 1.25f));
             _onPhaseOne = true;
         }
-        else if (_onPhaseTwo == false && currentHP > 30f)
+        else if (_onPhaseOne && currentHP > 30f)
         {
             StartCoroutine(ChangePhaseAfterDelay(phaseTwo, 1.25f));
             _onPhaseTwo = true;
         }
-        else //if (_onPhaseTree == false && currentHP <= 30f)
+        else if (_onPhaseTwo && currentHP <= 30f)
         {
             StartCoroutine(ChangePhaseAfterDelay(phaseTree, 1.25f));
             _onPhaseTree = true;

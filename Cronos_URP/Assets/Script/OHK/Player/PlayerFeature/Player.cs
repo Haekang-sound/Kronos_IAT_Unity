@@ -371,6 +371,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			isEnforced = false;
 			effectManager.SwordAuraOff();
 		}
 
@@ -424,6 +425,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 					Damageable.DamageMessage damageData = (Damageable.DamageMessage)data;
 					effectManager.PlayerHitFX(damageData);
 					PlayerFSM.InputReader.enabled = false;
+					PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.Death);
 					//Death(/*damageData*/);
 				}
 				break;
@@ -574,6 +576,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		yield return new WaitForSecondsRealtime(3);
 		ScreenFader.SetAlpha(0f);
 		PlayerFSM.InputReader.enabled = true;
+		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.Respawn);
 		isDeath = false;
 		//yield return SaveLoadManager.Instance.StartCoroutine(ScreenFader.FadeSceneIn(FadeType.Black));
 		//while (ScreenFader.IsFading)

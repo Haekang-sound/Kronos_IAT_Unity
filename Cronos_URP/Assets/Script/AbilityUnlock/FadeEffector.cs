@@ -62,4 +62,18 @@ public class FadeEffector : MonoBehaviour
     {
         return Fade(fadeDuration, 0f);
     }
+
+    private IEnumerator ForBossSpecialEvent()
+    {
+        yield return FadeIn(2);
+
+        yield return new WaitForSeconds(3);
+
+        yield return FadeOut(2);
+    }
+
+    public void StartForBossSpecialEvent()
+    {
+        StartCoroutine(ForBossSpecialEvent());
+    }
 }

@@ -6,6 +6,7 @@ public class Back2Normal : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		Player.Instance.isBuff = false;
+		Player.Instance.IsEnforced = false;
 		EffectManager.Instance.SwordAuraOff();
 	}
 
