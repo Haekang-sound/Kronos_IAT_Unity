@@ -117,4 +117,10 @@ public class BossLightRushCloneBehavior : MonoBehaviour
     {
         gameObject.GetComponent<BossChargeAimer>().OffAim();
     }
+
+    public void BossCharge()
+    {
+        SoundManager.Instance.PlaySFX("Boss_SwingSword_3_Sound_SE", transform);
+    }
 }
+

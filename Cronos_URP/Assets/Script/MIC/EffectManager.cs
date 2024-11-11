@@ -89,6 +89,7 @@ public class EffectManager : MonoBehaviour
 	public float bossMoonDistance = 5.0f;
 	public Vector3 bossMoonScale;
 	public Transform bossMoontarget;
+	Vector3 bossFireOffset = new Vector3(0, 0, 3.0f);
 
 	// 사용할 이펙트 리스트
 	static List<GameObject> effects = new List<GameObject>();
@@ -134,27 +135,27 @@ public class EffectManager : MonoBehaviour
 	// 기획 쪽에서 조정이 끝나면 별도로 구현한다
 	void Update()
 	{
-		//swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
-		//swordWaveDistance = enforceSlashSpeed * 2f / 5f;
+        //swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
+        //swordWaveDistance = enforceSlashSpeed * 2f / 5f;
 
-		//보스 이펙트 데모로 나오게
-		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-		//if (Input.GetKeyDown(KeyCode.Alpha2))
-		//    BossFireShoot(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha3))
-		//    BossFiveSpear(player.transform);
-		if (Input.GetKeyDown(KeyCode.Alpha6))
-			StartCoroutine(BossEightBeamCoroutine(player.transform));
-		if (Input.GetKeyDown(KeyCode.Alpha5))
-			QASkill();
-		if (Input.GetKeyDown(KeyCode.Alpha7))
-			BossMoonFixedPosition();
-		//if (Input.GetKeyDown(KeyCode.Alpha5))
-		//    CreateAbsorbFX(player.transform, 12);
-		//         if (Input.GetKeyDown(KeyCode.Alpha6))
-		//             SpeedLine();
-	}
+        //보스 이펙트 데모로 나오게
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            BossFireShoot(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    BossFiveSpear(player.transform);
+        //if (Input.GetKeyDown(KeyCode.Alpha6))
+        //    StartCoroutine(BossEightBeamCoroutine(player.transform));
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    QASkill();
+        //if (Input.GetKeyDown(KeyCode.Alpha7))
+        //    BossMoonFixedPosition();
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //    CreateAbsorbFX(player.transform, 12);
+        //         if (Input.GetKeyDown(KeyCode.Alpha6))
+        //             SpeedLine();
+    }
 
 	private void OnValidate()
 	{
@@ -699,7 +700,7 @@ public class EffectManager : MonoBehaviour
 		GameObject fire = SpawnEffect("BossFX_FireProjectile", bosstrans.position);
 		soundManager.PlaySFX("Boss_Flame_Sound_SE", bosstrans);
 		fire.transform.forward = bosstrans.transform.forward;
-		fire.transform.position += new Vector3(0, 1.0f, 0);
+		fire.transform.position += bosstrans.forward * 8.0f + new Vector3(0, 1.0f, 0);
 	}
 
 	// 보스 창 5개 쏘기
