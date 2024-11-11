@@ -158,4 +158,9 @@ public class SoundManager : MonoBehaviour
     {
         PlaySFX("UI_GameStart_Button_Sound_SE", transform);
     }
+
+    public void GateOpenSound()
+    {
+        PlaySFX("Effect_StoneGate_Sound_SE", transform);
+    }
 }

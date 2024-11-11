@@ -245,11 +245,6 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void Dead()
     {
-        if (Player.Instance != null)
-        {
-            Player.Instance.TP += tp;
-        }
-
         GetComponent<ReplaceWithRagdoll>().Replace();
         sm.PlaySFX("Enemy_Dead_Sound_SE", transform);
         _controller.Release();

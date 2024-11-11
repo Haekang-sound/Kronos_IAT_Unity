@@ -31,7 +31,8 @@ public class NewDoor : MonoBehaviour
 
 	public void OpenDoor()
 	{
-		isOpen = true; 
+		isOpen = true;
+		SoundManager.Instance.PlaySFX("Effect_StoneGate_Sound_SE", transform);
 	}
 
 }

@@ -253,7 +253,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	private void Down()
 	{
 		PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-		soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+		soundManager.PlaySFX("Player_Down_Sound_SE", transform);
 	}
 
 	private void ChangeParryState()
@@ -528,7 +528,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				break;
 			case DamageType.Down:
 				PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-				soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
+				soundManager.PlaySFX("Player_Down_Sound_SE", transform);
 				break;
 		}
 

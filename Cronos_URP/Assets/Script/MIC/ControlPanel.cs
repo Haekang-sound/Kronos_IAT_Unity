@@ -29,6 +29,12 @@ public class ControlPanel : MonoBehaviour
     {
         if (guideNum == guideLength)
         {
+            if (transform.parent.GetComponent<KeyPopUp>() != null)
+            {
+                ExitInstance();
+                return;
+            }
+
             ExitControl();
             return;
         }
@@ -73,5 +79,12 @@ public class ControlPanel : MonoBehaviour
         ResetGuideNum();
         gameObject.SetActive(false);
         pauseMenu.isControl = false;
+    }
+
+    public void ExitInstance()
+    {
+        PauseManager.Instance.UnPauseGame();
+        PauseManager.Instance.AvailableEsc();
+        Destroy(transform.parent.gameObject);
     }
 }

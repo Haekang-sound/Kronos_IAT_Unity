@@ -490,4 +490,19 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         EffectManager.Instance.BossScar(bossSword.transform);
     }
 
+    public void BossJump()
+    {
+        if (sm != null)
+        {
+            sm.PlaySFX("03 Ability_UP_Sound_SE", transform);
+        }
+    }
+
+    public void BossShoulder()
+    {
+        if (sm != null)
+        {
+            sm.PlaySFX("Player_ComboChange_Sound_SE", transform);
+        }
+    }
 }
