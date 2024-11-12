@@ -361,6 +361,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     public void Death()
     {
         _animator.SetTrigger("death");
+        SoundManager.Instance.PlaySFX("Boss_Dead_SE", transform);
         SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer renderer in renderers)
         {

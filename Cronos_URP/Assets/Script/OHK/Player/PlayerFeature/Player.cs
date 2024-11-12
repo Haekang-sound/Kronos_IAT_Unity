@@ -755,6 +755,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 			effectManager.GroundCheckFX();
 			effectManager.SwordWave();
 		}
+		if (soundManager != null)
+		{
+			soundManager.PlaySFX("Com_Attack_4_Impact_Sound_SE", transform);
+		}
 	}
 
 	public void GroundImpact()

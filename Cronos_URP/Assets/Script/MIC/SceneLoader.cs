@@ -31,7 +31,6 @@ public class SceneLoader : MonoBehaviour
     public float fadeTime = 1.0f;
     public GameObject loadingObj;
     public Image progressArch;
-    public Image loadingSpin;
     [SerializeField]
     TextMeshProUGUI loadingText;
 
@@ -65,7 +64,6 @@ public class SceneLoader : MonoBehaviour
             progress = Mathf.MoveTowards(progress, ao.progress, Time.deltaTime);
             progressArch.fillAmount = progress;
 
-            loadingSpin.transform.Rotate(0, 0, 1f);
 
             if (progress >= 0.9f)
             {
