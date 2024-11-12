@@ -141,21 +141,20 @@ public class EffectManager : MonoBehaviour
 		//보스 이펙트 데모로 나오게
 		//if (Input.GetKeyDown(KeyCode.Alpha1))
 		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-// 		if (Input.GetKeyDown(KeyCode.Alpha2))
-// 			BossMoon(player.transform);
-			//BossFireShoot(player.transform);
-			//if (Input.GetKeyDown(KeyCode.Alpha3))
-			//    BossFiveSpear(player.transform);
-			//if (Input.GetKeyDown(KeyCode.Alpha6))
-			//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-			//if (Input.GetKeyDown(KeyCode.Alpha5))
-			//    QASkill();
-			//if (Input.GetKeyDown(KeyCode.Alpha7))
-			//    BossMoonFixedPosition();
-			//if (Input.GetKeyDown(KeyCode.Alpha5))
-			//    CreateAbsorbFX(player.transform, 12);
-			//         if (Input.GetKeyDown(KeyCode.Alpha6))
-			//             SpeedLine();
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+			BossFireShoot(player.transform);
+		//if (Input.GetKeyDown(KeyCode.Alpha3))
+		//    BossFiveSpear(player.transform);
+		//if (Input.GetKeyDown(KeyCode.Alpha6))
+		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
+		//if (Input.GetKeyDown(KeyCode.Alpha5))
+		//    QASkill();
+		//if (Input.GetKeyDown(KeyCode.Alpha7))
+		//    BossMoonFixedPosition();
+		//if (Input.GetKeyDown(KeyCode.Alpha5))
+		//    CreateAbsorbFX(player.transform, 12);
+		//         if (Input.GetKeyDown(KeyCode.Alpha6))
+		//             SpeedLine();
 	}
 
 	private void OnValidate()
