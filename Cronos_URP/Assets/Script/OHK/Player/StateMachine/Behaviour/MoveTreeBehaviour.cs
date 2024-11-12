@@ -20,11 +20,11 @@ public class MoveTreeBehaviour : StateMachineBehaviour
 		animator.ResetTrigger(PlayerHashSet.Instance.Respawn);
 		animator.ResetTrigger(PlayerHashSet.Instance.Death);
 		
-		if(!Player.Instance.isBuff)
-		{
-			Player.Instance.IsEnforced = false;
-			EffectManager.Instance.SwordAuraOff();
-		}
+// 		if(!Player.Instance.isBuff)
+// 		{
+// 			Player.Instance.IsEnforced = false;
+// 			EffectManager.Instance.SwordAuraOff();
+// 		}
 
 	}
 

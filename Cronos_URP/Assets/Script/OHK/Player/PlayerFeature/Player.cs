@@ -360,7 +360,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 		CurrentState = PlayerFSM.GetState().GetType().Name;
 		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime && CurrentState == "PlayerMoveState")
+		if (buffTimer > buffTime
+			&&
+			(CurrentState == "PlayerBuffState"
+			|| CurrentState == "PlayerMoveState")
+			)
 		{
 			isBuff = false;
 			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
