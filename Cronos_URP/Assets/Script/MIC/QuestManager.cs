@@ -81,11 +81,11 @@ public class QuestManager : MonoBehaviour
         uiManager = UIManager.Instance;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // 0번 누르면 퀘스트 달성
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-            uiManager.Achieve();
-    }
+//     // Update is called once per frame
+//     void Update()
+//     {
+//         // 0번 누르면 퀘스트 달성
+//         if (Input.GetKeyDown(KeyCode.Alpha0))
+//             uiManager.Achieve();
+//     }
 }

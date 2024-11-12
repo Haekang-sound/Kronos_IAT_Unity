@@ -335,14 +335,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			CP = 100f;
 		}
 
-		if (Input.GetKeyDown(KeyCode.H))
-		{
-			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
-		}
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
-		}
+
 
 		// 휠꾹
 		if (isRelease)

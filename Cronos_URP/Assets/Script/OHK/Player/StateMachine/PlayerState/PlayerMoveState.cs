@@ -28,8 +28,9 @@ public class PlayerMoveState : PlayerBaseState
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.combAttack);
 		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
+		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.CPBoomb);
 
-		
+
 		stateMachine.InputReader.onFlashSlashStart += FlashSlash;
 		stateMachine.InputReader.onRunStart += RushAttack;
 
