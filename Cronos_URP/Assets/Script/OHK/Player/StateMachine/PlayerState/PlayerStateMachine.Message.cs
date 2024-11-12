@@ -35,7 +35,7 @@ public class PlayerHashSet
 		DodgeAttack = Animator.StringToHash("DodgeAttack");
 		EnforcedCombo = Animator.StringToHash("EnforcedCombo");
 		isTimeStop = Animator.StringToHash("isTimeStop");
-		isCPBoomb = Animator.StringToHash("isFlashSlash");
+		isCPBoomb = Animator.StringToHash("isCPBoomb");
 		isFlashSlash = Animator.StringToHash("isFlashSlash");
 		isTimeSlash = Animator.StringToHash("isTimeSlash");
 		isRushAttack = Animator.StringToHash("isRushAttack");
