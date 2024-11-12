@@ -51,10 +51,10 @@ public class LastEnforcedCombo : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		Player.Instance.isBuff = false;
-		Player.Instance.IsEnforced = false;
-		EffectManager.Instance.SwordAuraOff();
-		Player.Instance.buffTimer = 0f;
+// 		Player.Instance.isBuff = false;
+// 		Player.Instance.IsEnforced = false;
+// 		EffectManager.Instance.SwordAuraOff();
+// 		Player.Instance.buffTimer = 0f;
 
 	}
 

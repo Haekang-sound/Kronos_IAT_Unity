@@ -149,12 +149,12 @@ public class PlayerAttackState : PlayerBaseState
 			// NEXTCOMBO È°¼ºÈ­
 			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
-		else
-		{
-			Player.Instance.isBuff = false;
-			//EffectManager.Instance.SwordAuraOff();
-			Player.Instance.buffTimer = 0f;
-		}
+// 		else
+// 		{
+// 			Player.Instance.isBuff = false;
+// 			//EffectManager.Instance.SwordAuraOff();
+// 			Player.Instance.buffTimer = 0f;
+// 		}
 	}
 	private void Dodge()
 	{

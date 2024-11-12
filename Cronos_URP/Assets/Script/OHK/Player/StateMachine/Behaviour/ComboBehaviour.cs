@@ -61,14 +61,14 @@ public class ComboBehaviour : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		if (!animator.GetBool(PlayerHashSet.Instance.NextCombo))
-		{
-			Player.Instance.isBuff = false;
-			Player.Instance.buffTimer = 0f;
-			Player.Instance.IsEnforced = false;
-			EffectManager.Instance.SwordAuraOff();
-
-		}
+// 		if (!animator.GetBool(PlayerHashSet.Instance.NextCombo))
+// 		{
+// 			Player.Instance.isBuff = false;
+// 			Player.Instance.buffTimer = 0f;
+// 			Player.Instance.IsEnforced = false;
+// 			EffectManager.Instance.SwordAuraOff();
+// 
+// 		}
 		//EffectManager.Instance.SwordAuraOff();
 	}
 
