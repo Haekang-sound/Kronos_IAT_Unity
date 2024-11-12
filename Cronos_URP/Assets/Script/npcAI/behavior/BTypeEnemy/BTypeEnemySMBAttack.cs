@@ -7,7 +7,7 @@ public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _monoBehaviour.ChangeDebugText("ATTACK");
-        _monoBehaviour.aimEnd.SetActive(true);
+        //_monoBehaviour.aimEnd.SetActive(true);
 
     }
 
@@ -35,6 +35,6 @@ public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
 
     public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _monoBehaviour.aimEnd.SetActive(false);
+        //_monoBehaviour.aimEnd.SetActive(false);
     }
 }

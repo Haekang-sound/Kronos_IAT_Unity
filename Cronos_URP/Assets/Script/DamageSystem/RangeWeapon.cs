@@ -44,8 +44,11 @@ public class RangeWeapon : MonoBehaviour
     public void Attack(Vector3 target)
     {
         AttackProjectile(target);
+        GameObject shoot = EffectManager.Instance.SpawnEffect("EnemyShooting", transform.position);
+        shoot.transform.forward = gameObject.transform.forward;
+        shoot.transform.position += new Vector3(0, 1.5f, 0);
+        Destroy(shoot, 0.7f);
         sm.PlaySFX("Enemy_Bow_Shoot_Sound_SE", gameObject.transform);
-
     }
 
     public void LoadProjectile()

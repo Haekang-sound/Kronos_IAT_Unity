@@ -441,4 +441,9 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         _controller.animator.SetTrigger(hashIdle);
     }
+
+    public void ChargeSound()
+    {
+        sm.PlaySFX("Attack_SE", transform);
+    }
 }

@@ -15,7 +15,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public float rotationSpeed = 1.0f;
 
     public GameObject aimRing;
-    public GameObject aimEnd;
+    //public GameObject aimEnd;
     private Vector3 ringOriginScale = new Vector3(1f, 1f, 1f);
     private Vector3 ringShrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
 
@@ -81,7 +81,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         aimRing.SetActive(false);
-        aimEnd.SetActive(false);
+        //aimEnd.SetActive(false);
     }
 
     private void OnDisable()
