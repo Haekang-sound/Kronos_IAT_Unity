@@ -20,11 +20,20 @@ public class ControlPanel : MonoBehaviour
         guideLength = guides.Length - 1;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        {
+            CallGuide();
+        }
+    }
+
     public void ResetGuideNum()
     {
         guideNum = 0;
     }
 
+    // 다음 조작 가이드를 넘기는 함수
     public void CallGuide()
     {
         if (guideNum == guideLength)
