@@ -147,8 +147,10 @@ public class EffectManager : MonoBehaviour
 		//    BossFiveSpear(player.transform);
 		//if (Input.GetKeyDown(KeyCode.Alpha6))
 		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-		//if (Input.GetKeyDown(KeyCode.Alpha5))
-		//    QASkill();
+		if (Input.GetKey(KeyCode.K)
+			&&(Input.GetKey(KeyCode.I))
+			&&(Input.GetKeyDown(KeyCode.L)))
+		    QASkill();
 		//if (Input.GetKeyDown(KeyCode.Alpha7))
 		//    BossMoonFixedPosition();
 		//if (Input.GetKeyDown(KeyCode.Alpha5))
