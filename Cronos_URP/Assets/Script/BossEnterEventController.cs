@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using static Controls;
 
+/// <summary>
+/// 이거 달어..
+/// </summary>
 public class BossEnterEventController : MonoBehaviour
 {
     public GameObject timeline;

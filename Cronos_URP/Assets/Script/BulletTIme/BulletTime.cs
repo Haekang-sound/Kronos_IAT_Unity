@@ -68,8 +68,8 @@ public class BulletTime : MonoBehaviour
             }
             //currentSpeed = Mathf.Max(currentSpeed, maxSpeed); // 최소 속도 미만 방지
         }
-
     }
+
     public void DecelerateSpeed()
     {
         targetSpeed = 0.01f;
