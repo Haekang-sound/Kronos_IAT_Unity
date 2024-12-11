@@ -31,6 +31,7 @@ public class PlayerAttackState : PlayerBaseState
 
 		stateMachine.GroundChecker.ToggleChecker = false;
 	}
+
 	public override void Tick()
 	{
 		if (stateMachine.AutoTargetting.GetTarget() != null)

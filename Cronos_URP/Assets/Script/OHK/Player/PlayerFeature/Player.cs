@@ -31,6 +31,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			return instance;
 		}
 	}
+
 	protected static Player instance;
 
 	public RenderObjects SkillRenderObj;
@@ -107,6 +108,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			_damageable.currentHitPoints = currentTP;
 		}
 	}
+
 	public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
 	public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
 	public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -152,6 +154,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Awake()
 	{
+		
 		_knockBack = GetComponent<KnockBack>();
 		_defnsible = GetComponent<Defensible>();
 		_damageable = GetComponent<Damageable>();
@@ -182,7 +185,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void OnEnable()
 	{
-
 		_damageable.onDamageMessageReceivers.Add(this);
 
 		CapsuleColldierUtility.Initialize(gameObject);

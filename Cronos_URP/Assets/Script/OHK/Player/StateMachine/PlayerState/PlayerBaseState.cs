@@ -5,6 +5,13 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+
+/// <summary>
+/// 플레이어의 기본 상태를 묘사
+/// (소설) 모든 상태의 기본이 되며 여기서부터 파생됨..
+/// 
+/// OHK 2024.12.10 v1
+/// </summary>
 public abstract class PlayerBaseState : State
 {
 	// 변수를 읽기전용으로 선언
@@ -74,6 +81,7 @@ public abstract class PlayerBaseState : State
 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDirection), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
 
 	}
+
 	protected void FaceMoveDirection(Vector3 faceDir)
 	{
 		faceDir.y = 0f;
@@ -86,7 +94,6 @@ public abstract class PlayerBaseState : State
 		}
 		// 플레이어의 회전은 구면 선형보간의 형태로 이루어진다. 
 		stateMachine.Rigidbody.MoveRotation(Quaternion.Slerp(stateMachine.transform.rotation, Quaternion.LookRotation(faceDir), stateMachine.Player.lookRotationDampFactor * Time.fixedDeltaTime));
-
 	}
 
 	/// <summary>
@@ -110,7 +117,6 @@ public abstract class PlayerBaseState : State
 
 		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition + gravity; ;
 		Float();
-
 	}
 
 	protected Vector3 GetPlayerHorizentalVelocity()
@@ -119,7 +125,6 @@ public abstract class PlayerBaseState : State
 		playerHorizentalvelocity.y = 0f;
 		return playerHorizentalvelocity;
 	}
-
 
 	protected void MoveOnAnimation()
 	{
@@ -196,6 +201,7 @@ public abstract class PlayerBaseState : State
 	private void SetSlopeSpeedModifierOnAngle(float groundAngle)
 	{
 	}
+
 	protected Vector3 GetPlayerVerticalVelocity()
 	{
 		return new Vector3(0f, stateMachine.Rigidbody.velocity.y, 0f);

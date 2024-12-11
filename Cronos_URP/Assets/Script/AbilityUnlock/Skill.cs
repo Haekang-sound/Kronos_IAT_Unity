@@ -34,31 +34,27 @@ public class Skill : MonoBehaviour
 		virtualCamera = GetComponent<CinemachineVirtualCamera>();
 
 		// 연관스킬을 돌아본다.
-		foreach(var connectedSkill  in ConnectedSkills)
+		foreach(var connectedSkill in ConnectedSkills)
 		{
 			// 연관스킬을 활성화한다.skill level이 0보다 크다면
 			SkillTree.instance.SkillList[connectedSkill].gameObject.SetActive(SkillTree.instance.skillLeveles[id] > 0) ;
 			// 커넥터도 같이 활성화 시킨다.
 			SkillTree.instance.ConnectorList[connectedSkill].SetActive(SkillTree.instance.skillLeveles[id] > 0) ;
 		}
-
-		
 	}
 
 	// 스킬을 구매했을때 일어나는 일들
-
 	public void Buy()
 	{
 		if (SkillTree.instance.skillPoint < 1 || SkillTree.instance.skillLeveles[id] >= SkillTree.instance.skillCaps[id])
 		{
 			return;
 		}
+
 		SkillTree.instance.skillPoint -= 1;
 		SkillTree.instance.skillLeveles[id]++;
 		SkillTree.instance.UpdateAllskillUI();
 		CinemachineBrain.SoloCamera = virtualCamera;
-
 	}
-
 }
 
