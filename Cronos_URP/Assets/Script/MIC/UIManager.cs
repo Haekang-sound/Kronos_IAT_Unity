@@ -119,8 +119,7 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(true);
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		/// 제이슨 로드하고 텍스트 뽑기는 서비스 종료다
-        /// 걍 싱글턴에서 스트링으로 받아오자
+		/// 싱글턴에서 스트링으로 받아오자
 		//regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
         regionText.text = qm.RegionNames[idx];
 
@@ -182,10 +181,7 @@ public class UIManager : MonoBehaviour
     }
 
     /// 메인 목표 박스 UI 애니메이션
-    /// 씬 인덱스에 맞는 액셀 시트의 텍스트를 자동으로 불러오며,
-
-    /// 은 구버전이고,
-    /// 신버전은 QuestManager의 인덱스와 연동해서 팝업한다.
+    /// QuestManager의 인덱스와 연동해서 팝업한다.
     /// 이 코루틴이 끝나면 서브 목표 코루틴까지 알아서 호출한다
     /// 중간에 코루틴 난입을 대비해서 한번 더 함수로 감싸는게 맞나
     public void StartAppearMain(int idx)

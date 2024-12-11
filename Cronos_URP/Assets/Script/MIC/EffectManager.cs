@@ -92,7 +92,7 @@ public class EffectManager : MonoBehaviour
 	Vector3 bossFireOffset = new Vector3(0, 0, 3.0f);
 
 	// 사용할 이펙트 리스트
-	static List<GameObject> effects = new List<GameObject>();
+	//static List<GameObject> effects = new List<GameObject>();
 	GameObject[] effectArray;
 
 	// 이펙트를 로드하는 단계
@@ -179,7 +179,7 @@ public class EffectManager : MonoBehaviour
 		}
 		if (eVolume == null)
 		{
-			// 비용이 크다지만 알빠냐 볼륨이 없다는데
+			// 비용이 크다지만 볼륨이 없으면 안되니까
 			GameObject eVol = GameObject.Find("Effect Volume");
 			eVolume = eVol.GetComponent<Volume>();
 		}
@@ -236,7 +236,7 @@ public class EffectManager : MonoBehaviour
 		{
 			GameObject effectInstance = Instantiate(effect);
 			effectInstance.name = effect.name;
-			effects.Add(effectInstance);
+			//effects.Add(effectInstance);
 			effectInstance.SetActive(false);
 
 			yield return null;
@@ -292,15 +292,15 @@ public class EffectManager : MonoBehaviour
 		return null;
 	}
 
-	GameObject FindName(string name)
-	{
-		foreach (GameObject effect in effects)
-		{
-			if (effect.name == name)
-				return effect;
-		}
-		return null;
-	}
+	//GameObject FindName(string name)
+	//{
+	//	foreach (GameObject effect in effects)
+	//	{
+	//		if (effect.name == name)
+	//			return effect;
+	//	}
+	//	return null;
+	//}
 
 	// 부모 오브젝트에서 이름을 가진 자식 오브젝트를 리턴
 	// 이펙트가 나올 자식 오브젝트 위치 찾는 데 사용하는 중
@@ -762,9 +762,9 @@ public class EffectManager : MonoBehaviour
 	// 집중선 켰다가 끄기
 	IEnumerator SpeedLineCoroutine()
 	{
-		UI_TPCPHUD.Instance.speedLineUI.SetActive(true);
+		UI_TPHUD.Instance.speedLineUI.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
-		UI_TPCPHUD.Instance.speedLineUI.SetActive(false);
+		UI_TPHUD.Instance.speedLineUI.SetActive(false);
 	}
 
 	public void SpeedLine()

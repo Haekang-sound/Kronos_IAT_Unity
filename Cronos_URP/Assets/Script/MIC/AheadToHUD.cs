@@ -61,7 +61,7 @@ public class AheadToHUD : MonoBehaviour
         Debug.Log("Player current TP : " + Player.Instance.TP);
 
         // 파티클 트리거 되었을 때 TP HUD 초록색으로
-        UI_TPCPHUD uiHud = UI_TPCPHUD.Instance;
+        UI_TPHUD uiHud = UI_TPHUD.Instance;
         uiHud.ChangeGreen();
 
         // 파티클 배열 생성 및 가져오기

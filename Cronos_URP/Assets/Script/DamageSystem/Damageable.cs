@@ -40,7 +40,7 @@ public partial class Damageable : MonoBehaviour
 	//EffectManager effectManager;
 	Player player;
 	ImpulseCam impCam;
-	UI_TPCPHUD uiHud;
+	UI_TPHUD uiHud;
 
 	private void Awake()
 	{
@@ -62,7 +62,7 @@ public partial class Damageable : MonoBehaviour
 		player = Player.Instance;
 		impCam = ImpulseCam.Instance;
 		soundManager = SoundManager.Instance;
-		uiHud = UI_TPCPHUD.Instance;
+		uiHud = UI_TPHUD.Instance;
 	}
 
 	void Update()

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UI_PointText : UI_TPCP
+public class UI_PointText : UI_TP
 {
     [SerializeField]
     TextMeshProUGUI textTP;

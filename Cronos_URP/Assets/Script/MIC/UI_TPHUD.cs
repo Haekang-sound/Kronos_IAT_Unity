@@ -4,22 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_TPCPHUD : UI_TPCP
+public class UI_TPHUD : UI_TP
 {
     // 싱글벙글턴
-    static UI_TPCPHUD instance;
+    static UI_TPHUD instance;
 
-    public static UI_TPCPHUD Instance
+    public static UI_TPHUD Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<UI_TPCPHUD>();
+                instance = FindObjectOfType<UI_TPHUD>();
                 if (instance == null)
                 {
-                    GameObject hud = new GameObject(typeof(UI_TPCPHUD).Name);
-                    instance = hud.AddComponent<UI_TPCPHUD>();
+                    GameObject hud = new GameObject(typeof(UI_TPHUD).Name);
+                    instance = hud.AddComponent<UI_TPHUD>();
 
                     DontDestroyOnLoad(hud);
                 }
@@ -95,7 +95,7 @@ public class UI_TPCPHUD : UI_TPCP
 
         if (player == null)
         {
-            Debug.Log("플레이어가 없당께요");
+            Debug.Log("플레이어가 없습니다");
         }
 
         parentTrans = FxHolder.transform;
@@ -133,8 +133,6 @@ public class UI_TPCPHUD : UI_TPCP
     void UpdateTpSlider()     
     {
         // 플레이어의 TP를 받아온다.
-        //MaxTp = player.MaxTP;
-        //TPprogress = tp / MaxTp;
         if(player.TP >= 0f)
 		{
 			tp = player.TP;
@@ -144,8 +142,9 @@ public class UI_TPCPHUD : UI_TPCP
 			tp = 0f;
         }
 
-        textTP.text = tp.ToString("000");
-
+        // 플레이어 tp를 바인딩
+        GetText((int)Texts.HUD_TPAmount).text = tp.ToString("000");
+        //
         // 원형 슬라이더를 현재/최대로 계산해서 줄여준다.
         //circleImageTP.fillAmount = TPprogress;
         for (int i = 0; i < circleImageTPs.Length; i++)
