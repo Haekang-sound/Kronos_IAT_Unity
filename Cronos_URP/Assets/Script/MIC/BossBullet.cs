@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-/// ±èÁÖ¿µÀÇ Bullet ½ºÅ©¸³Æ®¸¦ ¸¶°³Á¶ÇØ¼­ º¸½º¿ë Åõ»çÃ¼·Î ¸¸µç ½ºÅ©¸³Æ®
+/// <summary>
+/// íˆ¬ì‚¬ì²´ë¥¼ ìƒì†ë°›ì•„ ë³´ìŠ¤ìš© íˆ¬ì‚¬ì²´ë¡œ ë§Œë“¤ì—ˆë‹¤.
+/// </summary>
 public class BossBullet : Projectile
 {
     public enum ShotType
@@ -40,8 +41,8 @@ public class BossBullet : Projectile
 
     private void Update()
     {
-        // 8ÃÊ°¡ Áö³ª¸é ÀÚµ¿À¸·Î ¿ÀºêÁ§Æ®°¡ Á¦°ÅµÇµµ·Ï ÇÏµå ÄÚµù
-        // »ıÁ¸ ½Ã°£ º¯¼ö¸¦ µû·Î µ×Áö¸¸ 0À¸·Î ÃÊ±âÈ­ ÇÏ´Â ¹Ù¶÷¿¡ ºÎµæÀÌÇÏ°Ô ÇÏµå ÄÚµù
+        // 8ì´ˆê°€ ì§€ë‚˜ë©´ ìë™ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ê°€ ì œê±°ë˜ë„ë¡ í•˜ë“œ ì½”ë”©
+        // ìƒì¡´ ì‹œê°„ ë³€ìˆ˜ë¥¼ ë”°ë¡œ ë’€ì§€ë§Œ 0ìœ¼ë¡œ ì´ˆê¸°í™” í•˜ëŠ” ë°”ëŒì— ë¶€ë“ì´í•˜ê²Œ í•˜ë“œ ì½”ë”©
         if (m_sinceFired > 8f)
         {
             pool.Free(this);
@@ -54,7 +55,7 @@ public class BossBullet : Projectile
 
         if (m_sinceFired > 0.2f)
         {
-            // ¹ß»çµÇÀÚ¸¶ÀÚ ÅÍÁö´Â °ÍÀ» ¸·±â À§ÇØ 0.5ÃÊ ÈÄ¿¡¸¸ Ãæµ¹À» È°¼ºÈ­ÇÕ´Ï´Ù.
+            // ë°œì‚¬ë˜ìë§ˆì í„°ì§€ëŠ” ê²ƒì„ ë§‰ê¸° ìœ„í•´ 0.5ì´ˆ í›„ì—ë§Œ ì¶©ëŒì„ í™œì„±í™”í•©ë‹ˆë‹¤.
             m_rigidBody.detectCollisions = true;
         }
 
@@ -121,12 +122,12 @@ public class BossBullet : Projectile
         Vector3 velocity = Vector3.zero;
         Vector3 toTarget = target - transform.position;
 
-        // ÀÌÂ÷ ¹æÁ¤½ÄÀ» Çª´Â µ¥ ÇÊ¿äÇÑ Á¶°ÇÀ» ¼³Á¤ÇÕ´Ï´Ù.
+        // ì´ì°¨ ë°©ì •ì‹ì„ í‘¸ëŠ” ë° í•„ìš”í•œ ì¡°ê±´ì„ ì„¤ì •í•©ë‹ˆë‹¤.
         float gSquared = Physics.gravity.sqrMagnitude;
         float b = projectileSpeed * projectileSpeed + Vector3.Dot(toTarget, Physics.gravity);
         float discriminant = b * b - gSquared * toTarget.sqrMagnitude;
 
-        // ÃÖ´ë ¼Óµµ ÀÌÇÏ·Î ¸ñÇ¥¿¡ µµ´ŞÇÒ ¼ö ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+        // ìµœëŒ€ ì†ë„ ì´í•˜ë¡œ ëª©í‘œì— ë„ë‹¬í•  ìˆ˜ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
         if (discriminant < 0)
         {
             velocity = toTarget;
@@ -144,11 +145,11 @@ public class BossBullet : Projectile
 
         float T = 0;
 
-        // ¹«Á¶°Ç ÀÏÁ÷¼±ÀÌ´Ï±î switch ¹®Àº »èÁ¦
+        // ë¬´ì¡°ê±´ ì¼ì§ì„ ì´ë‹ˆê¹Œ switch ë¬¸ì€ ì‚­ì œ
         float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
         T = T_min;
 
-        // time-to-hit¿¡¼­ launch velocity·Î º¯È¯ÇÕ´Ï´Ù:
+        // time-to-hitì—ì„œ launch velocityë¡œ ë³€í™˜í•©ë‹ˆë‹¤:
         velocity = toTarget / T - Physics.gravity * T / 2f;
 
         return velocity;

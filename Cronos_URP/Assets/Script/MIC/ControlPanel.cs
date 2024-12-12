@@ -2,7 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// ���۹�. �ſ�ſ� �����ϰ� �������
+/// <summary>
+/// 조작법 패널 클래스
+/// 단순하게 인덱스에 따라 배열에 맞는 게임오브젝트를 띄우는 방식
+/// </summary>
 public class ControlPanel : MonoBehaviour
 {
     
@@ -33,7 +36,7 @@ public class ControlPanel : MonoBehaviour
         guideNum = 0;
     }
 
-    // ���� ���� ���̵带 �ѱ�� �Լ�
+    // 인덱스 0부터 시작해서 다음으로 넘긴다
     public void CallGuide()
     {
         if (guideNum == guideLength)
@@ -67,22 +70,7 @@ public class ControlPanel : MonoBehaviour
         guides[0].SetActive(true);
     }
 
-    public void ShowKeyMou()
-    {
-        //padGuide.gameObject.SetActive(false);
-        //keyMouGuide.gameObject.SetActive(true);
-        //padTitle.gameObject.SetActive(false);
-        //keyMouTitle.gameObject.SetActive(true);
-    }
-
-    public void ShowPad()
-    {
-        //padGuide.gameObject.SetActive(true);
-        //keyMouGuide.gameObject.SetActive(false);
-        //padTitle.gameObject.SetActive(true);
-        //keyMouTitle.gameObject.SetActive(false);
-    }
-
+    // 패널 끄면 다시 인덱스 0으로
     public void ExitControl()
     {
         ResetGuideNum();
@@ -90,6 +78,7 @@ public class ControlPanel : MonoBehaviour
         pauseMenu.isControl = false;
     }
 
+    // 퍼즈 메뉴에서 온게 아니라 스테이지1에서 띄워줬다면
     public void ExitInstance()
     {
         PauseManager.Instance.UnPauseGame();

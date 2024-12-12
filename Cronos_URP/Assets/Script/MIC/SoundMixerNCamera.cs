@@ -4,62 +4,67 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// ì˜µì…˜ ì°½ì—ì„œ ìŠ¬ë¼ì´ë”ë¡œ ë³¼ë¥¨ê³¼ ì¹´ë©”ë¼ ê°ë„ë¥¼ ì¡°ì ˆí•  ë•Œ í•„ìš”í•œ í´ë˜ìŠ¤
+/// ì˜¤ë””ì˜¤ ë¯¹ì„œì— ì ‘ê·¼í•˜ì—¬ ê°’ì„ ë¡œì»¬ì— ì €ì¥í•œë‹¤
+/// </summary>
 public class SoundMixerNCamera : MonoBehaviour
 {
-    // º¼·ı Á¶Àı °ü·Ã
+    // ë³¼ë¥¨ ì¡°ì ˆ ê´€ë ¨
     [SerializeField]
-    AudioMixer audioMixer;
+    private AudioMixer audioMixer;
     [SerializeField]
-    Slider masterSlider;
+    private Slider masterSlider;
     [SerializeField]
-    Slider bgmSlider;
+    private Slider bgmSlider;
     [SerializeField]
-    Slider sfxSlider;
+    private Slider sfxSlider;
     [SerializeField]
-    TextMeshProUGUI masVal;
+    private TextMeshProUGUI masVal;
     [SerializeField]
-    TextMeshProUGUI bgmVal;
+    private TextMeshProUGUI bgmVal;
     [SerializeField]
-    TextMeshProUGUI sfxVal;
+    private TextMeshProUGUI sfxVal;
     [SerializeField]
-    TextMeshProUGUI camVal;
+    private TextMeshProUGUI camVal;
     [SerializeField]
-    Button applyButton;
+    private Button applyButton;
     [SerializeField]
-    GameObject confirmPopUp;
+    private GameObject confirmPopUp;
     [SerializeField]
-    GameObject optionPanel;
+    private GameObject optionPanel;
     [SerializeField]
-    GameObject pausePanel;
+    private GameObject pausePanel;
     [SerializeField]
-    PauseMenu pauseMenu;
-    CanvasGroup canvasGroup;
+    private PauseMenu pauseMenu;
+    private CanvasGroup canvasGroup;
 
-    int dMas = 70;
-    int dBgm = 100;
-    int dSfx = 100;
-    public int cMas;    // c ¹ë·ù, ½½¶óÀÌ´õ·Î Á¶ÀıµÉ °ª
+    private int dMas = 70;
+    private int dBgm = 100;
+    private int dSfx = 100;
+    public int cMas;    // c ë°¸ë¥˜, ìŠ¬ë¼ì´ë”ë¡œ ì¡°ì ˆë  ê°’
     public int cBgm;
     public int cSfx;
-    public int aMas;    // a ¹ë·ù, Àû¿ëµÇ¾î ÀúÀåµÈ °ª
+    public int aMas;    // a ë°¸ë¥˜, ì ìš©ë˜ì–´ ì €ì¥ëœ ê°’
     public int aBgm;
     public int aSfx;
 
-    // Ä«¸Ş¶ó Á¶Àı °ü·Ã
+    // ì¹´ë©”ë¼ ì¡°ì ˆ ê´€ë ¨
     [SerializeField]
-    CinemachineVirtualCamera virCam;
+    private CinemachineVirtualCamera virCam;
     [SerializeField]
-    Slider camSlider;
+    private Slider camSlider;
 
-    CinemachinePOV pov;
+    private CinemachinePOV pov;
     public int dCamX = 50;
     public int dCamY = 80;
-    public Vector2 cSpeed;     // c¹ë·ù, ½½¶óÀÌ´õ·Î Á¶ÀıµÉ °ª
-    public Vector2 aSpeed;     // a¹ë·ù, Àû¿ëµÉ ÃÖÁ¾°ª
+    public Vector2 cSpeed;     // cë°¸ë¥˜, ìŠ¬ë¼ì´ë”ë¡œ ì¡°ì ˆë  ê°’
+    public Vector2 aSpeed;     // aë°¸ë¥˜, ì ìš©ë  ìµœì¢…ê°’
 
-    int sMas;
-    int sBgm;
-    int sSfx;
+    private int sMas;
+    private int sBgm;
+    private int sSfx;
     public int sCamX;
     public int sCamY;
 
@@ -70,9 +75,11 @@ public class SoundMixerNCamera : MonoBehaviour
 
     void Initialize()
     {
-
         if (bgmSlider == null)
+        {
             Debug.LogWarning("bgmSlider is not assigned.");
+        }
+
         else
         {
             sBgm = PlayerPrefs.GetInt("BgmVolume", dBgm);
@@ -83,7 +90,10 @@ public class SoundMixerNCamera : MonoBehaviour
         }
 
         if (sfxSlider == null)
+        {
             Debug.LogWarning("sfxSlider is not assigned.");
+        }
+
         else
         {
             sSfx = PlayerPrefs.GetInt("SfxVolume", dSfx);
@@ -94,7 +104,10 @@ public class SoundMixerNCamera : MonoBehaviour
         }
 
         if (masterSlider == null)
+        {
             Debug.LogWarning("masterSlider is not assigned.");
+        }
+
         else
         {
             sMas = PlayerPrefs.GetInt("MasterVolume", dMas);
@@ -113,7 +126,10 @@ public class SoundMixerNCamera : MonoBehaviour
         virCam = playerCam.GetComponent<CinemachineVirtualCamera>();
 
         if (camSlider == null)
+        {
             Debug.LogWarning("camSlider is not assigned");
+        }
+
         else
         {
             sCamX = PlayerPrefs.GetInt("PlayerCam", dCamX);                                                                 
@@ -125,14 +141,16 @@ public class SoundMixerNCamera : MonoBehaviour
         }
 
         if (pov != null)
-            Debug.Log("pov¸¦ Ã£¾Ò½À´Ï´Ù");
+        {
+            Debug.Log("povë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤");
+        }
 
         aSpeed.x = sCamX / 5;
         aSpeed.y = sCamY / 5;
     }
 
 
-    // È°¼ºÈ­µÇ¸é a¹ë·ù Ã¤¿ì±â
+    // í™œì„±í™”ë˜ë©´ aë°¸ë¥˜ ì±„ìš°ê¸°
     private void OnEnable()
     {
         aMas = cMas;
@@ -145,35 +163,27 @@ public class SoundMixerNCamera : MonoBehaviour
 
     void Update()
     {
-        // c¹ë·ù¿¡ º¯°æµÈ °ªµéÀ» ÀúÀåÇØ³õÀÚ
+        // cë°¸ë¥˜ì— ë³€ê²½ëœ ê°’ë“¤ì„ ì €ì¥í•´ë†“ì
         cMas = Mathf.RoundToInt(masterSlider.value * 100);
         cBgm = Mathf.RoundToInt(bgmSlider.value * 100);
         cSfx = Mathf.RoundToInt(sfxSlider.value * 100);
 
-        // Ä«¸Ş¶óµµ c¹ë·ù¿¡ ½½¶óÀÌ´õ ÀúÀå
+        // ì¹´ë©”ë¼ë„ cë°¸ë¥˜ì— ìŠ¬ë¼ì´ë” ì €ì¥
         AdjustSensitivity(camSlider.value);
 
-        // Àû¿ë ¹öÆ°À» È°¼ºÈ­ÇÏ´Â Á¶°Ç¹®
+        // ì ìš© ë²„íŠ¼ì„ í™œì„±í™”í•˜ëŠ” ì¡°ê±´ë¬¸
         if (aMas != cMas || aBgm != cBgm || aSfx != cSfx || aSpeed != cSpeed)
         {
             applyButton.interactable = true;
         }
+
         else
         {
             applyButton.interactable = false;
         }
-
-        // ½½¶óÀÌ´õ °ªÀ» ÅØ½ºÆ®·Î º¸¿©ÁÖ±â
-        //masVal.text = ((masterSlider.value) * 100f).ToString("0") + ("%");
-        //bgmVal.text = ((bgmSlider.value) * 100f).ToString("0") + ("%");
-        //sfxVal.text = ((sfxSlider.value) * 100f).ToString("0") + ("%");
-        //// ±¸Á¶»ó 5ÀÇ ¹è¼ö·Î¸¸ ¹İ¿Ã¸²ÇØ¼­ º¸¿©Áà¾ß°Ú´Ù
-        //float roundVal = Mathf.Round(camSlider.value * 100f / 5f) * 5f;
-        //camVal.text = roundVal.ToString("0") + ("%");
-        //camVal.text = ((camSlider.value) * 100f).ToString("0") + ("%");
     }
 
-    // Àû¿ëÇÏ¸é c¹ë·ù¸¦ a¹ë·ù·Î ¹Ù²Û´Ù.
+    // ì ìš©í•˜ë©´ cë°¸ë¥˜ë¥¼ aë°¸ë¥˜ë¡œ ë°”ê¾¼ë‹¤.
     public void ApplyValue()
     {
         aMas = cMas;
@@ -190,13 +200,13 @@ public class SoundMixerNCamera : MonoBehaviour
         sCamY = PlayerPrefs.GetInt("PlayerCamY", dCamY);
     }
 
-    // È®ÀÎÇÏ¸é ÀÏ´Ü c¹ë·ù°¡ a¹ë·ù¿Í °°ÀºÁö È®ÀÎÇÑ´Ù.
-    // ´Ù¸£´Ù¸é È®ÀÎ ÆË¾÷À» ¶ç¿ì°í, ¾Æ´Ï¶ó¸é ¹Ù·Î Á¾·á
-    // È®ÀÎÇßÀ» ¶§ Àû¿ëÇÏÁö ¾ÊÀ¸¸é a¹ë·ù·Î Àû¿ëÇÏ°í Á¾·á
+    // í™•ì¸í•˜ë©´ ì¼ë‹¨ cë°¸ë¥˜ê°€ aë°¸ë¥˜ì™€ ê°™ì€ì§€ í™•ì¸í•œë‹¤.
+    // ë‹¤ë¥´ë‹¤ë©´ í™•ì¸ íŒì—…ì„ ë„ìš°ê³ , ì•„ë‹ˆë¼ë©´ ë°”ë¡œ ì¢…ë£Œ
+    // í™•ì¸í–ˆì„ ë•Œ ì ìš©í•˜ì§€ ì•Šìœ¼ë©´ aë°¸ë¥˜ë¡œ ì ìš©í•˜ê³  ì¢…ë£Œ
     public void ConfirmValue()
     {
-        // ÇÏ³ª¶óµµ ´Ù¸£´Ù = Àû¿ëÇÏÁö ¾Ê°í ½½¶óÀÌ´õ¸¦ ¹Ù²Û °ªÀÌ ÀÖ´Ù.
-        // ¿É¼Ç ÆĞ³ÎÀÇ ·¹ÀÌÄ³½ºÆ®¸¦ ¸·¾Æ¹ö¸®ÀÚ
+        // í•˜ë‚˜ë¼ë„ ë‹¤ë¥´ë‹¤ = ì ìš©í•˜ì§€ ì•Šê³  ìŠ¬ë¼ì´ë”ë¥¼ ë°”ê¾¼ ê°’ì´ ìˆë‹¤.
+        // ì˜µì…˜ íŒ¨ë„ì˜ ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ë§‰ì•„ë²„ë¦¬ì
         if (aMas != cMas || aBgm != cBgm || aSfx != cSfx || aSpeed != cSpeed)
         {
             confirmPopUp.SetActive(true);
@@ -209,7 +219,7 @@ public class SoundMixerNCamera : MonoBehaviour
         }
     }
 
-    // ¹Ù²ï°É Àû¿ëÇÏÀÚ
+    // ë°”ë€ê±¸ ì ìš©í•˜ì
     public void YesButton()
     {
         ApplyValue();
@@ -217,7 +227,7 @@ public class SoundMixerNCamera : MonoBehaviour
         ExitPanel();
     }
 
-    // Àû¿ë ¾ÈÇÑ´Ù¸é a¹ë·ù¸¦ Àû¿ëÇÏ°í c¹ë·ù¸¦ a¹ë·ù·Î ¹Ù²ÙÀÚ
+    // ì ìš© ì•ˆí•œë‹¤ë©´ aë°¸ë¥˜ë¥¼ ì ìš©í•˜ê³  cë°¸ë¥˜ë¥¼ aë°¸ë¥˜ë¡œ ë°”ê¾¸ì
     public void NoButton()
     {
         FixValue();
@@ -228,7 +238,7 @@ public class SoundMixerNCamera : MonoBehaviour
         ExitPanel();
     }
 
-    // ±âº»°ªÀ¸·Î ½½¶óÀÌ´õ °ªÀ» ¹Ù²Ù±â Àû¿ëÀº ¾ÈÇÑ´Ù
+    // ê¸°ë³¸ê°’ìœ¼ë¡œ ìŠ¬ë¼ì´ë” ê°’ì„ ë°”ê¾¸ê¸° ì ìš©ì€ ì•ˆí•œë‹¤
     public void ValueToDefault()
     {
         masterSlider.value = dMas / 100f;
@@ -237,7 +247,7 @@ public class SoundMixerNCamera : MonoBehaviour
         camSlider.value = dCamX / 100f;
     }
 
-    // a¹ë·ù·Î ÃÖÁ¾°ªÀ» È®Á¤ÇÏ´Â ºÎºĞ
+    // aë°¸ë¥˜ë¡œ ìµœì¢…ê°’ì„ í™•ì •í•˜ëŠ” ë¶€ë¶„
     void FixValue()
     {
         masterSlider.value = aMas / 100f;
@@ -251,24 +261,24 @@ public class SoundMixerNCamera : MonoBehaviour
 
     public void ExitPanel()
     {
-        // ·¹ÀÌÄ³½ºÆ® µ¹·Á³õ°í°¡
+        // ë ˆì´ìºìŠ¤íŠ¸ ëŒë ¤ë†“ê³ ê°€
         canvasGroup.blocksRaycasts = true;
         optionPanel.SetActive(false);
         pausePanel.SetActive(true);
         pauseMenu.isOption = false;
     }
 
-    // ¼±Çü ½½¶óÀÌ´õ¿¡ ·Î±× ÆäÀÌ´õ °ªÀ» º¯Çü½ÃÅ°·Á¸é...
+    // ì„ í˜• ìŠ¬ë¼ì´ë”ì— ë¡œê·¸ í˜ì´ë” ê°’ì„ ë³€í˜•ì‹œí‚¤ë ¤ë©´...
     public float AdjustVolume(float value)
     {
-        // ÃÖ´ë°ªÀº 1, ÃÖ¼Ò°ªÀº 0.0001 -> 0ÀÌ¸é °è»êÀÌ °íÀå³ª°í º¼·ıÀÌ ¿Ã¶ó°¨ 
+        // ìµœëŒ€ê°’ì€ 1, ìµœì†Œê°’ì€ 0.0001 -> 0ì´ë©´ ê³„ì‚°ì´ ê³ ì¥ë‚˜ê³  ë³¼ë¥¨ì´ ì˜¬ë¼ê° 
         float clampVal = Mathf.Clamp(value, 0.0001f, 1f);
-        // ¼±Çü º¸°£°ªÀ» °¨¼è º¸°£°ªÀ¸·Î º¯È¯
+        // ì„ í˜• ë³´ê°„ê°’ì„ ê°ì‡  ë³´ê°„ê°’ìœ¼ë¡œ ë³€í™˜
         float logVal = Mathf.Log10(clampVal) * 20f;
         return logVal;
     }
 
-    // ½½¶óÀÌ´õ °ªÀ» pov ¿¡ÀÓ ½ºÇÇµå¿¡ ÀûÇÕÇÑ °ªÀ¸·Î ¹Ù²Û´Ù
+    // ìŠ¬ë¼ì´ë” ê°’ì„ pov ì—ì„ ìŠ¤í”¼ë“œì— ì í•©í•œ ê°’ìœ¼ë¡œ ë°”ê¾¼ë‹¤
     public void AdjustSensitivity(float value)
     {
         cSpeed.x = Mathf.RoundToInt((value / 5) * 100);

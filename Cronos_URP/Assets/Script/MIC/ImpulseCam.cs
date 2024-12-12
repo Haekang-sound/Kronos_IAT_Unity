@@ -1,6 +1,12 @@
 using UnityEngine;
 using Cinemachine;
 
+
+/// <summary>
+/// ì¹´ë©”ë¼ ì…°ì´í¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤
+/// ì´ë²¤íŠ¸ë§ˆë‹¤ í•„ìš”í•œ ì…°ì´í¬ ê°’ì„ ë³€ìˆ˜ë¡œ ë“¤ê³ ìˆë‹¤ê°€
+/// í•„ìš”í•˜ë©´ í•¨ìˆ˜ì— ë„£ì–´ì„œ ì…°ì´í¬í•œë‹¤.
+/// </summary>
 public class ImpulseCam : MonoBehaviour
 {
     private static ImpulseCam instance;
@@ -23,14 +29,14 @@ public class ImpulseCam : MonoBehaviour
         }
     }
 
-    CinemachineImpulseSource impulse;
-    [Tooltip("8¹æÇâ ±¤¼±ÀÇ ¼ÎÀÌÅ© °­µµÀÔ´Ï´Ù.")]
+    private CinemachineImpulseSource impulse;
+    [Tooltip("8ë°©í–¥ ê´‘ì„ ì˜ ì…°ì´í¬ ê°•ë„ì…ë‹ˆë‹¤.")]
     [Range(0, 10)]
     public float rayStrength = 1.0f;
-    [Tooltip("ºí·¢È¦ Æø¹ßÀÇ ¼ÎÀÌÅ© °­µµÀÔ´Ï´Ù. 8°³ÀÇ À§¼ºÀÌ ÀüºÎ È£ÃâÇÕ´Ï´Ù.")]
+    [Tooltip("ë¸”ë™í™€ í­ë°œì˜ ì…°ì´í¬ ê°•ë„ì…ë‹ˆë‹¤. 8ê°œì˜ ìœ„ì„±ì´ ì „ë¶€ í˜¸ì¶œí•©ë‹ˆë‹¤.")]
     [Range(0, 10)]
     public float blackHoleStrength = 1.0f;
-    [Tooltip("½ÃÄ§ÀÇ ¼ÎÀÌÅ© °­µµÀÔ´Ï´Ù.")]
+    [Tooltip("ì‹œì¹¨ì˜ ì…°ì´í¬ ê°•ë„ì…ë‹ˆë‹¤.")]
     [Range(0, 10)]
     public float handsStrength = 1.0f;
 
@@ -54,7 +60,7 @@ public class ImpulseCam : MonoBehaviour
         }
         else
         {
-            Debug.Log("°æ°í: InpulseCam Å¬·¡½º¿¡¼­ CinemachineImpulseSource ÀÌ ¾øÀ½");
+            Debug.Log("ê²½ê³ : InpulseCam í´ë˜ìŠ¤ì—ì„œ CinemachineImpulseSource ì´ ì—†ìŒ");
         }
     }
 }

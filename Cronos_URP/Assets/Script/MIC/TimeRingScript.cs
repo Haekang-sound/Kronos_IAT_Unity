@@ -1,10 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
+
+/// <summary>
+/// íƒ€ì„ ë§ í´ë˜ìŠ¤
+/// ì‹œì‘í•˜ìë§ˆì íšŒì „ ì½”ë£¨í‹´ì„ ì‹¤í–‰í•´ì„œ ê³„ì†í•´ì„œ íšŒì „í•œë‹¤
+/// ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ HPì— ë”°ë¼ì„œ ë‹¤ë¥¸ ë§ˆí…Œë¦¬ì–¼ì„ ê°€ì ¸ì˜¨ë‹¤
+/// </summary>
 public class TimeRingScript : MonoBehaviour
 {
     [SerializeField]
-    GameObject timeRing;
+    private GameObject timeRing;
     float rotateSpeed = 180.0f;
     private Renderer ringRenderer;
     public Material tex1;
@@ -13,23 +19,22 @@ public class TimeRingScript : MonoBehaviour
     public Material tex4;
     public Material tex5;
 
-    //[SerializeField]
-    float MaxHP;
-    Damageable enemy;
+    private float maxHP;
+    private Damageable enemy;
 
     // Start is called before the first frame update
     void Start()
     {
         if (gameObject == Player.Instance.gameObject)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î Å¸ÀÓ¸µ ÀÛµ¿");
-            MaxHP = Player.Instance.TP;
+            Debug.Log("í”Œë ˆì´ì–´ íƒ€ì„ë§ ì‘ë™");
+            maxHP = Player.Instance.TP;
         }
         else
         {
-            Debug.Log("Àû Å¸ÀÓ¸µ ÀÛµ¿");
+            Debug.Log("ì  íƒ€ì„ë§ ì‘ë™");
             enemy = gameObject.GetComponent<Damageable>();
-            MaxHP = enemy.maxHitPoints;
+            maxHP = enemy.maxHitPoints;
         }
         ringRenderer = timeRing.gameObject.GetComponent<Renderer>();
         StartCoroutine(RotateCoroutine());
@@ -41,26 +46,27 @@ public class TimeRingScript : MonoBehaviour
 
     }
 
+    // ê³„ì† í”Œë ˆì´ì–´ì˜ HPë¥¼ ì²´í¬í•˜ê³ , íŠ¹ì • ë²”ìœ„ë¥¼ ë„˜ì–´ê°ˆ ë•Œ ë§ˆí…Œë¦¬ì–¼ì„ ë°”ê¾¸ëŠ”ê²Œ ì¢‹ê² ë‹¤
     void CheckHealthToSwitchTexture()
     {
         if (enemy == null)
         {
-            float curHP = Player.Instance.TP / MaxHP;
+            float curHP = Player.Instance.TP / maxHP;
 
-            Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // Ã¼·Â¿¡ µû¸¥ ¸¶Å×¸®¾ó ¹è¿­
+            Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // ì²´ë ¥ì— ë”°ë¥¸ ë§ˆí…Œë¦¬ì–¼ ë°°ì—´
 
-            // curHP¸¦ 0~1 ¹üÀ§·Î ³ª´©°í ¹è¿­ ÀÎµ¦½º·Î º¯È¯ (0.8f ÀÌ»óÀº 4, 0.6f ÀÌ»óÀº 3 µî)
+            // curHPë¥¼ 0~1 ë²”ìœ„ë¡œ ë‚˜ëˆ„ê³  ë°°ì—´ ì¸ë±ìŠ¤ë¡œ ë³€í™˜ (0.8f ì´ìƒì€ 4, 0.6f ì´ìƒì€ 3 ë“±)
             int index = Mathf.Clamp(Mathf.FloorToInt(curHP * 5), 0, 4);
 
             ringRenderer.material = materials[index];
         }
         else
         {
-            float curHP = enemy.currentHitPoints / MaxHP;
+            float curHP = enemy.currentHitPoints / maxHP;
 
-            Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // Ã¼·Â¿¡ µû¸¥ ¸¶Å×¸®¾ó ¹è¿­
+            Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // ì²´ë ¥ì— ë”°ë¥¸ ë§ˆí…Œë¦¬ì–¼ ë°°ì—´
 
-            // curHP¸¦ 0~1 ¹üÀ§·Î ³ª´©°í ¹è¿­ ÀÎµ¦½º·Î º¯È¯ (0.8f ÀÌ»óÀº 4, 0.6f ÀÌ»óÀº 3 µî)
+            // curHPë¥¼ 0~1 ë²”ìœ„ë¡œ ë‚˜ëˆ„ê³  ë°°ì—´ ì¸ë±ìŠ¤ë¡œ ë³€í™˜ (0.8f ì´ìƒì€ 4, 0.6f ì´ìƒì€ 3 ë“±)
             int index = Mathf.Clamp(Mathf.FloorToInt(curHP * 5), 0, 4);
 
             ringRenderer.material = materials[index];

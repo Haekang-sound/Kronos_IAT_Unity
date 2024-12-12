@@ -5,11 +5,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// ì”¬ì„ ë¡œë“œí•˜ê³ , ë¡œë“œí•˜ëŠ” ë™ì•ˆ ë¡œë”© ê²Œì´ì§€ë¥¼ ì±„ì›Œì£¼ëŠ” í´ë˜ìŠ¤
+/// </summary>
 public class SceneLoader : MonoBehaviour
 {
 	private List<string> lodingText;
 	private static SceneLoader instance;
-    // GetÇÏ´Â ÇÁ·ÎÆÛÆ¼
+    // Getí•˜ëŠ” í”„ë¡œí¼í‹°
     public static SceneLoader Instance
     {
         get
@@ -28,19 +32,19 @@ public class SceneLoader : MonoBehaviour
             return instance;
         }
     }
-    public float fadeTime = 1.0f;
-    public GameObject loadingObj;
-    public Image progressArch;
-    [SerializeField]
-    TextMeshProUGUI loadingText;
 
-    // ÇÔ¼ö·Î ºÎ¸¦°Å¶ó¸é ÀÌ°É ¾´´Ù
+    [SerializeField]
+    private TextMeshProUGUI loadingText;
+    public float fadeTime = 1.0f;
+    public Image progressArch;          // ë¡œë”© ë°”
+
+    // í•¨ìˆ˜ë¡œ ë¶€ë¥¼ê±°ë¼ë©´ ì´ê±¸ ì“´ë‹¤
     public void LoadScene(string indexName)
     {
         StartCoroutine(LoadSceneCoroutine(indexName));
     }
 
-    // ¾ÀÀ» ·ÎµåÇÏ´Â ÄÚ·çÆ¾
+    // ë¡œë”©í•˜ê³ , ë¡œë”© ë°”ë„ ì±„ì›Œì¤€ë‹¤
     public IEnumerator LoadSceneCoroutine(string indexName)
     {
         progressArch.fillAmount = 0;
@@ -52,10 +56,6 @@ public class SceneLoader : MonoBehaviour
         {
             Player.Instance.GetComponent<InputReader>().enabled = false;
         }
-
-        // 5°³ÀÇ ¿ä¼Ò Áß ÇÏ³ª ·£´ıÀ¸·Î »Ì¾Æ¼­ ÅØ½ºÆ®·Î ³ª¿À°Ô ÇÏ±â
-        List<int>rand = EffectManager.Instance.FisherYatesShuffles(5, 1);
-		//loadingText.text = JasonSaveLoader.LoadingTexts[rand[0]].text;
 
 		float progress = 0;
 

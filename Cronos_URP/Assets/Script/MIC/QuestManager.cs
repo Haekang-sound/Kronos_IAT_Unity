@@ -1,7 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// UI로 띄워야 하는 지역과 목표 텍스트를 갖고있는 클래스
+/// 새 목표를 띄울 때 현재 목표를 달성했는지 여부를 판단한다
+/// </summary>
 public class QuestManager : MonoBehaviour
 {
     // 호출할 지역 텍스트 배열
@@ -15,7 +19,7 @@ public class QuestManager : MonoBehaviour
     private bool curQuesting;
     public bool abilityQuesting = false;
 
-    UIManager uiManager;
+    private UIManager uiManager;
 
     // 또글턴
     private static QuestManager instance;
@@ -52,7 +56,6 @@ public class QuestManager : MonoBehaviour
 
         // 현재 퀘스트가 달성이 되었다면 (!curQuesting)이라면
         // 다음 목표로
-        //uiManager.StartCoroutine(uiManager.AppearMainObjective(idx));
         uiManager.StartAppearMain(idx);
         // 크로노스 동상을 위해서
         if (idx == 1)
@@ -74,18 +77,9 @@ public class QuestManager : MonoBehaviour
         curQuesting = false;
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UIManager.Instance;
     }
-
-//     // Update is called once per frame
-//     void Update()
-//     {
-//         // 0번 누르면 퀘스트 달성
-//         if (Input.GetKeyDown(KeyCode.Alpha0))
-//             uiManager.Achieve();
-//     }
 }

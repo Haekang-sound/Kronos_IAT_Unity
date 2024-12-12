@@ -1,7 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 첫 번째 스테이지에서 박스 콜라이더에 닿으면
+/// 조작법 가이드를 띄워주는 클래스
+/// </summary>
 public class KeyPopUp : MonoBehaviour
 {
     [SerializeField]

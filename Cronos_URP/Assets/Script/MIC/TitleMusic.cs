@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 타이틀 씬 BGM은 그냥 오브젝트 하나에 이걸 붙여서 사용하고 있다
+/// </summary>
 public class TitleMusic : MonoBehaviour
 {
-    SoundManager sm;
+    private SoundManager sm;
 
     // Start is called before the first frame update
     void Start()

@@ -1,14 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// ì§€ì—­ ì´ë¦„ ë° ëª©í‘œ UI íŒì—… ë° ì• ë‹ˆë©”ì´ì…˜ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤
+/// UI ì• ë‹ˆë©”ì´ì…˜ì€ ë³´ê°„ ê·¸ ì´ìƒ ê·¸ ì´í•˜ë„ ì•„ë‹ˆë‹¤
+/// í€˜ìŠ¤íŠ¸ ë§¤ë‹ˆì €ì™€ ì—°ë™í•´ì„œ êµ´ëŸ¬ê°€ëŠ” ì¤‘
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     private static UIManager instance;
-    // GetÇÏ´Â ÇÁ·ÎÆÛÆ¼
+    // Getí•˜ëŠ” í”„ë¡œí¼í‹°
     public static UIManager Instance
     {
         get
@@ -29,47 +33,47 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    GameObject regionNameObj;
+    private GameObject regionNameObj;
     [SerializeField]
-    Image regionImage;
+    private Image regionImage;
     [SerializeField]
-    TextMeshProUGUI regionText;
+    private TextMeshProUGUI regionText;
     [SerializeField]
-    GameObject objectiveSubObj;
+    private GameObject objectiveSubObj;
     [SerializeField]
-    Image subBackImage;
+    private Image subBackImage;
     [SerializeField]
-    TextMeshProUGUI subText;
+    private TextMeshProUGUI subText;
     [SerializeField]
-    GameObject objectiveMainObj;
+    private GameObject objectiveMainObj;
     [SerializeField]
-    Image mainBackImage;
+    private Image mainBackImage;
     [SerializeField]
-    TextMeshProUGUI mainText;
+    private TextMeshProUGUI mainText;
 
-    Color texColor = new Color(0.96f, 0.96f, 0.96f);
-    Color acvColor = new Color(0.431f, 0.886f, 0.357f);
+    private Color texColor = new Color(0.96f, 0.96f, 0.96f);
+    private Color acvColor = new Color(0.431f, 0.886f, 0.357f);
 
-    [Tooltip("Áö¿ª ÀÌ¸§ÀÌ ÆäÀÌµåµÇ´Â ½Ã°£ÀÔ´Ï´Ù")]
-    public float RegionfadeTime = 2.0f;
-    [Tooltip("Áö¿ª ÀÌ¸§ÀÌ À¯ÁöµÇ´Â ½Ã°£ÀÔ´Ï´Ù")]
-    public float RegiondurationTime = 3.0f;
-    [Tooltip("¸ñÇ¥°¡ ÆäÀÌµåµÇ´Â ½Ã°£ÀÔ´Ï´Ù")]
-    public float ObjfadeTime = 1.0f;
-    [Tooltip("¸ñÇ¥°¡ À¯ÁöµÇ´Â ½Ã°£ÀÔ´Ï´Ù")]
-    public float ObjdurationTime = 3.0f;
+    [Tooltip("ì§€ì—­ ì´ë¦„ì´ í˜ì´ë“œë˜ëŠ” ì‹œê°„ì…ë‹ˆë‹¤")]
+    public float regionFadeTime = 1.0f;
+    [Tooltip("ì§€ì—­ ì´ë¦„ì´ ìœ ì§€ë˜ëŠ” ì‹œê°„ì…ë‹ˆë‹¤")]
+    public float regionDurationTime = 2.0f;
+    [Tooltip("ëª©í‘œê°€ í˜ì´ë“œë˜ëŠ” ì‹œê°„ì…ë‹ˆë‹¤")]
+    public float objFadeTime = 1.0f;
+    [Tooltip("ëª©í‘œê°€ ìœ ì§€ë˜ëŠ” ì‹œê°„ì…ë‹ˆë‹¤")]
+    public float objDurationTime = 2.0f;
 
-    // ÄÚ·çÆ¾ Áß È£Ãâ ½Ã ¸ØÃß±â À§ÇØ¼­
-    Coroutine curCoroutine;
+    // ì½”ë£¨í‹´ ì¤‘ í˜¸ì¶œ ì‹œ ë©ˆì¶”ê¸° ìœ„í•´ì„œ
+    private Coroutine curCoroutine;
 
-    QuestManager qm;
+    private QuestManager qm;
 
     [SerializeField]
     private GameObject interactor;
     // lazy initialization
-    // ÇÁ·ÎÆÛÆ¼¿¡ ÇÒ´çÇÏ±â Àü¿¡ ´Ù¸¥ ½ºÅ©¸³Æ®°¡ ºÒ·¯¼­
-    // ÆÛºí¸¯ ¿ÀºêÁ§Æ®¸¦ ¹Ù·Î ÇÒ´çÇÏ±â ½ÈÀ¸´Ï±î
-    // ÃÊ±âÈ­ Àü¿¡ ¿ä±¸ÇÑ´Ù¸é, ÀÎ½ºÆåÅÍ¿¡¼­ ÇÒ´çÇÑ °ªÀ¸·Î ÃÊ±âÈ­ÇÏ°í ¸®ÅÏ
+    // í”„ë¡œí¼í‹°ì— í• ë‹¹í•˜ê¸° ì „ì— ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ê°€ ë¶ˆëŸ¬ì„œ
+    // í¼ë¸”ë¦­ ì˜¤ë¸Œì íŠ¸ë¥¼ ë°”ë¡œ í• ë‹¹í•˜ê¸° ì‹«ìœ¼ë‹ˆê¹Œ
+    // ì´ˆê¸°í™” ì „ì— ìš”êµ¬í•œë‹¤ë©´, ì¸ìŠ¤í™í„°ì—ì„œ í• ë‹¹í•œ ê°’ìœ¼ë¡œ ì´ˆê¸°í™”í•˜ê³  ë¦¬í„´
     private GameObject interactProp;
     public GameObject Interactor
     {
@@ -110,8 +114,8 @@ public class UIManager : MonoBehaviour
         StartCoroutine(AchieveSubObjective());
     }
 
-    /// Áö¿ªÀÌ¸§ UI ¾Ö´Ï¸ŞÀÌ¼Ç
-    /// »õ Áö¿ªÀ¸·Î µé¾î¿Ô´Ù¸é ÀÌ ÄÚ·çÆ¾À» È£Ãâ
+    /// ì§€ì—­ì´ë¦„ UI ì• ë‹ˆë©”ì´ì…˜
+    /// ìƒˆ ì§€ì—­ìœ¼ë¡œ ë“¤ì–´ì™”ë‹¤ë©´ ì´ ì½”ë£¨í‹´ì„ í˜¸ì¶œ
     public IEnumerator ShowRegionNameCoroutine(int idx)
     {
         Debug.Log("Begin Coroutine");
@@ -119,48 +123,46 @@ public class UIManager : MonoBehaviour
         regionNameObj.SetActive(true);
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		/// ½Ì±ÛÅÏ¿¡¼­ ½ºÆ®¸µÀ¸·Î ¹Ş¾Æ¿ÀÀÚ
-		//regionText.text = JasonSaveLoader.SceneTexts[sceneIdx].text;
+		// ì‹±ê¸€í„´ì—ì„œ ìŠ¤íŠ¸ë§ìœ¼ë¡œ ë°›ì•„ì˜¤ì
         regionText.text = qm.RegionNames[idx];
 
         float elapsedTime = 0.0f;
-        // ¹è°æ ÆäÀÌµå
-        while (elapsedTime < RegionfadeTime)
+        // ë°°ê²½ í˜ì´ë“œ
+        while (elapsedTime < regionFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / RegionfadeTime);
+            regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / regionFadeTime);
             yield return null;
         }
         regionImage.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        //yield return new WaitForSeconds(1.0f);
         elapsedTime = 0.0f;
 
-        // Áö¿ªÀÌ¸§ ÆäÀÌµå
-        while (elapsedTime < RegionfadeTime)
+        // ì§€ì—­ì´ë¦„ í˜ì´ë“œ
+        while (elapsedTime < regionFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / RegionfadeTime);
+            regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, elapsedTime / regionFadeTime);
             yield return null;
         }
         regionText.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        yield return new WaitForSecondsRealtime(RegiondurationTime);
+        yield return new WaitForSecondsRealtime(regionDurationTime);
         elapsedTime = 0.0f;
 
-        // ÆäÀÌµå ¾Æ¿ô
-        while (elapsedTime < RegionfadeTime)
+        // í˜ì´ë“œ ì•„ì›ƒ
+        while (elapsedTime < regionFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / RegionfadeTime);
-            regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / RegionfadeTime);
+            regionImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / regionFadeTime);
+            regionText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, elapsedTime / regionFadeTime);
             yield return null;
         }
         regionImage.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionText.GetComponent<CanvasGroup>().alpha = 0.0f;
         regionNameObj.SetActive(false);
 
-        // Ã¹ ¹øÂ° ¸ñÇ¥´Â ¿©±â¼­ ¶ç¿ì±â
+        // ì²« ë²ˆì§¸ ëª©í‘œëŠ” ì—¬ê¸°ì„œ ë„ìš°ê¸°
         if (idx == 0)
         {
             yield return new WaitForSeconds(1.0f);
@@ -180,10 +182,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// ¸ŞÀÎ ¸ñÇ¥ ¹Ú½º UI ¾Ö´Ï¸ŞÀÌ¼Ç
-    /// QuestManagerÀÇ ÀÎµ¦½º¿Í ¿¬µ¿ÇØ¼­ ÆË¾÷ÇÑ´Ù.
-    /// ÀÌ ÄÚ·çÆ¾ÀÌ ³¡³ª¸é ¼­ºê ¸ñÇ¥ ÄÚ·çÆ¾±îÁö ¾Ë¾Æ¼­ È£ÃâÇÑ´Ù
-    /// Áß°£¿¡ ÄÚ·çÆ¾ ³­ÀÔÀ» ´ëºñÇØ¼­ ÇÑ¹ø ´õ ÇÔ¼ö·Î °¨½Î´Â°Ô ¸Â³ª
+    /// ë©”ì¸ ëª©í‘œ ë°•ìŠ¤ UI ì• ë‹ˆë©”ì´ì…˜
+    /// QuestManagerì˜ ì¸ë±ìŠ¤ì™€ ì—°ë™í•´ì„œ íŒì—…í•œë‹¤.
+    /// ì´ ì½”ë£¨í‹´ì´ ëë‚˜ë©´ ì„œë¸Œ ëª©í‘œ ì½”ë£¨í‹´ê¹Œì§€ ì•Œì•„ì„œ í˜¸ì¶œí•œë‹¤
+    /// ì¤‘ê°„ì— ì½”ë£¨í‹´ ë‚œì…ì„ ëŒ€ë¹„í•´ì„œ í•œë²ˆ ë” í•¨ìˆ˜ë¡œ ê°ì‹¸ëŠ”ê²Œ ë§ë‚˜
     public void StartAppearMain(int idx)
     {
         curCoroutine = StartCoroutine(AppearMainObjective(idx));
@@ -192,7 +194,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator AppearMainObjective(int idx)
     {
         Debug.Log("Show Main objective UI");
-        // Äù½ºÆ® ½ÃÀÛ
+        // í€˜ìŠ¤íŠ¸ ì‹œì‘
         qm.Questing();
 
         objectiveMainObj.SetActive(true);
@@ -204,11 +206,11 @@ public class UIManager : MonoBehaviour
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
-        // ¸ñÇ¥ ¹è°æ ÆäÀÌµå
-        while (elapsedTime < ObjfadeTime)
+        // ëª©í‘œ ë°°ê²½ í˜ì´ë“œ
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            offset.y = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
+            offset.y = Mathf.Lerp(0, 1, elapsedTime / objFadeTime);
             mainBackImage.transform.localScale = offset;
             yield return null;
         }
@@ -217,48 +219,47 @@ public class UIManager : MonoBehaviour
 
         mainText.gameObject.SetActive(true);
         elapsedTime = 0.0f;
-        // ¸ñÇ¥ ÅØ½ºÆ® ÆäÀÌµå
-        while (elapsedTime < ObjfadeTime)
+        // ëª©í‘œ í…ìŠ¤íŠ¸ í˜ì´ë“œ
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
+            mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / objFadeTime);
             yield return null;
         }
         mainText.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        yield return new WaitForSecondsRealtime(ObjdurationTime);
+        yield return new WaitForSecondsRealtime(objDurationTime);
 
         elapsedTime = 0.0f;
-        // ÅØ½ºÆ® ÆäÀÌµå¾Æ¿ô
-        while (elapsedTime < ObjfadeTime)
+        // í…ìŠ¤íŠ¸ í˜ì´ë“œì•„ì›ƒ
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
+            mainText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / objFadeTime);
             yield return null;
         }
         mainText.GetComponent <CanvasGroup>().alpha = 0.0f;
         
         elapsedTime = 0.0f;
-        // ¹è°æ ÆäÀÌµå¾Æ¿ô
-        while (elapsedTime < ObjfadeTime)
+        // ë°°ê²½ í˜ì´ë“œì•„ì›ƒ
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            offset.y = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
+            offset.y = Mathf.Lerp(1, 0, elapsedTime / objFadeTime);
             mainBackImage.transform.localScale = offset;
             yield return null;
         }
         offset.y = 0.0f;
         mainBackImage.transform.localScale = offset;
 
-        //StartCoroutine(AppearSubObjective(idx));
         StartAppearSub(idx);
         objectiveMainObj.SetActive(false);
         curCoroutine = null;
     }
 
-    /// ¼­ºê ¸ñÇ¥ UI ¶ç¿ì±â
-    /// ¾ê´Â ¸ŞÀÎ ¸ñÇ¥°¡ ³ª¿À¸é ¹«Á¶°Ç È£ÃâµÈ´Ù.
-    /// ´Üµ¶À¸·Î ¾²ÀÏ ÀÏÀº °ÅÀÇ ¾øÀ» °Í °°´Ù.
+    /// ì„œë¸Œ ëª©í‘œ UI ë„ìš°ê¸°
+    /// ì–˜ëŠ” ë©”ì¸ ëª©í‘œê°€ ë‚˜ì˜¤ë©´ ë¬´ì¡°ê±´ í˜¸ì¶œëœë‹¤.
+    /// ë‹¨ë…ìœ¼ë¡œ ì“°ì¼ ì¼ì€ ê±°ì˜ ì—†ì„ ê²ƒ ê°™ë‹¤.
     public void StartAppearSub(int idx)
     {
         curCoroutine = StartCoroutine(AppearSubObjective(idx));
@@ -268,30 +269,29 @@ public class UIManager : MonoBehaviour
         Debug.Log("Show sub objective UI");
         objectiveSubObj.SetActive(true);
         subText.GetComponent<CanvasGroup>().alpha = 0.0f;
-        //subText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
         subText.text = qm.QuestLines[idx];
 
         Vector3 offset = new Vector3(1, 0, 1);
         float elapsedTime = 0.0f;
-        while (elapsedTime < ObjfadeTime)
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            offset.y = Mathf.SmoothStep(0, 1, elapsedTime / ObjfadeTime);
+            offset.y = Mathf.SmoothStep(0, 1, elapsedTime / objFadeTime);
             subBackImage.transform.localScale = offset;
-            subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / ObjfadeTime);
+            subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / objFadeTime);
             yield return null;
         }
         subText.GetComponent <CanvasGroup>().alpha = 1.0f;
     }
 
-    /// ¸ñÇ¥ ´Ş¼ºÇÏ¸é ¼­ºê UI ¶ì¿ëÇÏ°í Áö¿ì±â
+    /// ëª©í‘œ ë‹¬ì„±í•˜ë©´ ì„œë¸Œ UI ë ìš©í•˜ê³  ì§€ìš°ê¸°
     public void Achieve()
     {
         StartCoroutine(AchieveSubObjective());
     }
     public IEnumerator AchieveSubObjective()
     {
-        // curCoroutineÀº ÀÌ°ÍÀ» À§ÇØ¼­
+        // curCoroutineì€ ì´ê²ƒì„ ìœ„í•´ì„œ
         if (curCoroutine != null)
         {
             StopCoroutine(curCoroutine);
@@ -303,7 +303,7 @@ public class UIManager : MonoBehaviour
             curCoroutine = null;
         }
 
-        // ³¡³µ´Ù
+        // ëë‚¬ë‹¤
         qm.QuestDone();
 
         Debug.Log("Achieve sub objective UI");
@@ -325,12 +325,12 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2.0f);
 
         elapsedTime = 0.0f;
-        while (elapsedTime < ObjfadeTime)
+        while (elapsedTime < objFadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            offset.y = Mathf.SmoothStep(1, 0, elapsedTime / ObjfadeTime);
+            offset.y = Mathf.SmoothStep(1, 0, elapsedTime / objFadeTime);
             subBackImage.transform.localScale = offset;
-            subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / ObjfadeTime);
+            subText.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / objFadeTime);
             yield return null;
         }
         subText.GetComponent<CanvasGroup>().alpha = 0;
@@ -338,11 +338,10 @@ public class UIManager : MonoBehaviour
         objectiveSubObj.SetActive(false);
     }
 
-    /// ¸ñÇ¥ ½ÇÆĞÇÏ¸é ¼­ºê UI »¡°£»öÀ¸·Î Áö¿ì±â
-    
+    /// ëª©í‘œë¥¼ ë‹¬ì„±í•˜ì§€ ì•Šê³  ë‹¤ìŒ ëª©í‘œê°€ ë‚˜ì™”ë‹¤ë©´
     public IEnumerator FailSubObjective()
     {
-        // curCoroutineÀº ÀÌ°ÍÀ» À§ÇØ¼­
+        // curCoroutineì€ ì´ê²ƒì„ ìœ„í•´ì„œ
         if (curCoroutine != null)
         {
             StopCoroutine(curCoroutine);
@@ -354,14 +353,13 @@ public class UIManager : MonoBehaviour
             curCoroutine = null;
         }
 
-        // ³¡³µ´Ù
+        // ëë‚¬ë‹¤
         qm.QuestDone();
 
         Debug.Log("Failed to achieve sub objective UI");
         Vector3 offset = new Vector3(1.3f, 1.3f, 1.3f);
         Vector3 sVec = offset;
         Vector3 eVec = new Vector3(1, 1, 1);
-        //subText.color = Color.red;
 
         float failedTime = 0.6f;
         float elapsedTime = 0.0f;

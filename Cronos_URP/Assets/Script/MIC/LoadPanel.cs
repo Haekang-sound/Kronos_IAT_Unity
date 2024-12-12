@@ -2,21 +2,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
-/// ��¼�ٺ��� �ε�/Ÿ��Ʋ�� �� ��ũ��Ʈ���� �ϰ� �Ǿ���
-/// �̰Ÿ³�
+/// <summary>
+/// 체크포인트 로드와 타이틀 화면으로 돌아가는 기능을 하는 클래스
+/// 체크포인트 버튼과 타이틀 버튼은 같은 스크립트를 사용한다
+/// 굳이 나눌 필요가 없어 보여서 하나의 스크립트로 짜보았다
+/// </summary>
 public class LoadPanel : MonoBehaviour
 {
     [SerializeField]
-    Button option;
+    [Tooltip("퍼즈 패널의 옵션 버튼입니다")]
+    private Button option;
     [SerializeField]
-    Button control;
+    [Tooltip("퍼즈 패널의 조작 버튼입니다")]
+    private Button control;
     [SerializeField]
-    Button load;
+    [Tooltip("퍼즈 패널의 체크포인트 버튼입니다")]
+    private Button load;
     [SerializeField]
-    Button title;
+    [Tooltip("퍼즈 패널의 타이틀 버튼입니다")]
+    private Button title;
     [SerializeField]
-    PauseMenu pauseMenu;
+    [Tooltip("상위 퍼즈메뉴 프리팹입니다")]
+    private PauseMenu pauseMenu;
 
     private void OnEnable()
     {
@@ -28,7 +35,7 @@ public class LoadPanel : MonoBehaviour
 
     public void LoadSave()
     {
-
+        SaveLoadManager.Instance.LoadCheckpointData();
     }
 
     public void GoTitle()

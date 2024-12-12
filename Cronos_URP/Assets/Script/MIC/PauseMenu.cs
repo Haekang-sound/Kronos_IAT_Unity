@@ -1,27 +1,31 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+/// <summary>
+/// 퍼즈 했을 때 등장하는 메뉴 UI
+/// 프리팹에서 관리하기 쉽게 다 인스펙터로 열어놓은 게임오브젝트 뭉치
+/// </summary>
 public class PauseMenu : MonoBehaviour
 {
-    PauseManager pauseManager;
+    private PauseManager pauseManager;
 
     [SerializeField]
-    GameObject pausePanel;
+    private GameObject pausePanel;
     [SerializeField]
-    GameObject optionPanel;
+    private GameObject optionPanel;
     [SerializeField]
-    GameObject controlPanel;
+    private GameObject controlPanel;
     [SerializeField]
-    GameObject loadPanel;
+    private GameObject loadPanel;
     [SerializeField]
-    GameObject titlePanel;
-    bool isPaused;
+    private GameObject titlePanel;
+
+    private bool isPaused;
     public bool isOption;
     public bool isControl;
     public bool isLoad;
     public bool isTitle;
-
-
 
     private void OnEnable()
     {
@@ -68,10 +72,14 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && pauseManager.escAvailable && !ScreenFader.Instance.faderCanvasGroup.gameObject.activeSelf)
         {
             if (!isPaused)
+            {
                 OpenPauseMenu();
+            }
 
             else
+            {
                 ClosePanel();
+            }
         }
     }
 
@@ -80,7 +88,7 @@ public class PauseMenu : MonoBehaviour
         pausePanel.SetActive(true);
         isPaused = true;
         pauseManager.PauseGame();
-        Debug.Log("����޴�����");
+        Debug.Log("퍼즈메뉴열기");
     }
 
     void ClosePauseMenu()
@@ -89,7 +97,7 @@ public class PauseMenu : MonoBehaviour
         optionPanel.SetActive(false);
         isPaused = false;
         pauseManager.UnPauseGame();
-        Debug.Log("����޴��ݱ�");
+        Debug.Log("퍼즈메뉴닫기");
     }
 
     public void ClosePanel()
@@ -100,27 +108,32 @@ public class PauseMenu : MonoBehaviour
             optionPanel.GetComponentInChildren<SoundMixerNCamera>().ExitPanel();
             isOption = false;
         }
+
         else if (isControl)
         {
             controlPanel.SetActive(false);
             isControl = false;
         }
+
         else if (isLoad)
         {
             loadPanel.GetComponent<LoadPanel>().ExitLoad();
             isLoad = false;
         }
+
         else if (isTitle)
         {
             titlePanel.GetComponent<LoadPanel>().ExitLoad();
             isTitle = false;
         }
+
         else
         {
             ClosePauseMenu();
         }
-        // ��ư ���̶���Ʈ �ʱ�ȭ
-        Debug.Log("��ư ���̶���Ʈ �ʱ�ȭ");
+
+        // 버튼 하이라이트 초기화
+        Debug.Log("버튼 하이라이트 초기화");
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

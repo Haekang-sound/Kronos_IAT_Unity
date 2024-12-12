@@ -40,7 +40,7 @@ public partial class Damageable : MonoBehaviour
 	//EffectManager effectManager;
 	Player player;
 	ImpulseCam impCam;
-	UI_TPHUD uiHud;
+	UI_TPCPHUD uiHud;
 
 	private void Awake()
 	{
@@ -62,7 +62,7 @@ public partial class Damageable : MonoBehaviour
 		player = Player.Instance;
 		impCam = ImpulseCam.Instance;
 		soundManager = SoundManager.Instance;
-		uiHud = UI_TPHUD.Instance;
+		uiHud = UI_TPCPHUD.Instance;
 	}
 
 	void Update()
@@ -225,7 +225,7 @@ public partial class Damageable : MonoBehaviour
 	// 적 발자국을 이렇게 할 수 있을까
 	public void FootStep()
 	{
-		if (gameObject.GetComponent<DestroyKey>() != null)
+		if (gameObject.GetComponent<Centurion>() != null)
 			soundManager.PlaySFX("Boss_Walk_1_Sound_SE", transform);
 		else
 			soundManager.PlaySFX("Enemy_Walk_1_Sound_SE", transform);

@@ -1,5 +1,10 @@
 using UnityEngine;
 
+
+/// <summary>
+/// 분수 위의 삼각형 인디케이터
+/// 항상 플레이어를 바라보게
+/// </summary>
 public class PlazaIndicator : MonoBehaviour
 {
 

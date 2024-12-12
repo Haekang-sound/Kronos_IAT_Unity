@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 디졸브 스크립트
+/// 
+/// </summary>
 public class Dissolve : MonoBehaviour
 {
     [SerializeField]

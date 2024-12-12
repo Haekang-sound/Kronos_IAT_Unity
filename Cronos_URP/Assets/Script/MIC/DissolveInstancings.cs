@@ -2,14 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+/// <summary>
+/// ì´ê±´ ë‚´ê°€ ë§Œë“ ê²Œ ì•„ë‹Œë°?
+/// ë³´ìŠ¤ìš© ë””ì¡¸ë¸Œ ìŠ¤í¬ë¦½íŠ¸ê°™ë‹¤
+/// </summary>
 public class DissolveInstancings : MonoBehaviour
 {
-    // ¸î ÃÊ ÀÖ´Ù µğÁ¹ºê µÉ °ÍÀÎ°¡
+    // ëª‡ ì´ˆ ìˆë‹¤ ë””ì¡¸ë¸Œ ë  ê²ƒì¸ê°€
     public float delaySec = 2.0f;
 
     public UnityEvent Vanished;
 
-    // µğÁ¹ºê µÉ ÃÊ
+    // ë””ì¡¸ë¸Œ ë  ì´ˆ
     [SerializeField]
     private float dissolveTime = 6f;
 
@@ -44,12 +49,12 @@ public class DissolveInstancings : MonoBehaviour
 
         Vanished?.Invoke();
 
-        // ºÎ¸ğ Â°·Î ¾ø¾Ø´Ù
+        // ë¶€ëª¨ ì§¸ë¡œ ì—†ì•¤ë‹¤
         //gameObject.SetActive(false);
         DestroyTopParent();
     }
 
-    // ÃÖ»óÀ§ ºÎ¸ğ±îÁö Å½»öÇØ¼­ °ü·Ã ¿ÀºêÁ§Æ®¸¦ µğ½ºÆ®·ÎÀÌ
+    // ìµœìƒìœ„ ë¶€ëª¨ê¹Œì§€ íƒìƒ‰í•´ì„œ ê´€ë ¨ ì˜¤ë¸Œì íŠ¸ë¥¼ ë””ìŠ¤íŠ¸ë¡œì´
     void DestroyTopParent()
     {
         Transform curTrans = transform;

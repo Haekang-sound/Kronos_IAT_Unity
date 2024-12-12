@@ -1,11 +1,15 @@
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// UI에서 디버깅을 위해 FPS을 띄워주는 클래스
+/// </summary>
 public class FPSCounter : MonoBehaviour
 {
     public TextMeshProUGUI fpsText;
 
-    float deltaTime = 0.0f;
+    private float deltaTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()

@@ -1,7 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 보스 창 하나에서 돌아가는 클래스
+/// 플레이어를 조준하고 날아가는 것 까지는 여기에서
+/// </summary>
 public class BossSpearScript : MonoBehaviour
 {
     public bool act = false;
@@ -12,8 +16,8 @@ public class BossSpearScript : MonoBehaviour
     public float incSpeed = 0.0f;
     public float elapsedTime;
     public float spearDamage = 0.0f;
-    SoundManager sm;
-    ImpulseCam ic;
+    private SoundManager sm;
+    private ImpulseCam ic;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,7 @@ public class BossSpearScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // �÷��̾ ���� ����
+        // 플레이어를 향해 조준
         if (act)
         {
             Vector3 dir = (target.transform.position - transform.position).normalized;
@@ -37,7 +41,7 @@ public class BossSpearScript : MonoBehaviour
         }
     }
 
-    // ����
+    // 사출
     public IEnumerator Saturate(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -65,8 +69,8 @@ public class BossSpearScript : MonoBehaviour
         int collisionLayer = collision.gameObject.layer;
         if (collisionLayer == LayerMask.NameToLayer("Player"))
         {
-            // �÷��̾����� ������ڱ�
-            Debug.Log("�浹 : " + collision.gameObject.name);
+            // 플레이어한테 대미지박기
+            Debug.Log("충돌 : " + collision.gameObject.name);
             //Player.Instance._damageable.currentHitPoints -= spearDamage;
         }
 
@@ -74,7 +78,7 @@ public class BossSpearScript : MonoBehaviour
         {
             sat = false;
             Destroy(GetComponent<SimpleDamager>());
-            Debug.Log("â �ε�ħ");
+            Debug.Log("창 부딪침");
             ic.Shake(ic.handsStrength);
             EffectManager.Instance.SpearImpact(targetPos);
             sm.PlaySFX("Ground_Impact_1_Sound_SE", transform);
