@@ -24,7 +24,7 @@ public class LastCombo : StateMachineBehaviour
 		PlayerStateMachine.GetInstance().HitStop.hitStopTime = hitStopTime;
 
 		//Player.Instance.IsEnforced = true;
-		Player.Instance._damageable.enabled = false;
+		Player.Instance.damageable.enabled = false;
 
 		Player.Instance.meleeWeapon.simpleDamager.damageAmount = Damage;
 		Player.Instance.CurrentDamage = Damage;
@@ -50,7 +50,7 @@ public class LastCombo : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
- 		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
+ 		PlayerStateMachine.GetInstance().Player.damageable.enabled = true;
 // 		Player.Instance.isBuff = false;
 // 		Player.Instance.buffTimer = 0f;
 // 		Player.Instance.IsEnforced = false;

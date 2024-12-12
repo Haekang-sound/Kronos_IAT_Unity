@@ -42,7 +42,7 @@ public class MonsterSelector : MonoBehaviour
             /// 매번 컴포넌트 접근으로 찾아야하는 점은 
             /// 너무 아쉬운 일이다. 방법을 찾아볼까?
             /// 1. findTarget기능의 위치를 바꾼다.
-            float value = Mathf.Abs((autoTargetor.PlayerObject.position - monsters[i].GetComponent<Transform>().position).magnitude);
+            float value = Mathf.Abs((autoTargetor.playerObject.position - monsters[i].GetComponent<Transform>().position).magnitude);
 
             // 현재 min값보다 value가 작다면 혹은 min에 값이 들어있지 않다면 
             if (min > value || min == null)
@@ -51,7 +51,7 @@ public class MonsterSelector : MonoBehaviour
                 min = value;
 
                 // 가장 작은 값을 가진 트랜스폼을 타겟으로 설정한다.
-                autoTargetor.Target = monsters[i].GetComponent<Transform>();
+                autoTargetor.target = monsters[i].GetComponent<Transform>();
             }
         }
 

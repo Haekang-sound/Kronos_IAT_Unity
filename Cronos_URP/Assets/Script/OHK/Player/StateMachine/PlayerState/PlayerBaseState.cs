@@ -13,6 +13,7 @@ using UnityEngine.Rendering.Universal;
 /// OHK 2024.12.10 v1
 /// </summary>
 public abstract class PlayerBaseState : State
+
 {
 	// 변수를 읽기전용으로 선언
 	protected readonly PlayerStateMachine stateMachine;
@@ -22,11 +23,12 @@ public abstract class PlayerBaseState : State
 	protected PlayerBaseState(PlayerStateMachine stateMachine)
 	{
 		this.stateMachine = stateMachine;
-		slopeData = stateMachine.Player.CapsuleColldierUtility.SlopeData;
+		slopeData = stateMachine.Player.capsuleColldierUtility.SlopeData;
 	}
 	
 	// 벨로시티가 잘못되면 리턴
 	protected bool WrongVelocity()
+
 	{
 		if (!float.IsNaN(stateMachine.Animator.deltaPosition.x )
 		&& !float.IsNaN(stateMachine.Animator.deltaPosition.y)
@@ -110,15 +112,6 @@ public abstract class PlayerBaseState : State
 		Float();
 	}
 
-	protected void Move(Vector3 moveVector)
-	{
-		Vector3 velocity = moveVector;
-		Vector3 gravity = Vector3.down * 9.81f;
-
-		stateMachine.Rigidbody.velocity = stateMachine.Animator.deltaPosition + gravity; ;
-		Float();
-	}
-
 	protected Vector3 GetPlayerHorizentalVelocity()
 	{
 		Vector3 playerHorizentalvelocity = stateMachine.Rigidbody.velocity;
@@ -170,19 +163,19 @@ public abstract class PlayerBaseState : State
 	public void Float()
 	{
 		// 캡슐콜라이더 위치를 가져온다.
-		Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.CapsuleColldierUtility.CapsuleColliderData.Collider.bounds.center;
+		Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.capsuleColldierUtility.CapsuleColliderData.Collider.bounds.center;
 
 		// 레이위치를 캡슐콜라이더 센터로 잡는다.
 		Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
 
 		// 레이를 쏴서 캐스팅한다.
-		if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, slopeData.FloatRayDistance, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+		if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, slopeData.FloatRayDistance, stateMachine.Player.layerData.GroundLayer, QueryTriggerInteraction.Ignore))
 		{
 			float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
 			SetSlopeSpeedModifierOnAngle(groundAngle);
 
-			float distanceToFloatingPoint = stateMachine.Player.CapsuleColldierUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y
+			float distanceToFloatingPoint = stateMachine.Player.capsuleColldierUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y
 				* stateMachine.Player.transform.localScale.y - hit.distance;
 
 			if (distanceToFloatingPoint == 0f)

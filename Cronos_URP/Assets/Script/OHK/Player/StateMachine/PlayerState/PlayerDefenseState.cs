@@ -5,10 +5,10 @@ public class PlayerDefenceState : PlayerBaseState
     public PlayerDefenceState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 	public override void Enter()
 	{
-        stateMachine.AutoTargetting.Target = null;
+        stateMachine.AutoTargetting.target = null;
         stateMachine.Rigidbody.velocity = Vector3.zero;
-		Player.Instance._defnsible.isDefending = true;
-		Player.Instance._defnsible.onDefensFalse += DefenceFalse;
+		Player.Instance.defnsible.isDefending = true;
+		Player.Instance.defnsible.onDefensFalse += DefenceFalse;
 		stateMachine.Player.BeginGuard();
         stateMachine.Player.BeginParry();
     }
@@ -27,8 +27,8 @@ public class PlayerDefenceState : PlayerBaseState
 	public override void Exit()
     {
         stateMachine.Player.EndGuard();
-		Player.Instance._defnsible.isDefending = false;
-		Player.Instance._defnsible.onDefensFalse -= DefenceFalse;
+		Player.Instance.defnsible.isDefending = false;
+		Player.Instance.defnsible.onDefensFalse -= DefenceFalse;
 	}
     public void ReleaseGuard()
     {

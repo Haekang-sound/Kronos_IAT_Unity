@@ -11,7 +11,7 @@ public class FallBehaviour : StateMachineBehaviour
 	{
 		stateMachine = PlayerStateMachine.GetInstance();
 		stateMachine.SwitchState(new PlayerFallState(stateMachine));
-		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
+		PlayerStateMachine.GetInstance().AutoTargetting.target = null;
 		PlayerStateMachine.GetInstance().Rigidbody.useGravity = true; 
 	}
 

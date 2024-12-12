@@ -22,8 +22,8 @@ public class DodgeBehaviour : StateMachineBehaviour
 		}
 		animator.ResetTrigger(PlayerHashSet.Instance.Attack);
 		PlayerStateMachine.GetInstance().SwitchState(new PlayerDodgeState(PlayerStateMachine.GetInstance()));
-		PlayerStateMachine.GetInstance().AutoTargetting.Target = null;
-		PlayerStateMachine.GetInstance().Player._damageable.enabled = false;
+		PlayerStateMachine.GetInstance().AutoTargetting.target = null;
+		PlayerStateMachine.GetInstance().Player.damageable.enabled = false;
 		PlayerStateMachine.GetInstance().MoveForce = moveForce;
 	}
 
@@ -40,7 +40,7 @@ public class DodgeBehaviour : StateMachineBehaviour
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		PlayerStateMachine.GetInstance().Player._damageable.enabled = true;
+		PlayerStateMachine.GetInstance().Player.damageable.enabled = true;
 		stateMachine.AutoTargetting.enabled = true;
 	}
 

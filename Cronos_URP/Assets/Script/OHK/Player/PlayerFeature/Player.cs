@@ -8,14 +8,13 @@ using static ScreenFader;
 using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
-/// Player�� ���� ������ �� ���� �� �� �ִ� �÷��̾� ��ũ��Ʈ
-/// 1. status
-/// 2. Item
-/// 3. ���
+/// 플레이어의 정보를 갖고 있는 클래스
+/// 
+/// OHK
 /// </summary>
 public class Player : MonoBehaviour, IMessageReceiver
 {
-	// �̱��� ��ü �Դϴ�. 
+	// 싱글턴을 위한 변수
 	public static Player Instance
 	{
 		get
@@ -25,157 +24,144 @@ public class Player : MonoBehaviour, IMessageReceiver
 				return instance;
 			}
 
-			// �ν��Ͻ��� ���ٸ� ���� ����â���� �˻��ؼ� ������.
 			instance = FindObjectOfType<Player>();
-
 			return instance;
 		}
 	}
-
 	protected static Player instance;
 
-	public RenderObjects SkillRenderObj;
+	// timestop을 위한 변수
+	public RenderObjects skillRenderObj;
 
 	[Header("State")]
-	[SerializeField] private string CurrentState;
-	[SerializeField] public AnimationCurve TimeSlashCurve;
+	[SerializeField] private string _currentState;
 
 	[Header("Move Option")]
-	[SerializeField] private float Speed = 1f;
-	[SerializeField] private float LookRotationDampFactor = 10f;
-	[SerializeField] private float attackCoefficient = 0.1f;
-	[SerializeField] private float moveCoefficient = 0.1f;
+	[SerializeField] private float _speed = 1f;
+	[SerializeField] private float _lookRotationDampFactor = 10f;
+	[SerializeField] private float _attackCoefficient = 0.1f;
+	[SerializeField] private float _moveCoefficient = 0.1f;
 
-	[SerializeField] private float maxTP;
-	[SerializeField] private float maxCP;
+	[Header("Status")]
+	[SerializeField] private float _maxTP;
+	[SerializeField] private float _maxCP;
 
-	[SerializeField] private float currentDamage;
-	[SerializeField] private float attackSpeed;
-	[SerializeField] private float chargeAttack = 0f;
+	[SerializeField] private float _currentTP;
+	[SerializeField] private float _currentCP;
+	[SerializeField] private float _chargingCP = 10f;
+	[SerializeField] private float _TPAbsorptionRatio = 1f;
+	[SerializeField] private float _CPDecayRatio = 1f;
 
-	[SerializeField] private float currentTP;
-	[SerializeField] private float currentCP;
-	[SerializeField] private float chargingCP = 10f;
-	[SerializeField] private float TPAbsorptionRatio = 1f;
-	[SerializeField] private float CPDecayRatio = 1f;
+	[SerializeField] private float _currentDamage;
+	[SerializeField] private float _attackSpeed;
+	[SerializeField] private float _chargeAttack = 0f;
 
-	[SerializeField] private bool isEnforced = false;
-	[SerializeField] private bool isLockOn = false;
-	[SerializeField] private bool rigidImmunity = false;
-	[SerializeField] private bool dodgeAttack = false;
+	[SerializeField] private bool _isEnforced = false;
+	[SerializeField] private bool _isLockOn = false;
+	[SerializeField] private bool _isRigidImmunity = false;
+	[SerializeField] private bool _isDodgeAttack = false;
 
 	public bool isBuff = false;
 	public float buffTimer = 3f;
 	public float buffTime = 3f;
 
 	/// <summary>
-	/// floating capsule������� 
+	/// floating capsule을 위한 프로퍼티
 	/// </summary>
 	[field: Header("Collisions")]
-	[field: SerializeField] public CapsuleColldierUtility CapsuleColldierUtility { get; private set; }
-	[field: SerializeField] public PlayerLayerData LayerData { get; private set; }
-	[field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
-
+	[field: SerializeField] public CapsuleColldierUtility capsuleColldierUtility { get; private set; }
+	[field: SerializeField] public PlayerLayerData layerData { get; private set; }
+	[field: SerializeField] public AnimationCurve slopeSpeedAngles { get; private set; }
 
 	// �����ϰ��� �ϴ� ���̾ �����մϴ�.
 	public LayerMask targetLayer;
 	public float targetdistance = 1f;
+	private float _totalspeed;
 
 	// Property
-	private float totalspeed;
-	public float moveSpeed { get { return totalspeed; } }
-	public float lookRotationDampFactor { get { return LookRotationDampFactor; } }
-	public float AttackCoefficient { get { return attackCoefficient; } set { attackCoefficient = value; } }
-	public float MoveCoefficient { get { return moveCoefficient; } set { moveCoefficient = value; } }
-
-	//     // ��ų �������
-	//     public AbilityUsageInfo AbilityUsageInfo { get { return AbilityUsageInfo; } }
+	public float moveSpeed { get { return _totalspeed; } }
+	public float lookRotationDampFactor { get { return _lookRotationDampFactor; } }
+	public float AttackCoefficient { get { return _attackCoefficient; } set { _attackCoefficient = value; } }
+	public float MoveCoefficient { get { return _moveCoefficient; } set { _moveCoefficient = value; } }
 
 	// chronos in game Option
-	public float MaxCP { get { return maxCP; } set { maxCP = value; } }
-	public float MaxTP { get { return maxTP; } set { maxTP = value; } }
-	public float CP { get { return currentCP; } set { currentCP = value; } }
+	public float MaxCP { get { return _maxCP; } set { _maxCP = value; } }
+	public float MaxTP { get { return _maxTP; } set { _maxTP = value; } }
+	public float CP { get { return _currentCP; } set { _currentCP = value; } }
 	public float TP
 	{
-		get { return currentTP; }
+		get { return _currentTP; }
 		set
 		{
-			currentTP = value;
-			if (currentTP > maxTP)
+			_currentTP = value;
+			if (_currentTP > _maxTP)
 			{
-				maxTP = currentTP;
+				_maxTP = _currentTP;
 			}
-			_damageable.currentHitPoints = currentTP;
+			damageable.currentHitPoints = _currentTP;
 		}
 	}
 
-	public float ChargingCP { get { return chargingCP; } set { chargingCP = value; } }
-	public float CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
-	public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-	public float ChargeAttack { get { return chargeAttack; } set { chargeAttack = value; } }
+	public float ChargingCP { get { return _chargingCP; } set { _chargingCP = value; } }
+	public float CurrentDamage { get { return _currentDamage; } set { _currentDamage = value; } }
+	public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
+	public float ChargeAttack { get { return _chargeAttack; } set { _chargeAttack = value; } }
 	public bool IsDecreaseCP { get; set; }
-	public bool IsEnforced { get { return isEnforced; } set { isEnforced = value; } }   // ��ȭ���¸� ���� ������Ƽ
-	public bool IsLockOn { get { return isLockOn; } set { isLockOn = value; } }
-	public bool RigidImmunity { get { return rigidImmunity; } set { rigidImmunity = value; } }
-	public bool DodgeAttack { get { return dodgeAttack; } set { dodgeAttack = value; } }
+	public bool IsEnforced { get { return _isEnforced; } set { _isEnforced = value; } }   // ��ȭ���¸� ���� ������Ƽ
+	public bool IsLockOn { get { return _isLockOn; } set { _isLockOn = value; } }
+	public bool RigidImmunity { get { return _isRigidImmunity; } set { _isRigidImmunity = value; } }
+	public bool DodgeAttack { get { return _isDodgeAttack; } set { _isDodgeAttack = value; } }
 
-	// �÷��̾� �����͸� �����ϰ� respawn�� �ݿ��ϴ� ������
+	// 리스폰을 위한데이터
 	PlayerData playerData = new PlayerData();
 	Transform playerTransform;
-	AutoTargetting targetting;
 
 	public MeleeWeapon meleeWeapon;
-	ShieldWeapon shieldWeapon;
-	PlayerStateMachine PlayerFSM;
-
-	public Damageable _damageable;
+	public ShieldWeapon shieldWeapon;
+	public PlayerStateMachine PlayerFSM;
+	public Damageable damageable;
 	public GroggyStack groggyStack;
-	public Defensible _defnsible;
-	private KnockBack _knockBack;
-	private Rigidbody _rigidbody;
-
+	public Defensible defnsible;
+	public KnockBack knockBack;
 	public SoundManager soundManager;
 	public EffectManager effectManager;
 	public ImpulseCam impulseCam;
-	public GameObject playerSword;
-	//public GameObject spcCubeL;
-	//public GameObject spcCubeR;
-	public float spcDelay;
-	public PlayerStateMachine psm;
 	public BoxColliderAdjuster adjuster;
-	//public float spcActivateTime;
 
-	bool isRelease = false;
-	float releaseLockOn = 0f;
+	public GameObject playerSword;
 
-	public bool isDecreaseTP = true;
 	[SerializeField] private bool usePreiviousSceneData = true;
+
+
+	// 정리해야하는 변수들
+	public bool isDecreaseTP = true;
+	public float currentTime = 0f;
+	private bool isRelease = false;
+	private float releaseLockOn = 0f;
+
 
 
 	private void Awake()
 	{
-		
-		_knockBack = GetComponent<KnockBack>();
-		_defnsible = GetComponent<Defensible>();
-		_damageable = GetComponent<Damageable>();
+		knockBack = GetComponent<KnockBack>();
+		defnsible = GetComponent<Defensible>();
+		damageable = GetComponent<Damageable>();
 		playerTransform = GetComponent<Transform>();
 		PlayerFSM = GetComponent<PlayerStateMachine>();
 		meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		shieldWeapon = GetComponentInChildren<ShieldWeapon>();
-		targetting = GetComponentInChildren<AutoTargetting>();
-		_rigidbody = GetComponent<Rigidbody>();
 		groggyStack = GetComponent<GroggyStack>();
 
 	}
 	private void OnValidate()
 	{
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+		capsuleColldierUtility.Initialize(gameObject);
+		capsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
 	}
 	protected void OnDisable()
 	{
-		_damageable.onDamageMessageReceivers.Remove(this);
+		damageable.onDamageMessageReceivers.Remove(this);
 
 		PlayerFSM.InputReader.onDecelerationStart -= Deceleration;
 		PlayerFSM.InputReader.onLockOnPerformed -= ReleaseLockOn;
@@ -185,10 +171,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void OnEnable()
 	{
-		_damageable.onDamageMessageReceivers.Add(this);
+		damageable.onDamageMessageReceivers.Add(this);
 
-		CapsuleColldierUtility.Initialize(gameObject);
-		CapsuleColldierUtility.CalculateCapsuleColliderDimensions();
+		capsuleColldierUtility.Initialize(gameObject);
+		capsuleColldierUtility.CalculateCapsuleColliderDimensions();
 
 		meleeWeapon.parryDamaer.parrying.AddListener(EffectManager.Instance.CreateParryFX);
 		meleeWeapon.parryDamaer.parrying.AddListener(PlayerFSM.SwitchParryState);
@@ -206,35 +192,124 @@ public class Player : MonoBehaviour, IMessageReceiver
 			Debug.Log("EffectManager found");
 		if (impulseCam != null)
 			Debug.Log("ImpulseCam found");
-		psm = gameObject.GetComponent<PlayerStateMachine>();
 
 		// �����ذ��� ���� �ű� 
 		meleeWeapon.SetOwner(gameObject);
 
 		// simpleDamager�������� �ʾҳ�?
-		meleeWeapon.simpleDamager.damageAmount = currentDamage;
-		meleeWeapon.parryDamaer.damageAmount = currentDamage;
+		meleeWeapon.simpleDamager.damageAmount = _currentDamage;
+		meleeWeapon.parryDamaer.damageAmount = _currentDamage;
 
 		meleeWeapon.parryDamaer.parrying.AddListener(ChangeParryState);
 
-		totalspeed = Speed;
+		_totalspeed = _speed;
 
-		_damageable.maxHitPoints = maxTP;
-		_damageable.currentHitPoints = currentTP;
-		_damageable.OnDeath.AddListener(Death);
+		damageable.maxHitPoints = _maxTP;
+		damageable.currentHitPoints = _currentTP;
+		damageable.OnDeath.AddListener(Death);
 
 		if (usePreiviousSceneData)
 			SaveLoadManager.Instance.LoadSceneData();
 
 		groggyStack.OnMaxStack.AddListener(Down);
 
-		SkillRenderObj.SetActive(false);
+		skillRenderObj.SetActive(false);
 
 		PlayerFSM.InputReader.onDecelerationStart += Deceleration;
 		PlayerFSM.InputReader.onLockOnPerformed += ReleaseLockOn;
 		PlayerFSM.InputReader.onLockOnStart += LockOn;
 		PlayerFSM.InputReader.onLockOnCanceled += ReleaseReset;
 
+	}
+
+	private void Update()
+	{
+		// 플레이어의 상태를 받아온다.
+		_currentState = PlayerFSM.GetState().GetType().Name;
+
+		// TP와 CP를 증가, 감소시키는 치트키
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			TP += 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			TP = 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			CP -= 10f;
+		}
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			CP = 100f;
+		}
+
+		// 마우스 가운데클릭하는 시간이
+		// 기준시간을 초과할 경우 
+		// 락온을 해제한다.
+		if (isRelease)
+		{
+			releaseLockOn += Time.deltaTime;
+
+			if (releaseLockOn > 1f)
+			{
+				PlayerFSM.AutoTargetting.LockOff();
+			}
+		}
+
+		// 강화상태일 경우 시간을 증가시키고 
+		// 강화가 아닐경우 증가시킨 시간을 초기화한다.
+		if (isBuff)
+		{
+			buffTimer += Time.deltaTime;
+		}
+		else
+		{
+			buffTimer = 0f;
+		}
+
+		// 버프 해제조건을 달성하면 버프를 해제한다.
+		if (buffTimer > buffTime
+			&& (_currentState == "PlayerBuffState" || _currentState == "PlayerMoveState"))
+		{
+			isBuff = false;
+			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			_isEnforced = false;
+			effectManager.SwordAuraOff();
+		}
+
+		// TP감소상태 일 때
+		// 현재 TP를 검사하고 0보다 낮아지면 캐릭터를 죽인다.
+		if (isDecreaseTP && damageable.currentHitPoints > 0f)
+		{
+			damageable.currentHitPoints -= Time.deltaTime;
+
+			if (damageable.currentHitPoints <= 0)
+			{
+				damageable.JustDead();
+			}
+		}
+
+		// CP감소 상태 일 때
+		// CP가 0이하일 경우 감소상태를 해제한다.
+		if (IsDecreaseCP && CP > 0)
+		{
+			CP -= Time.deltaTime * _CPDecayRatio;
+			if (CP <= 0f)
+			{
+				TimeNormalization();
+			}
+		}
+		
+		// 캐릭터 TP를 갱신한다.
+		TP = damageable.currentHitPoints;
+	}
+
+	private void OnDestroy()
+	{
+		meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
+		ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading);
 	}
 
 	private void LockOn()
@@ -266,13 +341,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void ChargeCP(Collider other)
 	{
 		{
-			if (CP < maxCP && !IsDecreaseCP)
+			if (CP < _maxCP && !IsDecreaseCP)
 			{
-				CP += chargingCP;
+				CP += _chargingCP;
 
-				if (CP > maxCP)
+				if (CP > _maxCP)
 				{
-					CP = maxCP;
+					CP = _maxCP;
 				}
 			}
 		}
@@ -285,13 +360,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 			return;
 		}
 		{
-			if (CP < maxCP && !IsDecreaseCP)
+			if (CP < _maxCP && !IsDecreaseCP)
 			{
-				CP += chargingCP;
+				CP += _chargingCP;
 
-				if (CP > maxCP)
+				if (CP > _maxCP)
 				{
-					CP = maxCP;
+					CP = _maxCP;
 				}
 			}
 		}
@@ -299,13 +374,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public void ChargeCP()
 	{
 		{
-			if (CP < maxCP && !IsDecreaseCP)
+			if (CP < _maxCP && !IsDecreaseCP)
 			{
-				CP += chargingCP;
+				CP += _chargingCP;
 
-				if (CP > maxCP)
+				if (CP > _maxCP)
 				{
-					CP = maxCP;
+					CP = _maxCP;
 				}
 			}
 		}
@@ -313,100 +388,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// Ÿ�ݽ� tp�����
 	public float TPGain()
 	{
-		return TPAbsorptionRatio /** currentDamage*/;
+		return _TPAbsorptionRatio /** currentDamage*/;
 	}
 
-	public float currentTime = 0f;
-	bool timeSlash;
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			TP += 10f;
-		}
-		if (Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			TP = 10f;
-		}
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			CP -= 10f;
-		}
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			CP = 100f;
-		}
-
-
-
-		// 휠꾹
-		if (isRelease)
-		{
-			releaseLockOn += Time.deltaTime;
-
-			if (releaseLockOn > 1f)
-			{
-				PlayerFSM.AutoTargetting.LockOff();
-			}
-		}
-
-		// �������̶��
-		if (isBuff)
-		{
-			buffTimer += Time.deltaTime;
-		}
-		else // �ƴ϶��
-		{
-			buffTimer = 0f;
-		}
-
-		CurrentState = PlayerFSM.GetState().GetType().Name;
-		// Ư�� ������ ������ �� �ִϸ��̼��� �����ϰ� targetStateName���� ��ȯ
-		if (buffTimer > buffTime
-			&&
-			(CurrentState == "PlayerBuffState"
-			|| CurrentState == "PlayerMoveState")
-			)
-		{
-			isBuff = false;
-			PlayerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
-			isEnforced = false;
-			effectManager.SwordAuraOff();
-		}
-
-
-
-		// �ǽð����� TP ����
-		if (isDecreaseTP && _damageable.currentHitPoints > 0f)
-		{
-			_damageable.currentHitPoints -= Time.deltaTime;
-
-			if (_damageable.currentHitPoints <= 0)
-			{
-				_damageable.JustDead();
-			}
-		}
-
-		// �ǽð����� CP����
-		if (IsDecreaseCP && CP > 0)
-		{
-			CP -= Time.deltaTime * CPDecayRatio;
-			if (CP <= 0f)
-			{
-				TimeNormalization();
-			}
-		}
-
-		TP = _damageable.currentHitPoints;
-
-	}
-
-
-	private void OnDestroy()
-	{
-		meleeWeapon.parryDamaer.parrying.RemoveListener(ChangeParryState);
-		ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading);
-	}
 
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
@@ -445,11 +429,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
 			BulletTime.Instance.DecelerateSpeed();
 			IsDecreaseCP = true;
-			_damageable.enabled = false;
+			damageable.enabled = false;
 			BulletTime.Instance.OnActive.Invoke();
 		}
 		else if (IsDecreaseCP
-			&& PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb)
+		 && PlayerFSM.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb)
 		&& !PlayerFSM.Animator.IsInTransition(PlayerFSM.currentLayerIndex))
 		{
 			PlayerFSM.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
@@ -489,17 +473,17 @@ public class Player : MonoBehaviour, IMessageReceiver
 			return;
 		}
 		if (PlayerFSM.GetState().ToString() == "PlayerDodgeState" ||
-			PlayerFSM.GetState().ToString() == "PlayerDownState" ||
-			PlayerFSM.GetState().ToString() == "PlayerRushAttackState" ||
-			PlayerFSM.GetState().ToString() == "PlayerDodgeAttackState" ||
-			rigidImmunity || isEnforced)
+		 PlayerFSM.GetState().ToString() == "PlayerDownState" ||
+		 PlayerFSM.GetState().ToString() == "PlayerRushAttackState" ||
+		 PlayerFSM.GetState().ToString() == "PlayerDodgeAttackState" ||
+		 _isRigidImmunity || _isEnforced)
 		{
 			return;
 		}
 
 		if (useKnockback)
 		{
-			_knockBack?.Begin(damageMessage.damageSource);
+			knockBack?.Begin(damageMessage.damageSource);
 		}
 
 		Vector3 positionToDamager = damageMessage.damageSource - transform.position;
@@ -591,26 +575,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		IsDecreaseCP = false;
 		CP = 0;
-		SkillRenderObj.SetActive(false);
+		skillRenderObj.SetActive(false);
 		BulletTime.Instance.SetNormalSpeed();
-	}
-
-	void SetCursorInactive()
-	{
-		Cursor.visible = !Cursor.visible; // ���콺 �Ⱥ��̰� �ϱ�
-		if (Cursor.visible)
-		{
-			Cursor.lockState = CursorLockMode.None;
-		}
-		else
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-		}
 	}
 
 	public void SetSpeed(float value)
 	{
-		totalspeed = value * Speed;
+		_totalspeed = value * _speed;
 	}
 
 	public void SavePlayerData()
@@ -626,6 +597,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		meleeWeapon?.BeginAttack();
 	}
+
 	public void AttackEnd()
 	{
 		meleeWeapon?.EndAttack();
@@ -652,17 +624,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 		shieldWeapon?.EndParry();
 	}
 
-	/// <summary>
-	/// �ð����� �����Լ�
-	/// </summary>
-
 	public void TimeStop()
 	{
 		soundManager.PlaySFX("TimeStop_Skill_Sound_SE", transform);
 		soundManager.PlaySFX("Ult_SE", transform);
 		Vector3 temp = transform.position;
 		effectManager.SpawnEffect("TeraainScanner", temp);
-		SkillRenderObj.SetActive(true);
+		skillRenderObj.SetActive(true);
 	}
 
 	public void CPBombGround()
@@ -675,6 +643,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 				soundManager.PlaySFX("TempoExplosion_Sound_SE", transform);
 		}
 	}
+
 	public void CPBombSlash()
 	{
 		if (effectManager != null)
@@ -688,12 +657,9 @@ public class Player : MonoBehaviour, IMessageReceiver
 		}
 	}
 
-	/// <summary>
-	///  �ð����� ȿ���� ���ߴ� �Լ� �����Ұ�
-	/// </summary>
 	public void test()
 	{
-		SkillRenderObj.SetActive(false);
+		skillRenderObj.SetActive(false);
 	}
 	public void CPBoombDamager()
 	{
@@ -721,9 +687,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 			effectManager.SpawnEffect(name, pos);
 	}
 
-
-	// �⺻ ������ FX
-	// �̸��� ���غη�����
 	public void NormalSlash()
 	{
 		if (effectManager != null)
@@ -900,7 +863,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	internal void Save()
 	{
-		PlayerPrefs.SetFloat("currentTP", currentTP);
+		PlayerPrefs.SetFloat("currentTP", _currentTP);
 	}
 
 	public void ResetAbilityData()

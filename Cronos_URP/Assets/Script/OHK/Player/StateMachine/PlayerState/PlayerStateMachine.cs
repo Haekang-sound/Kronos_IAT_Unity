@@ -1,15 +1,15 @@
 using UnityEditor;
 using UnityEngine;
-//using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(InputReader))]         // 어트리뷰트를 상속받은 
-[RequireComponent(typeof(Animator))]            // 사용지정 어트리뷰트 RequireComponenet
-[RequireComponent(typeof(Rigidbody))] // 해당컴포넌트를 추가해준다
+[RequireComponent(typeof(InputReader))] // 어트리뷰트를 상속받은 
+[RequireComponent(typeof(Animator))]    // 사용지정 어트리뷰트 RequireComponenet
+[RequireComponent(typeof(Rigidbody))]	// 해당컴포넌트를 추가해준다
 
 public class PlayerStateMachine : StateMachine
 {
 	static PlayerStateMachine instance;
 	public static PlayerStateMachine GetInstance() { return instance; }
+
 	/// <summary>
 	///  이건 우클릭 콤보용
 	/// </summary>
@@ -39,7 +39,6 @@ public class PlayerStateMachine : StateMachine
 	}
 	public void OnEnable()
 	{
-
 		Player = GetComponent<Player>();
 		InputReader = GetComponent<InputReader>();
 		Rigidbody = GetComponent<Rigidbody>();
@@ -54,6 +53,9 @@ public class PlayerStateMachine : StateMachine
 		SwitchState(new PlayerMoveState(this));
 	}
 
+	/// <summary>
+	/// 플레이어를 패링상태로 전환한다.
+	/// </summary>
 	public void SwitchParryState()
 	{
 		if (Animator.GetBool("isParry"))
