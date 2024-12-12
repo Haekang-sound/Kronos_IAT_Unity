@@ -1,19 +1,24 @@
 using UnityEngine;
 
+
+/// <summary>
+/// 아틀라스 동상에 접근한 플레이어를 스캔하고
+/// 상호작용 UI 띄우기 + 능력 개방 UI로 옮기는 클래스
+/// </summary>
 public class UI_Scanner : MonoBehaviour
 {
     public GameObject player;
     public GameObject interText;
     public GameObject abilityUnlock;
 
-	public GameObject CPUI;
-	public GameObject SkillUI;
-	public GameObject KeyGuid;
+	public GameObject cpUI;
+	public GameObject skillUI;
+	public GameObject keyGuide;
 
-	bool keyguid;
-    bool isPopup;
-    bool isInteracting;
-    SoundManager sm;
+	private bool keyguid;
+    private bool isPopup;
+    private bool isInteracting;
+    private SoundManager sm;
 
     private void Start()
     {
@@ -21,9 +26,9 @@ public class UI_Scanner : MonoBehaviour
         interText = UIManager.Instance.Interactor;
         abilityUnlock = GameObject.Find("AbilityUnlock");
 
-		CPUI = GameObject.Find("HUD_CP");
-		SkillUI = GameObject.Find("HUD_Skills");
-		KeyGuid = GameObject.Find("KeyGuide");
+		cpUI = GameObject.Find("HUD_CP");
+		skillUI = GameObject.Find("HUD_Skills");
+		keyGuide = GameObject.Find("KeyGuide");
 
 		interText.SetActive(false);
         isPopup = false;
@@ -64,17 +69,17 @@ public class UI_Scanner : MonoBehaviour
 		{
 			PauseManager.Instance.UnavailableEsc();
             Interaction();
-			CPUI.SetActive(false);
-			SkillUI.SetActive(false);
-			keyguid = KeyGuid.activeSelf;
-			KeyGuid.SetActive(false);
+			cpUI.SetActive(false);
+			skillUI.SetActive(false);
+			keyguid = keyGuide.activeSelf;
+			keyGuide.SetActive(false);
 		}
 		else if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !ScreenFader.Instance.faderCanvasGroup.gameObject.activeSelf)
 		{
             TurnInteraction();
-			CPUI.SetActive(true);
-			SkillUI.SetActive(true);
-			KeyGuid.SetActive(keyguid);
+			cpUI.SetActive(true);
+			skillUI.SetActive(true);
+			keyGuide.SetActive(keyguid);
             PauseManager.Instance.AvailableEsc();
 		}
 	}
@@ -95,7 +100,7 @@ public class UI_Scanner : MonoBehaviour
         abilityUnlock.GetComponent<AbilityTree>().ExitAbility();
         Invoke("ShowIntext", 0.3f);
         isPopup = true;
-        // 크로노스 네 이노오ㅗㅁ
+        // 1스테이지 목표 달성을 위해서
         if (QuestManager.Instance.abilityQuesting)
         {
             QuestManager.Instance.abilityQuesting = false;

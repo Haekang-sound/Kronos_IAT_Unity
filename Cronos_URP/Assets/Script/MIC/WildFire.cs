@@ -1,13 +1,13 @@
-using Sonity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 불 프리팹에 붙이는 불 사운드 출력하는 클래스
+/// </summary>
 public class WildFire : MonoBehaviour
 {
-    SoundManager se;
+    private SoundManager se;
 
-    // Start is called before the first frame update
     void Start()
     {
         se = SoundManager.Instance;

@@ -2,38 +2,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// 타이틀 씬에서 가지고 있는 클래스
+/// 시작 씬, 크레딧 씬, 게임 오버만 지원한다
+/// </summary>
 public class TitleScene : MonoBehaviour
 {
     [SerializeField]
-    Button sButton;
+    private Button sButton;
     [SerializeField]
-    Button oButton;
+    private Button cButton;
     [SerializeField]
-    Button cButton;
-    [SerializeField]
-    Button eButton;
-
-    [SerializeField]
-    GameObject optionPanel;
-
-    void Update()
-    {
-
-    }
+    private Button eButton;
 
     public void StartGame()
     {
 		SceneManager.LoadScene("1_HN_Scene2");
-	}
-
-	public void Title()
-	{
-		SceneManager.LoadScene("0_TitleTest");
-	}
-
-    public void Option()
-    {
-        optionPanel.SetActive(true);
 	}
 
     public void Credit()
@@ -43,9 +28,7 @@ public class TitleScene : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("���� ����!");
+        Debug.Log("께임 종료!");
         Application.Quit();
     }
-
-
 }

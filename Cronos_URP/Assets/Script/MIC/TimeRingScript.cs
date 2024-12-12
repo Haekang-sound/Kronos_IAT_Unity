@@ -19,7 +19,7 @@ public class TimeRingScript : MonoBehaviour
     public Material tex4;
     public Material tex5;
 
-    private float MaxHP;
+    private float maxHP;
     private Damageable enemy;
 
     // Start is called before the first frame update
@@ -28,13 +28,13 @@ public class TimeRingScript : MonoBehaviour
         if (gameObject == Player.Instance.gameObject)
         {
             Debug.Log("플레이어 타임링 작동");
-            MaxHP = Player.Instance.TP;
+            maxHP = Player.Instance.TP;
         }
         else
         {
             Debug.Log("적 타임링 작동");
             enemy = gameObject.GetComponent<Damageable>();
-            MaxHP = enemy.maxHitPoints;
+            maxHP = enemy.maxHitPoints;
         }
         ringRenderer = timeRing.gameObject.GetComponent<Renderer>();
         StartCoroutine(RotateCoroutine());
@@ -51,7 +51,7 @@ public class TimeRingScript : MonoBehaviour
     {
         if (enemy == null)
         {
-            float curHP = Player.Instance.TP / MaxHP;
+            float curHP = Player.Instance.TP / maxHP;
 
             Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // 체력에 따른 마테리얼 배열
 
@@ -62,7 +62,7 @@ public class TimeRingScript : MonoBehaviour
         }
         else
         {
-            float curHP = enemy.currentHitPoints / MaxHP;
+            float curHP = enemy.currentHitPoints / maxHP;
 
             Material[] materials = { tex5, tex4, tex3, tex2, tex1 };  // 체력에 따른 마테리얼 배열
 

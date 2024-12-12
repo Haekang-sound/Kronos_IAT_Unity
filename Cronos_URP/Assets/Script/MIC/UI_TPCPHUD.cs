@@ -61,38 +61,38 @@ public class UI_TPCPHUD : UI_Bind
     // ui 움직이는 시간
     public float uiDuration = 0.2f;
 
-    Player player;
-    float tp;
-    float cp;
-    float maxTp;
-    float maxCp;
+    private Player player;
+    private float tp;
+    private float cp;
+    private float maxTp;
+    private float maxCp;
     public float TpInterval = 60.0f;
 
-    Transform parentTrans;
-    ParticleSystem fxPs;
-    ParticleSystem glowPs;
-    Quaternion prevParentRot;
-    ParticleSystem.MainModule fxMain;
-    ParticleSystem.MainModule glowMain;
+    private Transform parentTrans;
+    private ParticleSystem fxPs;
+    private ParticleSystem glowPs;
+    private Quaternion prevParentRot;
+    private ParticleSystem.MainModule fxMain;
+    private ParticleSystem.MainModule glowMain;
 
-    Vector4 green = Color.green;
-    Vector4 dGreen = new Vector4(0, 0.8f, 0, 1);
-    Vector4 red = Color.red;
-    Vector4 red2 = new Vector4(0.8f, 0, 0, 1);
-    Vector4 gray = new Vector4(0.8f, 0.8f, 0.8f, 1);
+    private Vector4 green = Color.green;
+    private Vector4 dGreen = new Vector4(0, 0.8f, 0, 1);
+    private Vector4 red = Color.red;
+    private Vector4 red2 = new Vector4(0.8f, 0, 0, 1);
+    private Vector4 gray = new Vector4(0.8f, 0.8f, 0.8f, 1);
     public Vector3 hitScale = new Vector3(1.2f, 1.2f, 1.2f);
-    Vector3 originScale = new Vector3(1, 1, 1);
+    private Vector3 originScale = new Vector3(1, 1, 1);
 
     public GameObject speedLineUI;
 
-    Vector4 yellow = Color.yellow;
-    Vector4 yellow2 = new Vector4(1, 0.8f, 0, 1);
-    Vector4 orange = new Vector4(1, 0.5f, 0, 1);
-    Vector4 orange2 = new Vector4(0.8f, 0.5f, 0, 1);
-    Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
-    Vector4 dOrange2 = new Vector4(0.8f, 0.3f, 0, 1);
-    Vector4 burgundy = new Vector4(1, 0, 0.3f, 1);
-    Vector4 burgundy2 = new Vector4(0.8f, 0, 0.3f, 1);
+    private Vector4 yellow = Color.yellow;
+    private Vector4 yellow2 = new Vector4(1, 0.8f, 0, 1);
+    private Vector4 orange = new Vector4(1, 0.5f, 0, 1);
+    private Vector4 orange2 = new Vector4(0.8f, 0.5f, 0, 1);
+    private Vector4 dOrange = new Vector4(1, 0.3f, 0, 1);
+    private Vector4 dOrange2 = new Vector4(0.8f, 0.3f, 0, 1);
+    private Vector4 burgundy = new Vector4(1, 0, 0.3f, 1);
+    private Vector4 burgundy2 = new Vector4(0.8f, 0, 0.3f, 1);
 
     private int prevZone = -1;
 
@@ -115,7 +115,6 @@ public class UI_TPCPHUD : UI_Bind
         glowMain = glowPs.main;
         prevParentRot = parentTrans.rotation;
 
-        // TP를 바인딩합니다.
         textTP.text = GetText((int)Texts.HUD_TPAmount).text;
     }
 
@@ -129,12 +128,9 @@ public class UI_TPCPHUD : UI_Bind
         maxCp = player.MaxCP;
         cpProgress = cp / maxCp;
         imageCP.fillAmount = cpProgress;
-        //CpHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CPprogress * -360));
     }
 
-    /// <summary>
-    /// HP와 MP의 슬라이더 이미지 및 텍스트를 실시간으로 업데이트합니다.
-    /// </summary>
+    // 실시간으로 반영하려면 어쨌든 업데이트에서 불러야 할 듯
     void UpdateTpSlider()     
     {
         // 플레이어의 TP를 받아온다.
@@ -181,9 +177,6 @@ public class UI_TPCPHUD : UI_Bind
     //}
 
 
-    /// <summary>
-    /// HP TMP를 빨간색으로 변환합니다.
-    /// </summary>
     public void ChangeRed()
     {
         StartCoroutine(ChangeColorScale(red, () =>
@@ -193,9 +186,6 @@ public class UI_TPCPHUD : UI_Bind
         }));
     }
 
-    /// <summary>
-    /// HP TMP를 초록색으로 변환합니다.
-    /// </summary>
     public void ChangeGreen()
     {
         StartCoroutine(ChangeColorScale(green, () =>
@@ -205,7 +195,6 @@ public class UI_TPCPHUD : UI_Bind
         }));
     }
 
-    /// HP 슬라이더의 보더 파티클의 색을 진척도에 따라 바꿔줍니다.
     public void CheckGlowColor(int i)
     {
         // 이전 존과 같으면 호출하지 않음
@@ -237,7 +226,6 @@ public class UI_TPCPHUD : UI_Bind
         }
     }
 
-    /// HP 텍스트의 색을 바꾸는 함수입니다.
     public IEnumerator ChangeColorScale(Vector4 color, Action onComplete)
     {
         float elapsedTime = 0.0f;
@@ -248,9 +236,6 @@ public class UI_TPCPHUD : UI_Bind
 
             textTP.color = Color.Lerp(color, Color.white, elapsedTime / uiDuration);
             textTP.transform.localScale = Vector3.Lerp(hitScale, originScale, elapsedTime / uiDuration);
-            // 슬라이더 색은 안바꾼다
-            //circleImageTP.color = Color.Lerp(color, Color.white, elapsedTime / uiDuration);
-            //circleImageTP.transform.localScale = Vector3.Lerp(hitScale, originScale, elapsedTime / uiDuration);
             
             if (color == green)
             {
