@@ -1,18 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// tab키로 우측의 조작 UI를 온/오프하는 클래스
+/// 온/오프 도중에 인풋이 들어와도 제대로 작동할 수 있게
+/// 현재 코루틴을 체크하여 중단시키고 새 코루틴으로 호출한다.
+/// </summary>
 public class KeyGuidance : MonoBehaviour
 {
     [SerializeField]
-    GameObject keyGuide;
+    private GameObject keyGuide;
 
-    //public float leftPos = 1647.0f;
-    float fadePos = 876.0f;
+    private float fadePos = 876.0f;
 
-    float fadeTime = 0.5f;
-    public bool nowShowing;
-    Coroutine curCoroutine;
+    private float fadeTime = 0.5f;
+    private bool nowShowing;
+    private Coroutine curCoroutine;
 
     public Vector2 showPos;
     public Vector2 hidePos;
@@ -20,7 +24,6 @@ public class KeyGuidance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //nowShowing = true;
         showPos = keyGuide.GetComponent<RectTransform>().anchoredPosition;
         hidePos = new Vector2(fadePos, showPos.y);
     }
@@ -53,7 +56,7 @@ public class KeyGuidance : MonoBehaviour
         Debug.Log("Hide key guide");
     }
 
-    // ���۰��̵带 show �ϴ� �ڷ�ƾ
+    // hide하는 중에 호출된다면, 현재 진행중인 hide코루틴을 중단하고 위치를 보정해서 show한다
     IEnumerator ShowHUD()
     {
         if (curCoroutine != null)
@@ -71,7 +74,7 @@ public class KeyGuidance : MonoBehaviour
         while (elapsedTime < fadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsedTime / fadeTime);  // Lerp ���� ����
+            float t = Mathf.Clamp01(elapsedTime / fadeTime);  // Lerp 비율 제한
             keyGuide.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 1, elapsedTime / fadeTime);
             keyGuide.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(hidePos, showPos, t);
             yield return null;
@@ -80,7 +83,7 @@ public class KeyGuidance : MonoBehaviour
         curCoroutine = null;
     }
 
-    // ���۰��̵带 hide�ϴ� �ڷ�ƾ
+    // 마찬가지로 show 하는 도중 호출된다면 원래 갔어야 할 위치로 바로 보낸 후 hide한다.
     IEnumerator HideHUD()
     {
         if (curCoroutine != null)
@@ -96,7 +99,7 @@ public class KeyGuidance : MonoBehaviour
         while (elapsedTime < fadeTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsedTime / fadeTime);  // Lerp ���� ����
+            float t = Mathf.Clamp01(elapsedTime / fadeTime);  // Lerp 비율 제한
             keyGuide.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0, elapsedTime / fadeTime);
             keyGuide.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(showPos, hidePos, t);
             yield return null;

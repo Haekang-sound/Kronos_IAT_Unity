@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 트리거 되면 오브젝트 Achieve을 호출하는 단순한 클래스
+/// </summary>
 public class ObjectAchiever : MonoBehaviour
 {
-    // 단순히 OnTrigger로 오브젝트 Achieve를 호출하는 단순한놈
-    UIManager um;
-    QuestManager qm;
+    private UIManager um;
+    private QuestManager qm;
     public int toCallNum;
 
     private void Start()

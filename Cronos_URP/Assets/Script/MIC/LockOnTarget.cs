@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 락온 타겟 UI를 보여주는 클래스
+/// UI가 플레이어와 타겟 사이에 위치해야 하므로 월드 공간에 띄워준다
+/// 오버레이로 할 수도 있다
+/// </summary>
 public class LockOnTarget : MonoBehaviour
 {
 	[SerializeField]
-	Transform target;
+	private Transform target;
 	[SerializeField]
-	Camera mainCam;
+	private Camera mainCam;
 	[SerializeField]
-	GameObject targetUI;
+	private GameObject targetUI;
 	[SerializeField]
-	Player player;
+	private Player player;
 
-	AutoTargetting atTgt;
-	bool isTgt;
-
-	//public float uiScaler = 5.0f;
+	private AutoTargetting atTgt;
+	private bool isTgt;
 
 	// Start is called before the first frame update
 	void Start()
@@ -37,6 +39,7 @@ public class LockOnTarget : MonoBehaviour
 		isTgt = player.IsLockOn;
 	}
 
+	// 플레이어나 타겟의 위치는 Update에서 변경되므로 그 다음에
 	private void LateUpdate()
 	{
 		if (target && isTgt)
@@ -55,7 +58,7 @@ public class LockOnTarget : MonoBehaviour
 
 	}
 
-	//ui �������̷� ������ ���
+	//ui 오버레이로 설정할 경우
 	//targetUI.transform.position = playerCam.WorldToScreenPoint(target.position) + new Vector3(0, yUp, 0);
 	//targetUI.transform.localScale = new Vector3(uiScaler / targetUI.transform.position.z, uiScaler / targetUI.transform.position.z, 0f);
 

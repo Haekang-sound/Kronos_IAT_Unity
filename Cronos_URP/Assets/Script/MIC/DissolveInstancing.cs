@@ -1,22 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 
+
+/// <summary>
+/// ë””ì¡¸ë¸Œ ë§ˆí…Œë¦¬ì–¼ ìŠ¤í¬ë¦½íŠ¸
+/// ë§ˆí…Œë¦¬ì–¼ì„ ê°œì²´ë§ˆë‹¤ ì¸ìŠ¤í„´ìŠ¤í™”í•˜ê³  ì‚¬ë¼ì§€ëŠ” ê²ƒì²˜ëŸ¼ ë§Œë“ ë‹¤
+/// ë””ì¡¸ë¸Œê°€ ëë‚˜ë©´ ë™ëŒì§¸ë¡œ Destroyí•œë‹¤
+/// </summary>
 public class DissolveInstancing : MonoBehaviour
 {
-    // ¸î ÃÊ ÀÖ´Ù µğÁ¹ºê µÉ °ÍÀÎ°¡
-    public float delaySec = 2.0f;
-
-    // µğÁ¹ºê µÉ ÃÊ
     [SerializeField]
-    private float dissolveTime = 0f;
+    private float delaySec = 2.0f;
 
-    public Material mat;
+    [SerializeField]
+    private float dissolveTime = 1.0f;
+
+    private Material mat;
     int dissolveAmount = Shader.PropertyToID("_DissolveAmount");
 
     private void Start()
     {
+        // ë§ˆí…Œë¦¬ì–¼ ì¸ìŠ¤í„´ì‹±
         mat = gameObject.GetComponent<Renderer>().material;
         DoVanish();
     }
@@ -26,6 +30,7 @@ public class DissolveInstancing : MonoBehaviour
         StartCoroutine(Vanish(delaySec));
     }
 
+    // ì´ê±¸ë¡œ ë””ì¡¸ë¸Œ
     IEnumerator Vanish(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -41,12 +46,11 @@ public class DissolveInstancing : MonoBehaviour
             yield return null;
         }
 
-        // ºÎ¸ğ Â°·Î ¾ø¾Ø´Ù
-        //gameObject.SetActive(false);
+        // ë¶€ëª¨ ì§¸ë¡œ ì—†ì•¤ë‹¤
         DestroyTopParent();   
     }
 
-    // ÃÖ»óÀ§ ºÎ¸ğ±îÁö Å½»öÇØ¼­ °ü·Ã ¿ÀºêÁ§Æ®¸¦ µğ½ºÆ®·ÎÀÌ
+    // ìµœìƒìœ„ ë¶€ëª¨ê¹Œì§€ íƒìƒ‰í•´ì„œ ê´€ë ¨ ì˜¤ë¸Œì íŠ¸ë¥¼ ë””ìŠ¤íŠ¸ë¡œì´
     void DestroyTopParent()
     {
         Transform curTrans = transform;

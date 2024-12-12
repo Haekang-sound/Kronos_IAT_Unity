@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// ë‹¨ìˆœí•˜ê²Œ, ì½œë¼ì´ë”ì— ë¶€ë”ªí˜”ì„ ë•Œ ëª©í‘œ UIë¥¼ ë„ìš°ëŠ” í´ë˜ìŠ¤
+/// ë°•ìŠ¤ ì½œë¼ì´ë”ë§Œ ì¡°ì ˆí•˜ë©´ ë˜ë‹ˆê¹Œ í¸ë¦¬í•˜ë‹¤
+/// </summary>
 public class UI_Collider : MonoBehaviour
 {
     public int questNum;
 
-    QuestManager qm;
+    private QuestManager qm;
 
     private void Start()
     {
         qm = QuestManager.Instance;
     }
 
-    // °¡Àå °£´ÜÇÑ Äİ¶óÀÌ´õ·Î ¸ñÇ¥UI¸¦ ¶ç¿ì´Â ¹æ¹ı
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == Player.Instance.gameObject)
@@ -21,6 +23,5 @@ public class UI_Collider : MonoBehaviour
             qm.StartCoroutine(qm.CallingQuest(questNum));
             Destroy(gameObject);
         }
-
     }
 }

@@ -2,17 +2,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+/// <summary>
+/// ê´‘ì¥ ì˜¤ë¸Œì íŠ¸ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
+/// ì˜¤ë¸Œì íŠ¸ë“¤ì´ íŒŒê´´ë˜ì—ˆì„ ë•Œì˜ ì´ë²¤íŠ¸ì™€ íšŒì „ ë“±ì„ ê´€ë¦¬í•œë‹¤
+/// </summary>
 public class PlazaManager : MonoBehaviour
 {
     public GameObject statue;
     public GameObject lock1;
     public GameObject lock2;
     public GameObject lock3;
-    // ÇÑ¹ø¿¡ È¸ÀüÇÒ Á¤µµ
+
+    // í•œë²ˆì— íšŒì „í•  ì •ë„
     public float rotateAmount = 0.1f;
-    // È¸ÀüÇÒ °¢µµ
+    // íšŒì „í•  ê°ë„
     public float rotateDegree = 45.0f;
-    // ÃÑ È¸ÀüÇÑ °¢µµ
+    // ì´ íšŒì „í•œ ê°ë„
     public float totalDegree = 0.0f;
     public float elapsedDegree = 0.0f;
 
@@ -20,7 +26,7 @@ public class PlazaManager : MonoBehaviour
 	public UnityEvent OnOpen;
     public GameObject soundTrigger;
 
-    UIManager um;
+    private UIManager um;
 
     void Start()
     {
@@ -29,13 +35,11 @@ public class PlazaManager : MonoBehaviour
         RegisterDestroyEvents();
         um = UIManager.Instance;
     }
+
 	void RegisterDestroyEvents()
     {
-        //lock1.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
         lock1.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
-        //lock2.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
         lock2.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
-		//lock3.GetComponent<DestroyablePlazeObject>().OnDestroyed += ObjectDestroyed;
         lock3.GetComponent<Fracture>().OnDeath += ObjectDestroyed;
 	}
 
@@ -43,11 +47,12 @@ public class PlazaManager : MonoBehaviour
     {
 		destroyedCount++;
         StartCoroutine(Spin45Degree());
+
 		if(destroyedCount == 3)
 		{
-			// ¿©±â¼­ ¹®¿©´Â ÇÔ¼ö¸¦ È£Ãâ? 
+			// ì—¬ê¸°ì„œ ë¬¸ì—¬ëŠ” í•¨ìˆ˜ë¥¼ í˜¸ì¶œ? 
 			OnOpen.Invoke();
-            // ¿ì½Â
+            // ìš°ìŠ¹
             um.Achieve();
 		}
     }
@@ -63,6 +68,5 @@ public class PlazaManager : MonoBehaviour
             yield return null;
         }
         soundTrigger.SetActive(false);
-
     }
 }

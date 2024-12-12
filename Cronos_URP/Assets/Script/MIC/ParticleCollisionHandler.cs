@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// 오브젝트의 파티클이 벽에 닿으면 삭제하는 클래스
+/// </summary>
 public class ParticleCollisionHandler : MonoBehaviour
 {
     public ParticleSystem ps;

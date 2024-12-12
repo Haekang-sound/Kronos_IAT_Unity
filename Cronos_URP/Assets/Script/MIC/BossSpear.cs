@@ -1,7 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 보스 투창 스킬을 담당하는 클래스
+/// 프리팹에서 창을 활성화하고 날려보내는 역할
+/// </summary>
 public class BossSpear : MonoBehaviour
 {
     public GameObject spear1;
@@ -9,7 +13,7 @@ public class BossSpear : MonoBehaviour
     public GameObject spear3;
     public GameObject spear4;
     public GameObject spear5;
-    public GameObject[] spears;
+    private GameObject[] spears;
     public float lookSpeed = 3.0f;
     public float delay = 3.0f;
     public float shotOffset = 0.0f;
@@ -35,6 +39,7 @@ public class BossSpear : MonoBehaviour
         
     }
 
+    // 차례대로 소환하고 차례대로 발사
     public IEnumerator ActivateCoroutine()
     {
         foreach (GameObject s in spears)

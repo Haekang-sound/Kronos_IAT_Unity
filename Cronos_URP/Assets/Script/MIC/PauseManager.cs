@@ -1,26 +1,27 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+/// <summary>
+/// ê²Œì„ì„ ì¼ì‹œì •ì§€í•˜ëŠ” ì—­í• ì„ ë§¡ì€ í´ë˜ìŠ¤
+/// ê¸°ë³¸ì ìœ¼ë¡œ escë¡œ íƒ€ì„ìŠ¤ì¼€ì¼ì„ ë©ˆì¶˜ë‹¤
+/// ì¼ì‹œì •ì§€ì—ì„œ ì¼ì–´ë‚˜ë©´ ì•ˆë˜ëŠ” ê²ƒë“¤ì€ ë§‰ëŠ”ë‹¤
+/// </summary>
 public class PauseManager : MonoBehaviour
 {
     [SerializeField]
-    Player player;
+    private Player player;
     [SerializeField]
-    GameObject playerCam;
+    private GameObject playerCam;
 
-    
     public bool isPause = false;
-    // esc·Î ÆÛÁîÇÒ ¼ö ÀÖÀ½À» Çã¿ëÇÏ´Â ºÒ¸®¾ğ
+    // escë¡œ í¼ì¦ˆí•  ìˆ˜ ìˆìŒì„ í—ˆìš©í•˜ëŠ” ë¶ˆë¦¬ì–¸
     public bool escAvailable;
-
-
-    // ÇöÀç ´É·Â°³¹æ »óÅÂ·Î µé¾î°¬À¸´Ï tp¸¦ ¸ØÃß±â À§ÇÑ ºÒ¸®¾ğ
+    // í˜„ì¬ ëŠ¥ë ¥ê°œë°© ìƒíƒœë¡œ ë“¤ì–´ê°”ìœ¼ë‹ˆ tpë¥¼ ë©ˆì¶”ê¸° ìœ„í•œ ë¶ˆë¦¬ì–¸
     public bool abilityPause = false;
 
-    // ±×·± ½Ì±ÛÅÏÀ¸·Î ±¦ÂúÀº°¡
+    // ê·¸ëŸ° ì‹±ê¸€í„´ìœ¼ë¡œ ê´œì°®ì€ê°€
     private static PauseManager instance;
     public static PauseManager Instance
     {
@@ -61,15 +62,16 @@ public class PauseManager : MonoBehaviour
             Time.timeScale = 0f;
     }
 
+    // í¼ì¦ˆí–ˆì„ ë•Œ ì‹ ê²½ì¨ì•¼ í•˜ëŠ” ê²ƒë“¤
     public void PauseGame()
     {
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
 		PlayerStateMachine.GetInstance().isPaused = true;
 		GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
-        //playerCam.gameObject.SetActive(false);
         Debug.Log("Pause");
 
+        // í”Œë ˆì´ì–´ ì¸í’‹ì„ ì°¨ë‹¨í•œë‹¤
         playerInput?.SwitchCurrentActionMap("UI");
         if (player != null)
         {
@@ -98,7 +100,6 @@ public class PauseManager : MonoBehaviour
 
     public void PausePlayer()
     {
-        //PlayerStateMachine.GetInstance().isPaused = true;
 		Player.Instance.isDecreaseTP = false;
         GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = false;
 
@@ -119,7 +120,6 @@ public class PauseManager : MonoBehaviour
         }
 
         GameObject.Find("PlayerCam").GetComponent<CinemachineInputProvider>().enabled = true;
-        //PlayerStateMachine.GetInstance().isPaused = false;
     }
 
     public void AvailableEsc()

@@ -245,7 +245,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     private void Dead()
     {
-        if (gameObject.GetComponent<DestroyKey>() != null)
+        if (gameObject.GetComponent<Centurion>() != null)
             sm.PlaySFX("BigEnemy_Dead_Sound_SE", transform);
         else
             sm.PlaySFX("Enemy_Dead_Sound_SE", transform);
@@ -352,41 +352,41 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
                 break;
             case Damageable.DamageType.ATypeHit:
                 key = Animator.StringToHash("hit_a");
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_1_Sound_SE", transform);
                 else
                     sm.PlaySFX("Enemy_Pain_1_Sound_SE", transform);
                 break;
             case Damageable.DamageType.BTypeHit:
                 key = Animator.StringToHash("hit_b");
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_2_Sound_SE", transform);
                 else
                     sm.PlaySFX("Enemy_Pain_2_Sound_SE", transform);
                 break;
             case Damageable.DamageType.KockBack:
                 key = Animator.StringToHash("knock_back");
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_3_Sound_SE", transform);
                 else
                     sm.PlaySFX("Enemy_Pain_3_Sound_SE", transform);
                 break;
             case Damageable.DamageType.Fall:
                 key = Animator.StringToHash("fall");
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_4_Sound_SE", transform);
                 else
                     sm.PlaySFX("Enemy_Pain_4_Sound_SE", transform);
                 break;
             case Damageable.DamageType.OnFallDamaged:
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_5_Sound_SE", transform);
                 else
                     key = Animator.StringToHash("on_fall_damaged");
                 sm.PlaySFX("Enemy_Pain_5_Sound_SE", transform);
                 break;
             case Damageable.DamageType.Down:
-                if (gameObject.GetComponent<DestroyKey>() != null)
+                if (gameObject.GetComponent<Centurion>() != null)
                     sm.PlaySFX("BigEnemy_Pain_6_Sound_SE", transform);
                 else
                     key = Animator.StringToHash("fall_down");

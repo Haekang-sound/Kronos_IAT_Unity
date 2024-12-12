@@ -1,13 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sonity;
 
-/// »ç¿îµå ·Îµå¸¦ ´ã´çÇÏ´Â ½Ì±ÛÅÏ »ç¿îµå ¸Å´ÏÀú
+
+///<summary>
+/// ì‚¬ìš´ë“œ ë¡œë“œë° ì¬ìƒì„ ë‹´ë‹¹í•˜ëŠ” ì‚¬ìš´ë“œ ë§¤ë‹ˆì € í´ë˜ìŠ¤
+/// ì†Œë‹ˆí‹°ì—ì„œ ìì²´ì ìœ¼ë¡œ ì‚¬ìš´ë“œ ë§¤ë‹ˆì €ë¥¼ ê°€ì§€ê³  ìˆì§€ë§Œ, ìŠ¤í¬ë¦½íŠ¸ë¡œ ê´€ë¦¬í•˜ê¸° ìœ„í•´ í•˜ë‚˜ ë” ë§Œë“¤ì—ˆë‹¤
+/// </summary>
 public class SoundManager : MonoBehaviour
 {
-    // ½Ì±ÛÅÏ & get
-    static SoundManager instance;
+    // ì‹±ê¸€í„´ & get
+    private static SoundManager instance;
     public static SoundManager Instance
     {
         get
@@ -28,15 +31,15 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField]
-    Player player;
+    private Player player;
 
-    // ÀÏ´Ü BGM ¸®½ºÆ®
-    List<SoundEvent> BgmList = new List<SoundEvent>();
-    List<SoundEvent> SfxList = new List<SoundEvent>();
-    // Play¸¦ id¸¦ ÅëÇØ¼­ ÇÔ¼ö·Î È£ÃâÇÒ°Å¶ó¸é µñ¼Å³Ê¸®°¡ ±¦ÂúÀ» °Í °°´Ù
-    Dictionary<int, SoundEvent> soundDictionary;
+    // ì¼ë‹¨ BGM ë¦¬ìŠ¤íŠ¸
+    private List<SoundEvent> bgmList = new List<SoundEvent>();
+    private List<SoundEvent> sfxList = new List<SoundEvent>();
+    // Playë¥¼ idë¥¼ í†µí•´ì„œ í•¨ìˆ˜ë¡œ í˜¸ì¶œí• ê±°ë¼ë©´ ë”•ì…”ë„ˆë¦¬ê°€ ê´œì°®ì„ ê²ƒ ê°™ë‹¤
+    private Dictionary<int, SoundEvent> soundDictionary;
 
-    // Ä³½ÌÇÑ´Ù¸é ¿©±â¼­
+    // ìºì‹±í•œë‹¤ë©´ ì—¬ê¸°ì„œ
     private void Awake()
     {
         instance = this;
@@ -46,43 +49,38 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PlayBGM("Demo_SE");
-        //SoundMixerNCamera.Instance.AdjustNewScene();
+        
     }
 
     void Update()
     {
 
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    StopBGM("Demo_SE");
-        //}
     }
 
-    // ¸®¼Ò½º Æú´õ ³»ºÎÀÇ SE¸¦ ÇÑ¹ø¿¡ ·Îµå
+    // ë¦¬ì†ŒìŠ¤ í´ë” ë‚´ë¶€ì˜ SEë¥¼ í•œë²ˆì— ë¡œë“œ
     void LoadSE()
     {
         SoundEvent[] bgms = Resources.LoadAll<SoundEvent>("Audio/Bgm");
         foreach (SoundEvent soundEvent in bgms)
         {
-            // ¸®½ºÆ®³ª µñ¼Å³Ê¸®¿¡ ³ÖÀÚ
-            BgmList.Add(soundEvent);
+            // ë¦¬ìŠ¤íŠ¸ë‚˜ ë”•ì…”ë„ˆë¦¬ì— ë„£ì
+            bgmList.Add(soundEvent);
         }
-        Debug.Log("¸®¼Ò½º Æú´õÀÇ BGM ·Îµå");
+        Debug.Log("ë¦¬ì†ŒìŠ¤ í´ë”ì˜ BGM ë¡œë“œ");
 
         SoundEvent[] sfxs = Resources.LoadAll<SoundEvent>("Audio/Sfx");
         foreach (SoundEvent soundEvent in sfxs)
         {
-            // ¸®½ºÆ®³ª µñ¼Å³Ê¸®¿¡ ³ÖÀÚ
-            SfxList.Add(soundEvent);
+            // ë¦¬ìŠ¤íŠ¸ë‚˜ ë”•ì…”ë„ˆë¦¬ì— ë„£ì
+            sfxList.Add(soundEvent);
         }
-        Debug.Log("¸®¼Ò½º Æú´õÀÇ SFX ·Îµå");
+        Debug.Log("ë¦¬ì†ŒìŠ¤ í´ë”ì˜ SFX ë¡œë“œ");
 
     }
 
     public void PlayBGM(string name)
     {
-        foreach (SoundEvent se in BgmList)
+        foreach (SoundEvent se in bgmList)
         {
             if (se.name == name)
                 se.PlayMusic();
@@ -91,7 +89,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(SoundEvent soev)
     {
-        foreach (SoundEvent se in BgmList)
+        foreach (SoundEvent se in bgmList)
         {
             if (se == soev)
                 se.PlayMusic();
@@ -100,17 +98,17 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(string name, Transform transform)
     {
-        foreach (SoundEvent se in SfxList)
+        foreach (SoundEvent se in sfxList)
         {
             if (se.name == name)
                 se.Play(transform);
         }
     }
 
-    // ¿À¹ö·Îµù
+    // ì˜¤ë²„ë¡œë”©
     public void PlaySFX(string name)
     {
-        foreach (SoundEvent se in SfxList)
+        foreach (SoundEvent se in sfxList)
         {
             if (se.name == name)
                 se.PlayMusic();
@@ -120,7 +118,7 @@ public class SoundManager : MonoBehaviour
 
     public void StopBGM(string name)
     {
-        foreach (SoundEvent se in BgmList)
+        foreach (SoundEvent se in bgmList)
         {
             if (se.name == name)
                 se.StopMusic();
@@ -129,7 +127,7 @@ public class SoundManager : MonoBehaviour
 
     public void StopSFX(string name)
     {
-        foreach (SoundEvent se in SfxList)
+        foreach (SoundEvent se in sfxList)
         {
             if (se.name == name)
             {
@@ -139,6 +137,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // íƒ€ì„ë¼ì¸ì´ë‚˜ í‚¤í”„ë ˆì„ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•´ì„œ ë³„ë„ë¡œ êµ¬í˜„í–ˆë‹¤
     public void ButtonEnter()
     {
         PlaySFX("UI_MouseON_Effect_Sound_SE", transform);

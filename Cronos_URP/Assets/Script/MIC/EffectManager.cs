@@ -1,11 +1,15 @@
-﻿using Sonity;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// 이펙트를 관리하는 매니저
+/// 하는 역할은 이펙트를 인스턴스화해서 뽑고 지우는거
+/// 모든 이펙트 프리팹의 스폰은 여기에서 한다
+/// </summary>
 public class EffectManager : MonoBehaviour
 {
 	// 싱글턴
@@ -35,8 +39,8 @@ public class EffectManager : MonoBehaviour
 	Player player;
 	public GameObject pSword;
 
-	SoundManager soundManager;
-	ImpulseCam ic;
+	private SoundManager soundManager;
+	private ImpulseCam ic;
 
 	// 레이캐스트 관련
 	float forwardVal = 1.6f;
@@ -46,10 +50,10 @@ public class EffectManager : MonoBehaviour
 
 	// 글로벌 볼륨
 	[SerializeField]
-	Volume eVolume;
-	MotionBlur mBlur;
-	ChromaticAberration cAber;
-	DepthOfField dOF;
+	private Volume eVolume;
+	private MotionBlur mBlur;
+	private ChromaticAberration cAber;
+	private DepthOfField dOF;
 	public float mBlurVal = 1.0f;
 	public float cAberVal = 0.7f;
 	public float dofFDistance = 2.0f;
@@ -60,9 +64,9 @@ public class EffectManager : MonoBehaviour
 	public float fadeTime = 0.3f;
 
 	// 캐릭터 평타 각도를 맞추기 위해서
-	Vector3 swordMagicOffest = new Vector3(90, 180, 0);
-	Vector3 enemyMagicOffset = new Vector3(0, 90, 0);
-	Vector3 bossMagicOffset = new Vector3(0, 90, 70);
+	private Vector3 swordMagicOffest = new Vector3(90, 180, 0);
+	private Vector3 enemyMagicOffset = new Vector3(0, 90, 0);
+	private Vector3 bossMagicOffset = new Vector3(0, 90, 70);
 
 	// 강화 검기 관련
 	public bool isSwordWave;
@@ -89,11 +93,10 @@ public class EffectManager : MonoBehaviour
 	public float bossMoonDistance = 5.0f;
 	public Vector3 bossMoonScale;
 	public Transform bossMoontarget;
-	Vector3 bossFireOffset = new Vector3(0, 0, 3.0f);
+	private Vector3 bossFireOffset = new Vector3(0, 0, 3.0f);
 
 	// 사용할 이펙트 리스트
-	//static List<GameObject> effects = new List<GameObject>();
-	GameObject[] effectArray;
+	private GameObject[] effectArray;
 
 	// 이펙트를 로드하는 단계
 	protected void Awake()
@@ -111,52 +114,33 @@ public class EffectManager : MonoBehaviour
 			DontDestroyOnLoad(gameObject);
 			Debug.Log("Effect Manager called on " + gameObject.name);
 		}
-		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
 
 	/// <summary>
 	/// 씬전환 초기화를 위한 함수
-	/// 민동휘는 고치던가 
+	/// 믹동휘는 고치던가 
 	/// By OHK
 	/// </summary>
-	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-	{
-		//Initialize();
-	}
+	//private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	//{
+	//	//Initialize();
+	//}
 
-	// 로드한 이펙트에 게임 오브젝트 할당
+	
 	void Start()
 	{
 		Initialize();
 		StartCoroutine(LoadEffectCoroutine());
 	}
 
-	// 디버그를 위해서 일단 업데이트에 넣어놓았다
-	// 기획 쪽에서 조정이 끝나면 별도로 구현한다
 	void Update()
 	{
-		//swordWaveSpeed = enforceSlashSpeed * 2f / 3f;
-		//swordWaveDistance = enforceSlashSpeed * 2f / 5f;
-
-		//보스 이펙트 데모로 나오게
-		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
-		//if (Input.GetKeyDown(KeyCode.Alpha2))
-		//	BossFireShoot(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha3))
-		//    BossFiveSpear(player.transform);
-		//if (Input.GetKeyDown(KeyCode.Alpha6))
-		//    StartCoroutine(BossEightBeamCoroutine(player.transform));
+		// 오씨가 만든 올킬 스킬
 		if (Input.GetKey(KeyCode.K)
 			&&(Input.GetKey(KeyCode.I))
 			&&(Input.GetKeyDown(KeyCode.L)))
 		    QASkill();
-		//if (Input.GetKeyDown(KeyCode.Alpha7))
-		//    BossMoonFixedPosition();
-		//if (Input.GetKeyDown(KeyCode.Alpha5))
-		//    CreateAbsorbFX(player.transform, 12);
-		//         if (Input.GetKeyDown(KeyCode.Alpha6))
-		//             SpeedLine();
+		
 	}
 
 	private void OnValidate()
@@ -167,6 +151,7 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
+	// 필요한 것들 할당하기
 	void Initialize()
 	{
 		soundManager = SoundManager.Instance;
@@ -177,6 +162,7 @@ public class EffectManager : MonoBehaviour
 		{
 			pSword = player.GetComponent<Player>().playerSword;
 		}
+
 		if (eVolume == null)
 		{
 			// 비용이 크다지만 볼륨이 없으면 안되니까
@@ -185,21 +171,31 @@ public class EffectManager : MonoBehaviour
 		}
 
 		if (eVolume != null)
+		{
 			InitializeVol(eVolume);
+		}
+
 		groundLayer = LayerMask.GetMask("Ground");
 
 		if (invisibleSlash != null)
 		{
 			ToggleMeshRenderer();
 		}
+
 		if (swordAura == null)
+		{
 			swordAura = GameObject.Find("Com_Ready");
+		}
 
 		if (swordAura != null)
+		{
 			swordAura.SetActive(false);
+		}
 
 		if (absorbBox == null)
+		{
 			absorbBox = GameObject.Find("AbsorbBox");
+		}
 	}
 
 	void InitializeVol(Volume vol)
@@ -229,7 +225,8 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator LoadEffectCoroutine()
+    // 로드한 이펙트에 게임 오브젝트 할당
+    private IEnumerator LoadEffectCoroutine()
 	{
 		effectArray = Resources.LoadAll<GameObject>("Prefabs/FX");
 		foreach (GameObject effect in effectArray)
@@ -243,6 +240,7 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
+	// 거의 모든 이펙트는 이걸 통해서
 	public GameObject SpawnEffect(string name, Vector3 pos)
 	{
 		foreach (GameObject effect in effectArray)
@@ -258,6 +256,7 @@ public class EffectManager : MonoBehaviour
 		return null;
 	}
 
+	// 오버로딩 1 : 플레이어로 가는 파티클의 개수를 변경하고 싶을 때
 	public GameObject SpawnEffect(string name, Vector3 pos, float value)
 	{
 		foreach (GameObject effect in effectArray)
@@ -266,8 +265,10 @@ public class EffectManager : MonoBehaviour
 			{
 				GameObject instance = Instantiate(effect);
 				instance.transform.position = pos;
-				if (instance.GetComponent<AheadToHUD>() != null)
-					instance.GetComponent<AheadToHUD>().BurstNumber = value;
+				if (instance.GetComponent<AheadToPlayer>() != null)
+				{
+					instance.GetComponent<AheadToPlayer>().BurstNumber = value;
+				}
 
 				return instance;
 			}
@@ -276,6 +277,7 @@ public class EffectManager : MonoBehaviour
 		return null;
 	}
 
+	// 오버로딩 2 : 프리팹이 돌아가있어서 회전해서 뽑아야 할 때
 	public GameObject SpawnEffect(string name, Vector3 pos, Quaternion rot)
 	{
 		foreach (GameObject effect in effectArray)
@@ -292,15 +294,6 @@ public class EffectManager : MonoBehaviour
 		return null;
 	}
 
-	//GameObject FindName(string name)
-	//{
-	//	foreach (GameObject effect in effects)
-	//	{
-	//		if (effect.name == name)
-	//			return effect;
-	//	}
-	//	return null;
-	//}
 
 	// 부모 오브젝트에서 이름을 가진 자식 오브젝트를 리턴
 	// 이펙트가 나올 자식 오브젝트 위치 찾는 데 사용하는 중
@@ -308,16 +301,21 @@ public class EffectManager : MonoBehaviour
 	{
 		GameObject result = GameObject.Find(name);
 		if (result != null)
+		{
 			return result;
+		}
+
 		foreach (GameObject gameObject in parent.GetComponentsInChildren<GameObject>())
 		{
 			result = FindChild(gameObject, name);
 			if (result != null)
 				return result;
 		}
+
 		return null;
 	}
 
+	// 투명 투사체 오브젝트를 다시 그리냐 마냐
 	void ToggleMeshRenderer()
 	{
 		if (invisibleSlash != null)
@@ -328,6 +326,7 @@ public class EffectManager : MonoBehaviour
 			{
 				meshRenderer.enabled = showInvisibleMesh;
 			}
+
 			else
 			{
 				Debug.LogWarning("MeshRenderer not found on prefab instance.");
@@ -341,7 +340,6 @@ public class EffectManager : MonoBehaviour
 		// 이펙트 뽑고 로테이션을 칼의 로테이션과 맞춘다.
 		// 칼과 이펙트의 기준이 다르므로 이건 이펙트마다 매직 넘버가 필요함
 		// 위치는 y 좌표만 칼과 같게, 나머지는 플레이어 트랜스폼에서
-		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject slash = SpawnEffect(fxName, player.transform.position);
 		slash.transform.rotation = player.playerSword.transform.rotation * Quaternion.Euler(swordMagicOffest);
 		float newY = player.playerSword.transform.position.y;
@@ -352,7 +350,6 @@ public class EffectManager : MonoBehaviour
 	// 일반 강공격 스핀
 	public void NormalStrongFX()
 	{
-		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject slash = SpawnEffect("Nor_S_Attack", player.transform.position);
 		float newY = player.playerSword.transform.position.y;
 		slash.transform.position = new Vector3(slash.transform.position.x, newY, slash.transform.position.z);
@@ -363,9 +360,6 @@ public class EffectManager : MonoBehaviour
 	public void SwordAuraOn()
 	{
 		swordAura.SetActive(true);
-		//soundManager.PlaySFX("Player_ComboChange_Sound_SE", player.transform);
-		//soundManager.PlaySFX("03 Ability_UP_Sound_SE", player.transform);
-
 	}
 
 	public void SwordAuraOff()
@@ -436,7 +430,6 @@ public class EffectManager : MonoBehaviour
 		// 레이를 쏠 위치 플레이어의 위치 + 정면으로 조금 앞으로 + 조금 위로
 		// 기준을 플레이어 포워드에서 칼 로컬 중심으로 조금 바꿈
 		Vector3 rayTrans = player.transform.position +
-			//player.transform.forward * forwardVal + 
 			pSword.transform.up * -1 * forwardVal +
 			new Vector3(0, yUpVal, 0);
 		Debug.DrawRay(rayTrans, Vector3.down * rayMaxDist, Color.yellow, 1.0f);
@@ -457,6 +450,7 @@ public class EffectManager : MonoBehaviour
 			GameObject cir = SpawnEffect("AllKillFORQA", hitPoint, fxRot);
 			Destroy(cir, 1.0f);
 		}
+
 		else
 		{
 			Debug.Log("no ground impact");
@@ -493,6 +487,7 @@ public class EffectManager : MonoBehaviour
 				Destroy(cir, 1.0f);
 			}
 		}
+
 		else
 		{
 			Debug.Log("no ground impact");
@@ -521,6 +516,7 @@ public class EffectManager : MonoBehaviour
 			soundManager.PlaySFX("Ground_Impact_2_Sound_SE", player.transform);
 			Destroy(impact, 2.0f);
 		}
+
 		else
 		{
 			Debug.Log("no ground impact");
@@ -559,13 +555,14 @@ public class EffectManager : MonoBehaviour
 	{
 		Vector3 startPos = proj.transform.position;
 		Vector3 DestPos = startPos + player.transform.forward * swordWaveDistance;
-		//Destroy(proj, 0.7f);
 		StartCoroutine(DestroyWaveCoroutine(proj));
 
 		while (proj != null && Vector3.Distance(proj.transform.position, startPos) < swordWaveDistance)
 		{
 			if (proj == null)
+			{
 				yield break;
+			}
 
 			proj.transform.position = Vector3.MoveTowards(proj.transform.position, DestPos, swordWaveSpeed * Time.deltaTime);
 
@@ -577,7 +574,9 @@ public class EffectManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.7f);
 		if (wav != null)
+		{
 			Destroy(wav);
+		}
 	}
 
 	// 이펙트매니저가 들고 있는게 나을 것 같은데
@@ -610,7 +609,9 @@ public class EffectManager : MonoBehaviour
 		Destroy(frag, 2.0f);
 
 		if (!isSpawner)
+		{
 			CreateAbsorbFX(targetTrans, dmgMsg.amount);
+		}
 
 		// 피격이펙트
 		Vector3 newPos = new Vector3(targetTrans.position.x - dmgMsg.direction.x, dmgMsg.damageSource.y, targetTrans.position.z);
@@ -635,7 +636,7 @@ public class EffectManager : MonoBehaviour
 
 	public void CreateAbsorbFX(Transform trans, float burstNum)
 	{
-		// 1초 뒤에 hud로 돌진하는 파티클 만들기
+		// 1초 뒤에 플레이어로 돌진하는 파티클 만들기
 		GameObject ab = SpawnEffect("AbsorbFX", trans.position + new Vector3(0, 2, 0), burstNum);
 		Destroy(ab, 3.0f);
 	}
@@ -643,7 +644,6 @@ public class EffectManager : MonoBehaviour
 	public void CreateGuardFX()
 	{
 		soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
-
 		Vector3 grdPos = new Vector3(player.transform.position.x, pSword.transform.position.y, player.transform.position.z);
 		GameObject grd = SpawnEffect("GuardFX", grdPos);
 		Destroy(grd, 1.0f);
@@ -651,17 +651,19 @@ public class EffectManager : MonoBehaviour
 
 	public void CreateParryFX()
 	{
-		//soundManager.PlaySFX("Player_Block_Sound_SE", player.transform);
-
 		soundManager.PlaySFX("Parry_Sound_SE", player.transform);
 		Vector3 parrPos = player.transform.position + new Vector3(0, 1f, 0.25f);
 		GameObject parr = SpawnEffect("GuardFlare", parrPos);
 		StartCoroutine(FadeOutLightsCoroutine(parr));
 		Destroy(parr, 1.0f);
 		CreateGuardFX();
+
 		// 글로벌볼륨이 없다면 나가
 		if (eVolume == null)
+		{
 			return;
+		}
+
 		StartCoroutine(ParryMotionBlurCoroutine(mBlurVal));
 		StartCoroutine(ParryCAberrationCoroutine(cAberVal));
 		StartCoroutine(ParryDepthOfFieldCoroutine());
@@ -692,6 +694,7 @@ public class EffectManager : MonoBehaviour
 				//soundManager.PlaySFX("Boss_Ground_Impact_Sound_SE", player.transform);
 				Destroy(beam, 0.6f);
 			}
+
 			yield return new WaitForSeconds(bossBeamTerm);
 		}
 	}
@@ -742,7 +745,11 @@ public class EffectManager : MonoBehaviour
 
 	public void BossMoonFixedPosition()
 	{
-		if (bossMoontarget == null) return;
+		if (bossMoontarget == null)
+		{
+			return;
+		}
+
 		List<int> moonNums = new List<int>();
 		moonNums = FisherYatesShuffles(8, 5);
 		Vector3 newOffset = new Vector3(0, bossMoonHeight, 0);
@@ -762,9 +769,11 @@ public class EffectManager : MonoBehaviour
 	// 집중선 켰다가 끄기
 	IEnumerator SpeedLineCoroutine()
 	{
-		UI_TPHUD.Instance.speedLineUI.SetActive(true);
+		UI_TPCPHUD.Instance.speedLineUI.SetActive(true);
+
 		yield return new WaitForSeconds(1.5f);
-		UI_TPHUD.Instance.speedLineUI.SetActive(false);
+
+		UI_TPCPHUD.Instance.speedLineUI.SetActive(false);
 	}
 
 	public void SpeedLine()
@@ -772,15 +781,13 @@ public class EffectManager : MonoBehaviour
 		StartCoroutine(SpeedLineCoroutine());
 	}
 
-	// 보스 돌진 예고 반짝
-
-
 
 	// 패리했을 때 모션 블러
 	IEnumerator ParryMotionBlurCoroutine(float val)
 	{
 		mBlur.intensity.value = val;
 		float elapsedTime = 0.0f;
+
 		while (elapsedTime < parryTime)
 		{
 			mBlur.intensity.value = Mathf.Lerp(val, 0f, elapsedTime / parryTime);
@@ -797,6 +804,7 @@ public class EffectManager : MonoBehaviour
 	{
 		cAber.intensity.value = val;
 		float elapsedTime = 0.0f;
+
 		while (elapsedTime < parryTime)
 		{
 			cAber.intensity.value = Mathf.Lerp(val, 0, elapsedTime / parryTime);
@@ -816,6 +824,7 @@ public class EffectManager : MonoBehaviour
 		dOF.aperture.value = dofAperture;
 		float elapsedTime = 0.0f;
 		float dofTime = 0.3f;
+
 		while (elapsedTime < parryTime)
 		{
 			elapsedTime += Time.deltaTime;
@@ -838,6 +847,7 @@ public class EffectManager : MonoBehaviour
 		float elapsedTime = 0.0f;
 		// n초에 걸쳐서 돌아가기
 		float backTime = 0.6f;
+
 		while (elapsedTime < backTime)
 		{
 			elapsedTime += Time.deltaTime;
@@ -851,6 +861,7 @@ public class EffectManager : MonoBehaviour
 		float elapsedTime = 0.0f;
 		Light light = flare.GetComponent<Light>();
 		LensFlareComponentSRP lens = flare.GetComponent<LensFlareComponentSRP>();
+
 		while (elapsedTime < fadeTime)
 		{
 			elapsedTime += Time.deltaTime;

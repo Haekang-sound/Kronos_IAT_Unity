@@ -1,7 +1,10 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
+
+/// <summary>
+/// 보스가 차지 어택을 할 때 인디케이터를 보여주기 위한 클래스
+/// </summary>
 public class BossChargeAimer : MonoBehaviour
 {
     [SerializeField]
@@ -16,15 +19,15 @@ public class BossChargeAimer : MonoBehaviour
         aimer.SetActive(false);
     }
 
-    // Update is called once per frame
+    //// Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DoAim()
     {
-        StartCoroutine(Aiming());
+        StartCoroutine(AimingCoroutine());
     }
 
     public void OffAim()
@@ -32,7 +35,8 @@ public class BossChargeAimer : MonoBehaviour
         aimer.SetActive(false);
     }
 
-    public IEnumerator Aiming()
+    // 단순히 에임 오브젝트 스케일을 줄일 뿐
+    public IEnumerator AimingCoroutine()
     {
         aimer.transform.localScale = originScale;
         aimer.SetActive(true);
