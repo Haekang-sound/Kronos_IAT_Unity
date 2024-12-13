@@ -13,8 +13,8 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
 /// <summary>
-/// 노드 간의 연결점을 나타매여, 연결의 방향과 용량을 지정할 수 있다.
-/// 이 클래스는 그래프 뷰 내에서 노드 간의 연결을 생성하고 관리하기 위한 기능을 제공한다.
+/// 노드 간의 연결점을 나타내며, 연결의 방향과 용량을 지정할 수 있습니다.
+/// 이 클래스는 그래프 뷰 내에서 노드 간의 연결을 생성하고 관리하기 위한 기능을 제공합니다.
 /// </summary>
 public class NodePort : Port
 {

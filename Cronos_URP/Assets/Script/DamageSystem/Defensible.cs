@@ -1,11 +1,12 @@
-using Sonity;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Damageable;
 
+/// <summary>
+/// 방어 시스템을 구현합니다. 
+/// 방어 중일 때 공격을 받을 경우, 피해를 경감하고 가드 성공 여부를 확인합니다.
+/// </summary>
 public class Defensible : MonoBehaviour
 {
     SoundManager sm;

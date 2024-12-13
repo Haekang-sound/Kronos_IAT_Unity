@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 보스의 무력화 상태 전환을 관리하는 클래스 입니다.
+/// </summary>
 public class BossSMBOnGroggy : SceneLinkedSMB<BossBehavior>
 {
 

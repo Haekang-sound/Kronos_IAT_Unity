@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.XR;
 
+/// <summary>
+/// BTypeEnem의 추적 이후 원래 자리로 되돌아가는 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class BTypeEnemySMBReturn : SceneLinkedSMB<BTypeEnemyBehavior>
 {
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

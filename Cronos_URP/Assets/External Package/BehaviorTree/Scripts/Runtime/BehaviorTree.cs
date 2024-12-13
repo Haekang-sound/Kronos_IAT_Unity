@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// 행동 트리(Behavior Tree)를 구현하는 클래스입니다.
+/// 이 클래스는 트리 구조를 기반으로 한 상태 업데이트 및 노드 관리 기능을 제공합니다.
+/// 트리 내의 각 노드는 상태를 가지며, 트리를 순회하고 노드를 추가/삭제할 수 있는 기능을 포함합니다.
+/// </summary>
 [CreateAssetMenu()]
 public class BehaviorTree : ScriptableObject
 {
@@ -11,8 +16,6 @@ public class BehaviorTree : ScriptableObject
     public Blackboard blackboard = new Blackboard();
     public Node.State Update()
     {
-        blackboard.Update();
-
         if (rootNode.state == Node.State.Running)
         {
             treeState = rootNode.Update();
@@ -103,7 +106,6 @@ public class BehaviorTree : ScriptableObject
         Undo.RecordObject(this, "Behaviour Tree (DeleteNode)");
         nodes.Remove(node);
 
-        //AssetDatabase.RemoveObjectFromAsset(node);
         Undo.DestroyObjectImmediate(node);
 
         AssetDatabase.SaveAssets();

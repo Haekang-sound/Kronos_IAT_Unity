@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ATypeEnem의 경계 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
 {
     public float minStrafeTime = 2.0f;

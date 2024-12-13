@@ -313,9 +313,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5640202023021520155, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -222.7002
+      objectReference: {fileID: 0}
     - target: {fileID: 6620581494647019592, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055305018129774275, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 75.99988
       objectReference: {fileID: 0}
     - target: {fileID: 8558117997612131958, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_Name
@@ -4457,6 +4465,7 @@ GameObject:
   - component: {fileID: 353967172}
   - component: {fileID: 353967174}
   - component: {fileID: 353967173}
+  - component: {fileID: 353967175}
   m_Layer: 0
   m_Name: ' Enter Trigger'
   m_TagString: Untagged
@@ -4491,49 +4500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f957ad1dec297044949925dcce1cdcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 1576613979}
-  - {fileID: 33685914}
-  - {fileID: 1175486729}
-  onEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 447517564}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 564812942}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &353967174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4555,6 +4521,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &353967175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353967171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0393a8c9db63a458b309e29728d9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeline: {fileID: 447517564}
 --- !u!1001 &370387588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12389,7 +12368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sButton: {fileID: 0}
-  oButton: {fileID: 0}
   cButton: {fileID: 0}
   eButton: {fileID: 0}
 --- !u!1001 &1052204996
@@ -13303,7 +13281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549f32a0ffa481b488b4e3ec9f0fbe35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeline: {fileID: 447517564}
 --- !u!4 &1096854305
 Transform:
   m_ObjectHideFlags: 0
@@ -18343,7 +18320,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.7251803, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.033288617, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -18354,7 +18331,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.7251803, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.033288617, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!4 &1562582733 stripped
 Transform:
@@ -21780,6 +21757,10 @@ PrefabInstance:
       propertyPath: Vanished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 37176471}
+    - target: {fileID: 3326145331922590434, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 11400000, guid: e46cc439edfe4d34c8f5da5a3904de49, type: 2}
     - target: {fileID: 4467352948813670711, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.040626884
@@ -21827,6 +21808,10 @@ PrefabInstance:
     - target: {fileID: 8751960732937434445, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751960732937434445, guid: ebc4dee4ea19b7940a9ec78c6fc6a361, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

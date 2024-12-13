@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ATypeEnem의 공격 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class ATypeEnemySMBAttack : SceneLinkedSMB<ATypeEnemyBehavior>
 {
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -8,10 +11,6 @@ public class ATypeEnemySMBAttack : SceneLinkedSMB<ATypeEnemyBehavior>
         _monoBehaviour.inAttack = true;
         _monoBehaviour.UseBulletTimeScale();
     }
-
-    //public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //}
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

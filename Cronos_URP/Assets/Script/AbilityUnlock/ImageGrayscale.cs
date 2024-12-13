@@ -2,6 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// UI 이미지에 그레이스케일 효과를 적용하고, 
+/// 지정된 시간 동안 그레이스케일 효과를 제어합니다.
+/// </summary>
 public class ImageGrayscale : MonoBehaviour
 {
     public Material GrayscaleMaterial;
@@ -18,7 +23,7 @@ public class ImageGrayscale : MonoBehaviour
         image.material = new Material(GrayscaleMaterial);
     }
 
-    // =====
+    // -----
 
     public void SetGrayscale(float amount = 1)
     {

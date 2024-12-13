@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어의 다양한 능력 및 공격 스킬을 활성화하고, 
+/// 애니메이션 및 효과와 연동하여 처리합니다.
+/// </summary>
 public class AbilityUsageInfoManager : MonoBehaviour
 {
     private AbilityUsageInfo abilityUsageInfo;

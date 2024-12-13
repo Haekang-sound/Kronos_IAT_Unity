@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Bullet Time 효과를 관리하는 시스템입니다. 
+/// 시간 속도를 조절하여 느리게 또는 정상 속도로 진행되도록 합니다.
+/// </summary>
 public class BulletTime : MonoBehaviour
 {
     [SerializeField]

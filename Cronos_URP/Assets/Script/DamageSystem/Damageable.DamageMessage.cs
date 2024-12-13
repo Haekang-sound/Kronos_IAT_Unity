@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// 피해 메시지 및 피해 유형과 콤보 유형을 정의하는 클래스입니다.
+/// 이 클래스는 적의 피해 처리 및 콤보 시스템을 관리하는데 사용됩니다.
+/// </summary>
 public partial class Damageable : MonoBehaviour
 {
 	public enum ComboType

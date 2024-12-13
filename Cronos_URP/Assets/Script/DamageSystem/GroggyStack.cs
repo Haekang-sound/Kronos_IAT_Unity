@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 캐릭터가 일정 횟수 이상 공격을 받을 경우 '그로기' 상태로 전환되는 
+/// 스택 시스템을 관리하는 클래스입니다.
+/// </summary>
 public class GroggyStack : MonoBehaviour
 {
     public int maxStack;
@@ -13,7 +17,7 @@ public class GroggyStack : MonoBehaviour
     [SerializeField]
     private bool _isGroggy;
 
-    // =====
+    // -----
 
     public void AddStack()
     {

@@ -1,20 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.XR;
 
+/// <summary>
+/// 전투 구역 내 적을 관리하는 클래스입니다. 이 클래스는 타겟을 추적하고, 타겟을 잃었을 때 일정 시간 동안 추적을 계속하거나 추적을 멈춥니다.
+/// 또한, 타겟의 위치에 맞춰 이동해야 할 지점을 계산하여 적이 타겟을 추적할 수 있도록 도와줍니다.
+/// </summary>
 public class CombatZoneEnemy : MonoBehaviour
 {
     public bool drawGizmos;
 
     public float timeToStopPursuit = 0.0f;
     protected float _timerSinceLostTarget = 0.0f;
+
     // finder의 타깃
     public GameObject CurrentTarget { get; private set; }
+
     // Scan 영역
     public bool useCombatZone;
     public CombatZone combatZone { private get; set; }
+
     // 타깃 발견 시 이동해야할 위치
     public TargetDistributor.TargetFollower FollowerData { get; private set; }
 
@@ -37,6 +41,10 @@ public class CombatZoneEnemy : MonoBehaviour
         FollowerData.requiredPoint = CurrentTarget.transform.position + fromTarget.normalized * distance * 0.9f;
     }
 
+    /// <summary>
+    /// 타겟을 찾고 추적 상태를 업데이트합니다. 
+    /// 전투 구역을 사용할 경우, CombatZone에서 타겟을 탐지하고, 그렇지 않으면 기본적으로 설정된 타겟을 사용합니다.
+    /// </summary>
     public void FindTarget()
     {
         GameObject target = null;

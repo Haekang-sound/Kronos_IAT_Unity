@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// 일정 주기마다 지속적으로 대미지를 입히는 
+/// '도트(Damage over Time)' 대미지 처리 클래스입니다.
+/// </summary>
 public class DotDamager : SimpleDamager
 {
     [SerializeField]

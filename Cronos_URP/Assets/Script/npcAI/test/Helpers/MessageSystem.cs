@@ -9,7 +9,6 @@ namespace Message
         DAMAGED,
         DEAD,
         RESPAWN,
-        //Add your user defined message type after
     }
 
     public interface IMessageReceiver

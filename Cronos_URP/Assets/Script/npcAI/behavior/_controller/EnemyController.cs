@@ -1,17 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
 /// <summary>
-/// 모든 Enmy 객체들이 공동적으로 가지는 컴포넌트 및 변수를 정의한 클래스
-/// 객체의 물리, 네브메시, 
+/// 모든 Enemy 객체들이 공동으로 사용하는 이동, 물리 처리, 외부 힘 적용 등의 기능을 정의한 클래스입니다.
+/// NavMeshAgent를 활용한 경로 탐색, 애니메이션 기반 이동, 외부 물리력 처리를 제공합니다.
 /// </summary>
 [DefaultExecutionOrder(-1)] // 다른 스크립트보다 먼저 실행(실행 주문 값이 낮을 수록 먼저 실행)
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))] // NavMeshAgent 컴포넌트 필수
 public class EnemyController : MonoBehaviour
 {
     // 인스펙터 창에 지정하지 않으면
@@ -61,12 +58,6 @@ public class EnemyController : MonoBehaviour
         _navMeshAgent.updatePosition = false;
 
         _rigidbody = GetComponentInChildren<Rigidbody>();
-
-        //_rigidbody.drag = 10f;
-        //_rigidbody.isKinematic = false;
-        //_rigidbody.useGravity = false;
-        //_rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        //_rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         _followNavmeshAgent = true;
     }

@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 카메라를 기준으로 오브젝트의 회전 방식을 설정하는 클래스입니다.
+/// 주어진 모드에 따라 카메라를 바라보거나 카메라의 방향을 반영하여 회전합니다.
+/// </summary>
 public class LookAtCamera : MonoBehaviour
 {
     private enum Mode
     {
-        LookAt,
-        LookAtInverted, //* 반전 시켜 보기
-        CameraForward,
-        CameraForwardInverted, //* 반전 시켜 보기
+        LookAt, // 카메라를 바라보도록 회전
+        LookAtInverted, // 카메라를 반대로 바라보도록 회전
+        CameraForward, // 카메라의 전방 방향으로 오브젝트의 Z축을 맞추기
+        CameraForwardInverted, // 카메라의 전방 방향으로 오브젝트의 Z축을 반대로 맞추기
     }
 
     [SerializeField] private Mode mode;

@@ -3,6 +3,11 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// BTypeEnem의 행동을 처리하는 클래스입니다.
+/// 공격 범위, 이동, 회전, 애니메이션 트리거, 피해 처리,
+/// 넉백, 슬래시 및 충전 등의 기능을 포함하고 있습니다.
+/// </summary>
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
 public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
@@ -15,7 +20,6 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     public float rotationSpeed = 1.0f;
 
     public GameObject aimRing;
-    //public GameObject aimEnd;
     private Vector3 ringOriginScale = new Vector3(1f, 1f, 1f);
     private Vector3 ringShrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
 
@@ -81,19 +85,12 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
         aimRing.SetActive(false);
-        //aimEnd.SetActive(false);
     }
 
     private void OnDisable()
     {
         _damageable.onDamageMessageReceivers.Remove(this);
     }
-
-    //void Update()
-
-    // void FixedUpdate()
-
-    // Debug ///////////////////////////////////////////////////////////////////////////////////
 
     public void ChangeDebugText(string state = nameof(BTypeEnemyBehavior))
     {
@@ -114,15 +111,10 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
 
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, strafeDistance);
-
         // 기본 위치 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////
 
     public void BeginAttack()
     {

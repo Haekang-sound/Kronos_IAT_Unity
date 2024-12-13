@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 공격 스택을 관리하는 클래스입니다. 
+/// 공격이 발생할 때마다 스택이 증가하며, 주어진 시간 동안 스택을 유지합니다.
+/// </summary>
 public class AttackStack : MonoBehaviour
 {
     public int currentStack;

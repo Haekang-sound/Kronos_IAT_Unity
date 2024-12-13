@@ -1,12 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 게임의 저장 및 로드 기능을 담당하는 클래스입니다.
+/// 씬 데이터, 체크포인트 데이터, 능력 트리 데이터를 저장하고 불러오는 기능을 제공합니다.
+/// </summary>
 public class SaveLoadManager : MonoBehaviour
 {
+    /// <summary>
+    /// 저장 및 로드의 목적을 정의하는 열거형입니다. 
+    /// 씬 데이터와 체크포인트 데이터로 구분됩니다.
+    /// </summary>
     public enum Purpose
     {
-        scene,
-        checkpoint
+        scene,      // 씬 데이터 저장 및 로드
+        checkpoint  // 체크포인트 데이터 저장 및 로드
     }
 
     [SerializeField]

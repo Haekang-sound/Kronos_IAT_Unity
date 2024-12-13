@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// 공격에 의해 대상을 피해 입히는 기능을 담당하는 클래스입니다.
+/// 이 클래스는 공격 범위 내의 대상에게 피해를 입히고, 
+/// 피해를 입힐 대상을 확인하는 기능을 제공합니다.
+/// </summary>
 [RequireComponent(typeof(Collider))]
 public class SimpleDamager : MonoBehaviour
 {
@@ -24,16 +28,6 @@ public class SimpleDamager : MonoBehaviour
     SoundManager soundManager;
 
     public UnityEvent OnAttack;
-
-    private void Start()
-    {
-        GetComponent<Collider>().isTrigger = true;
-    }
-
-    private void OnEnable()
-    {
-        soundManager = SoundManager.Instance;
-    }
 
     public void SetOwner(GameObject owner) => m_owner = owner;
 
@@ -159,5 +153,17 @@ public class SimpleDamager : MonoBehaviour
             Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.right, topSphereCenter + radius * Vector3.right);
             Gizmos.DrawLine(bottomSphereCenter - radius * Vector3.right, topSphereCenter - radius * Vector3.right);
         }
+    }
+
+    // -----
+
+    private void Start()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
+
+    private void OnEnable()
+    {
+        soundManager = SoundManager.Instance;
     }
 }

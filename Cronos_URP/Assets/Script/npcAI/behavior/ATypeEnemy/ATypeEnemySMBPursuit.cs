@@ -1,7 +1,9 @@
 using UnityEngine.AI;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
+/// <summary>
+/// ATypeEnem의 추적 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 {
     public enum PursuitFor

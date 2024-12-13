@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 게임 오브젝트를 지정된 축을 기준으로 회전시키는 기능을 제공합니다.
+/// </summary>
 public class RotateUI : MonoBehaviour
 {
     public enum Axis

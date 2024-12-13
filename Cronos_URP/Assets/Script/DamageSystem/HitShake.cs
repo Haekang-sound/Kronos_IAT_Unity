@@ -1,7 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트가 타격을 받았을 때 
+/// 흔들리는 효과를 구현하는 클래스입니다.
+/// </summary>
 public class HitShake : MonoBehaviour
 {
     [Header("Info")]

@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 'Node' 클래스는 행동 트리에서 각 노드의 기본 클래스입니다.
+/// 행동 트리의 각 단계를 처리하는 업데이트, 시작, 종료 메서드를 포함하며, 
+/// 이를 통해 트리의 흐름을 제어합니다.
+/// </summary>
 public abstract class Node : ScriptableObject
 {
     public enum State

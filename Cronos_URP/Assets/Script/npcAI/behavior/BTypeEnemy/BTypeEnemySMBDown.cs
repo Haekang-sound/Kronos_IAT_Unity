@@ -1,6 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// BTypeEnem의 무력화 전환을 관리하는 클래스입니다.
+/// </summary>
 
 public class BTypeEnemySMBDown : SceneLinkedSMB<BTypeEnemyBehavior>
 {

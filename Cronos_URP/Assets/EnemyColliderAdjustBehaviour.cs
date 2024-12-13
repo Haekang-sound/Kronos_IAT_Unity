@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 public class EnemyColliderAdjustBehaviour : SceneLinkedSMB<ATypeEnemyBehavior>
 {
 	public bool drawGizmos;
-	Vector3 OriginCenter;
-	Vector3 OriginSize;
 
 	[Header("Collider")]
 	[SerializeField] Vector3 Center = Vector3.zero;

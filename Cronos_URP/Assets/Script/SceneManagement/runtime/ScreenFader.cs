@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 페이딩 효과를 관리하는 클래스 입니다.
+/// 씬 전환, 로딩, 게임 오버와 같은 상황에서 사용합니다
+/// </summary>
 public class ScreenFader : MonoBehaviour
 {
     public enum FadeType

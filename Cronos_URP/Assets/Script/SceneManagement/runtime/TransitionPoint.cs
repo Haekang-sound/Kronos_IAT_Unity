@@ -1,7 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// 동일한 씬 내 텔레포트를 관리합니다.
+/// 이 클래스는 특정 조건에 따라 게임 오브젝트를 전환하거나 이동시키는 역할을 합니다.
+/// </summary>
 public class TransitionPoint : MonoBehaviour
 {
+	/// <summary>
+	/// 씬 전환 유형
+	/// </summary>
 	public enum TransitionType
 	{
 		DifferentZone,
@@ -9,13 +16,14 @@ public class TransitionPoint : MonoBehaviour
 		SameScene,
 	}
 
-
+	/// <summary>
+	/// 씬 전환이 발생하는 시점 정의
+	/// </summary>
 	public enum TransitionWhen
 	{
 		OnTriggerEnter,
 		ExternalCall,
 	}
-
 
 	[Tooltip("씬 전환이 될때 같이 이동될 게임 오브젝트입니다. (ex. 플레이어)")]
 	public GameObject transitioningGameObject;
@@ -45,17 +53,6 @@ public class TransitionPoint : MonoBehaviour
 		if (other.gameObject == transitioningGameObject)
 		{
 			m_transitioningGameObjectPresent = true;
-
-// 			if (ScreenFader.IsFading)
-// 			{
-// 				EffectManager.Instance.CreateParryFX();
-// 				return;
-// 			}
-// 			if ( SceneController.Transitioning)
-// 			{
-// 				EffectManager.Instance.CreateGuardFX();
-// 				return;
-// 			}
 
 			if (transitionWhen == TransitionWhen.OnTriggerEnter)
 			{

@@ -1,9 +1,13 @@
 using Message;
-using Sonity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+
+/// <summary>
+/// BossBehavior 클래스는 보스 캐릭터의 행동 및 상태 관리를 담당하는 클래스입니다.
+/// 보스의 다양한 패턴과 공격을 처리하고, 행동 트리 및 상태에 따라 각종 이펙트 및 공격을 실행합니다.
+/// </summary>
 
 public class BossBehavior : MonoBehaviour, IMessageReceiver
 {
@@ -121,12 +125,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             LookAtTarget();
         }
     }
-
-    //void FixedUpdate()
-    //{
-    //}
-
-
     private void OnDrawGizmos()
     {
         if (drawGizmos == false) return;
@@ -155,8 +153,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
     public void BossEightBeamCoroutine()
     {
         StartCoroutine(_effectManager?.BossEightBeamCoroutine(transform));
@@ -177,8 +173,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         //_effectManager?.BossMoon(transform);
 		_effectManager?.BossMoonFixedPosition();
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
     private void UpdateBehaviorTree()
     {
@@ -272,13 +266,11 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void BeginAiming()
     {
-        //_rotationSpeed = 100f;
         _aimtarget = true;
     }
 
     public void StopAiming()
     {
-        //_rotationSpeed = 0f;
         _aimtarget = false;
     }
 
@@ -296,7 +288,6 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     public void LightSpeedRushUpgrade()
     {
-        //GameObject obj = Resources.Load<GameObject>("Models/Boss/LightSpeedRush_Clon");
         GameObject obj = Resources.Load<GameObject>("Prefabs/Boss/LightSpeedRush_Clon");
 
         var clone1 = Instantiate(obj, transform.position, transform.rotation);

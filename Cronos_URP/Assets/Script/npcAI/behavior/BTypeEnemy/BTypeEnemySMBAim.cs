@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// BTypeEnem의 공격 조준 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
 {
     public float minStrafeTime = 2.0f;

@@ -2,6 +2,11 @@ using Message;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// ATypeEnem의 행동을 처리하는 클래스입니다.
+/// 공격 범위, 이동, 회전, 애니메이션 트리거, 피해 처리,
+/// 넉백, 슬래시 및 충전 등의 기능을 포함하고 있습니다.
+/// </summary>
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
 [RequireComponent(typeof(FanShapeScanner))]
@@ -103,11 +108,6 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         OnDown?.RemoveListener(TriggerDown);
     }
 
-    // void Update()
-    // void FixedUpdate()
-
-    // Debug ///////////////////////////////////////////////////////////////////////////////////
-
     public void ChangeDebugText(string state = nameof(BTypeEnemyBehavior))
     {
         var debugUI = GetComponentInChildren<TextMeshProUGUI>();
@@ -137,8 +137,6 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////
 
     public bool IsNearBase()
     {

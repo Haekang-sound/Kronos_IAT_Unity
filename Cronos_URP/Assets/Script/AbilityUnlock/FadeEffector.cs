@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// CanvasGroup의 투명도를 조절하여 페이드 인/아웃 효과를 제공합니다.
+/// 특정 이벤트(ex: 보스 스페셜 이벤트)를 위한 페이드 시퀀스도 지원합니다.
+/// </summary>
+
 public class FadeEffector : MonoBehaviour
 {
     private CanvasGroup canvasGroup;

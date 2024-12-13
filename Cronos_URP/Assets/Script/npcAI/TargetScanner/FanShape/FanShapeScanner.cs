@@ -1,7 +1,10 @@
 using UnityEngine;
-using static UnityEngine.Advertisements.Advertisement;
 
-// enemy 객체가 플레이를 찾고 추적하는 데 사용된다.
+/// <summary>
+/// 적이 특정 구역 내에서 플레이어를 찾고 추적하는 데 사용되는 스캐너 클래스입니다. 
+/// 이 클래스는 플레이어의 위치를 감지하고, 장애물에 의해 가려지지 않는지 확인하며, 
+/// 플레이어가 감지 범위 내에 있을 경우 이를 반환합니다.
+/// </summary>
 [System.Serializable]
 public class FanShapeScanner : MonoBehaviour
 {
@@ -33,10 +36,11 @@ public class FanShapeScanner : MonoBehaviour
     }
 
     /// <summary>
-    ///  매개변수에 따라 플레이어가 표시되는지 확인한다.
+    /// 주어진 매개변수에 따라 플레이어가 표시되는지 확인하고, 타겟을 반환합니다.
     /// </summary>
     /// <param name="detector">감지를 실행할 객체의 트랜스폼.</param>
-    /// /// <param name="useHeightDifference">If계산에서 높이 차이를 최대 높이 차이 값과 비교해야 하는지 아니면 무시해야 하는지.</returns>
+    /// <param name="useHeightDifference">높이 차이를 고려할지 여부.</param>
+    /// <returns>타겟이 감지되면 타겟 객체를 반환, 그렇지 않으면 null.</returns>
     public GameObject Detect(Transform detector, bool useHeightDifference = true)
     {
         if (target == null)

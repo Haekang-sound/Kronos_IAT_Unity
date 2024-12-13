@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 원거리 무기의 기본 클래스로, 발사체를 발사하고, 객체 풀에서 발사체를 관리하는 기능을 제공합니다.
+/// 발사체는 `Projectile` 클래스를 상속하여 관리되며, 발사 시 효과 및 소리도 처리합니다.
+/// </summary>
 public class RangeWeapon : MonoBehaviour
 {
     public Vector3 muzzleOffset;
@@ -24,22 +26,6 @@ public class RangeWeapon : MonoBehaviour
         m_projectilePool.Initialize(pooledObejctNum, projectile);
         sm = SoundManager.Instance;
     }
-
-    // TEST
-    //public GameObject target;
-    //const float maxtime = 1f;
-    //float passedTime = 0;
-    //private void Update()
-    //{
-    //    passedTime -= Time.deltaTime;
-    
-    //    if (passedTime < 0)
-    //    {
-    //        passedTime = maxtime;
-    //        Attack(target.transform.position);
-    //    }
-    
-    //}
 
     public void Attack(Vector3 target)
     {

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// BoxCollider의 중심과 크기를 조정하고, 원래 값으로 리셋하는 클래스입니다.
+/// 또한, 조정된 Collider 영역을 Gizmos로 시각화할 수 있습니다.
+/// </summary>
 public class BoxColliderAdjuster : MonoBehaviour
 {
     public bool drawGizmos;

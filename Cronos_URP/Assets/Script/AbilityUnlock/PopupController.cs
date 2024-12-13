@@ -2,6 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 스킬 트리의 팝업창을 관리하며, 
+/// 팝업 메시지와 버튼 동작을 설정하고 확인 및 취소 버튼의 동작을 처리합니다.
+/// </summary>
 public class PopupController : MonoBehaviour
 {
     public GameObject popupPanel; // 팝업창 패널

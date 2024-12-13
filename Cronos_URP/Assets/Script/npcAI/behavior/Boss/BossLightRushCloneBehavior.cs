@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 광속 돌진 공격 단계에서 복제된 보스 캐릭터의 동작을 제어하는 클래스로,
+/// 애니메이션 동기화를 처리하고 클론의 생명 주기를 관리합니다.
+/// </summary>
 public class BossLightRushCloneBehavior : MonoBehaviour
 {
     public float activeTime;
@@ -49,7 +53,6 @@ public class BossLightRushCloneBehavior : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        //_rigidbody.velocity = _animator.velocity;
         RaycastHit hit;
         if (!_rigidbody.SweepTest(_animator.deltaPosition.normalized, out hit,
             _animator.deltaPosition.sqrMagnitude))

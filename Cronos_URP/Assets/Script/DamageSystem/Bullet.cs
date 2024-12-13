@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 총알을 나타내는 클래스입니다. 발사 후 일정 시간 동안 목표를 향해 비행하며, 
+/// 충돌 후 폭발하여 주변의 대상에 피해를 입힙니다.
+/// </summary>
 public class Bullet : Projectile
 {
     public enum ShotType
     {
-        HIGHEST_SHOT,
-        LOWEST_SPEED,
-        MOST_DIRECT
+        HIGHEST_SHOT, // 가장 높은 고도로 발사하여 목표에 도달합니다.
+        LOWEST_SPEED, // 가장 낮은 속도로 목표에 도달하는 경로입니다.
+        MOST_DIRECT // 가장 직선적인 경로로 목표에 도달합니다.
     }
 
     public ShotType shotType;
@@ -77,6 +79,11 @@ public class Bullet : Projectile
         }
     }
 
+    /// <summary>
+    /// 목표 지점과 함께 총알을 발사합니다.
+    /// </summary>
+    /// <param name="target">목표 지점</param>
+    /// <param name="shooter">발사한 무기</param>
     public override void Shot(Vector3 target, RangeWeapon shooter)
     {
         m_rigidBody.isKinematic = false;
@@ -121,6 +128,11 @@ public class Bullet : Projectile
         pool.Free(this);
     }
 
+    /// <summary>
+    /// 목표 지점으로 이동하기 위한 속도를 계산합니다.
+    /// </summary>
+    /// <param name="target">목표 지점</param>
+    /// <returns>목표 지점으로 향하는 속도 벡터</returns>
     private Vector3 GetVelocity(Vector3 target)
     {
         Vector3 velocity = Vector3.zero;

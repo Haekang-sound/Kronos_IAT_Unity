@@ -1,8 +1,10 @@
-using System.Drawing;
 using TMPro;
 using UnityEngine;
-//using static UnityEditor.Experimental.GraphView.GraphView;
 
+/// <summary>
+/// 사용 가능한 능력 포인트를 관리하는 클래스 입니다.
+/// 포인트를 소비하거나 현재 포인트를 하는 기능을 제공합니다.
+/// </summary>
 public class AbilityAmountLimit : MonoBehaviour
 {
     [SerializeField] public TMP_Text availableText;

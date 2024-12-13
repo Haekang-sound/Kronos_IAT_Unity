@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 방패 무기의 기능을 담당하는 클래스입니다.
+/// 이 클래스는 방패의 가드와 패리 기능을 처리하며, `ParryDamager`를 통해 방패의 상태를 제어합니다.
+/// </summary>
 public class ShieldWeapon : MonoBehaviour
 {
     private ParryDamager _damager;

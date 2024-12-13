@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 패리(반격) 기능을 처리하는 클래스입니다.
+/// 공격이 들어올 때 패리 가능한 상태를 확인하고, 패리 성공 시 이벤트를 발생시킵니다.
+/// </summary>
 public class ParryDamager : SimpleDamager
 {
     [SerializeField]
@@ -52,18 +56,24 @@ public class ParryDamager : SimpleDamager
         _isParrying = false;
     }
 
+    /// <summary>
+    /// 패리 상태를 확인합니다. 상대가 패리 가능한 상태인지, 패리 중인지 체크합니다.
+    /// </summary>
+    /// <param name="other">충돌한 오브젝트</param>
+    /// <returns>패리 성공 여부</returns>
     public bool ParryiedCheck(Collider other)
     {
         var otherParryDamager = other.GetComponent<ParryDamager>();
 
+        // 패리할 수 없는 조건들
         if (otherParryDamager == null ||
             otherParryDamager?._isParrying == false ||
             _canBeParryied == false)
-        // _canBeParryied == true && otherParryDamager._isParrying == true
         {
             return false;
         }
 
+        // 패리 성공 시 이벤트 발생
         beParryied.Invoke();
         otherParryDamager.parrying?.Invoke();
 

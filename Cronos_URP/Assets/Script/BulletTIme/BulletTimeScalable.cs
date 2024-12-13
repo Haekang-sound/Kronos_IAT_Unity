@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
+/// <summary>
+/// Bullet Time 효과에 따라 애니메이션과 네비메시 에이전트의 속도를 조절하는 클래스입니다.
+/// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class BulletTimeScalable : MonoBehaviour

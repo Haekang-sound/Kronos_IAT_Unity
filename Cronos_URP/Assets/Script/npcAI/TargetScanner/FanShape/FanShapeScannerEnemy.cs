@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 적이 FanShapeScanner를 사용하여 플레이어를 추적하고, 
+/// 타겟을 발견한 경우 해당 위치로 이동하는 역할을 하는 클래스입니다.
+/// </summary>
 public class FanShapeScannerEnemy : MonoBehaviour
 {
     public float timeToStopPursuit = 100.0f;
@@ -16,20 +18,6 @@ public class FanShapeScannerEnemy : MonoBehaviour
     public TargetDistributor.TargetFollower FollowerData { get; private set; }
 
     public UnityEvent OnDown;
-
-    // =====
-
-    private void Awake()
-    {
-        scanner = GetComponent<FanShapeScanner>();
-    }
-
-    private void OnDisable()
-    {
-        FollowerData.distributor.UnregisterFollower(FollowerData);
-    }
-
-    // -----
 
     // 타겟 객체의 위치에서 특정 방향으로 90%의 거리에 있는 지점을 FollowerData.requiredPoint로 설정
     public void RequestTargetPosition(float distance)
@@ -109,5 +97,17 @@ public class FanShapeScannerEnemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    // -----
+
+    private void Awake()
+    {
+        scanner = GetComponent<FanShapeScanner>();
+    }
+
+    private void OnDisable()
+    {
+        FollowerData.distributor.UnregisterFollower(FollowerData);
     }
 }

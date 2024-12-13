@@ -9,6 +9,10 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Video;
 
+/// <summary>
+/// 스킬 트리의 전반적인 동작과 UI를 관리하며, 
+/// 노드 상태, 데이터 저장/로드, 화면 전환 등을 처리합니다.
+/// </summary>
 public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 {
 	[SerializeField] public AbilityNode rootAbilityNode;
@@ -47,7 +51,7 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 	SoundManager sm;
 
-	// IObserver /////////////////////////////////////////////////////////////
+	// IObserver -----
 
 	public virtual void Subscribe(IObservable<AbilityNode> provider)
 	{
@@ -66,7 +70,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 
 	public virtual void OnNext(AbilityNode value)
 	{
-		//if (value.isFucus == false)
 		{
 			_nodedetailEffector.StartFadeIn(1.5f);
 			abilityNodeDetail.blocksRaycasts = true;
@@ -86,19 +89,6 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 				_lastPressed.FocusOut();
             }
 		}
-		//else if (value.isFucus == true && value.CurrentState == AbilityNode.State.Interactible)
-		//{
-		//	if (abilityAmounts.CanSpend(value.PointNeed) != -1)
-		//	{
-		//		// �˾�â�� ����, Ȯ�� ��ư�� ������ �� ������ ������ ����
-		//		popup.OpenPopup("Ȯ���մϱ�?", () =>
-		//		{
-		//			// Ȯ�� ��ư�� ������ �� ������ ����
-		//			value.SetState(AbilityNode.State.Activate);
-		//			abilityAmounts.UpdateSpent(value.PointNeed);
-		//		});
-		//	}
-		//}
 		_lastPressed = value;
 	}
 
@@ -111,13 +101,12 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 		}
 	}
 
-    // MonoBehaviour /////////////////////////////////////////////////////////////
+    // MonoBehaviour -----
 
 	private void Awake()
 	{
         _nodedetailEffector = abilityNodeDetail.GetComponent<FadeEffector>();
 
-        // ������ ����
         _obserables = GetComponentsInChildren<IObservable<AbilityNode>>().ToList();
 		_abilityNodes = GetComponentsInChildren<AbilityNode>().ToList();
 
@@ -174,16 +163,11 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
         {
             if (abilityAmounts.CanSpend(_lastPressed.PointNeed) != -1)
             {
-				// �˾�â�� ����, Ȯ�� ��ư�� ������ �� ������ ������ ����
-				//popup.OpenPopup("Ȯ���մϱ�?", () =>
-				//{
-				// Ȯ�� ��ư�� ������ �� ������ ����
-				// 사운드?
 				AbilityOpenSound();
 
 				_lastPressed.SetState(AbilityNode.State.Activate);
                 abilityAmounts.UpdateSpent(_lastPressed.PointNeed);
-                //});
+
                 _nodedetailEffector.StartFadeOut(1.5f);
                 abilityNodeDetail.blocksRaycasts = false;
                 FocusOutAll();

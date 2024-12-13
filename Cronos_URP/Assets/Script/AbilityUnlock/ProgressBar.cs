@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 스킬 트리의 진행 상태를 시각적으로 표시하는 UI를 관리합니다. 
+/// </summary>
 public class ProgressBar : MonoBehaviour
 {
     public const string DefaultBarTextFormat = "{0:0.00} %";
@@ -17,11 +20,6 @@ public class ProgressBar : MonoBehaviour
 
     public bool isAnimate;
     private bool isFilling;
-
-    private void Awake()
-    {
-        //barImage.fillAmount = 0f;
-    }
 
     public void Reset()
     {

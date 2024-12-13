@@ -1,9 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Message;
 
+/// <summary>
+/// 게임 오브젝트의 피해 시스템을 처리합니다. 
+/// 체력 관리, 무적 상태, 피해 적용 등을 포함하며, 오브젝트가 피해를 입거나 
+/// 무적 상태가 되거나 죽을 때의 이벤트를 제공합니다. 또한, 다른 게임 오브젝트와 
+/// 메시지를 통해 상호작용하고, 오브젝트의 체력 및 취약 상태에 대한 시각적인 피드백을 제공합니다.
+/// </summary>
+///
+/// <remarks>
+/// 클래스의 주요 기능:
+/// - 정의된 타격 각도 및 회전에 따라 피해를 처리합니다.
+/// - 피해를 입은 후 무적 상태를 관리합니다.
+/// - OnDeath, OnReceiveDamage, OnHitWhileInvulnerable 등의 이벤트를 제공합니다.
+/// - 취약 상태와 콜라이더 상태를 설정할 수 있습니다.
+/// - 다른 오브젝트에 피해 상태를 메시지로 전달할 수 있습니다.
+/// </remarks>
 public partial class Damageable : MonoBehaviour
 {
 	public float maxHitPoints;
@@ -17,34 +31,32 @@ public partial class Damageable : MonoBehaviour
 	public float hitAngle = 360.0f;
 	[Tooltip("타격 각도 영역을 정의하는 기준 각도를 회전시킬 수 있습니다.")]
 	[Range(0.0f, 360.0f)]
-	[FormerlySerializedAs("hitForwardRoation")] //SHAME!
 	public float hitForwardRotation = 360.0f;
 
-	public Defensible defensible;
+	public Defensible defensible; // 방어 가능 객체 (있다면)
 
-	public bool isInvulnerable { get; set; }
+    public bool isInvulnerable { get; set; }
 	private bool isVulnerable { get; set; }
 
 	public UnityEvent OnDeath, OnReceiveDamage, OnHitWhileInvulnerable, OnBecomeVulnerable, OnResetDamage;
 
-	[Tooltip("데미지를 입으면, 다른 게임 오브젝트에게 메시지를 전달합니다.")]
-	[EnforceType(typeof(Message.IMessageReceiver))]
+    [Tooltip("이 객체가 피해를 입었을 때 메시지를 받을 다른 객체들.")]
+    [EnforceType(typeof(Message.IMessageReceiver))]
 	public List<MonoBehaviour> onDamageMessageReceivers;
 
-	protected float m_timeSinceLastHit = 0.0f;
-	protected Collider m_Collider;
+	protected float _timeSinceLastHit = 0.0f;
+	protected Collider _Collider;
 
 	System.Action schedule;
 
 	SoundManager soundManager;
-	//EffectManager effectManager;
 	Player player;
 	ImpulseCam impCam;
 	UI_TPCPHUD uiHud;
 
 	private void Awake()
 	{
-		m_Collider = GetComponent<Collider>();
+		_Collider = GetComponent<Collider>();
 	}
 
 	private void OnEnable()
@@ -69,10 +81,10 @@ public partial class Damageable : MonoBehaviour
 	{
 		if (isInvulnerable)
 		{
-			m_timeSinceLastHit += Time.deltaTime;
-			if (m_timeSinceLastHit > invulnerabiltyTime)
+			_timeSinceLastHit += Time.deltaTime;
+			if (_timeSinceLastHit > invulnerabiltyTime)
 			{
-				m_timeSinceLastHit = 0.0f;
+				_timeSinceLastHit = 0.0f;
 				isInvulnerable = false;
 				OnBecomeVulnerable.Invoke();
 			}
@@ -83,7 +95,7 @@ public partial class Damageable : MonoBehaviour
 	{
 		currentHitPoints = maxHitPoints;
 		isInvulnerable = false;
-		m_timeSinceLastHit = 0.0f;
+		_timeSinceLastHit = 0.0f;
 		OnResetDamage.Invoke();
 	}
 
@@ -94,7 +106,7 @@ public partial class Damageable : MonoBehaviour
 
 	public void SetColliderState(bool enabled)
 	{
-		m_Collider.enabled = enabled;
+		_Collider.enabled = enabled;
 	}
 
 	public void ApplyDamage(DamageMessage data)

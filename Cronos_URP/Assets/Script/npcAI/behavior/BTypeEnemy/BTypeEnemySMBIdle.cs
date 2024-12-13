@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// BTypeEnem의 유휴 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class BTypeEnemySMBIdle : SceneLinkedSMB<BTypeEnemyBehavior>
 {
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

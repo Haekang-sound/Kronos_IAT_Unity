@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 보스의 공격 상태 전환을 관리하는 클래스입니다.
+/// </summary>
 public class BossSMBLightSpeedRush : SceneLinkedSMB<BossBehavior>
 {
     [SerializeField]

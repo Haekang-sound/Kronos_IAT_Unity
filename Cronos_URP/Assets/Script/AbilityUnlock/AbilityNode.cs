@@ -8,6 +8,10 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+/// <summary>
+/// 스킬 트리의 개별 노드를 나타내며 상태 관리, UI 렌더링, 
+/// 자식 노드 활성화 및 저장/로드 기능을 제공합니다.
+/// </summary>
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
     public enum State
