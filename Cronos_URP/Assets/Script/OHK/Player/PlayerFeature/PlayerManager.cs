@@ -7,7 +7,6 @@ using UnityEngine;
 /// 플레이어의 ? 를 관리하는 플레이어 매니저
 /// 뭘관리하지? 
 /// </summary>
-
 public class PlayerManager : MonoBehaviour
 {
 	[SerializeField] private Player _player;

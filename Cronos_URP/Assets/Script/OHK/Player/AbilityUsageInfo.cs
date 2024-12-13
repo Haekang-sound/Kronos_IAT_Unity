@@ -1,3 +1,9 @@
+/// <summary>
+///  능력의 사용여부를 
+///  결정하는 함수들을 모아놓은 클래스
+///  
+/// ohk    v1 
+/// </summary>
 public struct AbilityUsageInfo
 {
 	/// 오해강
@@ -18,8 +24,8 @@ public struct AbilityUsageInfo
 	//경직 면역
 	public bool RigidImmunity
 	{
-		get { return PlayerStateMachine.GetInstance().Player.RigidImmunity; }
-		set { PlayerStateMachine.GetInstance().Player.RigidImmunity = value; }
+		get { return PlayerStateMachine.GetInstance().Player.IsRigidImmunity; }
+		set { PlayerStateMachine.GetInstance().Player.IsRigidImmunity = value; }
 	}
 
 	// Nor_Attack 변환

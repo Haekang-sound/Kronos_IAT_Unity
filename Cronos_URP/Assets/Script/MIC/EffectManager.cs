@@ -119,7 +119,7 @@ public class EffectManager : MonoBehaviour
 	/// <summary>
 	/// 씬전환 초기화를 위한 함수
 	/// 믹동휘는 고치던가 
-	/// By OHK
+	/// By ohk    v1
 	/// </summary>
 	//private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	//{

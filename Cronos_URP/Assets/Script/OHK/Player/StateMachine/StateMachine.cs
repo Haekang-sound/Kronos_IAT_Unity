@@ -3,35 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
 /// 모든 stateMachine의 기반이되는 SateMachine 클래스
+/// 
+/// ohk    v1
+/// </summary>
 public abstract class StateMachine : MonoBehaviour
 {
-	private State currentState; // 상태
-	[Range(0.0f, 1.0f)] public float minFrame;
+	private State _currentState;
 	public bool isPaused = false;
-
-	// 상태를 변경하는 함수
-	public void SwitchState(State state)
-	{
-		currentState?.Exit();   // 현재 상태를 탈출합니다.
-		currentState = state;   // 새로운 상태로 변경합니다.
-		currentState.Enter();   // 새로운 상태로 돌입합니다.
-	}
-
-	private void Update()
-	{
-		// 현재 상태를 업데이트한다.
-		if (!isPaused)
-		{
-			currentState?.Tick();
-		}
-	}
+	[Range(0.0f, 1.0f)] public float minFrame;
 
 	private void FixedUpdate()
 	{
 		if (!isPaused)
 		{
-			currentState?.FixedTick();
+			_currentState?.FixedTick();
+		}
+	}
+
+	private void Update()
+	{
+		if (!isPaused)
+		{
+			_currentState?.Tick();
 		}
 	}
 
@@ -39,14 +34,19 @@ public abstract class StateMachine : MonoBehaviour
 	{
 		if (!isPaused)
 		{
-			currentState?.LateTick();
+			_currentState?.LateTick();
 		}
 	}
 
 	public State GetState()
 	{
-		return currentState;
+		return _currentState;
 	}
 
-
+	public void SwitchState(State state)
+	{
+		_currentState?.Exit();
+		_currentState = state;
+		_currentState.Enter();
+	}
 }

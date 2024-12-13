@@ -2,56 +2,52 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 
-// 기본상태
-// 애니메이션 : idle
-// 끝
+/// <summary>
+/// Player의 유휴상태를 정의하는 클래스
+/// (현재 사용하지 않는다.)
+/// 
+/// ohk    v1
+/// </summary>
 public class PlayerIdleState : PlayerBaseState
 {
-	//private readonly int idleHash = Animator.StringToHash("Idle");
-	//private readonly float duration = 0.3f;
-	//private bool isMove = false;
-
 	float releaseLockOn = 0f;
 
 	public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 	public override void Enter()
 	{
+		_stateMachine.InputReader.onDecelerationStart += Deceleration;
 
-		stateMachine.InputReader.onDecelerationStart += Deceleration;
-
-		stateMachine.InputReader.onMove += IsMove;
-		stateMachine.Rigidbody.velocity = Vector3.zero;
+		_stateMachine.InputReader.onMove += IsMove;
+		_stateMachine.Rigidbody.velocity = Vector3.zero;
 	}
+
 	public override void Tick()
 	{
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
+			_stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
 		}
 
-
 		// 움직이면 == 이동키입력을 받으면
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f)
+		if (_stateMachine.InputReader.moveComposite.magnitude != 0f)
 		{
 			// 이동상태로 바뀐다
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
-			//stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.IsMove, true);
 		}
 
 		if (Input.GetMouseButtonDown(2))
 		{
 			// 락온 상태가 아니라면
-			if (!stateMachine.Player.IsLockOn)
+			if (!_stateMachine.Player.IsLockOn)
 			{
 				// 대상을 찾고
-				stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
+				_stateMachine.Player.IsLockOn = _stateMachine.autoTargetting.FindTarget();
 			}
 			// 락온상태라면 락온을 해제한다.
 			else
 			{
-				//stateMachine.AutoTargetting.LockOff();
-				stateMachine.AutoTargetting.SwitchTarget();
+				_stateMachine.autoTargetting.SwitchTarget();
 			}
 		}
 
@@ -61,7 +57,7 @@ public class PlayerIdleState : PlayerBaseState
 
 			if (releaseLockOn > 1f)
 			{
-				stateMachine.AutoTargetting.LockOff();
+				_stateMachine.autoTargetting.LockOff();
 			}
 		}
 		else
@@ -70,33 +66,35 @@ public class PlayerIdleState : PlayerBaseState
 		}
 
 	}
+
 	public override void FixedTick() { }
 	public override void LateTick() { }
+
 	public override void Exit()
 	{
-		stateMachine.InputReader.onMove -= IsMove;
-		stateMachine.InputReader.onDecelerationStart -= Deceleration;
+		_stateMachine.InputReader.onMove -= IsMove;
+		_stateMachine.InputReader.onDecelerationStart -= Deceleration;
 
 	}
 
 	private void SwitchToLAttackState()
 	{
-		stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
-		stateMachine.SwitchState(new PlayerAttackState(stateMachine));
+		_stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Attack);
+		_stateMachine.SwitchState(new PlayerAttackState(_stateMachine));
 	}
 
 	private void SwitchToDefanceState()
 	{
-		stateMachine.SwitchState(new PlayerDefenceState(stateMachine));
+		_stateMachine.SwitchState(new PlayerGuardState(_stateMachine));
 	}
 
 	private void Deceleration()
 	{
-		if (stateMachine.Player.CP >= 100)
+		if (_stateMachine.Player.CP >= 100)
 		{
 			Debug.Log("몬스터들이 느려진다");
 			BulletTime.Instance.DecelerateSpeed();
-			stateMachine.Player.IsDecreaseCP = true;
+			_stateMachine.Player.IsDecreaseCP = true;
 		}
 
 	}
@@ -104,16 +102,16 @@ public class PlayerIdleState : PlayerBaseState
 	private void LockOn()
 	{
 		// 락온 상태가 아니라면
-		if (!stateMachine.Player.IsLockOn)
+		if (!_stateMachine.Player.IsLockOn)
 		{
 			// 대상을 찾고
-			stateMachine.Player.IsLockOn = stateMachine.AutoTargetting.FindTarget();
+			_stateMachine.Player.IsLockOn = _stateMachine.autoTargetting.FindTarget();
 		}
 		// 락온상태라면 락온을 해제한다.
 		else
 		{
 			//stateMachine.AutoTargetting.LockOff();
-			stateMachine.AutoTargetting.SwitchTarget();
+			_stateMachine.autoTargetting.SwitchTarget();
 		}
 	}
 
@@ -121,13 +119,15 @@ public class PlayerIdleState : PlayerBaseState
 	{
 		//isMove = true;
 	}
+
 	private void SwitchToParryState()
 	{
 		Debug.Log("구른다");
-		stateMachine.SwitchState(new PlayerDodgeState(stateMachine));
+		_stateMachine.SwitchState(new PlayerDodgeState(_stateMachine));
 	}
+
 	private void SwitchToMoveState()
 	{
-		stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+		_stateMachine.SwitchState(new PlayerMoveState(_stateMachine));
 	}
 }

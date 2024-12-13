@@ -46,7 +46,7 @@ public class UI_PowerUp : MonoBehaviour
     public static void ExitPowerUp()
     {
         powerUp.SetActive(false);
-        player.GetComponent<PlayerStateMachine>().Velocity.y = gravity;
+        player.GetComponent<PlayerStateMachine>().velocity.y = gravity;
         //PauseManager.UnPauseGame();
     }
 }

@@ -1,190 +1,195 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+/// <summary>
+/// Player의 공격상태를 정의하는 클래스
+/// 
+/// ohk    v1
+/// </summary>
 public class PlayerAttackState : PlayerBaseState
 {
-	//private bool ismove = false;
 	public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	Vector3 totalMove;
-	[SerializeField] float moveForce;
-	bool attackBool = false;
 
-	Vector3 TargetPosition;
+	[SerializeField] private float _moveForce;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
-	AnimatorStateInfo currentStateInfo;
+	
+	private bool _attackBool = false;
+	private Vector3 _targetPosition;
+	private AnimatorStateInfo _currentStateInfo;
+
 	public override void Enter()
 	{
-		stateMachine.Rigidbody.velocity = Vector3.zero;
-		attackBool = false;
-		stateMachine.MoveForce = moveForce;
-		stateMachine.HitStop.hitStopTime = hitStopTime;
+		_attackBool = false;
+		_stateMachine.Rigidbody.velocity = Vector3.zero;
+		_stateMachine.MoveForce = _moveForce;
+		_stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.IsGuard, false);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
-		stateMachine.InputReader.onLAttackStart += Attack;
-		stateMachine.InputReader.onRAttackStart += Gurad;
-		stateMachine.InputReader.onJumpStart += Dodge;
+		_stateMachine.InputReader.onLAttackStart += Attack;
+		_stateMachine.InputReader.onRAttackStart += Gurad;
+		_stateMachine.InputReader.onJumpStart += Dodge;
 
-		stateMachine.GroundChecker.ToggleChecker = false;
+		_stateMachine.GroundChecker.toggleChecker = false;
 	}
 
 	public override void Tick()
 	{
-		if (stateMachine.AutoTargetting.GetTarget() != null)
+		// 자동조준 여부에따라
+		// 바라볼 방향을 결정한다.
+		if (_stateMachine.autoTargetting.GetTarget() != null)
 		{
-			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
+			_targetPosition = _stateMachine.autoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - _stateMachine.transform.forward ;
 		}
 		else
 		{
-			CalculateMoveDirection();   // 방향을 계산하고
+			CalculateMoveDirection();
 		}
-		if (attackBool && stateMachine.currentStateInformable.normalizedTime > stateMachine.minf)
+
+		// 조건을 확인하고
+		// 다음 콤보공격으로 넘어가는 조건을 활성화한다.
+		if (_attackBool && _stateMachine.currentStateInformable.normalizedTime > _stateMachine.minf)
 		{
-			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
 
 		// 좌클릭 누르는 중에는 차징
-		if (stateMachine.InputReader.IsLAttackPressed)
+		if (_stateMachine.InputReader.IsLAttackPressed)
 		{
-			float current = stateMachine.Animator.GetFloat(PlayerHashSet.Instance.Charge);
-			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, current + Time.deltaTime);
+			float current = _stateMachine.Animator.GetFloat(PlayerHashSet.Instance.Charge);
+			_stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, current + Time.deltaTime);
 		}
 
-		// 누르고있으면 차징중이다
-		if (stateMachine.InputReader.IsLAttackPressed)
+		// 좌클릭을 누르고있으면 차징중이다
+		if (_stateMachine.InputReader.IsLAttackPressed)
 		{
-			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, true);
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.ChargeAttack, true);
 		}
 		else
 		{
-			//인풋중에 뭐라고 정해줘야할듯
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, false);
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.ChargeAttack, false);
 		}
 
-		// 좌클릭땔때 차징 비활성화
-		if (!stateMachine.InputReader.IsLAttackPressed)
+		// 좌클릭을 멈췄을때 차징정보를 초기화
+		if (!_stateMachine.InputReader.IsLAttackPressed)
 		{
-			stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
+			_stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
 		}
 
-		CalculateMoveDirection();   // 방향을 계산하고
+		CalculateMoveDirection(); 
 
+		Vector3 gravity = Vector3.down * Mathf.Abs(_stateMachine.Rigidbody.velocity.y);
 
-		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+		// 자동조준이 활성화 되었을때
+		// 플레이어와 몬스터의 거리에 따라서
+		// 몬스터방향으로 접근여부를 결정하는 부분
 		if (Time.deltaTime == 0f) return;
-		else if (stateMachine.AutoTargetting.GetTarget() != null)
+		else if (_stateMachine.autoTargetting.GetTarget() != null)
 		{
-			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
-			if ((TargetPosition - stateMachine.transform.position).magnitude 
-				> stateMachine.Player.targetdistance)
+			if ((_targetPosition - _stateMachine.transform.position).magnitude 
+				> _stateMachine.Player.targetDistance)
 			{
-				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+				if (_stateMachine.MoveForce > 1f && _stateMachine.Animator.deltaPosition != null)
 				{
-					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+					_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) * _stateMachine.MoveForce + gravity;
 				}
-				else if (stateMachine.Animator.deltaPosition != null)
+				else if (_stateMachine.Animator.deltaPosition != null)
 				{
-					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+					_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
 				}
+
 			}
-			else // 도착하면 멈춘다.
+			else
 			{
-				stateMachine.Rigidbody.velocity = Vector3.zero;
+				_stateMachine.Rigidbody.velocity = Vector3.zero;
 			}
 
 		}
 		else
 		{
-			if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+			if (_stateMachine.MoveForce > 1f && _stateMachine.Animator.deltaPosition != null)
 			{
-				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+				_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) * _stateMachine.MoveForce + gravity;
 			}
-			else if (stateMachine.Animator.deltaPosition != null)
+			else if (_stateMachine.Animator.deltaPosition != null)
 			{
-				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+				_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
 			}
 		}
 	}
+
 	public override void FixedTick()
 	{
-		///트랜지션 중일때만 발동
-		if (stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex))
+		// 애니메이션 트랜지션 중일때만 
+		// 캐릭터의 진행방향을 바꿀 수 있게한다
+		if (_stateMachine.Animator.IsInTransition(_stateMachine.currentLayerIndex))
 		{
-			if (stateMachine.AutoTargetting.GetTarget() != null && stateMachine.InputReader.moveComposite.magnitude == 0f)
+			if (_stateMachine.autoTargetting.GetTarget() != null && _stateMachine.InputReader.moveComposite.magnitude == 0f)
 			{
-				FaceMoveDirection((TargetPosition - stateMachine.transform.position).normalized);
+				FaceMoveDirection((_targetPosition - _stateMachine.transform.position).normalized);
 			}
 			else
 			{
 				FaceMoveDirection();
 			}
+
 		}
 		Float();
 	}
+
 	public override void LateTick() { }
+
 	public override void Exit()
 	{
-		stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, false);
-		stateMachine.InputReader.onLAttackStart -= Attack;
-		stateMachine.InputReader.onRAttackStart -= Gurad;
-		stateMachine.InputReader.onJumpStart -= Dodge;
+		_stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.ChargeAttack, false);
+		_stateMachine.InputReader.onLAttackStart -= Attack;
+		_stateMachine.InputReader.onRAttackStart -= Gurad;
+		_stateMachine.InputReader.onJumpStart -= Dodge;
 
-		stateMachine.GroundChecker.ToggleChecker = true;
+		_stateMachine.GroundChecker.toggleChecker = true;
 	}
 
 	private void Attack()
 	{
 		/// 좌클릭시
-		stateMachine.AutoTargetting.AutoTargeting();
-		attackBool = true;
+		_stateMachine.autoTargetting.AutoTargeting();
+		_attackBool = true;
 
-		if (attackBool && currentStateInfo.normalizedTime > minFrame)
+		if (_attackBool && _currentStateInfo.normalizedTime > minFrame)
 		{
 			// NEXTCOMBO 활성화
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, true);
 		}
-// 		else
-// 		{
-// 			Player.Instance.isBuff = false;
-// 			//EffectManager.Instance.SwordAuraOff();
-// 			Player.Instance.buffTimer = 0f;
-// 		}
 	}
+
 	private void Dodge()
 	{
-		if (stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.isDodgeUsed)
+		if (_stateMachine.InputReader.moveComposite.magnitude != 0f && !CoolTimeCounter.Instance.IsDodgeUsed)
 		{
-			CoolTimeCounter.Instance.isDodgeUsed = true;
-			if (stateMachine.InputReader.moveComposite.magnitude != 0)
+			CoolTimeCounter.Instance.IsDodgeUsed = true;
+			if (_stateMachine.InputReader.moveComposite.magnitude != 0)
 			{
-				stateMachine.Rigidbody.rotation = Quaternion.LookRotation(stateMachine.Velocity);
+				_stateMachine.Rigidbody.rotation = Quaternion.LookRotation(_stateMachine.velocity);
 			}
-			stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);    // 
-			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
+			_stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);    // 
+			_stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
 		}
-// 		if (!CoolTimeCounter.Instance.isDodgeUsed && !stateMachine.DodgeBool)
-// 		{
-// 			// 사용될 경우
-// 			CoolTimeCounter.Instance.isDodgeUsed = true;        // 쿨타임 사용체크한다.
-// 																	//stateMachine.transform.rotation = Quaternion.LookRotation(stateMachine.Velocity);
-// 			stateMachine.Animator.SetTrigger(PlayerHashSet.Instance.Dodge);
-// 		}
 	}
+
 	private void Gurad()
 	{
-		if (stateMachine.IsRattack)
+		if (_stateMachine.IsRattack)
 		{
-			stateMachine.IsRattack = false;
+			_stateMachine.IsRattack = false;
 			return;
 		}
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, true);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.IsGuard, true);
 	}
 
 }

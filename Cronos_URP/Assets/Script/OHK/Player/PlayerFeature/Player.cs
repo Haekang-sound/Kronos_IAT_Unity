@@ -10,7 +10,7 @@ using static UnityEngine.Rendering.DebugUI;
 /// <summary>
 /// 플레이어의 정보를 갖고 있는 클래스
 /// 
-/// OHK
+/// ohk    v1
 /// </summary>
 public class Player : MonoBehaviour, IMessageReceiver
 {
@@ -41,11 +41,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[SerializeField] private float _lookRotationDampFactor = 10f;
 	[SerializeField] private float _attackCoefficient = 0.1f;
 	[SerializeField] private float _moveCoefficient = 0.1f;
+	private float _totalspeed;
 
 	[Header("Status")]
 	[SerializeField] private float _maxTP;
 	[SerializeField] private float _maxCP;
 
+	public bool isDecreaseTP = true;
 	[SerializeField] private float _currentTP;
 	[SerializeField] private float _currentCP;
 	[SerializeField] private float _chargingCP = 10f;
@@ -61,30 +63,29 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[SerializeField] private bool _isRigidImmunity = false;
 	[SerializeField] private bool _isDodgeAttack = false;
 
+	public bool useKnockback;
 	public bool isBuff = false;
 	public float buffTimer = 3f;
 	public float buffTime = 3f;
+	private float _releaseLockOn = 0f;
+	private bool _isRelease = false;
+	private bool _isDeath = false;
+
+	[Header("GroundLayer")]
+	public LayerMask targetLayer;
+	public float targetDistance = 1f;
 
 	/// <summary>
-	/// floating capsule을 위한 프로퍼티
+	///	Property 
 	/// </summary>
 	[field: Header("Collisions")]
 	[field: SerializeField] public CapsuleColldierUtility capsuleColldierUtility { get; private set; }
 	[field: SerializeField] public PlayerLayerData layerData { get; private set; }
 	[field: SerializeField] public AnimationCurve slopeSpeedAngles { get; private set; }
-
-	// �����ϰ��� �ϴ� ���̾ �����մϴ�.
-	public LayerMask targetLayer;
-	public float targetdistance = 1f;
-	private float _totalspeed;
-
-	// Property
 	public float moveSpeed { get { return _totalspeed; } }
 	public float lookRotationDampFactor { get { return _lookRotationDampFactor; } }
 	public float AttackCoefficient { get { return _attackCoefficient; } set { _attackCoefficient = value; } }
 	public float MoveCoefficient { get { return _moveCoefficient; } set { _moveCoefficient = value; } }
-
-	// chronos in game Option
 	public float MaxCP { get { return _maxCP; } set { _maxCP = value; } }
 	public float MaxTP { get { return _maxTP; } set { _maxTP = value; } }
 	public float CP { get { return _currentCP; } set { _currentCP = value; } }
@@ -107,10 +108,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
 	public float ChargeAttack { get { return _chargeAttack; } set { _chargeAttack = value; } }
 	public bool IsDecreaseCP { get; set; }
-	public bool IsEnforced { get { return _isEnforced; } set { _isEnforced = value; } }   // ��ȭ���¸� ���� ������Ƽ
+	public bool IsEnforced { get { return _isEnforced; } set { _isEnforced = value; } }
 	public bool IsLockOn { get { return _isLockOn; } set { _isLockOn = value; } }
-	public bool RigidImmunity { get { return _isRigidImmunity; } set { _isRigidImmunity = value; } }
-	public bool DodgeAttack { get { return _isDodgeAttack; } set { _isDodgeAttack = value; } }
+	public bool IsRigidImmunity { get { return _isRigidImmunity; } set { _isRigidImmunity = value; } }
+	public bool IsDodgeAttack { get { return _isDodgeAttack; } set { _isDodgeAttack = value; } }
 
 	// 리스폰을 위한데이터
 	PlayerData playerData = new PlayerData();
@@ -131,12 +132,8 @@ public class Player : MonoBehaviour, IMessageReceiver
 	// 정리해야하는 변수들
 	[SerializeField] private bool usePreiviousSceneData = true;
 	public GameObject playerSword;
-	public bool isDecreaseTP = true;
-	public float currentTime = 0f;
-	private bool isRelease = false;
-	private float releaseLockOn = 0f;
-	bool isDeath = false;
-	public bool useKnockback;
+
+
 
 	private void Awake()
 	{
@@ -150,12 +147,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 		groggyStack = GetComponent<GroggyStack>();
 
 	}
+
 	private void OnValidate()
 	{
 		capsuleColldierUtility.Initialize(gameObject);
 		capsuleColldierUtility.CalculateCapsuleColliderDimensions();
-
 	}
+
 	protected void OnDisable()
 	{
 		damageable.onDamageMessageReceivers.Remove(this);
@@ -245,13 +243,13 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 마우스 가운데클릭하는 시간이
 		// 기준시간을 초과할 경우 
 		// 락온을 해제한다.
-		if (isRelease)
+		if (_isRelease)
 		{
-			releaseLockOn += Time.deltaTime;
+			_releaseLockOn += Time.deltaTime;
 
-			if (releaseLockOn > 1f)
+			if (_releaseLockOn > 1f)
 			{
-				playerFSM.AutoTargetting.LockOff();
+				playerFSM.autoTargetting.LockOff();
 			}
 		}
 
@@ -271,7 +269,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			&& (_currentState == "PlayerBuffState" || _currentState == "PlayerMoveState"))
 		{
 			isBuff = false;
-			playerFSM.Animator.SetBool(PlayerHashSet.Instance.isMove, true);
+			playerFSM.Animator.SetBool(PlayerHashSet.Instance.IsMove, true);
 			_isEnforced = false;
 			effectManager.SwordAuraOff();
 		}
@@ -315,19 +313,19 @@ public class Player : MonoBehaviour, IMessageReceiver
 		if (!IsLockOn)
 		{
 			// 대상을 찾고
-			bool temp = IsLockOn = playerFSM.AutoTargetting.FindTarget();
+			bool temp = IsLockOn = playerFSM.autoTargetting.FindTarget();
 			Debug.Log(temp);
 		}
 		// 락온상태라면 타겟을 변경한다.
 		else
 		{
-			playerFSM.AutoTargetting.SwitchTarget();
+			playerFSM.autoTargetting.SwitchTarget();
 		}
 	}
 	
 	private void Down()
 	{
-		playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
+		playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.Down);
 		soundManager.PlaySFX("Player_Down_Sound_SE", transform);
 	}
 
@@ -391,7 +389,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		return _TPAbsorptionRatio /** currentDamage*/;
 	}
 
-
 	public void OnReceiveMessage(MessageType type, object sender, object data)
 	{
 		switch (type)
@@ -424,7 +421,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void Deceleration()
 	{
-		if (CP >= 100 && playerFSM.Animator.GetBool(PlayerHashSet.Instance.isTimeStop))
+		if (CP >= 100 && playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsTimeStop))
 		{
 			playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.TimeStop);
 			BulletTime.Instance.DecelerateSpeed();
@@ -433,7 +430,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 			BulletTime.Instance.OnActive.Invoke();
 		}
 		else if (IsDecreaseCP
-		 && playerFSM.Animator.GetBool(PlayerHashSet.Instance.isCPBoomb)
+		 && playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsCPBoomb)
 		&& !playerFSM.Animator.IsInTransition(playerFSM.currentLayerIndex))
 		{
 			playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.CPBoomb);
@@ -442,20 +439,20 @@ public class Player : MonoBehaviour, IMessageReceiver
 
 	private void ReleaseLockOn()
 	{
-		isRelease = true;
+		_isRelease = true;
 
 		//Debug.Log("누르는중");
-		releaseLockOn += Time.deltaTime;
+		_releaseLockOn += Time.deltaTime;
 
-		if (releaseLockOn > 1f)
+		if (_releaseLockOn > 1f)
 		{
-			playerFSM.AutoTargetting.LockOff();
+			playerFSM.autoTargetting.LockOff();
 		}
 	}
 	private void ReleaseReset()
 	{
-		isRelease = false;
-		releaseLockOn = 0f;
+		_isRelease = false;
+		_releaseLockOn = 0f;
 	}
 
 
@@ -465,7 +462,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		// 
 		if (playerFSM.GetState().ToString() == "PlayerDamagedState")
 		{
-			if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+			if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsGuard))
 			{
 				Player.Instance.groggyStack.AddStack();
 			}
@@ -495,22 +492,22 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 
 			case DamageType.None:
-				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
-				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.DamagedA);
+				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 				break;
 			case DamageType.ATypeHit:
-				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedA);
-				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.DamagedA);
+				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 				break;
 			case DamageType.BTypeHit:
-				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.damagedB);
-				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.isGuard))
+				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.DamagedB);
+				if (!playerFSM.Animator.GetBool(PlayerHashSet.Instance.IsGuard))
 					soundManager.PlaySFX("Player_Pain_Sound_SE", transform);
 				break;
 			case DamageType.Down:
-				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.down);
+				playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.Down);
 				soundManager.PlaySFX("Player_Down_Sound_SE", transform);
 				break;
 		}
@@ -520,11 +517,11 @@ public class Player : MonoBehaviour, IMessageReceiver
 	/// 플레이어가 죽었을 경우 동작하는 함수
 	public void Death()
 	{
-		if (!isDeath)
+		if (!_isDeath)
 		{
 			soundManager.PlaySFX("Player_Dead_Sound_SE", transform);
 			StartCoroutine(DeathScequence());
-			isDeath = true;
+			_isDeath = true;
 		}
 	}
 
@@ -559,7 +556,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 		ScreenFader.SetAlpha(0f);
 		playerFSM.InputReader.enabled = true;
 		playerFSM.Animator.SetTrigger(PlayerHashSet.Instance.Respawn);
-		isDeath = false;
+		_isDeath = false;
 	}
 
 	
@@ -666,8 +663,6 @@ public class Player : MonoBehaviour, IMessageReceiver
 		{
 			GameObject bomb = effectManager.SpawnEffect("CPBomb", transform.position);
 			Destroy(bomb, 3.0f);
-
-
 
 			GameObject bombDamager = effectManager.SpawnEffect("CPBombDamager", transform.position);
 			Destroy(bombDamager, 3.0f);
@@ -817,19 +812,10 @@ public class Player : MonoBehaviour, IMessageReceiver
 	protected IEnumerator RespawnRoutine()
 	{
 		// 1�� ���� ���̵� �ƿ�.
-		//yield return StartCoroutine(ScreenFader.FadeSceneOut());
-
 		while (ScreenFader.IsFading)
 		{
 			yield return null;
 		}
-
-		// Enable spawning.
-		//EllenSpawn spawn = GetComponentInChildren<EllenSpawn>();
-		//spawn.enabled = true;
-
-		// If there is a checkpoint, move Ellen to it.
-
 	}
 
 	internal void Save()
@@ -841,14 +827,14 @@ public class Player : MonoBehaviour, IMessageReceiver
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.EnforcedCombo, false);
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.DodgeAttack, false);
-		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isFlashSlash, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsFlashSlash, false);
 		EffectManager.Instance.isSwordWave = false;
 		EffectManager.Instance.isGroundEnforced = false;
-		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isCPBoomb, false);
-		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isTimeStop, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsCPBoomb, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsTimeStop, false);
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, false);
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, false);
-		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isParry, false);
-		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.isRushAttack, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsParry, false);
+		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsRushAttack, false);
 	}
 }

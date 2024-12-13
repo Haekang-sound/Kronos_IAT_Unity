@@ -2,67 +2,74 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Player의 
+/// 시간베기 상태를 정의하는 클래스
+/// (현재 사용하지 않음)
+/// 
+/// ohk    v1
+/// </summary>
 public class PlayerTimeSlashState : PlayerBaseState
 {
 	public PlayerTimeSlashState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-	[SerializeField] float moveForce;
+	[SerializeField] private float _moveForce;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
-	private bool isArrive;
 
-	Vector3 TargetPosition;
+	private Vector3 _targetPosition;
+
 	public override void Enter()
 	{
-		stateMachine.Rigidbody.velocity = Vector3.zero;
-		stateMachine.MoveForce = moveForce;
-		stateMachine.HitStop.hitStopTime = hitStopTime;  
+		_stateMachine.Rigidbody.velocity = Vector3.zero;
+		_stateMachine.MoveForce = _moveForce;
+		_stateMachine.HitStop.hitStopTime = hitStopTime;
 
-		stateMachine.GroundChecker.ToggleChecker = false;
+		_stateMachine.GroundChecker.toggleChecker = false;
 
 		// 도착해야할 위치
-		TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - stateMachine.transform.forward * 1f;
-
+		_targetPosition = _stateMachine.autoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position - _stateMachine.transform.forward * 1f;
 	}
 
 	public override void Tick()
 	{
 		// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
-		if ((TargetPosition - stateMachine.transform.position).magnitude > 1f)
+		if ((_targetPosition - _stateMachine.transform.position).magnitude > 1f)
 		{
-			stateMachine.GetComponent<Collider>().isTrigger = true;
-			if (Mathf.Sqrt((TargetPosition - stateMachine.transform.position).magnitude) < 40f)
+			_stateMachine.GetComponent<Collider>().isTrigger = true;
+
+			if (Mathf.Sqrt((_targetPosition - _stateMachine.transform.position).magnitude) < 40f)
 			{
-				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized
-			* (TargetPosition - stateMachine.transform.position).magnitude * (TargetPosition - stateMachine.transform.position).magnitude;
+				_stateMachine.Rigidbody.velocity += (_targetPosition - _stateMachine.transform.position).normalized
+				* (_targetPosition - _stateMachine.transform.position).magnitude * (_targetPosition - _stateMachine.transform.position).magnitude;
 			}
 			else
 			{
-				stateMachine.Rigidbody.velocity += (TargetPosition - stateMachine.transform.position).normalized
-			* 40f;
+				_stateMachine.Rigidbody.velocity += (_targetPosition - _stateMachine.transform.position).normalized * 40f;
 			}
 
 
 		}
 		else // 도착하면 멈춘다.
 		{
-			stateMachine.GetComponent<Collider>().isTrigger = false;
-			stateMachine.Rigidbody.velocity = Vector3.zero;
+			_stateMachine.GetComponent<Collider>().isTrigger = false;
+			_stateMachine.Rigidbody.velocity = Vector3.zero;
 		}
-
-
 	}
 
 	public override void FixedTick()
 	{
 		Float();
 	}
+
 	public override void LateTick() { }
+
 	public override void Exit()
 	{
 
-		stateMachine.GroundChecker.ToggleChecker = true;
+		_stateMachine.GroundChecker.toggleChecker = true;
 	}
+
 	Transform GetTopParent(Transform current)
 	{
 		// 부모가 없으면 자신이 최상위

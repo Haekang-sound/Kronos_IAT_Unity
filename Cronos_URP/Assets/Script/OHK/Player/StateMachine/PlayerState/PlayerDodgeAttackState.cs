@@ -1,86 +1,98 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+/// <summary>
+/// Player의 
+/// 회피 공격상태를 정의하는 클래스
+/// 
+/// ohk    v1
+/// </summary>
 public class PlayerDodgeAttackState : PlayerBaseState
 {
-	//private bool ismove = false;
 	public PlayerDodgeAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-	Vector3 totalMove;
-	[SerializeField] float moveForce;
-
-	Vector3 TargetPosition;
+	[SerializeField] private float _moveForce;
 	public float hitStopTime;
 	[Range(0.0f, 1.0f)] public float minFrame;
-	AnimatorStateInfo currentStateInfo;
+
+	private Vector3 _targetPosition;
+
 	public override void Enter()
 	{
-		stateMachine.AutoTargetting.AutoTargeting();
-		stateMachine.MoveForce = moveForce;
-		stateMachine.HitStop.hitStopTime = hitStopTime;
+		_stateMachine.autoTargetting.AutoTargeting();
+		_stateMachine.MoveForce = _moveForce;
+		_stateMachine.HitStop.hitStopTime = hitStopTime;
 		
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.isGuard, false);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
-		stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.NextCombo, false);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.IsGuard, false);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Attack);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.Rattack);
+		_stateMachine.Animator.ResetTrigger(PlayerHashSet.Instance.ParryAttack);
 
-		stateMachine.GroundChecker.ToggleChecker = false;
+		_stateMachine.GroundChecker.toggleChecker = false;
 	}
+
 	public override void Tick()
 	{
-		if (stateMachine.AutoTargetting.GetTarget() != null)
+		// 자동조준 여부에따라
+		// 바라볼 방향을 결정한다.
+		if (_stateMachine.autoTargetting.GetTarget() != null)
 		{
-			TargetPosition = stateMachine.AutoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position;
+			_targetPosition = _stateMachine.autoTargetting.GetTarget().GetComponent<LockOn>().TargetTransform.position;
 		}
 		else
 		{
-			CalculateMoveDirection();   // 방향을 계산하고
+			CalculateMoveDirection(); 
 		}
-		
 
 		CalculateMoveDirection();   // 방향을 계산하고
 
-		Vector3 gravity = Vector3.down * Mathf.Abs(stateMachine.Rigidbody.velocity.y);
+		Vector3 gravity = Vector3.down * Mathf.Abs(_stateMachine.Rigidbody.velocity.y);
+
+		// 자동조준이 활성화 되었을때
+		// 플레이어와 몬스터의 거리에 따라서
+		// 몬스터방향으로 접근여부를 결정하는 부분
 		if (Time.deltaTime == 0f) return;
-		else if (stateMachine.AutoTargetting.GetTarget() != null)
+		else if (_stateMachine.autoTargetting.GetTarget() != null)
 		{
-			// 타겟과 캐릭터사이의 거리가 1보다 크다면 타겟쪽으로 다가간다.
-			if ((TargetPosition - stateMachine.transform.position).magnitude > 1f)
+			if ((_targetPosition - _stateMachine.transform.position).magnitude > 1f)
 			{
-				if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+				if (_stateMachine.MoveForce > 1f && _stateMachine.Animator.deltaPosition != null)
 				{
-					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+					_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) * _stateMachine.MoveForce + gravity;
 				}
-				else if (stateMachine.Animator.deltaPosition != null)
+				else if (_stateMachine.Animator.deltaPosition != null)
 				{
-					stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+					_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
 				}
+
 			}
-			else // 도착하면 멈춘다.
+			else 
 			{
-				stateMachine.Rigidbody.velocity = Vector3.zero;
+				_stateMachine.Rigidbody.velocity = Vector3.zero;
 			}
 
 		}
 		else
 		{
-			if (stateMachine.MoveForce > 1f && stateMachine.Animator.deltaPosition != null)
+			if (_stateMachine.MoveForce > 1f && _stateMachine.Animator.deltaPosition != null)
 			{
-				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) * stateMachine.MoveForce + gravity;
+				_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) * _stateMachine.MoveForce + gravity;
 			}
-			else if (stateMachine.Animator.deltaPosition != null)
+			else if (_stateMachine.Animator.deltaPosition != null)
 			{
-				stateMachine.Rigidbody.velocity = (stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
+				_stateMachine.Rigidbody.velocity = (_stateMachine.Animator.deltaPosition / Time.deltaTime) + gravity;
 			}
 		}
 	}
+
 	public override void FixedTick()
 	{
 		///트랜지션 중일때만 발동
 		//if (stateMachine.Animator.IsInTransition(stateMachine.currentLayerIndex))
 		{
-			if (stateMachine.AutoTargetting.GetTarget() != null && stateMachine.InputReader.moveComposite.magnitude == 0f)
+			if (_stateMachine.autoTargetting.GetTarget() != null && _stateMachine.InputReader.moveComposite.magnitude == 0f)
 			{
-				FaceMoveDirection((TargetPosition - stateMachine.transform.position).normalized);
+				FaceMoveDirection((_targetPosition - _stateMachine.transform.position).normalized);
 			}
 			else
 			{
@@ -89,12 +101,14 @@ public class PlayerDodgeAttackState : PlayerBaseState
 		}
 		Float();
 	}
+
 	public override void LateTick() { }
+
 	public override void Exit()
 	{
-		stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
-		stateMachine.Animator.SetBool(PlayerHashSet.Instance.chargeAttack, false);
-		stateMachine.GroundChecker.ToggleChecker = true;
+		_stateMachine.Animator.SetFloat(PlayerHashSet.Instance.Charge, 0);
+		_stateMachine.Animator.SetBool(PlayerHashSet.Instance.ChargeAttack, false);
+		_stateMachine.GroundChecker.toggleChecker = true;
 	}
 
 }

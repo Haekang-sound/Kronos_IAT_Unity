@@ -13,27 +13,23 @@ using static Controls;
 /// </summary>
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
-
 	static InputReader instance;
 	public static InputReader GetInstance() { return instance; }
-	public void Awake()
-	{
-		instance = this;
-	}
+
 	public bool clickCondition = true;
 
-	public Vector2 mouseDelta; // 마우스 이동정보를 받아온다
+	public Vector2 mouseDelta;
 	public Vector2 moveComposite;
 
 	public Action onMove;
 
-	public Action onJumpStart;      // 점프의 대한 액션을 담기 위한 변수
-	public Action onJumpPerformed;      // 점프의 대한 액션을 담기 위한 변수
-	public Action onJumpCanceled;      // 점프의 대한 액션을 담기 위한 변수
+	public Action onJumpStart;
+	public Action onJumpPerformed;
+	public Action onJumpCanceled;
 
-	public Action onLAttackStart;   // 공격의 대한 액션을 담기 위한 변수
-	public Action onLAttackPerformed;   // 공격의 대한 액션을 담기 위한 변수
-	public Action onLAttackCanceled;   // 공격의 대한 액션을 담기 위한 변수
+	public Action onLAttackStart;
+	public Action onLAttackPerformed;
+	public Action onLAttackCanceled;
 
 	public Action onRAttackStart;
 	public Action onRAttackPerformed;
@@ -65,14 +61,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	public Action onFlashSlashPerformed;
 	public Action onFlashSlashCanceled;
 
-
-
 	public bool IsLAttackPressed { get; set; } = false;
 	public bool IsRAttackPressed { get; private set; } = false;
 
 	private Controls controls;
 
-	// 이 메서드는 다음 클릭을 위해 상태를 초기화하는 역할을 합니다.
+	public void Awake()
+	{
+		instance = this;
+	}
 
 	private void OnEnable()
 	{
@@ -84,7 +81,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		controls = new Controls();
 		controls.Player.SetCallbacks(this); // InputReader는 IPlayerActions를 상속받았다.
 											// Actions을 세팅한다.
-		controls.Player.Enable();       // 사용가능한 형태로 만든다.
+		controls.Player.Enable();           // 사용가능한 형태로 만든다.
 	}
 
 	public void OnDisable()
@@ -99,6 +96,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 	{
 		mouseDelta = context.ReadValue<Vector2>();
 	}
+
 	public void OnMove(InputAction.CallbackContext context)
 	{
 		moveComposite = context.ReadValue<Vector2>();
@@ -114,9 +112,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
 	public void OnLAttack(InputAction.CallbackContext context)
 	{
-		//         Player.Instance.on = context.started;
-		//         Player.Instance.perform = context.performed;
-		//         Player.Instance.off = context.canceled;
 		if (context.started && Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			IsLAttackPressed = true;
@@ -132,8 +127,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 			onLAttackCanceled?.Invoke();
 		}
 	}
-	// 우클릭
 
+	// 우클릭
 	public void OnRAttack(InputAction.CallbackContext context)
 	{
 		if (context.started)
@@ -170,6 +165,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		else if (context.performed) onLockOnPerformed?.Invoke();
 		else if (context.canceled) onLockOnCanceled?.Invoke();
 	}
+
 	// Tab
 	public void OnUnlockAbility(InputAction.CallbackContext context)
 	{
@@ -177,6 +173,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		else if (context.performed) onUnlockAbilityPerformed?.Invoke();
 		else if (context.canceled) onUnlockAbilityCanceled?.Invoke();
 	}
+
 	// LShift
 	public void OnRun_LShift(InputAction.CallbackContext context)
 	{
@@ -184,6 +181,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		else if (context.performed) { onRunStart?.Invoke(); }
 		else if (context.canceled) { onRunCanceled?.Invoke(); }
 	}
+
 	// F
 	public void OnInterActive_F(InputAction.CallbackContext context)
 	{
@@ -191,6 +189,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 		else if (context.performed) { onInteratctivePerformed?.Invoke(); }
 		else if (context.canceled) { onInteratctiveCanceled?.Invoke(); }
 	}
+
 	// E
 	public void OnFlashSlash_E(InputAction.CallbackContext context)
 	{
