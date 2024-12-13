@@ -496,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 6080329018290930370, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1780889}
+      objectReference: {fileID: 0}
     - target: {fileID: 6080329018290930370, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -608,17 +608,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8519713563527393179, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
   m_PrefabInstance: {fileID: 1780887}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1780889 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 458411311840028271, guid: 7d9fd1a4e2c94164bb3515b715056ff4, type: 3}
-  m_PrefabInstance: {fileID: 1780887}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22bc963c3645aae498bade5809d61047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9681024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1574,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
+      propertyPath: m_Intensity
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493876232567770463, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2671637398612028343, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: hitStopTime
       value: 0.1
@@ -1603,6 +1600,10 @@ PrefabInstance:
       objectReference: {fileID: 107361779}
     - target: {fileID: 5384916197114032611, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
       propertyPath: PlayerCamera
+      value: 
+      objectReference: {fileID: 1951667164}
+    - target: {fileID: 5384916197114032611, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
+      propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1951667164}
     - target: {fileID: 5582723466436448301, guid: 65b4e6faf6158f94b80c2dfe4ebc4b0d, type: 3}
@@ -1668,14 +1669,6 @@ PrefabInstance:
     - target: {fileID: 2477247345896289962, guid: 9cd5a9c87355eb646846f43ee525a01f, type: 3}
       propertyPath: m_Intensity
       value: 0.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 2885772357403636153, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
-      propertyPath: m_Intensity
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3493876232567770463, guid: 70ff117b3dfdde64f9d199aaeccab32d, type: 3}
-      propertyPath: m_Intensity
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21480,7 +21473,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.47193396, g: 0.37216935, b: 0.18031439, a: 0}
     - _DetailData: {r: 0.5, g: 4, b: -0.5, a: 0}
-    - _DetailWindDirection: {r: 0.27879265, g: 0, b: 0, a: 0}
+    - _DetailWindDirection: {r: 0.26522693, g: 0, b: 0, a: 0}
     - _DistanceData: {r: 0, g: -0.30000007, b: 0.000001, a: 0.69992995}
     - _FogOfWarCenter: {r: 0, g: 0, b: 0, a: 1}
     - _FogOfWarCenterAdjusted: {r: 0, g: 0, b: 0, a: 1}
@@ -21491,7 +21484,7 @@ Material:
     - _ShadowData: {r: 1, g: 0, b: 67.5, a: 0}
     - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _SunDir: {r: 0, g: 1, b: 0, a: 0}
-    - _WindDirection: {r: 0.27879265, g: 0, b: 0, a: 0}
+    - _WindDirection: {r: 0.26522693, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &1576613979
 GameObject:
@@ -21800,9 +21793,9 @@ MonoBehaviour:
   player: {fileID: 0}
   interText: {fileID: 0}
   abilityUnlock: {fileID: 0}
-  CPUI: {fileID: 0}
-  SkillUI: {fileID: 0}
-  KeyGuid: {fileID: 0}
+  cpUI: {fileID: 0}
+  skillUI: {fileID: 0}
+  keyGuide: {fileID: 0}
 --- !u!1001 &1599704902
 PrefabInstance:
   m_ObjectHideFlags: 0

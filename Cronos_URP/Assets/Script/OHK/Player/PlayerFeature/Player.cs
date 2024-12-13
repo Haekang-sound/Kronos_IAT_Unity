@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IMessageReceiver
 	[SerializeField] private string _currentState;
 
 	[Header("Move Option")]
-	[SerializeField] private float _speed = 1f;
+	[SerializeField] private float _speed = 15f;
 	[SerializeField] private float _lookRotationDampFactor = 10f;
 	[SerializeField] private float _attackCoefficient = 0.1f;
 	[SerializeField] private float _moveCoefficient = 0.1f;

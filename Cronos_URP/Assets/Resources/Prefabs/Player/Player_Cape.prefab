@@ -1538,18 +1538,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphere: {fileID: 9091533624918512758}
-  PlayerCamera: {fileID: 0}
-  CinemachinePOV: {fileID: 0}
+  playerCamera: {fileID: 0}
+  cinemachinePOV: {fileID: 0}
   horizontalSpeed: 500
   verticalSpeed: 100
-  Player: {fileID: 7737856591898675433}
-  Target: {fileID: 0}
-  PlayerObject: {fileID: 3469454222243215837}
+  player: {fileID: 7737856591898675433}
+  target: {fileID: 0}
+  playerObject: {fileID: 3469454222243215837}
   lockOnAixsDamp: 0.99
   autoTargettingAixsDamp: 0
   exitValue: 0
   isTargetting: 0
-  MonsterList: []
+  _monsterList: []
 --- !u!135 &9091533624918512758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1881,36 +1881,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e08ef511b33964bba9efab48ccdd95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillRenderObj: {fileID: 3284934833646403677, guid: 222404a70980adb4594c9347f02f38b7, type: 2}
-  CurrentState: 
-  TimeSlashCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Speed: 15
-  LookRotationDampFactor: 10
-  attackCoefficient: 0.001
-  moveCoefficient: 0.001
-  maxTP: 500
-  maxCP: 100
-  currentDamage: 0
-  attackSpeed: 0
-  chargeAttack: 0
-  currentTP: 60
-  currentCP: 0
-  chargingCP: 3
-  TPAbsorptionRatio: 1
-  CPDecayRatio: 10
-  isEnforced: 0
-  isLockOn: 0
-  rigidImmunity: 0
-  dodgeAttack: 0
+  skillRenderObj: {fileID: 3284934833646403677, guid: 222404a70980adb4594c9347f02f38b7, type: 2}
+  _currentState: 
+  _speed: 15
+  _lookRotationDampFactor: 10
+  _attackCoefficient: 0.1
+  _moveCoefficient: 0.1
+  _maxTP: 60
+  _maxCP: 0
+  isDecreaseTP: 1
+  _currentTP: 60
+  _currentCP: 0
+  _chargingCP: 10
+  _TPAbsorptionRatio: 1
+  _CPDecayRatio: 1
+  _currentDamage: 0
+  _attackSpeed: 0
+  _chargeAttack: 0
+  _isEnforced: 0
+  _isLockOn: 0
+  _isRigidImmunity: 0
+  _isDodgeAttack: 0
+  useKnockback: 0
   isBuff: 0
   buffTimer: 3
   buffTime: 3
-  <CapsuleColldierUtility>k__BackingField:
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  targetDistance: 1
+  <capsuleColldierUtility>k__BackingField:
     <DefaultColliderData>k__BackingField:
       <Height>k__BackingField: 1.8
       <CeneterY>k__BackingField: 0.9
@@ -1919,35 +1919,29 @@ MonoBehaviour:
       <StepHeightPercentage>k__BackingField: 0.25
       <FloatRayDistance>k__BackingField: 2
       <StepReachForce>k__BackingField: 25
-  <LayerData>k__BackingField:
+  <layerData>k__BackingField:
     <GroundLayer>k__BackingField:
       serializedVersion: 2
-      m_Bits: 2048
-  <SlopeSpeedAngles>k__BackingField:
+      m_Bits: 4294967295
+  <slopeSpeedAngles>k__BackingField:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  targetdistance: 0.3
   meleeWeapon: {fileID: 0}
-  _damageable: {fileID: 0}
+  shieldWeapon: {fileID: 0}
+  playerFSM: {fileID: 0}
+  damageable: {fileID: 0}
   groggyStack: {fileID: 0}
-  _defnsible: {fileID: 0}
+  defnsible: {fileID: 0}
+  knockBack: {fileID: 0}
   soundManager: {fileID: 0}
   effectManager: {fileID: 0}
   impulseCam: {fileID: 0}
-  playerSword: {fileID: 4831757503715229307}
-  spcDelay: 0.3
-  psm: {fileID: 0}
   adjuster: {fileID: 0}
-  isDecreaseTP: 1
   usePreiviousSceneData: 1
-  currentTime: 0
-  useKnockback: 0
+  playerSword: {fileID: 4831757503715229307}
 --- !u!114 &8379121543114933469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1960,11 +1954,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c92585d385a5c418951de327f90c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minFrame: 0
   isPaused: 0
-  Velocity: {x: 0, y: 0, z: 0}
-  AutoTargetting: {fileID: 5384916197114032611}
+  minFrame: 0
+  velocity: {x: 0, y: 0, z: 0}
   currentLayerIndex: 0
+  autoTargetting: {fileID: 5384916197114032611}
 --- !u!114 &4045251999486258608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,13 +2228,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3159fb8eb4270b44a8123eca3ddf0577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
+  _groundLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
-  radius: 0.3
-  offset: 0.1
-  drawGizmo: 1
-  ToggleChecker: 1
+    m_Bits: 0
+  _radius: 0.3
+  _offset: 0.1
+  _drawGizmo: 0
+  toggleChecker: 1
 --- !u!114 &7698948627034736897
 MonoBehaviour:
   m_ObjectHideFlags: 0
