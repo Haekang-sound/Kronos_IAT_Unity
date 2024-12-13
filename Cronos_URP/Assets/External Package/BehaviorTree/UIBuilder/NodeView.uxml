@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/BehaviorTree/UIBuilder/NodeViewStyle.uss?fileID=7433441132597879392&amp;guid=2556e58eb028d744ca9fe58cabae3f7a&amp;type=3#NodeViewStyle" />
+    <ui:VisualElement name="node-state" style="align-items: center;" />
+    <ui:VisualElement name="node-border">
+        <ui:VisualElement name="contents">
+            <ui:VisualElement name="top">
+                <ui:VisualElement name="input">
+                    <ui:VisualElement name="divider" style="flex-grow: 1;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="title" style="color: rgb(255, 255, 255); align-self: center;">
+                    <ui:Label name="title-label" text="SequencerNode" class="unity-text-element unity-label" style="align-items: center; align-self: stretch;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="description" style="align-self: center;">
+                    <ui:Label display-tooltip-when-elided="true" name="description" style="align-self: flex-start;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="output" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="selection-border" picking-mode="Ignore" style="align-items: center; display: flex;" />
+</ui:UXML>
