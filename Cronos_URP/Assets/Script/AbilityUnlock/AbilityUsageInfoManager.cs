@@ -1,77 +1,77 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ´É·Â °³¹æ ¹öÆ°¿¡ ÇÒ´çÇÒ ÇÔ¼öµéÀ» Á¤ÈñÇÑ Å¬·¡½º ÀÔ´Ï´Ù.
+/// ëŠ¥ë ¥ ê°œë°© ë²„íŠ¼ì— í• ë‹¹í•  í•¨ìˆ˜ë“¤ì„ ì •í¬í•œ í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
 /// </summary>
 public class AbilityUsageInfoManager : MonoBehaviour
 {
     private AbilityUsageInfo abilityUsageInfo;
 
-	//ÄŞº¸ °­È­
+	//ì½¤ë³´ ê°•í™”
 	public void UseEnforcedCombo()
     {
         abilityUsageInfo.EnforcedCombo = true;
     }
 
-	//È¸ÇÇ °ø°İ == µ¹Áø °ø°İ
+	//íšŒí”¼ ê³µê²© == ëŒì§„ ê³µê²©
 	public void UseDodgeAttack()
     {
         abilityUsageInfo.DodgeAttack = true;
     }
 
-	//½ÉÆÇÀÇ Ä®³¯
+	//ì‹¬íŒì˜ ì¹¼ë‚ 
 	public void Com_S_Attack_Aura()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsFlashSlash, true) ;
 		EffectManager.Instance.isSwordWave = true;
 	}
 
-	//½ÉÆÇÀÇ ÀÏ°İ - Com_S_Attack_Ground
+	//ì‹¬íŒì˜ ì¼ê²© - Com_S_Attack_Ground
 	public void Com_S_Attack_Ground()
 	{
 		EffectManager.Instance.isGroundEnforced = true;
 	}
 
-	//	CP Æø¹ß - Mov_TimeBomb
+	//	CP í­ë°œ - Mov_TimeBomb
 	public void Mov_TimeBomb()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsCPBoomb, true);
 	}
-	//	½Ã°£ Á¤Áö - Mov_TimeStop
+	//	ì‹œê°„ ì •ì§€ - Mov_TimeStop
 	public void Mov_TimeStop()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsTimeStop, true);
 	}
-	// °İ·ÄÇÑ °­Å¸ - Com_AbilityAttack
+	// ê²©ë ¬í•œ ê°•íƒ€ - Com_AbilityAttack
 	public void Com_AbilityAttack()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.ComAttackVariation, true);
 	}
-	// °İ·ÄÇÑ ÀÏ°İ - Nor_AbilityAttack
+	// ê²©ë ¬í•œ ì¼ê²© - Nor_AbilityAttack
 	public void Nor_AbilityAttack()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.NorAttackVariation, true);
 	}
 
-	// ¿î¸íÀÇ ±¼·¹ - ÆĞ¸®¾îÅÃ
+	// ìš´ëª…ì˜ êµ´ë ˆ - íŒ¨ë¦¬ì–´íƒ
 	public void ParryAttack()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsParry, true);
 	}
 
-	// ÆÄ±«ÀÇ µµ¾à - 
+	// íŒŒê´´ì˜ ë„ì•½ - 
 	public void RushAttack()
 	{
 		PlayerStateMachine.GetInstance().Animator.SetBool(PlayerHashSet.Instance.IsRushAttack, true);
 	}
 
-	//Com_S_Attack °­ °ø°İ °­È­
+	//Com_S_Attack ê°• ê³µê²© ê°•í™”
 	public void UseComSAttackUpgrade()
     {
         abilityUsageInfo.comSAttackUpgrade = true;
     }
 
-	//Nor_S_Attack °­ °ø°İ °­È­
+	//Nor_S_Attack ê°• ê³µê²© ê°•í™”
 	public void UseNorSAttackUpgrade()
     {
         abilityUsageInfo.norSAttackUpgrade = true;
