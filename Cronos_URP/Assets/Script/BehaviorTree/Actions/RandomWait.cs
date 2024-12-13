@@ -6,15 +6,15 @@ using UnityEngine;
 /// </summary>
 public class RandomWait : ActionNode
 {
-    public float minDuration = 0;
-    public float maxDuration = 1;
+    public float minDuration = 0f;
+    public float maxDuration = 1f;
 
-    [SerializeField] private float _duration = 1;
+    [SerializeField] private float _duration = 1f;
     [SerializeField] private float _elapse;
 
     protected override void OnStart()
     {
-        _duration = Random.Range(minDuration, maxDuration + 1);
+        _duration = Random.Range(minDuration, maxDuration + 1f);
         _elapse = 0f;
     }
 

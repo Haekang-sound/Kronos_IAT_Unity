@@ -58,18 +58,23 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private UnityEngine.Sprite _backGroundActivate;
     private UnityEngine.Sprite _backGroundDeactivate;
 
+    private readonly float _focusTransitionTIme = 2f;
+    private readonly int _cameraPriorityFocusIn = 10;
+    private readonly int _cameraPriorityFocusOut = 0;
+
+
     // -----
 
     public void FocusIn()
     {
-        StartCoroutine(SetFocausAfter(true, 2));
-        _virtualCam.Priority = 10;
+        StartCoroutine(SetFocausAfter(true, _focusTransitionTIme));
+        _virtualCam.Priority = _cameraPriorityFocusIn;
     }
 
     public void FocusOut()
     {
-        StartCoroutine(SetFocausAfter(false, 2));
-        _virtualCam.Priority = 0;
+        StartCoroutine(SetFocausAfter(false, _focusTransitionTIme));
+        _virtualCam.Priority = _cameraPriorityFocusOut;
     }
 
     public void Render()
@@ -234,7 +239,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     private void OnDisable()
     {
         isFucus = false;
-        _virtualCam.Priority = 0;
+        _virtualCam.Priority = _cameraPriorityFocusOut;
     }
 
     // -----

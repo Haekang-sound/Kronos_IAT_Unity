@@ -7,8 +7,8 @@ using UnityEngine;
 public class DotDamager : SimpleDamager
 {
     [SerializeField]
-    private float _elapse;
     public float period = 1f;
+    private float _elapse;
 
     private void Start()
     {

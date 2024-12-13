@@ -9,14 +9,14 @@ using UnityEngine.EventSystems;
 
 public class EmptyClick : MonoBehaviour, IPointerClickHandler
 {
-    public Action onEmptyClick;
+    public Action OnEmptyClick;
 
     public void OnEnable()
     {
         var abilityButtons = GetComponentsInChildren<AbilityNode>();
         foreach (var button in abilityButtons)
         {
-            onEmptyClick += button.FocusOut;
+            OnEmptyClick += button.FocusOut;
         }
     }
 
@@ -26,7 +26,7 @@ public class EmptyClick : MonoBehaviour, IPointerClickHandler
 
         if (SomthingClicked == null)
         {
-            onEmptyClick?.Invoke();
+            OnEmptyClick?.Invoke();
         }
     }
 }

@@ -13,8 +13,8 @@ public class PopupController : MonoBehaviour
     public Button confirmButton; // 확인 버튼
     public Button cancelButton; // 취소 버튼
 
-    private System.Action onConfirmAction; // 확인 시 실행할 액션
-    private System.Action onCancelAction; // 취소 시 실행할 액션
+    private System.Action OnConfirmAction; // 확인 시 실행할 액션
+    private System.Action OnCancelAction; // 취소 시 실행할 액션
 
     void Start()
     {
@@ -26,8 +26,8 @@ public class PopupController : MonoBehaviour
     public void OpenPopup(string message, System.Action onConfirm, System.Action onCancel = null)
     {
         popupText.text = message;
-        onConfirmAction = onConfirm;
-        onCancelAction = onCancel;
+        OnConfirmAction = onConfirm;
+        OnCancelAction = onCancel;
 
         confirmButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(OnConfirm);
@@ -47,14 +47,14 @@ public class PopupController : MonoBehaviour
     // 확인 버튼 클릭 시 호출
     private void OnConfirm()
     {
-        onConfirmAction?.Invoke();
+        OnConfirmAction?.Invoke();
         ClosePopup();
     }
 
     // 취소 버튼 클릭 시 호출
     private void OnCancel()
     {
-        onCancelAction?.Invoke();
+        OnCancelAction?.Invoke();
         ClosePopup();
     }
 }

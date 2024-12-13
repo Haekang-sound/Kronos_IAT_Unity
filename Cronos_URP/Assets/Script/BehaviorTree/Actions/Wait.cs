@@ -4,7 +4,7 @@
 /// </summary>
 public class Wait : ActionNode
 {
-    public float duration = 1;
+    public float duration = 1f;
     float _elapse;
 
     protected override void OnStart()
@@ -18,8 +18,6 @@ public class Wait : ActionNode
 
     protected override State OnUpdate()
     {
-        //float speed = 1;
-
         _elapse += blackboard.bulletTimeScalable.GetDeltaTime();
 
         if (_elapse > duration)

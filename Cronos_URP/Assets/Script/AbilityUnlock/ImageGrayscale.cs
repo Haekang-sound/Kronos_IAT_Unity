@@ -9,25 +9,25 @@ using UnityEngine.UI;
 /// </summary>
 public class ImageGrayscale : MonoBehaviour
 {
-    public Material GrayscaleMaterial;
+    public Material grayscaleMaterial;
 
     [SerializeField]
-    private Image image;
+    private Image _image;
     [SerializeField]
     private float _duration = 1f;
 
     private void Awake()
     {
-        image = GetComponent<Image>();
+        _image = GetComponent<Image>();
 
-        image.material = new Material(GrayscaleMaterial);
+        _image.material = new Material(grayscaleMaterial);
     }
 
     // -----
 
     public void SetGrayscale(float amount = 1)
     {
-        image.material.SetFloat("_GrayscaleAmount", amount);
+        _image.material.SetFloat("_GrayscaleAmount", amount);
     }
 
     public void StartGrayScaleRoutine()

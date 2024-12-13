@@ -76,8 +76,8 @@ public class AbilityTree : MonoBehaviour, IObserver<AbilityNode>
 			value.FocusIn();
 
             skillNameText.text = value.skillName.text;
-            nodeCostText.text = "TP " + value.PointNeed + " 필요";
-			nodeDetailText.text = value.description;
+            nodeCostText.text = $"TP {value.PointNeed} 필요";
+            nodeDetailText.text = value.description;
 
 			abilityVideoPlayer.clip = value.videoClip;
             abilityVideoPlayer.time = 0;

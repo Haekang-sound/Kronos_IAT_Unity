@@ -14,10 +14,10 @@ public class LookAtCamera : MonoBehaviour
         CameraForwardInverted, // 카메라의 전방 방향으로 오브젝트의 Z축을 반대로 맞추기
     }
 
-    [SerializeField] private Mode mode;
+    [SerializeField] private Mode _mode;
     private void LateUpdate()
     {
-        switch (mode)
+        switch (_mode)
         {
             case Mode.LookAt:
                 transform.LookAt(Camera.main.transform);

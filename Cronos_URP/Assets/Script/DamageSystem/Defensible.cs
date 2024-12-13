@@ -9,8 +9,6 @@ using static Damageable;
 /// </summary>
 public class Defensible : MonoBehaviour
 {
-    SoundManager sm;
-
 	public Action onDefensFalse;
 	public bool isDefending;
     [Range(1.0f, 100.0f)]

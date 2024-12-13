@@ -7,6 +7,7 @@ using UnityEngine;
 public class ShieldWeapon : MonoBehaviour
 {
     private ParryDamager _damager;
+
     private void Awake()
     {
         _damager = GetComponentInChildren<ParryDamager>();

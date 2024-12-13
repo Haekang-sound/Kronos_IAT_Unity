@@ -9,8 +9,9 @@ using UnityEngine.UI;
 /// </summary>
 public class ProgressBar : MonoBehaviour
 {
-    public const string DefaultBarTextFormat = "{0:0.00} %";
-    public const float DefaultPercentage = 0.0f;
+    public readonly string defaultBarTextFormat = "{0:0.00} %";
+    public readonly float defaultPercentage = 0.0f;
+    public readonly float fillAmountDuration = 1.6f;
 
     [SerializeField] public Image backgroundImage;
     [SerializeField] public Image barImage;
@@ -23,12 +24,12 @@ public class ProgressBar : MonoBehaviour
 
     public void Reset()
     {
-        barImage.fillAmount = 0f;
+        barImage.fillAmount = defaultPercentage;
     }
 
     public virtual void Start()
     {
-        percentage = DefaultPercentage;
+        percentage = defaultPercentage;
         UpdatePercentage(percentage);
     }
 
@@ -56,7 +57,7 @@ public class ProgressBar : MonoBehaviour
         {
             if (isFilling == false)
             {
-                StartCoroutine(FillBarOverTime(percentage, 1.6f)); // 1초 동안 fillAmount를 채움
+                StartCoroutine(FillBarOverTime(percentage, fillAmountDuration)); // 1초 동안 fillAmount를 채움
             }
         }
         else
@@ -94,7 +95,7 @@ public class ProgressBar : MonoBehaviour
     private void SetTextPercentage()
     {
         if (!(barText is null))
-            barText.text = string.Format(DefaultBarTextFormat, percentage);
+            barText.text = string.Format(defaultBarTextFormat, percentage);
     }
     public bool PercentInRange(float percentAmount)
     {

@@ -7,11 +7,6 @@ using UnityEngine;
 /// </summary>
 public class HitShake : MonoBehaviour
 {
-    [Header("Info")]
-    private Vector3 _originalPos;
-    private float _timer;
-    private Vector3 _randomPos;
-
     [Header("Settings")]
     [Range(0f, 2f)]
     public float time = 0.2f;
@@ -19,6 +14,10 @@ public class HitShake : MonoBehaviour
     public float distance = 0.1f;
     [Range(0f, 0.1f)]
     public float delayBetweenShakes = 0f;
+
+    private Vector3 _originalPos;
+    private float _timer;
+    private Vector3 _randomPos;
 
     public void Begin()
     {

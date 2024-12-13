@@ -14,10 +14,10 @@ public class CombatZone : MonoBehaviour
     public GameObject target;
     public CombatZoneEnemy[] enemyList;
 
-    private bool isTargetIn;
+    private bool _isTargetIn;
     public GameObject Detect(Transform detector, bool useHeightDifference = true)
     {
-        if (isTargetIn)
+        if (_isTargetIn)
         {
             return target;
         }
@@ -66,7 +66,7 @@ public class CombatZone : MonoBehaviour
     {
         if (other.gameObject == target)
         {
-            isTargetIn = true;
+            _isTargetIn = true;
         }
     }
 
@@ -74,7 +74,7 @@ public class CombatZone : MonoBehaviour
     {
         if (other.gameObject == target)
         {
-            isTargetIn = false;
+            _isTargetIn = false;
         }
     }
 

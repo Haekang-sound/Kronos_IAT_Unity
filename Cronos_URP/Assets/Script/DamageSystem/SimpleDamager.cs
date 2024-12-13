@@ -9,14 +9,12 @@ using UnityEngine.Events;
 public class SimpleDamager : MonoBehaviour
 {
     public bool drawGizmos;
-
-    public float damageAmount = 1;
-
+    public float damageAmount = 1f;
     public LayerMask targetLayers;
 
-    protected GameObject m_owner;
-    public bool inAttack;
+    protected GameObject _owner;
 
+    public bool inAttack;
 	public bool isAcitveSkill = false;
 
     public Damageable.DamageType currentDamageType = Damageable.DamageType.None;
@@ -29,7 +27,7 @@ public class SimpleDamager : MonoBehaviour
 
     public UnityEvent OnAttack;
 
-    public void SetOwner(GameObject owner) => m_owner = owner;
+    public void SetOwner(GameObject owner) => _owner = owner;
 
     public void BeginAttack()
     {
@@ -94,9 +92,9 @@ public class SimpleDamager : MonoBehaviour
            
         };
 
-        if (m_owner != null)
+        if (_owner != null)
         {
-            msg.damageSource = m_owner.transform.position;
+            msg.damageSource = _owner.transform.position;
         }
 
 		msg.isActiveSkill = isAcitveSkill;

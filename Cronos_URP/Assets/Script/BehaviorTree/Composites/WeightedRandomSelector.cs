@@ -19,7 +19,7 @@ public class WeightedRandomSelector : CompositeNode
         }
 
         // 랜덤 값을 생성
-        randomValue = Random.Range(0, totalWeight + 1);
+        randomValue = Random.Range(0f, totalWeight + 1f);
     }
 
     protected override void OnStop()
@@ -36,7 +36,7 @@ public class WeightedRandomSelector : CompositeNode
             totalIndexCount = weights.Count;
         }
 
-        float cumulativeWeight = 0;
+        float cumulativeWeight = 0f;
 
         // 랜덤 값에 따라 자식 노드 선택
         for (int i = 0; i < totalIndexCount; i++)

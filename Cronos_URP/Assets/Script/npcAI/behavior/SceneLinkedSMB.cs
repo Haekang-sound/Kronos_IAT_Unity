@@ -12,8 +12,8 @@ public class SceneLinkedSMB<TMonoBehaviour> : SealedSMB
 {
     protected TMonoBehaviour _monoBehaviour;
 
-    bool _firstFrameHappened;
-    bool _lastFrameHappened;
+    private bool _firstFrameHappened;
+    private bool _lastFrameHappened;
 
     public static void Initialise(Animator animator, TMonoBehaviour monoBehaviour)
     {

@@ -8,12 +8,12 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
 {
     public T[] instances;
 
-    protected Stack<int> m_FreeIdx;
+    protected Stack<int> _freeIdx;
 
     public void Initialize(int count, T prefab)
     {
         instances = new T[count];
-        m_FreeIdx = new Stack<int>(count);
+        _freeIdx = new Stack<int>(count);
 
         for (int i = 0; i < count; ++i)
         {
@@ -22,7 +22,7 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
             instances[i].poolID = i;
             instances[i].pool = this;
 
-            m_FreeIdx.Push(i);
+            _freeIdx.Push(i);
         }
     }
 
@@ -32,7 +32,7 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
     /// <returns>활성화된 객체</returns>
     public T GetNew()
     {
-        int idx = m_FreeIdx.Pop();
+        int idx = _freeIdx.Pop();
         instances[idx].gameObject.SetActive(true);
 
         return instances[idx];
@@ -45,7 +45,7 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
 
     public void Free(T obj)
     {
-        m_FreeIdx.Push(obj.poolID);
+        _freeIdx.Push(obj.poolID);
         instances[obj.poolID].gameObject.SetActive(false);
     }
 }

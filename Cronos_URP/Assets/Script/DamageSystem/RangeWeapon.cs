@@ -14,16 +14,16 @@ public class RangeWeapon : MonoBehaviour
 
     public Projectile loadedProjectile
     {
-        get { return m_loadedProjectile; }
+        get { return _loadedProjectile; }
     }
 
-    protected Projectile m_loadedProjectile = null;
-    protected ObjectPooler<Projectile> m_projectilePool;
+    protected Projectile _loadedProjectile = null;
+    protected ObjectPooler<Projectile> _projectilePool;
 
     private void Start()
     {
-        m_projectilePool = new ObjectPooler<Projectile>();
-        m_projectilePool.Initialize(pooledObejctNum, projectile);
+        _projectilePool = new ObjectPooler<Projectile>();
+        _projectilePool.Initialize(pooledObejctNum, projectile);
         sm = SoundManager.Instance;
     }
 
@@ -39,27 +39,27 @@ public class RangeWeapon : MonoBehaviour
 
     public void LoadProjectile()
     {
-        if (m_loadedProjectile != null)
+        if (_loadedProjectile != null)
         {
             return;
         }
 
-        m_loadedProjectile = m_projectilePool.GetNew();
-        m_loadedProjectile.transform.SetParent(transform, false);
-        m_loadedProjectile.transform.localPosition = muzzleOffset;
-        m_loadedProjectile.transform.localRotation = Quaternion.identity;
+        _loadedProjectile = _projectilePool.GetNew();
+        _loadedProjectile.transform.SetParent(transform, false);
+        _loadedProjectile.transform.localPosition = muzzleOffset;
+        _loadedProjectile.transform.localRotation = Quaternion.identity;
     }
 
     void AttackProjectile(Vector3 target)
     {
-        if (m_loadedProjectile == null)
+        if (_loadedProjectile == null)
         {
             LoadProjectile();
         }
 
-        m_loadedProjectile.transform.SetParent(null, true);
-        m_loadedProjectile.Shot(target, this);
-        m_loadedProjectile = null; //일단 발사되면 더 이상 이 객체가 발사체를 소유하는 것이 아니라 발사체가 스스로 생명을 유지합니다.
+        _loadedProjectile.transform.SetParent(null, true);
+        _loadedProjectile.Shot(target, this);
+        _loadedProjectile = null; //일단 발사되면 더 이상 이 객체가 발사체를 소유하는 것이 아니라 발사체가 스스로 생명을 유지합니다.
     }
 
 #if UNITY_EDITOR

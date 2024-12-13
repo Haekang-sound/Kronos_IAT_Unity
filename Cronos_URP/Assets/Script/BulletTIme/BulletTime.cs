@@ -15,7 +15,7 @@ public class BulletTime : MonoBehaviour
     public float deceleration = 1f;
 
 
-    public UnityEvent OnActive, OnNormalrize;
+    public UnityEvent OnActive OnNormalrize;
 
     private static BulletTime _instance;
 

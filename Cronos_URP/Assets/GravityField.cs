@@ -10,7 +10,7 @@ public class GravityField : MonoBehaviour
 	public float AnimSpeed = 0.1f;
 	public float Gravity = 3f;
 
-	Animator m_Animator;
+	Animator _animator;
 	private void OnTriggerEnter(Collider other)
 	{
 		Debug.Log(other.tag.ToString());

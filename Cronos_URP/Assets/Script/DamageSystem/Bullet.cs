@@ -22,31 +22,31 @@ public class Bullet : Projectile
     public float explosionTimer;
 
 
-	protected float m_sinceFired;
+	protected float _sinceFired;
 
-    protected RangeWeapon m_shooter;
-    protected Rigidbody m_rigidBody;
+    protected RangeWeapon _shooter;
+    protected Rigidbody _rigidBody;
 
-    protected static Collider[] m_ExplosionHitCache = new Collider[32];
+    protected static Collider[] _explosionHitCache = new Collider[32];
 
     private void Awake()
     {
-        m_rigidBody = GetComponent<Rigidbody>();
-        m_rigidBody.detectCollisions = false;
+        _rigidBody = GetComponent<Rigidbody>();
+        _rigidBody.detectCollisions = false;
     }
 
     private void OnEnable()
     {
-        m_rigidBody.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        m_rigidBody.isKinematic = true;
-        m_sinceFired = 0.0f;
+        _rigidBody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        _rigidBody.isKinematic = true;
+        _sinceFired = 0.0f;
     }
 
     private void Update()
     {
         // 8초가 지나면 자동으로 오브젝트가 제거되도록 하드 코딩
         // 생존 시간 변수를 따로 뒀지만 0으로 초기화 하는 바람에 부득이하게 하드 코딩
-        if (m_sinceFired > 8f)
+        if (_sinceFired > 8f)
         {
             pool.Free(this);
         }
@@ -55,17 +55,17 @@ public class Bullet : Projectile
 	private Vector3 _currentVelocity;
     private void FixedUpdate()
     {
-		m_rigidBody.velocity = _currentVelocity * BulletTime.Instance.GetCurrentSpeed();
+		_rigidBody.velocity = _currentVelocity * BulletTime.Instance.GetCurrentSpeed();
 
-		m_sinceFired += Time.deltaTime;
+		_sinceFired += Time.deltaTime;
 
-        if (m_sinceFired > 0.2f)
+        if (_sinceFired > 0.2f)
         {
             // 발사되자마자 터지는 것을 막기 위해 0.5초 후에만 충돌을 활성화합니다.
-            m_rigidBody.detectCollisions = true;
+            _rigidBody.detectCollisions = true;
         }
 
-        if (explosionTimer > 0 && m_sinceFired > explosionTimer)
+        if (explosionTimer > 0 && _sinceFired > explosionTimer)
         {
             Explosion();
         }
@@ -86,25 +86,25 @@ public class Bullet : Projectile
     /// <param name="shooter">발사한 무기</param>
     public override void Shot(Vector3 target, RangeWeapon shooter)
     {
-        m_rigidBody.isKinematic = false;
+        _rigidBody.isKinematic = false;
 
-        m_shooter = shooter;
+        _shooter = shooter;
 
-        m_rigidBody.velocity = GetVelocity(target);
+        _rigidBody.velocity = GetVelocity(target);
 		
 		//작업중
-		_currentVelocity = m_rigidBody.velocity;
+		_currentVelocity = _rigidBody.velocity;
 
-		m_rigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
+		_rigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
 
-        m_rigidBody.detectCollisions = false;
+        _rigidBody.detectCollisions = false;
 
         transform.forward = target - transform.position;
     }
 
     public void Explosion()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, m_ExplosionHitCache,
+        int count = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, _explosionHitCache,
                 damageMask.value);
 
         Damageable.DamageMessage message = new Damageable.DamageMessage
@@ -119,7 +119,7 @@ public class Bullet : Projectile
 
         for (int i = 0; i < count; ++i)
         {
-            Damageable d = m_ExplosionHitCache[i].GetComponentInChildren<Damageable>();
+            Damageable d = _explosionHitCache[i].GetComponentInChildren<Damageable>();
 
             if (d != null)
                 d.ApplyDamage(message);

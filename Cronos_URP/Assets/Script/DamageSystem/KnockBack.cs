@@ -7,7 +7,6 @@ using UnityEngine;
 public class KnockBack : MonoBehaviour
 {
     public float ForcePower = 100f;
-
     private Rigidbody _rigidbody;
 
     private void Awake()
