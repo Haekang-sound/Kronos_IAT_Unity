@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// ±¤¼Ó µ¹Áø °ø°İ ´Ü°è¿¡¼­ º¹Á¦µÈ º¸½º Ä³¸¯ÅÍÀÇ µ¿ÀÛÀ» Á¦¾îÇÏ´Â Å¬·¡½º·Î,
-/// ¾Ö´Ï¸ŞÀÌ¼Ç µ¿±âÈ­¸¦ Ã³¸®ÇÏ°í Å¬·ĞÀÇ »ı¸í ÁÖ±â¸¦ °ü¸®ÇÕ´Ï´Ù.
+/// ê´‘ì† ëŒì§„ ê³µê²© ë‹¨ê³„ì—ì„œ ë³µì œëœ ë³´ìŠ¤ ìºë¦­í„°ì˜ ë™ì‘ì„ ì œì–´í•˜ëŠ” í´ë˜ìŠ¤ë¡œ,
+/// ì• ë‹ˆë©”ì´ì…˜ ë™ê¸°í™”ë¥¼ ì²˜ë¦¬í•˜ê³  í´ë¡ ì˜ ìƒëª… ì£¼ê¸°ë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class BossLightRushCloneBehavior : MonoBehaviour
 {
@@ -77,7 +77,7 @@ public class BossLightRushCloneBehavior : MonoBehaviour
     {
         if (target == null) return;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ¼³Á¤
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ ì„¤ì •
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
@@ -108,7 +108,7 @@ public class BossLightRushCloneBehavior : MonoBehaviour
         }
     }
 
-    // ÀÌÆåÆ® ¶§¹®¿¡ ¸¸µé¾î¾ßÁö
+    // ì´í™íŠ¸ ë•Œë¬¸ì— ë§Œë“¤ì–´ì•¼ì§€
     // by MIC
     public void ChargeAim()
     {

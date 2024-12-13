@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// BTypeEnemÀÇ ÃßÀû ÀÌÈÄ ¿ø·¡ ÀÚ¸®·Î µÇµ¹¾Æ°¡´Â »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// BTypeEnemì˜ ì¶”ì  ì´í›„ ì›ë˜ ìë¦¬ë¡œ ë˜ëŒì•„ê°€ëŠ” ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BTypeEnemySMBReturn : SceneLinkedSMB<BTypeEnemyBehavior>
 {
@@ -16,7 +16,7 @@ public class BTypeEnemySMBReturn : SceneLinkedSMB<BTypeEnemyBehavior>
 
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // °æ·Î¸¦ Ã£À» ¼ö ¾øÀ» ¶§
+        // ê²½ë¡œë¥¼ ì°¾ì„ ìˆ˜ ì—†ì„ ë•Œ
         if (_monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathPartial
             || _monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
@@ -26,13 +26,13 @@ public class BTypeEnemySMBReturn : SceneLinkedSMB<BTypeEnemyBehavior>
 
         _monoBehaviour.FindTarget();
 
-        // PURSUIT - Å¸±ê ¹ß°ß ½Ã
+        // PURSUIT - íƒ€ê¹ƒ ë°œê²¬ ì‹œ
         GameObject currentTarget = _monoBehaviour.CurrentTarget;
         if (currentTarget != null)
         {
             _monoBehaviour.TriggerPursuit();
         }
-        // IDLE - ¸ñÀûÁö µµÂø ½Ã
+        // IDLE - ëª©ì ì§€ ë„ì°© ì‹œ
         else
         {
             Vector3 toBase = _monoBehaviour.BasePosition - _monoBehaviour.transform.position;

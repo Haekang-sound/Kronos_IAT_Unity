@@ -1,18 +1,18 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
 /// <summary>
-/// ¸ğµç Enemy °´Ã¼µéÀÌ °øµ¿À¸·Î »ç¿ëÇÏ´Â ÀÌµ¿, ¹°¸® Ã³¸®, ¿ÜºÎ Èû Àû¿ë µîÀÇ ±â´ÉÀ» Á¤ÀÇÇÑ Å¬·¡½ºÀÔ´Ï´Ù.
-/// NavMeshAgent¸¦ È°¿ëÇÑ °æ·Î Å½»ö, ¾Ö´Ï¸ŞÀÌ¼Ç ±â¹İ ÀÌµ¿, ¿ÜºÎ ¹°¸®·Â Ã³¸®¸¦ Á¦°øÇÕ´Ï´Ù.
+/// ëª¨ë“  Enemy ê°ì²´ë“¤ì´ ê³µë™ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ì´ë™, ë¬¼ë¦¬ ì²˜ë¦¬, ì™¸ë¶€ í˜ ì ìš© ë“±ì˜ ê¸°ëŠ¥ì„ ì •ì˜í•œ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// NavMeshAgentë¥¼ í™œìš©í•œ ê²½ë¡œ íƒìƒ‰, ì• ë‹ˆë©”ì´ì…˜ ê¸°ë°˜ ì´ë™, ì™¸ë¶€ ë¬¼ë¦¬ë ¥ ì²˜ë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
-[DefaultExecutionOrder(-1)] // ´Ù¸¥ ½ºÅ©¸³Æ®º¸´Ù ¸ÕÀú ½ÇÇà(½ÇÇà ÁÖ¹® °ªÀÌ ³·À» ¼ö·Ï ¸ÕÀú ½ÇÇà)
-[RequireComponent(typeof(NavMeshAgent))] // NavMeshAgent ÄÄÆ÷³ÍÆ® ÇÊ¼ö
+[DefaultExecutionOrder(-1)] // ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ë³´ë‹¤ ë¨¼ì € ì‹¤í–‰(ì‹¤í–‰ ì£¼ë¬¸ ê°’ì´ ë‚®ì„ ìˆ˜ë¡ ë¨¼ì € ì‹¤í–‰)
+[RequireComponent(typeof(NavMeshAgent))] // NavMeshAgent ì»´í¬ë„ŒíŠ¸ í•„ìˆ˜
 public class EnemyController : MonoBehaviour
 {
-    // ÀÎ½ºÆåÅÍ Ã¢¿¡ ÁöÁ¤ÇÏÁö ¾ÊÀ¸¸é
-    // OnEnable ÀÌº¥Æ®¿¡¼­ Tag ¸¦ ÅëÇØ Player °´Ã¼¸¦ Ã£´Â´Ù.
+    // ì¸ìŠ¤í™í„° ì°½ì— ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´
+    // OnEnable ì´ë²¤íŠ¸ì—ì„œ Tag ë¥¼ í†µí•´ Player ê°ì²´ë¥¼ ì°¾ëŠ”ë‹¤.
     [Header("Player Settings")]
     public GameObject target;
 
@@ -100,7 +100,7 @@ public class EnemyController : MonoBehaviour
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, rotationLerpSpeed * Time.deltaTime);
     }
 
-    // Áö¸é À§¿¡ ÀÖ´ÂÁö °Ë»çÇÑ´Ù.
+    // ì§€ë©´ ìœ„ì— ìˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤.
     void CheckGrounded()
     {
         RaycastHit hit;
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ÜºÎ¿¡ °¡ÇÑ ¹°¸®·Â¿¡ ´ëÇØ °è»êÀ» ÇÑ´Ù.
+    /// ì™¸ë¶€ì— ê°€í•œ ë¬¼ë¦¬ë ¥ì— ëŒ€í•´ ê³„ì‚°ì„ í•œë‹¤.
     /// </summary>
     void ForceMovement()
     {
@@ -130,10 +130,10 @@ public class EnemyController : MonoBehaviour
     }
     private void OnAnimatorMove()
     {
-        // ¿ÜºÎ ¾Ğ·ÂÀÌ ÀÖÀ» °æ¿ì ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ıµÇ¾î¼­´Â ¾ÈµÈ´Ù.
+        // ì™¸ë¶€ ì••ë ¥ì´ ìˆì„ ê²½ìš° ì• ë‹ˆë©”ì´ì…˜ì´ ì¬ìƒë˜ì–´ì„œëŠ” ì•ˆëœë‹¤.
         if (_underExternalForce) return;
 
-        // ÇöÀç ÇÁ·¹ÀÓ¿¡¼­ ÀÌµ¿ÇÑ °Å¸®¿Í ½Ã°£ ´ÜÀ§·Î °ªÀ» ¼Óµµ·Î ÁöÁ¤ÇÑ´Ù.
+        // í˜„ì¬ í”„ë ˆì„ì—ì„œ ì´ë™í•œ ê±°ë¦¬ì™€ ì‹œê°„ ë‹¨ìœ„ë¡œ ê°’ì„ ì†ë„ë¡œ ì§€ì •í•œë‹¤.
         if (_followNavmeshAgent)
         {
             if (useAnimatiorSpeed)
@@ -144,7 +144,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            // Ãæµ¹ °Ë»ç ÈÄ ÀÌµ¿. ¸¸ÀÏ Ãæµ¹ÀÌ ¹ß»ıÇÑ´Ù¸é rigidbodyÀÇ À§Ä¡´Â º¯ÇÏÁö ¾ÊÀ½.
+            // ì¶©ëŒ ê²€ì‚¬ í›„ ì´ë™. ë§Œì¼ ì¶©ëŒì´ ë°œìƒí•œë‹¤ë©´ rigidbodyì˜ ìœ„ì¹˜ëŠ” ë³€í•˜ì§€ ì•ŠìŒ.
             RaycastHit hit;
             if (!_rigidbody.SweepTest(_animator.deltaPosition.normalized, out hit,
                 _animator.deltaPosition.sqrMagnitude))
@@ -155,7 +155,7 @@ public class EnemyController : MonoBehaviour
 
         if (applyAnimationRotation)
         {
-            // ÇöÀç °´Ã¼ÀÇ Àü¹æ ¹æÇâÀ» ¾Ö´Ï¸ŞÀÌ¼Ç È¸Àü¿¡ ¸Â°Ô Á¶Á¤
+            // í˜„ì¬ ê°ì²´ì˜ ì „ë°© ë°©í–¥ì„ ì• ë‹ˆë©”ì´ì…˜ íšŒì „ì— ë§ê²Œ ì¡°ì •
             transform.forward = _animator.deltaRotation * transform.forward;
         }
     }

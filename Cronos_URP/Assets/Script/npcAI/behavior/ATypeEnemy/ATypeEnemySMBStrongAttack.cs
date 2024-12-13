@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿ausing UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ °ø°İ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ATypeEnemì˜ ê³µê²© ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
 {
@@ -17,14 +17,14 @@ public class ATypeEnemySMBStrongAttack : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.LookAtTarget();
 
-        // Down - ÇÃ·¹ÀÌ¾î°¡ °ø°İ Æä¸µ¿¡ ¼º°ø ÇßÀ» ¶§
-        /// TODO: ÃßÈÄ ±¸Çö ¿ä¸Á
+        // Down - í”Œë ˆì´ì–´ê°€ ê³µê²© í˜ë§ì— ì„±ê³µ í–ˆì„ ë•Œ
+        /// TODO: ì¶”í›„ êµ¬í˜„ ìš”ë§
         if (false)
         {
             //_monoBehaviour.TriggerDown();
         }
 
-        // Strafe - ÇÃ·¹ÀÌ¾î°¡ °ø°İ ÆĞ¸µ¿¡ ½ÇÆĞ ÇßÀ» ¶§(¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¸ğµÎ ³¡³­ µÚ)
+        // Strafe - í”Œë ˆì´ì–´ê°€ ê³µê²© íŒ¨ë§ì— ì‹¤íŒ¨ í–ˆì„ ë•Œ(ì• ë‹ˆë©”ì´ì…˜ì´ ëª¨ë‘ ëë‚œ ë’¤)
     }
 
     public override void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

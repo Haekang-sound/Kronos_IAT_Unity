@@ -1,12 +1,12 @@
-using Message;
+ï»¿using Message;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
 
 /// <summary>
-/// BossBehavior Å¬·¡½º´Â º¸½º Ä³¸¯ÅÍÀÇ Çàµ¿ ¹× »óÅÂ °ü¸®¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// º¸½ºÀÇ ´Ù¾çÇÑ ÆĞÅÏ°ú °ø°İÀ» Ã³¸®ÇÏ°í, Çàµ¿ Æ®¸® ¹× »óÅÂ¿¡ µû¶ó °¢Á¾ ÀÌÆåÆ® ¹× °ø°İÀ» ½ÇÇàÇÕ´Ï´Ù.
+/// BossBehavior í´ë˜ìŠ¤ëŠ” ë³´ìŠ¤ ìºë¦­í„°ì˜ í–‰ë™ ë° ìƒíƒœ ê´€ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ë³´ìŠ¤ì˜ ë‹¤ì–‘í•œ íŒ¨í„´ê³¼ ê³µê²©ì„ ì²˜ë¦¬í•˜ê³ , í–‰ë™ íŠ¸ë¦¬ ë° ìƒíƒœì— ë”°ë¼ ê°ì¢… ì´í™íŠ¸ ë° ê³µê²©ì„ ì‹¤í–‰í•©ë‹ˆë‹¤.
 /// </summary>
 
 public class BossBehavior : MonoBehaviour, IMessageReceiver
@@ -204,7 +204,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
     {
         if (target == null) return;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ¼³Á¤
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ ì„¤ì •
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
@@ -367,7 +367,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
             {
                 material.SetFloat("DissolveAmount", 0f);
 
-                // »õ·Î¿î ¹è¿­À» »ı¼ºÇÏ¿© ±³Ã¼
+                // ìƒˆë¡œìš´ ë°°ì—´ì„ ìƒì„±í•˜ì—¬ êµì²´
                 Material[] newMaterials = renderer.materials;
                 newMaterials[0] = material;
                 renderer.materials = newMaterials;
@@ -435,10 +435,10 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
 
     private void ResetAllTriggers()
     {
-        // ¾Ö´Ï¸ŞÀÌÅÍÀÇ ¸ğµç ÆÄ¶ó¹ÌÅÍ¸¦ °¡Á®¿È
+        // ì• ë‹ˆë©”ì´í„°ì˜ ëª¨ë“  íŒŒë¼ë¯¸í„°ë¥¼ ê°€ì ¸ì˜´
         foreach (AnimatorControllerParameter parameter in _animator.parameters)
         {
-            // ÆÄ¶ó¹ÌÅÍ°¡ Æ®¸®°ÅÀÏ °æ¿ì ¸®¼Â
+            // íŒŒë¼ë¯¸í„°ê°€ íŠ¸ë¦¬ê±°ì¼ ê²½ìš° ë¦¬ì…‹
             if (parameter.type == AnimatorControllerParameterType.Trigger)
             {
                 _animator.ResetTrigger(parameter.name);
@@ -453,7 +453,7 @@ public class BossBehavior : MonoBehaviour, IMessageReceiver
         OffAim();
     }
 
-    // ¿©±âµµ ÀÖÁö·Õ º¸½º ÀÌÆåÆ®
+    // ì—¬ê¸°ë„ ìˆì§€ë¡± ë³´ìŠ¤ ì´í™íŠ¸
     public void ChargeAim()
     {
         gameObject.GetComponent<BossChargeAimer>().DoAim();

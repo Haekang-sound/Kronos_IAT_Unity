@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Bullet Time È¿°ú¸¦ °ü¸®ÇÏ´Â ½Ã½ºÅÛÀÔ´Ï´Ù. 
-/// ½Ã°£ ¼Óµµ¸¦ Á¶ÀıÇÏ¿© ´À¸®°Ô ¶Ç´Â Á¤»ó ¼Óµµ·Î ÁøÇàµÇµµ·Ï ÇÕ´Ï´Ù.
+/// Bullet Time íš¨ê³¼ë¥¼ ê´€ë¦¬í•˜ëŠ” ì‹œìŠ¤í…œì…ë‹ˆë‹¤. 
+/// ì‹œê°„ ì†ë„ë¥¼ ì¡°ì ˆí•˜ì—¬ ëŠë¦¬ê²Œ ë˜ëŠ” ì •ìƒ ì†ë„ë¡œ ì§„í–‰ë˜ë„ë¡ í•©ë‹ˆë‹¤.
 /// </summary>
 public class BulletTime : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class BulletTime : MonoBehaviour
     public float deceleration = 1f;
 
 
-    public UnityEvent OnActive OnNormalrize;
+    public UnityEvent OnActive, OnNormalrize;
 
     private static BulletTime _instance;
 
@@ -60,7 +60,7 @@ public class BulletTime : MonoBehaviour
         if (currentSpeed < targetSpeed)
         {
             currentSpeed += acceleration * Time.deltaTime;
-            currentSpeed = Mathf.Min(currentSpeed, targetSpeed); // ÃÖ´ë ¼Óµµ ÃÊ°ú ¹æÁö
+            currentSpeed = Mathf.Min(currentSpeed, targetSpeed); // ìµœëŒ€ ì†ë„ ì´ˆê³¼ ë°©ì§€
 
         }
         else if (currentSpeed > targetSpeed)
@@ -70,7 +70,7 @@ public class BulletTime : MonoBehaviour
             {
                 currentSpeed = 0.01f;
             }
-            //currentSpeed = Mathf.Max(currentSpeed, maxSpeed); // ÃÖ¼Ò ¼Óµµ ¹Ì¸¸ ¹æÁö
+            //currentSpeed = Mathf.Max(currentSpeed, maxSpeed); // ìµœì†Œ ì†ë„ ë¯¸ë§Œ ë°©ì§€
         }
     }
 

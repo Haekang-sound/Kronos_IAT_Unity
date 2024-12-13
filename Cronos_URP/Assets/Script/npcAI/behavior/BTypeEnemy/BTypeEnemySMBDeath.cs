@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// BTypeEnemÀÇ »ç¸Á »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// BTypeEnemì˜ ì‚¬ë§ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BTypeEnemySMBDeath : SceneLinkedSMB<BTypeEnemyBehavior>
 {

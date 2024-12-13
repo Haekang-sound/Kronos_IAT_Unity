@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,25 +10,25 @@ using System.Linq;
 public class BehaviorTreeView : GraphView
 {
     public Action<NodeView> OnNodeSelected;
-    // UxmlFactory : 'GraphView'ÀÇ 'UxmlFactory' ¸¦ »ó¼Ó¹Ş´Â ³»ºÎ Å¬·¡½º·Î, UXMLÀ» ÅëÇØ 'BehaviorTreeView'¸¦ ÀÎ½ºÅÏ½ºÈ­ ÇÒ ¶§ »ç¿ëµÈ´Ù.
+    // UxmlFactory : 'GraphView'ì˜ 'UxmlFactory' ë¥¼ ìƒì†ë°›ëŠ” ë‚´ë¶€ í´ë˜ìŠ¤ë¡œ, UXMLì„ í†µí•´ 'BehaviorTreeView'ë¥¼ ì¸ìŠ¤í„´ìŠ¤í™” í•  ë•Œ ì‚¬ìš©ëœë‹¤.
     public new class UxmlFactory : UxmlFactory<BehaviorTreeView, GraphView.UxmlTraits> { }
 
-    // ÇöÀç ¿¡µğÅÍ¿¡¼­ ÀÛ¾÷ÁßÀÎ 'BehaviorTree' °´Ã¼, ÀÌ Æ®¸®´Â ³ëµåÀÇ ÁıÇÕ°ú ±×µé »çÀÌÀÇ ¿¬°á °ü°è¸¦ Æ÷ÇÔÇÑ´Ù.
+    // í˜„ì¬ ì—ë””í„°ì—ì„œ ì‘ì—…ì¤‘ì¸ 'BehaviorTree' ê°ì²´, ì´ íŠ¸ë¦¬ëŠ” ë…¸ë“œì˜ ì§‘í•©ê³¼ ê·¸ë“¤ ì‚¬ì´ì˜ ì—°ê²° ê´€ê³„ë¥¼ í¬í•¨í•œë‹¤.
     private BehaviorTree _tree;
     private BehaviorTreeSettings _treeSettings;
 
     /// <summary>
-    /// »ı¼ºÀÚ¿¡¼­ ¼³Á¤À» ·ÎµåÇÏ°í, 'GraphView'¿¡ ÇÊ¿äÇÑ Á¶ÀÛ±â(mainiplators)¿Í UI ¿ä¼Ò¸¦ Ãß°¡ÇÑ´Ù.
-    /// ÀÌ´Â »ç¿ëÀÚ°¡ Æ®¸®¸¦ ½±°Ô Á¶ÀÛÇÒ ¼ö ÀÖ°Ô ÇØÁØ´Ù.
-    /// Á¶ÀÛ±â¿¡´Â ContentZoomer, ContentDragger, SelectionDragger, RectangleSelector µîÀÌ Æ÷ÇÔµÇ¾ú´Ù.
-    /// ¶ÇÇÑ ½ºÅ¸ÀÏ½ÃÆ®¸¦ Ãß°¡ÇÏ¿© ºäÀÇ ¿Ü°üÀ» Á¤ÀÇÇÑ´Ù.
-    /// Undo/Redo ±â´ÉÀ» À§ÇÑ Event ¸®½º³Ê¸¦ ¼³Á¤ÇÑ´Ù.
+    /// ìƒì„±ìì—ì„œ ì„¤ì •ì„ ë¡œë“œí•˜ê³ , 'GraphView'ì— í•„ìš”í•œ ì¡°ì‘ê¸°(mainiplators)ì™€ UI ìš”ì†Œë¥¼ ì¶”ê°€í•œë‹¤.
+    /// ì´ëŠ” ì‚¬ìš©ìê°€ íŠ¸ë¦¬ë¥¼ ì‰½ê²Œ ì¡°ì‘í•  ìˆ˜ ìˆê²Œ í•´ì¤€ë‹¤.
+    /// ì¡°ì‘ê¸°ì—ëŠ” ContentZoomer, ContentDragger, SelectionDragger, RectangleSelector ë“±ì´ í¬í•¨ë˜ì—ˆë‹¤.
+    /// ë˜í•œ ìŠ¤íƒ€ì¼ì‹œíŠ¸ë¥¼ ì¶”ê°€í•˜ì—¬ ë·°ì˜ ì™¸ê´€ì„ ì •ì˜í•œë‹¤.
+    /// Undo/Redo ê¸°ëŠ¥ì„ ìœ„í•œ Event ë¦¬ìŠ¤ë„ˆë¥¼ ì„¤ì •í•œë‹¤.
     /// </summary>
     public BehaviorTreeView()
     {
         _treeSettings = BehaviorTreeSettings.GetOrCreateSettings();
 
-        Insert(0, new GridBackground()); // ¹é±×¶ó¿îµå µå·Î¿ì
+        Insert(0, new GridBackground()); // ë°±ê·¸ë¼ìš´ë“œ ë“œë¡œìš°
 
         this.AddManipulator(new ContentZoomer());
         this.AddManipulator(new ContentDragger());
@@ -37,24 +37,24 @@ public class BehaviorTreeView : GraphView
         this.AddManipulator(new RectangleSelector());
 
         var styleSheet = _treeSettings.behaviourTreeStyle;
-        styleSheets.Add(styleSheet); // ½ºÅ¸ÀÏ ½ÃÆ® Á÷Á¢ÂüÁ¶
+        styleSheets.Add(styleSheet); // ìŠ¤íƒ€ì¼ ì‹œíŠ¸ ì§ì ‘ì°¸ì¡°
 
         Undo.undoRedoPerformed += OnUndoRedo;
 
-        // 'BehaviorTreeView' ÀÇ »ı¼ºÀÚ´Â Çàµ¿ Æ®¸® ¿¡µğÅÍÀÇ ÁÖ¿ä ºä¸¦ ÃÊ±âÈ­ÇÏ°í, ÇÊ¿äÇÑ Á¶ÀÛ±â(Mainpulator)¿Í ½ºÅ¸ÀÏ½ÃÆ®¸¦ Ãß°¡ÇÑ´Ù.
-        // ¿©±â¿¡´Â ÄÜÅÙÃ÷¸¦ È®´ë/Ãà¼ÒÇÒ ¼ö ÀÖ´Â 'ContentZoomer', ³»¿ëÀ» µå·¡±×ÇÒ ¼ö ÀÖ´Â 'ContentDragger', ´õºí Å¬¸¯À¸·Î Æ¯Á¤ µ¿ÀÛÀ» ¼öÇàÇÏ´Â 'DoubleClickSelection'
-        // ¼±ÅÃµÈ ¿ä¼Ò¸¦ µå·¡±×ÇÏ´Â 'SelectionDragger', ¿µ¿ª ¼±ÅÃÀ» °¡´ÉÇÏ°Ô ÇÏ´Â 'RectangleSelector' µîÀÌ Æ÷ÇÔµÈ´Ù.
-        // ¶ÇÇÑ 'Undo/Redo' ±â´ÉÀ» À§ÇÑ ÀÌº¥Æ® ¸®½º³Êµµ ¼³Á¤µÈ´Ù.
+        // 'BehaviorTreeView' ì˜ ìƒì„±ìëŠ” í–‰ë™ íŠ¸ë¦¬ ì—ë””í„°ì˜ ì£¼ìš” ë·°ë¥¼ ì´ˆê¸°í™”í•˜ê³ , í•„ìš”í•œ ì¡°ì‘ê¸°(Mainpulator)ì™€ ìŠ¤íƒ€ì¼ì‹œíŠ¸ë¥¼ ì¶”ê°€í•œë‹¤.
+        // ì—¬ê¸°ì—ëŠ” ì½˜í…ì¸ ë¥¼ í™•ëŒ€/ì¶•ì†Œí•  ìˆ˜ ìˆëŠ” 'ContentZoomer', ë‚´ìš©ì„ ë“œë˜ê·¸í•  ìˆ˜ ìˆëŠ” 'ContentDragger', ë”ë¸” í´ë¦­ìœ¼ë¡œ íŠ¹ì • ë™ì‘ì„ ìˆ˜í–‰í•˜ëŠ” 'DoubleClickSelection'
+        // ì„ íƒëœ ìš”ì†Œë¥¼ ë“œë˜ê·¸í•˜ëŠ” 'SelectionDragger', ì˜ì—­ ì„ íƒì„ ê°€ëŠ¥í•˜ê²Œ í•˜ëŠ” 'RectangleSelector' ë“±ì´ í¬í•¨ëœë‹¤.
+        // ë˜í•œ 'Undo/Redo' ê¸°ëŠ¥ì„ ìœ„í•œ ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆë„ ì„¤ì •ëœë‹¤.
     }
 
-    // Undo³ª Redo ÀÛ¾÷ÀÌ ¼öÇàµÉ ¶§, È£ÃâµÇ¾î Æ®¸® ºä¸¦ »õ·Î¿î »óÅÂ·Î  ¾÷µ¥ÀÌÆ® ÇÏ°í, º¯°æ »çÇ×À» ÀúÀåÇÑ´Ù.
+    // Undoë‚˜ Redo ì‘ì—…ì´ ìˆ˜í–‰ë  ë•Œ, í˜¸ì¶œë˜ì–´ íŠ¸ë¦¬ ë·°ë¥¼ ìƒˆë¡œìš´ ìƒíƒœë¡œ  ì—…ë°ì´íŠ¸ í•˜ê³ , ë³€ê²½ ì‚¬í•­ì„ ì €ì¥í•œë‹¤.
     private void OnUndoRedo()
     {
         PopulateView(_tree);
         AssetDatabase.SaveAssets();
     }
 
-    // ÁÖ¾îÁø 'Node' °´Ã¼¿¡ ÇØ´çÇÏ´Â 'NodeView'¸¦ Ã£¾Æ ¹İÈ¯ÇÑ´Ù. ÀÌ´Â ³ëµåÀÇ GUID¸¦ »ç¿ëÇÏ¿© °Ë»öÇÑ´Ù.
+    // ì£¼ì–´ì§„ 'Node' ê°ì²´ì— í•´ë‹¹í•˜ëŠ” 'NodeView'ë¥¼ ì°¾ì•„ ë°˜í™˜í•œë‹¤. ì´ëŠ” ë…¸ë“œì˜ GUIDë¥¼ ì‚¬ìš©í•˜ì—¬ ê²€ìƒ‰í•œë‹¤.
     public NodeView FindNodeView(Node node)
     {
         return GetNodeByGuid(node.guid) as NodeView;
@@ -64,32 +64,32 @@ public class BehaviorTreeView : GraphView
     {
         _tree = tree;
 
-        // ±×·¡ÇÁ º¯°æ ¸®½º³Ê °ü¸®
-        // ±âÁ¸ ¿ä¼Ò »èÁ¦
+        // ê·¸ë˜í”„ ë³€ê²½ ë¦¬ìŠ¤ë„ˆ ê´€ë¦¬
+        // ê¸°ì¡´ ìš”ì†Œ ì‚­ì œ
         graphViewChanged -= OnGraphViewChanged;
-        DeleteElements(graphElements.ToList());  // µÎ °³ ÀÌ»ó »ı¼º ´ëºñ »èÁ¦
+        DeleteElements(graphElements.ToList());  // ë‘ ê°œ ì´ìƒ ìƒì„± ëŒ€ë¹„ ì‚­ì œ
         graphViewChanged += OnGraphViewChanged;
-        // 'graphViewChanged' ÀÌº¥Æ®¿¡¼­ 'OnGraphViewChanged' ¸Ş¼­µå¸¦ ÇØÁ¦ÇÏ°í ´Ù½Ã Ãß°¡ÇÔÀ¸·Î½á, ±×·¡ÇÁ ºä°¡ º¯°æµÉ ¶§¸¶´Ù ÀûÀıÇÑ Ã³¸®°¡ ÀÌ·ç¾îÁöµµ·Ï ÇÑ´Ù.
-        // ÀÌ´Â ±×·¡ÇÁ ºä°¡ ¾÷µ¥ÀÌÆ®µÉ ¶§ ¹ß»ıÇÒ ¼ö ÀÖ´Â ÀÌº¥Æ®¸¦ °ü¸®ÇÏ±â À§ÇÑ ÁØºñ ÀÛ¾÷ÀÌ´Ù.
-        // 'DeleteElements' ¸¦ È£ÃâÇÏ¿© 'graphElements.ToList()' ·Î º¯È¯µÈ ÇöÀç ±×·¡ÇÁ ºä ³»ÀÇ ¸ğµç ¿ä¼Ò¸¦ »èÁ¦ÇÑ´Ù.
-        // ÀÌ´Â »õ·Î¿î Æ®¸®¸¦ Ç¥½ÃÇÏ±â Àü¿¡ ±âÁ¸ÀÇ ¸ğµç ³ëµå¿Í ¿¬°áÀ» Á¦°ÅÇÏ±â À§ÇÔÀÌ´Ù.
+        // 'graphViewChanged' ì´ë²¤íŠ¸ì—ì„œ 'OnGraphViewChanged' ë©”ì„œë“œë¥¼ í•´ì œí•˜ê³  ë‹¤ì‹œ ì¶”ê°€í•¨ìœ¼ë¡œì¨, ê·¸ë˜í”„ ë·°ê°€ ë³€ê²½ë  ë•Œë§ˆë‹¤ ì ì ˆí•œ ì²˜ë¦¬ê°€ ì´ë£¨ì–´ì§€ë„ë¡ í•œë‹¤.
+        // ì´ëŠ” ê·¸ë˜í”„ ë·°ê°€ ì—…ë°ì´íŠ¸ë  ë•Œ ë°œìƒí•  ìˆ˜ ìˆëŠ” ì´ë²¤íŠ¸ë¥¼ ê´€ë¦¬í•˜ê¸° ìœ„í•œ ì¤€ë¹„ ì‘ì—…ì´ë‹¤.
+        // 'DeleteElements' ë¥¼ í˜¸ì¶œí•˜ì—¬ 'graphElements.ToList()' ë¡œ ë³€í™˜ëœ í˜„ì¬ ê·¸ë˜í”„ ë·° ë‚´ì˜ ëª¨ë“  ìš”ì†Œë¥¼ ì‚­ì œí•œë‹¤.
+        // ì´ëŠ” ìƒˆë¡œìš´ íŠ¸ë¦¬ë¥¼ í‘œì‹œí•˜ê¸° ì „ì— ê¸°ì¡´ì˜ ëª¨ë“  ë…¸ë“œì™€ ì—°ê²°ì„ ì œê±°í•˜ê¸° ìœ„í•¨ì´ë‹¤.
 
-        // ·çÆ® ³ëµå »ı¼º
+        // ë£¨íŠ¸ ë…¸ë“œ ìƒì„±
         if (tree.rootNode == null)
         {
             tree.rootNode = tree.CreateNode(typeof(Start)) as Start;
             EditorUtility.SetDirty(tree);
             AssetDatabase.SaveAssets();
         }
-        // ¸¸¾à 'tree.rootNode' °¡ 'null' ÀÎ °æ¿ì, 'tree.CreateNode(typeof(RootNode))' ¸¦ È£ÃâÇÏ¿© »õ·Î¿î 'RootNode' ¸¦ »ı¼ºÇÏ°í, Æ®¸®ÀÇ ·çÆ® ³ëµå·Î ¼³Á¤ÇÑ´Ù.
-        // ÀÌ´Â Çàµ¿ Æ®¸®°¡ ÃÖ¼Ò ÇÏ³ªÀÇ ·çÆ® ³ëµå¸¦ °¡Áö°í ÀÖµµ·Ï º¸ÀåÇÑ´Ù.
+        // ë§Œì•½ 'tree.rootNode' ê°€ 'null' ì¸ ê²½ìš°, 'tree.CreateNode(typeof(RootNode))' ë¥¼ í˜¸ì¶œí•˜ì—¬ ìƒˆë¡œìš´ 'RootNode' ë¥¼ ìƒì„±í•˜ê³ , íŠ¸ë¦¬ì˜ ë£¨íŠ¸ ë…¸ë“œë¡œ ì„¤ì •í•œë‹¤.
+        // ì´ëŠ” í–‰ë™ íŠ¸ë¦¬ê°€ ìµœì†Œ í•˜ë‚˜ì˜ ë£¨íŠ¸ ë…¸ë“œë¥¼ ê°€ì§€ê³  ìˆë„ë¡ ë³´ì¥í•œë‹¤.
 
-        // ³ëµå ºä »ı¼º
+        // ë…¸ë“œ ë·° ìƒì„±
         _tree.nodes.ForEach(n => CreateNodeView(n));
-        // 'tree.nodes.ForEach' ¸¦ »ç¿ëÇÏ¿© Æ®¸®¿¡ Æ÷ÇÔµÈ ¸ğµç ³ëµå¿¡ ´ëÇØ 'CreateNodeView' ¸Ş¼­µå¸¦ È£ÃâÇÑ´Ù.
-        // ÀÌ °úÁ¤¿¡¼­ °¢ ³ëµå¸¦ ½Ã°¢ÀûÀ¸·Î Ç¥ÇöÇÏ´Â 'NodeView' °´Ã¼°¡ »ı¼ºµÈ´Ù.
+        // 'tree.nodes.ForEach' ë¥¼ ì‚¬ìš©í•˜ì—¬ íŠ¸ë¦¬ì— í¬í•¨ëœ ëª¨ë“  ë…¸ë“œì— ëŒ€í•´ 'CreateNodeView' ë©”ì„œë“œë¥¼ í˜¸ì¶œí•œë‹¤.
+        // ì´ ê³¼ì •ì—ì„œ ê° ë…¸ë“œë¥¼ ì‹œê°ì ìœ¼ë¡œ í‘œí˜„í•˜ëŠ” 'NodeView' ê°ì²´ê°€ ìƒì„±ëœë‹¤.
 
-        // °¢ ³ëµå¿¡ ´ëÇØ ÀÚ½Ä ³ëµå¸¦ ¾ò°í, °¢ ³ëµå¿¡ ´ëÇÑ ¿§Áö(Edge) »ı¼º ÈÄ º¸¸ğ-ÀÚ½Ä ³ëµåÀÇ ÃâÀÔ·Â Æ÷Æ® ¿¬°á ÈÄ ±×·¡ÇÁ ºä¿¡ Ãß°¡.
+        // ê° ë…¸ë“œì— ëŒ€í•´ ìì‹ ë…¸ë“œë¥¼ ì–»ê³ , ê° ë…¸ë“œì— ëŒ€í•œ ì—£ì§€(Edge) ìƒì„± í›„ ë³´ëª¨-ìì‹ ë…¸ë“œì˜ ì¶œì…ë ¥ í¬íŠ¸ ì—°ê²° í›„ ê·¸ë˜í”„ ë·°ì— ì¶”ê°€.
         _tree.nodes.ForEach(n =>
         {
             var children = BehaviorTree.GetChildren(n);
@@ -104,10 +104,10 @@ public class BehaviorTreeView : GraphView
         });
     }
 
-    // ¿¬°áÀ» ½ÃÀÛÇÏ´Â Æ÷Æ®¿Í ¿¬°áÀÌ °¡´ÉÇÑ ´Ù¸¥ Æ÷Æ®µéÀ» Ã£´Â´Ù. ±ÔÄ¢Àº ¾Æ·¡¿Í °°´Ù.
-    // ¿¬°áÀ» ½ÃÀÛÇÏ´Â Æ÷Æ® 'startPort' ¿Í ¹İ´ë ¹æÇâÀÇ Æ÷Æ®¸¸ ¿¬°á ´ë»êÀ¸·Î °í·ÁÇÑ´Ù.
-    // µ¿ÀÏÇÑ ³ëµå¿¡ ¼ÓÇÑ Æ÷Æ®³¢¸®´Â ¿¬°áµÇÁö ¾Ê´Â´Ù.
-    // °á°úÀûÀ¸·Î, ÀÌ ¸Ş¼­µå´Â »ç¿ëÀÚ°¡ ³ëµå °£ ¿¬°áÀ» ¸¸µé ¼ö ÀÖ´Â À¯È¿ÇÑ Æ÷Æ®µé¸¸À» ¼±ÅÃÇÒ ¼ö ÀÖµµ·Ï µµ¿ÍÁØ´Ù.
+    // ì—°ê²°ì„ ì‹œì‘í•˜ëŠ” í¬íŠ¸ì™€ ì—°ê²°ì´ ê°€ëŠ¥í•œ ë‹¤ë¥¸ í¬íŠ¸ë“¤ì„ ì°¾ëŠ”ë‹¤. ê·œì¹™ì€ ì•„ë˜ì™€ ê°™ë‹¤.
+    // ì—°ê²°ì„ ì‹œì‘í•˜ëŠ” í¬íŠ¸ 'startPort' ì™€ ë°˜ëŒ€ ë°©í–¥ì˜ í¬íŠ¸ë§Œ ì—°ê²° ëŒ€ì‚°ìœ¼ë¡œ ê³ ë ¤í•œë‹¤.
+    // ë™ì¼í•œ ë…¸ë“œì— ì†í•œ í¬íŠ¸ë¼ë¦¬ëŠ” ì—°ê²°ë˜ì§€ ì•ŠëŠ”ë‹¤.
+    // ê²°ê³¼ì ìœ¼ë¡œ, ì´ ë©”ì„œë“œëŠ” ì‚¬ìš©ìê°€ ë…¸ë“œ ê°„ ì—°ê²°ì„ ë§Œë“¤ ìˆ˜ ìˆëŠ” ìœ íš¨í•œ í¬íŠ¸ë“¤ë§Œì„ ì„ íƒí•  ìˆ˜ ìˆë„ë¡ ë„ì™€ì¤€ë‹¤.
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter adapter)
     {
@@ -115,16 +115,16 @@ public class BehaviorTreeView : GraphView
             endPort => endPort.direction != startPort.direction &&
             endPort.node != startPort.node).ToList();
     }
-    // ¿¬°áÀ» ½ÃÀÛÇÏ´Â Æ÷Æ®¿Í ¹İ´ë ¹æÇâ(direction)ÀÇ Æ÷Æ®¸¸ ¿¬°á ´ë»óÀ¸·Î °í·ÁÇÑ´Ù.
-    // ÀÌ´Â ÀÔ·Â Æ÷Æ®´Â Ãâ·Â Æ÷Æ®¿Í¸¸ ¿¬°áµÇ°í, Ãâ·Â Æ÷Æ®´Â ÀÔ·Â Æ÷Æ®¿Í¸¸ ¿¬°áµÉ ¼ö ÀÖÀ½À» ÀÇ¹ÌÇÑ´Ù.
-    // µ¿ÀÏÇÑ ³ëµå¿¡ ¼ÓÇÑ Æ÷Æ®³¢¸®´Â ¿¬°áµÇÁö ¾Ê´Â´Ù.
-    // ÀÌ´Â ³ëµå°¡ ÀÚ±â ÀÚ½Å°ú ¿¬°áµÇ´Â °ÍÀ» ¹æÁöÇÑ´Ù.
+    // ì—°ê²°ì„ ì‹œì‘í•˜ëŠ” í¬íŠ¸ì™€ ë°˜ëŒ€ ë°©í–¥(direction)ì˜ í¬íŠ¸ë§Œ ì—°ê²° ëŒ€ìƒìœ¼ë¡œ ê³ ë ¤í•œë‹¤.
+    // ì´ëŠ” ì…ë ¥ í¬íŠ¸ëŠ” ì¶œë ¥ í¬íŠ¸ì™€ë§Œ ì—°ê²°ë˜ê³ , ì¶œë ¥ í¬íŠ¸ëŠ” ì…ë ¥ í¬íŠ¸ì™€ë§Œ ì—°ê²°ë  ìˆ˜ ìˆìŒì„ ì˜ë¯¸í•œë‹¤.
+    // ë™ì¼í•œ ë…¸ë“œì— ì†í•œ í¬íŠ¸ë¼ë¦¬ëŠ” ì—°ê²°ë˜ì§€ ì•ŠëŠ”ë‹¤.
+    // ì´ëŠ” ë…¸ë“œê°€ ìê¸° ìì‹ ê³¼ ì—°ê²°ë˜ëŠ” ê²ƒì„ ë°©ì§€í•œë‹¤.
 
-    // ºä Ã¼ÀÎÁö ÀÌº¥Æ® ÇÔ¼ö
-    // ±×·¡ÇÁ ºä¿¡ º¯°æ»çÇ×ÀÌ ¹ß»ıÇßÀ» ¶§ ÀÌ¸¦ Ã³¸®ÇÑ´Ù. ÁÖ·Î ³ëµå ¶Ç´Â ¿§Áö(Edge)ÀÇ Ãß°¡ ¹× Á¦°Å¿Í °ü·ÃµÈ ÀÛ¾÷À» ¼öÇàÇÑ´Ù.
-    // Á¦°ÅÇÒ ¿ä¼Ò°¡ ÀÖÀ¸¸é, ÇØ´ç ¿ä¼Ò°¡ ³ëµåÀÎ °æ¿ì Æ®¸®¿¡¼­ ³ëµå¸¦ »èÁ¦ÇÏ°í, EdgeÀÎ °æ¿ì ¿¬°áµÈ ³ëµå °£ÀÇ °ü°è¸¦ Á¦°ÅÇÑ´Ù.
-    // »ı¼ºÇÒ Edge°¡ ÀÖÀ¸¸é, »õ·Î¿î Edge·Î ¿¬°áµÈ ³ëµå °£ÀÇ ºÎ¸ğ-ÀÚ½Ä °ü°è¸¦ Ãß°¡ÇÑ´Ù.
-    // ¸ğµç ³ëµåÀÇ ÀÚ½ÄÀ» Á¤·ÄÇÑ´Ù.
+    // ë·° ì²´ì¸ì§€ ì´ë²¤íŠ¸ í•¨ìˆ˜
+    // ê·¸ë˜í”„ ë·°ì— ë³€ê²½ì‚¬í•­ì´ ë°œìƒí–ˆì„ ë•Œ ì´ë¥¼ ì²˜ë¦¬í•œë‹¤. ì£¼ë¡œ ë…¸ë“œ ë˜ëŠ” ì—£ì§€(Edge)ì˜ ì¶”ê°€ ë° ì œê±°ì™€ ê´€ë ¨ëœ ì‘ì—…ì„ ìˆ˜í–‰í•œë‹¤.
+    // ì œê±°í•  ìš”ì†Œê°€ ìˆìœ¼ë©´, í•´ë‹¹ ìš”ì†Œê°€ ë…¸ë“œì¸ ê²½ìš° íŠ¸ë¦¬ì—ì„œ ë…¸ë“œë¥¼ ì‚­ì œí•˜ê³ , Edgeì¸ ê²½ìš° ì—°ê²°ëœ ë…¸ë“œ ê°„ì˜ ê´€ê³„ë¥¼ ì œê±°í•œë‹¤.
+    // ìƒì„±í•  Edgeê°€ ìˆìœ¼ë©´, ìƒˆë¡œìš´ Edgeë¡œ ì—°ê²°ëœ ë…¸ë“œ ê°„ì˜ ë¶€ëª¨-ìì‹ ê´€ê³„ë¥¼ ì¶”ê°€í•œë‹¤.
+    // ëª¨ë“  ë…¸ë“œì˜ ìì‹ì„ ì •ë ¬í•œë‹¤.
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
         if (graphViewChange.elementsToRemove != null)
@@ -146,10 +146,10 @@ public class BehaviorTreeView : GraphView
                 }
             });
         }
-        // 'elementsToRemove' °¡ null ÀÌ ¾Æ´Ï¸é, °¢ ¿ä¼Ò¿¡ ´ëÇØ Å¸ÀÔÀ» °Ë»çÇÏ¿© 'NodeView' ÀÎ °æ¿ì Æ®¸®¿¡¼­ ³ëµå¸¦ »èÁ¦ÇÏ°í,
-        // 'Edge' ÀÎ °æ¿ì ¿¬°áµÈ ³ëµå °£ÀÇ °ü°è¸¦ Á¦°ÅÇÑ´Ù.
+        // 'elementsToRemove' ê°€ null ì´ ì•„ë‹ˆë©´, ê° ìš”ì†Œì— ëŒ€í•´ íƒ€ì…ì„ ê²€ì‚¬í•˜ì—¬ 'NodeView' ì¸ ê²½ìš° íŠ¸ë¦¬ì—ì„œ ë…¸ë“œë¥¼ ì‚­ì œí•˜ê³ ,
+        // 'Edge' ì¸ ê²½ìš° ì—°ê²°ëœ ë…¸ë“œ ê°„ì˜ ê´€ê³„ë¥¼ ì œê±°í•œë‹¤.
 
-        // »ı¼ºµÈ Edge°¡ ÀÖ´Ù¸é, °¢ Edge¿¡ ´ëÇÑ ¿¬°áµÈ ³ëµå °£ÀÇ ºÎ¸ğ-ÀÚ½Ä °ü°è Ãß°¡
+        // ìƒì„±ëœ Edgeê°€ ìˆë‹¤ë©´, ê° Edgeì— ëŒ€í•œ ì—°ê²°ëœ ë…¸ë“œ ê°„ì˜ ë¶€ëª¨-ìì‹ ê´€ê³„ ì¶”ê°€
         if (graphViewChange.edgesToCreate != null)
         {
             graphViewChange.edgesToCreate.ForEach(edge =>
@@ -159,23 +159,23 @@ public class BehaviorTreeView : GraphView
                 _tree.AddChild(parentView.node, childView.node);
             });
         }
-        // 'edgesToCreate' °¡ null ÀÌ ¾Æ´Ï¸é, °¢ 'Edge' ¿¡ ´ëÇØ ¿¬°áµÈ ³ëµå °£ÀÇ ºÎ¸ğ-ÀÚ½Ä °ü°è¸¦ Ãß°¡ÇÑ´Ù.
-        // ÀÌ´Â »õ·Î¿î ¿¬°áÀÌ ±×·¡ÇÁ¿¡ Ãß°¡µÉ ¶§¸¶´Ù ÇØ´ç ¿¬°áÀ» ÅëÇØ ³ëµå°£ÀÇ °ü°è°¡ Á¤ÀÇµÊÀ» ÀÇ¹ÌÇÑ´Ù.
+        // 'edgesToCreate' ê°€ null ì´ ì•„ë‹ˆë©´, ê° 'Edge' ì— ëŒ€í•´ ì—°ê²°ëœ ë…¸ë“œ ê°„ì˜ ë¶€ëª¨-ìì‹ ê´€ê³„ë¥¼ ì¶”ê°€í•œë‹¤.
+        // ì´ëŠ” ìƒˆë¡œìš´ ì—°ê²°ì´ ê·¸ë˜í”„ì— ì¶”ê°€ë  ë•Œë§ˆë‹¤ í•´ë‹¹ ì—°ê²°ì„ í†µí•´ ë…¸ë“œê°„ì˜ ê´€ê³„ê°€ ì •ì˜ë¨ì„ ì˜ë¯¸í•œë‹¤.
 
-        // ³ëµåÀÇ ÀÚ½Ä Á¤·Ä
+        // ë…¸ë“œì˜ ìì‹ ì •ë ¬
         nodes.ForEach((n) =>
         {
             NodeView view = n as NodeView;
             view.SortChildren();
         });
-        // ¸ğµç ³ëµå¿¡ ´ëÇØ 'SortChildren' ¸Ş¼­µå¸¦ È£ÃâÇÏ¿©, ÀÚ½Ä ³ëµåµéÀ» Á¤·ÄÇÑ´Ù.
-        // ÀÌ´Â ³ëµåµéÀÌ ±×·¡ÇÈ ÀÎÅÍÆäÀÌ½º¿¡¼­ ÀÏ°üµÇ°í Á÷°üÀûÀÎ ¼ø¼­·Î Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.
+        // ëª¨ë“  ë…¸ë“œì— ëŒ€í•´ 'SortChildren' ë©”ì„œë“œë¥¼ í˜¸ì¶œí•˜ì—¬, ìì‹ ë…¸ë“œë“¤ì„ ì •ë ¬í•œë‹¤.
+        // ì´ëŠ” ë…¸ë“œë“¤ì´ ê·¸ë˜í”½ ì¸í„°í˜ì´ìŠ¤ì—ì„œ ì¼ê´€ë˜ê³  ì§ê´€ì ì¸ ìˆœì„œë¡œ í‘œì‹œë˜ë„ë¡ í•œë‹¤.
 
 
         return graphViewChange;
     }
 
-    // ¸Ş´º ÀçÁ¤ÀÇ
+    // ë©”ë‰´ ì¬ì •ì˜
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
         //base.BuildContextualMenu(evt);
@@ -189,10 +189,10 @@ public class BehaviorTreeView : GraphView
 
         evt.menu.AppendSeparator();
 
-        // ³ëµå »ı¼º À§Ä¡ °áÁ¤
+        // ë…¸ë“œ ìƒì„± ìœ„ì¹˜ ê²°ì •
         Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);
-        // »ı¼ºÀÚ ¸Ş´º¸¦ È£ÃâÇÑ À§Ä¡¸¦ ±â¹İÀ¸·Î ³ëµå¸¦ »ı¼ºÇÏ±â À§ÇØ, 'ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition)' ¸¦ »ç¿ëÇÏ¿© ¸¶¿ì½º Å¬¸¯ À§Ä¡¸¦ ±×·¡ÇÁ ºä ³»ÀÇ ÁÂÇ¥·Î º¯È¯ÇÑ´Ù.
-        // ÀÌ ÁÂÇ¥´Â 'CreateNode' ¸Ş¼­µå¿¡ Àü´ŞµÇ¾î, »ı¼ºµÈ ³ëµå°¡ »ç¿ëÀÚ°¡ Å¬¸¯ÇÑ À§Ä¡¿¡ ¹èÄ¡µÈ´Ù.
+        // ìƒì„±ì ë©”ë‰´ë¥¼ í˜¸ì¶œí•œ ìœ„ì¹˜ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë…¸ë“œë¥¼ ìƒì„±í•˜ê¸° ìœ„í•´, 'ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition)' ë¥¼ ì‚¬ìš©í•˜ì—¬ ë§ˆìš°ìŠ¤ í´ë¦­ ìœ„ì¹˜ë¥¼ ê·¸ë˜í”„ ë·° ë‚´ì˜ ì¢Œí‘œë¡œ ë³€í™˜í•œë‹¤.
+        // ì´ ì¢Œí‘œëŠ” 'CreateNode' ë©”ì„œë“œì— ì „ë‹¬ë˜ì–´, ìƒì„±ëœ ë…¸ë“œê°€ ì‚¬ìš©ìê°€ í´ë¦­í•œ ìœ„ì¹˜ì— ë°°ì¹˜ëœë‹¤.
 
         {
 

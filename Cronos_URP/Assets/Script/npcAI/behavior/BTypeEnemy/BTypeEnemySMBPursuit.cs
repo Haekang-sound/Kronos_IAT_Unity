@@ -1,8 +1,8 @@
-using UnityEngine.AI;
+ï»¿using UnityEngine.AI;
 using UnityEngine;
 
 /// <summary>
-/// BTypeEnemÀÇ ÃßÀû »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// BTypeEnemì˜ ì¶”ì  ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BTypeEnemySMBPursuit : SceneLinkedSMB<BTypeEnemyBehavior>
 {
@@ -19,7 +19,7 @@ public class BTypeEnemySMBPursuit : SceneLinkedSMB<BTypeEnemyBehavior>
     {
         _monoBehaviour.FindTarget();
 
-        // °æ·Î¸¦ Ã£À» ¼ö ¾øÀ» ¶§
+        // ê²½ë¡œë¥¼ ì°¾ì„ ìˆ˜ ì—†ì„ ë•Œ
         if (_monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathPartial
             || _monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
@@ -31,12 +31,12 @@ public class BTypeEnemySMBPursuit : SceneLinkedSMB<BTypeEnemyBehavior>
         {
             _monoBehaviour.RequestTargetPosition();
 
-            // ATTACK - °ø°İ »ç°Å¸® ¾È¿¡ ÀÖÀ» ¶§
+            // ATTACK - ê³µê²© ì‚¬ê±°ë¦¬ ì•ˆì— ìˆì„ ë•Œ
             if (_monoBehaviour.IsInAttackRange())
             {
                 _monoBehaviour.TriggerAim();
             }
-            // PURSUIT - °ø°İ À§Ä¡¸¦ ÇÒ´ç ¹Ş¾ÒÀ» ¶§
+            // PURSUIT - ê³µê²© ìœ„ì¹˜ë¥¼ í• ë‹¹ ë°›ì•˜ì„ ë•Œ
             else if (_monoBehaviour.FollowerData.assignedSlot != -1)
             {
                 Vector3 targetPoint = _monoBehaviour.FollowerData.requiredPoint;
@@ -48,7 +48,7 @@ public class BTypeEnemySMBPursuit : SceneLinkedSMB<BTypeEnemyBehavior>
                 //_monoBehaviour.TriggerAim();
             }
         }
-        // IDLE - ±× ¿Ü(¾ÆÁ÷ ÇÃ·¹ÀÌ¾î »ç¸ÁÀº ¹ÌÆ÷ÇÔ)
+        // IDLE - ê·¸ ì™¸(ì•„ì§ í”Œë ˆì´ì–´ ì‚¬ë§ì€ ë¯¸í¬í•¨)
         else
         {
             _monoBehaviour.TriggerIdle();

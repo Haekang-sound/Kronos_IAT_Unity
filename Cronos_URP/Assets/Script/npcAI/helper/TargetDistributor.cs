@@ -1,24 +1,24 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ ±ºÁıÀÌ Æ¯Á¤ Å¸°ÙÀ» ÁÖÀ§¿¡ ºĞ»ê½ÃÅ°°í, ÆÈ·Î¿öµéÀÌ ¼­·Î ´Ù¸¥ ¹æÇâ¿¡¼­ Å¸°ÙÀ» °ø°İÇÏµµ·Ï ÇÏ´Â ½Ã½ºÅÛÀÔ´Ï´Ù.
-/// ÀÌ Å¬·¡½º´Â Å¸°ÙÀÇ À§Ä¡¸¦ ¿©·¯ ÆÈ·Î¿ö¿¡°Ô ºĞ¹èÇÏ°í, °¢ ÆÈ·Î¿ö°¡ Å¸°ÙÀ» ÇâÇØ ¿òÁ÷ÀÌµµ·Ï ÇÕ´Ï´Ù.
+/// ì ì˜ êµ°ì§‘ì´ íŠ¹ì • íƒ€ê²Ÿì„ ì£¼ìœ„ì— ë¶„ì‚°ì‹œí‚¤ê³ , íŒ”ë¡œì›Œë“¤ì´ ì„œë¡œ ë‹¤ë¥¸ ë°©í–¥ì—ì„œ íƒ€ê²Ÿì„ ê³µê²©í•˜ë„ë¡ í•˜ëŠ” ì‹œìŠ¤í…œì…ë‹ˆë‹¤.
+/// ì´ í´ë˜ìŠ¤ëŠ” íƒ€ê²Ÿì˜ ìœ„ì¹˜ë¥¼ ì—¬ëŸ¬ íŒ”ë¡œì›Œì—ê²Œ ë¶„ë°°í•˜ê³ , ê° íŒ”ë¡œì›Œê°€ íƒ€ê²Ÿì„ í–¥í•´ ì›€ì§ì´ë„ë¡ í•©ë‹ˆë‹¤.
 /// </summary>
 [DefaultExecutionOrder(-1)]
 public class TargetDistributor : MonoBehaviour
 {
     /// <summary>
-    /// Å¸°ÙÀ» ÃßÀûÇÏ´Â ÆÈ·Î¿ö¸¦ ³ªÅ¸³»´Â ³»ºÎ Å¬·¡½ºÀÔ´Ï´Ù.
-    /// ÆÈ·Î¿ö´Â ºĞ¹èµÈ À§Ä¡·Î ÀÌµ¿ÇÏ±â À§ÇØ ÇÊ¿äÇÑ Á¤º¸¸¦ ÀúÀåÇÕ´Ï´Ù.
+    /// íƒ€ê²Ÿì„ ì¶”ì í•˜ëŠ” íŒ”ë¡œì›Œë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë‚´ë¶€ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+    /// íŒ”ë¡œì›ŒëŠ” ë¶„ë°°ëœ ìœ„ì¹˜ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ í•„ìš”í•œ ì •ë³´ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
     /// </summary>
     public class TargetFollower
     {
-        public bool requireSlot;  // ÆÈ·Î¿ö°¡ À§Ä¡¸¦ ¿ä±¸ÇÏ´ÂÁö ¿©ºÎ
-        public int assignedSlot;  // ÇÒ´çµÈ À§Ä¡ÀÇ ÀÎµ¦½º (-1Àº ÇÒ´çµÇÁö ¾ÊÀ½)
-        public Vector3 requiredPoint;  // ÆÈ·Î¿ö°¡ ¸ñÇ¥·Î ÇÏ´Â À§Ä¡
-        public TargetDistributor distributor;  // ÆÈ·Î¿ö°¡ ¼ÓÇÑ Distributor ÀÎ½ºÅÏ½º
+        public bool requireSlot;  // íŒ”ë¡œì›Œê°€ ìœ„ì¹˜ë¥¼ ìš”êµ¬í•˜ëŠ”ì§€ ì—¬ë¶€
+        public int assignedSlot;  // í• ë‹¹ëœ ìœ„ì¹˜ì˜ ì¸ë±ìŠ¤ (-1ì€ í• ë‹¹ë˜ì§€ ì•ŠìŒ)
+        public Vector3 requiredPoint;  // íŒ”ë¡œì›Œê°€ ëª©í‘œë¡œ í•˜ëŠ” ìœ„ì¹˜
+        public TargetDistributor distributor;  // íŒ”ë¡œì›Œê°€ ì†í•œ Distributor ì¸ìŠ¤í„´ìŠ¤
 
         public TargetFollower(TargetDistributor owner)
         {
@@ -29,15 +29,15 @@ public class TargetDistributor : MonoBehaviour
         }
     }
 
-    public int arcsCount;  // ºĞ¹èÇÒ ¾ÆÅ©(°¢µµ)ÀÇ ¼ö (1º¸´Ù Ä¿¾ß ÇÔ)
-    protected Vector3[] _worldDirection;  // °¢ ¾ÆÅ©ÀÇ ¹æÇâÀ» ÀúÀå
-    protected bool[] _freeArcs;  // °¢ ¾ÆÅ©°¡ »ç¿ë °¡´ÉÇÑÁö ¿©ºÎ
-    protected float _arcDegree;  // °¢ ¾ÆÅ©ÀÇ °¢µµ
+    public int arcsCount;  // ë¶„ë°°í•  ì•„í¬(ê°ë„)ì˜ ìˆ˜ (1ë³´ë‹¤ ì»¤ì•¼ í•¨)
+    protected Vector3[] _worldDirection;  // ê° ì•„í¬ì˜ ë°©í–¥ì„ ì €ì¥
+    protected bool[] _freeArcs;  // ê° ì•„í¬ê°€ ì‚¬ìš© ê°€ëŠ¥í•œì§€ ì—¬ë¶€
+    protected float _arcDegree;  // ê° ì•„í¬ì˜ ê°ë„
 
-    protected List<TargetFollower> _followers;  // ÆÈ·Î¿ö ¸®½ºÆ®
+    protected List<TargetFollower> _followers;  // íŒ”ë¡œì›Œ ë¦¬ìŠ¤íŠ¸
 
     /// <summary>
-    /// °´Ã¼°¡ È°¼ºÈ­µÉ ¶§ È£ÃâµÇ¸ç, ¾ÆÅ© ¹æÇâ°ú ÆÈ·Î¿öµéÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
+    /// ê°ì²´ê°€ í™œì„±í™”ë  ë•Œ í˜¸ì¶œë˜ë©°, ì•„í¬ ë°©í–¥ê³¼ íŒ”ë¡œì›Œë“¤ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
     /// </summary>
     public void OnEnable()
     {
@@ -46,7 +46,7 @@ public class TargetDistributor : MonoBehaviour
         _followers = new List<TargetFollower>();
         _arcDegree = 360.0f / arcsCount;
 
-        // ¾ÆÅ© ¹æÇâ ÃÊ±âÈ­
+        // ì•„í¬ ë°©í–¥ ì´ˆê¸°í™”
         Quaternion rotation = Quaternion.Euler(0, -_arcDegree, 0);
         Vector3 currentDirection = Vector3.forward;
         for (int i = 0; i < arcsCount; ++i)
@@ -58,7 +58,7 @@ public class TargetDistributor : MonoBehaviour
     }
 
     /// <summary>
-    /// »õ·Î¿î ÆÈ·Î¿ö¸¦ µî·ÏÇÏ°í ÇØ´ç ÆÈ·Î¿ö¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ìƒˆë¡œìš´ íŒ”ë¡œì›Œë¥¼ ë“±ë¡í•˜ê³  í•´ë‹¹ íŒ”ë¡œì›Œë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public TargetFollower RegisterNewFollower()
     {
@@ -68,7 +68,7 @@ public class TargetDistributor : MonoBehaviour
     }
 
     /// <summary>
-    /// ±âÁ¸ ÆÈ·Î¿ö¸¦ µî·Ï ÇØÁ¦ÇÕ´Ï´Ù.
+    /// ê¸°ì¡´ íŒ”ë¡œì›Œë¥¼ ë“±ë¡ í•´ì œí•©ë‹ˆë‹¤.
     /// </summary>
     public void UnregisterFollower(TargetFollower follower)
     {
@@ -80,7 +80,7 @@ public class TargetDistributor : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸Å ÇÁ·¹ÀÓ ³¡³¯ ¶§ ¸ğµç ÆÈ·Î¿ö¿¡°Ô Å¸°Ù À§Ä¡¸¦ ÇÒ´çÇÕ´Ï´Ù.
+    /// ë§¤ í”„ë ˆì„ ëë‚  ë•Œ ëª¨ë“  íŒ”ë¡œì›Œì—ê²Œ íƒ€ê²Ÿ ìœ„ì¹˜ë¥¼ í• ë‹¹í•©ë‹ˆë‹¤.
     /// </summary>
     private void LateUpdate()
     {
@@ -88,7 +88,7 @@ public class TargetDistributor : MonoBehaviour
         {
             var follower = _followers[i];
 
-            // ÀÌ¹Ì ÇÒ´çµÈ À§Ä¡¸¦ ÇØÁ¦ÇÏ°í, ÇÊ¿ä ½Ã »õ·Î¿î À§Ä¡¸¦ ÇÒ´çÇÕ´Ï´Ù.
+            // ì´ë¯¸ í• ë‹¹ëœ ìœ„ì¹˜ë¥¼ í•´ì œí•˜ê³ , í•„ìš” ì‹œ ìƒˆë¡œìš´ ìœ„ì¹˜ë¥¼ í• ë‹¹í•©ë‹ˆë‹¤.
             if (follower.assignedSlot != -1)
             {
                 _freeArcs[follower.assignedSlot] = true;
@@ -102,7 +102,7 @@ public class TargetDistributor : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁÖ¾îÁø ÀÎµ¦½ºÀÇ ¹æÇâÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì£¼ì–´ì§„ ì¸ë±ìŠ¤ì˜ ë°©í–¥ì„ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public Vector3 GetDirection(int index)
     {
@@ -110,7 +110,7 @@ public class TargetDistributor : MonoBehaviour
     }
 
     /// <summary>
-    /// ÆÈ·Î¿ö¿¡°Ô ÀûÀıÇÑ ºñ¾î ÀÖ´Â ¾ÆÅ© ÀÎµ¦½º¸¦ Ã£¾Æ ÇÒ´çÇÕ´Ï´Ù.
+    /// íŒ”ë¡œì›Œì—ê²Œ ì ì ˆí•œ ë¹„ì–´ ìˆëŠ” ì•„í¬ ì¸ë±ìŠ¤ë¥¼ ì°¾ì•„ í• ë‹¹í•©ë‹ˆë‹¤.
     /// </summary>
     public int GetFreeArcIndex(TargetFollower follower)
     {
@@ -123,7 +123,7 @@ public class TargetDistributor : MonoBehaviour
         float wantedDistance = wanted.magnitude;
         wanted.Normalize();
 
-        // Å¸°Ù À§Ä¡ÀÇ °¢µµ °è»ê
+        // íƒ€ê²Ÿ ìœ„ì¹˜ì˜ ê°ë„ ê³„ì‚°
         float angle = Vector3.SignedAngle(wanted, Vector3.forward, Vector3.up);
         if (angle < 0)
             angle = 360 + angle;
@@ -134,12 +134,12 @@ public class TargetDistributor : MonoBehaviour
 
         int choosenIndex = wantedIndex;
 
-        // Å¸°Ù À§Ä¡¿ÍÀÇ ·¹ÀÌÄ³½ºÆ® °Ë»ç
+        // íƒ€ê²Ÿ ìœ„ì¹˜ì™€ì˜ ë ˆì´ìºìŠ¤íŠ¸ ê²€ì‚¬
         RaycastHit hit;
         if (!Physics.Raycast(rayCastPosition, GetDirection(choosenIndex), out hit, wantedDistance))
             found = _freeArcs[choosenIndex];
 
-        // ºñ¾îÀÖ´Â ¾ÆÅ©¸¦ Ã£À» ¼ö ¾øÀ¸¸é ÁÖº¯ ¾ÆÅ©¸¦ È®ÀÎ
+        // ë¹„ì–´ìˆëŠ” ì•„í¬ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìœ¼ë©´ ì£¼ë³€ ì•„í¬ë¥¼ í™•ì¸
         if (!found)
         {
             int offset = 1;
@@ -172,19 +172,19 @@ public class TargetDistributor : MonoBehaviour
             }
         }
 
-        // ºñ¾î ÀÖ´Â ¾ÆÅ©¸¦ Ã£Áö ¸øÇÏ¸é -1À» ¹İÈ¯
+        // ë¹„ì–´ ìˆëŠ” ì•„í¬ë¥¼ ì°¾ì§€ ëª»í•˜ë©´ -1ì„ ë°˜í™˜
         if (!found)
         {
             return -1;
         }
 
-        // ¼±ÅÃÇÑ ¾ÆÅ©¸¦ »ç¿ë ÁßÀ¸·Î ¼³Á¤
+        // ì„ íƒí•œ ì•„í¬ë¥¼ ì‚¬ìš© ì¤‘ìœ¼ë¡œ ì„¤ì •
         _freeArcs[choosenIndex] = false;
         return choosenIndex;
     }
 
     /// <summary>
-    /// Æ¯Á¤ ÀÎµ¦½ºÀÇ ¾ÆÅ©¸¦ ÀÚÀ¯·Ó°Ô ¸¸µì´Ï´Ù.
+    /// íŠ¹ì • ì¸ë±ìŠ¤ì˜ ì•„í¬ë¥¼ ììœ ë¡­ê²Œ ë§Œë“­ë‹ˆë‹¤.
     /// </summary>
     public void FreeIndex(int index)
     {

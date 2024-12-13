@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static Damageable;
 
 /// <summary>
-/// ¹æ¾î ½Ã½ºÅÛÀ» ±¸ÇöÇÕ´Ï´Ù. 
-/// ¹æ¾î ÁßÀÏ ¶§ °ø°İÀ» ¹ŞÀ» °æ¿ì, ÇÇÇØ¸¦ °æ°¨ÇÏ°í °¡µå ¼º°ø ¿©ºÎ¸¦ È®ÀÎÇÕ´Ï´Ù.
+/// ë°©ì–´ ì‹œìŠ¤í…œì„ êµ¬í˜„í•©ë‹ˆë‹¤. 
+/// ë°©ì–´ ì¤‘ì¼ ë•Œ ê³µê²©ì„ ë°›ì„ ê²½ìš°, í”¼í•´ë¥¼ ê²½ê°í•˜ê³  ê°€ë“œ ì„±ê³µ ì—¬ë¶€ë¥¼ í™•ì¸í•©ë‹ˆë‹¤.
 /// </summary>
 public class Defensible : MonoBehaviour
 {
@@ -14,10 +14,10 @@ public class Defensible : MonoBehaviour
     [Range(1.0f, 100.0f)]
     public float dampRatio = 10.0f;
 
-    [Tooltip("´ë¹ÌÁö¸¦ ÀÔÈú ¼ö ÀÖ´Â °¢µµÀÔ´Ï´Ù. Ç×»ó ¿ùµå XZ Æò¸é¿¡ ÀÖÀ¸¸ç, Àü¹æÀº hitForwardRoationÀ¸·Î È¸ÀüÇÕ´Ï´Ù.")]
+    [Tooltip("ëŒ€ë¯¸ì§€ë¥¼ ì…í ìˆ˜ ìˆëŠ” ê°ë„ì…ë‹ˆë‹¤. í•­ìƒ ì›”ë“œ XZ í‰ë©´ì— ìˆìœ¼ë©°, ì „ë°©ì€ hitForwardRoationìœ¼ë¡œ íšŒì „í•©ë‹ˆë‹¤.")]
     [Range(0.0f, 360.0f)]
     public float hitAngle = 360.0f;
-    [Tooltip("Å¸°İ °¢µµ ¿µ¿ªÀ» Á¤ÀÇÇÏ´Â ±âÁØ °¢µµ¸¦ È¸Àü½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.")]
+    [Tooltip("íƒ€ê²© ê°ë„ ì˜ì—­ì„ ì •ì˜í•˜ëŠ” ê¸°ì¤€ ê°ë„ë¥¼ íšŒì „ì‹œí‚¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.")]
     [Range(0.0f, 360.0f)]
     [FormerlySerializedAs("hitForwardRoation")] //SHAME!
     public float hitForwardRotation = 360.0f;
@@ -37,18 +37,18 @@ public class Defensible : MonoBehaviour
         Vector3 forward = transform.forward;
         forward = Quaternion.AngleAxis(hitForwardRotation, transform.up) * forward;
 
-        // µ¥¹ÌÁö¸¦ ÀÔÀº ¹æÇâ°ú µ¥¹ÌÁö ¿µ¿ªÀ» Åõ¿µ(projection)
+        // ë°ë¯¸ì§€ë¥¼ ì…ì€ ë°©í–¥ê³¼ ë°ë¯¸ì§€ ì˜ì—­ì„ íˆ¬ì˜(projection)
         Vector3 positionToDamager = data.damageSource - transform.position;
         positionToDamager -= transform.up * Vector3.Dot(transform.up, positionToDamager);
 
         if (Vector3.Angle(forward, positionToDamager) > hitAngle * 0.5f)
         {
-			Debug.Log("°¡µå¸¦ ½ÇÆĞÇÑ");
+			Debug.Log("ê°€ë“œë¥¼ ì‹¤íŒ¨í•œ");
 			onDefensFalse?.Invoke();
 			return;
         }
 
-        // °¡µå ÀÌÆåÆ®
+        // ê°€ë“œ ì´í™íŠ¸
         EffectManager.Instance.CreateGuardFX();
 		Vector3 temp = data.direction;
 		temp.y = 0f;

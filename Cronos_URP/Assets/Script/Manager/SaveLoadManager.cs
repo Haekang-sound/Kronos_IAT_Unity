@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// °ÔÀÓÀÇ ÀúÀå ¹× ·Îµå ±â´ÉÀ» ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾À µ¥ÀÌÅÍ, Ã¼Å©Æ÷ÀÎÆ® µ¥ÀÌÅÍ, ´É·Â Æ®¸® µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ°í ºÒ·¯¿À´Â ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ê²Œìž„ì˜ ì €ìž¥ ë° ë¡œë“œ ê¸°ëŠ¥ì„ ë‹´ë‹¹í•˜ëŠ” í´ëž˜ìŠ¤ìž…ë‹ˆë‹¤.
+/// ì”¬ ë°ì´í„°, ì²´í¬í¬ì¸íŠ¸ ë°ì´í„°, ëŠ¥ë ¥ íŠ¸ë¦¬ ë°ì´í„°ë¥¼ ì €ìž¥í•˜ê³  ë¶ˆëŸ¬ì˜¤ëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 public class SaveLoadManager : MonoBehaviour
 {
     /// <summary>
-    /// ÀúÀå ¹× ·ÎµåÀÇ ¸ñÀûÀ» Á¤ÀÇÇÏ´Â ¿­°ÅÇüÀÔ´Ï´Ù. 
-    /// ¾À µ¥ÀÌÅÍ¿Í Ã¼Å©Æ÷ÀÎÆ® µ¥ÀÌÅÍ·Î ±¸ºÐµË´Ï´Ù.
+    /// ì €ìž¥ ë° ë¡œë“œì˜ ëª©ì ì„ ì •ì˜í•˜ëŠ” ì—´ê±°í˜•ìž…ë‹ˆë‹¤. 
+    /// ì”¬ ë°ì´í„°ì™€ ì²´í¬í¬ì¸íŠ¸ ë°ì´í„°ë¡œ êµ¬ë¶„ë©ë‹ˆë‹¤.
     /// </summary>
     public enum Purpose
     {
-        scene,      // ¾À µ¥ÀÌÅÍ ÀúÀå ¹× ·Îµå
-        checkpoint  // Ã¼Å©Æ÷ÀÎÆ® µ¥ÀÌÅÍ ÀúÀå ¹× ·Îµå
+        scene,      // ì”¬ ë°ì´í„° ì €ìž¥ ë° ë¡œë“œ
+        checkpoint  // ì²´í¬í¬ì¸íŠ¸ ë°ì´í„° ì €ìž¥ ë° ë¡œë“œ
     }
 
     [SerializeField]
@@ -86,7 +86,7 @@ public class SaveLoadManager : MonoBehaviour
     {
         if (_currentCheckpoint == null)
         {
-            Debug.Log("ÀúÂ¡µÈ Ã¼Å©Æ÷ÀÎÆ®°¡ ¾ø´Âµ¥½º. ¾À ³» Ã¼Å©Æ÷ÀÎÆ®¸¦ ´Ù½Ã È®ÀÎ ÇÒ °Í");
+            Debug.Log("ì €ì§•ëœ ì²´í¬í¬ì¸íŠ¸ê°€ ì—†ëŠ”ë°ìŠ¤. ì”¬ ë‚´ ì²´í¬í¬ì¸íŠ¸ë¥¼ ë‹¤ì‹œ í™•ì¸ í•  ê²ƒ");
             return;
         }
 

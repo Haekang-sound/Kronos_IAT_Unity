@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ ºÒ²É ÀåÆÇ ½ºÅ³ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ë³´ìŠ¤ì˜ ë¶ˆê½ƒ ì¥íŒ ìŠ¤í‚¬ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BossSMBFireZone : SceneLinkedSMB<BossBehavior>
 {

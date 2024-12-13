@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// ¿ÀºêÁ§Æ®°¡ Å¸°İÀ» ¹Ş¾ÒÀ» ¶§ 
-/// Èçµé¸®´Â È¿°ú¸¦ ±¸ÇöÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ì˜¤ë¸Œì íŠ¸ê°€ íƒ€ê²©ì„ ë°›ì•˜ì„ ë•Œ 
+/// í”ë“¤ë¦¬ëŠ” íš¨ê³¼ë¥¼ êµ¬í˜„í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class HitShake : MonoBehaviour
 {

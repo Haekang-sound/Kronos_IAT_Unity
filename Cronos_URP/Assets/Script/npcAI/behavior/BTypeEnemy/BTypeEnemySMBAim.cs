@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// BTypeEnemÀÇ °ø°İ Á¶ÁØ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// BTypeEnemì˜ ê³µê²© ì¡°ì¤€ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
 {
@@ -74,7 +74,7 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
 
             _monoBehaviour.FindTarget();
 
-            // ATTACK - Å¸°ÙÀÌ °ø°İ »ç°Å¸® ¾È¿¡ ÀÖÀ» ¶§
+            // ATTACK - íƒ€ê²Ÿì´ ê³µê²© ì‚¬ê±°ë¦¬ ì•ˆì— ìˆì„ ë•Œ
             if (_monoBehaviour.CurrentTarget != null)
             {
                 if (_monoBehaviour.IsInAttackRange())
@@ -93,7 +93,7 @@ public class BTypeEnemySMBAim : SceneLinkedSMB<BTypeEnemyBehavior>
                     _monoBehaviour.TriggerPursuit();
                 }
             }
-            // IDLE - Å¸°ÙÀ» Ã£À» ¼ö ¾øÀ» ¶§
+            // IDLE - íƒ€ê²Ÿì„ ì°¾ì„ ìˆ˜ ì—†ì„ ë•Œ
             else
             {
                 _monoBehaviour.TriggerIdle();

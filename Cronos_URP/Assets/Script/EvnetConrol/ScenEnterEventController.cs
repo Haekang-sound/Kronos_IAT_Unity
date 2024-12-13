@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Ã¹ ¹øÂ° ¾À ½ÃÀÛ ¿¬ÃâÀ» Á¦¾îÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ì²« ë²ˆì§¸ ì”¬ ì‹œì‘ ì—°ì¶œì„ ì œì–´í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ScenEnterEventController : MonoBehaviour
 {
@@ -17,13 +17,13 @@ public class ScenEnterEventController : MonoBehaviour
     {
         playerbleDirector.gameObject.SetActive(false);
 
-        // Å° °ª ÃÊ±âÈ­
+        // í‚¤ ê°’ ì´ˆê¸°í™”
         _key = SceneManager.GetActiveScene().name + " - timeline";
     }
 
     void Start()
     {
-        // Å° °Ë»ç
+        // í‚¤ ê²€ì‚¬
         _haskey = PlayerPrefs.HasKey(_key);
 
         playerbleDirector.gameObject.SetActive(!_haskey);
@@ -31,7 +31,7 @@ public class ScenEnterEventController : MonoBehaviour
         if (_haskey == false)
         {
             playerbleDirector.Play();
-            Debug.Log("Å¸ÀÓ ¶óÀÎÀ» Àç»ıÇÕ´Ï´Ù.");
+            Debug.Log("íƒ€ì„ ë¼ì¸ì„ ì¬ìƒí•©ë‹ˆë‹¤.");
             PlayerPrefs.SetInt(_key, 1);
         }
     }

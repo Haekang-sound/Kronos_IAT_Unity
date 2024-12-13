@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// BoxColliderÀÇ Áß½É°ú Å©±â¸¦ Á¶Á¤ÇÏ°í, ¿ø·¡ °ªÀ¸·Î ¸®¼ÂÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¶ÇÇÑ, Á¶Á¤µÈ Collider ¿µ¿ªÀ» Gizmos·Î ½Ã°¢È­ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+/// BoxColliderì˜ ì¤‘ì‹¬ê³¼ í¬ê¸°ë¥¼ ì¡°ì •í•˜ê³ , ì›ë˜ ê°’ìœ¼ë¡œ ë¦¬ì…‹í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ë˜í•œ, ì¡°ì •ëœ Collider ì˜ì—­ì„ Gizmosë¡œ ì‹œê°í™”í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 /// </summary>
 public class BoxColliderAdjuster : MonoBehaviour
 {

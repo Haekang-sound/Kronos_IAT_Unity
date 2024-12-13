@@ -1,8 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ ÅÚ·¹Æ÷Æ® ±â´ÉÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ê²Œì„ ì˜¤ë¸Œì íŠ¸ì˜ í…”ë ˆí¬íŠ¸ ê¸°ëŠ¥ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class GameObjectTeleporter : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class GameObjectTeleporter : MonoBehaviour
             if (instance != null)
                 return instance;
 
-            // GameObjectTeleporter °´Ã¼°¡ ¾øÀ¸¸é »õ·Î »ı¼º
+            // GameObjectTeleporter ê°ì²´ê°€ ì—†ìœ¼ë©´ ìƒˆë¡œ ìƒì„±
             GameObject gameObjectTeleporter = new GameObject("GameObjectTeleporter");
             instance = gameObjectTeleporter.AddComponent<GameObjectTeleporter>();
 
@@ -31,23 +31,23 @@ public class GameObjectTeleporter : MonoBehaviour
         get { return Instance.m_transitioning; }
     }
 
-    protected static GameObjectTeleporter instance;  // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
-    protected bool m_transitioning;  // ÅÚ·¹Æ÷Æ® ÁøÇà Áß »óÅÂ
+    protected static GameObjectTeleporter instance;  // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
+    protected bool m_transitioning;  // í…”ë ˆí¬íŠ¸ ì§„í–‰ ì¤‘ ìƒíƒœ
 
     void Awake()
     {
-        // ÀÌ¹Ì ½Ì±ÛÅæ ÀÎ½ºÅÏ½º°¡ ÀÖÀ¸¸é °´Ã¼¸¦ ÆÄ±«ÇÏ°í, ±×·¸Áö ¾ÊÀ¸¸é ÇöÀç °´Ã¼¸¦ À¯Áö
+        // ì´ë¯¸ ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆìœ¼ë©´ ê°ì²´ë¥¼ íŒŒê´´í•˜ê³ , ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ í˜„ì¬ ê°ì²´ë¥¼ ìœ ì§€
         if (Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject);  // ¾À ÀüÈ¯ ½Ã °´Ã¼°¡ ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤
+        DontDestroyOnLoad(gameObject);  // ì”¬ ì „í™˜ ì‹œ ê°ì²´ê°€ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì •
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ TransitionPoint·Î ÅÚ·¹Æ÷Æ®
+    /// ì§€ì •ëœ TransitionPointë¡œ í…”ë ˆí¬íŠ¸
     /// </summary>
     public static void Teleport(TransitionPoint transitionPoint)
     {
@@ -56,7 +56,7 @@ public class GameObjectTeleporter : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÁöÁ¤µÈ Transform À§Ä¡·Î ÅÚ·¹Æ÷Æ®
+    /// ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì§€ì •ëœ Transform ìœ„ì¹˜ë¡œ í…”ë ˆí¬íŠ¸
     /// </summary>
     public static void Teleport(GameObject transitioningGameObject, Transform destination)
     {
@@ -64,7 +64,7 @@ public class GameObjectTeleporter : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÁöÁ¤µÈ À§Ä¡·Î ÅÚ·¹Æ÷Æ®
+    /// ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì§€ì •ëœ ìœ„ì¹˜ë¡œ í…”ë ˆí¬íŠ¸
     /// </summary>
     public static void Teleport(GameObject transitioningGameObject, Vector3 destinationPosition)
     {
@@ -72,7 +72,7 @@ public class GameObjectTeleporter : MonoBehaviour
     }
 
     /// <summary>
-    /// ÅÚ·¹Æ÷Æ® ÁøÇàÀ» Ã³¸®ÇÏ´Â ÄÚ·çÆ¾
+    /// í…”ë ˆí¬íŠ¸ ì§„í–‰ì„ ì²˜ë¦¬í•˜ëŠ” ì½”ë£¨í‹´
     /// </summary>
     protected IEnumerator Transition(GameObject transitioningGameObject, bool releaseControl, Vector3 destinationPosition, bool fade)
     {
@@ -80,21 +80,21 @@ public class GameObjectTeleporter : MonoBehaviour
 
         if (fade)
         {
-            yield return StartCoroutine(ScreenFader.FadeSceneOut());  // ¾À ÆäÀÌµå ¾Æ¿ô
+            yield return StartCoroutine(ScreenFader.FadeSceneOut());  // ì”¬ í˜ì´ë“œ ì•„ì›ƒ
         }
 
-        transitioningGameObject.transform.position = destinationPosition;  // À§Ä¡ ÀÌµ¿
+        transitioningGameObject.transform.position = destinationPosition;  // ìœ„ì¹˜ ì´ë™
 
         if (fade)
         {
-            yield return StartCoroutine(ScreenFader.FadeSceneIn());  // ¾À ÆäÀÌµå ÀÎ
+            yield return StartCoroutine(ScreenFader.FadeSceneIn());  // ì”¬ í˜ì´ë“œ ì¸
         }
 
         m_transitioning = false;
     }
 
     /// <summary>
-    /// ÅÚ·¹Æ÷Æ® ¸ñÇ¥ À§Ä¡ÀÎ SceneTransitionDestination °´Ã¼¸¦ Ã£À½
+    /// í…”ë ˆí¬íŠ¸ ëª©í‘œ ìœ„ì¹˜ì¸ SceneTransitionDestination ê°ì²´ë¥¼ ì°¾ìŒ
     /// </summary>
     protected SceneTransitionDestination GetDestination()
     {
@@ -104,7 +104,7 @@ public class GameObjectTeleporter : MonoBehaviour
             return entrance;
         }
 
-        Debug.LogWarning("SceneTransitionDestination ¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+        Debug.LogWarning("SceneTransitionDestination ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         return null;
     }
 }

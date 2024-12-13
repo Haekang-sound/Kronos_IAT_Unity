@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÇÇÇØ ¸Ş½ÃÁö ¹× ÇÇÇØ À¯Çü°ú ÄŞº¸ À¯ÇüÀ» Á¤ÀÇÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀÌ Å¬·¡½º´Â ÀûÀÇ ÇÇÇØ Ã³¸® ¹× ÄŞº¸ ½Ã½ºÅÛÀ» °ü¸®ÇÏ´Âµ¥ »ç¿ëµË´Ï´Ù.
+/// í”¼í•´ ë©”ì‹œì§€ ë° í”¼í•´ ìœ í˜•ê³¼ ì½¤ë³´ ìœ í˜•ì„ ì •ì˜í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì´ í´ë˜ìŠ¤ëŠ” ì ì˜ í”¼í•´ ì²˜ë¦¬ ë° ì½¤ë³´ ì‹œìŠ¤í…œì„ ê´€ë¦¬í•˜ëŠ”ë° ì‚¬ìš©ë©ë‹ˆë‹¤.
 /// </summary>
 public partial class Damageable : MonoBehaviour
 {
 	public enum ComboType
 	{
         None = 0,
-		InterruptibleCombo, // enemy°¡ °ø°İÁßÀÏ¶§´Â ÇÇ°İ»óÅÂ·Î ³Ñ¾î°¡Áö ¾ÊÀ½
-		UninterruptibleCombo // ÀÌÀü°ú ¶È°°À½
+		InterruptibleCombo, // enemyê°€ ê³µê²©ì¤‘ì¼ë•ŒëŠ” í”¼ê²©ìƒíƒœë¡œ ë„˜ì–´ê°€ì§€ ì•ŠìŒ
+		UninterruptibleCombo // ì´ì „ê³¼ ë˜‘ê°™ìŒ
 	}
 	public enum DamageType
     {

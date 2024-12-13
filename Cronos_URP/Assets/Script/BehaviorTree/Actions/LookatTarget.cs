@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ´ë»óÀÌ ÁÖ¾îÁø °¢µµ ÀÌ³»¿¡ ÀÖÀ¸¸é ¼º°ø »óÅÂ¸¦ ¹İÈ¯ÇÏ¸ç,
-/// ±×·¸Áö ¾ÊÀ¸¸é È¸ÀüÇÏ¿© ¹Ù¶óº¾´Ï´Ù.
+/// ëŒ€ìƒì´ ì£¼ì–´ì§„ ê°ë„ ì´ë‚´ì— ìˆìœ¼ë©´ ì„±ê³µ ìƒíƒœë¥¼ ë°˜í™˜í•˜ë©°,
+/// ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ íšŒì „í•˜ì—¬ ë°”ë¼ë´…ë‹ˆë‹¤.
 /// </summary>
 public class LookatTarget : ActionNode
 {
     public float rotationSpeed = 1;
-    public float angleThreshold = 10.0f; // ¹Ù¶óº¸´Â °ÍÀ¸·Î °£ÁÖÇÒ ÃÖ´ë °¢µµ
+    public float angleThreshold = 10.0f; // ë°”ë¼ë³´ëŠ” ê²ƒìœ¼ë¡œ ê°„ì£¼í•  ìµœëŒ€ ê°ë„
 
     protected override void OnStart()
     {
@@ -58,10 +58,10 @@ public class LookatTarget : ActionNode
         Vector3 forward = transform.forward;
         Vector3 toTarget = (target.transform.position - transform.position).normalized;
 
-        // µÎ º¤ÅÍ °£ÀÇ °¢µµ °è»ê
+        // ë‘ ë²¡í„° ê°„ì˜ ê°ë„ ê³„ì‚°
         float angle = Vector3.Angle(forward, toTarget);
 
-        // °¢µµ°¡ ÀÓ°è°ª ÀÌÇÏÀÌ¸é true ¹İÈ¯
+        // ê°ë„ê°€ ì„ê³„ê°’ ì´í•˜ì´ë©´ true ë°˜í™˜
         return angle <= angleThreshold;
     }
 
@@ -70,7 +70,7 @@ public class LookatTarget : ActionNode
         var target = blackboard.target;
         if (target == null) return;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ¼³Á¤
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ ì„¤ì •
         Transform transform = context.transform;
         var lookPosition = target.transform.position - transform.position;
         lookPosition.y = 0;

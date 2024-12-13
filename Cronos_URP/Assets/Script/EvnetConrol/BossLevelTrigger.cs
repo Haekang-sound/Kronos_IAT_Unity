@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// º¸½º ÀÌº¥Æ® ½ÃÀÛ ½Ã ¸ÊÀÇ Äİ¶óÀÌ´õµéÀ» Á¦¾ÆÇÏ´Â Å¬¸®½º.
+/// ë³´ìŠ¤ ì´ë²¤íŠ¸ ì‹œì‘ ì‹œ ë§µì˜ ì½œë¼ì´ë”ë“¤ì„ ì œì•„í•˜ëŠ” í´ë¦¬ìŠ¤.
 /// </summary>
 public class BossLevelTrigger : MonoBehaviour
 {

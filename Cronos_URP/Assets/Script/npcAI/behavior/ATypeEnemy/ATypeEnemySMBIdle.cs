@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ À¯ÈŞ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ATypeEnemì˜ ìœ íœ´ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ATypeEnemySMBIdle : SceneLinkedSMB<ATypeEnemyBehavior>
 {
@@ -17,16 +17,16 @@ public class ATypeEnemySMBIdle : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.FindTarget();
 
-        // Å¸±ê ¹ß°ß ½Ã
+        // íƒ€ê¹ƒ ë°œê²¬ ì‹œ
         GameObject currentTarget = _monoBehaviour.CurrentTarget;
         if (currentTarget != null)
         {
-            // ÃßÀû »óÅÂ·Î ÀüÀÌ
+            // ì¶”ì  ìƒíƒœë¡œ ì „ì´
             _monoBehaviour.StartPursuit();
         }
         else
         {
-            // Idle - ¸ñÀûÁö µµÂø
+            // Idle - ëª©ì ì§€ ë„ì°©
             if (_monoBehaviour.IsNearBase() == false)
             {
                 _monoBehaviour.TriggerReturn();

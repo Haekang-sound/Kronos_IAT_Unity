@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// ½ºÅ³ Æ®¸® UI¿¡¼­ ºó °ø°£À» Å¬¸¯ÇßÀ» ¶§ ÀÌº¥Æ®¸¦ Ã³¸®ÇÏ¸ç, 
-/// ¿¬°áµÈ ¸ğµç AbilityNodeÀÇ Æ÷Ä¿½º¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+/// ìŠ¤í‚¬ íŠ¸ë¦¬ UIì—ì„œ ë¹ˆ ê³µê°„ì„ í´ë¦­í–ˆì„ ë•Œ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ë©°, 
+/// ì—°ê²°ëœ ëª¨ë“  AbilityNodeì˜ í¬ì»¤ìŠ¤ë¥¼ í•´ì œí•©ë‹ˆë‹¤.
 /// </summary>
 
 public class EmptyClick : MonoBehaviour, IPointerClickHandler

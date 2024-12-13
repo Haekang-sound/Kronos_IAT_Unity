@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿ausing UnityEngine;
 using UnityEngine.Events;
 
-/// °ø°İ¿¡ ÀÇÇØ ´ë»óÀ» ÇÇÇØ ÀÔÈ÷´Â ±â´ÉÀ» ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀÌ Å¬·¡½º´Â °ø°İ ¹üÀ§ ³»ÀÇ ´ë»ó¿¡°Ô ÇÇÇØ¸¦ ÀÔÈ÷°í, 
-/// ÇÇÇØ¸¦ ÀÔÈú ´ë»óÀ» È®ÀÎÇÏ´Â ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ê³µê²©ì— ì˜í•´ ëŒ€ìƒì„ í”¼í•´ ì…íˆëŠ” ê¸°ëŠ¥ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì´ í´ë˜ìŠ¤ëŠ” ê³µê²© ë²”ìœ„ ë‚´ì˜ ëŒ€ìƒì—ê²Œ í”¼í•´ë¥¼ ì…íˆê³ , 
+/// í”¼í•´ë¥¼ ì…í ëŒ€ìƒì„ í™•ì¸í•˜ëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 [RequireComponent(typeof(Collider))]
 public class SimpleDamager : MonoBehaviour
@@ -120,12 +120,12 @@ public class SimpleDamager : MonoBehaviour
         }
         else if (collider is CapsuleCollider capsuleCollider)
         {
-            // Ä¸½¶ Äİ¶óÀÌ´õÀÇ À§Ä¡¿Í Å©±â¸¦ °¡Á®¿É´Ï´Ù.
+            // ìº¡ìŠ ì½œë¼ì´ë”ì˜ ìœ„ì¹˜ì™€ í¬ê¸°ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
             Vector3 center = capsuleCollider.center;
             float height = capsuleCollider.height * 0.5f;
             float radius = capsuleCollider.radius;
 
-            // Ä¸½¶ Äİ¶óÀÌ´õÀÇ ¹æÇâ¿¡ µû¶ó Ä¸½¶ÀÇ »óÇÏ À§Ä¡¸¦ °áÁ¤ÇÕ´Ï´Ù.
+            // ìº¡ìŠ ì½œë¼ì´ë”ì˜ ë°©í–¥ì— ë”°ë¼ ìº¡ìŠì˜ ìƒí•˜ ìœ„ì¹˜ë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
             Vector3 upDirection;
             if (capsuleCollider.direction == 0) // X-Axis
             {
@@ -143,7 +143,7 @@ public class SimpleDamager : MonoBehaviour
             Vector3 bottomSphereCenter = center - upDirection * (height - radius);
             Vector3 topSphereCenter = center + upDirection * (height - radius);
 
-            // ¹İ±¸ ¹× ½Ç¸°´õ ºÎºĞÀ» ±×¸³´Ï´Ù.
+            // ë°˜êµ¬ ë° ì‹¤ë¦°ë” ë¶€ë¶„ì„ ê·¸ë¦½ë‹ˆë‹¤.
             Gizmos.DrawSphere(bottomSphereCenter, radius);
             Gizmos.DrawSphere(topSphereCenter, radius);
             Gizmos.DrawLine(bottomSphereCenter + radius * Vector3.forward, topSphereCenter + radius * Vector3.forward);

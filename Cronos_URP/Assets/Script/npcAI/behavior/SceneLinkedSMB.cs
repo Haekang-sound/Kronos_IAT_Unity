@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Animations;
 
 /// <summary>
-/// StateMachineBehaviour ¸¦ »ó¼Ó¹Ş¾Æ Ãß°¡ ±â´É¼ºÀ» ´õÇÑ Å¬·¡½º.
-/// StateMucineÀ» °¡Áø °´Ã¼ÀÇ ¸ğ³ëºñÇìÀÌ¹ö¸¦ ºÒ·¯¿Ã ¼ö ÀÖ°í,
-/// Enter / Update /  Exit ÀÌº¥Æ® ¿Ü¿¡µµ ¾Ö´Ï¸ŞÀÌ¼Ç Æ®·£Áö¼Ç¿¡ ´ëÇÑ ¾÷µ¥ÀÌÆ®°¡ Ãß°¡µÇ¾ú´Ù.
+/// StateMachineBehaviour ë¥¼ ìƒì†ë°›ì•„ ì¶”ê°€ ê¸°ëŠ¥ì„±ì„ ë”í•œ í´ë˜ìŠ¤.
+/// StateMucineì„ ê°€ì§„ ê°ì²´ì˜ ëª¨ë…¸ë¹„í—¤ì´ë²„ë¥¼ ë¶ˆëŸ¬ì˜¬ ìˆ˜ ìˆê³ ,
+/// Enter / Update /  Exit ì´ë²¤íŠ¸ ì™¸ì—ë„ ì• ë‹ˆë©”ì´ì…˜ íŠ¸ëœì§€ì…˜ì— ëŒ€í•œ ì—…ë°ì´íŠ¸ê°€ ì¶”ê°€ë˜ì—ˆë‹¤.
 /// </summary>
-/// <typeparam name="TMonoBehaviour">MonoBehaviour¸¦ »ó¼Ó¹ŞÀº Å¬·¡½º</typeparam>
+/// <typeparam name="TMonoBehaviour">MonoBehaviourë¥¼ ìƒì†ë°›ì€ í´ë˜ìŠ¤</typeparam>
 public class SceneLinkedSMB<TMonoBehaviour> : SealedSMB
         where TMonoBehaviour : MonoBehaviour
 {
@@ -88,28 +88,28 @@ public class SceneLinkedSMB<TMonoBehaviour> : SealedSMB
     }
 
     /// <summary>
-    ///  ¾À ³» Monobehviour °¡ ½ÃÀÛ ÇÔ¼ö¸¦ È£ÃâÇÒ ¶§ °°ÀÌ È£Ãâ.
+    ///  ì”¬ ë‚´ Monobehviour ê°€ ì‹œì‘ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•  ë•Œ ê°™ì´ í˜¸ì¶œ.
     /// </summary>
     public virtual void OnStart(Animator animator) { }
 
     /// ----------------------------------------------------------------------------------------------------------------------------------------
-    /// Æ®·»Áö¼Ç -> ½ºÅ×ÀÌÆ® 
+    /// íŠ¸ë Œì§€ì…˜ -> ìŠ¤í…Œì´íŠ¸ 
     /// ----------------------------------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// ½ºÅ×ÀÌÆ®ÀÇ ½ÇÇàÀÌ Ã³À½ ½ÃÀÛµÉ ¶§(Æ®·£Áö¼Ç -> ½ºÅ×ÀÌÆ® ½Ã) Update ÀÌÀü¿¡ È£Ãâ.
+    /// ìŠ¤í…Œì´íŠ¸ì˜ ì‹¤í–‰ì´ ì²˜ìŒ ì‹œì‘ë  ë•Œ(íŠ¸ëœì§€ì…˜ -> ìŠ¤í…Œì´íŠ¸ ì‹œ) Update ì´ì „ì— í˜¸ì¶œ.
     /// </summary>
     public virtual void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 
     /// <summary>
-    /// Æ®·»Áö¼Ç -> ½ºÅ×ÀÌÆ® Áß¿¡ ¸Å ÇÁ·¹ÀÓ¸¶´Ù È£Ãâ. OnSLStateEnter ÀÌÈÄ¿¡ È£Ãâ.
+    /// íŠ¸ë Œì§€ì…˜ -> ìŠ¤í…Œì´íŠ¸ ì¤‘ì— ë§¤ í”„ë ˆì„ë§ˆë‹¤ í˜¸ì¶œ. OnSLStateEnter ì´í›„ì— í˜¸ì¶œ.
     /// </summary>
     public virtual void OnSLTransitionToStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLTransitionToStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 
     /// <summary>
-    /// Æ®·»Áö¼Ç -> ½ºÅ×ÀÌÆ® ÈÄ Ã¹ ¹øÂ° ÇÁ·¹ÀÓ¿¡ È£Ãâ.
+    /// íŠ¸ë Œì§€ì…˜ -> ìŠ¤í…Œì´íŠ¸ í›„ ì²« ë²ˆì§¸ í”„ë ˆì„ì— í˜¸ì¶œ.
     /// </summary>
     public virtual void OnSLStatePostEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLStatePostEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
@@ -119,35 +119,35 @@ public class SceneLinkedSMB<TMonoBehaviour> : SealedSMB
     /// ----------------------------------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// ½ºÅ×ÀÌÆ®°¡ Æ®·»Áö¼Ç µÇÁö ¾ÊÀ» ¶§(Æ®·»Áö¼Ç ÁßÀÌ ¾Æ´Ò ¶§) ¸Å ÇÁ·¹ÀÓ¸¶´Ù È£ÃâµÊ.
+    /// ìŠ¤í…Œì´íŠ¸ê°€ íŠ¸ë Œì§€ì…˜ ë˜ì§€ ì•Šì„ ë•Œ(íŠ¸ë Œì§€ì…˜ ì¤‘ì´ ì•„ë‹ ë•Œ) ë§¤ í”„ë ˆì„ë§ˆë‹¤ í˜¸ì¶œë¨.
     /// </summary>
     public virtual void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 
     /// ----------------------------------------------------------------------------------------------------------------------------------------
-    /// ½ºÅ×ÀÌÆ® -> Æ®·»Áö¼Ç
+    /// ìŠ¤í…Œì´íŠ¸ -> íŠ¸ë Œì§€ì…˜
     /// ----------------------------------------------------------------------------------------------------------------------------------------
 
-    /// ½ºÅ×ÀÌÆ® -> Æ®·»Áö¼ÇÀÌ ½ÃÀÛµÈ Ã¹ ¹øÂ° ÇÁ·¹ÀÓ¿¡ È£ÃâµË. ÀüÈ¯ÀÇ Áö¼Ó ½Ã°£ÀÌ 1 ÇÁ·¹ÀÓº¸´Ù ÂªÀ¸¸é È£ÃâµÇÁö ¾ÊÀ½.
+    /// ìŠ¤í…Œì´íŠ¸ -> íŠ¸ë Œì§€ì…˜ì´ ì‹œì‘ëœ ì²« ë²ˆì§¸ í”„ë ˆì„ì— í˜¸ì¶œë©. ì „í™˜ì˜ ì§€ì† ì‹œê°„ì´ 1 í”„ë ˆì„ë³´ë‹¤ ì§§ìœ¼ë©´ í˜¸ì¶œë˜ì§€ ì•ŠìŒ.
     public virtual void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLStatePreExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 
     /// <summary>
-    /// ½ºÅ×ÀÌÆ® -> Æ®·»Áö¼Ç Áß¿¡ ¸Å ÇÁ·¹ÀÓ¸¶´Ù OnSLStatePreExit ÀÌÈÄ¿¡ È£Ãâ.
+    /// ìŠ¤í…Œì´íŠ¸ -> íŠ¸ë Œì§€ì…˜ ì¤‘ì— ë§¤ í”„ë ˆì„ë§ˆë‹¤ OnSLStatePreExit ì´í›„ì— í˜¸ì¶œ.
     /// </summary>
     public virtual void OnSLTransitionFromStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLTransitionFromStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 
     /// <summary>
     /// Called after Updates when execution of the state first finshes (after transition from the state).
-    /// ÇöÀç ½ºÅ×ÀÌÆ®¿¡¼­ ³ª°¡´Â Æ®·»Áö¼ÇÀÌ ¿Ï·áµÉ ¶§ È£Ãâ.
+    /// í˜„ì¬ ìŠ¤í…Œì´íŠ¸ì—ì„œ ë‚˜ê°€ëŠ” íŠ¸ë Œì§€ì…˜ì´ ì™„ë£Œë  ë•Œ í˜¸ì¶œ.
     /// </summary>
     public virtual void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller) { }
 }
 
-// ½ÇÇà ÁßÀÎ °´Ã¼¿¡ ´ëÇÑ Á÷Á¢ ÂüÁ¶È÷ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
-// »óÅÂ°¡ ½ÇÇà ÁßÀÎ °´Ã¼¸¦ Á÷Á¢ ÂüÁ¶ÇÒ ¼ö ÀÖ´Â °¡´É¼ºÀ» Ãß°¡ÇÏ¿© ¸Å¹ø GetComponent¸¦ ÅëÇØ °¡Á®¿À´Â ºñ¿ëÀ» ÇÇÇÒ ¼ö ÀÖ´Ù.
+// ì‹¤í–‰ ì¤‘ì¸ ê°ì²´ì— ëŒ€í•œ ì§ì ‘ ì°¸ì¡°íˆí•  ìˆ˜ ìˆë„ë¡ í•œë‹¤.
+// ìƒíƒœê°€ ì‹¤í–‰ ì¤‘ì¸ ê°ì²´ë¥¼ ì§ì ‘ ì°¸ì¡°í•  ìˆ˜ ìˆëŠ” ê°€ëŠ¥ì„±ì„ ì¶”ê°€í•˜ì—¬ ë§¤ë²ˆ GetComponentë¥¼ í†µí•´ ê°€ì ¸ì˜¤ëŠ” ë¹„ìš©ì„ í”¼í•  ìˆ˜ ìˆë‹¤.
 public abstract class SealedSMB : StateMachineBehaviour
 {
     public sealed override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }

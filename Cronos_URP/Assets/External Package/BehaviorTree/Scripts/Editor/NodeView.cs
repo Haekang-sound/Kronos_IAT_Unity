@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -7,27 +7,27 @@ using UnityEditor;
 
 
 /// <summary>
-/// 'NodeView' Å¬·¡½º´Â Çàµ¿ Æ®¸® ³»ÀÇ °¢ ³ëµå¸¦ ±×·¡ÇÈ »ç¿ëÀÚ ÀÎÅÍÆäÀÌ½º(GUI) »ó¿¡¼­ Ç¥ÇöÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù.
-/// ÀÌ Å¬·¡½º´Â ³ëµåÀÇ »óÅÂ, Å¸ÀÔ, ÀÌ¸§, À§Ä¡ µîÀÇ Á¤º¸¸¦ ½Ã°¢ÀûÀ¸·Î ³ªÅ¸³»°í, »ç¿ëÀÚ ÀÔ·Â¿¡ ´ëÇÑ ¹ÝÀÀ(¿¹:¼±ÅÃ, µå·¡±× ¾Ø µå·Ó)À» Ã³¸®ÇÑ´Ù.
+/// 'NodeView' í´ëž˜ìŠ¤ëŠ” í–‰ë™ íŠ¸ë¦¬ ë‚´ì˜ ê° ë…¸ë“œë¥¼ ê·¸ëž˜í”½ ì‚¬ìš©ìž ì¸í„°íŽ˜ì´ìŠ¤(GUI) ìƒì—ì„œ í‘œí˜„í•˜ëŠ” ì—­í• ì„ í•œë‹¤.
+/// ì´ í´ëž˜ìŠ¤ëŠ” ë…¸ë“œì˜ ìƒíƒœ, íƒ€ìž…, ì´ë¦„, ìœ„ì¹˜ ë“±ì˜ ì •ë³´ë¥¼ ì‹œê°ì ìœ¼ë¡œ ë‚˜íƒ€ë‚´ê³ , ì‚¬ìš©ìž ìž…ë ¥ì— ëŒ€í•œ ë°˜ì‘(ì˜ˆ:ì„ íƒ, ë“œëž˜ê·¸ ì•¤ ë“œë¡­)ì„ ì²˜ë¦¬í•œë‹¤.
 /// </summary>
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
-    // ³ëµå°¡ ¼±ÅÃµÉ ¶§ È£ÃâµÉ ÄÝ¹é ÇÔ¼ö. 'Action<NodeView>' Å¸ÀÔÀ¸·Î, 'NodeView' ÀÎ½ºÅÏ½º¸¦ ¸Å°³º¯¼ö·Î ¹Þ´Â´Ù.
+    // ë…¸ë“œê°€ ì„ íƒë  ë•Œ í˜¸ì¶œë  ì½œë°± í•¨ìˆ˜. 'Action<NodeView>' íƒ€ìž…ìœ¼ë¡œ, 'NodeView' ì¸ìŠ¤í„´ìŠ¤ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ëŠ”ë‹¤.
     public Action<NodeView> OnNodeSelected;
-    // ÀÌ ºä°¡ Ç¥ÇöÇÏ´Â 'Node' °´Ã¼. Çàµ¿ Æ®¸®ÀÇ ±¸¼º ¿ä¼Ò Áß ÇÏ³ªÀÌ´Ù.
+    // ì´ ë·°ê°€ í‘œí˜„í•˜ëŠ” 'Node' ê°ì²´. í–‰ë™ íŠ¸ë¦¬ì˜ êµ¬ì„± ìš”ì†Œ ì¤‘ í•˜ë‚˜ì´ë‹¤.
     public Node node;
     // 'input', 'output'
-    // ³ëµåÀÇ ÀÔ·Â Æ÷Æ®¿Í Ãâ·Â Æ÷Æ®¸¦ ³ªÅ¸³½´Ù. ÀÌ Æ÷Æ®µéÀº ³ëµå °£ÀÇ ¿¬°áÀ» »ý¼ºÇÏ´Âµ¥ »ç¿ëµÈ´Ù.
+    // ë…¸ë“œì˜ ìž…ë ¥ í¬íŠ¸ì™€ ì¶œë ¥ í¬íŠ¸ë¥¼ ë‚˜íƒ€ë‚¸ë‹¤. ì´ í¬íŠ¸ë“¤ì€ ë…¸ë“œ ê°„ì˜ ì—°ê²°ì„ ìƒì„±í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.
     public Port input;
     public Port output;
 
-    // »ý¼ºÀÚ´Â 'Node' °´Ã¼¸¦ ¸Å°³º¯¼ö·Î ¹Þ¾Æ, ³ëµåÀÇ ½Ã°¢Àû Ç¥ÇöÀ» ÃÊ±âÈ­ÇÑ´Ù.
-    // ÀÌ °úÁ¤¿¡¼­ ³ëµåÀÇ ÀÌ¸§, À§Ä¡, ÀÔ·Â/Ãâ·Â Æ÷Æ® »ý¼º, CSS Å¬·¡½º ¼³Á¤, µ¥ÀÌÅÍ ¹ÙÀÎµù ¼³Á¤ µîÀ» ¼öÇàÇÑ´Ù.
+    // ìƒì„±ìžëŠ” 'Node' ê°ì²´ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„, ë…¸ë“œì˜ ì‹œê°ì  í‘œí˜„ì„ ì´ˆê¸°í™”í•œë‹¤.
+    // ì´ ê³¼ì •ì—ì„œ ë…¸ë“œì˜ ì´ë¦„, ìœ„ì¹˜, ìž…ë ¥/ì¶œë ¥ í¬íŠ¸ ìƒì„±, CSS í´ëž˜ìŠ¤ ì„¤ì •, ë°ì´í„° ë°”ì¸ë”© ì„¤ì • ë“±ì„ ìˆ˜í–‰í•œë‹¤.
     public NodeView(Node node): base(AssetDatabase.GetAssetPath(BehaviorTreeSettings.GetOrCreateSettings().nodeXml))
     {
         if (node == null)
         {
-            Debug.LogError("NodeView »ý¼ºÀÚÀÇ Node °¡ null ÀÔ´Ï´Ù. °æ·Î¸¦ È®ÀÎÇÏ¼¼¿ä");
+            Debug.LogError("NodeView ìƒì„±ìžì˜ Node ê°€ null ìž…ë‹ˆë‹¤. ê²½ë¡œë¥¼ í™•ì¸í•˜ì„¸ìš”");
             return;
         }
 
@@ -45,7 +45,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         SetupDataBinding();
     }
 
-    // ³ëµåÀÇ ¼Ó¼º(¿¹:¼³¸í)À» UI ¿ä¼Ò¿¡ ¹ÙÀÎµùÇÏ´Â ¸Þ¼­µåÀÌ´Ù. ÀÌ¸¦ ÅëÇØ ³ëµåÀÇ µ¥ÀÌÅÍ°¡ UI¿¡ µ¿ÀûÀ¸·Î ¹Ý¿µµÈ´Ù.
+    // ë…¸ë“œì˜ ì†ì„±(ì˜ˆ:ì„¤ëª…)ì„ UI ìš”ì†Œì— ë°”ì¸ë”©í•˜ëŠ” ë©”ì„œë“œì´ë‹¤. ì´ë¥¼ í†µí•´ ë…¸ë“œì˜ ë°ì´í„°ê°€ UIì— ë™ì ìœ¼ë¡œ ë°˜ì˜ëœë‹¤.
     private void SetupDataBinding()
     {
         Label descriptionLabel = this.Q<Label>("description");
@@ -53,7 +53,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         descriptionLabel.Bind(new SerializedObject(node));
     }
 
-    // ³ëµå Å¸ÀÔ(Action, Composite, Decorate)¿¡ µû¶ó CSS Å¬·¡½º¸¦ µ¿ÀûÀ¸·Î Ãß°¡ÇÏ´Â ¸Þ¼­µåÀÌ´Ù. ³ëµåÀÇ ½Ã°¢Àû ½ºÅ¸ÀÏÀ» °áÁ¤ÇÑ´Ù.
+    // ë…¸ë“œ íƒ€ìž…(Action, Composite, Decorate)ì— ë”°ë¼ CSS í´ëž˜ìŠ¤ë¥¼ ë™ì ìœ¼ë¡œ ì¶”ê°€í•˜ëŠ” ë©”ì„œë“œì´ë‹¤. ë…¸ë“œì˜ ì‹œê°ì  ìŠ¤íƒ€ì¼ì„ ê²°ì •í•œë‹¤.
     private void SetupClasses()
     {
         if (node is ActionNode)
@@ -74,8 +74,8 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
     }
 
-    // CreateInputPorts, CreateOutputPorts : ³ëµåÀÇ ÀÔ·Â Æ÷Æ®¿Í Ãâ·Â Æ÷Æ®¸¦ »ý¼ºÇÑ´Ù.
-    // Æ÷Æ® Å¸ÀÔ°ú ¿ë·®Àº ³ëµåÀÇ Á¾·ù¿¡ µû¶ó ´Ù¸£¸ç, ÀÌ ¸Þ¼­µåµéÀº ÇØ´ç Æ÷Æ®µéÀ» ³ëµå ºä¿¡ Ãß°¡ÇÑ´Ù.
+    // CreateInputPorts, CreateOutputPorts : ë…¸ë“œì˜ ìž…ë ¥ í¬íŠ¸ì™€ ì¶œë ¥ í¬íŠ¸ë¥¼ ìƒì„±í•œë‹¤.
+    // í¬íŠ¸ íƒ€ìž…ê³¼ ìš©ëŸ‰ì€ ë…¸ë“œì˜ ì¢…ë¥˜ì— ë”°ë¼ ë‹¤ë¥´ë©°, ì´ ë©”ì„œë“œë“¤ì€ í•´ë‹¹ í¬íŠ¸ë“¤ì„ ë…¸ë“œ ë·°ì— ì¶”ê°€í•œë‹¤.
     private void CreateInputPorts()
     {
         if (node is ActionNode)
@@ -130,8 +130,8 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
     }
 
-    // »ç¿ëÀÚ°¡ ³ëµå¸¦ µå·¡±×ÇÒ ¶§, ³ëµåÀÇ »õ À§Ä¡¸¦ ¼³Á¤ÇÑ´Ù.
-    // ÀÌ ¸Þ¼­µå´Â Undo ½Ã½ºÅÛ°ú ÅëÇÕµÇ¾î, »ç¿ëÀÚ°¡ ³ëµå À§Ä¡ º¯°æÀ» µÇµ¹¸± ¼ö ÀÖ°Ô ÇÑ´Ù.
+    // ì‚¬ìš©ìžê°€ ë…¸ë“œë¥¼ ë“œëž˜ê·¸í•  ë•Œ, ë…¸ë“œì˜ ìƒˆ ìœ„ì¹˜ë¥¼ ì„¤ì •í•œë‹¤.
+    // ì´ ë©”ì„œë“œëŠ” Undo ì‹œìŠ¤í…œê³¼ í†µí•©ë˜ì–´, ì‚¬ìš©ìžê°€ ë…¸ë“œ ìœ„ì¹˜ ë³€ê²½ì„ ë˜ëŒë¦´ ìˆ˜ ìžˆê²Œ í•œë‹¤.
     public override void SetPosition(Rect newPos)
     {
         base.SetPosition(newPos);
@@ -144,7 +144,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         EditorUtility.SetDirty(node);
     }
 
-    // ³ëµå ºä°¡ ¼±ÅÃµÉ ¶§ È£ÃâµÈ´Ù. ÀÌ ¸Þ¼­µå´Â 'OnNodeSelected' ÀÌº¥Æ®¸¦ ¹ß»ý½ÃÄÑ, ³ëµå°¡ ¼±ÅÃµÇ¾úÀ½À» ¾Ë¸°´Ù.
+    // ë…¸ë“œ ë·°ê°€ ì„ íƒë  ë•Œ í˜¸ì¶œëœë‹¤. ì´ ë©”ì„œë“œëŠ” 'OnNodeSelected' ì´ë²¤íŠ¸ë¥¼ ë°œìƒì‹œì¼œ, ë…¸ë“œê°€ ì„ íƒë˜ì—ˆìŒì„ ì•Œë¦°ë‹¤.
     public override void OnSelected()
     {
         base.OnSelected();
@@ -154,7 +154,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
     }
 
-    // 'CompositeNode' Å¸ÀÔÀÇ ³ëµå°¡ ÀÚ½Ä ³ëµå¸¦ °¡Áö°í ÀÖ´Â °æ¿ì, ÀÌ ¸Þ¼­µå´Â ±× ÀÚ½Ä ³ëµåµéÀ» °¡·Î À§Ä¡¿¡ µû¶ó Á¤·ÄÇÑ´Ù.
+    // 'CompositeNode' íƒ€ìž…ì˜ ë…¸ë“œê°€ ìžì‹ ë…¸ë“œë¥¼ ê°€ì§€ê³  ìžˆëŠ” ê²½ìš°, ì´ ë©”ì„œë“œëŠ” ê·¸ ìžì‹ ë…¸ë“œë“¤ì„ ê°€ë¡œ ìœ„ì¹˜ì— ë”°ë¼ ì •ë ¬í•œë‹¤.
     public void SortChildren()
     {
         if (node is CompositeNode composite)
@@ -163,13 +163,13 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
     }
 
-    // ÀÚ½Ä ³ëµåµéÀ» °¡·Î À§Ä¡(position.x)¿¡ µû¶ó Á¤·ÄÇÏ±â À§ÇÑ ºñ±³ ÇÔ¼öÀÌ´Ù. 'CompositeNode'¿Í °°ÀÌ ¿©·¯ ÀÚ½Ä ³ëµå¸¦ °¡Áú ¼ö ÀÖ´Â ³ëµå Å¸ÀÔ¿¡¼­ »ç¿ëµÈ´Ù.
+    // ìžì‹ ë…¸ë“œë“¤ì„ ê°€ë¡œ ìœ„ì¹˜(position.x)ì— ë”°ë¼ ì •ë ¬í•˜ê¸° ìœ„í•œ ë¹„êµ í•¨ìˆ˜ì´ë‹¤. 'CompositeNode'ì™€ ê°™ì´ ì—¬ëŸ¬ ìžì‹ ë…¸ë“œë¥¼ ê°€ì§ˆ ìˆ˜ ìžˆëŠ” ë…¸ë“œ íƒ€ìž…ì—ì„œ ì‚¬ìš©ëœë‹¤.
     private int SortByHorizontalPosition(Node left, Node right)
     {
         return left.position.x < right.position.x ? -1 : 1;
     }
 
-    // ³ëµåÀÇ ½ÇÇà »óÅÂ(Success, Running, Failure)¿¡ µû¶ó CSS Å¬·¡½º¸¦ µ¿ÀûÀ¸·Î Ãß°¡ÇÏ°Å³ª Á¦°ÅÇÏ¿©, ³ëµåÀÇ »óÅÂ¸¦ ½Ã°¢ÀûÀ¸·Î Ç¥ÇöÇÑ´Ù.
+    // ë…¸ë“œì˜ ì‹¤í–‰ ìƒíƒœ(Success, Running, Failure)ì— ë”°ë¼ CSS í´ëž˜ìŠ¤ë¥¼ ë™ì ìœ¼ë¡œ ì¶”ê°€í•˜ê±°ë‚˜ ì œê±°í•˜ì—¬, ë…¸ë“œì˜ ìƒíƒœë¥¼ ì‹œê°ì ìœ¼ë¡œ í‘œí˜„í•œë‹¤.
     public void UpdateState()
     {
 

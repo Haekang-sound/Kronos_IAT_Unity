@@ -1,11 +1,11 @@
-using JetBrains.Annotations;
+ï»¿using JetBrains.Annotations;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ½ºÅ³ Æ®¸®ÀÇ ÁøÇà »óÅÂ¸¦ ½Ã°¢ÀûÀ¸·Î Ç¥½ÃÇÏ´Â UI¸¦ °ü¸®ÇÕ´Ï´Ù. 
+/// ìŠ¤í‚¬ íŠ¸ë¦¬ì˜ ì§„í–‰ ìƒíƒœë¥¼ ì‹œê°ì ìœ¼ë¡œ í‘œì‹œí•˜ëŠ” UIë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤. 
 /// </summary>
 public class ProgressBar : MonoBehaviour
 {
@@ -57,7 +57,7 @@ public class ProgressBar : MonoBehaviour
         {
             if (isFilling == false)
             {
-                StartCoroutine(FillBarOverTime(percentage, fillAmountDuration)); // 1ÃÊ µ¿¾È fillAmount¸¦ Ã¤¿ò
+                StartCoroutine(FillBarOverTime(percentage, fillAmountDuration)); // 1ì´ˆ ë™ì•ˆ fillAmountë¥¼ ì±„ì›€
             }
         }
         else
@@ -78,10 +78,10 @@ public class ProgressBar : MonoBehaviour
         {
             elapsedTime += Time.unscaledDeltaTime;
             barImage.fillAmount = Mathf.Lerp(startFill, endFill, elapsedTime / duration);
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
 
-        // ÃÖÁ¾ÀûÀ¸·Î Á¤È®ÇÑ °ªÀ¸·Î ¼³Á¤
+        // ìµœì¢…ì ìœ¼ë¡œ ì •í™•í•œ ê°’ìœ¼ë¡œ ì„¤ì •
         barImage.fillAmount = endFill;
 
         isFilling = false;

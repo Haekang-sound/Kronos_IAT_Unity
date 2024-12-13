@@ -1,11 +1,11 @@
-using Message;
+ï»¿using Message;
 using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ Çàµ¿À» Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°İ ¹üÀ§, ÀÌµ¿, È¸Àü, ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å, ÇÇÇØ Ã³¸®,
-/// ³Ë¹é, ½½·¡½Ã ¹× ÃæÀü µîÀÇ ±â´ÉÀ» Æ÷ÇÔÇÏ°í ÀÖ½À´Ï´Ù.
+/// ATypeEnemì˜ í–‰ë™ì„ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ê³µê²© ë²”ìœ„, ì´ë™, íšŒì „, ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±°, í”¼í•´ ì²˜ë¦¬,
+/// ë„‰ë°±, ìŠ¬ë˜ì‹œ ë° ì¶©ì „ ë“±ì˜ ê¸°ëŠ¥ì„ í¬í•¨í•˜ê³  ìˆìŠµë‹ˆë‹¤.
 /// </summary>
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
@@ -43,7 +43,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     private MeleeWeapon _meleeWeapon;
     private Rigidbody _rigidbody;
 
-    // ¾Ö³Ê¹Ìµµ Ä®À» °®°íÀÖ¾î¾ß ÇÑ´Ù.
+    // ì• ë„ˆë¯¸ë„ ì¹¼ì„ ê°–ê³ ìˆì–´ì•¼ í•œë‹¤.
     public GameObject enemySword;
 
     // Animator Parameters
@@ -123,7 +123,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (drawGizmos == false) return;
 
-        // °ø°İ ¹üÀ§
+        // ê³µê²© ë²”ìœ„
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeAttackDistance);
 
@@ -133,7 +133,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, strongAttackDistance);
 
-        // ±âº» À§Ä¡ 
+        // ê¸°ë³¸ ìœ„ì¹˜ 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
@@ -148,7 +148,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ÀÌµ¿ ¸ñÀûÁö ¼³Á¤
+        // ì´ë™ ëª©ì ì§€ ì„¤ì •
         var offsetPlayer = transform.position - CurrentTarget.transform.position;
         var direction = Vector3.Cross(offsetPlayer, Vector3.up);
         _controller.SetTarget(transform.position + direction);
@@ -160,7 +160,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ÀÌµ¿ ¸ñÀûÁö ¼³Á¤
+        // ì´ë™ ëª©ì ì§€ ì„¤ì •
         var offsetPlayer = CurrentTarget.transform.position - transform.position;
         var direction = Vector3.Cross(offsetPlayer, Vector3.up);
         _controller.SetTarget(transform.position + direction);
@@ -172,7 +172,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ¼³Á¤
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ ì„¤ì •
         var lookPosition = CurrentTarget.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
@@ -251,7 +251,7 @@ public class ATypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _controller.Release();
     }
 
-    // ¾Ö³Ê¹Ì ½½·¡½Ã È¿°ú
+    // ì• ë„ˆë¯¸ ìŠ¬ë˜ì‹œ íš¨ê³¼
     public void EnemySlash()
     {
         EffectManager.Instance.EnemySlash(gameObject.transform);

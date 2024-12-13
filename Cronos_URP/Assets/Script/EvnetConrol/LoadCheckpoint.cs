@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÇÃ·¹ÀÌ µ¿¾È ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// í”Œë ˆì´ ë™ì•ˆ ì €ì¥ëœ ë°ì´í„°ë¥¼ í˜¸ì¶œí•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class LoadCheckpoint : MonoBehaviour
 {

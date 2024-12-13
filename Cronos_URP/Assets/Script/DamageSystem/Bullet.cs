@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÃÑ¾ËÀ» ³ªÅ¸³»´Â Å¬·¡½ºÀÔ´Ï´Ù. ¹ß»ç ÈÄ ÀÏÁ¤ ½Ã°£ µ¿¾È ¸ñÇ¥¸¦ ÇâÇØ ºñÇàÇÏ¸ç, 
-/// Ãæµ¹ ÈÄ Æø¹ßÇÏ¿© ÁÖº¯ÀÇ ´ë»ó¿¡ ÇÇÇØ¸¦ ÀÔÈü´Ï´Ù.
+/// ì´ì•Œì„ ë‚˜íƒ€ë‚´ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤. ë°œì‚¬ í›„ ì¼ì • ì‹œê°„ ë™ì•ˆ ëª©í‘œë¥¼ í–¥í•´ ë¹„í–‰í•˜ë©°, 
+/// ì¶©ëŒ í›„ í­ë°œí•˜ì—¬ ì£¼ë³€ì˜ ëŒ€ìƒì— í”¼í•´ë¥¼ ì…í™ë‹ˆë‹¤.
 /// </summary>
 public class Bullet : Projectile
 {
     public enum ShotType
     {
-        HIGHEST_SHOT, // °¡Àå ³ôÀº °íµµ·Î ¹ß»çÇÏ¿© ¸ñÇ¥¿¡ µµ´ŞÇÕ´Ï´Ù.
-        LOWEST_SPEED, // °¡Àå ³·Àº ¼Óµµ·Î ¸ñÇ¥¿¡ µµ´ŞÇÏ´Â °æ·ÎÀÔ´Ï´Ù.
-        MOST_DIRECT // °¡Àå Á÷¼±ÀûÀÎ °æ·Î·Î ¸ñÇ¥¿¡ µµ´ŞÇÕ´Ï´Ù.
+        HIGHEST_SHOT, // ê°€ì¥ ë†’ì€ ê³ ë„ë¡œ ë°œì‚¬í•˜ì—¬ ëª©í‘œì— ë„ë‹¬í•©ë‹ˆë‹¤.
+        LOWEST_SPEED, // ê°€ì¥ ë‚®ì€ ì†ë„ë¡œ ëª©í‘œì— ë„ë‹¬í•˜ëŠ” ê²½ë¡œì…ë‹ˆë‹¤.
+        MOST_DIRECT // ê°€ì¥ ì§ì„ ì ì¸ ê²½ë¡œë¡œ ëª©í‘œì— ë„ë‹¬í•©ë‹ˆë‹¤.
     }
 
     public ShotType shotType;
@@ -44,8 +44,8 @@ public class Bullet : Projectile
 
     private void Update()
     {
-        // 8ÃÊ°¡ Áö³ª¸é ÀÚµ¿À¸·Î ¿ÀºêÁ§Æ®°¡ Á¦°ÅµÇµµ·Ï ÇÏµå ÄÚµù
-        // »ıÁ¸ ½Ã°£ º¯¼ö¸¦ µû·Î µ×Áö¸¸ 0À¸·Î ÃÊ±âÈ­ ÇÏ´Â ¹Ù¶÷¿¡ ºÎµæÀÌÇÏ°Ô ÇÏµå ÄÚµù
+        // 8ì´ˆê°€ ì§€ë‚˜ë©´ ìë™ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ê°€ ì œê±°ë˜ë„ë¡ í•˜ë“œ ì½”ë”©
+        // ìƒì¡´ ì‹œê°„ ë³€ìˆ˜ë¥¼ ë”°ë¡œ ë’€ì§€ë§Œ 0ìœ¼ë¡œ ì´ˆê¸°í™” í•˜ëŠ” ë°”ëŒì— ë¶€ë“ì´í•˜ê²Œ í•˜ë“œ ì½”ë”©
         if (_sinceFired > 8f)
         {
             pool.Free(this);
@@ -61,7 +61,7 @@ public class Bullet : Projectile
 
         if (_sinceFired > 0.2f)
         {
-            // ¹ß»çµÇÀÚ¸¶ÀÚ ÅÍÁö´Â °ÍÀ» ¸·±â À§ÇØ 0.5ÃÊ ÈÄ¿¡¸¸ Ãæµ¹À» È°¼ºÈ­ÇÕ´Ï´Ù.
+            // ë°œì‚¬ë˜ìë§ˆì í„°ì§€ëŠ” ê²ƒì„ ë§‰ê¸° ìœ„í•´ 0.5ì´ˆ í›„ì—ë§Œ ì¶©ëŒì„ í™œì„±í™”í•©ë‹ˆë‹¤.
             _rigidBody.detectCollisions = true;
         }
 
@@ -80,10 +80,10 @@ public class Bullet : Projectile
     }
 
     /// <summary>
-    /// ¸ñÇ¥ ÁöÁ¡°ú ÇÔ²² ÃÑ¾ËÀ» ¹ß»çÇÕ´Ï´Ù.
+    /// ëª©í‘œ ì§€ì ê³¼ í•¨ê»˜ ì´ì•Œì„ ë°œì‚¬í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="target">¸ñÇ¥ ÁöÁ¡</param>
-    /// <param name="shooter">¹ß»çÇÑ ¹«±â</param>
+    /// <param name="target">ëª©í‘œ ì§€ì </param>
+    /// <param name="shooter">ë°œì‚¬í•œ ë¬´ê¸°</param>
     public override void Shot(Vector3 target, RangeWeapon shooter)
     {
         _rigidBody.isKinematic = false;
@@ -92,7 +92,7 @@ public class Bullet : Projectile
 
         _rigidBody.velocity = GetVelocity(target);
 		
-		//ÀÛ¾÷Áß
+		//ì‘ì—…ì¤‘
 		_currentVelocity = _rigidBody.velocity;
 
 		_rigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
@@ -129,21 +129,21 @@ public class Bullet : Projectile
     }
 
     /// <summary>
-    /// ¸ñÇ¥ ÁöÁ¡À¸·Î ÀÌµ¿ÇÏ±â À§ÇÑ ¼Óµµ¸¦ °è»êÇÕ´Ï´Ù.
+    /// ëª©í‘œ ì§€ì ìœ¼ë¡œ ì´ë™í•˜ê¸° ìœ„í•œ ì†ë„ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="target">¸ñÇ¥ ÁöÁ¡</param>
-    /// <returns>¸ñÇ¥ ÁöÁ¡À¸·Î ÇâÇÏ´Â ¼Óµµ º¤ÅÍ</returns>
+    /// <param name="target">ëª©í‘œ ì§€ì </param>
+    /// <returns>ëª©í‘œ ì§€ì ìœ¼ë¡œ í–¥í•˜ëŠ” ì†ë„ ë²¡í„°</returns>
     private Vector3 GetVelocity(Vector3 target)
     {
         Vector3 velocity = Vector3.zero;
         Vector3 toTarget = target - transform.position;
 
-        // ÀÌÂ÷ ¹æÁ¤½ÄÀ» Çª´Â µ¥ ÇÊ¿äÇÑ Á¶°ÇÀ» ¼³Á¤ÇÕ´Ï´Ù.
+        // ì´ì°¨ ë°©ì •ì‹ì„ í‘¸ëŠ” ë° í•„ìš”í•œ ì¡°ê±´ì„ ì„¤ì •í•©ë‹ˆë‹¤.
         float gSquared = Physics.gravity.sqrMagnitude;
         float b = projectileSpeed * projectileSpeed + Vector3.Dot(toTarget, Physics.gravity);
         float discriminant = b * b - gSquared * toTarget.sqrMagnitude;
 
-        // ÃÖ´ë ¼Óµµ ÀÌÇÏ·Î ¸ñÇ¥¿¡ µµ´ŞÇÒ ¼ö ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+        // ìµœëŒ€ ì†ë„ ì´í•˜ë¡œ ëª©í‘œì— ë„ë‹¬í•  ìˆ˜ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
         if (discriminant < 0)
         {
             velocity = toTarget;
@@ -164,21 +164,21 @@ public class Bullet : Projectile
         {
             case ShotType.HIGHEST_SHOT:
                 {
-                    // °¡Àå ³ôÀº ³ôÀÌ·Î °î¼±À» ±×¸®¸ç ¸íÁßÇÕ´Ï´Ù:
+                    // ê°€ì¥ ë†’ì€ ë†’ì´ë¡œ ê³¡ì„ ì„ ê·¸ë¦¬ë©° ëª…ì¤‘í•©ë‹ˆë‹¤:
                     float T_max = Mathf.Sqrt((b + discRoot) * 2f / gSquared);
                     T = T_max;
                 }
                 break;
             case ShotType.LOWEST_SPEED:
                 {
-                    // °¡Àå ³·Àº °î¼±À» ±×¸®¸ç ¸íÁßÇÕ´Ï´Ù.
+                    // ê°€ì¥ ë‚®ì€ ê³¡ì„ ì„ ê·¸ë¦¬ë©° ëª…ì¤‘í•©ë‹ˆë‹¤.
                     float T_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(toTarget.sqrMagnitude * 4f / gSquared));
                     T = T_lowEnergy;
                 }
                 break;
             case ShotType.MOST_DIRECT:
                 {
-                    // ÀÏÁ÷¼±À¸·Î ¸íÁßÇÕ´Ï´Ù.:
+                    // ì¼ì§ì„ ìœ¼ë¡œ ëª…ì¤‘í•©ë‹ˆë‹¤.:
                     float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
                     T = T_min;
                 }
@@ -187,7 +187,7 @@ public class Bullet : Projectile
                 break;
         }
 
-        // time-to-hit¿¡¼­ launch velocity·Î º¯È¯ÇÕ´Ï´Ù:
+        // time-to-hitì—ì„œ launch velocityë¡œ ë³€í™˜í•©ë‹ˆë‹¤:
         velocity = toTarget / T - Physics.gravity * T / 2f;
 
         return velocity;

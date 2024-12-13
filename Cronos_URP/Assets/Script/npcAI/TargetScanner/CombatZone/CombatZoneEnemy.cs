@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ÀüÅõ ±¸¿ª ³» ÀûÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù. ÀÌ Å¬·¡½º´Â Å¸°ÙÀ» ÃßÀûÇÏ°í, Å¸°ÙÀ» ÀÒ¾úÀ» ¶§ ÀÏÁ¤ ½Ã°£ µ¿¾È ÃßÀûÀ» °è¼ÓÇÏ°Å³ª ÃßÀûÀ» ¸ØÃä´Ï´Ù.
-/// ¶ÇÇÑ, Å¸°ÙÀÇ À§Ä¡¿¡ ¸ÂÃç ÀÌµ¿ÇØ¾ß ÇÒ ÁöÁ¡À» °è»êÇÏ¿© ÀûÀÌ Å¸°ÙÀ» ÃßÀûÇÒ ¼ö ÀÖµµ·Ï µµ¿ÍÁİ´Ï´Ù.
+/// ì „íˆ¬ êµ¬ì—­ ë‚´ ì ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤. ì´ í´ë˜ìŠ¤ëŠ” íƒ€ê²Ÿì„ ì¶”ì í•˜ê³ , íƒ€ê²Ÿì„ ìƒì—ˆì„ ë•Œ ì¼ì • ì‹œê°„ ë™ì•ˆ ì¶”ì ì„ ê³„ì†í•˜ê±°ë‚˜ ì¶”ì ì„ ë©ˆì¶¥ë‹ˆë‹¤.
+/// ë˜í•œ, íƒ€ê²Ÿì˜ ìœ„ì¹˜ì— ë§ì¶° ì´ë™í•´ì•¼ í•  ì§€ì ì„ ê³„ì‚°í•˜ì—¬ ì ì´ íƒ€ê²Ÿì„ ì¶”ì í•  ìˆ˜ ìˆë„ë¡ ë„ì™€ì¤ë‹ˆë‹¤.
 /// </summary>
 public class CombatZoneEnemy : MonoBehaviour
 {
@@ -12,14 +12,14 @@ public class CombatZoneEnemy : MonoBehaviour
     public float timeToStopPursuit = 0.0f;
     protected float _timerSinceLostTarget = 0.0f;
 
-    // finderÀÇ Å¸±ê
+    // finderì˜ íƒ€ê¹ƒ
     public GameObject CurrentTarget { get; private set; }
 
-    // Scan ¿µ¿ª
+    // Scan ì˜ì—­
     public bool useCombatZone;
     public CombatZone combatZone { private get; set; }
 
-    // Å¸±ê ¹ß°ß ½Ã ÀÌµ¿ÇØ¾ßÇÒ À§Ä¡
+    // íƒ€ê¹ƒ ë°œê²¬ ì‹œ ì´ë™í•´ì•¼í•  ìœ„ì¹˜
     public TargetDistributor.TargetFollower FollowerData { get; private set; }
 
     public UnityEvent OnDown;
@@ -29,7 +29,7 @@ public class CombatZoneEnemy : MonoBehaviour
         FollowerData.distributor.UnregisterFollower(FollowerData);
     }
 
-    // Å¸°Ù °´Ã¼ÀÇ À§Ä¡¿¡¼­ Æ¯Á¤ ¹æÇâÀ¸·Î 90%ÀÇ °Å¸®¿¡ ÀÖ´Â ÁöÁ¡À» FollowerData.requiredPoint·Î ¼³Á¤
+    // íƒ€ê²Ÿ ê°ì²´ì˜ ìœ„ì¹˜ì—ì„œ íŠ¹ì • ë°©í–¥ìœ¼ë¡œ 90%ì˜ ê±°ë¦¬ì— ìˆëŠ” ì§€ì ì„ FollowerData.requiredPointë¡œ ì„¤ì •
     public void RequestTargetPosition(float distance)
     {
         if (FollowerData == null)
@@ -42,15 +42,15 @@ public class CombatZoneEnemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Å¸°ÙÀ» Ã£°í ÃßÀû »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù. 
-    /// ÀüÅõ ±¸¿ªÀ» »ç¿ëÇÒ °æ¿ì, CombatZone¿¡¼­ Å¸°ÙÀ» Å½ÁöÇÏ°í, ±×·¸Áö ¾ÊÀ¸¸é ±âº»ÀûÀ¸·Î ¼³Á¤µÈ Å¸°ÙÀ» »ç¿ëÇÕ´Ï´Ù.
+    /// íƒ€ê²Ÿì„ ì°¾ê³  ì¶”ì  ìƒíƒœë¥¼ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤. 
+    /// ì „íˆ¬ êµ¬ì—­ì„ ì‚¬ìš©í•  ê²½ìš°, CombatZoneì—ì„œ íƒ€ê²Ÿì„ íƒì§€í•˜ê³ , ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ê¸°ë³¸ì ìœ¼ë¡œ ì„¤ì •ëœ íƒ€ê²Ÿì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
     /// </summary>
     public void FindTarget()
     {
         GameObject target = null;
         if (useCombatZone == true)
         {
-            // scannerÀÇ Å¸±ê
+            // scannerì˜ íƒ€ê¹ƒ
             target = combatZone.Detect(transform, CurrentTarget == null);
         }
         else
@@ -60,7 +60,7 @@ public class CombatZoneEnemy : MonoBehaviour
 
         if (CurrentTarget == null)
         {
-            // ÇöÀç Å¸±êÀÌ ¾ø°í, Scanner°¡ Å¸±êÀ» ¹ß°ßÇÑ °æ¿ì.
+            // í˜„ì¬ íƒ€ê¹ƒì´ ì—†ê³ , Scannerê°€ íƒ€ê¹ƒì„ ë°œê²¬í•œ ê²½ìš°.
             if (target != null)
             {
                 CurrentTarget = target;
@@ -68,45 +68,45 @@ public class CombatZoneEnemy : MonoBehaviour
 
                 if (distributor != null)
                 {
-                    // Å¸±ê ¹ß°ß ½Ã ÀÌµ¿ÇØ¾ßÇÒ À§Ä¡¸¦ ¾ò½À´Ï´Ù.
+                    // íƒ€ê¹ƒ ë°œê²¬ ì‹œ ì´ë™í•´ì•¼í•  ìœ„ì¹˜ë¥¼ ì–»ìŠµë‹ˆë‹¤.
                     FollowerData = distributor.RegisterNewFollower();
                 }
             }
         }
         else
         {
-            // ÇöÀç Å¸±êÀÌ ÀÖÁö¸¸ Scanner°¡ ´õ´Â Å¸±êÀ» Ã£Áö ¸øÇÏ´Â °æ¿ì.
+            // í˜„ì¬ íƒ€ê¹ƒì´ ìˆì§€ë§Œ Scannerê°€ ë”ëŠ” íƒ€ê¹ƒì„ ì°¾ì§€ ëª»í•˜ëŠ” ê²½ìš°.
             if (target == null)
             {
                 _timerSinceLostTarget += Time.deltaTime;
 
                 if (_timerSinceLostTarget > timeToStopPursuit)
                 {
-                    // Å¸±êÀÇ Distributer ±¸µ¶ ÇØÁ¦
+                    // íƒ€ê¹ƒì˜ Distributer êµ¬ë… í•´ì œ
                     if (FollowerData != null)
                     {
                         FollowerData.distributor.UnregisterFollower(FollowerData);
                     }
 
-                    // ÇöÁ¦ Å¸±êÀÌ ¾øµµ·Ï Àç¼³Á¤ÇÑ´Ù.
+                    // í˜„ì œ íƒ€ê¹ƒì´ ì—†ë„ë¡ ì¬ì„¤ì •í•œë‹¤.
                     CurrentTarget = null;
                 }
             }
             else
             {
-                // ¿©ÀüÈ÷ ÇöÀç Å¸±êÀÌ ÀÖÁö¸¸ Scanner°¡ Å¸±êÀ» Ã£À» ¼ö ¾ø´Â °æ¿ì
+                // ì—¬ì „íˆ í˜„ì¬ íƒ€ê¹ƒì´ ìˆì§€ë§Œ Scannerê°€ íƒ€ê¹ƒì„ ì°¾ì„ ìˆ˜ ì—†ëŠ” ê²½ìš°
                 if (target != CurrentTarget)
                 {
-                    // ÀÌµ¿À§Ä¡ ¾÷µ¥ÀÌÆ® 1: Å¸±êÀÇ Distributer ±¸µ¶ ÇØÁ¦.
+                    // ì´ë™ìœ„ì¹˜ ì—…ë°ì´íŠ¸ 1: íƒ€ê¹ƒì˜ Distributer êµ¬ë… í•´ì œ.
                     if (FollowerData != null)
                     {
                         FollowerData.distributor.UnregisterFollower(FollowerData);
                     }
 
-                    // ÇöÀç Å¸±ê ¾÷µ¥ÀÌÆ®
+                    // í˜„ì¬ íƒ€ê¹ƒ ì—…ë°ì´íŠ¸
                     CurrentTarget = target;
 
-                    // ÀÌµ¿À§Ä¡ ¾÷µ¥ÀÌÆ® 2: Å¸±êÀÇ Distributer Àç±¸µ¶.
+                    // ì´ë™ìœ„ì¹˜ ì—…ë°ì´íŠ¸ 2: íƒ€ê¹ƒì˜ Distributer ì¬êµ¬ë….
                     TargetDistributor distributor = target.GetComponentInChildren<TargetDistributor>();
 
                     if (distributor != null)

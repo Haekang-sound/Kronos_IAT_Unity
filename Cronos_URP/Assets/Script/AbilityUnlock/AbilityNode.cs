@@ -1,4 +1,4 @@
-using Cinemachine;
+ï»¿using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,8 +9,8 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 
 /// <summary>
-/// ½ºÅ³ Æ®¸®ÀÇ °³º° ³ëµå¸¦ ³ªÅ¸³»¸ç »óÅÂ °ü¸®, UI ·»´õ¸µ, 
-/// ÀÚ½Ä ³ëµå È°¼ºÈ­ ¹× ÀúÀå/·Îµå ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ìŠ¤í‚¬ íŠ¸ë¦¬ì˜ ê°œë³„ ë…¸ë“œë¥¼ ë‚˜íƒ€ë‚´ë©° ìƒíƒœ ê´€ë¦¬, UI ë Œë”ë§, 
+/// ìì‹ ë…¸ë“œ í™œì„±í™” ë° ì €ì¥/ë¡œë“œ ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 {
@@ -104,7 +104,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
                     skillIcon.SetGrayscale(0f);
                     _backgroundRotate.enabled = true;
 
-                    // Àû¿ëµÉ ½ºÅ³ ¾÷µ¥ÀÌÆ®
+                    // ì ìš©ë  ìŠ¤í‚¬ ì—…ë°ì´íŠ¸
                     OnUpdated.Invoke();
                 }
                 break;
@@ -149,15 +149,15 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
                     background.SetGrayscale(0f);
                     skillIcon.Reset();
 
-                    // ÀÚ½Ä ³ëµåµéÀ» Interactible·Î º¯°æ
+                    // ìì‹ ë…¸ë“œë“¤ì„ Interactibleë¡œ ë³€ê²½
                     SetChildsInteractible();
-                    // Àû¿ëµÉ ½ºÅ³ ¾÷µ¥ÀÌÆ®
+                    // ì ìš©ë  ìŠ¤í‚¬ ì—…ë°ì´íŠ¸
                     OnUpdated.Invoke();
                 }
                 break;
         }
 
-        // ±âÅ¸ ¾÷µ¥ÀÌÆ® (ÁøÇàµµ ¹Ù)
+        // ê¸°íƒ€ ì—…ë°ì´íŠ¸ (ì§„í–‰ë„ ë°”)
 
     }
 
@@ -189,7 +189,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
     {
         if (_observer != null)
         {
-            throw new InvalidOperationException("°üÂûÀÚ(observer)´Â ÇÑ ¸í¸¸ ÀÖ¾î¾ß ÇÕ´Ï´Ù.");
+            throw new InvalidOperationException("ê´€ì°°ì(observer)ëŠ” í•œ ëª…ë§Œ ìˆì–´ì•¼ í•©ë‹ˆë‹¤.");
         }
         _observer = observer;
         return new Unsubscriber(this);
@@ -251,7 +251,7 @@ public class AbilityNode : MonoBehaviour, IObservable<AbilityNode>
 
     private IEnumerator SetFocausAfter(bool val, float time)
     {
-        // ÁöÁ¤µÈ ½Ã°£(2ÃÊ) ´ë±â
+        // ì§€ì •ëœ ì‹œê°„(2ì´ˆ) ëŒ€ê¸°
         yield return new WaitForSecondsRealtime(time);
 
         isFucus = val;

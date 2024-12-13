@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
@@ -11,13 +11,13 @@ public class BehaviorTreeEditor : EditorWindow
     private BehaviorTree _tree;
     private InspectorView _inspectorView;
     private IMGUIContainer _blackboardView;
-    private ToolbarMenu _toolbarMenu; // Çàµ¿ Æ®¸® ¿¡µğÅÍÀÇ µµ±¸ ¸ğÀ½ ¸Ş´ºÀÌ´Ù.
+    private ToolbarMenu _toolbarMenu; // í–‰ë™ íŠ¸ë¦¬ ì—ë””í„°ì˜ ë„êµ¬ ëª¨ìŒ ë©”ë‰´ì´ë‹¤.
     private BehaviorTreeSettings _treeSettings;
 
-    // ÆíÁı ÁßÀÎ Çàµ¿ Æ®¸®¿Í ±× ºí·¢º¸µå¸¦ Á÷·ÄÈ­ÇÏ´Â °´Ã¼ÀÌ´Ù.
+    // í¸ì§‘ ì¤‘ì¸ í–‰ë™ íŠ¸ë¦¬ì™€ ê·¸ ë¸”ë™ë³´ë“œë¥¼ ì§ë ¬í™”í•˜ëŠ” ê°ì²´ì´ë‹¤.
     SerializedObject _treeObject;
-    // treeObject : ÇöÀç ÆíÁıÁßÀÎ 'BehaviorTree' °´Ã¼¸¦ 'SerializedObject' ·Î °¨½Î, ÀÎ½ºÆåÅÍ¿¡¼­ ¼öÁ¤ÇÒ ¼ö ÀÖ°Ô ÇÏ´Â °´Ã¼ÀÌ´Ù.
-    // Unity ¿¡µğÅÍ¿¡¼­ °´Ã¼ÀÇ ÇÁ·ÎÆÛÆ¼¸¦ ½Ã°¢ÀûÀ¸·Î ÆíÁıÇÏ±â À§ÇØ »ç¿ëµÈ´Ù.
+    // treeObject : í˜„ì¬ í¸ì§‘ì¤‘ì¸ 'BehaviorTree' ê°ì²´ë¥¼ 'SerializedObject' ë¡œ ê°ì‹¸, ì¸ìŠ¤í™í„°ì—ì„œ ìˆ˜ì •í•  ìˆ˜ ìˆê²Œ í•˜ëŠ” ê°ì²´ì´ë‹¤.
+    // Unity ì—ë””í„°ì—ì„œ ê°ì²´ì˜ í”„ë¡œí¼í‹°ë¥¼ ì‹œê°ì ìœ¼ë¡œ í¸ì§‘í•˜ê¸° ìœ„í•´ ì‚¬ìš©ëœë‹¤.
     SerializedProperty _blackboardProperty;
 
     //[MenuItem("BehaviorTreeEditor/Editor ...")]
@@ -29,7 +29,7 @@ public class BehaviorTreeEditor : EditorWindow
         wnd.minSize = new Vector2(800, 600);
     }
 
-    // Çàµ¿ Æ®¸® ¿¡¼ÂÀ» ´õºí Å¬¸¯ÇÒ ¶§ ÇØ´ç ¿¡µğÅÍ À©µµ¿ì¸¦ ÀÚµ¿À¸·Î ¿©´Â ±â´ÉÀ» ±¸ÇöÇÑ´Ù.
+    // í–‰ë™ íŠ¸ë¦¬ ì—ì…‹ì„ ë”ë¸” í´ë¦­í•  ë•Œ í•´ë‹¹ ì—ë””í„° ìœˆë„ìš°ë¥¼ ìë™ìœ¼ë¡œ ì—¬ëŠ” ê¸°ëŠ¥ì„ êµ¬í˜„í•œë‹¤.
     [OnOpenAsset]
     public static bool OnOpenAsset(int instanceID, int line)
     {
@@ -42,27 +42,27 @@ public class BehaviorTreeEditor : EditorWindow
         return false;
     }
 
-    // ÁöÁ¤µÈ Å¸ÀÔÀÇ ¸ğµç ¿¡¼ÂÀ» ·ÎµåÇÏ´Â À¯Æ¿¸®Æ¼ ¸Ş¼­µåÀÌ´Ù.
+    // ì§€ì •ëœ íƒ€ì…ì˜ ëª¨ë“  ì—ì…‹ì„ ë¡œë“œí•˜ëŠ” ìœ í‹¸ë¦¬í‹° ë©”ì„œë“œì´ë‹¤.
     List<T> LoadAssets<T>() where T : UnityEngine.Object
-        // Á¦³×¸¯ 'T' ¿¡ ÇØ´çÇÏ´Â ¸ğµç ¿¡¼ÂÀ» ·ÎµåÇÏ´Â À¯Æ¿¸®Æ¼ ¸Ş¼­µåÀÌ´Ù.
-        // ¿©±â¼­ 'T' ´Â 'UnityEngine.Object' ¸¦ »ó¼Ó¹Ş´Â ¸ğµç Å¸ÀÔÀÌ µÉ ¼ö ÀÖ´Ù.
+        // ì œë„¤ë¦­ 'T' ì— í•´ë‹¹í•˜ëŠ” ëª¨ë“  ì—ì…‹ì„ ë¡œë“œí•˜ëŠ” ìœ í‹¸ë¦¬í‹° ë©”ì„œë“œì´ë‹¤.
+        // ì—¬ê¸°ì„œ 'T' ëŠ” 'UnityEngine.Object' ë¥¼ ìƒì†ë°›ëŠ” ëª¨ë“  íƒ€ì…ì´ ë  ìˆ˜ ìˆë‹¤.
     {
         string[] assetIds = AssetDatabase.FindAssets($"t:{typeof(T).Name}");
-        // 'AssetDatabase.FindAssets($"t:{typeof(T).Name}")' À» »ç¿ëÇÏ¿© ÁöÁ¤µÈ Å¸ÀÔÀÇ ¸ğµç ¿¡¼ÂÀÇ GDUI¸¦ Ã£´Â´Ù.
+        // 'AssetDatabase.FindAssets($"t:{typeof(T).Name}")' ì„ ì‚¬ìš©í•˜ì—¬ ì§€ì •ëœ íƒ€ì…ì˜ ëª¨ë“  ì—ì…‹ì˜ GDUIë¥¼ ì°¾ëŠ”ë‹¤.
         List<T> assets = new List<T>();
         foreach (var assetId in assetIds)
         {
             string path = AssetDatabase.GUIDToAssetPath(assetId);
-            // °¢ GDUI¿¡ ´ëÇØ 'AssetDatabase.GUIDToAssetPath(assetId)' ¸¦ È£ÃâÇÏ¿© ¿¡¼ÂÀÇ °æ·Î¸¦ ¾ò°í,
+            // ê° GDUIì— ëŒ€í•´ 'AssetDatabase.GUIDToAssetPath(assetId)' ë¥¼ í˜¸ì¶œí•˜ì—¬ ì—ì…‹ì˜ ê²½ë¡œë¥¼ ì–»ê³ ,
             T asset = AssetDatabase.LoadAssetAtPath<T>(path);
-            // 'AssetDatabase.LoadAssetAtPath<T>(path)' ·Î ½ÇÁ¦ ¿¡¼ÂÀ» ·ÎµåÇÑ´Ù.
+            // 'AssetDatabase.LoadAssetAtPath<T>(path)' ë¡œ ì‹¤ì œ ì—ì…‹ì„ ë¡œë“œí•œë‹¤.
             assets.Add(asset);
-            // ·ÎµåµÈ ¿¡¼ÂÀ» 'List<T>' ¿¡ Ãß°¡ÇÑ´Ù.
+            // ë¡œë“œëœ ì—ì…‹ì„ 'List<T>' ì— ì¶”ê°€í•œë‹¤.
         }
         return assets;
-        // ·ÎµåµÈ ¿¡¼ÂµéÀ» ¹İÈ¯ÇÑ´Ù.
+        // ë¡œë“œëœ ì—ì…‹ë“¤ì„ ë°˜í™˜í•œë‹¤.
     }
-    // ÀÌ ¸Ş¼­µå´Â Çàµ¿ Æ®¸® ¿¡µğÅÍ¿¡¼­ »ç¿ëÇÒ ¿¡¼ÂÀ» µ¿ÀûÀ¸·Î ·ÎµåÇÒ ¶§ »ç¿ëµÉ ¼ö ÀÖ´Ù.
+    // ì´ ë©”ì„œë“œëŠ” í–‰ë™ íŠ¸ë¦¬ ì—ë””í„°ì—ì„œ ì‚¬ìš©í•  ì—ì…‹ì„ ë™ì ìœ¼ë¡œ ë¡œë“œí•  ë•Œ ì‚¬ìš©ë  ìˆ˜ ìˆë‹¤.
 
     public void CreateGUI()
     {
@@ -70,25 +70,25 @@ public class BehaviorTreeEditor : EditorWindow
 
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
-        // ¿¡µğÅÍ À©µµ¿ìÀÇ 'rootVisualElement' °´Ã¼¿¡ Á¢±ÙÇÏ¿© UIÀÇ ±âº» ÄÁÅ×ÀÌ³Ê·Î »ç¿ëÇÑ´Ù.
+        // ì—ë””í„° ìœˆë„ìš°ì˜ 'rootVisualElement' ê°ì²´ì— ì ‘ê·¼í•˜ì—¬ UIì˜ ê¸°ë³¸ ì»¨í…Œì´ë„ˆë¡œ ì‚¬ìš©í•œë‹¤.
 
-        // UXML °¡Á®¿À±â
+        // UXML ê°€ì ¸ì˜¤ê¸°
         var visualTree = _treeSettings.behaviourTreeXml;
         visualTree.CloneTree(root);
 
-        // ½ºÅ¸ÀÏ ½ÃÆ®
+        // ìŠ¤íƒ€ì¼ ì‹œíŠ¸
         var styleSheet = _treeSettings.behaviourTreeStyle;
         root.styleSheets.Add(styleSheet);
 
-        // ¸ÅÀÎ Æ®¸® ºä
+        // ë§¤ì¸ íŠ¸ë¦¬ ë·°
         _treeView = root.Q<BehaviorTreeView>();
         _treeView.OnNodeSelected = OnNodeSelectionChanged;
         root.styleSheets.Add(styleSheet);
 
-        // ÀÎ½ºÆåÅÍ ºä
+        // ì¸ìŠ¤í™í„° ë·°
         _inspectorView = root.Q<InspectorView>();
 
-        // ºí·¢º¸µå ºä
+        // ë¸”ë™ë³´ë“œ ë·°
         _blackboardView = root.Q<IMGUIContainer>();
         _blackboardView.onGUIHandler = () =>
         {
@@ -100,7 +100,7 @@ public class BehaviorTreeEditor : EditorWindow
             }
         };
 
-        // Åø¹Ù ¿¡¼Â ¸Ş´º
+        // íˆ´ë°” ì—ì…‹ ë©”ë‰´
         _toolbarMenu = root.Q<ToolbarMenu>();
         var behaviourTrees = LoadAssets<BehaviorTree>();
         behaviourTrees.ForEach(tree =>
@@ -120,24 +120,24 @@ public class BehaviorTreeEditor : EditorWindow
         {
             SelectTree(_tree);
         }
-        // ¸¸¾à ÇöÀç ¼±ÅÃµÈ Æ®¸®(tree)°¡ ¾ø´Ù¸é, 'OnSelectionChange()' ¸Ş¼­µå¸¦ È£ÃâÇÏ¿© ¼±ÅÃµÈ Æ®¸®¸¦ Ã³¸®ÇÑ´Ù.
-        // ÀÌ¹Ì ¼±ÅÃµÈ Æ®¸®°¡ ÀÖ´Ù¸é, 'SelectTree(tree)' ¸¦ È£ÃâÇÏ¿© ÇØ´ç Æ®¸®¸¦ ¿¡µğÅÍ¿¡ Ç¥½ÃÇÑ´Ù.
+        // ë§Œì•½ í˜„ì¬ ì„ íƒëœ íŠ¸ë¦¬(tree)ê°€ ì—†ë‹¤ë©´, 'OnSelectionChange()' ë©”ì„œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ì„ íƒëœ íŠ¸ë¦¬ë¥¼ ì²˜ë¦¬í•œë‹¤.
+        // ì´ë¯¸ ì„ íƒëœ íŠ¸ë¦¬ê°€ ìˆë‹¤ë©´, 'SelectTree(tree)' ë¥¼ í˜¸ì¶œí•˜ì—¬ í•´ë‹¹ íŠ¸ë¦¬ë¥¼ ì—ë””í„°ì— í‘œì‹œí•œë‹¤.
     }
 
-    // OnEnable, OnDisable : À©µµ¿ì°¡ È°¼ºÈ­/ºñÈ²¼ºÈ­ µÉ ¶§, È£ÃâµÇ¾î ÇÃ·¹ÀÌ ¸ğµå »óÅÂ º¯°æ ÀÌº¥Æ®¿¡ ´ëÇÑ ±¸µ¶À» °ü¸®ÇÑ´Ù.
+    // OnEnable, OnDisable : ìœˆë„ìš°ê°€ í™œì„±í™”/ë¹„í™©ì„±í™” ë  ë•Œ, í˜¸ì¶œë˜ì–´ í”Œë ˆì´ ëª¨ë“œ ìƒíƒœ ë³€ê²½ ì´ë²¤íŠ¸ì— ëŒ€í•œ êµ¬ë…ì„ ê´€ë¦¬í•œë‹¤.
     private void OnEnable()
     {
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
     }
-    // 'EditorApplication.playModeStateChanged' ÀÌº¥Æ®¿¡ ´ëÇÑ ±¸µ¶À» ¸ÕÀú ÇØÁ¦ÇÑ ÈÄ ´Ù½Ã ±¸µ¶ÇÑ´Ù.
-    // ÀÌ´Â Áßº¹ ±¸µ¶À» ¹æÁöÇÏ±â À§ÇÔÀÌ´Ù. ÀÌ ÀÌº¥Æ®´Â ÇÃ·¹ÀÌ ¸ğµå »óÅÂ°¡ º¯°æµÉ ¶§¸¶´Ù ¹ß»ıÇÑ´Ù.
+    // 'EditorApplication.playModeStateChanged' ì´ë²¤íŠ¸ì— ëŒ€í•œ êµ¬ë…ì„ ë¨¼ì € í•´ì œí•œ í›„ ë‹¤ì‹œ êµ¬ë…í•œë‹¤.
+    // ì´ëŠ” ì¤‘ë³µ êµ¬ë…ì„ ë°©ì§€í•˜ê¸° ìœ„í•¨ì´ë‹¤. ì´ ì´ë²¤íŠ¸ëŠ” í”Œë ˆì´ ëª¨ë“œ ìƒíƒœê°€ ë³€ê²½ë  ë•Œë§ˆë‹¤ ë°œìƒí•œë‹¤.
     private void OnDisable()
     {
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
     }
 
-    // ÇÃ·¹ÀÌ ¸ğµå »óÅÂ°¡ º¯°æµÉ ¶§ È£ÃâµÇ´Â ¸Ş¼­µåÀÌ´Ù.
+    // í”Œë ˆì´ ëª¨ë“œ ìƒíƒœê°€ ë³€ê²½ë  ë•Œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œì´ë‹¤.
     private void OnPlayModeStateChanged(PlayModeStateChange obj)
     {
         switch (obj)
@@ -155,8 +155,8 @@ public class BehaviorTreeEditor : EditorWindow
         }
     }
 
-    // ¿¡µğÅÍ¿¡¼­ ´Ù¸¥ °´Ã¼°¡ ¼±ÅÃµÉ ¶§ È£ÃâµÇ¾î, ¼±ÅÃµÈ Çàµ¿ Æ®¸®¸¦ ¿¡µğÅÍ¿¡ Ç¥½ÃÇÑ´Ù.
-    // ÇöÀç ¼±ÅÃµÈ °´Ã¼°¡ 'BehaviorTedd' ÀÎÁö È¤Àº, 'BehaviorTreeRunner' ÄÄÆ÷³ÍÆ®¸¦ °¡Áø °ÔÀÓ¿ÀºêÁ§Æ®ÀÎÁö¸¦ È®ÀÎÇÏ°í, ÇØ´ç Æ®¸® ¿¡µğÅÍ¿¡ Ç¥½ÃÇÑ´Ù.
+    // ì—ë””í„°ì—ì„œ ë‹¤ë¥¸ ê°ì²´ê°€ ì„ íƒë  ë•Œ í˜¸ì¶œë˜ì–´, ì„ íƒëœ í–‰ë™ íŠ¸ë¦¬ë¥¼ ì—ë””í„°ì— í‘œì‹œí•œë‹¤.
+    // í˜„ì¬ ì„ íƒëœ ê°ì²´ê°€ 'BehaviorTedd' ì¸ì§€ í˜¹ì€, 'BehaviorTreeRunner' ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§„ ê²Œì„ì˜¤ë¸Œì íŠ¸ì¸ì§€ë¥¼ í™•ì¸í•˜ê³ , í•´ë‹¹ íŠ¸ë¦¬ ì—ë””í„°ì— í‘œì‹œí•œë‹¤.
     private void OnSelectionChange()
     {
         EditorApplication.delayCall += () =>
@@ -177,15 +177,15 @@ public class BehaviorTreeEditor : EditorWindow
             SelectTree(tree);
         };
 
-        // 'EditorApplication.delayCall' À» »ç¿ëÇÏ¿©, ÇöÀç ½ÇÇà ÁßÀÎ ¸ğµç Ã³¸®°¡ ¿Ï·áµÈ ÈÄ¿¡ ÄÚµåºí·ÏÀ» ½ÇÇàÇÏµµ·Ï ÇÑ´Ù.
-        // ÀÌ´Â µ¥ÀÌÅÍÀÇ »óÅÂ°¡ ¾ÈÁ¤µÈ ÈÄ¿¡ ¼±ÅÃµÈ Æ®¸®¸¦ Ã³¸®ÇÏ±â À§ÇÔÀÌ´Ù.
-        // 'Selection.activeObjet' ¸¦ È®ÀÎÇÏ¿© ÇöÀç ¼±ÅÃµÈ °´Ã¼°¡ 'BehaviorTree' Å¸ÀÔÀÎÁö °Ë»çÇÑ´Ù.
-        // ±×·¸Áö ¾Ê°í ¼±ÅÃµÈ °ÔÀÓ¿ÀºêÁ§Æ®°¡ ÀÖÀ» °æ¿ì, ÇØ´ç ¿ÀºêÁ§Æ®¿¡¼­ 'BehaviorTreeRunner' ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ °ü·ÃµÈ Æ®¸®¸¦ È®ÀÎÇÑ´Ù.
-        // È®ÀÎµÈ Çàµ¿ Æ®¸®¸¦ 'SelectTree' ¸Ş¼­µå¿¡ Àü´ŞÇÏ¿©, ¿¡µğÅÍ¿¡¼­ ÇØ´ç Æ®¸®¸¦ Ç¥½ÃÇÏ°í ÀÛ¾÷ÇÒ ¼ö ÀÖ°Ô ÇÑ´Ù.
+        // 'EditorApplication.delayCall' ì„ ì‚¬ìš©í•˜ì—¬, í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ ëª¨ë“  ì²˜ë¦¬ê°€ ì™„ë£Œëœ í›„ì— ì½”ë“œë¸”ë¡ì„ ì‹¤í–‰í•˜ë„ë¡ í•œë‹¤.
+        // ì´ëŠ” ë°ì´í„°ì˜ ìƒíƒœê°€ ì•ˆì •ëœ í›„ì— ì„ íƒëœ íŠ¸ë¦¬ë¥¼ ì²˜ë¦¬í•˜ê¸° ìœ„í•¨ì´ë‹¤.
+        // 'Selection.activeObjet' ë¥¼ í™•ì¸í•˜ì—¬ í˜„ì¬ ì„ íƒëœ ê°ì²´ê°€ 'BehaviorTree' íƒ€ì…ì¸ì§€ ê²€ì‚¬í•œë‹¤.
+        // ê·¸ë ‡ì§€ ì•Šê³  ì„ íƒëœ ê²Œì„ì˜¤ë¸Œì íŠ¸ê°€ ìˆì„ ê²½ìš°, í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ì—ì„œ 'BehaviorTreeRunner' ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•„ ê´€ë ¨ëœ íŠ¸ë¦¬ë¥¼ í™•ì¸í•œë‹¤.
+        // í™•ì¸ëœ í–‰ë™ íŠ¸ë¦¬ë¥¼ 'SelectTree' ë©”ì„œë“œì— ì „ë‹¬í•˜ì—¬, ì—ë””í„°ì—ì„œ í•´ë‹¹ íŠ¸ë¦¬ë¥¼ í‘œì‹œí•˜ê³  ì‘ì—…í•  ìˆ˜ ìˆê²Œ í•œë‹¤.
     }
 
 
-    // ÁÖ¾îÁø Çàµ¿ Æ®¸®¸¦ ¼±ÅÃÇÏ°í ¿¡µğÅÍ¿¡ Ç¥½ÃÇÏ´Â ¸Ş¼­µåÀÌ´Ù.
+    // ì£¼ì–´ì§„ í–‰ë™ íŠ¸ë¦¬ë¥¼ ì„ íƒí•˜ê³  ì—ë””í„°ì— í‘œì‹œí•˜ëŠ” ë©”ì„œë“œì´ë‹¤.
     void SelectTree(BehaviorTree newTree)
     {
         if (_treeView == null)

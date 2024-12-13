@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ °æ°è »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ë³´ìŠ¤ì˜ ê²½ê³„ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
 {
@@ -45,7 +45,7 @@ public class BossSMBStrafe : SceneLinkedSMB<BossBehavior>
         }
 
 
-        // ÀÌµ¿
+        // ì´ë™
         if (_strafeSpeed > 0f)
         {
             _monoBehaviour.Strafe(true);

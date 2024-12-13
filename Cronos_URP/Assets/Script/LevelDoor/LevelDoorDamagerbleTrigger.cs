@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ·¹º§ÀÇ ¹®À» ¿­ ¼ö ÀÖ´Â Æ®¸®°Å¸¦ °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÁöÁ¤µÈ `Damageable` °´Ã¼°¡ »ç¸ÁÇÏ¸é `timeline` ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­ÇÕ´Ï´Ù.
+/// ë ˆë²¨ì˜ ë¬¸ì„ ì—´ ìˆ˜ ìˆëŠ” íŠ¸ë¦¬ê±°ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì§€ì •ëœ `Damageable` ê°ì²´ê°€ ì‚¬ë§í•˜ë©´ `timeline` ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”í•©ë‹ˆë‹¤.
 /// </summary>
 public class LevelDoorDamagerbleTrigger : MonoBehaviour
 {

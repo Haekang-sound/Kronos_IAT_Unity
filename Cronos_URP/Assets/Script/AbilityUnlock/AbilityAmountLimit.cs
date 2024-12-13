@@ -1,9 +1,9 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// »ç¿ë °¡´ÉÇÑ ´É·Â Æ÷ÀÎÆ®¸¦ °ü¸®ÇÏ´Â Å¬·¡½º ÀÔ´Ï´Ù.
-/// Æ÷ÀÎÆ®¸¦ ¼ÒºñÇÏ°Å³ª ÇöÀç Æ÷ÀÎÆ®¸¦ ÇÏ´Â ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ì‚¬ìš© ê°€ëŠ¥í•œ ëŠ¥ë ¥ í¬ì¸íŠ¸ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤ ìž…ë‹ˆë‹¤.
+/// í¬ì¸íŠ¸ë¥¼ ì†Œë¹„í•˜ê±°ë‚˜ í˜„ìž¬ í¬ì¸íŠ¸ë¥¼ í•˜ëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 public class AbilityAmountLimit : MonoBehaviour
 {

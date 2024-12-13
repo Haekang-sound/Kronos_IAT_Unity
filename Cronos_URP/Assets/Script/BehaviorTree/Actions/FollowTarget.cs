@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// �� ĳ���Ͱ� Ÿ���� �����ϸ� �̵��� �� ���˴ϴ�.
-/// �̵� �ӵ�, ȸ�� ������Ʈ, ��ǥ ��ġ ���� �����ϰ�, 
-/// Ÿ�ٿ� �����ϸ� ���� ���¸� ��ȯ�մϴ�.
+/// 적 캐릭터가 타겟을 추적하며 이동할 때 사용됩니다.
+/// 이동 속도, 회전 업데이트, 목표 위치 등을 설정하고, 
+/// 타겟에 도달하면 성공 상태를 반환합니다.
 /// </summary>
 public class FollowTarget : ActionNode
 {
@@ -83,7 +83,7 @@ public class FollowTarget : ActionNode
     {
         if (blackboard.target == null)
         {
-            Debug.Log("Ÿ���� ã�� �� ����");
+            Debug.Log("타깃을 찾을 수 없음");
         }
         else
         {

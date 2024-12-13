@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÁöÁ¤µÈ ¹üÀ§ ³»¿¡¼­ ¹«ÀÛÀ§·Î ´ë±â ½Ã°£À» ¼³Á¤ÇÑ ÈÄ, 
-/// ´ë±â ½Ã°£ÀÌ Áö³ª¸é ¼º°ø »óÅÂ¸¦ ¹ÝÈ¯ÇÏ´Â ¾×¼Ç ³ëµåÀÔ´Ï´Ù.
+/// ì§€ì •ëœ ë²”ìœ„ ë‚´ì—ì„œ ë¬´ìž‘ìœ„ë¡œ ëŒ€ê¸° ì‹œê°„ì„ ì„¤ì •í•œ í›„, 
+/// ëŒ€ê¸° ì‹œê°„ì´ ì§€ë‚˜ë©´ ì„±ê³µ ìƒíƒœë¥¼ ë°˜í™˜í•˜ëŠ” ì•¡ì…˜ ë…¸ë“œìž…ë‹ˆë‹¤.
 /// </summary>
 public class RandomWait : ActionNode
 {

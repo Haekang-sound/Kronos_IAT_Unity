@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÁöÁ¤µÈ ½Ã°£ µ¿¾È ÀÚ½Ä ³ëµå¸¦ ½ÇÇàÇÏÁö ¾Ê°í Äð´Ù¿îÀ» Àû¿ëÇÏ´Â ³ëµåÀÔ´Ï´Ù.
+/// ì§€ì •ëœ ì‹œê°„ ë™ì•ˆ ìžì‹ ë…¸ë“œë¥¼ ì‹¤í–‰í•˜ì§€ ì•Šê³  ì¿¨ë‹¤ìš´ì„ ì ìš©í•˜ëŠ” ë…¸ë“œìž…ë‹ˆë‹¤.
 /// </summary>
 public class Cooldown : DecoratorNode
 {

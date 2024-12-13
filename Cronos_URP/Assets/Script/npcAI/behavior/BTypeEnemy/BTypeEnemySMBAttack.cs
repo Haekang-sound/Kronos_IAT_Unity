@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// BTypeEnemÀÇ °ø°İ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// BTypeEnemì˜ ê³µê²© ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
 {
@@ -16,21 +16,21 @@ public class BTypeEnemySMBAttack : SceneLinkedSMB<BTypeEnemyBehavior>
     {
         _monoBehaviour.LookAtTarget();
 
-        // DOWN - ¹ŞÀº °ø°İÀÌ ÇÃ·¹ÀÌ¾îÀÇ Æ¯Á¤ ¾Ö´Ï¸ŞÀÌ¼Ç ÀÏ ¶§
-        /// TODO = ÃßÈÄ Ãß°¡ ¿ä¸Á
+        // DOWN - ë°›ì€ ê³µê²©ì´ í”Œë ˆì´ì–´ì˜ íŠ¹ì • ì• ë‹ˆë©”ì´ì…˜ ì¼ ë•Œ
+        /// TODO = ì¶”í›„ ì¶”ê°€ ìš”ë§
         if (false)
         {
             //_monoBehaviour.TriggerDown();
         }
 
-        // IDLE - Å¸°ÙÀ» Ã£À» ¼ö ¾øÀ» ¶§
+        // IDLE - íƒ€ê²Ÿì„ ì°¾ì„ ìˆ˜ ì—†ì„ ë•Œ
         _monoBehaviour.FindTarget();
         if (_monoBehaviour.CurrentTarget == null)
         {
             _monoBehaviour.TriggerIdle();
         }
 
-        // RELOAD - ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Á¾·á µÆÀ» ¶§
+        // RELOAD - ì• ë‹ˆë©”ì´ì…˜ì´ ì¢…ë£Œ ëì„ ë•Œ
 
     }
 

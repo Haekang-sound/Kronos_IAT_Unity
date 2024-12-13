@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// BossLightRushCloneBehaviorÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ¿¡¼­ ·çÆ® ¸ð¼ÇÀ» Á¦¾îÇÏ´Â Å¬·¡½º.
-/// ¾Ö´Ï¸ÞÀÌ¼ÇÀÇ ·çÆ® ¸ð¼ÇÀ» »ç¿ëÇÏ¿© º¸½ºÀÇ Å¬·ÐÀÌ Å¸°ÙÀ» ÇâÇØ ÀÌµ¿ÇÏµµ·Ï Á¶Á¤ÇÕ´Ï´Ù.
+/// BossLightRushCloneBehaviorì˜ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœì—ì„œ ë£¨íŠ¸ ëª¨ì…˜ì„ ì œì–´í•˜ëŠ” í´ëž˜ìŠ¤.
+/// ì• ë‹ˆë©”ì´ì…˜ì˜ ë£¨íŠ¸ ëª¨ì…˜ì„ ì‚¬ìš©í•˜ì—¬ ë³´ìŠ¤ì˜ í´ë¡ ì´ íƒ€ê²Ÿì„ í–¥í•´ ì´ë™í•˜ë„ë¡ ì¡°ì •í•©ë‹ˆë‹¤.
 /// </summary>
 public class BossLightRushCloneSMBRush : SceneLinkedSMB<BossLightRushCloneBehavior>
 {

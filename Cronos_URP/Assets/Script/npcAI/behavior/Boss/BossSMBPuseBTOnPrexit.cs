@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ BehaviourTree Runner¸¦ ÁøÇàÀ» ºñÈ°¼ºÈ­ ÇÏ´Â Å¬·¡½º ÀÔ´Ï´Ù.
+/// ë³´ìŠ¤ì˜ BehaviourTree Runnerë¥¼ ì§„í–‰ì„ ë¹„í™œì„±í™” í•˜ëŠ” í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
 /// </summary>
 public class BossSMBPuseBTOnPrexit : SceneLinkedSMB<BossBehavior>
 {

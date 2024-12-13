@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// SpawnEnemyWave ¸¦ È°¼ºÈ­ ½ÃÅ°´Â Å¬·¡½º ÀÔ´Ï´Ù.
+/// SpawnEnemyWave ë¥¼ í™œì„±í™” ì‹œí‚¤ëŠ” í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
 /// </summary>
 public class SpawnerTrigger : MonoBehaviour
 {

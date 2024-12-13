@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// ���Ÿ� ������ �⺻ Ŭ������, �߻�ü�� �߻��ϰ�, ��ü Ǯ���� �߻�ü�� �����ϴ� ����� �����մϴ�.
-/// �߻�ü�� `Projectile` Ŭ������ ����Ͽ� �����Ǹ�, �߻� �� ȿ�� �� �Ҹ��� ó���մϴ�.
+/// 원거리 무기의 기본 클래스로, 발사체를 발사하고, 객체 풀에서 발사체를 관리하는 기능을 제공합니다.
+/// 발사체는 `Projectile` 클래스를 상속하여 관리되며, 발사 시 효과 및 소리도 처리합니다.
 /// </summary>
 public class RangeWeapon : MonoBehaviour
 {
@@ -59,7 +59,7 @@ public class RangeWeapon : MonoBehaviour
 
         _loadedProjectile.transform.SetParent(null, true);
         _loadedProjectile.Shot(target, this);
-        _loadedProjectile = null; //�ϴ� �߻�Ǹ� �� �̻� �� ��ü�� �߻�ü�� �����ϴ� ���� �ƴ϶� �߻�ü�� ������ ������ �����մϴ�.
+        _loadedProjectile = null; //일단 발사되면 더 이상 이 객체가 발사체를 소유하는 것이 아니라 발사체가 스스로 생명을 유지합니다.
     }
 
 #if UNITY_EDITOR

@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Çàµ¿ Æ®¸®¿¡¼­ »ç¿ëµÇ´Â ³ëµå Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¿©·¯ ÀÚ½Ä ³ëµå¸¦ °®½À´Ï´Ù.
+/// í–‰ë™ íŠ¸ë¦¬ì—ì„œ ì‚¬ìš©ë˜ëŠ” ë…¸ë“œ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì—¬ëŸ¬ ìì‹ ë…¸ë“œë¥¼ ê°–ìŠµë‹ˆë‹¤.
 /// </summary>
 public abstract class CompositeNode : Node
 {

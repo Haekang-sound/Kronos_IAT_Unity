@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// Çàµ¿ Æ®¸®¿¡¼­ »ç¿ëÇÒ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÁÖ·Î °ÔÀÓ ¿ÀºêÁ§Æ®¿Í ÀÌµ¿ À§Ä¡, BulletTimeScalable °´Ã¼ µîÀ» ÀúÀåÇÏ¿© Æ®¸®¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù.
+/// í–‰ë™ íŠ¸ë¦¬ì—ì„œ ì‚¬ìš©í•  ë°ì´í„°ë¥¼ ì €ìž¥í•˜ëŠ” í´ëž˜ìŠ¤ìž…ë‹ˆë‹¤.
+/// ì£¼ë¡œ ê²Œìž„ ì˜¤ë¸Œì íŠ¸ì™€ ì´ë™ ìœ„ì¹˜, BulletTimeScalable ê°ì²´ ë“±ì„ ì €ìž¥í•˜ì—¬ íŠ¸ë¦¬ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ í•©ë‹ˆë‹¤.
 /// </summary>
 [System.Serializable]
 public class Blackboard

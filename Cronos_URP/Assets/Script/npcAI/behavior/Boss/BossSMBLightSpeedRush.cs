@@ -1,7 +1,7 @@
-using UnityEngine;
+О╩©using UnityEngine;
 
 /// <summary>
-/// ╨╦╫╨юг ╟Ь╟щ ╩Себ юЭх╞ю╩ ╟Э╦╝го╢б е╛╥║╫╨ют╢о╢ы.
+/// КЁ╢Л┼╓Л²≤ ЙЁ╣Й╡╘ Л┐│М┐° Л═└М≥≤Л²└ Й╢─К╕╛М∙≤К┼■ М│╢К·≤Л┼╓Л·┘К▀┬К▀╓.
 /// </summary>
 public class BossSMBLightSpeedRush : SceneLinkedSMB<BossBehavior>
 {

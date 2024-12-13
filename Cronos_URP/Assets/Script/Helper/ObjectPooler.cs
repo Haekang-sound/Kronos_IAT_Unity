@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Á¦³×¸¯ ¿ÀºêÁ§Æ® Ç® Å¬·¡½º·Î, ÁÖ¾îÁø Å¸ÀÔ TÀÇ MonoBehaviour °´Ã¼¸¦ °ü¸®ÇÕ´Ï´Ù.
+/// ì œë„¤ë¦­ ì˜¤ë¸Œì íŠ¸ í’€ í´ë˜ìŠ¤ë¡œ, ì£¼ì–´ì§„ íƒ€ì… Tì˜ MonoBehaviour ê°ì²´ë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
 {
@@ -27,9 +27,9 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
     }
 
     /// <summary>
-    /// °´Ã¼ Ç®¿¡¼­ ºñÈ°¼ºÈ­µÈ °´Ã¼¸¦ ÇÏ³ª °¡Á®¿Í È°¼ºÈ­ »óÅÂ·Î ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ê°ì²´ í’€ì—ì„œ ë¹„í™œì„±í™”ëœ ê°ì²´ë¥¼ í•˜ë‚˜ ê°€ì ¸ì™€ í™œì„±í™” ìƒíƒœë¡œ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>È°¼ºÈ­µÈ °´Ã¼</returns>
+    /// <returns>í™œì„±í™”ëœ ê°ì²´</returns>
     public T GetNew()
     {
         int idx = _freeIdx.Pop();
@@ -39,9 +39,9 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
     }
 
     /// <summary>
-    /// »ç¿ëÀÌ ³¡³­ °´Ã¼¸¦ Ç®¿¡ ¹İÈ¯ÇÏ¿© ºñÈ°¼ºÈ­ÇÕ´Ï´Ù.
+    /// ì‚¬ìš©ì´ ëë‚œ ê°ì²´ë¥¼ í’€ì— ë°˜í™˜í•˜ì—¬ ë¹„í™œì„±í™”í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="obj">Ç®¿¡ ¹İÈ¯ÇÒ °´Ã¼</param>
+    /// <param name="obj">í’€ì— ë°˜í™˜í•  ê°ì²´</param>
 
     public void Free(T obj)
     {
@@ -51,9 +51,9 @@ public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
 }
 
 /// <summary>
-/// °´Ã¼ Ç®¿¡¼­ °ü¸®µÉ °´Ã¼°¡ ±¸ÇöÇØ¾ß ÇÏ´Â ÀÎÅÍÆäÀÌ½ºÀÔ´Ï´Ù.
+/// ê°ì²´ í’€ì—ì„œ ê´€ë¦¬ë  ê°ì²´ê°€ êµ¬í˜„í•´ì•¼ í•˜ëŠ” ì¸í„°í˜ì´ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
-/// <typeparam name="T">Ç®¿¡¼­ °ü¸®ÇÒ °´Ã¼ÀÇ Å¸ÀÔ</typeparam>
+/// <typeparam name="T">í’€ì—ì„œ ê´€ë¦¬í•  ê°ì²´ì˜ íƒ€ì…</typeparam>
 public interface IPooled<T> where T : MonoBehaviour, IPooled<T>
 {
     int poolID { get; set; }

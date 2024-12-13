@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ °æ°è »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ATypeEnemì˜ ê²½ê³„ ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
 {
@@ -20,7 +20,7 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.ChangeDebugText("STRAFE");
 
-        // Damaged - »óÅÂ¿¡¼­ ÇÇ°İ ´çÇßÀ» ¶§
+        // Damaged - ìƒíƒœì—ì„œ í”¼ê²© ë‹¹í–ˆì„ ë•Œ
         _monoBehaviour.ResetTriggerDamaged();
 
         _monoBehaviour.StopPursuit();
@@ -76,10 +76,10 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
         {
             ResetTimer();
 
-            // ½Ã°£ÀÌ Á¾·á µÆÀ» ¶§
+            // ì‹œê°„ì´ ì¢…ë£Œ ëì„ ë•Œ
 
-            /// TODO: Player °¡ ÆĞ¸µ °¡´É ¿©ºÎ¸¦ ¾î¶»°Ô ¹Ş¾Æ¿Ã °ÍÀÎÁö ±¸ÇöÇÒ °Í
-            // Attack - ¹üÀ§º¸´Ù ÇÃ·¹ÀÌ¾î°¡ ¸Ö¾î Á³À» ¶§
+            /// TODO: Player ê°€ íŒ¨ë§ ê°€ëŠ¥ ì—¬ë¶€ë¥¼ ì–´ë–»ê²Œ ë°›ì•„ì˜¬ ê²ƒì¸ì§€ êµ¬í˜„í•  ê²ƒ
+            // Attack - ë²”ìœ„ë³´ë‹¤ í”Œë ˆì´ì–´ê°€ ë©€ì–´ ì¡Œì„ ë•Œ
             if (_monoBehaviour.IsInAttackRange())
             {
                 _monoBehaviour.TriggerAttack();
@@ -94,7 +94,7 @@ public class ATypeEnemySMBStrafe : SceneLinkedSMB<ATypeEnemyBehavior>
             }
             else
             {
-                // Pursuit - »óÅÂ ½Ã°£ÀÌ Á¾·á µÆÀ» ¶§
+                // Pursuit - ìƒíƒœ ì‹œê°„ì´ ì¢…ë£Œ ëì„ ë•Œ
                 _monoBehaviour.StartPursuit();
             }
         }

@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// ÆäÀÌµù È¿°ú¸¦ °ü¸®ÇÏ´Â Å¬·¡½º ÀÔ´Ï´Ù.
-/// ¾À ÀüÈ¯, ·Îµù, °ÔÀÓ ¿À¹ö¿Í °°Àº »óÈ²¿¡¼­ »ç¿ëÇÕ´Ï´Ù
+/// íŽ˜ì´ë”© íš¨ê³¼ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤ ìž…ë‹ˆë‹¤.
+/// ì”¬ ì „í™˜, ë¡œë”©, ê²Œìž„ ì˜¤ë²„ì™€ ê°™ì€ ìƒí™©ì—ì„œ ì‚¬ìš©í•©ë‹ˆë‹¤
 /// </summary>
 public class ScreenFader : MonoBehaviour
 {

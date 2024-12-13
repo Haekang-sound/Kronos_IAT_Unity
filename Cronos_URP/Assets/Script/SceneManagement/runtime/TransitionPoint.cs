@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// µ¿ÀÏÇÑ ¾À ³» ÅÚ·¹Æ÷Æ®¸¦ °ü¸®ÇÕ´Ï´Ù.
-/// ÀÌ Å¬·¡½º´Â Æ¯Á¤ Á¶°Ç¿¡ µû¶ó °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÀüÈ¯ÇÏ°Å³ª ÀÌµ¿½ÃÅ°´Â ¿ªÇÒÀ» ÇÕ´Ï´Ù.
+/// ë™ì¼í•œ ì”¬ ë‚´ í…”ë ˆí¬íŠ¸ë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
+/// ì´ í´ë˜ìŠ¤ëŠ” íŠ¹ì • ì¡°ê±´ì— ë”°ë¼ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì „í™˜í•˜ê±°ë‚˜ ì´ë™ì‹œí‚¤ëŠ” ì—­í• ì„ í•©ë‹ˆë‹¤.
 /// </summary>
 public class TransitionPoint : MonoBehaviour
 {
 	/// <summary>
-	/// ¾À ÀüÈ¯ À¯Çü
+	/// ì”¬ ì „í™˜ ìœ í˜•
 	/// </summary>
 	public enum TransitionType
 	{
@@ -17,7 +17,7 @@ public class TransitionPoint : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ¾À ÀüÈ¯ÀÌ ¹ß»ıÇÏ´Â ½ÃÁ¡ Á¤ÀÇ
+	/// ì”¬ ì „í™˜ì´ ë°œìƒí•˜ëŠ” ì‹œì  ì •ì˜
 	/// </summary>
 	public enum TransitionWhen
 	{
@@ -25,15 +25,15 @@ public class TransitionPoint : MonoBehaviour
 		ExternalCall,
 	}
 
-	[Tooltip("¾À ÀüÈ¯ÀÌ µÉ¶§ °°ÀÌ ÀÌµ¿µÉ °ÔÀÓ ¿ÀºêÁ§Æ®ÀÔ´Ï´Ù. (ex. ÇÃ·¹ÀÌ¾î)")]
+	[Tooltip("ì”¬ ì „í™˜ì´ ë ë•Œ ê°™ì´ ì´ë™ë  ê²Œì„ ì˜¤ë¸Œì íŠ¸ì…ë‹ˆë‹¤. (ex. í”Œë ˆì´ì–´)")]
 	public GameObject transitioningGameObject;
-	[Tooltip("ÀüÈ¯ÀÌ ÀÌ Àå¸é ³»¿¡¼­ ÀÌ·ç¾îÁúÁö, ´Ù¸¥ ¿µ¿ªÀ¸·Î ÀüÈ¯µÉÁö, ¾Æ´Ï¸é °ÔÀÓÇÃ·¹ÀÌ°¡ ¾Æ´Ñ Àå¸éÀ¸·Î ÀüÈ¯µÉÁö °áÁ¤ÇÕ´Ï´Ù.")]
+	[Tooltip("ì „í™˜ì´ ì´ ì¥ë©´ ë‚´ì—ì„œ ì´ë£¨ì–´ì§ˆì§€, ë‹¤ë¥¸ ì˜ì—­ìœ¼ë¡œ ì „í™˜ë ì§€, ì•„ë‹ˆë©´ ê²Œì„í”Œë ˆì´ê°€ ì•„ë‹Œ ì¥ë©´ìœ¼ë¡œ ì „í™˜ë ì§€ ê²°ì •í•©ë‹ˆë‹¤.")]
 	public TransitionType transitionType;
 	[SceneName]
 	public string newSceneName;
-	[Tooltip("ÀÌ ¾À¿¡¼­ ÀüÈ¯µÇ´Â °ÔÀÓ ¿ÀºêÁ§Æ®°¡ ÅÚ·¹Æ÷Æ®µÉ ¸ñÀûÁöÀÔ´Ï´Ù.")]
+	[Tooltip("ì´ ì”¬ì—ì„œ ì „í™˜ë˜ëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ê°€ í…”ë ˆí¬íŠ¸ë  ëª©ì ì§€ì…ë‹ˆë‹¤.")]
 	public TransitionPoint destinationTransform;
-	[Tooltip("¾À ÀüÈ¯ÀÌ ½ÃÀÛµÇµµ·Ï Æ®¸®°ÅÇØ¾ß ÇÏ´Â Ç×¸ñ.")]
+	[Tooltip("ì”¬ ì „í™˜ì´ ì‹œì‘ë˜ë„ë¡ íŠ¸ë¦¬ê±°í•´ì•¼ í•˜ëŠ” í•­ëª©.")]
 	public TransitionWhen transitionWhen;
 
 	bool m_transitioningGameObjectPresent;
@@ -49,7 +49,7 @@ public class TransitionPoint : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Æ®·£Áö¼Ç Æ÷ÀÎÆ® Æ®¸®°Å");
+		Debug.Log("íŠ¸ëœì§€ì…˜ í¬ì¸íŠ¸ íŠ¸ë¦¬ê±°");
 		if (other.gameObject == transitioningGameObject)
 		{
 			m_transitioningGameObjectPresent = true;
@@ -67,7 +67,7 @@ public class TransitionPoint : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		Debug.Log("Æ®·£Áö¼Ç Æ÷ÀÎÆ® ³ª¿È");
+		Debug.Log("íŠ¸ëœì§€ì…˜ í¬ì¸íŠ¸ ë‚˜ì˜´");
 		if (other.gameObject == transitioningGameObject)
 		{
 			m_transitioningGameObjectPresent = false;

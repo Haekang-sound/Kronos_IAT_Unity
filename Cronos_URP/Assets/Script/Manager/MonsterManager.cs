@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
@@ -6,14 +6,14 @@ using UnityEngine.UIElements;
 
 
 /// <summary>
-/// ICollectionÀ» ÀÌ¿ëÇØ¼­ ¸Å´ÏÀú¸¦ ¸¸µé¾îº¸ÀÚ
-/// ÆíÀÇ»ó GameObject·Î ¸¸µé¾úÁö¸¸
-/// ³ªÁß¿¡´Â Monster È¤Àº ±×·± °èÅëÀÇ PrefabÀÇ »ı¼º,»èÁ¦¸¦ °ü¸®ÇØ¾ß ÇÒ µí
+/// ICollectionì„ ì´ìš©í•´ì„œ ë§¤ë‹ˆì €ë¥¼ ë§Œë“¤ì–´ë³´ì
+/// í¸ì˜ìƒ GameObjectë¡œ ë§Œë“¤ì—ˆì§€ë§Œ
+/// ë‚˜ì¤‘ì—ëŠ” Monster í˜¹ì€ ê·¸ëŸ° ê³„í†µì˜ Prefabì˜ ìƒì„±,ì‚­ì œë¥¼ ê´€ë¦¬í•´ì•¼ í•  ë“¯
 /// </summary>
 class MonsterManager : MonoBehaviour
 {
     float? min = null;
-    //public AutoTargetting autoTargetor; // ¸Å´ÏÀú°¡ ÀÌ ÄÄÆ÷³ÍÆ®¸¦ ¾Ë ÀÌÀ¯´Â ¾ø´Ù
+    //public AutoTargetting autoTargetor; // ë§¤ë‹ˆì €ê°€ ì´ ì»´í¬ë„ŒíŠ¸ë¥¼ ì•Œ ì´ìœ ëŠ” ì—†ë‹¤
 
     private static MonsterManager _instance;
 
@@ -33,8 +33,8 @@ class MonsterManager : MonoBehaviour
             return _instance;
         }
     }
-    // ¸ó½ºÅÍ ÀÚ·áÇüÀ» ¹Ş¾Æ¾ßÇÏ´Ï±î
-    // ÇÁ¸®ÆéÀ» ¹ŞÀ» ¼ö ÀÖ°Ô ¿­¾î³õ´Â ¹«¾ğ°¡.
+    // ëª¬ìŠ¤í„° ìë£Œí˜•ì„ ë°›ì•„ì•¼í•˜ë‹ˆê¹Œ
+    // í”„ë¦¬í©ì„ ë°›ì„ ìˆ˜ ìˆê²Œ ì—´ì–´ë†“ëŠ” ë¬´ì–¸ê°€.
     public GameObject monster;
     public GameObject Player;
     public List<GameObject> list = new List<GameObject>();
@@ -43,7 +43,7 @@ class MonsterManager : MonoBehaviour
 
     private void Update()
     {
-//         /// ÀÓ½ÃÇÔ¼ö
+//         /// ì„ì‹œí•¨ìˆ˜
 //         if (Input.GetKeyUp(KeyCode.Equals))
 //         {
 //             CreateMonster();
@@ -61,20 +61,20 @@ class MonsterManager : MonoBehaviour
 
 
     /// <summary>
-    /// ¸ó½ºÅÍ¸¦ »ı¼ºÇÏ´Â ÇÔ¼ö
+    /// ëª¬ìŠ¤í„°ë¥¼ ìƒì„±í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public void CreateMonster()
     {
-        // ¸ó½ºÅÍ¸¦ »ı¼ºÇÑ´Ù.
+        // ëª¬ìŠ¤í„°ë¥¼ ìƒì„±í•œë‹¤.
         GameObject temp = Instantiate(monster, new Vector3(10, 0, 5), Quaternion.identity);
-        // ¸ó½ºÅÍ¸¦ ¸®½ºÆ®¿¡ ÀúÀåÇÑ´Ù.
+        // ëª¬ìŠ¤í„°ë¥¼ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥í•œë‹¤.
         Add(temp);
-        Debug.Log($"ÇöÀç ¸ó½ºÅÍ ¼ö {list.Count}");
+        Debug.Log($"í˜„ì¬ ëª¬ìŠ¤í„° ìˆ˜ {list.Count}");
     }
 
 	public void CreatePlayer()
 	{
-		// ÇÃ·¹ÀÌ¾î¸¦ »ı¼ºÇÑ´Ù
+		// í”Œë ˆì´ì–´ë¥¼ ìƒì„±í•œë‹¤
 		GameObject player = Instantiate(Player, new Vector3(0, 10, 5), Quaternion.identity);
 		//player.GetComponent<Player>().PlayerRespawn();
 
@@ -82,7 +82,7 @@ class MonsterManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// ¸ó½ºÅÍ¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö
+	/// ëª¬ìŠ¤í„°ë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 	/// </summary>
 	public void DeleteMonster()
     {
@@ -94,30 +94,30 @@ class MonsterManager : MonoBehaviour
     }
 
     /// <summary>
-    /// °¡Àå °¡±î¿î ¸ó½ºÅÍ¸¦ Ã£¾ÆÁÖÀÚ
+    /// ê°€ì¥ ê°€ê¹Œìš´ ëª¬ìŠ¤í„°ë¥¼ ì°¾ì•„ì£¼ì
     /// </summary>
-    /// <returns>¼º°ø¿©ºÎ¸¦ ¸®ÅÏÇÑ´Ù</returns>
+    /// <returns>ì„±ê³µì—¬ë¶€ë¥¼ ë¦¬í„´í•œë‹¤</returns>
     public Transform FindTarget(Vector3 playerPos)
     {
         Transform target = null;
-        // ¸ó½ºÅÍ¸®½ºÆ®°¡ ¾ø°Å³ª »çÀÌÁî°¡ 0ÀÌ¶ó¸é false
+        // ëª¬ìŠ¤í„°ë¦¬ìŠ¤íŠ¸ê°€ ì—†ê±°ë‚˜ ì‚¬ì´ì¦ˆê°€ 0ì´ë¼ë©´ false
         if (list.Count == 0)
         {
             return null;
         }
-        // ÇöÀç ¸ó½ºÅÍ ¸ñ·ÏÀ» ¼øÈ¸ÇÑ´Ù.
+        // í˜„ì¬ ëª¬ìŠ¤í„° ëª©ë¡ì„ ìˆœíšŒí•œë‹¤.
         for (int i = 0; i < list.Count; i++)
         {
-            // ¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸®º¤ÅÍÀÇ Å©±â¸¦ ±¸ÇÑ´Ù.
+            // ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ì˜ ê±°ë¦¬ë²¡í„°ì˜ í¬ê¸°ë¥¼ êµ¬í•œë‹¤.
             float value = Mathf.Abs((playerPos - list[i].GetComponent<Transform>().position).magnitude);
 
-            // ÇöÀç min°ªº¸´Ù value°¡ ÀÛ´Ù¸é È¤Àº min¿¡ °ªÀÌ µé¾îÀÖÁö ¾Ê´Ù¸é 
+            // í˜„ì¬ minê°’ë³´ë‹¤ valueê°€ ì‘ë‹¤ë©´ í˜¹ì€ minì— ê°’ì´ ë“¤ì–´ìˆì§€ ì•Šë‹¤ë©´ 
             if (min > value || min == null)
             {
-                // min °ªÀ» ±³Ã¼ÇÏ°í 
+                // min ê°’ì„ êµì²´í•˜ê³  
                 min = value;
 
-                // °¡Àå ÀÛÀº °ªÀ» °¡Áø Æ®·£½ºÆûÀ» Å¸°ÙÀ¸·Î ¼³Á¤ÇÑ´Ù.
+                // ê°€ì¥ ì‘ì€ ê°’ì„ ê°€ì§„ íŠ¸ëœìŠ¤í¼ì„ íƒ€ê²Ÿìœ¼ë¡œ ì„¤ì •í•œë‹¤.
                 target = list[i].GetComponent<Transform>();
             }
         }
@@ -131,14 +131,14 @@ class MonsterManager : MonoBehaviour
 
 
 
-    public void Clear() { list = new List<GameObject>(); } // C#ÀÇ ÃÊ±âÈ­ ... ¹ÌÃÆ´Ù..
+    public void Clear() { list = new List<GameObject>(); } // C#ì˜ ì´ˆê¸°í™” ... ë¯¸ì³¤ë‹¤..
     public void Add(GameObject gameObject)
     {
         list.Add(gameObject);
     }
     public bool Remove(GameObject gameObject)
     {
-        Debug.Log($"ÇöÀç ¸ó½ºÅÍ ¼ö {list.Count}");
+        Debug.Log($"í˜„ì¬ ëª¬ìŠ¤í„° ìˆ˜ {list.Count}");
         return list.Remove(gameObject);
     }
     public bool Contains(GameObject gameObject) { return list.Contains(gameObject); }

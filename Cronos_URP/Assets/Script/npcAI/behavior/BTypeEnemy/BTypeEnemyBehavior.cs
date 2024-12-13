@@ -1,12 +1,12 @@
-using Message;
+ï»¿using Message;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// BTypeEnemÀÇ Çàµ¿À» Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°İ ¹üÀ§, ÀÌµ¿, È¸Àü, ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å, ÇÇÇØ Ã³¸®,
-/// ³Ë¹é, ½½·¡½Ã ¹× ÃæÀü µîÀÇ ±â´ÉÀ» Æ÷ÇÔÇÏ°í ÀÖ½À´Ï´Ù.
+/// BTypeEnemì˜ í–‰ë™ì„ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ê³µê²© ë²”ìœ„, ì´ë™, íšŒì „, ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±°, í”¼í•´ ì²˜ë¦¬,
+/// ë„‰ë°±, ìŠ¬ë˜ì‹œ ë° ì¶©ì „ ë“±ì˜ ê¸°ëŠ¥ì„ í¬í•¨í•˜ê³  ìˆìŠµë‹ˆë‹¤.
 /// </summary>
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(EnemyController))]
@@ -107,11 +107,11 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (drawGizmos == false) return;
 
-        // °ø°İ ¹üÀ§
+        // ê³µê²© ë²”ìœ„
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
 
-        // ±âº» À§Ä¡ 
+        // ê¸°ë³¸ ìœ„ì¹˜ 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(BasePosition, _baseTolerance);
     }
@@ -122,7 +122,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
         var attackTarget = CurrentTarget.transform.position;
 
-        // °ø°İ ³ôÀÌ ¿ÀÇÁ¼Â
+        // ê³µê²© ë†’ì´ ì˜¤í”„ì…‹
         attackTarget.y += 1.2f;
 
         _rangeWeapon.Attack(attackTarget);
@@ -146,17 +146,17 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
 
     public bool IsLookAtTarget()
     {
-        float angleThreshold = 10.0f; // ¹Ù¶óº¸´Â °ÍÀ¸·Î °£ÁÖÇÒ ÃÖ´ë °¢µµ
+        float angleThreshold = 10.0f; // ë°”ë¼ë³´ëŠ” ê²ƒìœ¼ë¡œ ê°„ì£¼í•  ìµœëŒ€ ê°ë„
 
         if (CurrentTarget == null) return false;
 
         Vector3 forward = transform.forward;
         Vector3 toTarget = (CurrentTarget.transform.position - transform.position).normalized;
 
-        // µÎ º¤ÅÍ °£ÀÇ °¢µµ °è»ê
+        // ë‘ ë²¡í„° ê°„ì˜ ê°ë„ ê³„ì‚°
         float angle = Vector3.Angle(forward, toTarget);
 
-        // °¢µµ°¡ ÀÓ°è°ª ÀÌÇÏÀÌ¸é true ¹İÈ¯
+        // ê°ë„ê°€ ì„ê³„ê°’ ì´í•˜ì´ë©´ true ë°˜í™˜
         return angle <= angleThreshold;
     }
 
@@ -171,7 +171,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ÀÌµ¿ ¸ñÀûÁö ¼³Á¤
+        // ì´ë™ ëª©ì ì§€ ì„¤ì •
         var offsetPlayer = transform.position - CurrentTarget.transform.position;
         var direction = Vector3.Cross(offsetPlayer, Vector3.up);
         _controller.SetTarget(transform.position + direction);
@@ -183,7 +183,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ÀÌµ¿ ¸ñÀûÁö ¼³Á¤
+        // ì´ë™ ëª©ì ì§€ ì„¤ì •
         var offsetPlayer = CurrentTarget.transform.position - transform.position;
         var direction = Vector3.Cross(offsetPlayer, Vector3.up);
         _controller.SetTarget(transform.position + direction);
@@ -195,7 +195,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
     {
         if (CurrentTarget == null) return;
 
-        // ¹Ù¶óº¸´Â ¹æÇâ ¼³Á¤
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥ ì„¤ì •
         var lookPosition = CurrentTarget.transform.position - transform.position;
         lookPosition.y = 0;
         var rotation = Quaternion.LookRotation(lookPosition);
@@ -334,7 +334,7 @@ public class BTypeEnemyBehavior : FanShapeScannerEnemy, IMessageReceiver
         _controller.animator.SetTrigger(hashIdle);
     }
 
-    // ¿¡ÀÓ ÀÌÆåÆ® °ü·ÃÇÑ°Å
+    // ì—ì„ ì´í™íŠ¸ ê´€ë ¨í•œê±°
     public IEnumerator ShrinkScale()
     {
         aimRing.transform.localScale = ringOriginScale;

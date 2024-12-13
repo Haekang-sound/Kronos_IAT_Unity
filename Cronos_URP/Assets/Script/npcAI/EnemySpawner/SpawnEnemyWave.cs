@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 /// <summary>
-/// ÀûÀ» ÀÏÁ¤ ÁÖ±â·Î ½ºÆù ½ÃÅ°´Â Å¬·¡½º ÀÔ´Ï´Ù.
-/// ¿ÀºêÁ§Æ® Ç®(Pool)À» ÀÌ¿ëÇÕ´Ï´Ù.
+/// ì ì„ ì¼ì • ì£¼ê¸°ë¡œ ìŠ¤í° ì‹œí‚¤ëŠ” í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
+/// ì˜¤ë¸Œì íŠ¸ í’€(Pool)ì„ ì´ìš©í•©ë‹ˆë‹¤.
 /// </summary>
 public class SpawnEnemyWave : MonoBehaviour
 {

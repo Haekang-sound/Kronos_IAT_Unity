@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Bullet Time È¿°ú¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼Ç°ú ³×ºñ¸Ş½Ã ¿¡ÀÌÀüÆ®ÀÇ ¼Óµµ¸¦ Á¶ÀıÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// Bullet Time íš¨ê³¼ì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ê³¼ ë„¤ë¹„ë©”ì‹œ ì—ì´ì „íŠ¸ì˜ ì†ë„ë¥¼ ì¡°ì ˆí•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]

@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ ³×ºñ¸Ş½Ã¸¦ ºñÈ°¼ºÈ­ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ë³´ìŠ¤ì˜ ë„¤ë¹„ë©”ì‹œë¥¼ ë¹„í™œì„±í™”í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BossSMBOffNavmeshOnEnter : SceneLinkedSMB<BossBehavior>
 {

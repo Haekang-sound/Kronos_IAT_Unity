@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ¾À ÀüÈ¯ ½Ã, ÇÃ·¹ÀÌ¾î ¶Ç´Â Æ¯Á¤ °ÔÀÓ ¿ÀºêÁ§Æ®°¡ ÀÌµ¿ÇÒ ¸ñÀûÁö¸¦ ¼³Á¤ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ì”¬ ì „í™˜ ì‹œ, í”Œë ˆì´ì–´ ë˜ëŠ” íŠ¹ì • ê²Œì„ ì˜¤ë¸Œì íŠ¸ê°€ ì´ë™í•  ëª©ì ì§€ë¥¼ ì„¤ì •í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class SceneTransitionDestination : MonoBehaviour
 {
-    [Tooltip("ÇÃ·¹ÀÌ¾î¿Í °°ÀÌ ´ÙÀ½ ¾À¿¡ ¿Å°ÜÁú °ÔÀÓ ¿ÀºêÁ§Æ® ÀÔ´Ï´Ù.")]
+    [Tooltip("í”Œë ˆì´ì–´ì™€ ê°™ì´ ë‹¤ìŒ ì”¬ì— ì˜®ê²¨ì§ˆ ê²Œì„ ì˜¤ë¸Œì íŠ¸ ì…ë‹ˆë‹¤.")]
     public GameObject transitioningGameObject;
     public UnityEvent OnReachDestination;
 }

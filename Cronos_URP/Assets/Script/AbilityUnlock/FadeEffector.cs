@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// CanvasGroupÀÇ Åõ¸íµµ¸¦ Á¶ÀıÇÏ¿© ÆäÀÌµå ÀÎ/¾Æ¿ô È¿°ú¸¦ Á¦°øÇÕ´Ï´Ù.
-/// Æ¯Á¤ ÀÌº¥Æ®(ex: º¸½º ½ºÆä¼È ÀÌº¥Æ®)¸¦ À§ÇÑ ÆäÀÌµå ½ÃÄö½ºµµ Áö¿øÇÕ´Ï´Ù.
+/// CanvasGroupì˜ íˆ¬ëª…ë„ë¥¼ ì¡°ì ˆí•˜ì—¬ í˜ì´ë“œ ì¸/ì•„ì›ƒ íš¨ê³¼ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
+/// íŠ¹ì • ì´ë²¤íŠ¸(ex: ë³´ìŠ¤ ìŠ¤í˜ì…œ ì´ë²¤íŠ¸)ë¥¼ ìœ„í•œ í˜ì´ë“œ ì‹œí€€ìŠ¤ë„ ì§€ì›í•©ë‹ˆë‹¤.
 /// </summary>
 
 public class FadeEffector : MonoBehaviour
@@ -22,7 +22,7 @@ public class FadeEffector : MonoBehaviour
 
         if (_canvasGroup == null)
         {
-            Debug.LogError("CanvasGroup ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù. Ãß°¡ÇØÁÖ¼¼¿ä.");
+            Debug.LogError("CanvasGroup ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤. ì¶”ê°€í•´ì£¼ì„¸ìš”.");
             return;
         }
 
@@ -36,7 +36,7 @@ public class FadeEffector : MonoBehaviour
 
         if (_canvasGroup == null)
         {
-            Debug.LogError("CanvasGroup ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù. Ãß°¡ÇØÁÖ¼¼¿ä.");
+            Debug.LogError("CanvasGroup ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤. ì¶”ê°€í•´ì£¼ì„¸ìš”.");
             return;
         }
 
@@ -45,17 +45,17 @@ public class FadeEffector : MonoBehaviour
 
     private IEnumerator Fade(float fadeDuration, float targetAlpha)
     {
-        float startTime = Time.unscaledTime;  // ½ÃÀÛ ½Ã°£ ¼³Á¤
-        float initialAlpha = _canvasGroup.alpha;  // ½ÃÀÛ ¾ËÆÄ °ª ¼³Á¤
+        float startTime = Time.unscaledTime;  // ì‹œì‘ ì‹œê°„ ì„¤ì •
+        float initialAlpha = _canvasGroup.alpha;  // ì‹œì‘ ì•ŒíŒŒ ê°’ ì„¤ì •
 
         while (Time.unscaledTime < startTime + fadeDuration)
         {
-            float t = (Time.unscaledTime - startTime) / fadeDuration;  // ÇöÀç ½Ã°£ °è»ê
-            _canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, t);  // ¾ËÆÄ °ª º¸°£
-            yield return null;  // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            float t = (Time.unscaledTime - startTime) / fadeDuration;  // í˜„ì¬ ì‹œê°„ ê³„ì‚°
+            _canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, t);  // ì•ŒíŒŒ ê°’ ë³´ê°„
+            yield return null;  // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
 
-        _canvasGroup.alpha = targetAlpha;  // ¸ñÇ¥ ¾ËÆÄ °ª ¼³Á¤
+        _canvasGroup.alpha = targetAlpha;  // ëª©í‘œ ì•ŒíŒŒ ê°’ ì„¤ì •
     }
 
     private IEnumerator FadeIn(float fadeDuration)

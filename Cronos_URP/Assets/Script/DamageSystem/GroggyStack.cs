@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Ä³¸¯ÅÍ°¡ ÀÏÁ¤ È½¼ö ÀÌ»ó °ø°İÀ» ¹ŞÀ» °æ¿ì '±×·Î±â' »óÅÂ·Î ÀüÈ¯µÇ´Â 
-/// ½ºÅÃ ½Ã½ºÅÛÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ìºë¦­í„°ê°€ ì¼ì • íšŸìˆ˜ ì´ìƒ ê³µê²©ì„ ë°›ì„ ê²½ìš° 'ê·¸ë¡œê¸°' ìƒíƒœë¡œ ì „í™˜ë˜ëŠ” 
+/// ìŠ¤íƒ ì‹œìŠ¤í…œì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class GroggyStack : MonoBehaviour
 {
@@ -41,7 +41,7 @@ public class GroggyStack : MonoBehaviour
         if (_isGroggy == false && _currentStack >= maxStack)
         {
             OnMaxStack?.Invoke();
-			// ¿©±â¼­ Àá±Ù´Ù.
+			// ì—¬ê¸°ì„œ ì ê·¼ë‹¤.
             _isGroggy = true;
             SoundManager.Instance.PlaySFX("Boss_Groggy_Sound_SE", transform);
         }

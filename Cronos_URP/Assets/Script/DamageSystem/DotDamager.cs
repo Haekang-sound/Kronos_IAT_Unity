@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÀÏÁ¤ ÁÖ±â¸¶´Ù Áö¼ÓÀûÀ¸·Î ´ë¹ÌÁö¸¦ ÀÔÈ÷´Â 
-/// 'µµÆ®(Damage over Time)' ´ë¹ÌÁö Ã³¸® Å¬·¡½ºÀÔ´Ï´Ù.
+/// ì¼ì • ì£¼ê¸°ë§ˆë‹¤ ì§€ì†ì ìœ¼ë¡œ ëŒ€ë¯¸ì§€ë¥¼ ì…íˆëŠ” 
+/// 'ë„íŠ¸(Damage over Time)' ëŒ€ë¯¸ì§€ ì²˜ë¦¬ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class DotDamager : SimpleDamager
 {
@@ -23,7 +23,7 @@ public class DotDamager : SimpleDamager
             if (damaged)
             {
                 _elapse = 0f;
-                //Debug.Log("µµÆ®´ï");
+                //Debug.Log("ë„íŠ¸ëŒ");
             }
         }
     }

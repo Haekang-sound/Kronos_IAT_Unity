@@ -1,8 +1,8 @@
-using UnityEngine.AI;
+ï»¿using UnityEngine.AI;
 using UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ ÃßÀû »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ATypeEnemì˜ ì¶”ì  ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 {
@@ -20,7 +20,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
         _monoBehaviour.StartPursuit();
         _monoBehaviour.Controller.SetFollowNavmeshAgent(true);
 
-        // Damaged - »óÅÂ¿¡¼­ ÇÇ°İ ´çÇßÀ» ¶§
+        // Damaged - ìƒíƒœì—ì„œ í”¼ê²© ë‹¹í–ˆì„ ë•Œ
         _monoBehaviour.ResetTriggerDamaged();
 
         _monoBehaviour.UseBulletTimeScale();
@@ -30,7 +30,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
     {
         _monoBehaviour.FindTarget();
 
-        // °æ·Î¸¦ Ã£À» ¼ö ¾øÀ» ¶§
+        // ê²½ë¡œë¥¼ ì°¾ì„ ìˆ˜ ì—†ì„ ë•Œ
         if (_monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathPartial
             || _monoBehaviour.Controller.navmeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
@@ -45,24 +45,24 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
 
             if (purpose == PursuitFor.Normal)
             {
-                // ATTACK - °ø°İ »ç°Å¸® ¾È¿¡ ÀÖÀ» ¶§
+                // ATTACK - ê³µê²© ì‚¬ê±°ë¦¬ ì•ˆì— ìˆì„ ë•Œ
                 if (_monoBehaviour.IsInAttackRange())
                 {
                     _monoBehaviour.TriggerAttack();
                 }
-                // PURSUIT - °ø°İ À§Ä¡¸¦ ÇÒ´ç ¹Ş¾ÒÀ» ¶§
+                // PURSUIT - ê³µê²© ìœ„ì¹˜ë¥¼ í• ë‹¹ ë°›ì•˜ì„ ë•Œ
                 else if (_monoBehaviour.FollowerData.assignedSlot != -1)
                 {
                     Vector3 targetPoint = _monoBehaviour.FollowerData.requiredPoint;
 
                     _monoBehaviour.Controller.SetTarget(targetPoint);
                 }
-                else // Strafe - Å¸±êÀ» Ã£À» ¼ö ÀÖÀ» ¶§
+                else // Strafe - íƒ€ê¹ƒì„ ì°¾ì„ ìˆ˜ ìˆì„ ë•Œ
                 {
                     _monoBehaviour.TriggerStrafe();
                 }
             }
-            // STRONG ATTACK - °ø°İ »ç°Å¸® ¾È¿¡ ÀÖ°í, SAttackÀ¸·Î ÀÌµ¿ÇØ¾ß ÇÏ´Â °æ¿ì
+            // STRONG ATTACK - ê³µê²© ì‚¬ê±°ë¦¬ ì•ˆì— ìˆê³ , SAttackìœ¼ë¡œ ì´ë™í•´ì•¼ í•˜ëŠ” ê²½ìš°
             else if (purpose == PursuitFor.SAttack)
             {
                 if (_monoBehaviour.IsInStrongAttackRange())
@@ -77,7 +77,7 @@ public class ATypeEnemySMBPursuit : SceneLinkedSMB<ATypeEnemyBehavior>
                 }
             }
         }
-        // IDLE - ±× ¿Ü(¾ÆÁ÷ ÇÃ·¹ÀÌ¾î »ç¸ÁÀº ¹ÌÆ÷ÇÔ)
+        // IDLE - ê·¸ ì™¸(ì•„ì§ í”Œë ˆì´ì–´ ì‚¬ë§ì€ ë¯¸í¬í•¨)
         else
         {
             _monoBehaviour.TriggerIdle();

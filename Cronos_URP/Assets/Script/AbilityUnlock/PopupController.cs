@@ -1,28 +1,28 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ½ºÅ³ Æ®¸®ÀÇ ÆË¾÷Ã¢À» °ü¸®ÇÏ¸ç, 
-/// ÆË¾÷ ¸Ş½ÃÁö¿Í ¹öÆ° µ¿ÀÛÀ» ¼³Á¤ÇÏ°í È®ÀÎ ¹× Ãë¼Ò ¹öÆ°ÀÇ µ¿ÀÛÀ» Ã³¸®ÇÕ´Ï´Ù.
+/// ìŠ¤í‚¬ íŠ¸ë¦¬ì˜ íŒì—…ì°½ì„ ê´€ë¦¬í•˜ë©°, 
+/// íŒì—… ë©”ì‹œì§€ì™€ ë²„íŠ¼ ë™ì‘ì„ ì„¤ì •í•˜ê³  í™•ì¸ ë° ì·¨ì†Œ ë²„íŠ¼ì˜ ë™ì‘ì„ ì²˜ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class PopupController : MonoBehaviour
 {
-    public GameObject popupPanel; // ÆË¾÷Ã¢ ÆĞ³Î
-    public TMP_Text popupText; // ÆË¾÷Ã¢ ÅØ½ºÆ®
-    public Button confirmButton; // È®ÀÎ ¹öÆ°
-    public Button cancelButton; // Ãë¼Ò ¹öÆ°
+    public GameObject popupPanel; // íŒì—…ì°½ íŒ¨ë„
+    public TMP_Text popupText; // íŒì—…ì°½ í…ìŠ¤íŠ¸
+    public Button confirmButton; // í™•ì¸ ë²„íŠ¼
+    public Button cancelButton; // ì·¨ì†Œ ë²„íŠ¼
 
-    private System.Action OnConfirmAction; // È®ÀÎ ½Ã ½ÇÇàÇÒ ¾×¼Ç
-    private System.Action OnCancelAction; // Ãë¼Ò ½Ã ½ÇÇàÇÒ ¾×¼Ç
+    private System.Action OnConfirmAction; // í™•ì¸ ì‹œ ì‹¤í–‰í•  ì•¡ì…˜
+    private System.Action OnCancelAction; // ì·¨ì†Œ ì‹œ ì‹¤í–‰í•  ì•¡ì…˜
 
     void Start()
     {
-        // Ã³À½¿£ ÆË¾÷Ã¢À» ¼û±é´Ï´Ù.
+        // ì²˜ìŒì—” íŒì—…ì°½ì„ ìˆ¨ê¹ë‹ˆë‹¤.
         popupPanel.SetActive(false);
     }
 
-    // ÆË¾÷Ã¢À» ¿­°í ¸Ş½ÃÁö¿Í ¹öÆ° µ¿ÀÛ ¼³Á¤
+    // íŒì—…ì°½ì„ ì—´ê³  ë©”ì‹œì§€ì™€ ë²„íŠ¼ ë™ì‘ ì„¤ì •
     public void OpenPopup(string message, System.Action onConfirm, System.Action onCancel = null)
     {
         popupText.text = message;
@@ -38,20 +38,20 @@ public class PopupController : MonoBehaviour
         popupPanel.SetActive(true);
     }
 
-    // ÆË¾÷Ã¢ ´İ±â
+    // íŒì—…ì°½ ë‹«ê¸°
     public void ClosePopup()
     {
         popupPanel.SetActive(false);
     }
 
-    // È®ÀÎ ¹öÆ° Å¬¸¯ ½Ã È£Ãâ
+    // í™•ì¸ ë²„íŠ¼ í´ë¦­ ì‹œ í˜¸ì¶œ
     private void OnConfirm()
     {
         OnConfirmAction?.Invoke();
         ClosePopup();
     }
 
-    // Ãë¼Ò ¹öÆ° Å¬¸¯ ½Ã È£Ãâ
+    // ì·¨ì†Œ ë²„íŠ¼ í´ë¦­ ì‹œ í˜¸ì¶œ
     private void OnCancel()
     {
         OnCancelAction?.Invoke();

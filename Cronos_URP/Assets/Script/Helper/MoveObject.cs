@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// ÁöÁ¤µÈ ¸ñÇ¥ À§Ä¡·Î ¿ÀºêÁ§Æ®¸¦ ºÎµå·´°Ô ÀÌµ¿½ÃÅ°´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀÌµ¿Àº ÁÖ¾îÁø ½Ã°£ µ¿¾È ¼±Çü º¸°£(Lerp) ¹æ½ÄÀ¸·Î ÀÌ·ç¾îÁı´Ï´Ù.
+/// ì§€ì •ëœ ëª©í‘œ ìœ„ì¹˜ë¡œ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¶€ë“œëŸ½ê²Œ ì´ë™ì‹œí‚¤ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì´ë™ì€ ì£¼ì–´ì§„ ì‹œê°„ ë™ì•ˆ ì„ í˜• ë³´ê°„(Lerp) ë°©ì‹ìœ¼ë¡œ ì´ë£¨ì–´ì§‘ë‹ˆë‹¤.
 /// </summary>
 public class MoveObject : MonoBehaviour
 {
-    public Vector3 targetPosition; // ¸ñÇ¥ À§Ä¡
-    public float duration = 1f; // ÀÌµ¿ ½Ã°£ (1ÃÊ)
+    public Vector3 targetPosition; // ëª©í‘œ ìœ„ì¹˜
+    public float duration = 1f; // ì´ë™ ì‹œê°„ (1ì´ˆ)
 
     private Vector3 _startPosition;
     private float _elapsedTime = 0f;
 
     void Start()
     {
-        _startPosition = transform.position; // ÇöÀç À§Ä¡ ÀúÀå
+        _startPosition = transform.position; // í˜„ì¬ ìœ„ì¹˜ ì €ì¥
         StartCoroutine(MoveToPosition());
     }
 
@@ -24,11 +24,11 @@ public class MoveObject : MonoBehaviour
         while (_elapsedTime < duration)
         {
             transform.position = Vector3.Lerp(_startPosition, targetPosition, _elapsedTime / duration);
-            _elapsedTime += Time.deltaTime; // °æ°ú ½Ã°£ ¾÷µ¥ÀÌÆ®
-            yield return null; // ÇÑ ÇÁ·¹ÀÓ ´ë±â
+            _elapsedTime += Time.deltaTime; // ê²½ê³¼ ì‹œê°„ ì—…ë°ì´íŠ¸
+            yield return null; // í•œ í”„ë ˆì„ ëŒ€ê¸°
         }
 
-        // ¸¶Áö¸·À¸·Î Á¤È®ÇÑ ¸ñÇ¥ À§Ä¡·Î ¼³Á¤
+        // ë§ˆì§€ë§‰ìœ¼ë¡œ ì •í™•í•œ ëª©í‘œ ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = targetPosition;
     }
 }

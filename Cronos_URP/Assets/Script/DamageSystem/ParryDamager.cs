@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ÆĞ¸®(¹İ°İ) ±â´ÉÀ» Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°İÀÌ µé¾î¿Ã ¶§ ÆĞ¸® °¡´ÉÇÑ »óÅÂ¸¦ È®ÀÎÇÏ°í, ÆĞ¸® ¼º°ø ½Ã ÀÌº¥Æ®¸¦ ¹ß»ı½ÃÅµ´Ï´Ù.
+/// íŒ¨ë¦¬(ë°˜ê²©) ê¸°ëŠ¥ì„ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ê³µê²©ì´ ë“¤ì–´ì˜¬ ë•Œ íŒ¨ë¦¬ ê°€ëŠ¥í•œ ìƒíƒœë¥¼ í™•ì¸í•˜ê³ , íŒ¨ë¦¬ ì„±ê³µ ì‹œ ì´ë²¤íŠ¸ë¥¼ ë°œìƒì‹œí‚µë‹ˆë‹¤.
 /// </summary>
 public class ParryDamager : SimpleDamager
 {
@@ -57,15 +57,15 @@ public class ParryDamager : SimpleDamager
     }
 
     /// <summary>
-    /// ÆĞ¸® »óÅÂ¸¦ È®ÀÎÇÕ´Ï´Ù. »ó´ë°¡ ÆĞ¸® °¡´ÉÇÑ »óÅÂÀÎÁö, ÆĞ¸® ÁßÀÎÁö Ã¼Å©ÇÕ´Ï´Ù.
+    /// íŒ¨ë¦¬ ìƒíƒœë¥¼ í™•ì¸í•©ë‹ˆë‹¤. ìƒëŒ€ê°€ íŒ¨ë¦¬ ê°€ëŠ¥í•œ ìƒíƒœì¸ì§€, íŒ¨ë¦¬ ì¤‘ì¸ì§€ ì²´í¬í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="other">Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®</param>
-    /// <returns>ÆĞ¸® ¼º°ø ¿©ºÎ</returns>
+    /// <param name="other">ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸</param>
+    /// <returns>íŒ¨ë¦¬ ì„±ê³µ ì—¬ë¶€</returns>
     public bool ParryiedCheck(Collider other)
     {
         var otherParryDamager = other.GetComponent<ParryDamager>();
 
-        // ÆĞ¸®ÇÒ ¼ö ¾ø´Â Á¶°Çµé
+        // íŒ¨ë¦¬í•  ìˆ˜ ì—†ëŠ” ì¡°ê±´ë“¤
         if (otherParryDamager == null ||
             otherParryDamager?._isParrying == false ||
             _canBeParryied == false)
@@ -73,7 +73,7 @@ public class ParryDamager : SimpleDamager
             return false;
         }
 
-        // ÆĞ¸® ¼º°ø ½Ã ÀÌº¥Æ® ¹ß»ı
+        // íŒ¨ë¦¬ ì„±ê³µ ì‹œ ì´ë²¤íŠ¸ ë°œìƒ
         beParryied.Invoke();
         otherParryDamager.parrying?.Invoke();
 
@@ -86,12 +86,12 @@ public class ParryDamager : SimpleDamager
 
         if (_isGuard == false)
         {
-            // yellow - ÆĞ¸® ´çÇÒ ¼ö ÀÖ´Â °ø°İ Å¸ÀÌ¹Ö
+            // yellow - íŒ¨ë¦¬ ë‹¹í•  ìˆ˜ ìˆëŠ” ê³µê²© íƒ€ì´ë°
             if (_canBeParryied == true)
             {
                 Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
             }
-            // Red - °ø°İ
+            // Red - ê³µê²©
             else if (inAttack == true)
             {
                 Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
@@ -99,12 +99,12 @@ public class ParryDamager : SimpleDamager
         }
         else if (_isGuard == true)
         {
-            // Green - ÆĞ¸® °¡´ÉÇÑ °¡µå
+            // Green - íŒ¨ë¦¬ ê°€ëŠ¥í•œ ê°€ë“œ
             if (_isParrying == true)
             {
                 Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
             }
-            // Blue - °¡µå
+            // Blue - ê°€ë“œ
             else
             {
                 Gizmos.color = new Color(0f, 0f, 1f, 0.3f);

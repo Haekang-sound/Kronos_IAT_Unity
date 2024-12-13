@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Playables;
 
 /// <summary>
-/// º¸½º ÄÆ¾À ¿¬ÃâÀ» Á¦¾îÇÏ´Â Å¬·¡½º
+/// ë³´ìŠ¤ ì»·ì”¬ ì—°ì¶œì„ ì œì–´í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class BossEnterEventController : MonoBehaviour
 {

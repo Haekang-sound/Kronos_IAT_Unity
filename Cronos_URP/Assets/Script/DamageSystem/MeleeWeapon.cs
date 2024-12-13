@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ±ÙÁ¢ ¹«±âÀÇ °ø°İ ¹× ¹æ¾î °ü·Ã ±â´ÉÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¹«±âÀÇ °ø°İ ½ÃÀÛ°ú Á¾·á, ¹æ¾îÇÒ ¼ö ÀÖ´Â »óÅÂÀÇ ¼³Á¤ µîÀ» ´ã´çÇÕ´Ï´Ù.
+/// ê·¼ì ‘ ë¬´ê¸°ì˜ ê³µê²© ë° ë°©ì–´ ê´€ë ¨ ê¸°ëŠ¥ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ë¬´ê¸°ì˜ ê³µê²© ì‹œì‘ê³¼ ì¢…ë£Œ, ë°©ì–´í•  ìˆ˜ ìˆëŠ” ìƒíƒœì˜ ì„¤ì • ë“±ì„ ë‹´ë‹¹í•©ë‹ˆë‹¤.
 /// </summary>
 public class MeleeWeapon : MonoBehaviour
 {
@@ -11,13 +11,13 @@ public class MeleeWeapon : MonoBehaviour
 	public BoxColliderAdjuster bAdjuster;
 
     /// <summary>
-    /// ¹«±âÀÇ ÁÖÀÎ(¼ÒÀ¯ÀÚ)À» ¼³Á¤ÇÕ´Ï´Ù.
+    /// ë¬´ê¸°ì˜ ì£¼ì¸(ì†Œìœ ì)ì„ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
     public void SetOwner(GameObject owner) => simpleDamager?.SetOwner(owner);
 
     /// <summary>
-    /// °ø°İÀ» ½ÃÀÛÇÒ ¶§ È£ÃâµË´Ï´Ù.
-    /// °ø°İ ½Ã SimpleDamager¸¦ È°¼ºÈ­ÇÏ°í, ParryDamagerÀÇ °ø°İ »óÅÂ¸¦ È°¼ºÈ­ÇÕ´Ï´Ù.
+    /// ê³µê²©ì„ ì‹œì‘í•  ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
+    /// ê³µê²© ì‹œ SimpleDamagerë¥¼ í™œì„±í™”í•˜ê³ , ParryDamagerì˜ ê³µê²© ìƒíƒœë¥¼ í™œì„±í™”í•©ë‹ˆë‹¤.
     public void BeginAttack()
     {
         simpleDamager?.gameObject.SetActive(true);
@@ -29,8 +29,8 @@ public class MeleeWeapon : MonoBehaviour
     }
 
     /// <summary>
-    /// °ø°İÀ» Á¾·áÇÒ ¶§ È£ÃâµË´Ï´Ù.
-    /// °ø°İ Á¾·á ½Ã SimpleDamager¸¦ ºñÈ°¼ºÈ­ÇÏ°í, ParryDamagerÀÇ °ø°İ »óÅÂ¸¦ ºñÈ°¼ºÈ­ÇÕ´Ï´Ù.
+    /// ê³µê²©ì„ ì¢…ë£Œí•  ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
+    /// ê³µê²© ì¢…ë£Œ ì‹œ SimpleDamagerë¥¼ ë¹„í™œì„±í™”í•˜ê³ , ParryDamagerì˜ ê³µê²© ìƒíƒœë¥¼ ë¹„í™œì„±í™”í•©ë‹ˆë‹¤.
     /// </summary>
     public void EndAttack()
     {
@@ -43,7 +43,7 @@ public class MeleeWeapon : MonoBehaviour
     }
 
     /// <summary>
-    /// ÆĞ¸®(¹İ°İ) »óÅÂ·Î ¼³Á¤ÇÒ ¼ö ÀÖ´Â ½ÃÀÛ ½Ã È£ÃâµË´Ï´Ù.
+    /// íŒ¨ë¦¬(ë°˜ê²©) ìƒíƒœë¡œ ì„¤ì •í•  ìˆ˜ ìˆëŠ” ì‹œì‘ ì‹œ í˜¸ì¶œë©ë‹ˆë‹¤.
     /// </summary>
     public void BeginCanBeParried()
     {
@@ -51,7 +51,7 @@ public class MeleeWeapon : MonoBehaviour
     }
 
     /// <summary>
-    /// ÆĞ¸®(¹İ°İ) »óÅÂ¸¦ Á¾·áÇÒ ¶§ È£ÃâµË´Ï´Ù.
+    /// íŒ¨ë¦¬(ë°˜ê²©) ìƒíƒœë¥¼ ì¢…ë£Œí•  ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
     /// </summary>
     public void EndBeCanParried()
     {

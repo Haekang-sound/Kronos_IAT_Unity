@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ¾À ÀüÈ¯ ¹× °ü¸® ±â´ÉÀ» ´ã´çÇÏ´Â ½Ì±ÛÅæ Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾À ·Îµù, ÀüÈ¯, Àç½ÃÀÛ ¹× ÅÚ·¹Æ÷Æ®¿Í °ü·ÃµÈ ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ì”¬ ì „í™˜ ë° ê´€ë¦¬ ê¸°ëŠ¥ì„ ë‹´ë‹¹í•˜ëŠ” ì‹±ê¸€í†¤ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì”¬ ë¡œë”©, ì „í™˜, ì¬ì‹œì‘ ë° í…”ë ˆí¬íŠ¸ì™€ ê´€ë ¨ëœ ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 public class SceneController : MonoBehaviour
 {
@@ -36,13 +36,13 @@ public class SceneController : MonoBehaviour
         get { return Instance.m_transitioning; }
     }
 
-    protected static SceneController instance;  // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
-    public SceneTransitionDestination initialSceneTransitionDestination;  // ÃÊ±â ¾À ÀüÈ¯ À§Ä¡
-    protected Scene m_currentZoneScene;  // ÇöÀç ¾À Á¤º¸
-    protected bool m_transitioning;  // ¾À ÀüÈ¯ Áß ¿©ºÎ
+    protected static SceneController instance;  // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
+    public SceneTransitionDestination initialSceneTransitionDestination;  // ì´ˆê¸° ì”¬ ì „í™˜ ìœ„ì¹˜
+    protected Scene m_currentZoneScene;  // í˜„ì¬ ì”¬ ì •ë³´
+    protected bool m_transitioning;  // ì”¬ ì „í™˜ ì¤‘ ì—¬ë¶€
 
     /// <summary>
-    /// ¾À ÄÁÆ®·Ñ·¯ ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇÕ´Ï´Ù.
+    /// ì”¬ ì»¨íŠ¸ë¡¤ëŸ¬ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
     /// </summary>
     public static SceneController Create()
     {
@@ -55,32 +55,32 @@ public class SceneController : MonoBehaviour
     void Awake()
     {
 #if UNITY_STANDALONE
-        Screen.SetResolution(1920, 1080, true);  // ÇØ»óµµ ¼³Á¤
+        Screen.SetResolution(1920, 1080, true);  // í•´ìƒë„ ì„¤ì •
 #endif
 
         if (Instance != this)
         {
-            Destroy(gameObject);  // ´Ù¸¥ ÀÎ½ºÅÏ½º°¡ ÀÖÀ¸¸é °´Ã¼¸¦ ÆÄ±«
+            Destroy(gameObject);  // ë‹¤ë¥¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆìœ¼ë©´ ê°ì²´ë¥¼ íŒŒê´´
             return;
         }
 
-        DontDestroyOnLoad(gameObject);  // ¾À ÀüÈ¯ ½Ã °´Ã¼°¡ ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤
+        DontDestroyOnLoad(gameObject);  // ì”¬ ì „í™˜ ì‹œ ê°ì²´ê°€ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì •
 
         if (initialSceneTransitionDestination != null)
         {
-            SetEnteringGameObjectLocation(initialSceneTransitionDestination);  // ÃÊ±â À§Ä¡ ¼³Á¤
+            SetEnteringGameObjectLocation(initialSceneTransitionDestination);  // ì´ˆê¸° ìœ„ì¹˜ ì„¤ì •
             ScreenFader.SetAlpha(1f);
-            StartCoroutine(ScreenFader.FadeSceneIn());  // ¾À ÆäÀÌµå ÀÎ
-            initialSceneTransitionDestination.OnReachDestination.Invoke();  // ¸ñÇ¥ µµ´Ş ÀÌº¥Æ® È£Ãâ
+            StartCoroutine(ScreenFader.FadeSceneIn());  // ì”¬ í˜ì´ë“œ ì¸
+            initialSceneTransitionDestination.OnReachDestination.Invoke();  // ëª©í‘œ ë„ë‹¬ ì´ë²¤íŠ¸ í˜¸ì¶œ
         }
         else
         {
-            m_currentZoneScene = SceneManager.GetActiveScene();  // ÇöÀç ¾À ÀúÀå
+            m_currentZoneScene = SceneManager.GetActiveScene();  // í˜„ì¬ ì”¬ ì €ì¥
         }
     }
 
     /// <summary>
-    /// ÇöÀç ¾ÀÀ» ´Ù½Ã ½ÃÀÛÇÕ´Ï´Ù.
+    /// í˜„ì¬ ì”¬ì„ ë‹¤ì‹œ ì‹œì‘í•©ë‹ˆë‹¤.
     /// </summary>
     public static void RestartZone()
     {
@@ -88,7 +88,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ ½Ã°£ ÈÄ ÇöÀç ¾ÀÀ» ´Ù½Ã ½ÃÀÛÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ ì‹œê°„ í›„ í˜„ì¬ ì”¬ì„ ë‹¤ì‹œ ì‹œì‘í•©ë‹ˆë‹¤.
     /// </summary>
     public static void RestartZoneWithDelay(float delay)
     {
@@ -96,7 +96,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// »õ ¾ÀÀ¸·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ìƒˆ ì”¬ìœ¼ë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public static void TransitionToScene(TransitionPoint transitionPoint)
     {
@@ -104,7 +104,7 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ ¾ÀÀ¸·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ì§€ì •ëœ ì”¬ìœ¼ë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public static void TransitionToScene(string newSceneName)
     {
@@ -112,35 +112,35 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾À ÀüÈ¯À» Ã³¸®ÇÏ´Â ÄÚ·çÆ¾ÀÔ´Ï´Ù.
+    /// ì”¬ ì „í™˜ì„ ì²˜ë¦¬í•˜ëŠ” ì½”ë£¨í‹´ì…ë‹ˆë‹¤.
     /// </summary>
     protected IEnumerator Transition(string newSceneName, TransitionPoint.TransitionType transitionType = TransitionPoint.TransitionType.DifferentZone)
     {
         m_transitioning = true;
 
-        SaveLoadManager.Instance.SaveSceneData();  // ¾À µ¥ÀÌÅÍ ÀúÀå
+        SaveLoadManager.Instance.SaveSceneData();  // ì”¬ ë°ì´í„° ì €ì¥
 
-        yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));  // ¾À ÆäÀÌµå ¾Æ¿ô
+        yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.Loading));  // ì”¬ í˜ì´ë“œ ì•„ì›ƒ
 
-        yield return SceneLoader.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(newSceneName));  // ¾À ·Îµù
+        yield return SceneLoader.Instance.StartCoroutine(SceneLoader.Instance.LoadSceneCoroutine(newSceneName));  // ì”¬ ë¡œë”©
 
-        SceneTransitionDestination entrance = GetDestination();  // ¸ñÇ¥ À§Ä¡ Ã£±â
+        SceneTransitionDestination entrance = GetDestination();  // ëª©í‘œ ìœ„ì¹˜ ì°¾ê¸°
 
-        SetEnteringGameObjectLocation(entrance);  // °ÔÀÓ ¿ÀºêÁ§Æ® À§Ä¡ ¼³Á¤
-        SetupNewScene(transitionType, entrance);  // ¾À ¼³Á¤
+        SetEnteringGameObjectLocation(entrance);  // ê²Œì„ ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜ ì„¤ì •
+        SetupNewScene(transitionType, entrance);  // ì”¬ ì„¤ì •
 
         if (entrance != null)
         {
-            entrance.OnReachDestination.Invoke();  // ¸ñÇ¥ µµ´Ş ÀÌº¥Æ® È£Ãâ
+            entrance.OnReachDestination.Invoke();  // ëª©í‘œ ë„ë‹¬ ì´ë²¤íŠ¸ í˜¸ì¶œ
         }
 
-        yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));  // ¾À ÆäÀÌµå ÀÎ
+        yield return StartCoroutine(ScreenFader.FadeSceneIn(ScreenFader.FadeType.Loading));  // ì”¬ í˜ì´ë“œ ì¸
 
         m_transitioning = false;
     }
 
     /// <summary>
-    /// ¾À ÀüÈ¯ ¸ñÇ¥ÀÎ SceneTransitionDestinationÀ» Ã£½À´Ï´Ù.
+    /// ì”¬ ì „í™˜ ëª©í‘œì¸ SceneTransitionDestinationì„ ì°¾ìŠµë‹ˆë‹¤.
     /// </summary>
     protected SceneTransitionDestination GetDestination()
     {
@@ -150,18 +150,18 @@ public class SceneController : MonoBehaviour
             return entrances;
         }
 
-        Debug.LogWarning("SceneTransitionDestination ÄÄÆ÷³ÍÆ®¸¦ °¡Áø °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+        Debug.LogWarning("SceneTransitionDestination ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§„ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         return null;
     }
 
     /// <summary>
-    /// °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ À§Ä¡¸¦ SceneTransitionDestinationÀÇ À§Ä¡·Î ¼³Á¤ÇÕ´Ï´Ù.
+    /// ê²Œì„ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ë¥¼ SceneTransitionDestinationì˜ ìœ„ì¹˜ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
     protected void SetEnteringGameObjectLocation(SceneTransitionDestination entrance)
     {
         if (entrance == null)
         {
-            Debug.LogWarning("½ÃÀÛ À§Ä¡(SceneTransitionDestination) ÀÔ·ÂÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("ì‹œì‘ ìœ„ì¹˜(SceneTransitionDestination) ì…ë ¥ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return;
         }
         Transform entranceLocation = entrance.transform;
@@ -171,24 +171,24 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// »õ ¾ÀÀ» ¼³Á¤ÇÕ´Ï´Ù.
+    /// ìƒˆ ì”¬ì„ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
     protected void SetupNewScene(TransitionPoint.TransitionType transitionType, SceneTransitionDestination entrance)
     {
         if (entrance == null)
         {
-            Debug.LogWarning("Àç½ÃÀÛ Á¤º¸(SceneTransitionDestination)°¡ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("ì¬ì‹œì‘ ì •ë³´(SceneTransitionDestination)ê°€ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return;
         }
 
         if (transitionType == TransitionPoint.TransitionType.DifferentZone)
         {
-            SetZoneStart(entrance);  // ´Ù¸¥ ±¸¿ªÀÏ °æ¿ì, ±¸¿ª ½ÃÀÛ ¼³Á¤
+            SetZoneStart(entrance);  // ë‹¤ë¥¸ êµ¬ì—­ì¼ ê²½ìš°, êµ¬ì—­ ì‹œì‘ ì„¤ì •
         }
     }
 
     /// <summary>
-    /// »õ·Î¿î ±¸¿ªÀÇ ½ÃÀÛÀ» ¼³Á¤ÇÕ´Ï´Ù.
+    /// ìƒˆë¡œìš´ êµ¬ì—­ì˜ ì‹œì‘ì„ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
     protected void SetZoneStart(SceneTransitionDestination entrance)
     {

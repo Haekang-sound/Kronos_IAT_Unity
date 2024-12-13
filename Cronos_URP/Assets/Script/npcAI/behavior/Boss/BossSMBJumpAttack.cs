@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ °ø°İ »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ë³´ìŠ¤ì˜ ê³µê²© ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class BossSMBJumpAttack : SceneLinkedSMB<BossBehavior>
 {
@@ -23,9 +23,9 @@ public class BossSMBJumpAttack : SceneLinkedSMB<BossBehavior>
 
         rootmotion *= scale;
 
-        // ¼öÆò ÀÌµ¿ Àû¿ë
+        // ìˆ˜í‰ ì´ë™ ì ìš©
         _monoBehaviour.transform.position += rootmotion;
-        // ¼öÁ÷ ÀÌµ¿ Àû¿ë
+        // ìˆ˜ì§ ì´ë™ ì ìš©
         _monoBehaviour.transform.position += new Vector3(0f, rootmotionY, 0f);
     }
 

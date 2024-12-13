@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ATypeEnemÀÇ ÃßÀû ÀÌÈÄ ¿ø·¡ ÀÚ¸®·Î µÇµ¹¾Æ°¡´Â »óÅÂ ÀüÈ¯À» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ATypeEnemì˜ ì¶”ì  ì´í›„ ì›ë˜ ìë¦¬ë¡œ ë˜ëŒì•„ê°€ëŠ” ìƒíƒœ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 /// </summary>
 public class ATypeEnemySMBReturn : SceneLinkedSMB<ATypeEnemyBehavior>
 {
@@ -19,16 +19,16 @@ public class ATypeEnemySMBReturn : SceneLinkedSMB<ATypeEnemyBehavior>
 
         _monoBehaviour.FindTarget();
 
-        // Å¸±ê ¹ß°ß ½Ã
+        // íƒ€ê¹ƒ ë°œê²¬ ì‹œ
         GameObject currentTarget = _monoBehaviour.CurrentTarget;
         if (currentTarget != null)
         {
-            // ÃßÀû »óÅÂ·Î ÀüÀÌ
+            // ì¶”ì  ìƒíƒœë¡œ ì „ì´
             _monoBehaviour.StartPursuit();
         }
         else
         {
-            // ¸ñÀûÁö µµÂø ½Ã Idle »óÅÂ ÁøÀÔ
+            // ëª©ì ì§€ ë„ì°© ì‹œ Idle ìƒíƒœ ì§„ì…
             Vector3 toBase = _monoBehaviour.BasePosition - _monoBehaviour.transform.position;
             toBase.y = 0;
             if (_monoBehaviour.IsNearBase() == true)

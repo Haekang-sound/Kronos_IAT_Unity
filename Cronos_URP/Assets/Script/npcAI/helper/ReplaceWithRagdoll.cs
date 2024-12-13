@@ -1,7 +1,7 @@
-using UnityEngine;
+О╩©using UnityEngine;
 
 /// <summary>
-/// юл е╛╥║╫╨╢б ╠Ба╦ ╟╢ц╪╦╕ ╢Кц╪го©╘ 'Ragdoll' га╦╝фую╩ ╩Щ╪╨го╢б ©╙грю╩ гу╢о╢ы.
+/// Л²╢ М│╢К·≤Л┼╓К┼■ Й╦╟Л║╢ Й╟²Л╡╢К╔╪ К▄─Л╡╢М∙≤Л≈╛ 'Ragdoll' М■└К╕╛М▄╧Л²└ Л┐²Л└╠М∙≤К┼■ Л≈╜М∙═Л²└ М∙╘К▀┬К▀╓.
 /// </summary>
 public class ReplaceWithRagdoll : MonoBehaviour
 {

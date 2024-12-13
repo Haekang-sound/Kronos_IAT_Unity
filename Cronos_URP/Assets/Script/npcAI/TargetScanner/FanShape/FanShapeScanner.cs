@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÀûÀÌ Æ¯Á¤ ±¸¿ª ³»¿¡¼­ ÇÃ·¹ÀÌ¾î¸¦ Ã£°í ÃßÀûÇÏ´Â µ¥ »ç¿ëµÇ´Â ½ºÄ³³Ê Å¬·¡½ºÀÔ´Ï´Ù. 
-/// ÀÌ Å¬·¡½º´Â ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¸¦ °¨ÁöÇÏ°í, Àå¾Ö¹°¿¡ ÀÇÇØ °¡·ÁÁöÁö ¾Ê´ÂÁö È®ÀÎÇÏ¸ç, 
-/// ÇÃ·¹ÀÌ¾î°¡ °¨Áö ¹üÀ§ ³»¿¡ ÀÖÀ» °æ¿ì ÀÌ¸¦ ¹ÝÈ¯ÇÕ´Ï´Ù.
+/// ì ì´ íŠ¹ì • êµ¬ì—­ ë‚´ì—ì„œ í”Œë ˆì´ì–´ë¥¼ ì°¾ê³  ì¶”ì í•˜ëŠ” ë° ì‚¬ìš©ë˜ëŠ” ìŠ¤ìºë„ˆ í´ëž˜ìŠ¤ìž…ë‹ˆë‹¤. 
+/// ì´ í´ëž˜ìŠ¤ëŠ” í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ë¥¼ ê°ì§€í•˜ê³ , ìž¥ì• ë¬¼ì— ì˜í•´ ê°€ë ¤ì§€ì§€ ì•ŠëŠ”ì§€ í™•ì¸í•˜ë©°, 
+/// í”Œë ˆì´ì–´ê°€ ê°ì§€ ë²”ìœ„ ë‚´ì— ìžˆì„ ê²½ìš° ì´ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 /// </summary>
 [System.Serializable]
 public class FanShapeScanner : MonoBehaviour
@@ -36,11 +36,11 @@ public class FanShapeScanner : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁÖ¾îÁø ¸Å°³º¯¼ö¿¡ µû¶ó ÇÃ·¹ÀÌ¾î°¡ Ç¥½ÃµÇ´ÂÁö È®ÀÎÇÏ°í, Å¸°ÙÀ» ¹ÝÈ¯ÇÕ´Ï´Ù.
+    /// ì£¼ì–´ì§„ ë§¤ê°œë³€ìˆ˜ì— ë”°ë¼ í”Œë ˆì´ì–´ê°€ í‘œì‹œë˜ëŠ”ì§€ í™•ì¸í•˜ê³ , íƒ€ê²Ÿì„ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="detector">°¨Áö¸¦ ½ÇÇàÇÒ °´Ã¼ÀÇ Æ®·£½ºÆû.</param>
-    /// <param name="useHeightDifference">³ôÀÌ Â÷ÀÌ¸¦ °í·ÁÇÒÁö ¿©ºÎ.</param>
-    /// <returns>Å¸°ÙÀÌ °¨ÁöµÇ¸é Å¸°Ù °´Ã¼¸¦ ¹ÝÈ¯, ±×·¸Áö ¾ÊÀ¸¸é null.</returns>
+    /// <param name="detector">ê°ì§€ë¥¼ ì‹¤í–‰í•  ê°ì²´ì˜ íŠ¸ëžœìŠ¤í¼.</param>
+    /// <param name="useHeightDifference">ë†’ì´ ì°¨ì´ë¥¼ ê³ ë ¤í• ì§€ ì—¬ë¶€.</param>
+    /// <returns>íƒ€ê²Ÿì´ ê°ì§€ë˜ë©´ íƒ€ê²Ÿ ê°ì²´ë¥¼ ë°˜í™˜, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ null.</returns>
     public GameObject Detect(Transform detector, bool useHeightDifference = true)
     {
         if (target == null)

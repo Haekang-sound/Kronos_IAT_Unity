@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 /// <summary>
-/// Çàµ¿ Æ®¸®(Behavior Tree)¸¦ ±¸ÇöÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀÌ Å¬·¡½º´Â Æ®¸® ±¸Á¶¸¦ ±â¹İÀ¸·Î ÇÑ »óÅÂ ¾÷µ¥ÀÌÆ® ¹× ³ëµå °ü¸® ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
-/// Æ®¸® ³»ÀÇ °¢ ³ëµå´Â »óÅÂ¸¦ °¡Áö¸ç, Æ®¸®¸¦ ¼øÈ¸ÇÏ°í ³ëµå¸¦ Ãß°¡/»èÁ¦ÇÒ ¼ö ÀÖ´Â ±â´ÉÀ» Æ÷ÇÔÇÕ´Ï´Ù.
+/// í–‰ë™ íŠ¸ë¦¬(Behavior Tree)ë¥¼ êµ¬í˜„í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì´ í´ë˜ìŠ¤ëŠ” íŠ¸ë¦¬ êµ¬ì¡°ë¥¼ ê¸°ë°˜ìœ¼ë¡œ í•œ ìƒíƒœ ì—…ë°ì´íŠ¸ ë° ë…¸ë“œ ê´€ë¦¬ ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
+/// íŠ¸ë¦¬ ë‚´ì˜ ê° ë…¸ë“œëŠ” ìƒíƒœë¥¼ ê°€ì§€ë©°, íŠ¸ë¦¬ë¥¼ ìˆœíšŒí•˜ê³  ë…¸ë“œë¥¼ ì¶”ê°€/ì‚­ì œí•  ìˆ˜ ìˆëŠ” ê¸°ëŠ¥ì„ í¬í•¨í•©ë‹ˆë‹¤.
 /// </summary>
 [CreateAssetMenu()]
 public class BehaviorTree : ScriptableObject
@@ -94,13 +94,13 @@ public class BehaviorTree : ScriptableObject
         nodes.Add(node);
 
         AssetDatabase.AddObjectToAsset(node, this);
-        Undo.RegisterCreatedObjectUndo(node, "Behavior Tree (CreateNode)"); // »õ·Î »ı¼ºµÈ °´Ã¼¿¡ ´ëÇÑ Undo ÀÛ¾÷ µî·Ï.
+        Undo.RegisterCreatedObjectUndo(node, "Behavior Tree (CreateNode)"); // ìƒˆë¡œ ìƒì„±ëœ ê°ì²´ì— ëŒ€í•œ Undo ì‘ì—… ë“±ë¡.
         AssetDatabase.SaveAssets();
 
         return node;
     }
 
-    // »èÁ¦ÇÒ ³ëµå¸¦ °¡Á®¿Í ³ëµå¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö, ÁÖ¾îÁø ³ëµå¸¦ Æ®¸®¿¡¼­ »èÁ¦ÇÑ´Ù.
+    // ì‚­ì œí•  ë…¸ë“œë¥¼ ê°€ì ¸ì™€ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜, ì£¼ì–´ì§„ ë…¸ë“œë¥¼ íŠ¸ë¦¬ì—ì„œ ì‚­ì œí•œë‹¤.
     public void DeleteNode(Node node)
     {
         Undo.RecordObject(this, "Behaviour Tree (DeleteNode)");

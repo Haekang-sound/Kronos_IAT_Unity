@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ÀüÅõ ±¸¿ªÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù. ÀÌ Å¬·¡½º´Â Æ¯Á¤ ±¸¿ª ¾È¿¡ ÀûµéÀÌ Á¸ÀçÇÏ¸ç, 
-/// ÇÃ·¹ÀÌ¾î°¡ ±× ±¸¿ª¿¡ µé¾î¿À¸é ÀüÅõ°¡ ½ÃÀÛµÇ°í, ¸ðµç ÀûÀ» Ã³Ä¡ÇÏ¸é ±¸¿ªÀÌ Å¬¸®¾îµÈ °ÍÀ¸·Î °£ÁÖµË´Ï´Ù.
+/// ì „íˆ¬ êµ¬ì—­ì„ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤ìž…ë‹ˆë‹¤. ì´ í´ëž˜ìŠ¤ëŠ” íŠ¹ì • êµ¬ì—­ ì•ˆì— ì ë“¤ì´ ì¡´ìž¬í•˜ë©°, 
+/// í”Œë ˆì´ì–´ê°€ ê·¸ êµ¬ì—­ì— ë“¤ì–´ì˜¤ë©´ ì „íˆ¬ê°€ ì‹œìž‘ë˜ê³ , ëª¨ë“  ì ì„ ì²˜ì¹˜í•˜ë©´ êµ¬ì—­ì´ í´ë¦¬ì–´ëœ ê²ƒìœ¼ë¡œ ê°„ì£¼ë©ë‹ˆë‹¤.
 /// </summary>
 public class CombatZone : MonoBehaviour
 {

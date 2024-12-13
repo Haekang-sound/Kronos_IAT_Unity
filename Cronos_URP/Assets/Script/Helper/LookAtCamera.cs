@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// Ä«¸Ş¶ó¸¦ ±âÁØÀ¸·Î ¿ÀºêÁ§Æ®ÀÇ È¸Àü ¹æ½ÄÀ» ¼³Á¤ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÁÖ¾îÁø ¸ğµå¿¡ µû¶ó Ä«¸Ş¶ó¸¦ ¹Ù¶óº¸°Å³ª Ä«¸Ş¶óÀÇ ¹æÇâÀ» ¹İ¿µÇÏ¿© È¸ÀüÇÕ´Ï´Ù.
+/// ì¹´ë©”ë¼ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ì˜ íšŒì „ ë°©ì‹ì„ ì„¤ì •í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì£¼ì–´ì§„ ëª¨ë“œì— ë”°ë¼ ì¹´ë©”ë¼ë¥¼ ë°”ë¼ë³´ê±°ë‚˜ ì¹´ë©”ë¼ì˜ ë°©í–¥ì„ ë°˜ì˜í•˜ì—¬ íšŒì „í•©ë‹ˆë‹¤.
 /// </summary>
 public class LookAtCamera : MonoBehaviour
 {
     private enum Mode
     {
-        LookAt, // Ä«¸Ş¶ó¸¦ ¹Ù¶óº¸µµ·Ï È¸Àü
-        LookAtInverted, // Ä«¸Ş¶ó¸¦ ¹İ´ë·Î ¹Ù¶óº¸µµ·Ï È¸Àü
-        CameraForward, // Ä«¸Ş¶óÀÇ Àü¹æ ¹æÇâÀ¸·Î ¿ÀºêÁ§Æ®ÀÇ ZÃàÀ» ¸ÂÃß±â
-        CameraForwardInverted, // Ä«¸Ş¶óÀÇ Àü¹æ ¹æÇâÀ¸·Î ¿ÀºêÁ§Æ®ÀÇ ZÃàÀ» ¹İ´ë·Î ¸ÂÃß±â
+        LookAt, // ì¹´ë©”ë¼ë¥¼ ë°”ë¼ë³´ë„ë¡ íšŒì „
+        LookAtInverted, // ì¹´ë©”ë¼ë¥¼ ë°˜ëŒ€ë¡œ ë°”ë¼ë³´ë„ë¡ íšŒì „
+        CameraForward, // ì¹´ë©”ë¼ì˜ ì „ë°© ë°©í–¥ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ì˜ Zì¶•ì„ ë§ì¶”ê¸°
+        CameraForwardInverted, // ì¹´ë©”ë¼ì˜ ì „ë°© ë°©í–¥ìœ¼ë¡œ ì˜¤ë¸Œì íŠ¸ì˜ Zì¶•ì„ ë°˜ëŒ€ë¡œ ë§ì¶”ê¸°
     }
 
     [SerializeField] private Mode _mode;
@@ -23,16 +23,16 @@ public class LookAtCamera : MonoBehaviour
                 transform.LookAt(Camera.main.transform);
                 break;
             case Mode.LookAtInverted:
-                //* Ä«¸Ş¶ó ¹æÇâÀ» ¾Ë¾Æ³»¼­ ±× ¹æÇâ ¸¸Å­ µ¹·ÁÁà¼­ ¹İÀü½ÃÅ°±â
+                //* ì¹´ë©”ë¼ ë°©í–¥ì„ ì•Œì•„ë‚´ì„œ ê·¸ ë°©í–¥ ë§Œí¼ ëŒë ¤ì¤˜ì„œ ë°˜ì „ì‹œí‚¤ê¸°
                 Vector3 dirFromCamera = transform.position - Camera.main.transform.position;
                 transform.LookAt(transform.position + dirFromCamera);
                 break;
             case Mode.CameraForward:
-                //* Ä«¸Ş¶ó ¹æÇâÀ¸·Î ZÃà (¾ÕµÚ)À» ¹Ù²ãÁÖ±â
+                //* ì¹´ë©”ë¼ ë°©í–¥ìœ¼ë¡œ Zì¶• (ì•ë’¤)ì„ ë°”ê¿”ì£¼ê¸°
                 transform.forward = Camera.main.transform.forward;
                 break;
             case Mode.CameraForwardInverted:
-                //* Ä«¸Ş¶ó ¹æÇâÀ¸·Î ZÃà (¾ÕµÚ)À» ¹Ù²ãÁÖ°í ¹İÀü½ÃÅ°±â
+                //* ì¹´ë©”ë¼ ë°©í–¥ìœ¼ë¡œ Zì¶• (ì•ë’¤)ì„ ë°”ê¿”ì£¼ê³  ë°˜ì „ì‹œí‚¤ê¸°
                 transform.forward = -Camera.main.transform.forward;
                 break;
             default:

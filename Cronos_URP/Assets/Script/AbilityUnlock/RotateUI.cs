@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ÁöÁ¤µÈ ÃàÀ» ±âÁØÀ¸·Î È¸Àü½ÃÅ°´Â ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù.
+/// ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì§€ì •ëœ ì¶•ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „ì‹œí‚¤ëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
 public class RotateUI : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class RotateUI : MonoBehaviour
     }
 
     public Axis axis;
-    public float rotationSpeed = 10f; // È¸Àü ¼Óµµ
+    public float rotationSpeed = 10f; // íšŒì „ ì†ë„
 
     private RectTransform rectTransform;
 
@@ -22,7 +22,7 @@ public class RotateUI : MonoBehaviour
 
     void Update()
     {
-        // ¼±ÅÃÇÑ ÃàÀ» ±âÁØÀ¸·Î È¸Àü
+        // ì„ íƒí•œ ì¶•ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „
             switch (axis)
         {
             case Axis.X:

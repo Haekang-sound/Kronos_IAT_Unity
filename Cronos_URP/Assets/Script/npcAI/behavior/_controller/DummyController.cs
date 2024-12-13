@@ -1,11 +1,11 @@
-using Message;
+ï»¿using Message;
 using UnityEngine;
 
 /// <summary>
-/// µð¹ö±ëÀ» À§ÇÑ ´õ¹ÌÄ³¸¯ÅÍ °´Ã¼µéÀÌ °øµ¿À¸·Î »ç¿ëÇÏ´Â ÀÌµ¿, ¹°¸® Ã³¸®, ¿ÜºÎ Èû Àû¿ë µîÀÇ ±â´ÉÀ» Á¤ÀÇÇÑ Å¬·¡½ºÀÔ´Ï´Ù.
-/// NavMeshAgent¸¦ È°¿ëÇÑ °æ·Î Å½»ö, ¾Ö´Ï¸ÞÀÌ¼Ç ±â¹Ý ÀÌµ¿, ¿ÜºÎ ¹°¸®·Â Ã³¸®¸¦ Á¦°øÇÕ´Ï´Ù.
+/// ë””ë²„ê¹…ì„ ìœ„í•œ ë”ë¯¸ìºë¦­í„° ê°ì²´ë“¤ì´ ê³µë™ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ì´ë™, ë¬¼ë¦¬ ì²˜ë¦¬, ì™¸ë¶€ íž˜ ì ìš© ë“±ì˜ ê¸°ëŠ¥ì„ ì •ì˜í•œ í´ëž˜ìŠ¤ìž…ë‹ˆë‹¤.
+/// NavMeshAgentë¥¼ í™œìš©í•œ ê²½ë¡œ íƒìƒ‰, ì• ë‹ˆë©”ì´ì…˜ ê¸°ë°˜ ì´ë™, ì™¸ë¶€ ë¬¼ë¦¬ë ¥ ì²˜ë¦¬ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
 /// </summary>
-[DefaultExecutionOrder(-1)] // ´Ù¸¥ ½ºÅ©¸³Æ®º¸´Ù ¸ÕÀú ½ÇÇà(½ÇÇà ÁÖ¹® °ªÀÌ ³·À» ¼ö·Ï ¸ÕÀú ½ÇÇà)
+[DefaultExecutionOrder(-1)] // ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ë³´ë‹¤ ë¨¼ì € ì‹¤í–‰(ì‹¤í–‰ ì£¼ë¬¸ ê°’ì´ ë‚®ì„ ìˆ˜ë¡ ë¨¼ì € ì‹¤í–‰)
 public class DummyController : MonoBehaviour, IMessageReceiver
 {
     private Animator _animator;
