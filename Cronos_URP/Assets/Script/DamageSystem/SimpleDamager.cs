@@ -1,4 +1,4 @@
-﻿ausing UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 /// 공격에 의해 대상을 피해 입히는 기능을 담당하는 클래스입니다.

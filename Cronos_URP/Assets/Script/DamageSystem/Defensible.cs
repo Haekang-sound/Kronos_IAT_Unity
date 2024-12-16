@@ -22,11 +22,6 @@ public class Defensible : MonoBehaviour
     [FormerlySerializedAs("hitForwardRoation")] //SHAME!
     public float hitForwardRotation = 360.0f;
 
-    private void Start()
-    {
-        sm = SoundManager.Instance;
-    }
-
     public void ApplyDamage(ref DamageMessage data)
     {
         if (!isDefending)
@@ -52,8 +47,6 @@ public class Defensible : MonoBehaviour
         EffectManager.Instance.CreateGuardFX();
 		Vector3 temp = data.direction;
 		temp.y = 0f;
-
-        //PlayerStateMachine.GetInstance().transform.rotation = Quaternion.LookRotation(positionToDamager);
         
         data.amount /= dampRatio;
     }

@@ -1,4 +1,4 @@
-﻿ausing UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ATypeEnem의 공격 상태 전환을 관리하는 클래스입니다.
