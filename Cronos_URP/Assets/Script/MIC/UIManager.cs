@@ -71,9 +71,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject interactor;
     // lazy initialization
-    // 프로퍼티에 할당하기 전에 다른 스크립트가 불러서
-    // 퍼블릭 오브젝트를 바로 할당하기 싫으니까
-    // 초기화 전에 요구한다면, 인스펙터에서 할당한 값으로 초기화하고 리턴
+    // 프로퍼티에 할당하기 전에 다른 스크립트가 불러서 초기화 전에 요구한다면
     private GameObject interactProp;
     public GameObject Interactor
     {
@@ -200,7 +198,6 @@ public class UIManager : MonoBehaviour
         objectiveMainObj.SetActive(true);
         objectiveSubObj.SetActive(false);
         mainText.GetComponent<CanvasGroup>().alpha = 0.0f;
-		//mainText.text = JasonSaveLoader.QuestTexts[objectiveIdx].text;
         mainText.text = qm.QuestLines[idx];
         subText.text = qm.QuestLines[idx];
 

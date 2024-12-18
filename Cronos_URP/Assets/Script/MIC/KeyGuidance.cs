@@ -57,7 +57,7 @@ public class KeyGuidance : MonoBehaviour
     }
 
     // hide하는 중에 호출된다면, 현재 진행중인 hide코루틴을 중단하고 위치를 보정해서 show한다
-    IEnumerator ShowHUD()
+    private IEnumerator ShowHUD()
     {
         if (curCoroutine != null)
         {
@@ -84,7 +84,7 @@ public class KeyGuidance : MonoBehaviour
     }
 
     // 마찬가지로 show 하는 도중 호출된다면 원래 갔어야 할 위치로 바로 보낸 후 hide한다.
-    IEnumerator HideHUD()
+    private IEnumerator HideHUD()
     {
         if (curCoroutine != null)
         {

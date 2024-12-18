@@ -381,7 +381,6 @@ public class EffectManager : MonoBehaviour
 	// 어빌리티 공격 1
 	public void AbilitySlash()
 	{
-		//soundManager.PlaySFX("Attack_SE", player.transform);
 		GameObject aSlash = SpawnEffect("AbilitySlash", player.transform.position);
 		aSlash.transform.rotation = player.playerSword.transform.rotation;
 		float newY = player.playerSword.transform.position.y;
